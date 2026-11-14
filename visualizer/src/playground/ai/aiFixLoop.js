@@ -1,5 +1,6 @@
 // Iterative "Fix with AI": suggest → verify → retry with the failure added to the prompt.
-export const MAX_TOTAL_ATTEMPTS = 5
+// The user is asked after every round, and also at this attempt count. There is no hard limit.
+export const ASK_AT_ATTEMPTS = 5
 export const ROUND_SIZES = [1, 2, 3]
 
 function feedbackLines(attempts) {
@@ -17,7 +18,7 @@ function feedbackLines(attempts) {
  * @param {(attempts: object[]) => void} options.onUpdate
  * @param {(attemptCount: number) => Promise<'continue'|'stop'>} options.askToContinue
  * @param {AbortSignal} options.signal
- * @returns {Promise<{status: 'fixed'|'stopped'|'setup'|'limit', proposal?: object, attempts: object[], message?: string}>}
+ * @returns {Promise<{status: 'fixed'|'stopped'|'setup'|'empty', proposal?: object, attempts: object[], message?: string}>}
  */
 export async function runAiFixLoop({ base, roundSize, suggest, verify, onUpdate, askToContinue, signal }) {
   const attempts = []
@@ -26,9 +27,6 @@ export async function runAiFixLoop({ base, roundSize, suggest, verify, onUpdate,
 
   while (true) {
     if (signal.aborted) return { status: 'stopped', attempts }
-    if (attempts.length >= MAX_TOTAL_ATTEMPTS) {
-      return { status: 'limit', attempts, message: `${MAX_TOTAL_ATTEMPTS} attempts did not produce a working fix.` }
-    }
 
     const attempt = { n: attempts.length + 1, status: 'running', reason: '', raw: '', summary: '' }
     attempts.push(attempt)
@@ -61,10 +59,14 @@ export async function runAiFixLoop({ base, roundSize, suggest, verify, onUpdate,
       if (failure?.code === 'MISSING_AI_SETUP') {
         return { status: 'setup', attempts, message: attempt.reason }
       }
+      // The agent answered with nothing; asking again would only repeat that.
+      if (failure?.raw === '') {
+        return { status: 'empty', attempts, message: 'The AI returned no response text, so the loop stopped. Check the connection or model, then try again.' }
+      }
     }
 
     const done = attempts.length
-    if (done < MAX_TOTAL_ATTEMPTS && done % size === 0) {
+    if (done % size === 0 || done === ASK_AT_ATTEMPTS) {
       const decision = await askToContinue(done)
       if (decision !== 'continue' || signal.aborted) return { status: 'stopped', attempts }
     }

@@ -184,12 +184,13 @@ function assertNotHtmlResponse(response) {
 }
 
 function networkError(providerLabel, error) {
-  return new Error(
+  // Code MISSING_AI_SETUP makes the fix loop stop and open the connection panel: retrying cannot help.
+  return Object.assign(new Error(
     `Could not reach ${providerLabel} from this browser. The request was blocked or the network failed. `
     + 'Use Ollama Local on this computer, or try a key from a provider that allows browser requests. '
     + `Original error: ${error?.message || 'fetch failed'}`,
     { cause: error },
-  )
+  ), { code: 'MISSING_AI_SETUP' })
 }
 
 async function readErrorDetail(response, fallback) {

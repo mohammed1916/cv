@@ -19,17 +19,17 @@ test('retries with the failure in the prompt until a proposal runs', async () =>
   assert.match(prompts[2], /Attempt 2 did not work. Result: fail 2/)
 })
 
-test('stops at five attempts and never asks past the limit', async () => {
+test('asks at each round and at five attempts, with no hard limit', async () => {
   const asked = []
   const result = await runAiFixLoop({
     base, roundSize: 2, onUpdate: noop, signal: new AbortController().signal,
-    askToContinue: async (count) => { asked.push(count); return 'continue' },
+    askToContinue: async (count) => { asked.push(count); return count >= 6 ? 'stop' : 'continue' },
     suggest: async () => ({ source: 'same', raw: '' }),
     verify: async () => { throw new Error('still broken') },
   })
-  assert.equal(result.status, 'limit')
-  assert.equal(result.attempts.length, 5)
-  assert.deepEqual(asked, [2, 4])
+  assert.equal(result.status, 'stopped')
+  assert.equal(result.attempts.length, 6)
+  assert.deepEqual(asked, [2, 4, 5, 6])
 })
 
 test('setup errors stop immediately', async () => {
@@ -52,4 +52,15 @@ test('stop at a round boundary ends the loop', async () => {
   })
   assert.equal(result.status, 'stopped')
   assert.equal(result.attempts.length, 1)
+})
+
+test('an empty response from the agent stops the loop without retrying', async () => {
+  let calls = 0
+  const result = await runAiFixLoop({
+    base, roundSize: 1, onUpdate: noop, askToContinue: async () => 'continue', signal: new AbortController().signal,
+    suggest: async () => { calls += 1; throw Object.assign(new Error('No response text was returned.'), { raw: '' }) },
+    verify: async () => {},
+  })
+  assert.equal(result.status, 'empty')
+  assert.equal(calls, 1)
 })

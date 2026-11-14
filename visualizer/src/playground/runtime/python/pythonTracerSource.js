@@ -473,6 +473,8 @@ from collections import Counter, defaultdict, deque
 from heapq import heapify, heappop, heappush, heapreplace, nlargest, nsmallest
 from bisect import bisect_left, bisect_right, insort
 from math import inf
+from itertools import accumulate, chain, combinations, groupby, islice, pairwise, permutations, product, zip_longest
+from functools import cache, lru_cache, reduce
 """
     exec(conveniences, namespace, namespace)
     return namespace

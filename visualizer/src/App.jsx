@@ -706,6 +706,9 @@ function HomePage({
 
   return (
     <Shell className="home-page" {...shellProps}>
+      <section className="home-create-hero" aria-label="Create a visualizer">
+        <CreateVisualizerButton onClick={onOpenPlayground} />
+      </section>
       <WelcomeHero
         onTutorial={onTutorial}
         onPlayground={onOpenPlayground}
@@ -718,6 +721,7 @@ function HomePage({
         }
       />
       <header className="home-header">
+        <h2 className="home-catalog-heading">Try any LeetCode problem</h2>
         <div className="home-header-row">
           <Brand
             className="brand"

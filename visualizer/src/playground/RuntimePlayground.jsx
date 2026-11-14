@@ -907,6 +907,8 @@ export default function RuntimePlayground({
   const [aiRoundSize, setAiRoundSize] = useState(1);
   const [aiLoop, setAiLoop] = useState({ status: "idle", attempts: [], message: "", awaiting: 0 });
   const [selectedAttemptNumber, setSelectedAttemptNumber] = useState(null);
+  // The newest attempt is shown until the user picks another node.
+  const shownAttemptNumber = selectedAttemptNumber ?? aiLoop.attempts[aiLoop.attempts.length - 1]?.n ?? null;
   const aiControllerRef = useRef(null);
   const aiContinueRef = useRef(null);
   const aiLoopActive = aiLoop.status === "running" || aiLoop.status === "asking";
@@ -959,9 +961,8 @@ export default function RuntimePlayground({
     }
     const messages = {
       stopped: "Stopped. You can start again with Fix with AI.",
-      limit: `${result.attempts.length} attempts did not produce a working fix. Press Fix with AI to try again.`,
     };
-    setAiLoop({ status: result.status, attempts: result.attempts, message: messages[result.status] || "", awaiting: 0 });
+    setAiLoop({ status: result.status, attempts: result.attempts, message: result.message || messages[result.status] || "", awaiting: 0 });
   }, [aiLoopActive, aiRoundSize, currentErrorMessage, isPython, pythonEntry, pythonInputSource, pythonSource, requestAiKey]);
   const stopAiFix = useCallback(() => {
     aiControllerRef.current?.abort();
@@ -1654,8 +1655,9 @@ export default function RuntimePlayground({
                             <li key={attempt.n}>
                               <button
                                 type="button"
-                                className={`is-${attempt.status}${selectedAttemptNumber === attempt.n ? " is-selected" : ""}`}
-                                aria-pressed={selectedAttemptNumber === attempt.n}
+                                className={`is-${attempt.status}${shownAttemptNumber === attempt.n ? " is-selected" : ""}`}
+                                aria-pressed={shownAttemptNumber === attempt.n}
+                                title="Show this attempt's response"
                                 aria-label={`Attempt ${attempt.n}: ${attempt.status}`}
                                 onClick={() => setSelectedAttemptNumber(attempt.n)}
                               >
@@ -1665,9 +1667,12 @@ export default function RuntimePlayground({
                           ))}
                         </ol>
                       )}
+                      {aiLoop.attempts.length > 0 && (
+                        <small className="runtime-playground__ai-hint">Click a numbered node to see what that attempt returned.</small>
+                      )}
                       {aiLoop.status === "asking" && (
                         <div className="runtime-playground__ai-ask" role="status">
-                          <span>{aiLoop.awaiting} {aiLoop.awaiting === 1 ? "attempt" : "attempts"} did not fix it. Try {Math.min(aiRoundSize, 5 - aiLoop.awaiting)} more?</span>
+                          <span>{aiLoop.awaiting} {aiLoop.awaiting === 1 ? "attempt" : "attempts"} did not fix it. Try {aiRoundSize} more?</span>
                           <div>
                             <button type="button" className="runtime-playground__button--primary" onClick={continueAiFix}>Yes, keep trying</button>
                             <button type="button" onClick={stopAiFix}>Stop</button>
@@ -1677,8 +1682,8 @@ export default function RuntimePlayground({
                       {aiLoop.status === "running" && (
                         <small role="status">Attempt {aiLoop.attempts.length} is running. Each result is checked by running it.</small>
                       )}
-                      {selectedAttemptNumber && aiLoop.attempts.find((attempt) => attempt.n === selectedAttemptNumber) && (() => {
-                        const attempt = aiLoop.attempts.find((item) => item.n === selectedAttemptNumber);
+                      {shownAttemptNumber && aiLoop.attempts.find((attempt) => attempt.n === shownAttemptNumber) && (() => {
+                        const attempt = aiLoop.attempts.find((item) => item.n === shownAttemptNumber);
                         return (
                           <div className="runtime-playground__ai-detail">
                             <strong>Attempt {attempt.n}: {attempt.status === "fixed" ? "worked" : attempt.status === "failed" ? "did not work" : "running"}</strong>

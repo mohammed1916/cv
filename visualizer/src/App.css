@@ -236,6 +236,38 @@ body.chat-select-mode .trie-state svg g:hover {
   overflow-y: auto;
 }
 
+/* Home: prominent Create Visualizer entry above the catalogue. */
+.home-create-hero {
+  padding: 2rem 0 1.5rem;
+}
+
+.home-create-hero .create-visualizer-launch-btn {
+  display: flex;
+  width: 100%;
+  min-height: 120px;
+  justify-content: center;
+  padding: 1.25rem 1rem;
+  border-style: dashed;
+  border-width: 2px;
+  border-radius: 18px;
+  font-size: clamp(1.25rem, 4vw, 2rem);
+  font-weight: 800;
+  text-align: center;
+  color: var(--text);
+  box-sizing: border-box;
+}
+
+.home-create-hero .create-visualizer-launch-btn:focus-visible {
+  outline: 3px solid var(--primary);
+  outline-offset: 6px;
+}
+
+.home-catalog-heading {
+  margin: 0 0 0.75rem;
+  font-size: clamp(1.1rem, 2.6vw, 1.5rem);
+  color: var(--text);
+}
+
 .home-header {
   padding: 3.5rem 0 2.5rem;
   border-bottom: 1px solid var(--border);
