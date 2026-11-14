@@ -10,9 +10,10 @@
 .recursive-call-tree-scroll {
   width: 100%;
   min-width: 0;
+  max-height: var(--recursive-tree-max-height, 70vh);
 
-  overflow-x: auto;
-  overflow-y: visible;
+  overflow: auto;
+  overscroll-behavior: contain;
 
   padding: 6px 4px 12px;
 }
@@ -23,6 +24,7 @@
 
   display: flex;
   justify-content: center;
+  justify-content: safe center;
   align-items: flex-start;
 }
 
@@ -82,6 +84,73 @@
 
 .recursive-call-tree-node.is-waiting {
   border-color: color-mix(in srgb, #f59e0b 65%, var(--border));
+}
+
+.recursive-call-tree-node.is-on-path {
+  border-color: color-mix(in srgb, var(--primary) 55%, var(--border));
+  background: color-mix(in srgb, var(--primary) 4%, var(--surface2));
+}
+
+.recursive-call-tree-node.is-chosen {
+  border-color: color-mix(in srgb, #16a34a 75%, var(--border));
+}
+
+.recursive-call-tree-node.is-ignored {
+  opacity: 0.55;
+  border-style: dashed;
+}
+
+.recursive-call-tree-node.is-pruned {
+  border-color: color-mix(in srgb, #dc2626 65%, var(--border));
+  border-style: dashed;
+}
+
+.recursive-call-tree-chosen-mark {
+  position: absolute;
+  top: -8px;
+  left: 8px;
+
+  width: 16px;
+  height: 16px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 50%;
+
+  background: #16a34a;
+  color: white;
+
+  font-size: 10px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.recursive-call-tree-choice {
+  align-self: flex-start;
+  max-width: 100%;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  padding: 1px 5px;
+
+  border-radius: 4px;
+
+  background: color-mix(in srgb, var(--primary) 12%, transparent);
+  color: var(--text);
+
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 9px;
+  font-weight: 700;
+}
+
+.recursive-call-tree-prune-reason {
+  color: #dc2626;
+
+  font-size: 9px;
+  font-weight: 700;
 }
 
 .recursive-call-tree-node.is-returned {
@@ -275,6 +344,10 @@
   background: color-mix(in srgb, var(--text) 42%, transparent);
 }
 
+.recursive-call-tree-stem.is-on-path {
+  background: var(--primary);
+}
+
 .recursive-call-tree-children {
   position: relative;
 
@@ -313,6 +386,10 @@
   height: 24px;
 
   background: color-mix(in srgb, var(--text) 42%, transparent);
+}
+
+.recursive-call-tree-child.is-on-path > .recursive-call-tree-child-line {
+  background: var(--primary);
 }
 
 .recursive-call-tree-child-line::after {
@@ -397,6 +474,23 @@
 
 .recursive-call-tree-dot.returned {
   background: #22c55e;
+}
+
+.recursive-call-tree-dot.path {
+  background: color-mix(in srgb, var(--primary) 55%, var(--border));
+}
+
+.recursive-call-tree-dot.chosen {
+  background: #16a34a;
+}
+
+.recursive-call-tree-dot.ignored {
+  background: transparent;
+  border: 1px dashed var(--muted);
+}
+
+.recursive-call-tree-dot.pruned {
+  background: #dc2626;
 }
 
 .recursive-call-tree-empty {

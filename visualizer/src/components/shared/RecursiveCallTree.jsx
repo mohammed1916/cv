@@ -2,6 +2,13 @@ import { useMemo } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import "./RecursiveCallTree.css";
 
+// Node fields understood by this tree (all optional, existing fields unchanged):
+//   status:       "waiting" | "returned"            (existing)
+//   decision:     "chosen" | "ignored" | "pruned"   (new; "active" comes from activeNodeId)
+//   pruneReason:  short text shown beside a pruned node, e.g. "duplicate value"
+//   choice:       short label for the branch taken, e.g. "keep ( " (new)
+//   returnValue, union, expr, index, depth, children, parentId, id (existing)
+
 function displayWord(value) {
   return value === "" ? "ε" : value;
 }
@@ -15,6 +22,7 @@ function TreeNode({
   node,
   nodesById,
   activeNodeId,
+  pathIds,
   getTitle,
   getSubtitle,
   getState,
@@ -26,8 +34,13 @@ function TreeNode({
     .filter(Boolean);
 
   const active = node.id === activeNodeId;
+  const onPath = pathIds.has(node.id);
   const returned = node.status === "returned";
   const waiting = node.status === "waiting";
+  const decision = node.decision ?? null;
+  const chosen = decision === "chosen";
+  const ignored = decision === "ignored";
+  const pruned = decision === "pruned";
   const states = getState?.(node) ?? [];
   const returnValue = getReturnValue?.(node) ?? node.returnValue ?? [];
 
@@ -35,14 +48,19 @@ function TreeNode({
     <div
       className="recursive-call-tree-branch"
       data-depth={node.depth ?? level}
+      data-decision={decision ?? undefined}
     >
       <motion.div
         layout
         className={[
           "recursive-call-tree-node",
           active ? "is-active" : "",
+          onPath && !active ? "is-on-path" : "",
           returned ? "is-returned" : "",
           waiting ? "is-waiting" : "",
+          chosen ? "is-chosen" : "",
+          ignored ? "is-ignored" : "",
+          pruned ? "is-pruned" : "",
         ]
           .filter(Boolean)
           .join(" ")}
@@ -60,6 +78,10 @@ function TreeNode({
               depth {node.depth ?? level}
             </span>
           </div>
+
+          {node.choice && (
+            <div className="recursive-call-tree-choice">{node.choice}</div>
+          )}
 
           {getSubtitle && (
             <div className="recursive-call-tree-subtitle">
@@ -90,6 +112,14 @@ function TreeNode({
           </motion.div>
         )}
 
+        {pruned && (
+          <div className="recursive-call-tree-prune-reason">
+            pruned{node.pruneReason ? `: ${node.pruneReason}` : ""}
+          </div>
+        )}
+
+        {chosen && <span className="recursive-call-tree-chosen-mark">✓</span>}
+
         {active && (
           <div className="recursive-call-tree-active-label">active call</div>
         )}
@@ -103,7 +133,9 @@ function TreeNode({
 
       {children.length > 0 && (
         <>
-          <div className="recursive-call-tree-stem" />
+          <div
+            className={`recursive-call-tree-stem ${onPath ? "is-on-path" : ""}`}
+          />
 
           <div
             className={`recursive-call-tree-children ${
@@ -112,7 +144,12 @@ function TreeNode({
           >
             <AnimatePresence initial={false}>
               {children.map((child) => (
-                <div className="recursive-call-tree-child" key={child.id}>
+                <div
+                  className={`recursive-call-tree-child ${
+                    pathIds.has(child.id) ? "is-on-path" : ""
+                  }`}
+                  key={child.id}
+                >
                   <div className="recursive-call-tree-child-line" />
 
                   {child.status === "returned" && (
@@ -126,6 +163,7 @@ function TreeNode({
                     node={child}
                     nodesById={nodesById}
                     activeNodeId={activeNodeId}
+                    pathIds={pathIds}
                     getTitle={getTitle}
                     getSubtitle={getSubtitle}
                     getState={getState}
@@ -151,18 +189,27 @@ export default function RecursiveCallTree({
   getReturnValue,
   emptyLabel = "No recursive calls yet.",
 }) {
-  const { roots, nodesById } = useMemo(() => {
+  const { roots, nodesById, pathIds } = useMemo(() => {
     const map = new Map(nodes.map((node) => [node.id, node]));
 
     const rootNodes = nodes.filter(
       (node) => node.parentId == null || !map.has(node.parentId),
     );
 
+    // Root-to-active path: the active node and each ancestor up to its root.
+    const path = new Set();
+    let cursor = activeNodeId != null ? map.get(activeNodeId) : null;
+    while (cursor && !path.has(cursor.id)) {
+      path.add(cursor.id);
+      cursor = cursor.parentId != null ? map.get(cursor.parentId) : null;
+    }
+
     return {
       roots: rootNodes,
       nodesById: map,
+      pathIds: path,
     };
-  }, [nodes]);
+  }, [nodes, activeNodeId]);
 
   if (!roots.length) {
     return <div className="recursive-call-tree-empty">{emptyLabel}</div>;
@@ -178,6 +225,7 @@ export default function RecursiveCallTree({
               node={root}
               nodesById={nodesById}
               activeNodeId={activeNodeId}
+              pathIds={pathIds}
               getTitle={getTitle}
               getSubtitle={getSubtitle}
               getState={getState}
@@ -194,6 +242,11 @@ export default function RecursiveCallTree({
         </span>
 
         <span>
+          <i className="recursive-call-tree-dot path" />
+          Path
+        </span>
+
+        <span>
           <i className="recursive-call-tree-dot waiting" />
           Waiting
         </span>
@@ -201,6 +254,21 @@ export default function RecursiveCallTree({
         <span>
           <i className="recursive-call-tree-dot returned" />
           Returned
+        </span>
+
+        <span>
+          <i className="recursive-call-tree-dot chosen" />
+          Chosen
+        </span>
+
+        <span>
+          <i className="recursive-call-tree-dot ignored" />
+          Ignored
+        </span>
+
+        <span>
+          <i className="recursive-call-tree-dot pruned" />
+          Pruned
         </span>
       </div>
     </div>

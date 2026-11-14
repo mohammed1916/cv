@@ -2,7 +2,7 @@ import authoredExamples0 from '../../config/examples/local--90.js';
 
 const AUTHORED_INITIAL = authoredExamples0[0];
 
-import { useState, useMemo, useCallback } from 'react'
+import { useState, useMemo, useCallback, useEffect } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -16,6 +16,7 @@ import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import './Visualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
+import RecursiveCallTree from '../../components/shared/RecursiveCallTree'
 
 const PATTERNS = ['init', 'record', 'skip', 'choose', 'recurse', 'unchoose', 'done']
 
@@ -54,94 +55,154 @@ function generateSteps(inputNums) {
   const nums = [...inputNums].sort((a, b) => a - b)
   const res = []
 
-  steps.push({
-    phase: 'init',
-    activeLine: 2,
-    nums: [...nums],
-    activeIndex: -1,
-    path: [],
-    res: [],
-    message: `Sort nums -> [${nums.join(', ')}] so duplicates sit next to each other.`,
-  })
+  // Search-tree trace. Each node is one backtrack call (decision "chosen" for
+  // a taken value, root has no decision) or one candidate at a call that was
+  // pruned as a duplicate. Fields: id, parentId, depth, decision, choice,
+  // subset (subset so far), pruneReason, children.
+  const treeNodes = []
+  const nodeById = new Map()
+  let activeNodeId = null
 
-  function backtrack(start, path) {
-    // Record the current path as a subset.
-    res.push([...path])
+  function addNode({ parentId = null, decision = null, choice = null, subset, pruneReason }) {
+    const parent = parentId != null ? nodeById.get(parentId) : null
+    const node = {
+      id: treeNodes.length,
+      parentId,
+      depth: parent ? parent.depth + 1 : 0,
+      decision,
+      choice,
+      subset: [...subset],
+      pruneReason,
+      children: [],
+    }
+    treeNodes.push(node)
+    nodeById.set(node.id, node)
+    if (parent) parent.children.push(node.id)
+    return node.id
+  }
+
+  function snapshotTree() {
+    return treeNodes.map((n) => ({ ...n, children: [...n.children], subset: [...n.subset] }))
+  }
+
+  function pushStep(step, nodeId) {
+    activeNodeId = nodeId
     steps.push({
-      phase: 'record',
-      activeLine: 5,
       nums: [...nums],
       activeIndex: -1,
-      path: [...path],
+      path: [],
       res: res.map((r) => [...r]),
-      recorded: true,
-      message: `Record subset [${path.join(', ')}]  (total: ${res.length})`,
+      ...step,
+      treeNodes: snapshotTree(),
+      activeNodeId,
     })
+  }
+
+  pushStep(
+    {
+      phase: 'init',
+      activeLine: 2,
+      message: `Sort nums -> [${nums.join(', ')}] so duplicates sit next to each other.`,
+    },
+    null,
+  )
+
+  function backtrack(start, path, nodeId) {
+    // Record the current path as a subset.
+    res.push([...path])
+    pushStep(
+      {
+        phase: 'record',
+        activeLine: 5,
+        path: [...path],
+        recorded: true,
+        message: `Record subset [${path.join(', ')}]  (total: ${res.length})`,
+      },
+      nodeId,
+    )
 
     for (let i = start; i < nums.length; i++) {
       if (i > start && nums[i] === nums[i - 1]) {
-        steps.push({
-          phase: 'skip',
-          activeLine: 8,
-          nums: [...nums],
-          activeIndex: i,
-          path: [...path],
-          res: res.map((r) => [...r]),
-          skipping: true,
-          message: `Skip nums[${i}]=${nums[i]} — duplicate of nums[${i - 1}] at same level (avoids duplicate subset).`,
+        const prunedId = addNode({
+          parentId: nodeId,
+          decision: 'pruned',
+          choice: `skip ${nums[i]}`,
+          subset: path,
+          pruneReason: `same value as nums[${i - 1}] at this level`,
         })
+        pushStep(
+          {
+            phase: 'skip',
+            activeLine: 8,
+            activeIndex: i,
+            path: [...path],
+            skipping: true,
+            message: `Skip nums[${i}]=${nums[i]} — duplicate of nums[${i - 1}] at same level (avoids duplicate subset).`,
+          },
+          prunedId,
+        )
         continue
       }
 
       path.push(nums[i])
-      steps.push({
-        phase: 'choose',
-        activeLine: 9,
-        nums: [...nums],
-        activeIndex: i,
-        path: [...path],
-        res: res.map((r) => [...r]),
-        chosen: true,
-        message: `Choose nums[${i}]=${nums[i]}, path=[${path.join(', ')}]`,
+      const childId = addNode({
+        parentId: nodeId,
+        decision: 'chosen',
+        choice: `take ${nums[i]}`,
+        subset: path,
       })
+      pushStep(
+        {
+          phase: 'choose',
+          activeLine: 9,
+          activeIndex: i,
+          path: [...path],
+          chosen: true,
+          message: `Choose nums[${i}]=${nums[i]}, path=[${path.join(', ')}]`,
+        },
+        childId,
+      )
 
-      steps.push({
-        phase: 'recurse',
-        activeLine: 10,
-        nums: [...nums],
-        activeIndex: i,
-        path: [...path],
-        res: res.map((r) => [...r]),
-        message: `Recurse with start=${i + 1}`,
-      })
+      pushStep(
+        {
+          phase: 'recurse',
+          activeLine: 10,
+          activeIndex: i,
+          path: [...path],
+          message: `Recurse with start=${i + 1}`,
+        },
+        childId,
+      )
 
-      backtrack(i + 1, path)
+      backtrack(i + 1, path, childId)
 
       path.pop()
-      steps.push({
-        phase: 'unchoose',
-        activeLine: 11,
-        nums: [...nums],
-        activeIndex: i,
-        path: [...path],
-        res: res.map((r) => [...r]),
-        message: `Backtrack: un-choose ${nums[i]}, path=[${path.join(', ')}]`,
-      })
+      pushStep(
+        {
+          phase: 'unchoose',
+          activeLine: 11,
+          activeIndex: i,
+          path: [...path],
+          message: `Backtrack: un-choose ${nums[i]}, path=[${path.join(', ')}]`,
+        },
+        nodeId,
+      )
     }
   }
 
-  backtrack(0, [])
+  const rootId = addNode({ subset: [] })
+  backtrack(0, [], rootId)
 
-  steps.push({
-    phase: 'done',
-    activeLine: 13,
-    nums: [...nums],
-    activeIndex: -1,
-    path: [],
-    res: res.map((r) => [...r]),
-    done: true,
-    message: `Done. ${res.length} unique subsets found.`,
-  })
+  pushStep(
+    {
+      phase: 'done',
+      activeLine: 13,
+      path: [],
+      done: true,
+      message: `Done. ${res.length} unique subsets found.`,
+    },
+    null,
+  )
 
   return steps
 }
@@ -155,7 +216,7 @@ function VisualizationPanel({ step }) {
     )
   }
 
-  const { nums = [], activeIndex = -1, path = [], res = [], skipping, chosen } = step
+  const { nums = [], activeIndex = -1, path = [], res = [], skipping, chosen, treeNodes = [], activeNodeId = null } = step
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16 }}>
@@ -233,7 +294,10 @@ function VisualizationPanel({ step }) {
         <div style={{ fontSize: 12, color: 'var(--text-muted)', marginBottom: 6, fontWeight: 600 }}>
           Result subsets ({res.length})
         </div>
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
+        <div
+          className="problem90-subsets"
+          style={{ display: 'flex', flexWrap: 'wrap', gap: 8, maxHeight: 180, overflow: 'auto', overscrollBehavior: 'contain', padding: 4 }}
+        >
           {res.map((subset, i) => {
             const isLatest = i === res.length - 1 && step.recorded
             return (
@@ -255,6 +319,22 @@ function VisualizationPanel({ step }) {
               </motion.div>
             )
           })}
+        </div>
+      </div>
+
+      {/* Decision tree: root to children; chosen / pruned branches; path to active call highlighted */}
+      <div>
+        <div style={{ fontSize: 12, color: 'var(--text-muted)', marginBottom: 6, fontWeight: 600 }}>
+          Decision tree (take = chosen, duplicate skip = pruned)
+        </div>
+        <div className="problem90-tree" style={{ '--recursive-tree-max-height': '320px', minWidth: 0 }}>
+          <RecursiveCallTree
+            nodes={treeNodes}
+            activeNodeId={activeNodeId}
+            emptyLabel="Press play to build the search tree."
+            getTitle={(node) => (node.parentId == null ? 'root' : `[${node.subset.join(', ')}]`)}
+            getSubtitle={(node) => (node.parentId == null ? 'subset so far: []' : `subset so far: [${node.subset.join(', ')}]`)}
+          />
         </div>
       </div>
 
@@ -391,6 +471,13 @@ export default function Problem90Visualizer() {
     []
   )
   const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
+  // The primary panel is portalled into a dock element; let that element scroll itself.
+  useEffect(() => {
+    const el = panelDivs?.primary
+    if (!el) return
+    // Pin the dock content to fill its slot, so overflow scrolls inside it instead of being clipped.
+    Object.assign(el.style, { position: 'absolute', inset: '0', overflowY: 'auto', maxHeight: 'none' })
+  }, [panelDivs])
 
   return (
     <div className="problem90-shell">
