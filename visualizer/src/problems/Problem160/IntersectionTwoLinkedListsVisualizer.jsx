@@ -138,6 +138,8 @@ function renderList(nodes, label, ptrIdx, ptrList, intersectStart, accent) {
         values={nodes}
         pointers={pointers}
         partition={intersectStart >= 0 ? intersectStart : null}
+        highlight={intersectStart >= 0 ? nodes.map((_, i) => i).filter((i) => i >= intersectStart) : []}
+        terminator="null"
         note={intersectStart >= 0 ? "Blue nodes are before the shared tail; green nodes are the shared tail." : undefined}
       />
     </div>

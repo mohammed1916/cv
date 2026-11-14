@@ -40,3 +40,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+/* IndexedSequence roles: the mismatch and compare cells of the two strings. */
+.algorithm-sequence__cell[data-role="mismatch"] { border: 2px solid var(--error); background: color-mix(in srgb, var(--error) 22%, var(--surface)); }
+.algorithm-sequence__cell[data-role="compare"] { border: 2px solid var(--warning); background: color-mix(in srgb, var(--warning) 22%, var(--surface)); }

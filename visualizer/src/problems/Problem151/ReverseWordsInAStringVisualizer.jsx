@@ -165,6 +165,7 @@ function VisualizationPanel({ step }) {
             length={step.reversed.length}
             valueAt={(i) => `"${step.reversed[i]}"`}
             active={step.reversed.length - 1}
+            roleAt={() => 'written'}
           />
         </motion.div>
       )}

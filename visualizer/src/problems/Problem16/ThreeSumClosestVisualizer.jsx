@@ -201,7 +201,7 @@ export default function ThreeSumClosestVisualizer() {
           <PointerRail
             title="Sorted array · pointers"
             values={sorted}
-            highlight={step?.phase === 'found' ? [step.i, step.l, step.r].filter(v => v != null) : []}
+            highlight={step?.phase === 'calc' ? [step.i, step.l, step.r].filter(v => v != null) : []}
           pointers={[
               ...(step?.i != null ? [{ id: 'i', label: 'i', index: step.i, tone: 'primary' }] : []),
               ...(step?.l != null ? [{ id: 'l', label: 'l', index: step.l, tone: 'info' }] : []),

@@ -68,15 +68,19 @@ function VisualizationPanel({ step, applyEx }) {
         </div>
       </div>
 
-      {step?.array && step.array.length > 0 && (
-        <IndexedSequence
-          label="Active keys"
-          length={step.array.length}
-          valueAt={(i) => step.array[i]}
-          active={step.array.indexOf(step.val)}
-          roleAt={(i) => (step.array[i] === step.randomVal ? 'random' : '')}
-        />
-      )}
+      {step?.array && step.array.length > 0 && (() => {
+        // The steps carry the operated key inside currentOp (e.g. "inc(a)"), and the returned key in result.
+        const operatedKey = step.val ?? step.currentOp?.match(/^(?:inc|dec)\((\w+)\)$/)?.[1];
+        return (
+          <IndexedSequence
+            label="Active keys"
+            length={step.array.length}
+            valueAt={(i) => step.array[i]}
+            active={step.array.indexOf(operatedKey)}
+            roleAt={(i) => (step.array[i] === step.result ? 'result' : '')}
+          />
+        )
+      })()}
 
       {step?.map && step.map.size > 0 && (
         <div>

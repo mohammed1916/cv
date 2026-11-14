@@ -1,3 +1,4 @@
+import './AlgorithmWorkspace.css'
 import { useState } from 'react'
 
 // A window into the full collection, never a truncated replacement for it.

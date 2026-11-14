@@ -104,6 +104,7 @@ export default function FindPeakElementVisualizer() {
           ...(step.mid >= 0 ? [{ id: 'mid', label: 'mid', index: step.mid, tone: 'primary' }] : []),
           { id: 'hi', label: 'hi', index: step.hi, tone: 'warning' },
         ] : []}
+        highlight={step?.result != null ? [step.result] : []}
       />
       <div
         className="fp-bars"

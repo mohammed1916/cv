@@ -243,7 +243,13 @@ function StringsVisualizationPanel({ step, strs }) {
                       title={`strs[${rowIdx}] · column`}
                       values={str.split("")}
                       pointers={pointers}
-                      range={step?.prefix != null ? { start: 0, end: Math.max(0, step.prefix.length - 1) } : null}
+                      cellWidth={34}
+                      marks={[
+                        ...Array.from({ length: step?.prefix?.length ?? 0 }, (_, index) => ({ index, tone: "success" })),
+                        ...(step?.phase === "out_of_bounds" && step?.row === rowIdx && step?.col != null
+                          ? [{ index: step.col, tone: "danger" }]
+                          : []),
+                      ]}
                     />
                   )}
                 </div>

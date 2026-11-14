@@ -25,3 +25,13 @@
 
 /* Cells that satisfy a condition (for example a found 3Sum triplet). */
 .pointer-rail-cell.highlighted { background: color-mix(in srgb, #22c55e 28%, var(--surface2)); box-shadow: 0 0 0 2px #22c55e; font-weight: 700; }
+
+/* Optional end-of-list marker, for example a null terminator. */
+.pointer-rail-terminator .pointer-rail-cell { border-style: dashed; color: var(--text-muted); font-size: 11px; padding: 0 6px; }
+
+/* Optional per-cell tones: pointed cells follow their pointer's tone; marks colour cells by outcome. */
+.pointer-rail-cell.pointed.pointed-info { border-color: var(--info); background: color-mix(in srgb, var(--info) 16%, var(--surface)); }
+.pointer-rail-cell.pointed.pointed-success { border-color: var(--success); background: color-mix(in srgb, var(--success) 16%, var(--surface)); }
+.pointer-rail-cell.pointed.pointed-warning { border-color: var(--warning); background: color-mix(in srgb, var(--warning) 16%, var(--surface)); }
+.pointer-rail-cell.mark-success { background: rgba(34, 197, 94, 0.15); border-color: #22c55e; }
+.pointer-rail-cell.mark-danger { background: rgba(239, 68, 68, 0.15); border-color: #ef4444; }

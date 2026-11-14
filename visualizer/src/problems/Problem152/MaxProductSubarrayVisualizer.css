@@ -227,3 +227,8 @@
     color: var(--recovered-ink-2f8628, #2f8628);
     border-color: #a6e3a1;
 }
+/* Array cells from the shared IndexedSequence: sign colouring and the amber current-element marker. */
+.mps-panel .algorithm-sequence__cell[data-role="negative"] { background: var(--recovered-surface-fee2e2, #fee2e2); }
+.mps-panel .algorithm-sequence__cell[data-role="zero"] { background: var(--recovered-surface-f3f4f6, #f3f4f6); }
+.mps-panel .algorithm-sequence__cell:not([data-role="negative"]):not([data-role="zero"]) { background: var(--recovered-surface-dbeafe, #dbeafe); }
+.mps-panel .algorithm-sequence__cell.is-active { background: var(--recovered-surface-fbbf24, #fbbf24); border: 2px solid #f59e0b; outline: none; transform: translateY(-8px) scale(1.1); }

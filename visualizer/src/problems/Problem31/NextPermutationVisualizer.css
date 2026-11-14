@@ -159,3 +159,19 @@
 .np-status-message {
   width: 100%;
 }
+/* PointerRail role colours for the array (pivot, swap target, reversed suffix). */
+.np-array-visualization .pointer-rail-cell.role-pivot {
+  border-color: var(--error);
+  background: var(--surface2);
+  color: var(--error);
+}
+.np-array-visualization .pointer-rail-cell.role-swap {
+  border-color: var(--primary);
+  background: var(--surface2);
+  color: var(--primary);
+}
+.np-array-visualization .pointer-rail-cell.role-reversed {
+  border-color: var(--success);
+  background: var(--surface2);
+  color: var(--success);
+}

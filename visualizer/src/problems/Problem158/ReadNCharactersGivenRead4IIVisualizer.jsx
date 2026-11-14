@@ -222,10 +222,15 @@ function VisualizationPanel({ step }) {
           valueAt={i => step.chunk[i]} roleAt={() => 'chunk'} />
       )}
 
-      {step.globalQueue && step.globalQueue.length > 0 && (
+      {step.globalQueue && (step.globalQueue.length > 0 ? (
         <IndexedSequence label="Queue (cache)" length={step.globalQueue.length} active={-1}
           valueAt={i => step.globalQueue[i]} roleAt={() => 'cached'} />
-      )}
+      ) : (
+        <section aria-label="Queue (cache)">
+          <h3>Queue (cache)</h3>
+          <div style={{ fontSize: 11, color: 'var(--primary)' }}>empty</div>
+        </section>
+      ))}
 
       {step.result && step.result.length > 0 && (
         <motion.div style={{ padding: 12, backgroundColor: "var(--surface2)", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>

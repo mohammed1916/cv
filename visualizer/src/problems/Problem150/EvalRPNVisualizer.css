@@ -177,13 +177,3 @@
     color: var(--text-muted);
     min-height: 36px;
 }
-/* Token row styling for the shared IndexedSequence component. */
-.algorithm-sequence { margin: 4px 0 10px; }
-.algorithm-sequence h3 { font-size: 12px; font-weight: 600; color: var(--text); margin: 0 0 4px; }
-.algorithm-sequence__cells { display: flex; flex-wrap: wrap; gap: 4px; }
-.algorithm-sequence__cell { display: grid; place-items: center; min-width: 44px; padding: 4px 8px; border: 1px solid var(--border); border-radius: 4px; background: var(--surface2); color: var(--text); font-size: 11px; }
-.algorithm-sequence__cell strong { font-size: 13px; }
-.algorithm-sequence__cell small, .algorithm-sequence__cell span { color: var(--text-muted); font-size: 10px; }
-.algorithm-sequence__cell[data-role="operator"] { font-weight: bold; }
-.algorithm-sequence__cell.is-active { border: 3px solid var(--primary); }
-.algorithm-sequence nav { display: flex; gap: 6px; align-items: center; margin-top: 6px; font-size: 11px; flex-wrap: wrap; }

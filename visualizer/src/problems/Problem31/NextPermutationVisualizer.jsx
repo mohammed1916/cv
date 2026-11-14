@@ -10,7 +10,6 @@ import LuminoDockPanel from "../../components/LuminoDockPanel";
 import FloatingPanel from "../../components/shared/FloatingPanel";
 import ManualInputPanel from "../../components/shared/ManualInputPanel";
 import PointerRail from "../../components/shared/PointerRail";
-import IndexedSequence from "../../components/shared/IndexedSequence";
 
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
@@ -256,19 +255,12 @@ function ArrayVisualizationPanel({ step, exampleNums }) {
       <div className="np-panel-label">Array</div>
 
       <PointerRail
-        title="Pointers"
+        title="Array"
         values={displayedNums}
         pointers={[
-          { id: "pivot", label: "i (pivot)", index: step?.pivotI ?? -1, tone: "pivot" },
-          { id: "swap", label: "j (swap)", index: step?.swapJ ?? -1, tone: "swap" },
+          { id: "pivot", label: "i (pivot)", index: step?.pivotI ?? -1, tone: "warning" },
+          { id: "swap", label: "j (swap)", index: step?.swapJ ?? -1, tone: "info" },
         ]}
-      />
-
-      <IndexedSequence
-        label="Array"
-        length={displayedNums.length}
-        valueAt={(idx) => displayedNums[idx]}
-        active={step?.pivotI ?? -1}
         roleAt={(idx) => cellClass(idx, step)}
       />
 
