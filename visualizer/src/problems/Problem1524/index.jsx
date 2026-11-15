@@ -1,4 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import IndexedSequence from '../../components/shared/IndexedSequence'
+import FrequencyCountTable from '../../components/shared/FrequencyCountTable'
 import { buildTrace, parseInput, code, python, phases } from './algorithm'
 
 const definition = {
@@ -20,17 +22,24 @@ const definition = {
 
 export default function OddSumSubarrays() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
-    const { index, value, parity, odd, even, total, added } = step.snapshot
+    const { index = -1, parity = 0, odd = 0, even = 0, total = 0, added = 0 } = step.snapshot ?? {}
+    const arr = run.input.arr
+    // prefix[k] is the parity of the sum of the first k values; prefix[0] is the empty prefix (even).
+    const prefix = [0]
+    arr.forEach((value, k) => prefix.push(prefix[k] ^ (value & 1)))
+    const current = index >= 0 ? index + 1 : 0
+    const valueRole = i => (arr[i] % 2 ? 'odd' : 'even')
+    const prefixRole = k => {
+      if (k > current) return 'future'
+      // While counting, earlier prefixes with the opposite parity form the odd-sum subarrays.
+      if (step.phase === 'count' && k < current && prefix[k] !== prefix[current]) return 'pair'
+      return prefix[k] ? 'odd' : 'even'
+    }
     return <>
-      <div role="img" aria-label="Array values" style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-        {run.input.arr.map((v, i) => <div key={i} style={{
-          minWidth: 46, padding: '6px 8px', textAlign: 'center', fontFamily: 'monospace', boxSizing: 'border-box',
-          border: `${i === index ? 2 : 1}px solid ${i === index ? 'var(--text)' : 'var(--border)'}`,
-        }}><div>{v}</div><small>{i}</small></div>)}
-      </div>
-      <p>Prefix parity: <strong>{parity === 1 ? 'odd' : 'even'}</strong>{value != null ? ` after value ${value}` : ''}</p>
-      <p>Even prefixes stored: <strong>{even}</strong> · Odd prefixes stored: <strong>{odd}</strong></p>
-      <p>Subarrays added here: <strong>{added ?? 0}</strong> · Total: <strong>{total}</strong></p>
+      <IndexedSequence label="Values (parity)" length={arr.length} valueAt={i => arr[i]} active={index} roleAt={valueRole} />
+      <IndexedSequence label="Prefix parity (k values before)" length={prefix.length} valueAt={k => (prefix[k] ? 'odd' : 'even')} active={current} roleAt={prefixRole} />
+      <FrequencyCountTable title="Stored prefixes by parity" entries={[['even', even], ['odd', odd]]} active={parity ? 'odd' : 'even'} emptyText="Only the empty prefix is stored." />
+      <p>Odd-sum subarrays added here: <strong>{added}</strong> · Total: <strong>{total}</strong></p>
     </>
   }} renderReasoning={() => <>
     <p><strong>Prefix sums:</strong> a subarray has odd sum exactly when its two prefix sums have different parity.</p>

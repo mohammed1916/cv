@@ -63,3 +63,12 @@
 
 .algorithm-workspace--tutorial .algorithm-workspace__current-state { display:none; }
 .algorithm-workspace--tutorial .algorithm-workspace__playback { padding:6px; gap:8px; }
+
+/* Visualization panel: fills its dock slot and scrolls inside itself (code and input panels unchanged). */
+.algorithm-workspace__panel.is-visual { height: 100%; overflow-y: auto; overscroll-behavior: contain; }
+
+/* Parity roles (sequence cells): odd and even values and prefixes, pairs being counted, and prefixes not yet reached. */
+.algorithm-sequence__cell[data-role="odd"] { color: var(--primary); }
+.algorithm-sequence__cell[data-role="even"] { color: var(--text-muted); }
+.algorithm-sequence__cell[data-role="pair"] { border: 2px solid var(--success); background: color-mix(in srgb, var(--success) 18%, var(--surface)); }
+.algorithm-sequence__cell[data-role="future"] { opacity: .4; }

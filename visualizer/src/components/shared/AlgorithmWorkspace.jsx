@@ -29,6 +29,12 @@ export default function AlgorithmWorkspace({ definition, renderVisual, renderRea
   const [run, setRun] = useState(() => definition.build(definition.parse(definition.examples[0].input)))
   const [error, setError] = useState('')
   const [panelDivs, setPanelDivs] = useState(null)
+  // The visual panel scrolls inside itself: pin its dock content to fill the slot.
+  useEffect(() => {
+    const el = panelDivs?.visual
+    if (!el) return
+    Object.assign(el.style, { position: 'absolute', inset: '0', overflowY: 'auto', maxHeight: 'none' })
+  }, [panelDivs])
   const [tutorialDivs, setTutorialDivs] = useState(null)
   const [tutorialMode, setTutorialMode] = useState('off')
   const [floating, setFloating] = useState(true)
@@ -127,7 +133,7 @@ export default function AlgorithmWorkspace({ definition, renderVisual, renderRea
     <div className="algorithm-workspace__dock" style={directed && !adaptive ? {display:'none'} : undefined}>
       <LuminoDockPanel panels={PANELS} focusPanel={adaptive && directed ? "visual" : null} onPanelReady={setPanelDivs} />
       {Object.entries({...views, input: inputPanel}).map(([id, content]) => panelDivs?.[id]
-        ? createPortal(<div className="algorithm-workspace__panel">{content}</div>, panelDivs[id], id) : null)}
+        ? createPortal(<div className={`algorithm-workspace__panel${id === "visual" ? " is-visual" : ""}`}>{content}</div>, panelDivs[id], id) : null)}
     </div>
     {floating ? createPortal(<FloatingPanel title="Playback Controls" storageKey="algorithm-workspace-playback-size"
       defaultSize={{ width: Math.min(520, window.innerWidth - 16), height: Math.min(380, window.innerHeight - 32) }}
