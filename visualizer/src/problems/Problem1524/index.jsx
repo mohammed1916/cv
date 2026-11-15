@@ -72,7 +72,7 @@ export default function OddSumSubarrays() {
           ]}
           edges={[
             { from: 'even', to: 'odd', label: `odd value +${even}`, bend: -18, active: fromState === 'even' && toState === 'odd' },
-            { from: 'odd', to: 'even', label: `odd value +${odd}`, bend: -18, active: fromState === 'odd' && toState === 'even' },
+            { from: 'odd', to: 'even', label: `odd value +${odd}`, bend: 18, active: fromState === 'odd' && toState === 'even' },
             { from: 'even', to: 'even', label: `even value +${odd}`, active: fromState === 'even' && toState === 'even' },
             { from: 'odd', to: 'odd', label: `even value +${even}`, active: fromState === 'odd' && toState === 'odd' },
           ]}
