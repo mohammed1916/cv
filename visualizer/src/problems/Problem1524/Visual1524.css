@@ -1,0 +1,11 @@
+/* Separate, colour-coded blocks for the parity visual. */
+.pr1524-block { border: 1px solid var(--border); border-left-width: 4px; border-radius: 10px; padding: 12px 14px; display: grid; gap: 10px; background: var(--surface); }
+.pr1524-block h4 { margin: 0; font-size: 12px; text-transform: uppercase; letter-spacing: .06em; }
+.pr1524-block--values { border-left-color: #2563eb; }
+.pr1524-block--values h4 { color: #2563eb; }
+.pr1524-block--states { border-left-color: #7c3aed; }
+.pr1524-block--states h4 { color: #7c3aed; }
+.pr1524-block--counts { border-left-color: #16a34a; }
+.pr1524-block--counts h4 { color: #16a34a; }
+.pr1524-block--history { border-left-color: #d97706; }
+.pr1524-block--history h4 { color: #d97706; }

@@ -2,6 +2,8 @@ import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
 import FrequencyCountTable from '../../components/shared/FrequencyCountTable'
 import RecordStateTable from '../../components/shared/RecordStateTable'
+import StateTransitionDiagram from '../../components/shared/StateTransitionDiagram'
+import './Visual1524.css'
 import { buildTrace, parseInput, code, python, phases } from './algorithm'
 
 const definition = {
@@ -29,6 +31,9 @@ export default function OddSumSubarrays() {
     const prefix = [0]
     arr.forEach((value, k) => prefix.push(prefix[k] ^ (value & 1)))
     const current = index >= 0 ? index + 1 : 0
+    // The transition taken by this step: from the parity before the value to the parity after it.
+    const fromState = current > 0 ? (prefix[current - 1] ? 'odd' : 'even') : null
+    const toState = current > 0 ? (prefix[current] ? 'odd' : 'even') : null
     // History: the start row and one row per value, up to the current step.
     const frames = run.frames
     const here = Math.max(0, frames.indexOf(step))
@@ -50,16 +55,44 @@ export default function OddSumSubarrays() {
       return prefix[k] ? 'odd' : 'even'
     }
     return <>
-      <IndexedSequence label="Values (parity)" length={arr.length} valueAt={i => arr[i]} active={index} roleAt={valueRole} />
-      <IndexedSequence label="Prefix parity (k values before)" length={prefix.length} valueAt={k => (prefix[k] ? 'odd' : 'even')} active={current} roleAt={prefixRole} />
-      <FrequencyCountTable title="Stored prefixes by parity" entries={[['even', even], ['odd', odd]]} active={parity ? 'odd' : 'even'} emptyText="Only the empty prefix is stored." />
-      <p>Odd-sum subarrays added here: <strong>{added}</strong> · Total: <strong>{total}</strong></p>
-      <RecordStateTable
-        label="History: one row per value"
-        columns={['value', 'parity', 'even', 'odd', 'added', 'total']}
-        rows={history}
-        activeRow={history.length - 1}
-      />
+      <section className="pr1524-block pr1524-block--values">
+        <h4>Values and prefix parity</h4>
+        <IndexedSequence label="Values (parity)" length={arr.length} valueAt={i => arr[i]} active={index} roleAt={valueRole} />
+        <IndexedSequence label="Prefix parity (k values before)" length={prefix.length} valueAt={k => (prefix[k] ? 'odd' : 'even')} active={current} roleAt={prefixRole} />
+      </section>
+      <section className="pr1524-block pr1524-block--states">
+        <h4>State changes</h4>
+        <StateTransitionDiagram
+          title="Prefix parity states"
+          width={420}
+          height={200}
+          nodes={[
+            { id: 'even', label: 'Even', sub: `${even} stored`, x: 100, y: 120, active: parity === 0 },
+            { id: 'odd', label: 'Odd', sub: `${odd} stored`, x: 320, y: 120, active: parity === 1 },
+          ]}
+          edges={[
+            { from: 'even', to: 'odd', label: `odd value +${even}`, bend: -18, active: fromState === 'even' && toState === 'odd' },
+            { from: 'odd', to: 'even', label: `odd value +${odd}`, bend: -18, active: fromState === 'odd' && toState === 'even' },
+            { from: 'even', to: 'even', label: `even value +${odd}`, active: fromState === 'even' && toState === 'even' },
+            { from: 'odd', to: 'odd', label: `even value +${even}`, active: fromState === 'odd' && toState === 'odd' },
+          ]}
+        />
+        <p>The added count is the number of stored prefixes with the opposite parity to the new state.</p>
+      </section>
+      <section className="pr1524-block pr1524-block--counts">
+        <h4>Stored prefixes and totals</h4>
+        <FrequencyCountTable title="Stored prefixes by parity" entries={[['even', even], ['odd', odd]]} active={parity ? 'odd' : 'even'} emptyText="Only the empty prefix is stored." />
+        <p>Odd-sum subarrays added here: <strong>{added}</strong> · Total: <strong>{total}</strong></p>
+      </section>
+      <section className="pr1524-block pr1524-block--history">
+        <h4>History</h4>
+        <RecordStateTable
+          label="One row per value"
+          columns={['value', 'parity', 'even', 'odd', 'added', 'total']}
+          rows={history}
+          activeRow={history.length - 1}
+        />
+      </section>
     </>
   }} renderReasoning={() => <>
     <p><strong>Prefix sums:</strong> a subarray has odd sum exactly when its two prefix sums have different parity.</p>

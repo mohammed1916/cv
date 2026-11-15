@@ -1,0 +1,13 @@
+.state-transition { margin: 0; display: grid; gap: 6px; }
+.state-transition figcaption { font-size: 12px; font-weight: 700; color: var(--text-muted); }
+.state-transition svg { width: 100%; max-width: 460px; height: auto; overflow: visible; }
+.state-transition__node circle { fill: var(--surface2); stroke: var(--border); stroke-width: 2; }
+.state-transition__node.is-active circle { stroke: var(--primary); fill: color-mix(in srgb, var(--primary) 16%, var(--surface2)); }
+.state-transition__label { font: 700 14px ui-monospace, monospace; fill: var(--text); }
+.state-transition__sub { font: 600 11px ui-monospace, monospace; fill: var(--text-muted); }
+.state-transition__edge line, .state-transition__edge path { fill: none; stroke: var(--text-muted); stroke-width: 1.6; }
+.state-transition__edge text { font: 600 11px system-ui, sans-serif; fill: var(--text-muted); }
+.state-transition__edge.is-active line, .state-transition__edge.is-active path { stroke: var(--primary); stroke-width: 3; }
+.state-transition__edge.is-active text { fill: var(--primary); font-weight: 800; }
+.state-transition__arrow-active { fill: var(--primary); }
+.state-transition marker path { fill: var(--text-muted); }
