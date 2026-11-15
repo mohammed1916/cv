@@ -14,24 +14,40 @@ export function buildTrace(graph) {
   const target = graph.length - 1
   const result = []
   const path = [0]
-  const frames = [{ phase: 'start', activeLine: 9, pythonLine: 12, path: [0], u: 0, count: 0, message: `Start DFS at node 0 with path [0]; the target is node ${target}.` }]
-  const dfs = u => {
+  const tree = []
+  const newNode = (u, parentId, choice) => {
+    const id = tree.length
+    const deadEnd = u !== target && graph[u].length === 0
+    tree.push({
+      id, parentId, u, depth: parentId == null ? 0 : tree[parentId].depth + 1,
+      decision: deadEnd ? 'pruned' : 'chosen',
+      pruneReason: deadEnd ? 'dead end: no outgoing edge' : undefined,
+      choice, subtitle: `path ${[...path].join(' -> ')}`, children: [],
+    })
+    if (parentId != null) tree[parentId].children.push(id)
+    return id
+  }
+  const rootId = newNode(0, null, 'start')
+  const frames = [{ phase: 'start', activeLine: 9, pythonLine: 12, path: [0], u: 0, count: 0, activeNodeId: rootId, message: `Start DFS at node 0 with path [0]; the target is node ${target}.` }]
+  const dfs = (u, nodeId) => {
     if (u === target) {
       result.push([...path])
-      frames.push({ phase: 'emit', activeLine: 4, pythonLine: 6, path: [...path], u, count: result.length, message: `Reached target ${target}: record path [${path.join(' -> ')}] (a copy, since path keeps changing).` })
+      frames.push({ phase: 'emit', activeLine: 4, pythonLine: 6, path: [...path], u, count: result.length, activeNodeId: nodeId, message: `Reached target ${target}: record path [${path.join(' -> ')}] (a copy, since path keeps changing).` })
       return
     }
     for (const v of graph[u]) {
       path.push(v)
-      frames.push({ phase: 'push', activeLine: 6, pythonLine: 9, path: [...path], u: v, count: result.length, message: `Follow edge ${u} -> ${v}: append ${v} to the path.` })
-      dfs(v)
+      const childId = newNode(v, nodeId, `-> ${v}`)
+      tree[childId].subtitle = `path ${path.join(' -> ')}`
+      frames.push({ phase: 'push', activeLine: 6, pythonLine: 9, path: [...path], u: v, count: result.length, activeNodeId: childId, message: `Follow edge ${u} -> ${v}: append ${v} to the path.` })
+      dfs(v, childId)
       path.pop()
-      frames.push({ phase: 'pop', activeLine: 8, pythonLine: 11, path: [...path], u, count: result.length, message: `Finished exploring ${v}: backtrack to ${u}.` })
+      frames.push({ phase: 'pop', activeLine: 8, pythonLine: 11, path: [...path], u, count: result.length, activeNodeId: nodeId, message: `Finished exploring ${v}: backtrack to ${u}.` })
     }
   }
-  dfs(0)
-  frames.push({ phase: 'done', activeLine: 10, pythonLine: 13, path: [], u: -1, count: result.length, message: `${result.length} path(s) from 0 to ${target}.` })
-  return { input: graph, result, frames }
+  dfs(0, rootId)
+  frames.push({ phase: 'done', activeLine: 10, pythonLine: 13, path: [], u: -1, count: result.length, activeNodeId: null, message: `${result.length} path(s) from 0 to ${target}.` })
+  return { input: graph, result, frames, tree }
 }
 export const code = `set target to the last node, n - 1, and res to an empty list
 define dfs(u, path)

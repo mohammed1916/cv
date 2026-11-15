@@ -8,37 +8,51 @@ export function parseInput(text) {
 
 // The bucket sum must be total / k. Place the largest numbers first and backtrack when a bucket cannot take one.
 // Buckets with equal sums are interchangeable, so only the first of them is tried.
+// The search tree has one node per bucket choice: chosen (placed), or pruned (bucket full / equal-sum bucket skipped).
 export function buildTrace({ nums, k }) {
   const total = nums.reduce((a, b) => a + b, 0)
   const sorted = [...nums].sort((a, b) => b - a)
-  const frames = [{ phase: 'start', index: null, sums: Array(k).fill(0), target: null, bucket: null, activeLine: L('const total = '), pythonLine: P('total = sum('), message: 'Split the numbers into k buckets with equal sums.' }]
+  const tree = [{ id: 0, parentId: null, depth: 0, decision: null, choice: 'start', subtitle: 'no numbers placed', status: 'waiting' }]
+  const returnedIds = []
+  const frames = [{ phase: 'start', index: null, sums: Array(k).fill(0), target: null, bucket: null, activeLine: L('const total = '), pythonLine: P('total = sum('), message: 'Split the numbers into k buckets with equal sums.', nodeId: 0, treeCount: tree.length, returnedIds: [] }]
   if (total % k !== 0) {
-    frames.push({ phase: 'done', index: null, sums: Array(k).fill(0), target: null, bucket: null, result: false, activeLine: L('if (total % k'), pythonLine: P('if total % k'), message: `Total ${total} does not split into ${k} equal parts.` })
-    return { input: { nums, k }, result: false, frames }
+    frames.push({ phase: 'done', index: null, sums: Array(k).fill(0), target: null, bucket: null, result: false, activeLine: L('if (total % k'), pythonLine: P('if total % k'), message: `Total ${total} does not split into ${k} equal parts.`, nodeId: 0, treeCount: tree.length, returnedIds: [] })
+    return { input: { nums, k }, result: false, frames, tree }
   }
   const target = total / k
   if (sorted[0] > target) {
-    frames.push({ phase: 'done', index: null, sums: Array(k).fill(0), target, bucket: null, result: false, activeLine: L('if (sorted[0] > target)'), pythonLine: P('if ordered[0] > target'), message: `${sorted[0]} is larger than the target ${target}.` })
-    return { input: { nums, k }, result: false, frames }
+    frames.push({ phase: 'done', index: null, sums: Array(k).fill(0), target, bucket: null, result: false, activeLine: L('if (sorted[0] > target)'), pythonLine: P('if ordered[0] > target'), message: `${sorted[0]} is larger than the target ${target}.`, nodeId: 0, treeCount: tree.length, returnedIds: [] })
+    return { input: { nums, k }, result: false, frames, tree }
   }
   const sums = Array(k).fill(0)
   frames[0].target = target
-  const place = i => {
+  const place = (i, parentId) => {
     if (i === sorted.length) return sums.every(s => s === target)
     for (let b = 0; b < k; b++) {
-      if (sums[b] + sorted[i] > target) continue
-      if (b > 0 && sums[b] === sums[b - 1]) continue
+      const partial = `buckets ${sums.join(', ')}`
+      if (sums[b] + sorted[i] > target) {
+        tree.push({ id: tree.length, parentId, depth: i + 1, decision: 'pruned', choice: `${sorted[i]} → bucket ${b + 1}`, subtitle: partial, pruneReason: 'bucket would overflow', status: 'waiting' })
+        continue
+      }
+      if (b > 0 && sums[b] === sums[b - 1]) {
+        tree.push({ id: tree.length, parentId, depth: i + 1, decision: 'pruned', choice: `${sorted[i]} → bucket ${b + 1}`, subtitle: partial, pruneReason: 'same sum as an earlier bucket', status: 'waiting' })
+        continue
+      }
       sums[b] += sorted[i]
-      frames.push({ phase: 'place', index: i, sums: [...sums], target, bucket: b, activeLine: L('sums[b] += sorted[i]'), pythonLine: P('sums[b] += ordered[i]'), message: `Put ${sorted[i]} into bucket ${b + 1}: sum ${sums[b]} of ${target}.` })
-      if (place(i + 1)) return true
+      const nodeId = tree.length
+      tree.push({ id: nodeId, parentId, depth: i + 1, decision: 'chosen', choice: `${sorted[i]} → bucket ${b + 1}`, subtitle: `buckets ${sums.join(', ')}`, status: 'waiting' })
+      frames.push({ phase: 'place', index: i, sums: [...sums], target, bucket: b, activeLine: L('sums[b] += sorted[i]'), pythonLine: P('sums[b] += ordered[i]'), message: `Put ${sorted[i]} into bucket ${b + 1}: sum ${sums[b]} of ${target}.`, nodeId, treeCount: tree.length, returnedIds: [...returnedIds] })
+      if (place(i + 1, nodeId)) return true
       sums[b] -= sorted[i]
-      frames.push({ phase: 'undo', index: i, sums: [...sums], target, bucket: b, activeLine: L('sums[b] -= sorted[i]'), pythonLine: P('sums[b] -= ordered[i]'), message: `Bucket ${b + 1} cannot finish with ${sorted[i]}: take it back out.` })
+      tree[nodeId].status = 'returned'
+      returnedIds.push(nodeId)
+      frames.push({ phase: 'undo', index: i, sums: [...sums], target, bucket: b, activeLine: L('sums[b] -= sorted[i]'), pythonLine: P('sums[b] -= ordered[i]'), message: `Bucket ${b + 1} cannot finish with ${sorted[i]}: take it back out.`, nodeId, treeCount: tree.length, returnedIds: [...returnedIds] })
     }
     return false
   }
-  const result = place(0)
-  frames.push({ phase: 'done', index: null, sums: [...sums], target, bucket: null, result, activeLine: L('return place(0)'), pythonLine: P('return place(0)'), message: result ? 'Every bucket reached the target.' : 'No assignment reaches the target in every bucket.' })
-  return { input: { nums, k }, result, frames }
+  const result = place(0, 0)
+  frames.push({ phase: 'done', index: null, sums: [...sums], target, bucket: null, result, activeLine: L('return place(0)'), pythonLine: P('return place(0)'), message: result ? 'Every bucket reached the target.' : 'No assignment reaches the target in every bucket.', nodeId: null, treeCount: tree.length, returnedIds: [...returnedIds] })
+  return { input: { nums, k }, result, frames, tree }
 }
 
 const SOURCE = `function canPartitionKSubsets(nums, k) {

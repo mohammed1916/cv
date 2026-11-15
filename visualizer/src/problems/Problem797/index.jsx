@@ -1,5 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
+import RecursiveCallTree from '../../components/shared/RecursiveCallTree'
 import GraphTraversalView from '../../components/shared/GraphTraversalView'
 import { edgesFromAdjacency } from '../../components/shared/graphTraversalModel'
 import { buildTrace, parseInput, code, python } from './algorithm'
@@ -34,6 +35,8 @@ export default function AllPathsSourceTarget() {
     <IndexedSequence label="Current path" length={Math.max(step.path.length, 1)} valueAt={i => step.path[i] ?? ' '} active={step.path.length - 1} />
     <IndexedSequence label="Recorded paths (latest 8)" length={Math.min(step.count, 8)} indexOffset={Math.max(0, step.count - 8)} valueAt={i => run.result[Math.max(0, step.count - 8) + i].join('>')} />
     <output aria-label="Path count">Paths found: {step.count}</output>
+    <RecursiveCallTree nodes={run.tree} activeNodeId={step.activeNodeId} emptyLabel="No calls yet."
+      getTitle={node => `node ${node.u}`} getSubtitle={node => node.subtitle} />
   </>}} renderReasoning={({ step }) => <>
     <p>{step.message}</p>
     <p>Because the graph is acyclic, DFS never revisits a node on the current path, so no visited set is needed; every distinct walk from 0 to the last node is a distinct path.</p>

@@ -1,5 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
+import RecursiveCallTree from '../../components/shared/RecursiveCallTree'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
@@ -34,6 +35,13 @@ export default function UniqueSplit() {
         valueAt={index => run.input.s[index]}
         roleAt={index => (inPiece(index) ? 'piece' : '')} />
       <output aria-label="Pieces">{`Pieces: ${step.pieces.join(' | ') || '(none)'} · best ${step.best}`}</output>
+      <RecursiveCallTree
+        nodes={run.tree.slice(0, step.treeSize)}
+        activeNodeId={step.activeNodeId}
+        getTitle={node => (node.choice === null ? 'start' : node.choice === 'end' ? 'end' : `piece "${node.choice}"`)}
+        getSubtitle={node => node.subtitle}
+        emptyLabel="No choices yet."
+      />
     </>
   }} renderReasoning={() => <>
     <p>Every cut position is a choice, so the search tries each split and backtracks when a piece repeats.</p>

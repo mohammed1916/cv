@@ -7,6 +7,9 @@ import SequenceRenderer from './SequenceRenderer'
 import UnknownRenderer from './UnknownRenderer'
 import { resolveRendererCategory } from './rendererRegistry'
 import { normalizeKind, shortValue } from './rendererUtils'
+import { sharedVisualFor } from './sharedRoutes.js'
+import AnswerRangeBar from '../../components/shared/AnswerRangeBar'
+import { splitRangeGroup } from './adapters/rangeAdapter.js'
 
 function normalizeContainers(scene, directContainers) {
   const source = directContainers ?? scene
@@ -35,6 +38,8 @@ function normalizeContainers(scene, directContainers) {
 }
 
 function RendererOutlet({ category, container }) {
+  const shared = sharedVisualFor(container)
+  if (shared) return shared
   if (category === 'sequence') return <SequenceRenderer container={container} />
   if (category === 'grid') return <GridRenderer container={container} />
   if (category === 'node-link') return <NodeLinkRenderer container={container} />
@@ -75,10 +80,11 @@ export default function VisualizationCanvas({
   className = '',
   emptyMessage = 'Run your code to create a visualization.',
 }) {
-  const normalizedContainers = normalizeContainers(scene, containers)
+  const allContainers = normalizeContainers(scene, containers)
+  const { rangeProps, rest: normalizedContainers } = splitRangeGroup(allContainers)
   const classes = ['playground-visualization-canvas', className].filter(Boolean).join(' ')
 
-  if (normalizedContainers.length === 0) {
+  if (allContainers.length === 0) {
     return (
       <div className={`${classes} is-empty`} aria-live="polite">
         <div className="playground-canvas-empty">
@@ -92,6 +98,11 @@ export default function VisualizationCanvas({
 
   return (
     <div className={classes}>
+      {rangeProps && (
+        <section className="playground-visual-card is-range" aria-label="Answer search">
+          <AnswerRangeBar {...rangeProps} />
+        </section>
+      )}
       {normalizedContainers.map((container, index) => (
         <ContainerVisual container={container} key={`${String(container.id ?? container.name ?? 'container')}-${index}`} />
       ))}

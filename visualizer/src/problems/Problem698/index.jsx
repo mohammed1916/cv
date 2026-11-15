@@ -1,6 +1,7 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
 import RecordStateTable from '../../components/shared/RecordStateTable'
+import RecursiveCallTree from '../../components/shared/RecursiveCallTree'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
@@ -30,6 +31,10 @@ export default function PartitionKSubsets() {
       valueAt={i => [...run.input.nums].sort((a, b) => b - a)[i]} roleAt={i => (i === step.index ? 'placing' : '')} />
     <RecordStateTable label={`Buckets (target ${step.target ?? '…'})`} columns={['bucket', 'sum']}
       rows={step.sums.map((sum, b) => ({ bucket: b + 1, sum }))} activeRow={step.bucket ?? -1} />
+    <RecursiveCallTree emptyLabel="No placements yet."
+      nodes={run.tree.slice(0, step.treeCount).map(node => ({ ...node, status: step.returnedIds.includes(node.id) ? 'returned' : node.status }))}
+      activeNodeId={step.nodeId ?? null}
+      getTitle={node => node.choice} getSubtitle={node => node.subtitle} />
   </>} renderReasoning={({ step }) => <>
     <p>{step.message}</p>
     <p><strong>Why largest first:</strong> big numbers are the hardest to place, so failing early prunes most of the search.</p>
