@@ -1,6 +1,7 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
 import FrequencyCountTable from '../../components/shared/FrequencyCountTable'
+import RecordStateTable from '../../components/shared/RecordStateTable'
 import { buildTrace, parseInput, code, python, phases } from './algorithm'
 
 const definition = {
@@ -28,6 +29,19 @@ export default function OddSumSubarrays() {
     const prefix = [0]
     arr.forEach((value, k) => prefix.push(prefix[k] ^ (value & 1)))
     const current = index >= 0 ? index + 1 : 0
+    // History: the start row and one row per value, up to the current step.
+    const frames = run.frames
+    const here = Math.max(0, frames.indexOf(step))
+    const history = frames.slice(0, here + 1)
+      .filter(frame => frame.phase === 'start' || frame.phase === 'record')
+      .map(frame => ({
+        value: frame.snapshot.value ?? 'start',
+        parity: frame.snapshot.parity,
+        even: frame.snapshot.even,
+        odd: frame.snapshot.odd,
+        added: frame.snapshot.added ?? 0,
+        total: frame.snapshot.total,
+      }))
     const valueRole = i => (arr[i] % 2 ? 'odd' : 'even')
     const prefixRole = k => {
       if (k > current) return 'future'
@@ -40,6 +54,12 @@ export default function OddSumSubarrays() {
       <IndexedSequence label="Prefix parity (k values before)" length={prefix.length} valueAt={k => (prefix[k] ? 'odd' : 'even')} active={current} roleAt={prefixRole} />
       <FrequencyCountTable title="Stored prefixes by parity" entries={[['even', even], ['odd', odd]]} active={parity ? 'odd' : 'even'} emptyText="Only the empty prefix is stored." />
       <p>Odd-sum subarrays added here: <strong>{added}</strong> · Total: <strong>{total}</strong></p>
+      <RecordStateTable
+        label="History: one row per value"
+        columns={['value', 'parity', 'even', 'odd', 'added', 'total']}
+        rows={history}
+        activeRow={history.length - 1}
+      />
     </>
   }} renderReasoning={() => <>
     <p><strong>Prefix sums:</strong> a subarray has odd sum exactly when its two prefix sums have different parity.</p>
