@@ -1,4 +1,5 @@
 import HistogramBars from '../../components/shared/HistogramBars';
+import StackOperationView from '../../components/shared/StackOperationView';
 import { HISTOGRAM_CODE as SOLUTION_CODE, histogramSteps as generateSteps } from '../../algorithms/shared/histogram.js';
 import authoredExamples0 from '../../config/examples/largest-rectangle-in-histogram.js';
 import { useState, useMemo, useCallback } from 'react'
@@ -70,7 +71,13 @@ export default function LargestRectangleInHistogramVisualizer() {
     <div className="lr-panel">
       <header className="lr-head"><span>Stack / Best</span></header>
       <div className="lr-body">
-        <div className="lr-stack">{(step?.stack || []).map((s, i) => <span key={`${s.start}-${s.h}-${i}`}>({s.start},{s.h})</span>)}</div>
+        <StackOperationView
+          label="stack (start, height)"
+          items={(step?.stack || []).map((s) => `(${s.start}, ${s.h})`)}
+          popped={step?.phase === 'pop' && step.rect
+            ? [{ name: 'start', value: step.rect.start }, { name: 'ht', value: step.rect.height }]
+            : []}
+        />
         <div className="lr-best">best area: <strong>{step?.best ?? 0}</strong></div>
       </div>
     </div>

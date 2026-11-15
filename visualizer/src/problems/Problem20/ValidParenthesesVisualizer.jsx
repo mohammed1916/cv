@@ -1,7 +1,7 @@
 import authoredExamples0 from '../../config/examples/valid-parentheses.js';
-﻿import { useState, useCallback, useMemo } from 'react'
+import { useState, useCallback, useMemo } from 'react'
 import { createPortal } from 'react-dom'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
 import PatternOverlay from '../../components/PatternOverlay'
@@ -14,6 +14,7 @@ import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 
 import './ValidParenthesesVisualizer.css'
 import FloatingPanel from '../../components/shared/FloatingPanel'
+import StackOperationView from '../../components/shared/StackOperationView'
 
 const SOLUTION_CODE = [
   { line: 1, text: 'class Solution:' },
@@ -51,32 +52,35 @@ function generateSteps(s) {
   const stack = []
   const pairs = { ')': '(', ']': '[', '}': '{' }
 
-  steps.push({ phase: 'init', i: -1, stack: [], char: null, activeLine: 3, message: 'Initialize empty stack.' })
+  steps.push({ phase: 'init', i: -1, stack: [], popped: [], char: null, activeLine: 3, message: 'Initialize empty stack.' })
 
   for (let i = 0; i < s.length; i++) {
     const char = s[i]
-    steps.push({ phase: 'check', i, stack: [...stack], char, activeLine: 5, message: `Check position ${i}: "${char}"` })
+    steps.push({ phase: 'check', i, stack: [...stack], popped: [], char, activeLine: 5, message: `Check position ${i}: "${char}"` })
 
     if (char in pairs) {
       const expectedOpen = pairs[char]
-      steps.push({ phase: 'is_closing', i, stack: [...stack], char, activeLine: 6, message: `"${char}" is closing.` })
+      steps.push({ phase: 'is_closing', i, stack: [...stack], popped: [], char, activeLine: 6, message: `"${char}" is closing.` })
 
       if (stack.length === 0 || stack[stack.length - 1] !== expectedOpen) {
-        steps.push({ phase: 'invalid', i, stack: [...stack], char, activeLine: 8, message: 'No match. Invalid!' })
+        steps.push({ phase: 'invalid', i, stack: [...stack], popped: [], char, activeLine: 8, message: 'No match. Invalid!' })
         return steps
       }
 
-      steps.push({ phase: 'match', i, stack: [...stack], char, matchIdx: stack.length - 1, activeLine: 9, message: 'Match!' })
+      const top = stack[stack.length - 1]
+      steps.push({ phase: 'match', i, stack: [...stack], popped: [{ name: 'top', value: top }], char, matchIdx: stack.length - 1, activeLine: 9, message: `Compare: stack top "${top}" matches "${char}".` })
       stack.pop()
+      steps.push({ phase: 'pop', i, stack: [...stack], popped: [{ name: 'top', value: top }], char, activeLine: 9, message: `Pop "${top}" off the stack.` })
     } else {
-      steps.push({ phase: 'is_opening', i, stack: [...stack], char, activeLine: 11, message: `"${char}" is opening.` })
+      steps.push({ phase: 'is_opening', i, stack: [...stack], popped: [], char, activeLine: 11, message: `"${char}" is opening.` })
       stack.push(char)
+      steps.push({ phase: 'push', i, stack: [...stack], popped: [], char, activeLine: 11, message: `Push "${char}" onto the stack.` })
     }
   }
 
   steps.push(stack.length === 0
-    ? { phase: 'valid', i: s.length, stack: [], char: null, activeLine: 12, message: 'Valid!' }
-    : { phase: 'invalid', i: s.length, stack: [...stack], char: null, activeLine: 12, message: 'Invalid!' })
+    ? { phase: 'valid', i: s.length, stack: [], popped: [], char: null, activeLine: 12, message: 'Valid!' }
+    : { phase: 'invalid', i: s.length, stack: [...stack], popped: [], char: null, activeLine: 12, message: 'Invalid!' })
 
   return steps
 }
@@ -112,9 +116,7 @@ export default function ValidParenthesesVisualizer() {
   const statePanel = (
     <div className="validparen-panel">
       <div className="validparen-panel-body">
-        <div className="validparen-stack-container">
-          <AnimatePresence>{step?.stack?.length > 0 ? step.stack.map((bracket, idx) => (<motion.div key={idx} layout initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="validparen-stack-item"><span className="validparen-stack-bracket">{bracket}</span></motion.div>)) : (<div className="validparen-stack-empty">Empty</div>)}</AnimatePresence>
-        </div>
+        <StackOperationView items={step?.stack ?? []} popped={step?.popped ?? []} />
       </div>
     </div>
   )

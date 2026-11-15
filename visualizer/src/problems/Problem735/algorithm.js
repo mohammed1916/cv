@@ -48,17 +48,17 @@ export const python = PY_LINES.join('\n')
 // Stack of survivors moving right. A left-mover meets the stack top; the smaller one explodes (equal: both).
 export function buildTrace(asteroids) {
   const stack = []
-  const frames = [{ phase: 'start', index: -1, stack: [], activeLine: L('const stack'), pythonLine: P('stack = []'), message: 'Asteroids moving right wait on the stack.' }]
+  const frames = [{ phase: 'start', index: -1, stack: [], activeLine: L('const stack'), pythonLine: P('stack = []'), popped: [], message: 'Asteroids moving right wait on the stack.' }]
   asteroids.forEach((a, i) => {
     let alive = true
     while (alive && a < 0 && stack.length && stack[stack.length - 1] > 0) {
       const top = stack[stack.length - 1]
-      if (top < -a) { stack.pop(); frames.push({ phase: 'explode', index: i, value: a, stack: [...stack], activeLine: L('the right-mover is smaller'), pythonLine: P('stack.pop()'), message: `${-a} meets ${top}: the smaller right-mover explodes, so we keep checking.` }) }
-      else if (top === -a) { stack.pop(); alive = false; frames.push({ phase: 'both', index: i, value: a, stack: [...stack], activeLine: L('equal sizes'), pythonLine: P('alive = False'), message: `${-a} and ${top} are equal: both explode.` }) }
-      else { alive = false; frames.push({ phase: 'explode', index: i, value: a, stack: [...stack], activeLine: L('the left-mover is smaller'), pythonLine: P('else:'), message: `${-a} is smaller than ${top}: it explodes.` }) }
+      if (top < -a) { stack.pop(); frames.push({ phase: 'explode', index: i, value: a, stack: [...stack], activeLine: L('the right-mover is smaller'), pythonLine: P('stack.pop()'), popped: [{ name: 'top', value: top }], message: `${-a} meets ${top}: the smaller right-mover explodes, so we keep checking.` }) }
+      else if (top === -a) { stack.pop(); alive = false; frames.push({ phase: 'both', index: i, value: a, stack: [...stack], activeLine: L('equal sizes'), pythonLine: P('alive = False'), popped: [{ name: 'top', value: top }, { name: 'a', value: a }], message: `${-a} and ${top} are equal: both explode.` }) }
+      else { alive = false; frames.push({ phase: 'explode', index: i, value: a, stack: [...stack], activeLine: L('the left-mover is smaller'), pythonLine: P('else:'), popped: [{ name: 'a', value: a }], message: `${-a} is smaller than ${top}: it explodes.` }) }
     }
-    if (alive) { stack.push(a); frames.push({ phase: 'push', index: i, value: a, stack: [...stack], activeLine: L('a survives this round'), pythonLine: P('stack.append(a)'), message: `${a} survives this round.` }) }
+    if (alive) { stack.push(a); frames.push({ phase: 'push', index: i, value: a, stack: [...stack], activeLine: L('a survives this round'), pythonLine: P('stack.append(a)'), popped: [], message: `${a} survives this round.` }) }
   })
-  frames.push({ phase: 'done', index: asteroids.length - 1, stack: [...stack], result: stack, activeLine: L('return stack'), pythonLine: P('return stack'), message: `Survivors: [${stack.join(', ')}].` })
+  frames.push({ phase: 'done', index: asteroids.length - 1, stack: [...stack], result: stack, activeLine: L('return stack'), pythonLine: P('return stack'), popped: [], message: `Survivors: [${stack.join(', ')}].` })
   return { input: asteroids, result: stack, frames }
 }

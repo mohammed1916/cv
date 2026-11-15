@@ -12,6 +12,7 @@ import { useAutoScroll } from "../../hooks/useAutoScroll";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import "./MinStackVisualizer.css";
 import { Stack3D } from "../../components/viz3d";
+import StackOperationView from "../../components/shared/StackOperationView";
 
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
@@ -114,7 +115,7 @@ function generateSteps(operations) {
         result: null,
         message: `pop(): remove top (${stack[stack.length - 1]}) from stack.`,
       });
-      stack.pop();
+      const removed = stack.pop();
       minStack.pop();
       steps.push({
         phase: "pop_done",
@@ -124,6 +125,7 @@ function generateSteps(operations) {
         op: "pop",
         opArg: null,
         result: null,
+        popped: [{ name: "top", value: removed }],
         message: `pop(): also remove top from min_stack. Stack: [${stack}], Min: [${minStack}].`,
       });
     } else if (op.type === "top") {
@@ -286,11 +288,10 @@ export default function MinStackVisualizer() {
     <div className="ms-panel-body">
       {/* Stack visualizations */}
       <div className="ms-stacks">
-        <Stack3D
+        <StackOperationView
           label="stack"
           items={stack}
-          topBadge="top"
-          highlightIndex={stack.length - 1}
+          popped={step?.popped ?? []}
         />
         <Stack3D
           label="min_stack"

@@ -9,6 +9,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 
 import FloatingPanel from '../../components/shared/FloatingPanel'
+import StackOperationView from '../../components/shared/StackOperationView'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -96,6 +97,18 @@ function generateSteps(text) {
 
       let popped = false
       while (stack.length > 0 && nums[stack[stack.length - 1]] < nums[idx]) {
+        steps.push({
+          phase: 'pop',
+          activeLine: 9,
+          message: `Compare: stack top index ${stack[stack.length - 1]} (value ${nums[stack[stack.length - 1]]}) < ${nums[idx]} — pop it`,
+          nums,
+          result: [...result],
+          stack: [...stack],
+          poppedVars: [],
+          cursor: idx,
+          pass: secondPass ? 2 : 1,
+          i,
+        })
         const top = stack.pop()
         result[top] = nums[idx]
         popped = true
@@ -108,6 +121,7 @@ function generateSteps(text) {
           stack: [...stack],
           cursor: idx,
           resolvedIndex: top,
+          poppedVars: [{ name: 'top', value: nums[top] }],
           pass: secondPass ? 2 : 1,
           i,
         })
@@ -281,23 +295,12 @@ export default function NextGreaterElementIIVisualizer() {
     <div className="p503-panel-state">
       <div className="p503-card">
         <div className="p503-section-label">Monotonic Stack (indices)</div>
-        {step?.stack?.length ? (
-          <div className="p503-stack">
-            {[...step.stack].reverse().map((idx, k) => (
-              <motion.div
-                key={idx}
-                className={`p503-stack-item ${k === 0 ? 'top' : ''}`}
-                initial={{ opacity: 0, y: -6 }}
-                animate={{ opacity: 1, y: 0 }}
-              >
-                <span className="p503-stack-key">idx {idx}</span>
-                <span className="p503-stack-val">{step.nums?.[idx]}</span>
-              </motion.div>
-            ))}
-          </div>
-        ) : (
-          <p className="p503-hint">Stack is empty.</p>
-        )}
+        <StackOperationView
+          items={(step?.stack ?? []).map((idx) => step.nums?.[idx])}
+          popped={step?.poppedVars ?? []}
+          label="Stack"
+          emptyText="Stack is empty."
+        />
         <p className="p503-hint" style={{ marginTop: '0.55rem' }}>
           Values from bottom to top are non-increasing; the top is the next index waiting for a bigger value.
         </p>

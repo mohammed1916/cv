@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { StackLane } from '../../components/shared/AlgorithmStatePrimitives'
+import StackOperationView from '../../components/shared/StackOperationView'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
@@ -31,7 +31,7 @@ export default function AsteroidCollision() {
     <IndexedSequence label="Asteroids in order (the current one is marked)" length={run.input.length} active={step.index}
       valueAt={i => run.input[i]}
       roleAt={i => (i < step.index ? 'done' : '')} />
-    <StackLane title="Survivors moving right (bottom to top)" items={step.stack.map(String)} note={step.value === undefined ? undefined : `incoming ${step.value}`} />
+    <StackOperationView label="Survivors moving right" items={step.stack} popped={step.popped ?? []} />
     <output aria-label="Step">{step.message}</output>
   </>} renderReasoning={() => <>
     <p>Only a left-mover can collide, and only with right-movers on top of the stack. Collisions repeat until the incoming asteroid is safe or gone.</p>

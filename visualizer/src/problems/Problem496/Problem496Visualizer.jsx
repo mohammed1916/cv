@@ -17,6 +17,7 @@ import './Problem496Visualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import PatternOverlay from "../../components/PatternOverlay";
 import { createPortal } from 'react-dom'
+import StackOperationView from '../../components/shared/StackOperationView'
 
 const PATTERNS = {
   'init': { icon: '◯', label: 'Initialize', color: '#048196' },
@@ -85,13 +86,14 @@ function generateSteps(nums1, nums2) {
 
   for (let i = 0; i < nums2.length; i++) {
     const num = nums2[i]
-    steps.push({ activeLine: 4, message: `Process nums2[${i}]=${num}`, current: num, index: i })
+    steps.push({ activeLine: 4, message: `Process nums2[${i}]=${num}`, current: num, index: i, stack: [...stack], result: new Map(result) })
 
     let popped = false
     while (stack.length > 0 && stack[stack.length - 1] < num) {
+      steps.push({ activeLine: 5, message: `Top ${stack[stack.length - 1]} < ${num}: it has found its next greater element, so pop it`, current: num, stack: [...stack], poppedVars: [], result: new Map(result) })
       const top = stack.pop()
       result.set(top, num)
-      steps.push({ activeLine: 5, message: `Pop ${top}: next greater = ${num}`, popped: top, greater: num, stack: [...stack], result: new Map(result) })
+      steps.push({ activeLine: 5, message: `Pop ${top}: next greater = ${num}`, popped: top, poppedVars: [{ name: 'top', value: top }], greater: num, stack: [...stack], result: new Map(result) })
       popped = true
     }
 
@@ -213,31 +215,7 @@ function VisualizationPanel({ nums1, nums2, step, applyEx }) {
       {step?.stack && (
         <div style={{ padding: 12, backgroundColor: '#f3e8ff', borderRadius: 6, border: '2px solid #d8b4fe' }}>
           <div style={{ fontSize: 12, fontWeight: 600, color: '#6b21a8', marginBottom: 8 }}>Stack (Decreasing)</div>
-          <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
-            {step.stack.length === 0 ? (
-              <div style={{ fontSize: 11, color: '#627794', fontStyle: 'italic' }}>empty</div>
-            ) : (
-              step.stack.map((s, i) => (
-                <motion.div
-                  key={i}
-                  style={{
-                    padding: '6px 10px',
-                    borderRadius: 4,
-                    backgroundColor: '#ede9fe',
-                    border: '1px solid #d8b4fe',
-                    fontFamily: 'monospace',
-                    fontWeight: 600,
-                    fontSize: 12,
-                    color: '#6b21a8',
-                  }}
-                  initial={{ opacity: 0, y: -5 }}
-                  animate={{ opacity: 1, y: 0 }}
-                >
-                  {s}
-                </motion.div>
-              ))
-            )}
-          </div>
+          <StackOperationView items={step.stack} popped={step.poppedVars ?? []} label="Stack" emptyText="empty" />
         </div>
       )}
 

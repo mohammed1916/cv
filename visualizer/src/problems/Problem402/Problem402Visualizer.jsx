@@ -5,6 +5,7 @@ import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
+import StackOperationView from '../../components/shared/StackOperationView'
 import PlaybackControls from '../../components/PlaybackControls'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
@@ -301,28 +302,8 @@ export default function Problem402Visualizer() {
             </div>
           </div>
 
-          <div style={{ backgroundColor: 'var(--surface2)', padding: '12px', borderRadius: '8px' }}>
-            <div style={{ color: '#627794', fontSize: '13px', marginBottom: '8px' }}>Stack</div>
-            <div style={{ display: 'flex', gap: '2px', flexWrap: 'wrap' }}>
-              {(!step?.stack || step.stack.length === 0) ? (
-                <div style={{ color: 'var(--text-muted)', fontSize: '12px' }}>Empty</div>
-              ) : (
-                step.stack.map((digit, idx) => (
-                  <motion.div
-                    key={`${digit}-${idx}`}
-                    initial={{ scale: 0.8 }}
-                    animate={{ scale: 1 }}
-                    style={{
-                      width: '36px', height: '36px', display: 'flex', alignItems: 'center', justifyContent: 'center',
-                      backgroundColor: '#06b6d4', color: 'var(--text-on-light)', borderRadius: '6px',
-                      fontSize: '13px', fontWeight: 'bold'
-                    }}
-                  >
-                    {digit}
-                  </motion.div>
-                ))
-              )}
-            </div>
+                    <div style={{ backgroundColor: 'var(--surface2)', padding: '12px', borderRadius: '8px' }}>
+            <StackOperationView label="Stack" items={step?.stack ?? []} popped={step?.removed !== undefined ? [{ name: 'top', value: step.removed }] : []} />
           </div>
 
           <div style={{ flex: 1, backgroundColor: 'var(--surface2)', padding: '12px', borderRadius: '8px', display: 'flex', flexDirection: 'column', gap: 12 }}>

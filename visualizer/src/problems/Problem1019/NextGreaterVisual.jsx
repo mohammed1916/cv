@@ -1,18 +1,10 @@
 import IndexedSequence from '../../components/shared/IndexedSequence'
 import { useTutorialScene } from '../../components/shared/TutorialScene'
+import StackOperationView from '../../components/shared/StackOperationView'
 import './NextGreaterVisual.css'
 
-// Focused view: only the waiting stack (bottom to top) and the position being resolved.
+// Focused view: the waiting stack (bottom to top) drawn as an open cup, plus the values just popped.
 // Full view keeps the complete list, answers and stack for the non-tutorial workspace.
-function StackChips({ stack, values, highlight }) {
-  if (!stack.length) return <em>empty</em>
-  return <div className="ngv__chips" role="list" aria-label="Stack, bottom to top">
-    {stack.map(i => <span role="listitem" key={i} className={`ngv__chip ${i === highlight ? 'is-top' : ''}`} data-position={i}>
-      [{i}] {values[i]}
-    </span>)}
-  </div>
-}
-
 export default function NextGreaterVisual({ run, step }) {
   const scene = useTutorialScene()
   const values = run.input.values
@@ -47,9 +39,10 @@ export default function NextGreaterVisual({ run, step }) {
       {focus.kind === 'assign' && <span>next greater: {focus.value}</span>}
     </div>}
     {focus.kind === 'check' && <p className="ngv__compare">{focus.top === null ? 'Stack empty: nothing to compare.' : `Top ${focus.top} (value ${focus.topValue}) ${focus.compare ? 'is smaller than' : 'is not smaller than'} ${focus.value}.`}</p>}
-    <div className="ngv__stack">
-      <strong>Waiting stack</strong>
-      <StackChips stack={focus.stack} values={values} highlight={focus.kind === 'check' ? focus.top : null} />
-    </div>
+    <StackOperationView
+      label="Waiting stack"
+      items={focus.stack.map(i => `[${i}] ${values[i]}`)}
+      popped={focus.kind === 'check' && focus.top !== null ? [{ name: 'top', value: focus.topValue }] : resolving ? [{ name: `position ${focus.popped}`, value: values[focus.popped] }] : []}
+    />
   </section>
 }

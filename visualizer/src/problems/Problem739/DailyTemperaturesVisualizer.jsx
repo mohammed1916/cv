@@ -7,6 +7,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import PatternOverlay from '../../components/PatternOverlay'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
+import StackOperationView from '../../components/shared/StackOperationView'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
@@ -37,12 +38,15 @@ function generateSteps(temps) {
   const steps = []
   const res = Array(temps.length).fill(0)
   const stack = []
-  steps.push({ phase: 'init', activeLine: 4, i: -1, temps, res: [...res], stack: [...stack], message: 'Initialize result and monotonic stack.' })
+  steps.push({ phase: 'init', activeLine: 4, i: -1, temps, res: [...res], stack: [...stack], popped: [], message: 'Initialize result and monotonic stack.' })
   for (let i = 0; i < temps.length; i++) {
     const t = temps[i]
-    steps.push({ phase: 'iterate', activeLine: 5, i, t, temps, res: [...res], stack: [...stack], message: `Day ${i}, temp=${t}.` })
+    steps.push({ phase: 'iterate', activeLine: 5, i, t, temps, res: [...res], stack: [...stack], popped: [], message: `Day ${i}, temp=${t}.` })
     while (stack.length && temps[stack[stack.length - 1]] < t) {
+      const top = stack[stack.length - 1]
+      steps.push({ phase: 'compare', activeLine: 6, i, j: top, t, temps, res: [...res], stack: [...stack], popped: [], message: `Is temp ${t} warmer than the top day ${top} (temp ${temps[top]})? Yes.` })
       const j = stack.pop()
+      steps.push({ phase: 'pop', activeLine: 7, i, j, t, temps, res: [...res], stack: [...stack], popped: [{ name: 'j', value: j }], message: `Pop day ${j} off the stack into j.` })
       res[j] = i - j
       steps.push({
         phase: 'resolve',
@@ -51,13 +55,14 @@ function generateSteps(temps) {
         temps,
         res: [...res],
         stack: [...stack],
-        message: `Temp ${t} is warmer than day ${j}. res[${j}] = ${res[j]}.`,
+        popped: [{ name: 'j', value: j }],
+        message: `res[${j}] = ${i} - ${j} = ${res[j]}.`,
       })
     }
     stack.push(i)
-    steps.push({ phase: 'push', activeLine: 9, i, t, temps, res: [...res], stack: [...stack], message: `Push day ${i} onto stack.` })
+    steps.push({ phase: 'push', activeLine: 9, i, t, temps, res: [...res], stack: [...stack], popped: [], message: `Push day ${i} onto stack.` })
   }
-  steps.push({ phase: 'done', activeLine: 10, i: temps.length - 1, temps, res: [...res], stack: [...stack], message: `Return [${res.join(', ')}].` })
+  steps.push({ phase: 'done', activeLine: 10, i: temps.length - 1, temps, res: [...res], stack: [...stack], popped: [], message: `Return [${res.join(', ')}].` })
   return steps
 }
 
@@ -109,7 +114,7 @@ function StackStatePanel({ step }) {
     <div className="dt-panel-body">
       <div className="dt-section">
         <h3 className="dt-section-title">Monotonic Stack</h3>
-        <div className="dt-stack">{(step?.stack || []).map((idx) => <span key={idx}>{idx}</span>)}</div>
+        <StackOperationView items={step?.stack ?? []} popped={step?.popped ?? []} />
       </div>
 
       <div className="dt-section">
