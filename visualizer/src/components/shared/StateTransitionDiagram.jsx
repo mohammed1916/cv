@@ -40,7 +40,7 @@ export default function StateTransitionDiagram({ nodes = [], edges = [], width =
         return <g key={i} className={cls}>
           <line x1={x1} y1={y1} x2={x2} y2={y2} markerEnd={edge.active ? 'url(#state-arrow-active)' : 'url(#state-arrow)'} />
           {/* Label sits on the side the arrow is bent towards, so it never touches the line. */}
-          <text x={mx - uy * Math.sign(bend) * 16} y={my + ux * Math.sign(bend) * 16 + 4} textAnchor="middle">{edge.label}</text>
+          <text x={mx - uy * Math.sign(bend) * 34} y={my + ux * Math.sign(bend) * 34 + 4} textAnchor="middle">{edge.label}</text>
         </g>
       })}
       {nodes.map(node => <g key={node.id} className={`state-transition__node${node.active ? ' is-active' : ''}`} data-state={node.id}>
