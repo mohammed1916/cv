@@ -1,4 +1,5 @@
 import AlgorithmWorkspace from "../../components/shared/AlgorithmWorkspace";
+import RecursiveCallTree from "../../components/shared/RecursiveCallTree";
 import authoredExamples from "../../config/examples/nqueensii.js";
 import { NQueensScene } from "./NQueensIIVisualizer";
 import { code, python, pythonLineMap, parseInput, buildTrace } from "./algorithm";
@@ -33,6 +34,16 @@ export default function NQueensIIWorkspace() {
         <>
           {run.truncated && <p role="status">All solutions are counted. Playback shows the first 12,000 events, then the final count; use a smaller n to inspect every event.</p>}
           <NQueensScene n={run.input} step={step} />
+          <section aria-label="Search tree">
+            <h3>Search tree</h3>
+            <RecursiveCallTree
+              nodes={run.tree.slice(0, step.treeCount)}
+              activeNodeId={step.nodeId}
+              getTitle={node => node.choice}
+              getSubtitle={node => node.subtitle}
+              emptyLabel="No placements yet."
+            />
+          </section>
         </>
       )}
       renderReasoning={({ step }) => <p>{step.explanation ?? step.message}</p>}

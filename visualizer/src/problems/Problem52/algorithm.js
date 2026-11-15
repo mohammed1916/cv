@@ -31,73 +31,93 @@ export const SOLUTION_CODE = [
 export function generateSteps(n) {
   if (!Number.isInteger(n) || n < 1 || n > 9) throw new Error("Use an integer n from 1 to 9.");
   const steps = [];
+  const treeNodes = [];
+  const nodeById = new Map();
   let eventCount = 0;
-  const record = frame => {
-    eventCount++;
-    if (steps.length < 12000 || frame.done) steps.push({ ...frame, boardRef: board.map(row => [...row]) });
-  };
   const board = Array.from({ length: n }, () => Array(n).fill("."));
   const cols = new Set(), diag1 = new Set(), diag2 = new Set();
+  const queens = [];
+  const queenText = () => queens.map(([r, c]) => `(${r},${c})`).join(" ") || "none";
+  const addNode = (parentId, row, col, decision, pruneReason) => {
+    const node = { id: `n${treeNodes.length}`, parentId, depth: row + 1, choice: `row ${row}, col ${col}`, decision, pruneReason, subtitle: `queens: ${queenText()}`, children: [] };
+    treeNodes.push(node);
+    nodeById.get(parentId)?.children.push(node.id);
+    nodeById.set(node.id, node);
+    return node;
+  };
+  const record = frame => {
+    eventCount++;
+    if (steps.length < 12000 || frame.done) steps.push({ ...frame, treeCount: treeNodes.length, boardRef: board.map(row => [...row]) });
+  };
+  const root = { id: "root", parentId: null, depth: 0, choice: "start: row 0", decision: null, subtitle: "queens: none", children: [] };
+  treeNodes.push(root);
+  nodeById.set(root.id, root);
+
   let count = 0;
 
   record({
     activeLine: 3,
-    row: 0, col: -1, phase: "init", solutions: 0,
+    row: 0, col: -1, phase: "init", solutions: 0, nodeId: "root",
     message: `Start N-Queens II for n=${n}. Empty board, count=0.`,
   });
 
-  function backtrack(row) {
+  function backtrack(row, parentId) {
     if (row === n) {
       count++;
       record({
         activeLine: 7,
-        row, col: -1, phase: "solution", solutions: count,
+        row, col: -1, phase: "solution", solutions: count, nodeId: parentId,
         message: `✓ Solution #${count} found! Increment count.`,
       });
       return;
     }
     for (let col = 0; col < n; col++) {
+      const attacked = cols.has(col) || diag1.has(row - col) || diag2.has(row + col);
+      const node = addNode(parentId, row, col, attacked ? "pruned" : "chosen", attacked ? "same column or diagonal" : undefined);
       record({
         activeLine: 9,
-        row, col, phase: "check", solutions: count,
+        row, col, phase: "check", solutions: count, nodeId: node.id,
         message: `Row ${row}, Col ${col}: check attacks`,
       });
-      if (cols.has(col) || diag1.has(row - col) || diag2.has(row + col)) {
+      if (attacked) {
         record({
           activeLine: 10,
-          row, col, phase: "skip", solutions: count,
+          row, col, phase: "skip", solutions: count, nodeId: node.id,
           message: `(${row},${col}) under attack — skip`,
         });
         continue;
       }
       board[row][col] = "Q";
       cols.add(col); diag1.add(row - col); diag2.add(row + col);
+      queens.push([row, col]);
+      node.subtitle = `queens: ${queenText()}`;
       record({
         activeLine: 11,
-        row, col, phase: "place", solutions: count,
+        row, col, phase: "place", solutions: count, nodeId: node.id,
         message: `Place Queen at (${row},${col})`,
       });
-      backtrack(row + 1);
+      backtrack(row + 1, node.id);
       board[row][col] = ".";
       cols.delete(col); diag1.delete(row - col); diag2.delete(row + col);
+      queens.pop();
       record({
         activeLine: 13,
-        row, col, phase: "remove", solutions: count,
+        row, col, phase: "remove", solutions: count, nodeId: node.id,
         message: `Backtrack: remove Queen from (${row},${col})`,
       });
     }
   }
 
-  backtrack(0);
+  backtrack(0, "root");
   record({
     activeLine: 15,
-    row: -1, col: -1, phase: "done", solutions: count, done: true,
+    row: -1, col: -1, phase: "done", solutions: count, done: true, nodeId: "root",
     message: `Done! Found ${count} solution(s) for ${n}-Queens II.`,
   });
   steps.truncated = eventCount > steps.length;
+  steps.treeNodes = treeNodes;
   return steps;
 }
-
 
 // ---- N-Queens II (statement-sourced; see scratch statements/52.md) ----
 export function parseInput(text) {
@@ -125,7 +145,7 @@ export function buildTrace(input) {
     message: frame.message,
     explanation: frame.message,
   }))
-  return { input: n, result: frames.at(-1).solutions, truncated: steps.truncated, frames }
+  return { input: n, result: frames.at(-1).solutions, truncated: steps.truncated, frames, tree: steps.treeNodes }
 }
 
 export const code = `count n-queens solutions (n):
