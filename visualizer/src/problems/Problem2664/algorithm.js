@@ -83,6 +83,10 @@ export function buildTrace({ rows, cols, start }) {
   const total = rows * cols
   const board = Array.from({ length: rows }, () => Array(cols).fill(-1))
   const frames = []
+  // Search tree: one node per placed square (call) and per candidate move (choice). Nodes are replaced, never mutated, so each frame keeps its own snapshot.
+  const tree = []
+  let current = 0
+  const setNode = (id, patch) => { tree[id] = { ...tree[id], ...patch } }
   const free = (r, c) => r >= 0 && r < rows && c >= 0 && c < cols && board[r][c] === -1
   const onward = (r, c) => MOVES.filter(([dr, dc]) => free(r + dr, c + dc)).length
   const push = (phase, line, py, message, extra = {}) => {
@@ -101,10 +105,13 @@ export function buildTrace({ rows, cols, start }) {
     options: extra.options ?? [],
     chosen: extra.chosen ?? null,
     labelled: board.flat().filter(v => v >= 0).length,
+    tree: tree.slice(),
+    activeNodeId: current,
   })
   }
 
-  function walk(r, c, step) {
+  function walk(r, c, step, id) {
+    current = id
     board[r][c] = step
     push('place', 'label the cell with the step', 'board[r][c] = step', `Visit ${step} goes to row ${r}, column ${c}.`, { at: [r, c] })
     if (step === total - 1) {
@@ -118,18 +125,30 @@ export function buildTrace({ rows, cols, start }) {
       if (free(nr, nc)) options.push({ r: nr, c: nc, onward: onward(nr, nc) })
     }
     options.sort((a, b) => a.onward - b.onward || a.r - b.r || a.c - b.c)
+    for (const option of options) {
+      option.nodeId = tree.length
+      tree.push({ id: option.nodeId, parentId: id, depth: step + 1, decision: undefined, choice: `to row ${option.r}, column ${option.c}`, subtitle: `${option.onward} onward move${option.onward === 1 ? '' : 's'}` })
+    }
+    current = id
     push('options', 'list the unvisited knight moves', 'options.append', `${options.length} unvisited move${options.length === 1 ? '' : 's'} from row ${r}, column ${c}; fewest onward moves first.`, { at: [r, c], options })
     for (const option of options) {
+      setNode(option.nodeId, { decision: 'chosen' })
+      current = id
       push('try', 'for each move in that order', 'for _, nr, nc in options', `Try row ${option.r}, column ${option.c}, which leaves ${option.onward} onward move${option.onward === 1 ? '' : 's'}.`, { at: [option.r, option.c], options, chosen: option })
-      if (walk(option.r, option.c, step + 1)) return true
+      if (walk(option.r, option.c, step + 1, option.nodeId)) return true
+      setNode(option.nodeId, { decision: 'pruned', pruneReason: 'no tour below' })
+      current = id
     }
     board[r][c] = -1
+    current = id
     push('backtrack', 'clear the label of cell', 'board[r][c] = -1', `No tour continues from row ${r}, column ${c}, so its label is cleared.`, { at: [r, c] })
     return false
   }
 
-  const ok = walk(start[0], start[1], 0)
+  tree.push({ id: 0, parentId: null, depth: 0, decision: 'chosen', choice: `start at row ${start[0]}, column ${start[1]}`, subtitle: '1 square labelled' })
+  const ok = walk(start[0], start[1], 0, 0)
   const result = ok ? board.map(row => [...row]) : []
+  current = 0
   push('done', 'return the labelled board', 'return board', ok ? 'A tour exists from this start, and the labelled board is returned.' : 'No tour exists from this start, so the result is an empty grid.', { at: null })
   return { input: { rows, cols, start: [...start] }, result, frames }
 }

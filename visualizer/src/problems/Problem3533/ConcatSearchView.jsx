@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef } from 'react'
+import RecursiveCallTree from '../../components/shared/RecursiveCallTree'
 
 const COLUMN = 46
 const ROW = 62
@@ -130,5 +131,10 @@ export default function ConcatSearchView({ run, step }) {
     </div>
 
     <Memo run={run} step={step} />
+
+    <div>
+      <h3 style={{ margin: '0 0 6px', fontSize: 15 }}>Call tree</h3>
+      <RecursiveCallTree nodes={run.callTree} activeNodeId={step.nodeId} emptyLabel="No calls yet." />
+    </div>
   </section>
 }

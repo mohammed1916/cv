@@ -102,11 +102,22 @@ export function buildTrace({ grid }) {
   const frames = []
   const path = [start]
   let count = 0
+  // Search tree: one node per call (the start square) and one node per direction tried from a square.
+  const tree = []
+  let activeNode = 0
+  const addNode = (parentId, choice, decision, subtitle = null, pruneReason = undefined) => {
+    const id = tree.length
+    const depth = parentId === null ? 0 : tree[parentId].depth + 1
+    tree.push({ id, parentId, title: `call ${id}`, choice, decision, subtitle, pruneReason, depth, children: [] })
+    if (parentId !== null) tree[parentId].children.push(id)
+    return id
+  }
   const push = (phase, js, py, message, extra = {}) => {
     if (frames.length >= MAX_STEPS) throw new Error('This grid needs too many steps to show. Try a smaller grid.')
-    frames.push({ phase, activeLine: L(js), pythonLine: PY(py), message, path: path.map(p => [...p]), count, ...extra })
+    frames.push({ phase, activeLine: L(js), pythonLine: PY(py), message, path: path.map(p => [...p]), count, nodeId: activeNode, treeCount: tree.length, ...extra })
   }
-  const walk = (r, c, remaining) => {
+  const walk = (r, c, remaining, nodeId) => {
+    activeNode = nodeId
     if (grid[r][c] === 2) {
       if (remaining === 0) {
         count++
@@ -116,22 +127,33 @@ export function buildTrace({ grid }) {
       }
       return
     }
-    for (const [dr, dc] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) {
+    for (const [dr, dc, name] of [[1, 0, 'down'], [-1, 0, 'up'], [0, 1, 'right'], [0, -1, 'left']]) {
       const nr = r + dr, nc = c + dc
-      if (nr < 0 || nc < 0 || nr >= rows || nc >= cols || visited[nr][nc] || grid[nr][nc] === -1) continue
+      const label = `${name} to (${nr},${nc})`
+      if (nr < 0 || nc < 0 || nr >= rows || nc >= cols) { addNode(nodeId, label, 'pruned', null, 'off the grid'); continue }
+      if (grid[nr][nc] === -1) { addNode(nodeId, label, 'pruned', null, 'obstacle'); continue }
+      if (visited[nr][nc]) { addNode(nodeId, label, 'pruned', null, 'already on the path'); continue }
       visited[nr][nc] = true
       path.push([nr, nc])
       const next = grid[nr][nc] === 0 ? remaining - 1 : remaining
+      const subtitle = `${path.length} square(s) on the path, ${next} empty left`
+      const child = grid[nr][nc] === 2 && next !== 0
+        ? addNode(nodeId, label, 'pruned', subtitle, `${next} empty square(s) unused`)
+        : addNode(nodeId, label, 'chosen', subtitle)
+      activeNode = child
       push('walk', 'visited[nr][nc] = true', 'visited[nr][nc] = True', `Step to (${nr},${nc}). ${next} empty square(s) are still unvisited.`, { at: [nr, nc], remaining: next })
-      walk(nr, nc, next)
+      walk(nr, nc, next, child)
       path.pop()
       visited[nr][nc] = false
+      activeNode = nodeId
       push('backtrack', 'visited[nr][nc] = false', 'visited[nr][nc] = False', `Back up from (${nr},${nc}) and free the square for other walks.`, { at: [r, c], remaining, undone: [nr, nc] })
     }
   }
   visited[start[0]][start[1]] = true
+  const root = addNode(null, `start (${start[0]},${start[1]})`, 'chosen', `1 square on the path, ${empties} empty to visit`)
+  activeNode = root
   push('walk', 'visited[start[0]][start[1]] = true', 'visited[start[0]][start[1]] = True', `Start at (${start[0]},${start[1]}) with ${empties} empty square(s) to visit.`, { at: start, remaining: empties })
-  walk(start[0], start[1], empties)
-  frames.push({ phase: 'done', activeLine: L('return count'), pythonLine: PY('return count'), message: `${count} walk(s) cover every empty square and end on the target.`, path: [], count, at: null, remaining: 0 })
-  return { input: { grid }, result: count, frames }
+  walk(start[0], start[1], empties, root)
+  frames.push({ phase: 'done', activeLine: L('return count'), pythonLine: PY('return count'), message: `${count} walk(s) cover every empty square and end on the target.`, path: [], count, at: null, remaining: 0, nodeId: null, treeCount: tree.length })
+  return { input: { grid }, result: count, frames, tree }
 }

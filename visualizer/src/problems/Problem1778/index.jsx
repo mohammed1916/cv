@@ -1,4 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import RecursiveCallTree from '../../components/shared/RecursiveCallTree'
 
 const code = [
   'const seen = new Set([key(0, 0)])',
@@ -92,30 +93,48 @@ export function build({ grid, target }) {
   const key = (r, c) => `${r},${c}`
   let pos = [0, 0]
   let found = false
+  // Search tree: one node per probed neighbour. Open neighbours are chosen calls, known cells and walls are pruned branches.
+  const tree = [{ id: 0, parentId: null, depth: 0, decision: 'chosen', choice: 'wake at (0, 0)', subtitle: 'robot at (0, 0)' }]
+  let current = 0
+  const addNode = (parentId, choice, decision, subtitle, pruneReason) => {
+    const id = tree.length
+    tree.push({ id, parentId, depth: tree[parentId].depth + 1, decision, choice, subtitle, pruneReason })
+    return id
+  }
   const push = (phase, line, pythonLine, message, dist = {}) => frames.push({
     phase, activeLine: line, pythonLine, message, pos: [...pos], open: [...open], blocked: [...blocked], dist,
+    tree: tree.slice(), activeNodeId: current,
   })
   push('start', 1, PY.seen, 'The robot wakes up at (0, 0) and can only ask about neighbours.')
-  const explore = (r, c) => {
+  const explore = (r, c, id) => {
+    current = id
     if (r === target[0] && c === target[1]) { found = true; push('target', 9, PY.target, `Target found at (${r}, ${c}).`) }
     for (const [dr, dc, move, back] of DIRS) {
       const nr = r + dr, nc = c + dc
-      if (seen.has(key(nr, nc))) continue
+      if (seen.has(key(nr, nc))) {
+        addNode(id, `ask ${move}`, 'pruned', `(${nr}, ${nc}) already known`, 'already visited')
+        continue
+      }
       if (inside(nr, nc) && grid[nr][nc] === 1) {
         seen.add(key(nr, nc))
         pos = [nr, nc]
         open.add(key(nr, nc))
+        const child = addNode(id, `move ${move}`, 'chosen', `(${nr}, ${nc}) is open`)
+        current = child
         push('probe', 8, PY.probe, `Neighbour ${move} of (${r}, ${c}) is open; move in.`)
-        explore(nr, nc)
+        explore(nr, nc, child)
         pos = [r, c]
+        current = id
         push('back', 11, PY.back, `Step ${back} back to (${r}, ${c}).`)
       } else {
         blocked.add(key(nr, nc))
+        addNode(id, `ask ${move}`, 'pruned', `(${nr}, ${nc}) is a wall`, 'wall')
+        current = id
         push('blocked', 6, PY.check, `Neighbour ${move} of (${r}, ${c}) is blocked.`)
       }
     }
   }
-  explore(0, 0)
+  explore(0, 0, 0)
   if (!found) {
     push('done', 16, PY.noTarget, 'The target was not reached by exploration.')
     return { input: { grid, target }, result: -1, frames }
@@ -176,6 +195,9 @@ export default function ShortestPathInAHiddenGrid() {
       })}</tr>)}</tbody>
     </table>
     <output aria-label="Distance so far">{step.dist[`${run.input.target[0]},${run.input.target[1]}`] ?? 'not yet'}</output>
+    {step.tree && <div aria-label="Search tree">
+      <RecursiveCallTree nodes={step.tree} activeNodeId={step.activeNodeId} getTitle={node => (node.id === 0 ? 'start' : `cell ${node.depth}`)} getSubtitle={node => node.subtitle} />
+    </div>}
   </>} renderReasoning={() => <>
     <p>The robot never sees the grid, only whether a neighbour is open. Depth-first exploration with backtracking records every reachable cell and every wall it touches.</p>
     <p>Once the map is known, ordinary breadth-first search finds the shortest route, because every move costs the same.</p>

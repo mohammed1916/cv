@@ -1,3 +1,5 @@
+import RecursiveCallTree from '../../components/shared/RecursiveCallTree'
+
 const CELL = 66
 const PAD = 24
 const verdictTone = { open: 'var(--success)', visited: 'var(--error)', wrong: 'var(--error)', dead: 'var(--warning)', untried: 'var(--text-muted)' }
@@ -83,6 +85,8 @@ export default function PathSearchView({ run, step }) {
     <div style={{ flex: '1 1 280px', minWidth: 0 }}>
       <h3 style={{ margin: '0 0 6px', fontSize: 14, color: 'var(--text)' }}>Live branch of the search</h3>
       <SearchLadder stack={step.stack} />
+      <h3 style={{ margin: '12px 0 6px', fontSize: 14, color: 'var(--text)' }}>Call tree</h3>
+      <RecursiveCallTree nodes={run.callTree} activeNodeId={step.nodeId ?? null} emptyLabel="No calls yet." />
       {step.phase === 'done' && <output aria-label="Result" style={{ display: 'block', marginTop: 10, color: 'var(--text)', overflowWrap: 'anywhere' }}>{run.result.length ? `Result: ${JSON.stringify(run.result)}` : 'Result: []'}</output>}
     </div>
   </section>

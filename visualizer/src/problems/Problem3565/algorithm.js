@@ -95,6 +95,16 @@ export function buildTrace({ grid, k }) {
   const seen = grid.map(row => row.map(() => false))
   const path = []
   const stack = []
+  const treeNodes = []
+  const TREE_CAP = 600
+  const addNode = (parentId, choice, subtitle) => {
+    if (treeNodes.length >= TREE_CAP) return null
+    const id = treeNodes.length
+    const depth = parentId === null ? 0 : treeNodes[parentId].depth + 1
+    treeNodes.push({ id, parentId, depth, decision: null, choice, subtitle, pruneReason: undefined, children: [] })
+    if (parentId !== null) treeNodes[parentId].children.push(id)
+    return id
+  }
   const frames = []
   let entered = 0
   let backtracks = 0
@@ -105,7 +115,7 @@ export function buildTrace({ grid, k }) {
       phase, activeLine, pythonLine, at, need, message, probe,
       path: path.map(cell => [...cell]),
       stack: stack.map(entry => ({ r: entry.r, c: entry.c, options: entry.options.map(option => ({ ...option })) })),
-      entered, backtracks,
+      entered, backtracks, nodeId: stack.length ? stack[stack.length - 1].nodeId : null,
     })
   }
   const neighbours = (r, c) => DIRS.flatMap(([dr, dc, dir]) => {
@@ -114,10 +124,13 @@ export function buildTrace({ grid, k }) {
     return x >= 0 && x < m && y >= 0 && y < n ? [{ x, y, dir, status: 'untried' }] : []
   })
   function walk(r, c, need) {
+    const parentEntry = stack[stack.length - 1]
+    const parentId = parentEntry ? parentEntry.nodeId : null
     path.push([r, c])
     seen[r][c] = true
     entered++
-    const entry = { r, c, options: neighbours(r, c) }
+    const nodeId = parentEntry && parentEntry.nodeId === null ? null : addNode(parentId, `to (${r}, ${c})`, `${path.length} of ${total} cells, need ${need}`)
+    const entry = { r, c, options: neighbours(r, c), nodeId }
     stack.push(entry)
     emit('enter', L('enter a cell'), P('path.append'), [r, c], need, `Step onto (${r}, ${c}), cell ${path.length} of ${total}.`)
     if (grid[r][c] === need) {
@@ -132,6 +145,10 @@ export function buildTrace({ grid, k }) {
       else if (grid[x][y] !== 0 && grid[x][y] !== need) verdict = 'wrong'
       else verdict = 'open'
       option.status = verdict
+      if (verdict !== 'open' && entry.nodeId !== null) {
+        const prunedId = addNode(entry.nodeId, `to (${x}, ${y})`, `direction ${option.dir}`)
+        if (prunedId !== null) { treeNodes[prunedId].decision = 'pruned'; treeNodes[prunedId].pruneReason = verdict === 'visited' ? 'already on path' : 'wrong number' }
+      }
       const why = verdict === 'visited' ? `(${x}, ${y}) is already on the path.`
         : verdict === 'wrong' ? `(${x}, ${y}) holds ${grid[x][y]}, but ${need > k ? 'no number' : `number ${need}`} is needed next.`
           : `(${x}, ${y}) is free${grid[x][y] ? ` and holds the needed ${grid[x][y]}` : ''}, so go there.`
@@ -156,6 +173,8 @@ export function buildTrace({ grid, k }) {
       if (eligible && walk(r, c, 1)) { found = true; break outer }
     }
   }
+  if (found) stack.forEach(entry => { if (entry.nodeId !== null) treeNodes[entry.nodeId].decision = 'chosen' })
+  treeNodes.forEach(node => { if (!node.decision) node.decision = 'ignored' })
   const result = found ? path.map(cell => [...cell]) : []
   const skipped = hidden
   if (skipped > 0) {
@@ -171,7 +190,7 @@ export function buildTrace({ grid, k }) {
     path: result, stack: [], entered, backtracks,
     message: found ? `All ${total} cells are covered and 1 to ${k} were met in order.` : `Every start failed after ${entered} cell entries, so the answer is the empty list.`,
   })
-  return { input: { grid, k }, result, frames }
+  return { input: { grid, k }, result, frames, callTree: treeNodes }
 }
 
 export const inputLabel = 'Object with grid (rows of integers) and k'

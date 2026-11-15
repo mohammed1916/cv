@@ -1,5 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
+import RecursiveCallTree from '../../components/shared/RecursiveCallTree'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
@@ -29,6 +30,10 @@ export default function GenerateSchedule() {
     <IndexedSequence label="Days" length={step.slots.length} valueAt={i => step.slots[i]} active={step.at >= 0 ? step.at : -1}
       roleAt={i => (i < step.at + 1 && step.slots[i] !== '·' ? 'placed' : '')} />
     <output aria-label="Schedule status">{`${run.input.n} teams, ${step.slots.filter(slot => slot !== '·').length} of ${step.slots.length} matches placed, ${step.ok === false ? 'backtracking' : step.ok ? 'complete' : 'searching'}`}</output>
+    <RecursiveCallTree label="Search tree" emptyLabel="No pairs yet."
+      nodes={run.tree.slice(0, step.treeCount).map(node => (step.returnedIds.includes(node.id) ? { ...node, decision: 'pruned', pruneReason: 'dead end' } : node))}
+      activeNodeId={step.nodeId ?? null}
+      getTitle={node => node.choice} getSubtitle={node => node.subtitle} />
   </>} renderReasoning={() => <>
     <p>Every pair of distinct teams gives two fixtures, one with each side hosting. Counting them all leaves n(n-1) fixtures to fit onto days.</p>
     <p>Place one pair per day. If the pair shares a team with the previous day, skip it. When no pair fits, undo the last placement and try another.</p>

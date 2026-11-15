@@ -15,10 +15,22 @@ export function buildTrace(input) {
   const used = Array(n).fill(false)
   const sequence = []
   let count = 0
-  const frames = [{ phase: 'start', activeLine: L('sort nums'), pythonLine: P('nums = sorted(nums)'), index: null, sequence: [], used: [...used], count, result: null, message: `Sort the values to ${sorted.join(', ')}. Equal values are interchangeable, so each repeated value is tried once per position.` }]
+  const frames = [{ phase: 'start', activeLine: L('sort nums'), pythonLine: P('nums = sorted(nums)'), index: null, sequence: [], used: [...used], count, result: null, nodeId: null, treeCount: 0, message: `Sort the values to ${sorted.join(', ')}. Equal values are interchangeable, so each repeated value is tried once per position.` }]
   const PY = { complete: P('count += 1'), duplicate: P('if i > 0 and nums[i] == nums[i - 1]'), reject: P('if seq and not is_square'), place: P('used[i] = True') }
-  const snapshot = (phase, activeLine, index, message, result = null) => frames.push({ phase, activeLine: L(activeLine), pythonLine: PY[phase], index, sequence: [...sequence], used: [...used], count, result, message })
-  const backtrack = () => {
+  // Search tree: one node per call of backtrack (the root is the empty arrangement) and one node per value tried there.
+  const tree = []
+  let activeNode = 0
+  const addNode = (parentId, choice, decision, subtitle, pruneReason = undefined) => {
+    const id = tree.length
+    const depth = parentId === null ? 0 : tree[parentId].depth + 1
+    tree.push({ id, parentId, title: `call ${id}`, choice, decision, subtitle, pruneReason, depth, children: [] })
+    if (parentId !== null) tree[parentId].children.push(id)
+    return id
+  }
+  const arrangementText = () => `[${sequence.join(', ')}]`
+  const snapshot = (phase, activeLine, index, message, result = null) => frames.push({ phase, activeLine: L(activeLine), pythonLine: PY[phase], index, sequence: [...sequence], used: [...used], count, result, message, nodeId: activeNode, treeCount: tree.length })
+  const backtrack = (nodeId) => {
+    activeNode = nodeId
     if (sequence.length === n) {
       count++
       snapshot('complete', 'add 1 to count', null, `A full arrangement [${sequence.join(', ')}] is squareful. Total so far: ${count}.`)
@@ -26,26 +38,34 @@ export function buildTrace(input) {
     }
     for (let i = 0; i < n; i++) {
       if (used[i]) continue
+      const label = `place ${sorted[i]} (index ${i})`
       if (i > 0 && sorted[i] === sorted[i - 1] && !used[i - 1]) {
+        addNode(nodeId, label, 'pruned', `arrangement ${arrangementText()}`, `repeats value ${sorted[i]}`)
+        activeNode = nodeId
         snapshot('duplicate', 'if i > 0 and nums[i] equals nums[i - 1]', i, `Value ${sorted[i]} at index ${i} repeats an unused value just before it, so this arrangement was already tried.`)
         continue
       }
       const prev = sequence.at(-1)
       if (prev !== undefined && !isSquare(prev + sorted[i])) {
+        addNode(nodeId, label, 'pruned', `arrangement ${arrangementText()}`, `${prev} + ${sorted[i]} = ${prev + sorted[i]} is not square`)
+        activeNode = nodeId
         snapshot('reject', 'is not a perfect square', i, `${prev} + ${sorted[i]} = ${prev + sorted[i]} is not a perfect square. Skip ${sorted[i]} here.`)
         continue
       }
       used[i] = true
       sequence.push(sorted[i])
+      const child = addNode(nodeId, label, 'chosen', `arrangement ${arrangementText()}`)
+      activeNode = child
       snapshot('place', 'mark index i as used', i, prev === undefined ? `Start the arrangement with ${sorted[i]}.` : `${prev} + ${sorted[i]} = ${prev + sorted[i]} is a perfect square. Place ${sorted[i]}.`)
-      backtrack()
+      backtrack(child)
       sequence.pop()
       used[i] = false
+      activeNode = nodeId
     }
   }
-  backtrack()
-  frames.push({ phase: 'done', activeLine: L('return count'), pythonLine: P('return count'), index: null, sequence: [], used: [...used], count, result: count, message: `Distinct squareful arrangements: ${count}.` })
-  return { input, result: count, frames }
+  backtrack(addNode(null, 'start: empty arrangement', 'chosen', 'arrangement []'))
+  frames.push({ phase: 'done', activeLine: L('return count'), pythonLine: P('return count'), index: null, sequence: [], used: [...used], count, result: count, message: `Distinct squareful arrangements: ${count}.`, nodeId: null, treeCount: tree.length })
+  return { input, result: count, frames, tree }
 }
 
 export const code = `squareful arrangements (nums):

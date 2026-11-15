@@ -1,5 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
+import RecursiveCallTree from '../../components/shared/RecursiveCallTree'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
@@ -28,6 +29,10 @@ export default function SplitFibonacci() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
     <IndexedSequence label="Digits" length={run.input.length} active={step.j} valueAt={i => run.input[i]} roleAt={i => (step.i >= 0 && step.j >= 0 && i >= step.i && i <= step.j ? 'segment' : '')} />
     <IndexedSequence label="Sequence so far" length={step.res.length} active={step.res.length - 1} valueAt={i => step.res[i]} />
+    <RecursiveCallTree label="Search tree" emptyLabel="No segments tried yet."
+      nodes={run.tree.slice(0, step.treeCount).map(node => ({ ...node, status: step.returnedIds.includes(node.id) ? 'returned' : node.status }))}
+      activeNodeId={step.nodeId ?? null}
+      getTitle={node => node.choice} getSubtitle={node => node.subtitle} />
     <output aria-label="Result">{step.phase === 'done' ? `Result: [${run.result.join(', ')}]` : `${step.res.length} numbers chosen`}</output>
   </>} renderReasoning={({ step }) => <>
     <p>{step.message}</p>

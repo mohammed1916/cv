@@ -1,5 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
+import RecursiveCallTree from '../../components/shared/RecursiveCallTree'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
@@ -18,10 +19,12 @@ const definition = {
 }
 
 export default function CrackingTheSafe() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => <>
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
     <IndexedSequence label="Answer built so far (reverse order)" length={step.ans.length} active={step.ans.length - 1} valueAt={i => step.ans[i]} />
     <output aria-label="Current edge">Node: "{step.node || '(empty)'}" {step.edge ? `| edge: ${step.edge}` : ''} | depth {step.depth}</output>
     <output aria-label="Coverage">Passwords marked: {step.seen} / {step.total}</output>
+    <RecursiveCallTree nodes={run.tree} activeNodeId={step.activeNodeId} emptyLabel="No calls yet."
+      getTitle={node => `node "${node.node || '(empty)'}"`} getSubtitle={node => node.subtitle} />
   </>} renderReasoning={() => <>
     <p>Every node has k in-edges and k out-edges, so an Eulerian cycle exists. Hierholzer's DFS emits edges after exploring beyond them, producing the cycle in reverse; appending the n-1 starting zeros closes the string so the last passwords are complete.</p>
   </>} />

@@ -15,11 +15,14 @@ export function buildTrace(input) {
   let best = 0
   let bestPieces = []
   // Search tree: one node per choice (a piece taken, a duplicate skipped, or a finished split).
-  const tree = [{ id: 'root', parentId: null, depth: 0, title: 'start', choice: null, decision: null, subtitle: 'no pieces yet', status: null }]
+  const tree = [{ id: 'root', parentId: null, depth: 0, title: 'start', choice: null, decision: null, subtitle: 'no pieces yet', status: null, children: [] }]
+  const nodeById = new Map([['root', tree[0]]])
   let nodeCount = 0
   const addNode = (parentId, depth, choice, decision, subtitle, pruneReason) => {
-    const node = { id: `n${++nodeCount}`, parentId, depth, choice, decision, subtitle, ...(pruneReason ? { pruneReason } : {}) }
+    const node = { id: `n${++nodeCount}`, parentId, depth, choice, decision, subtitle, children: [], ...(pruneReason ? { pruneReason } : {}) }
     tree.push(node)
+    nodeById.get(parentId).children.push(node.id)
+    nodeById.set(node.id, node)
     return node.id
   }
   const partial = list => (list.length ? list.join(' | ') : 'no pieces yet')

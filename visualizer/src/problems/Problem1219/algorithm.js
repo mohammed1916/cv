@@ -84,18 +84,36 @@ const P = key => pythonText.split('\n').findIndex(line => line.includes(key)) + 
 
 const DIRECTIONS = [[1, 0], [-1, 0], [0, 1], [0, -1]]
 
+const DIRECTION_NAMES = { '1,0': 'down', '-1,0': 'up', '0,1': 'right', '0,-1': 'left' }
+
 export function buildTrace(grid) {
   const rows = grid.length
   const cols = grid[0].length
   const used = new Set()
   const frames = []
+  const tree = []
   let answer = 0
+  let activeNodeId = null
   const key = (r, c) => `${r},${c}`
-  const snap = (extra = {}) => ({ used: [...used].map(k => k.split(',').map(Number)), answer, ...extra })
+  const snap = (extra = {}) => ({ used: [...used].map(k => k.split(',').map(Number)), answer, tree: tree.map(n => ({ ...n, children: [...n.children] })), activeNodeId, ...extra })
 
-  function explore(r, c) {
+  // One node per call or per cut branch. The subtitle is the gold collected on the path so far.
+  const addNode = (parentId, r, c, choice, pathSum, decision = 'chosen', pruneReason) => {
+    const id = `n${tree.length}`
+    const parent = parentId == null ? null : tree.find(n => n.id === parentId)
+    tree.push({
+      id, parentId, depth: parent ? parent.depth + 1 : 0, decision, choice,
+      title: `(${r},${c})`, subtitle: `gold so far ${pathSum}`, children: [],
+      ...(pruneReason ? { pruneReason } : {}),
+    })
+    if (parent) parent.children.push(id)
+    return id
+  }
+
+  function explore(r, c, parentId, choice, before) {
+    const nodeId = addNode(parentId, r, c, choice, before + grid[r][c])
+    activeNodeId = nodeId
     used.add(key(r, c))
-    let pathTotal = 0
     frames.push({
       phase: 'extend', activeLine: L('used.add('), pythonLine: P('seen.add'),
       message: `Enter (${r},${c}) with ${grid[r][c]} gold and mark it as used on this path.`,
@@ -106,17 +124,26 @@ export function buildTrace(grid) {
       const nr = r + dr
       const nc = c + dc
       const inside = nr >= 0 && nr < rows && nc >= 0 && nc < cols
-      if (inside && grid[nr][nc] > 0 && !used.has(key(nr, nc))) {
-        frames.push({
-          phase: 'extend', activeLine: L('best = Math.max(best, explore'), pythonLine: P('if 0 <= nr'),
-          message: `Neighbour (${nr},${nc}) has gold and is unused, so the path may continue there.`,
-          snapshot: snap({ cell: [r, c], next: [nr, nc] }),
-        })
-        best = Math.max(best, explore(nr, nc))
+      if (!inside) continue
+      const name = DIRECTION_NAMES[`${dr},${dc}`]
+      if (grid[nr][nc] <= 0) {
+        addNode(nodeId, nr, nc, name, before + grid[r][c], 'pruned', 'no gold')
+        continue
       }
+      if (used.has(key(nr, nc))) {
+        addNode(nodeId, nr, nc, name, before + grid[r][c], 'pruned', 'already on this path')
+        continue
+      }
+      frames.push({
+        phase: 'extend', activeLine: L('best = Math.max(best, explore'), pythonLine: P('if 0 <= nr'),
+        message: `Neighbour (${nr},${nc}) has gold and is unused, so the path may continue there.`,
+        snapshot: snap({ cell: [r, c], next: [nr, nc] }),
+      })
+      best = Math.max(best, explore(nr, nc, nodeId, name, before + grid[r][c]))
+      activeNodeId = nodeId
     }
     used.delete(key(r, c))
-    pathTotal = grid[r][c] + best
+    const pathTotal = grid[r][c] + best
     frames.push({
       phase: 'backtrack', activeLine: L('used.delete('), pythonLine: P('seen.remove'),
       message: `The best path from (${r},${c}) collects ${pathTotal}. Unmark it so other paths can pass through.`,
@@ -128,14 +155,16 @@ export function buildTrace(grid) {
   for (let r = 0; r < rows; r++) {
     for (let c = 0; c < cols; c++) {
       if (grid[r][c] <= 0) continue
+      activeNodeId = null
       frames.push({
         phase: 'start', activeLine: L('if (grid[r][c] > 0)'), pythonLine: P('for r in range(rows)'),
         message: `Start a path at (${r},${c}), which holds ${grid[r][c]} gold.`,
         snapshot: snap({ cell: [r, c] }),
       })
-      answer = Math.max(answer, explore(r, c))
+      answer = Math.max(answer, explore(r, c, null, 'start', 0))
     }
   }
+  activeNodeId = null
   frames.push({
     phase: 'done', activeLine: L('return answer'), pythonLine: P('return answer'),
     message: answer ? `The largest total over all starting cells is ${answer}.` : 'The grid has no gold, so the answer is 0.',

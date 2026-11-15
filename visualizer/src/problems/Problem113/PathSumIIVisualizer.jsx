@@ -18,6 +18,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import './PathSumIIVisualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
+import RecursiveCallTree from '../../components/shared/RecursiveCallTree'
 
 
 // ─── Pattern annotations ───────────────────────────────────────────────────
@@ -136,6 +137,15 @@ export default function PathSumIIVisualizer() {
                     }}
                 />
                 <TreeVisualizationPanel step={step} positions={positions} edges={edges} allNodes={allNodes} />
+                <div className="psi-search-tree">
+                    <RecursiveCallTree
+                        nodes={step?.searchNodes ?? []}
+                        activeNodeId={step?.activeNodeId ?? null}
+                        getTitle={n => n.title}
+                        getSubtitle={n => n.subtitle}
+                        emptyLabel="Press Play to grow the search tree."
+                    />
+                </div>
             </div>
         </div>
     )

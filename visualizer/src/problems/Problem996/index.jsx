@@ -1,6 +1,7 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
 import { StackLane } from '../../components/shared/AlgorithmStatePrimitives'
+import RecursiveCallTree from '../../components/shared/RecursiveCallTree'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
@@ -34,6 +35,10 @@ export default function NumberOfSquarefulArrays() {
         roleAt={j => step.used[j] ? 'used' : ''} />
       <StackLane title="Arrangement so far" items={step.sequence.map(String)} note={`${step.sequence.length} of ${sorted.length}`} />
       <output aria-label="Squareful count">{`Squareful arrangements found: ${step.count}`}</output>
+      <RecursiveCallTree emptyLabel="No placements yet."
+        nodes={run.tree.slice(0, step.treeCount)}
+        activeNodeId={step.nodeId ?? null}
+        getTitle={node => node.title} getSubtitle={node => node.subtitle} />
     </>
   }} renderReasoning={() => <>
     <p>Each step appends one value and checks only the adjacent pair, so a failing pair prunes the whole branch below it.</p>

@@ -18,13 +18,18 @@ export function buildTrace({ n }) {
   const used = Array(total).fill(false)
   const plan = []
   const frames = []
+  const tree = [{ id: 0, parentId: null, depth: 0, decision: null, choice: 'start', subtitle: 'no pairs yet', status: 'waiting' }]
+  const returned = []
   const slots = () => Array.from({ length: total }, (_, i) => (i < plan.length ? `${plan[i][0]}-${plan[i][1]}` : '·'))
+  const partial = () => (plan.length ? plan.map(([h, a]) => `${h}-${a}`).join(', ') : 'no pairs yet')
+  const frame = extra => frames.push({ ...extra, treeCount: tree.length, returnedIds: returned.slice() })
   let result = []
 
-  const place = () => {
+  // Each candidate pair is one tree node under the node that placed the previous day.
+  const place = parentId => {
     if (plan.length === total) {
       result = plan.map(pair => pair.slice())
-      frames.push({ pythonLine: 7, phase: 'found', activeLine: L('if all matches are placed'), at: plan.length - 1, slots: slots(), ok: true, message: 'All fixtures are placed, and each day avoids the teams from the day before.' })
+      frame({ nodeId: parentId, pythonLine: 7, phase: 'found', activeLine: L('if all matches are placed'), at: plan.length - 1, slots: slots(), ok: true, message: 'All fixtures are placed, and each day avoids the teams from the day before.' })
       return true
     }
     const prev = plan[plan.length - 1]
@@ -32,23 +37,28 @@ export function buildTrace({ n }) {
       if (used[m]) continue
       const [home, away] = matches[m]
       if (prev && [prev[0], prev[1]].some(team => team === home || team === away)) {
-        frames.push({ pythonLine: 12, phase: 'skip', activeLine: L('if it shares a team'), at: plan.length, slots: slots(), ok: false, message: `${home}-${away} touches yesterday's teams; skip it.` })
+        const id = tree.length
+        tree.push({ id, parentId, depth: plan.length + 1, decision: 'pruned', pruneReason: 'shares a team with yesterday', choice: `${home}-${away}`, subtitle: partial() })
+        frame({ nodeId: id, pythonLine: 12, phase: 'skip', activeLine: L('if it shares a team'), at: plan.length, slots: slots(), ok: false, message: `${home}-${away} touches yesterday's teams; skip it.` })
         continue
       }
       used[m] = true
       plan.push([home, away])
-      frames.push({ pythonLine: 14, phase: 'place', activeLine: L('place it and recurse'), at: plan.length - 1, slots: slots(), ok: null, message: `Day ${plan.length - 1}: ${home} hosts ${away}.` })
-      if (place()) return true
+      const id = tree.length
+      tree.push({ id, parentId, depth: plan.length, decision: 'chosen', choice: `${home}-${away}`, subtitle: partial() })
+      frame({ nodeId: id, pythonLine: 14, phase: 'place', activeLine: L('place it and recurse'), at: plan.length - 1, slots: slots(), ok: null, message: `Day ${plan.length - 1}: ${home} hosts ${away}.` })
+      if (place(id)) return true
       plan.pop()
       used[m] = false
-      frames.push({ pythonLine: 18, phase: 'backtrack', activeLine: L('undo the placement'), at: plan.length, slots: slots(), ok: false, message: `Dead end; undo ${home}-${away}.` })
+      returned.push(id)
+      frame({ nodeId: id, pythonLine: 18, phase: 'backtrack', activeLine: L('undo the placement'), at: plan.length, slots: slots(), ok: false, message: `Dead end; undo ${home}-${away}.` })
     }
     return false
   }
 
-  const found = place()
-  frames.push({ pythonLine: 21, phase: 'done', activeLine: L('return none'), at: -1, slots: slots(), ok: found, message: found ? 'A schedule exists.' : 'No schedule exists, so return an empty list.' })
-  return { input: { n }, result: found ? result : [], frames }
+  const found = place(0)
+  frame({ nodeId: 0, pythonLine: 21, phase: 'done', activeLine: L('return none'), at: -1, slots: slots(), ok: found, message: found ? 'A schedule exists.' : 'No schedule exists, so return an empty list.' })
+  return { input: { n }, result: found ? result : [], frames, tree }
 }
 
 export const code = `schedule every ordered pair of distinct teams once

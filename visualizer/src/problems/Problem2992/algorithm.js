@@ -59,52 +59,71 @@ export function parseInput(text) {
   return n
 }
 
+// Search tree: one node per choice. Each chosen node is a call to place(pos + 1) below it.
+// decision: "chosen" (gcd is 1, recurse), "ignored" (value already used), "pruned" (gcd above 1).
 export function buildTrace(n) {
   const frames = []
   const perm = Array(n + 1).fill(0)
   const used = Array(n + 1).fill(false)
+  const tree = []
   let count = 0
   const snap = () => ({ perm: perm.slice(1), used: used.slice(1), count })
-  const push = (phase, pos, value, g, ok, message, activeText, pyText) => {
+  const addNode = (parentId, decision, choice, subtitle = null, pruneReason = null) => {
+    const id = tree.length
+    const parent = parentId == null ? null : tree[parentId]
+    tree.push({ id, parentId, depth: parent ? parent.depth + 1 : 0, decision, choice, subtitle, pruneReason, children: [] })
+    if (parent) parent.children.push(id)
+    return id
+  }
+  const push = (phase, pos, value, g, ok, message, activeText, pyText, nodeId) => {
     frames.push({
       phase, pos, value, gcd: g, ok, message,
       activeLine: L(activeText), pythonLine: P(pyText),
+      nodeId, treeCount: tree.length,
       ...snap(),
     })
   }
 
-  push('start', 0, 0, null, null, `Count permutations of 1 to ${n} where gcd(position, value) is 1 at every position.`, 'set count to 0', 'count = 0')
+  const rootId = addNode(null, null, 'place(1)', 'partial: []')
+  push('start', 0, 0, null, null, `Count permutations of 1 to ${n} where gcd(position, value) is 1 at every position.`, 'set count to 0', 'count = 0', rootId)
 
-  function place(pos) {
+  function place(pos, callId) {
     if (pos > n) {
       count += 1
-      push('count', pos, 0, null, true, `Every position is filled. Permutation number ${count} is counted.`, 'add one to count', 'count += 1')
+      const leaf = addNode(callId, 'chosen', 'count += 1', `total ${count}`)
+      push('count', pos, 0, null, true, `Every position is filled. Permutation number ${count} is counted.`, 'add one to count', 'count += 1', leaf)
       return
     }
-    push('place', pos, 0, null, null, `Fill position ${pos}. Try each unused value.`, 'for each value v', 'for v in range')
+    push('place', pos, 0, null, null, `Fill position ${pos}. Try each unused value.`, 'for each value v', 'for v in range', callId)
     for (let v = 1; v <= n; v++) {
-      if (used[v]) continue
+      if (used[v]) {
+        addNode(callId, 'ignored', `${v} already used`)
+        continue
+      }
       const g = gcd(pos, v)
       if (g !== 1) {
-        push('reject', pos, v, g, false, `gcd(${pos}, ${v}) = ${g}, so value ${v} cannot sit at position ${pos}.`, 'if gcd(pos, v) is not 1', 'if gcd(pos, v) != 1')
+        const id = addNode(callId, 'pruned', `${pos} ← ${v}`, null, `gcd ${g} above 1`)
+        push('reject', pos, v, g, false, `gcd(${pos}, ${v}) = ${g}, so value ${v} cannot sit at position ${pos}.`, 'if gcd(pos, v) is not 1', 'if gcd(pos, v) != 1', id)
         continue
       }
       perm[pos] = v
       used[v] = true
-      push('assign', pos, v, g, true, `gcd(${pos}, ${v}) = 1, so place ${v} at position ${pos}.`, 'set p[pos] to v', 'perm[pos] = v')
-      place(pos + 1)
+      const id = addNode(callId, 'chosen', `${pos} ← ${v}`, `partial: [${perm.slice(1, pos + 1).join(', ')}]`)
+      push('assign', pos, v, g, true, `gcd(${pos}, ${v}) = 1, so place ${v} at position ${pos}.`, 'set p[pos] to v', 'perm[pos] = v', id)
+      place(pos + 1, id)
       used[v] = false
       perm[pos] = 0
-      push('backtrack', pos, v, null, null, `Remove ${v} from position ${pos} and try the next value.`, 'unmark v and clear', 'perm[pos] = 0')
+      push('backtrack', pos, v, null, null, `Remove ${v} from position ${pos} and try the next value.`, 'unmark v and clear', 'perm[pos] = 0', id)
     }
   }
 
-  place(1)
+  place(1, rootId)
   frames.push({
     phase: 'done', pos: 0, value: 0, gcd: null, ok: true,
     message: `${count} self-divisible permutation${count === 1 ? '' : 's'} of 1 to ${n}.`,
     activeLine: L('return count'), pythonLine: P('return count'),
+    nodeId: rootId, treeCount: tree.length,
     ...snap(),
   })
-  return { input: n, result: count, frames }
+  return { input: n, result: count, frames, tree }
 }

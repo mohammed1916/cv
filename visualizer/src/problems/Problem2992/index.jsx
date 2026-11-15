@@ -1,5 +1,6 @@
 import AlgorithmWorkspace from "../../components/shared/AlgorithmWorkspace";
 import PermutationGridView from "./PermutationGridView";
+import RecursiveCallTree from "../../components/shared/RecursiveCallTree";
 import { code, python, parseInput, buildTrace } from "./algorithm.js";
 
 const phases = [
@@ -35,7 +36,18 @@ export default function Problem2992Visualizer() {
   return (
     <AlgorithmWorkspace
       definition={definition}
-      renderVisual={({ run, step }) => <PermutationGridView run={run} step={step} />}
+      renderVisual={({ run, step }) => (
+        <>
+          <PermutationGridView run={run} step={step} />
+          <RecursiveCallTree
+            nodes={run.tree.slice(0, step.treeCount)}
+            activeNodeId={step.nodeId ?? null}
+            getTitle={node => node.choice}
+            getSubtitle={node => node.subtitle}
+            emptyLabel="No placements yet."
+          />
+        </>
+      )}
       renderReasoning={({ step }) => (
         <p>{step.message}</p>
       )}

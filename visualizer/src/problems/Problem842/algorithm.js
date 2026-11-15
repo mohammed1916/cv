@@ -8,9 +8,21 @@ export function buildTrace(num) {
   const n = num.length
   const res = []
   const frames = []
-  const push = (phase, activeLine, pythonLine, message, extra = {}) => frames.push({ phase, activeLine, pythonLine, message, res: [...res], i: -1, j: -1, ...extra })
+  // Search tree: one node per segment tried (num[i..j]) under the call that tried it.
+  const tree = [{ id: 0, parentId: null, depth: 0, decision: null, choice: 'start', subtitle: 'no numbers yet', status: 'waiting' }]
+  const returnedIds = []
+  let currentNode = 0
+  const push = (phase, activeLine, pythonLine, message, extra = {}) => frames.push({ phase, activeLine, pythonLine, message, res: [...res], i: -1, j: -1, nodeId: currentNode, treeCount: tree.length, returnedIds: [...returnedIds], ...extra })
+  const partial = () => (res.length ? res.join(', ') : 'no numbers yet')
+  const addNode = (parentId, label, decision, subtitle, pruneReason) => {
+    const node = { id: tree.length, parentId, depth: tree[parentId].depth + 1, decision, choice: label, subtitle, status: 'waiting' }
+    if (pruneReason) node.pruneReason = pruneReason
+    tree.push(node)
+    return node.id
+  }
   push('start', 3, 3, `Split "${num}" into numbers with no leading zeros, each at most ${LIMIT}, where every number after the first two is the sum of the previous two.`)
-  const backtrack = i => {
+  const backtrack = (i, parentId) => {
+    currentNode = parentId
     if (i === n) {
       const ok = res.length >= 3
       push(ok ? 'push' : 'pop', 6, 6, ok ? `All digits consumed with ${res.length} numbers: a valid sequence.` : `All digits consumed but only ${res.length} numbers (need at least 3): this branch fails.`, { i })
@@ -18,26 +30,53 @@ export function buildTrace(num) {
     }
     let cur = 0
     for (let j = i; j < n; j++) {
-      if (j > i && num[i] === '0') { push('reject', 9, 10, `Segment starting at ${i} begins with '0' and is longer than one digit: leading zero, stop extending.`, { i, j }); break }
+      const label = `"${num.slice(i, j + 1)}"`
+      if (j > i && num[i] === '0') {
+        const id = addNode(parentId, label, 'pruned', partial(), 'leading zero')
+        currentNode = id
+        push('reject', 9, 10, `Segment starting at ${i} begins with '0' and is longer than one digit: leading zero, stop extending.`, { i, j })
+        break
+      }
       cur = cur * 10 + Number(num[j])
-      if (cur > LIMIT) { push('reject', 11, 13, `${cur} exceeds 2^31 - 1; longer segments only grow, so stop extending.`, { i, j, cur }); break }
+      if (cur > LIMIT) {
+        const id = addNode(parentId, label, 'pruned', partial(), 'over 2^31 - 1')
+        currentNode = id
+        push('reject', 11, 13, `${cur} exceeds 2^31 - 1; longer segments only grow, so stop extending.`, { i, j, cur })
+        break
+      }
       if (res.length >= 2) {
         const s = res[res.length - 1] + res[res.length - 2]
-        if (cur < s) { push('reject', 14, 17, `${cur} is smaller than ${res[res.length - 2]} + ${res[res.length - 1]} = ${s}; take more digits.`, { i, j, cur }); continue }
-        if (cur > s) { push('reject', 15, 19, `${cur} is larger than the required ${s}; longer segments only grow, so stop.`, { i, j, cur }); break }
+        if (cur < s) {
+          const id = addNode(parentId, label, 'ignored', partial())
+          currentNode = id
+          push('reject', 14, 17, `${cur} is smaller than ${res[res.length - 2]} + ${res[res.length - 1]} = ${s}; take more digits.`, { i, j, cur })
+          continue
+        }
+        if (cur > s) {
+          const id = addNode(parentId, label, 'pruned', partial(), `larger than the required ${s}`)
+          currentNode = id
+          push('reject', 15, 19, `${cur} is larger than the required ${s}; longer segments only grow, so stop.`, { i, j, cur })
+          break
+        }
       }
       res.push(cur)
+      const nodeId = addNode(parentId, label, 'chosen', partial())
+      currentNode = nodeId
       push('push', 16, 20, res.length >= 3 ? `${cur} equals the sum of the previous two: accept it and continue from digit ${j + 1}.` : `Tentatively take ${cur} as number ${res.length} (the first two numbers are free choices).`, { i, j, cur })
-      if (backtrack(j + 1)) return true
+      if (backtrack(j + 1, nodeId)) return true
       res.pop()
+      tree[nodeId].status = 'returned'
+      returnedIds.push(nodeId)
+      currentNode = nodeId
       push('pop', 18, 23, `Dead end after ${cur}: undo it and try a longer segment.`, { i, j, cur })
     }
     return false
   }
-  const found = backtrack(0)
+  const found = backtrack(0, 0)
   const result = found ? [...res] : []
+  currentNode = null
   push('done', 20, 26, found ? `Sequence found: [${result.join(', ')}].` : 'Every split was pruned or failed: return [].')
-  return { input: num, result, frames }
+  return { input: num, result, frames, tree }
 }
 export const code = `function splitIntoFibonacci(num)
   set limit to 2^31 - 1 and res to an empty list

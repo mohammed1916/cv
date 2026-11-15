@@ -102,38 +102,63 @@ export function buildTrace({ tree, arr }) {
   const kids = buildKids(tree)
   const frames = []
   const path = []
-  const frame = (phase, activeLine, pythonLine, node, k, message) => frames.push({
-    phase, activeLine, pythonLine, node, k, message, path: [...path], kids,
+  // Search tree: one node per call to check(); each node records its decision and the partial match.
+  const searchNodes = []
+  const byId = new Map()
+  const snapshot = () => searchNodes.map(node => ({ ...node, children: [...node.children] }))
+  const frame = (phase, activeLine, pythonLine, node, k, message, activeNodeId) => frames.push({
+    phase, activeLine, pythonLine, node, k, message, path: [...path], kids, treeNodes: snapshot(), activeNodeId,
   })
-  let found = false
-  const check = (i, k) => {
+  const addNode = (i, parentId, depth, k) => {
+    const node = {
+      id: `n${i}`, parentId, depth, value: tree[i], decision: null, pruneReason: undefined,
+      choice: parentId === null ? null : `go to node ${i}`,
+      subtitle: k > 0 ? `matched ${arr.slice(0, k).join(' ')}` : 'nothing matched yet',
+      children: [],
+    }
+    searchNodes.push(node)
+    byId.set(node.id, node)
+    if (parentId !== null) byId.get(parentId).children.push(node.id)
+    return node
+  }
+  const check = (i, k, parentId, depth) => {
+    const searchNode = addNode(i, parentId, depth, k)
+    const id = searchNode.id
     path.push(i)
     if (tree[i] !== arr[k]) {
-      frame('mismatch', L('node.val differs'), P('if tree[i] != arr[k]'), i, k, `Node ${i} has ${tree[i]}, but arr[${k}] is ${arr[k]}.`)
+      searchNode.decision = 'pruned'
+      searchNode.pruneReason = `${tree[i]} is not ${arr[k]}`
+      frame('mismatch', L('node.val differs'), P('if tree[i] != arr[k]'), i, k, `Node ${i} has ${tree[i]}, but arr[${k}] is ${arr[k]}.`, id)
       path.pop()
       return false
     }
-    frame('enter', L('node is missing'), P('if tree[i] != arr[k]'), i, k, `Node ${i} matches arr[${k}] = ${arr[k]}.`)
+    searchNode.decision = 'chosen'
+    frame('enter', L('node is missing'), P('if tree[i] != arr[k]'), i, k, `Node ${i} matches arr[${k}] = ${arr[k]}.`, id)
     if (k === arr.length - 1) {
       const leaf = kids[i].length === 0
-      frame(leaf ? 'found' : 'short', L('if k is the last index'), P('if k == len(arr) - 1'), i, k,
-        leaf ? `arr ends on leaf ${i}: a valid path.` : `arr ends at node ${i}, which has children, so this is not a root-to-leaf path.`)
-      if (leaf) found = true
-      if (!leaf) path.pop()
-      return leaf
+      if (leaf) {
+        frame('found', L('if k is the last index'), P('if k == len(arr) - 1'), i, k, `arr ends on leaf ${i}: a valid path.`, id)
+        return true
+      }
+      searchNode.decision = 'pruned'
+      searchNode.pruneReason = 'array ends at an inner node'
+      frame('short', L('if k is the last index'), P('if k == len(arr) - 1'), i, k, `arr ends at node ${i}, which has children, so this is not a root-to-leaf path.`, id)
+      path.pop()
+      return false
     }
     for (const child of kids[i]) {
-      frame('enter', L('for each child of node'), P('for c in kids[i]'), i, k, `Try child ${child} for arr[${k + 1}] = ${arr[k + 1]}.`)
-      if (check(child, k + 1)) {
-        frame('found', L('check(child, k + 1)'), P('if check(c, k + 1)'), child, k + 1, 'The child continues the valid path.')
+      frame('enter', L('for each child of node'), P('for c in kids[i]'), i, k, `Try child ${child} for arr[${k + 1}] = ${arr[k + 1]}.`, id)
+      if (check(child, k + 1, id, depth + 1)) {
+        frame('found', L('check(child, k + 1)'), P('if check(c, k + 1)'), child, k + 1, 'The child continues the valid path.', id)
         return true
       }
     }
-    frame('backtrack', LAST('return false'), P('return False'), i, k, `No child of ${i} continues the sequence.`)
+    searchNode.decision = 'ignored'
+    frame('backtrack', LAST('return false'), P('return False'), i, k, `No child of ${i} continues the sequence.`, id)
     path.pop()
     return false
   }
-  const result = tree[0] !== null && check(0, 0)
-  frame('done', L('return root !== null'), P('return bool(tree)'), -1, -1, result ? 'A root-to-leaf path spells arr.' : 'No root-to-leaf path spells arr.')
-  return { input: { tree, arr }, result, frames, kids }
+  const result = tree[0] !== null && check(0, 0, null, 0)
+  frame('done', L('return root !== null'), P('return bool(tree)'), -1, -1, result ? 'A root-to-leaf path spells arr.' : 'No root-to-leaf path spells arr.', null)
+  return { input: { tree, arr }, result, frames, kids, tree: searchNodes }
 }

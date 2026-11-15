@@ -1,4 +1,5 @@
 import './PathMatchView.css'
+import RecursiveCallTree from '../../components/shared/RecursiveCallTree'
 
 const W = 640
 const ROW = 72
@@ -40,6 +41,7 @@ export default function PathMatchView({ run, step }) {
     return onPath.has(i) ? 'pm-node pm-node--path' : 'pm-node'
   }
   return (
+    <>
     <figure className="pm-view">
       <div className="pm-array" aria-label="Array to match">
         {arr.map((value, k) => (
@@ -62,6 +64,14 @@ export default function PathMatchView({ run, step }) {
         ))}
       </svg>
       <figcaption>{step.message}</figcaption>
-    </figure>
+      </figure>
+      <RecursiveCallTree
+        nodes={step.treeNodes}
+        activeNodeId={step.activeNodeId ? step.activeNodeId : null}
+        getTitle={node => `value ${node.value}`}
+        getSubtitle={node => node.subtitle}
+        emptyLabel="No calls yet."
+      />
+    </>
   )
 }

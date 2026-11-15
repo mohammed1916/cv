@@ -4,9 +4,14 @@ export function generateSteps(text, targetSum) {
     const root = parseLevelOrderTree(text)
     const { positions, edges, nodes: allNodes } = binaryTreeLayout(root)
     const steps = []
+    // Search-tree nodes: one per recursive call or skipped child. Snapshotted into every step.
+    const treeNodes = []
+    let curTreeId = null
+    const snap = () => ({ searchNodes: treeNodes.map(n => ({ ...n, children: [...n.children] })), activeNodeId: curTreeId })
 
     if (!root) {
         return [{
+            ...snap(),
             phase: 'done', activeLine: 13, activeId: -1, pathStack: [], completedPaths: [],
             onPathNode: new Set(), positions, edges, allNodes, currentSum: 0, targetSum,
             message: 'Empty tree → return []'
@@ -17,14 +22,23 @@ export function generateSteps(text, targetSum) {
     const onPathNode = new Set()
 
     steps.push({
+        ...snap(),
         phase: 'init', activeLine: 2, activeId: -1, pathStack: [], completedPaths: [],
         onPathNode: new Set(), positions, edges, allNodes, currentSum: 0, targetSum,
         message: `Initialize result list. Target sum: ${targetSum}. Start DFS.`
     })
 
-    function dfs(node, path, remainingSum) {
+    function dfs(node, path, remainingSum, parentTreeId, choice, depth) {
+        const treeId = treeNodes.length
+        const parent = parentTreeId === null ? null : treeNodes[parentTreeId]
+        if (parent) parent.children.push(treeId)
+        const subtitleFor = sum => `path [${path.join(', ')}] · sum ${sum}`
         if (!node) {
+            treeNodes.push({ id: treeId, parentId: parentTreeId, depth, choice, title: 'empty', decision: 'pruned',
+                pruneReason: 'no child here', subtitle: subtitleFor(targetSum - remainingSum), children: [], status: 'returned' })
+            curTreeId = treeId
             steps.push({
+                ...snap(),
                 phase: 'null', activeLine: 4, activeId: -1,
                 pathStack: [...path], completedPaths: [...completedPaths], onPathNode: new Set(onPathNode),
                 positions, edges, allNodes, currentSum: targetSum - remainingSum, targetSum,
@@ -33,11 +47,17 @@ export function generateSteps(text, targetSum) {
             return
         }
 
+        treeNodes.push({ id: treeId, parentId: parentTreeId, depth, choice, title: `node ${node.val}`,
+            decision: 'chosen', subtitle: '', children: [], status: 'waiting' })
+        curTreeId = treeId
+
         path.push(node.val)
         onPathNode.add(node.id)
         const currentSum = targetSum - remainingSum + node.val
+        treeNodes[treeId].subtitle = subtitleFor(currentSum)
 
         steps.push({
+            ...snap(),
             phase: 'visit', activeLine: 5, activeId: node.id,
             pathStack: [...path], completedPaths: [...completedPaths], onPathNode: new Set(onPathNode),
             positions, edges, allNodes, currentSum, targetSum,
@@ -47,6 +67,7 @@ export function generateSteps(text, targetSum) {
         const isLeaf = !node.left && !node.right
         if (isLeaf) {
             steps.push({
+                ...snap(),
                 phase: 'leaf', activeLine: 6, activeId: node.id,
                 pathStack: [...path], completedPaths: [...completedPaths], onPathNode: new Set(onPathNode),
                 positions, edges, allNodes, currentSum, targetSum,
@@ -55,14 +76,19 @@ export function generateSteps(text, targetSum) {
 
             if (currentSum === targetSum) {
                 completedPaths.push([...path])
+                treeNodes[treeId].subtitle = `saved [${path.join(', ')}]`
                 steps.push({
+                    ...snap(),
                     phase: 'match', activeLine: 8, activeId: node.id,
                     pathStack: [...path], completedPaths: [...completedPaths], onPathNode: new Set(onPathNode),
                     positions, edges, allNodes, currentSum, targetSum,
                     message: `Sum matches! Save path: [${path.join(', ')}]. Total: ${completedPaths.length}`
                 })
             } else {
+                treeNodes[treeId].decision = 'ignored'
+                treeNodes[treeId].subtitle = `leaf sum ${currentSum} ≠ ${targetSum}`
                 steps.push({
+                    ...snap(),
                     phase: 'no-match', activeLine: 7, activeId: node.id,
                     pathStack: [...path], completedPaths: [...completedPaths], onPathNode: new Set(onPathNode),
                     positions, edges, allNodes, currentSum, targetSum,
@@ -71,6 +97,7 @@ export function generateSteps(text, targetSum) {
             }
         } else {
             steps.push({
+                ...snap(),
                 phase: 'branch', activeLine: 9, activeId: node.id,
                 pathStack: [...path], completedPaths: [...completedPaths], onPathNode: new Set(onPathNode),
                 positions, edges, allNodes, currentSum, targetSum,
@@ -78,9 +105,11 @@ export function generateSteps(text, targetSum) {
             })
 
             if (node.left) {
-                dfs(node.left, path, remainingSum - node.val)
+                dfs(node.left, path, remainingSum - node.val, treeId, 'go left', depth + 1)
+                curTreeId = treeId
             } else {
                 steps.push({
+                    ...snap(),
                     phase: 'no-left', activeLine: 10, activeId: node.id,
                     pathStack: [...path], completedPaths: [...completedPaths], onPathNode: new Set(onPathNode),
                     positions, edges, allNodes, currentSum, targetSum,
@@ -89,9 +118,11 @@ export function generateSteps(text, targetSum) {
             }
 
             if (node.right) {
-                dfs(node.right, path, remainingSum - node.val)
+                dfs(node.right, path, remainingSum - node.val, treeId, 'go right', depth + 1)
+                curTreeId = treeId
             } else {
                 steps.push({
+                    ...snap(),
                     phase: 'no-right', activeLine: 11, activeId: node.id,
                     pathStack: [...path], completedPaths: [...completedPaths], onPathNode: new Set(onPathNode),
                     positions, edges, allNodes, currentSum, targetSum,
@@ -102,8 +133,10 @@ export function generateSteps(text, targetSum) {
 
         onPathNode.delete(node.id)
         path.pop()
+        treeNodes[treeId].status = 'returned'
 
         steps.push({
+            ...snap(),
             phase: 'backtrack', activeLine: 12, activeId: node.id,
             pathStack: [...path], completedPaths: [...completedPaths], onPathNode: new Set(onPathNode),
             positions, edges, allNodes, currentSum: targetSum - remainingSum, targetSum,
@@ -111,9 +144,10 @@ export function generateSteps(text, targetSum) {
         })
     }
 
-    dfs(root, [], targetSum)
+    dfs(root, [], targetSum, null, 'start', 0)
 
     steps.push({
+        ...snap(),
         phase: 'done', activeLine: 13, activeId: -1,
         pathStack: [], completedPaths: [...completedPaths], onPathNode: new Set(),
         positions, edges, allNodes, currentSum: 0, targetSum,

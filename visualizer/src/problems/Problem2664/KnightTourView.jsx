@@ -1,4 +1,5 @@
 import './KnightTourView.css'
+import RecursiveCallTree from '../../components/shared/RecursiveCallTree'
 
 const CELL = 58
 const PAD = 26
@@ -63,6 +64,16 @@ export default function KnightTourView({ run, step }) {
       <p className="kt-legend">
         Numbers are visit order. Small "next" tags show onward moves for each candidate; the highlighted candidate is the one being tried.
       </p>
+      {step.tree && (
+        <div className="kt-tree" aria-label="Search tree">
+          <RecursiveCallTree
+            nodes={step.tree}
+            activeNodeId={step.activeNodeId}
+            getTitle={node => (node.id === 0 ? 'start' : `square ${node.depth + 1}`)}
+            getSubtitle={node => node.subtitle}
+          />
+        </div>
+      )}
     </section>
   )
 }

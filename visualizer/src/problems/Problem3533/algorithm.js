@@ -106,7 +106,7 @@ export function buildTrace({ nums: given, k }) {
   push('setup', 'work out what', 'shift =', `Appending a number with d digits multiplies what came before by 10^d. Only the remainder mod ${k} has to be carried.`)
 
   const search = (mask, r, parent, via) => {
-    const node = { id: nodes.length, parent, mask, r, via, depth: path.length, enter: frames.length, exit: null, outcome: null }
+    const node = { id: nodes.length, parent, mask, r, via, depth: path.length, enter: frames.length, exit: null, outcome: null, prefix: path.map(i => nums[i]).join('') }
     nodes.push(node)
     const here = { nodeId: node.id, mask, r }
     const finish = (outcome, value) => { node.outcome = outcome; node.exit = frames.length - 1; return value }
@@ -146,5 +146,18 @@ export function buildTrace({ nums: given, k }) {
   push('done', 'successful path', 'return order', found
     ? `The answer is [${result.join(', ')}], which writes out as ${result.join('')}.`
     : `No order of ${nums.join(', ')} divides by ${k}, so the answer is the empty list.`, { done: true })
-  return { input: { nums, k }, result, frames, nodes, deadLog, digits }
+  const callTree = nodes.map(node => {
+    const decision = node.outcome === 'found' ? 'chosen' : node.outcome === 'seen' ? 'pruned' : 'ignored'
+    return {
+      id: node.id,
+      parentId: node.parent,
+      depth: node.depth,
+      decision,
+      pruneReason: decision === 'pruned' ? 'known dead state' : undefined,
+      choice: node.via === null ? 'start' : `+ ${nums[node.via]}`,
+      subtitle: `written: ${node.prefix || 'nothing'}, remainder ${node.r}`,
+      children: nodes.filter(child => child.parent === node.id).map(child => child.id),
+    }
+  })
+  return { input: { nums, k }, result, frames, nodes, deadLog, digits, callTree }
 }

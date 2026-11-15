@@ -12,6 +12,8 @@ export function parseInput(text) {
   return { n }
 }
 
+// Search tree: one node per candidate value at each call. decision: "chosen" (appended, recurse),
+// "ignored" (already in path), "pruned" (same parity as the last value).
 export function buildTrace({ n }) {
   const L = text => lookup(code.map(line => line.text), text)
   const PY = text => lookup(python.split('\n'), text)
@@ -19,42 +21,55 @@ export function buildTrace({ n }) {
   const result = []
   const path = []
   const used = Array(n + 1).fill(false)
+  const tree = []
+  const addNode = (parentId, decision, choice, subtitle = null, pruneReason = null) => {
+    const id = tree.length
+    const parent = parentId == null ? null : tree[parentId]
+    tree.push({ id, parentId, depth: parent ? parent.depth + 1 : 0, decision, choice, subtitle, pruneReason, children: [] })
+    if (parent) parent.children.push(id)
+    return id
+  }
   const snap = (phase, extra) => ({
     phase, path: path.slice(), used: used.slice(), results: result.map(row => row.slice()), value: null, last: path.length ? path[path.length - 1] : null,
+    treeCount: tree.length,
     ...extra,
   })
 
-  frames.push(snap('start', { pythonLine: PY('result = []'), activeLine: L('set result to an empty list'), message: `Build permutations of 1 to ${n} with neighbours of opposite parity.` }))
+  const rootId = addNode(null, null, 'build([])', 'partial: []')
+  frames.push(snap('start', { nodeId: rootId, pythonLine: PY('result = []'), activeLine: L('set result to an empty list'), message: `Build permutations of 1 to ${n} with neighbours of opposite parity.` }))
 
-  const build = () => {
+  const build = callId => {
     if (path.length === n) {
       result.push(path.slice())
-      frames.push(snap('record', { pythonLine: PY('if len(path) == n'), activeLine: L('if path has n values'), message: `Full permutation [${path.join(', ')}] is valid; record it.` }))
+      frames.push(snap('record', { nodeId: callId, pythonLine: PY('if len(path) == n'), activeLine: L('if path has n values'), message: `Full permutation [${path.join(', ')}] is valid; record it.` }))
       return
     }
-    frames.push(snap('enter', { pythonLine: PY('if len(path) == n'), activeLine: L('for each value v from 1 to n'), message: `Path is [${path.join(', ')}]; try each unused value next.` }))
+    frames.push(snap('enter', { nodeId: callId, pythonLine: PY('if len(path) == n'), activeLine: L('for each value v from 1 to n'), message: `Path is [${path.join(', ')}]; try each unused value next.` }))
     for (let value = 1; value <= n; value++) {
       if (used[value]) {
-        frames.push(snap('reject', { pythonLine: PY('if used[value]'), activeLine: L('if v is already in path'), value, message: `${value} is already in the path.` }))
+        addNode(callId, 'ignored', `${value} already in path`)
+        frames.push(snap('reject', { nodeId: callId, pythonLine: PY('if used[value]'), activeLine: L('if v is already in path'), value, message: `${value} is already in the path.` }))
         continue
       }
       if (path.length > 0 && (path[path.length - 1] - value) % 2 === 0) {
-        frames.push(snap('reject', { pythonLine: PY('if path and'), activeLine: L('the last value have the same parity'), value, message: `${value} has the same parity as ${path[path.length - 1]}, so it cannot follow it.` }))
+        const id = addNode(callId, 'pruned', `${value}`, null, `same parity as ${path[path.length - 1]}`)
+        frames.push(snap('reject', { nodeId: id, pythonLine: PY('if path and'), activeLine: L('the last value have the same parity'), value, message: `${value} has the same parity as ${path[path.length - 1]}, so it cannot follow it.` }))
         continue
       }
       path.push(value)
       used[value] = true
-      frames.push(snap('place', { pythonLine: PY('path.append(value)'), activeLine: L('append v to path'), value, message: `Place ${value} at position ${path.length - 1}.` }))
-      build()
+      const id = addNode(callId, 'chosen', `${value}`, `partial: [${path.join(', ')}]`)
+      frames.push(snap('place', { nodeId: id, pythonLine: PY('path.append(value)'), activeLine: L('append v to path'), value, message: `Place ${value} at position ${path.length - 1}.` }))
+      build(id)
       used[value] = false
       path.pop()
-      frames.push(snap('undo', { pythonLine: PY('path.pop()'), activeLine: L('remove the last value from path'), value, message: `Backtrack: remove ${value} and try the next value.` }))
+      frames.push(snap('undo', { nodeId: id, pythonLine: PY('path.pop()'), activeLine: L('remove the last value from path'), value, message: `Backtrack: remove ${value} and try the next value.` }))
     }
   }
-  build()
+  build(rootId)
 
-  frames.push(snap('done', { pythonLine: PY('return result'), activeLine: L('return result'), message: `${result.length} permutation${result.length === 1 ? '' : 's'} have alternating parity.` }))
-  return { input: { n }, result, frames }
+  frames.push(snap('done', { nodeId: rootId, pythonLine: PY('return result'), activeLine: L('return result'), message: `${result.length} permutation${result.length === 1 ? '' : 's'} have alternating parity.` }))
+  return { input: { n }, result, frames, tree }
 }
 
 export const code = `alternating-parity permutations of 1 to n in lexicographic order

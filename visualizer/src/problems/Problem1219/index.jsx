@@ -1,4 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import RecursiveCallTree from '../../components/shared/RecursiveCallTree'
 import { buildTrace, parseInput, code, python, phases, inputLabel, complexity, examples } from './algorithm'
 
 const definition = {
@@ -28,8 +29,9 @@ export default function PathWithMaximumGold() {
         }))}
       </div>
       <p aria-label="Current path total">Best so far: {step.snapshot.answer}{step.snapshot.value !== undefined ? ` · this path from here: ${step.snapshot.value}` : ''}</p>
+      <RecursiveCallTree nodes={step.snapshot.tree} activeNodeId={step.snapshot.activeNodeId} getTitle={n => n.title} getSubtitle={n => n.subtitle} emptyLabel="No search calls yet." />
     </>
-  }} renderReasoning={({ step }) => <>
+  }} renderReasoning={() => <>
     <p><strong>Why unmark:</strong> a path may not revisit a cell, but a different path may pass through the same cell. Releasing the cell on return keeps every start independent.</p>
     <p>Each cell's answer is its own gold plus the best continuation through an unused neighbour, so the recursion returns the best total from that cell.</p>
   </>} />

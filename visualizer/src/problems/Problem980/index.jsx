@@ -1,4 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import RecursiveCallTree from '../../components/shared/RecursiveCallTree'
 import { parseInput, buildTrace, code, python, phases } from './algorithm'
 
 const definition = {
@@ -45,6 +46,10 @@ export default function Problem980() {
       <p style={{ margin: 0, color: 'var(--text)' }}>Path so far: {step.path.map(p => `(${p[0]},${p[1]})`).join(' → ')}. Walks counted: {step.count}.</p>
       {step.remaining !== undefined && <p style={{ margin: 0, color: 'var(--text-muted)' }}>Empty squares still unvisited: {step.remaining}.</p>}
       <p style={{ margin: 0, color: 'var(--text-muted)' }}>Numbers mark the order of the current path. Shaded squares are on it. Backtracking frees the most recent square.</p>
+      <RecursiveCallTree emptyLabel="No steps yet."
+        nodes={run.tree.slice(0, step.treeCount)}
+        activeNodeId={step.nodeId ?? null}
+        getTitle={node => node.title} getSubtitle={node => node.subtitle} />
     </section>
   }} renderReasoning={({ step }) => <p>{step.message}</p>} />
 }
