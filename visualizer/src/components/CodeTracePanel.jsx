@@ -83,16 +83,14 @@ export default function CodeTracePanel({
     // Auto-scroll if enabled
     if (selection.enabled || !autoScroll || Date.now() - lastManualScrollTsRef.current < MANUAL_SCROLL_GRACE_MS) return;
 
-    // Measure against the scroll box itself: offsetTop is relative to a positioned ancestor, not this box.
     const container = codeRef.current;
-    const box = container.getBoundingClientRect();
-    const lineRect = el.getBoundingClientRect();
-    const elTop = lineRect.top - box.top + container.scrollTop;
-    const elBottom = elTop + lineRect.height;
+    const elTop = el.offsetTop;
+    const elBottom = elTop + el.offsetHeight;
     const ctTop = container.scrollTop;
     const ctBottom = ctTop + container.clientHeight;
-    if (elTop < ctTop) container.scrollTop = elTop - 8;
-    else if (elBottom > ctBottom) container.scrollTop = elBottom - container.clientHeight + 8;
+    if (elTop < ctTop || elBottom > ctBottom) {
+      el.scrollIntoView({ block: "nearest", behavior: "auto" });
+    }
   }, [resolvedStep, autoScroll, onActiveLineDomChange, selection.enabled]);
 
   useEffect(() => {
