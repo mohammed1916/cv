@@ -29,12 +29,6 @@ export default function AlgorithmWorkspace({ definition, renderVisual, renderRea
   const [run, setRun] = useState(() => definition.build(definition.parse(definition.examples[0].input)))
   const [error, setError] = useState('')
   const [panelDivs, setPanelDivs] = useState(null)
-  // The visual panel scrolls inside itself: pin its dock content to fill the slot.
-  useEffect(() => {
-    const el = panelDivs?.visual
-    if (!el) return
-    Object.assign(el.style, { position: 'absolute', inset: '0', overflowY: 'auto', maxHeight: 'none' })
-  }, [panelDivs])
   const [tutorialDivs, setTutorialDivs] = useState(null)
   const [tutorialMode, setTutorialMode] = useState('off')
   const [floating, setFloating] = useState(true)
