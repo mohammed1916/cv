@@ -32,16 +32,16 @@ export function CodePanel({ code, step, title = 'Solution Code', getRowExtra }) 
     const el = scrollRef.current.querySelector(`[data-line="${step.activeLine}"]`)
     if (!el) return
 
+    // Measure against the scroll box itself: offsetTop is relative to a positioned ancestor, not this box.
     const container = scrollRef.current
-    const elTop    = el.offsetTop
-    const elBottom = elTop + el.offsetHeight
-    const ctTop    = container.scrollTop
+    const box = container.getBoundingClientRect()
+    const lineRect = el.getBoundingClientRect()
+    const elTop = lineRect.top - box.top + container.scrollTop
+    const elBottom = elTop + lineRect.height
+    const ctTop = container.scrollTop
     const ctBottom = ctTop + container.clientHeight
-
-    const isFullyVisible = elTop >= ctTop && elBottom <= ctBottom
-    if (!isFullyVisible) {
-      el.scrollIntoView({ block: 'nearest', behavior: 'auto' })
-    }
+    if (elTop < ctTop) container.scrollTop = elTop - 8
+    else if (elBottom > ctBottom) container.scrollTop = elBottom - container.clientHeight + 8
   }, [step, selection.enabled])
 
   useEffect(() => {
