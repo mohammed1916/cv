@@ -137,9 +137,10 @@ export default function Problem2911() {
       )}
 
       renderReasoning={({ step }) => (
+        // The visual already shows this step's message, so explain the phase here instead of repeating it.
         <div className="mc-reasoning">
-          <strong>What is happening?</strong>
-          <p>{step.message}</p>
+          <strong>Why this step</strong>
+          <p>{definition.phases.find(phase => phase.id === step.phase)?.description ?? ''}</p>
         </div>
       )}
     />
