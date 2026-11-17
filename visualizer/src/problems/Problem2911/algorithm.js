@@ -192,24 +192,6 @@ export function buildTrace({ s, k }) {
   const bufferSnapshot = buffer =>
     Array.from(buffer);
 
-  const makeBuffers = (
-    twoBack,
-    oneBack,
-    current,
-    layers
-  ) => ({
-    buffers: {
-      twoBack: bufferSnapshot(twoBack),
-      oneBack: bufferSnapshot(oneBack),
-      current: bufferSnapshot(current)
-    },
-
-    bufferLayers: {
-      twoBack: layers.twoBack,
-      oneBack: layers.oneBack,
-      current: layers.current
-    }
-  });
 
   // Python line (in PYTHON_SOURCE, counted from 1) that each phase executes, so the code panel can highlight it.
   const PYTHON_LINE = { setup: 2, divisor: 12, blocks: 17, recurrence: 21, offset: 28, store: 38, rotate: 46, dpSetup: 52, dpPieces: 57, dpEnd: 64, dpCandidate: 68, dpStore: 76, dpSkip: 73, result: 80 };
