@@ -1,48 +1,166 @@
+
+import React from "react";
+
 import AlgorithmWorkspace from "../../components/shared/AlgorithmWorkspace";
-import RecurrenceGrid from "../../components/shared/RecurrenceGrid";
-import IndexedSequence from "../../components/shared/IndexedSequence";
-import { code, python, parseInput, buildTrace } from "./algorithm";
+import MinimumChangesVisualizer from "./MinimumChangesVisualizer";
+
+import {
+  code,
+  python,
+  parseInput,
+  buildTrace
+} from "./algorithm";
 
 const definition = {
   number: "2911",
+
   phases: [
-    { id: "setup", label: "Setup", description: "Start the DP table with zero parts ending at zero." },
-    { id: "row", label: "Parts", description: "Fill the row for each number of parts." },
-    { id: "cost", label: "Cost", description: "Price the substring from start to end as a semi-palindrome." },
-    { id: "update", label: "Update", description: "Keep the cheapest candidate for this cell." },
-    { id: "result", label: "Result", description: "Report the minimum total changes." },
+    {
+      id: "setup",
+      label: "Setup",
+      description: "Initialize the substring cost matrix and recurrence buffers."
+    },
+    {
+      id: "divisor",
+      label: "Divisors",
+      description: "Choose a divisor and establish its independent sequences."
+    },
+    {
+      id: "blocks",
+      label: "Blocks",
+      description: "Process substrings with increasing numbers of blocks."
+    },
+    {
+      id: "recurrence",
+      label: "Recurrence",
+      description: "Read the inner result from two_back."
+    },
+    {
+      id: "offset",
+      label: "Compare",
+      description: "Compare corresponding characters in the outer blocks."
+    },
+    {
+      id: "store",
+      label: "Store",
+      description: "Write the computed cost into current and the cost matrix."
+    },
+    {
+      id: "rotate",
+      label: "Rotate",
+      description: "Rotate two_back, one_back and current references."
+    },
+    {
+      id: "dpSetup",
+      label: "DP Setup",
+      description: "Initialize the partition dynamic programming table."
+    },
+    {
+      id: "dpPieces",
+      label: "Parts",
+      description: "Calculate legal minimum start and end boundaries."
+    },
+    {
+      id: "dpCandidate",
+      label: "Candidates",
+      description: "Evaluate possible final partitions."
+    },
+    {
+      id: "dpStore",
+      label: "DP Update",
+      description: "Store the cheapest candidate."
+    },
+    {
+      id: "result",
+      label: "Result",
+      description: "Reconstruct the optimal partition."
+    }
   ],
+
   parse: parseInput,
   build: buildTrace,
+
   code,
   python,
-  inputLabel: 'JSON object with keys s and k (e.g. {"s": "abcac", "k": 2})',
-  url: "https://leetcode.com/problems/minimum-changes-to-make-k-semi-palindromes/",
-  complexity: "O(n^3) time and O(n*k) space for string length n, with the semi-palindrome cost computed per substring. The visualization caps s at 12 characters.",
+
+  inputLabel:
+    'JSON object with keys s and k (e.g. {"s":"abcac","k":2})',
+
+  url:
+    "https://leetcode.com/problems/minimum-changes-to-make-k-semi-palindromes/",
+
+  complexity:
+    "O(n^3 + k*n^2) time and O(n^2) auxiliary space. Detailed visualization is capped at 12 characters.",
+
   examples: [
-    { label: 'Six letters, two parts', input: '{"s":"xyzxzy","k":2}' },
-    { label: 'Eight letters, four parts', input: '{"s":"mnopqrst","k":4}' },
-    { label: 'Repeated letter, one part', input: '{"s":"rrrr","k":1}' },
-    { label: "Two letters, k = 1", input: "{\"s\":\"ab\",\"k\":1}" },
-    { label: "All letters equal, k = 2", input: "{\"s\":\"aaaa\",\"k\":2}" },
-    { label: "Longest string, k = 6", input: "{\"s\":\"abcabcabcabc\",\"k\":6}" },
-    { label: "Long run: 12 letters", input: "{\"s\":\"jiakmfcojvpf\",\"k\":4}" },
-  ],
+    {
+      label: "Two parts",
+      input: '{"s":"abcac","k":2}'
+    },
+    {
+      label: "One semi-palindrome",
+      input: '{"s":"abcc","k":1}'
+    },
+    {
+      label: "Repeated characters",
+      input: '{"s":"rrrr","k":1}'
+    },
+    {
+      label: "Two characters",
+      input: '{"s":"ab","k":1}'
+    },
+    {
+      label: "All characters equal",
+      input: '{"s":"aaaa","k":2}'
+    },
+    {
+      label: "Multiple divisors",
+      input: '{"s":"abcabcabcabc","k":4}'
+    },
+    {
+      label: "Longer example",
+      input: '{"s":"jiakmfcojvpf","k":4}'
+    }
+  ]
 };
 
-const cellText = value => (value === null || value === undefined ? "∞" : String(value));
-
 export default function Problem2911() {
-  return <AlgorithmWorkspace
-    definition={definition}
-    renderVisual={({ run, step }) => <>
-      <IndexedSequence label="s (the piece being priced runs from l to r)" length={run.input.s.length} valueAt={i => run.input.s[i]}
-        active={-1} roleAt={i => (step.start !== null && step.start !== undefined && i === step.start ? "l" : step.column > 0 && i === step.column - 1 ? "r" : step.start !== null && step.start !== undefined && i > step.start && i < step.column - 1 ? "inside" : "")} />
-      <RecurrenceGrid rowLabels={run.rowLabels} columnLabels={run.columnLabels}
-        row={step.row} column={step.column} label="DP table: parts (rows) by end index (columns)"
-        valueAt={(r, c) => cellText(step.table[r][c])}
-        roleAt={(r, c) => (r === step.row && c === step.column ? "current" : step.table[r][c] !== null ? "filled" : "")} />
-      <p>{step.message}</p>
-    </>}
-    renderReasoning={({ step }) => <p>{step.message}</p>} />;
+  return (
+    <AlgorithmWorkspace
+      definition={definition}
+
+      renderVisual={({ run, step }) => (
+        <MinimumChangesVisualizer
+          run={run}
+          step={step}
+        />
+      )}
+
+      renderReasoning={({ step }) => (
+        <div className="mc-reasoning">
+          <strong>What is happening?</strong>
+          <p>{step.message}</p>
+        </div>
+      )}
+    />
+  );
 }
+
+export const meta = {
+  number: "2911",
+  title: "Minimum Changes to Make K Semi-palindromes",
+  slug: "minimum-changes-to-make-k-semi-palindromes",
+  difficulty: "Hard",
+
+  tags: [
+    "String",
+    "Dynamic Programming",
+    "Partitioning",
+    "Recurrence"
+  ],
+
+  description:
+    "Visualize divisor-based semi-palindrome costs, three rotating recurrence buffers, offset comparisons and partition DP.",
+
+  accent: "#a78bfa"
+};
