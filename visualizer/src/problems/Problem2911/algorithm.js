@@ -211,10 +211,13 @@ export function buildTrace({ s, k }) {
     }
   });
 
+  // Python line (in PYTHON_SOURCE, counted from 1) that each phase executes, so the code panel can highlight it.
+  const PYTHON_LINE = { setup: 2, divisor: 12, blocks: 17, recurrence: 21, offset: 28, store: 38, rotate: 46, dpSetup: 52, dpPieces: 57, dpEnd: 64, dpCandidate: 68, dpStore: 76, dpSkip: 73, result: 80 };
   const emit = (phase, message, extra = {}) => {
     frames.push({
       phase,
       message,
+      pythonLine: PYTHON_LINE[phase],
       ...extra
     });
   };
