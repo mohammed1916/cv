@@ -131,7 +131,7 @@ export default function FloatingPanel({
   const handlePointerDown = (event) => {
     if (
       docked || isPinned ||
-      event.target.closest("button") ||
+      event.target.closest("button, input, select, textarea, label, a, [role='slider']") ||
       event.target.closest(".floating-panel-resizer")
     ) {
       return;
