@@ -1,4 +1,5 @@
 import "./HighFiveView.css";
+import IndexedSequence from "../../components/shared/IndexedSequence";
 
 const SLOTS = 5;
 
@@ -37,16 +38,13 @@ export default function HighFiveView({ run, step }) {
                 <span className="hf-lane__count">{kept.length} of {SLOTS} kept</span>
               </header>
               <div className="hf-slots">
-                {Array.from({ length: SLOTS }, (_, slot) => {
-                  const value = kept[slot];
-                  const isNew = isActive && value === current.score && step.decision && step.decision !== "skip";
-                  return (
-                    <div key={slot} className={`hf-slot${value === undefined ? " hf-slot--empty" : ""}${isNew ? " hf-slot--new" : ""}${slot === 0 && value !== undefined ? " hf-slot--min" : ""}`}>
-                      <span className="hf-slot__value">{value === undefined ? "open" : value}</span>
-                      {slot === 0 && value !== undefined && <span className="hf-slot__tag">smallest</span>}
-                    </div>
-                  );
-                })}
+                <IndexedSequence
+                  label={`Student ${id} kept scores`}
+                  length={SLOTS}
+                  valueAt={(slot) => (kept[slot] === undefined ? "open" : kept[slot])}
+                  active={isActive && step.decision && step.decision !== "skip" ? kept.indexOf(current.score) : -1}
+                  roleAt={(slot) => (slot === 0 && kept[0] !== undefined ? "smallest" : kept[slot] === undefined ? "empty" : "")}
+                />
               </div>
               <div className="hf-lane__status">
                 {isActive && step.decision ? (

@@ -1,4 +1,5 @@
 import './ShortestWayView.css'
+import IndexedSequence from '../../components/shared/IndexedSequence'
 
 const PALETTE = ['piece-a', 'piece-b', 'piece-c', 'piece-d']
 
@@ -10,35 +11,23 @@ export default function ShortestWayView({ run, step }) {
     number: index + 1,
     letters: target.split('').filter((_, position) => step.assign[position] === index + 1).join(''),
   }))
+  const targetNeed = step.phase !== 'done' && step.phase !== 'stuck' ? next : -1
   return (
     <figure className="sws" aria-label="Source and target letters matched piece by piece">
-      <div className="sws__row">
-        <span className="sws__label">source</span>
-        <div className="sws__tiles">
-          {source.split('').map((letter, index) => (
-            <span key={index} className={`sws__tile${index === step.scan ? ' sws__tile--scan' : ''}`}>
-              <b>{letter}</b><small>{index}</small>
-            </span>
-          ))}
-          {source.length === 0 && <span className="sws__empty">empty</span>}
-        </div>
-      </div>
-      <div className="sws__row">
-        <span className="sws__label">target</span>
-        <div className="sws__tiles">
-          {target.split('').map((letter, index) => {
-            const done = index < next
-            const need = index === next && step.phase !== 'done' && step.phase !== 'stuck'
-            const cls = done ? PALETTE[(step.assign[index] - 1) % PALETTE.length] : ''
-            return (
-              <span key={index} className={`sws__tile sws__tile--target ${cls}${need ? ' sws__tile--need' : ''}`}>
-                <b>{letter}</b><small>{need ? 'next' : index}</small>
-              </span>
-            )
-          })}
-          {target.length === 0 && <span className="sws__empty">empty target</span>}
-        </div>
-      </div>
+      <IndexedSequence
+        label="source"
+        length={source.length}
+        valueAt={index => source[index]}
+        active={step.scan}
+        roleAt={index => (index === step.scan ? 'scanning' : '')}
+      />
+      <IndexedSequence
+        label="target"
+        length={target.length}
+        valueAt={index => target[index]}
+        active={targetNeed}
+        roleAt={index => (index < next ? `piece ${step.assign[index]}` : index === targetNeed ? 'next' : '')}
+      />
       <div className="sws__pieces" aria-label="Pieces so far">
         {pieces.length === 0 && <span className="sws__chip">no pieces yet</span>}
         {pieces.map(piece => (

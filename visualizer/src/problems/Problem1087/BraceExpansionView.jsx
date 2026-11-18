@@ -1,4 +1,5 @@
 import "./BraceExpansionView.css";
+import IndexedSequence from "../../components/shared/IndexedSequence";
 
 // Draws the groups as columns of option chips, the prefix being built, and the result list.
 export default function BraceExpansionView({ run, step }) {
@@ -35,11 +36,13 @@ export default function BraceExpansionView({ run, step }) {
 
       <section aria-label="Prefix" className="brace-view__section">
         <h3 className="brace-view__heading">Prefix built so far</h3>
-        <div className="brace-view__prefix">
-          {prefix.length === 0 && <span className="brace-view__none">empty</span>}
-          {[...prefix].map((ch, i) => <span key={i} className="brace-view__tile">{ch}</span>)}
-          {step.option && <span className="brace-view__tile is-pending" aria-label="Pending letter">{step.option}</span>}
-        </div>
+        {prefix.length === 0 && !step.option && <span className="brace-view__none">empty</span>}
+        <IndexedSequence
+          label="Prefix letters"
+          length={prefix.length + (step.option ? 1 : 0)}
+          valueAt={(i) => (i < prefix.length ? prefix[i] : step.option)}
+          roleAt={(i) => (i < prefix.length ? "set" : "pending")}
+        />
       </section>
 
       <section aria-label="Results" className="brace-view__section">

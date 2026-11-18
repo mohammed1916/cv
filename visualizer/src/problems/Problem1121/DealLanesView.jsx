@@ -1,3 +1,5 @@
+import IndexedSequence from "../../components/shared/IndexedSequence";
+import FrequencyCountTable from "../../components/shared/FrequencyCountTable";
 import "./DealLanesView.css";
 
 // Top: the array as cards, with the frequency bars that set f.
@@ -6,42 +8,24 @@ export default function DealLanesView({ run, step }) {
   if (!run || !step) return null;
   const { nums, k } = run.input;
   const counts = step.counts || null;
-  const maxCount = counts ? Math.max(1, ...Object.values(counts)) : 0;
   const lanes = step.lanes || [];
   const dealtLane = step.lane;
   return (
     <div className="dl-view">
-      <section className="dl-section" aria-label="Input values">
-        <h3 className="dl-title">Sorted input</h3>
-        <ol className="dl-cards">
-          {nums.map((value, index) => {
-            const isDealt = step.dealt === index;
-            const isDealtDone = step.dealt > index;
-            return (
-              <li key={index} className={`dl-card${isDealt ? " dl-card--current" : ""}${isDealtDone ? " dl-card--done" : ""}`}>
-                <span className="dl-card__value">{value}</span>
-                <span className="dl-card__index">i={index}</span>
-              </li>
-            );
-          })}
-        </ol>
-      </section>
+      <IndexedSequence
+        label="Sorted input"
+        length={nums.length}
+        valueAt={(index) => String(nums[index])}
+        active={step.dealt >= 0 ? step.dealt : -1}
+        roleAt={(index) => (step.dealt > index ? "dealt" : "")}
+      />
 
       {counts && (
-        <section className="dl-section" aria-label="Value frequencies">
-          <h3 className="dl-title">Largest group f = {step.f}</h3>
-          <ul className="dl-bars">
-            {Object.entries(counts).map(([value, count]) => (
-              <li key={value} className={`dl-bar${count === step.f ? " dl-bar--max" : ""}`}>
-                <span className="dl-bar__label">{value}</span>
-                <span className="dl-bar__track" aria-hidden="true">
-                  <span className="dl-bar__fill" style={{ width: `${(count / maxCount) * 100}%` }} />
-                </span>
-                <span className="dl-bar__count">×{count}</span>
-              </li>
-            ))}
-          </ul>
-        </section>
+        <FrequencyCountTable
+          title={`Largest group f = ${step.f}`}
+          entries={Object.entries(counts)}
+          active={Object.keys(counts).find((value) => counts[value] === step.f) ?? null}
+        />
       )}
 
       {step.phase === "check" || step.phase === "count" || step.phase === "setup" ? (

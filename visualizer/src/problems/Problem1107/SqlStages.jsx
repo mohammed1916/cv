@@ -1,4 +1,6 @@
 // Stage pipeline plus the rows the query holds at this step. Rows marked kept/dropped are shaded.
+import FrequencyCountTable from '../../components/shared/FrequencyCountTable'
+
 export default function SqlStages({ phases, step, resultCount }) {
   const current = phases.findIndex(phase => phase.id === step.phase)
   return <section className="sql-stages" aria-label="SQL stages">
@@ -9,6 +11,9 @@ export default function SqlStages({ phases, step, resultCount }) {
         <strong>{phase.label}</strong><span>{phase.description}</span>
       </li>)}
     </ol>
+    {step.phase === 'group' || step.phase === 'done' ? <FrequencyCountTable title="New users per login day"
+      entries={step.rows.map(row => [row.login_date, row.user_count])} active={step.rows.length ? step.rows[step.rows.length - 1].login_date : null}
+      emptyText="No logins in the window yet." /> : null}
     <div className="sql-stages__table">
       <table>
         <caption>{step.phase === 'done' ? `Output: ${resultCount} rows` : `Rows at this stage: ${step.rows.length}`}</caption>
