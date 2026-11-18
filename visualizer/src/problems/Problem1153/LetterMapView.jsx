@@ -1,4 +1,5 @@
 import "./LetterMapView.css";
+import IndexedSequence from "../../components/shared/IndexedSequence";
 
 const ALPHABET = "abcdefghijklmnopqrstuvwxyz";
 
@@ -14,25 +15,21 @@ export default function LetterMapView({ run, step }) {
   const conflict = step.conflict;
   return (
     <div className="lm-view">
-      <div className="lm-pairs" role="table" aria-label="Positions of str1 and str2">
-        <div className="lm-row" role="row">
-          <span className="lm-tag" role="rowheader">str1</span>
-          {[...str1].map((letter, index) => (
-            <span key={index} role="cell" className={`lm-tile${index === step.index ? " lm-tile--current" : ""}${index < step.index ? " lm-tile--done" : ""}`}>{letter}</span>
-          ))}
-        </div>
-        <div className="lm-arrows" aria-hidden="true">
-          <span className="lm-tag" />
-          {[...str1].map((_, index) => (
-            <span key={index} className={`lm-arrow${index === step.index ? " lm-arrow--current" : ""}`}>{index < step.index || (index === step.index && step.phase === "map") ? "↓" : "·"}</span>
-          ))}
-        </div>
-        <div className="lm-row" role="row">
-          <span className="lm-tag" role="rowheader">str2</span>
-          {[...str2].map((letter, index) => (
-            <span key={index} role="cell" className={`lm-tile lm-tile--target${index === step.index ? " lm-tile--current" : ""}${conflict && conflict.to !== letter && index === step.index ? " lm-tile--bad" : ""}`}>{letter}</span>
-          ))}
-        </div>
+      <div className="lm-pairs">
+        <IndexedSequence
+          label="str1"
+          length={[...str1].length}
+          valueAt={(index) => str1[index]}
+          active={step.index ?? -1}
+          roleAt={(index) => (index < step.index ? 'done' : '')}
+        />
+        <IndexedSequence
+          label="str2"
+          length={[...str2].length}
+          valueAt={(index) => str2[index]}
+          active={step.index ?? -1}
+          roleAt={(index) => (conflict && index === step.index && conflict.to !== str2[index] ? 'conflict' : 'target')}
+        />
       </div>
 
       <div className="lm-map" aria-label="Letter mapping so far">

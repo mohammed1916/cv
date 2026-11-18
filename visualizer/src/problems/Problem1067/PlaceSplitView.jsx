@@ -1,3 +1,4 @@
+import AnswerRangeBar from '../../components/shared/AnswerRangeBar'
 import './PlaceSplitView.css'
 
 export default function PlaceSplitView({ run, step }) {
@@ -7,6 +8,7 @@ export default function PlaceSplitView({ run, step }) {
   return (
     <figure className="psv" aria-label="Place-by-place split of the bounds">
       <p className="psv__ask">Count digit <b>{d}</b> from <b>{low}</b> to <b>{high}</b>, as count({high}) minus count({low - 1}).</p>
+      <AnswerRangeBar title="Numbers counted" min={1} max={high} low={low} high={high} />
       <div className="psv__bounds">
         <div className={`psv__bound${step.bound === 'high' ? ' psv__bound--on' : ''}`}>
           <span>upper</span>
