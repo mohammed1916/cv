@@ -1,4 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import IndexedSequence from '../../components/shared/IndexedSequence'
 import { code, python, pythonLineMap, phases, parseInput, buildTrace } from './algorithm'
 
 const definition = {
@@ -29,22 +30,19 @@ export default function PopulatingNextRightPointersIIVisualizer() {
       renderVisual={({ run, step }) => {
         const snap = step.snapshot
         const queued = new Set(snap.queue)
-        return <section className="algorithm-sequence" aria-label="Tree levels">
-          <h3>Levels</h3>
+        const linkTextFor = id => {
+          const linkedTo = Object.prototype.hasOwnProperty.call(snap.next, id) ? snap.next[id] : undefined
+          const linkText = linkedTo === undefined ? 'not linked yet' : linkedTo === null ? 'next: null' : `next: ${run.input.nodes[linkedTo].value}`
+          return queued.has(id) ? `queued, ${linkText}` : linkText
+        }
+        return <>
           {run.input.levels.map((ids, depth) => (
-            <div key={depth} className="algorithm-sequence__cells" aria-label={`Level ${depth}`}>
-              {ids.map(id => {
-                const node = run.input.nodes[id]
-                const linkedTo = Object.prototype.hasOwnProperty.call(snap.next, id) ? snap.next[id] : undefined
-                const linkText = linkedTo === undefined ? 'not linked yet' : linkedTo === null ? 'next: null' : `next: ${run.input.nodes[linkedTo].value}`
-                return <div key={id} className={`algorithm-sequence__cell ${snap.current === id ? 'is-active' : ''}`}
-                  data-role={queued.has(id) ? 'queued' : ''} data-index={id}>
-                  <small>node {id}</small><strong>{node.value}</strong><span>{linkText}</span>
-                </div>
-              })}
-            </div>
+            <IndexedSequence key={depth} label={`Level ${depth}`} length={ids.length}
+              active={ids.indexOf(snap.current)}
+              valueAt={i => run.input.nodes[ids[i]].value}
+              roleAt={i => linkTextFor(ids[i])} />
           ))}
-        </section>
+        </>
       }}
       renderReasoning={({ step }) => <p>Nodes waiting in the queue: {step.snapshot.queue.length}.</p>}
     />
