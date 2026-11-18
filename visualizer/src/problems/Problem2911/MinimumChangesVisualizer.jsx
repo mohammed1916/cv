@@ -640,21 +640,11 @@ export default function MinimumChangesVisualizer({ run, step }) {
 
     return (
         <div className="mc-visualizer">
-            <header className="mc-hero">
-                <div>
-                    <span className="mc-eyebrow">LEETCODE 2911 · EXECUTION LAB</span>
-                    <h2>Minimum Changes to Make K Semi-palindromes</h2>
-                    <p>
-                        Follow the actual optimized algorithm: recurrence buffers,
-                        character comparisons and rolling DP.
-                    </p>
-                </div>
-                <div className="mc-input-badge">
+            <div className="mc-input-badge">
                     <span>INPUT</span>
                     <strong>{s}</strong>
                     <small>k = {k}</small>
                 </div>
-            </header>
 
             <div className="mc-step-message">
                 <div className="mc-step-indicator">
