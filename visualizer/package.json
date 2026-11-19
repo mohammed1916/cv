@@ -37,8 +37,9 @@
     "build:definition-groups": "node scripts/build-definition-groups.mjs",
     "prebuild:authored-routes": "npm run build:definition-groups",
     "predev": "npm run build:definition-groups",
-    "prebuild": "npm run build:definition-groups",
-    "prebuild:firebase": "npm run build:definition-groups"
+    "prebuild": "npm run build:definition-groups && npm run build:seo",
+    "prebuild:firebase": "npm run build:definition-groups && npm run build:seo",
+    "build:seo": "node scripts/build-seo-pages.mjs"
   },
   "dependencies": {
     "@ai-sdk/react": "^4.0.69",

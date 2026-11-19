@@ -520,6 +520,18 @@ body.chat-select-mode .trie-state svg g:hover {
   flex-shrink: 0;
 }
 
+/* The logo PNG has a baked-in checkerboard outside its circle (the file is RGB,
+   not RGBA). Clip to the circle so the page background shows through instead,
+   and drop the gradient tile, rounded square and glow behind the image. */
+img.brand-icon {
+  background: none;
+  border-radius: 50%;
+  box-shadow: none;
+  clip-path: circle(47% at 50% 50%);
+  object-fit: cover;
+  display: block;
+}
+
 .brand h1 {
   font-size: 2rem;
   font-weight: 800;
