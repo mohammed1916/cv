@@ -1,0 +1,111 @@
+.bs-tracker-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  gap: 1rem;
+}
+
+.bs-tracker-row .algorithm-sequence__cell[data-role="changed"] {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
+
+/* Solution 2 stage: input row with a sliding read pointer, and arrows for entering values. */
+.ms-stage { display: grid; gap: 14px; }
+.ms-input { position: relative; padding-top: 34px; }
+.ms-input__cells { display: flex; gap: 6px; flex-wrap: wrap; }
+.ms-cell {
+  min-width: 44px; padding: 6px 8px; text-align: center; border-radius: 8px;
+  border: 1px solid var(--border); background: var(--surface); font-variant-numeric: tabular-nums;
+  transition: background 300ms ease, border-color 300ms ease, transform 300ms ease;
+}
+.ms-cell small { display: block; font-size: 10px; color: var(--text-muted); }
+.ms-cell.is-read { border-color: var(--primary); background: color-mix(in srgb, var(--primary) 14%, var(--surface)); }
+.ms-cell.is-done { opacity: .55; }
+.ms-pointer {
+  position: absolute; top: 0; left: 0; width: 44px; display: flex; flex-direction: column; align-items: center;
+  font-size: 11px; font-weight: 700; color: var(--primary); pointer-events: none;
+  transition: transform 420ms cubic-bezier(.2,.8,.2,1);
+}
+.ms-pointer__arrow { font-size: 16px; line-height: 1; animation: ms-bob 1.2s ease-in-out infinite; }
+@keyframes ms-bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(3px); } }
+.ms-carry {
+  position: absolute; top: 0; width: 44px; text-align: center; font-weight: 700; font-size: 13px;
+  color: var(--primary); transition: transform 520ms cubic-bezier(.2,.8,.2,1), opacity 300ms ease;
+  pointer-events: none;
+}
+.ms-trackers { display: grid; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); gap: 14px; }
+.ms-slot-row { display: flex; align-items: center; gap: 8px; }
+.ms-slot {
+  min-width: 60px; padding: 8px 10px; text-align: center; border-radius: 10px;
+  border: 1px solid var(--border); background: var(--surface); font-variant-numeric: tabular-nums;
+  transition: transform 420ms cubic-bezier(.2,.8,.2,1), background 300ms ease, border-color 300ms ease;
+}
+.ms-slot.is-entering { border-color: var(--primary); background: color-mix(in srgb, var(--primary) 18%, var(--surface)); animation: ms-enter 520ms ease-out; }
+.ms-slot.is-shifted { transform: translateX(4px); }
+.ms-slot-tag { font-size: 10px; color: var(--text-muted); }
+.ms-arrow { font-size: 14px; color: var(--primary); animation: ms-nudge 900ms ease-in-out infinite; }
+.ms-arrow.is-idle { opacity: .25; animation: none; }
+@keyframes ms-nudge { 0%,100% { transform: translateX(0); } 50% { transform: translateX(3px); } }
+@keyframes ms-enter { from { transform: translateY(-10px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+.ms-caption { font-size: 12px; color: var(--text-muted); margin: 0; }
+@media (prefers-reduced-motion: reduce) {
+  .ms-pointer, .ms-carry, .ms-slot, .ms-cell { transition: none; }
+  .ms-pointer__arrow, .ms-arrow, .ms-slot.is-entering { animation: none; }
+}
+
+/* Span candidates: each kept span grows from its left edge, and the active row is emphasised. */
+.ms-spans { display: grid; gap: 10px; }
+.ms-span-row { padding: 8px 10px; border-radius: 10px; border: 1px solid var(--border); background: var(--surface); animation: ms-enter 420ms ease-out; }
+.ms-span-row.is-active { border-color: var(--primary); background: color-mix(in srgb, var(--primary) 12%, var(--surface)); }
+.ms-span-row__label { display: flex; justify-content: space-between; gap: 8px; font-size: 12px; color: var(--text-muted); }
+.ms-span-row__label strong { color: var(--text); font-variant-numeric: tabular-nums; }
+.ms-span-track { position: relative; height: 22px; margin-top: 22px; border-radius: 6px; background: color-mix(in srgb, var(--border) 45%, transparent); }
+.ms-span-bar { position: absolute; top: 4px; bottom: 4px; border-radius: 4px; background: var(--primary); transition: left 480ms cubic-bezier(.2,.8,.2,1), width 480ms cubic-bezier(.2,.8,.2,1); }
+.ms-span-marker { position: absolute; top: -18px; transform: translateX(-50%); font-size: 10px; color: var(--text-muted); transition: left 480ms ease; }
+.ms-span-marker.is-end { transform: translateX(-100%); }
+@media (prefers-reduced-motion: reduce) {
+  .ms-span-bar, .ms-span-marker, .ms-span-row { transition: none; animation: none; }
+}
+
+.ms-span-row.is-chosen { border-color: var(--primary); box-shadow: 0 0 0 2px color-mix(in srgb, var(--primary) 35%, transparent); }
+.ms-span-row.is-chosen .ms-span-bar { background: var(--primary); filter: brightness(1.15); }
+.ms-span-row.is-chosen .ms-span-row__label strong { color: var(--primary); }
+
+/* Magnitude pyramids: smallest group rises left to right, largest group is inverted. */
+.ms-pyramid__chart { display: flex; align-items: flex-end; justify-content: center; gap: 14px; height: 150px; padding-top: 28px; border-bottom: 2px solid var(--border); }
+.ms-pyramid__col { position: relative; flex: 1; max-width: 90px; height: 100%; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; }
+.ms-pyramid__bar { width: 100%; border-radius: 6px 6px 0 0; background: var(--primary); transition: height 480ms cubic-bezier(.2,.8,.2,1), background 300ms ease; }
+.ms-pyramid--largest .ms-pyramid__bar { background: color-mix(in srgb, var(--primary) 55%, var(--surface)); }
+.ms-pyramid__bar.is-entering { animation: ms-enter 520ms ease-out; }
+.ms-pyramid__value { position: absolute; top: 0; font-size: 12px; font-variant-numeric: tabular-nums; color: var(--text); }
+.ms-pyramid__value.is-entering { color: var(--primary); font-weight: 700; }
+.ms-pyramid__tag { margin-top: 4px; font-size: 10px; color: var(--text-muted); }
+.ms-pyramid__cmp { position: absolute; bottom: 100%; margin-bottom: 4px; font-size: 10px; white-space: nowrap; color: var(--text-muted); }
+.ms-pyramid__cmp.is-entering { color: var(--primary); font-weight: 700; }
+.ms-pyramid__axis { margin: 4px 0 0; font-size: 11px; color: var(--text-muted); text-align: center; }
+@media (prefers-reduced-motion: reduce) { .ms-pyramid__bar { transition: none; } .ms-pyramid__bar.is-entering { animation: none; } }
+
+/* Comparison: the two compared slots are linked by a flowing arrow; the returned minimum is shown as a chain. */
+.ms-trackers-wrap { position: relative; display: grid; gap: 6px; padding-top: 48px; }
+.ms-compare__overlay { position: absolute; top: 0; left: 0; pointer-events: none; overflow: visible; }
+.ms-pyramid__col.is-hot .ms-pyramid__bar { box-shadow: 0 0 0 2px var(--primary); }
+.ms-pyramid__col.is-hot .ms-pyramid__tag { color: var(--primary); font-weight: 700; }
+.ms-compare { display: grid; gap: 4px; }
+.ms-compare__svg { width: 100%; height: 56px; overflow: visible; }
+.ms-compare__flow { fill: none; stroke: var(--primary); stroke-width: 2; stroke-dasharray: 6 6; animation: ms-flow 900ms linear infinite; }
+.ms-compare__node { fill: var(--primary); }
+@keyframes ms-flow { to { stroke-dashoffset: -12; } }
+.ms-compare__text { margin: 0; font-size: 12px; color: var(--text-muted); font-variant-numeric: tabular-nums; }
+.ms-compare__chips { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.ms-compare__chip { padding: 3px 8px; border-radius: 8px; border: 1px solid var(--border); font-size: 12px; font-variant-numeric: tabular-nums; }
+.ms-compare__chip.is-winner { border-color: var(--primary); background: color-mix(in srgb, var(--primary) 16%, var(--surface)); font-weight: 700; }
+.ms-compare__arrow { color: var(--primary); animation: ms-nudge 900ms ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) { .ms-compare__flow, .ms-compare__arrow { animation: none; } }
+
+/* Page sizing: the workspace fills the viewport height, so its dock and shelf stay inside the page.
+   Problem 1606 gets this from its own stylesheet; 2567 must provide it here. */
+.ms-page { display: flex; flex-direction: column; height: 100%; min-height: 0; overflow: hidden; }
+.ms-page > .tab-switch { flex: 0 0 auto; }
+.ms-page > .algorithm-workspace { flex: 1; height: auto; min-height: 0; }
+.ms-page .algorithm-workspace { overflow: hidden; }
+.ms-page .algorithm-workspace__dock { min-height: 0; }
