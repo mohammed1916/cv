@@ -44,6 +44,14 @@ export const CODE_LINES = [
 export const code = CODE_LINES.map((text, index) => ({ line: index + 1, text }))
 export const python = CODE_LINES.join('\n') + '\n'
 
+// Rooted tree from a parent array, so a diagram can show the parents as they are at a given frame.
+export function treeFromParents(parents) {
+  const children = Array.from({ length: parents.length }, () => [])
+  for (let i = 1; i < parents.length; i++) children[parents[i]].push(i)
+  const build = id => ({ id, children: children[id].map(build) })
+  return build(0)
+}
+
 export function buildTrace({ parent, s }) {
   const n = s.length
   const frames = []
@@ -51,8 +59,10 @@ export function buildTrace({ parent, s }) {
   const nxt = Array(n).fill(-1)
   const size = Array(n).fill(1)
   const last = {}
+  const effective = [...parent]
+  const stack = [[0, false, -1]]
   const snapshot = () => Object.fromEntries(Object.entries(last).sort())
-  const push = (frame) => frames.push({ sizes: [...size], last: snapshot(), node: -1, y: -1, ...frame })
+  const push = (frame) => frames.push({ sizes: [...size], last: snapshot(), effective: [...effective], stack: stack.map(([node, exiting]) => ({ node, exiting })), node: -1, y: -1, ...frame })
 
   push({ pythonLine: 2, activeLine: 2, phase: 'start', message: `Start with ${n} nodes; the root is node 0.` })
   for (let i = 1; i < n; i++) {
@@ -62,7 +72,6 @@ export function buildTrace({ parent, s }) {
   }
   push({ pythonLine: 7, activeLine: 7, phase: 'start', message: 'Every subtree starts with size 1.' })
 
-  const stack = [[0, false, -1]]
   push({ pythonLine: 9, activeLine: 9, phase: 'start', node: 0, message: 'Push the root onto the stack.' })
   while (stack.length) {
     let [x, exiting, old] = stack.pop()
@@ -88,6 +97,7 @@ export function buildTrace({ parent, s }) {
     } else {
       push({ pythonLine: 11, activeLine: 11, phase: 'exit', node: x, message: `Leave node ${x}.` })
       last[c] = old
+      effective[x] = old !== -1 ? old : parent[x]
       push({ pythonLine: 22, activeLine: 22, phase: 'exit', node: x, y: old, message: old === -1
         ? `No earlier ${c} ancestor; remove ${c} from the path.`
         : `Restore the ${c} ancestor to node ${old}.` })

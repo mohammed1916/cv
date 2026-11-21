@@ -61,3 +61,15 @@ test('3331 every frame points at a real code line and the result is the last fra
   assert.deepEqual(run.frames.at(-1).sizes, run.result)
   assert.match(run.frames.at(-1).message, /Subtree sizes/)
 })
+
+test('3331 the current-parent view moves exactly the nodes whose nearest same-letter ancestor differs', () => {
+  const run = buildTrace({ parent: [-1, 0, 1, 1, 1, 1, 5, 3, 7, 0], s: 'abbebcbbbe' })
+  assert.deepEqual(run.frames.at(-1).effective, [-1, 0, 1, 1, 1, 1, 1, 1, 7, 0])
+  assert.deepEqual(run.result, [10, 8, 1, 1, 1, 1, 1, 2, 1, 1])
+})
+
+test('3331 the stack in each frame ends empty and holds exit markers while subtrees are open', () => {
+  const run = buildTrace({ parent: [-1, 0, 1, 1, 0], s: 'abaca' })
+  assert.deepEqual(run.frames.at(-1).stack, [])
+  assert.ok(run.frames.some(frame => frame.stack.some(item => item.exiting)))
+})

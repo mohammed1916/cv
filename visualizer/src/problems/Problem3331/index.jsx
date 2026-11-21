@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
-import RootedTreeDiagram from '../../components/shared/RootedTreeDiagram'
 import { buildTrace, parseInput, code, python } from './algorithm'
+import ReparentView from './ReparentView'
 import { sizeTutorial } from './tutorial'
 import { examples } from './presets.js'
 import './Subtree3331.css'
@@ -56,17 +56,22 @@ const definition = {
 }
 
 const LAST_LABEL = 'Nearest same-letter ancestor (last)'
+
 export default function SubtreeSizesAfterChanges() {
   return <AlgorithmWorkspace definition={definition} tutorial={sizeTutorial} narration="3331" renderVisual={({ run, step }) => {
-    const roles = {}
-    if (step.node >= 0) roles[step.node] = 'focus'
-    if (step.y >= 0 && step.phase !== 'exit') roles[step.y] = 'target'
     const entries = Object.entries(step.last ?? {})
     return <>
-      <RootedTreeDiagram root={run.root} roles={roles} title="Original tree (node ids)" />
+      <ReparentView root={run.root} parents={step.effective ?? run.input.parent} original={run.input.parent} focus={step.node} />
       <p aria-label={LAST_LABEL}>
         {entries.length ? entries.map(([letter, id]) => <span key={letter} className="problem-3331__chip">{letter} → node {id}</span>) : 'No letters on the path yet.'}
       </p>
+      <section aria-label="DFS stack">
+        <strong>Stack (top first)</strong>
+        {(step.stack ?? []).length
+          ? <ol className="problem-3331__stack">{[...step.stack].reverse().map((item, index) =>
+              <li key={index} className="problem-3331__chip">{item.exiting ? `exit ${item.node}` : `visit ${item.node}`}</li>)}</ol>
+          : <p>The stack is empty.</p>}
+      </section>
       <output aria-label="Subtree sizes">{`Sizes: [${(step.sizes ?? run.result).join(', ')}]`}</output>
     </>
   }} renderReasoning={({ step }) => <>
