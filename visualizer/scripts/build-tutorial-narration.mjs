@@ -10,8 +10,12 @@ import { examples as examples1606 } from '../src/problems/Problem1606/presets.js
 import * as p100 from '../src/problems/Problem100/algorithm.js';
 import { sameTreeTutorial } from '../src/problems/Problem100/tutorial.js';
 import { getExamples } from '../src/config/examplesRegistry.js';
+import * as p3331 from '../src/problems/Problem3331/algorithm.js';
+import { sizeTutorial } from '../src/problems/Problem3331/tutorial.js';
+import { examples as examples3331 } from '../src/problems/Problem3331/presets.js';
 
 const routes = [
+  { id: '3331', build: p3331.buildTrace, parse: p3331.parseInput, tutorial: sizeTutorial, examples: examples3331 },
   { id: '1606-bisect', build: p1606.buildTrace, parse: p1606.parseInput, tutorial: serverTutorial, examples: examples1606 },
   { id: '1606-virtual', build: p1606.buildAlternativeTrace, parse: p1606.parseInput, tutorial: serverTutorial, examples: examples1606 },
   {

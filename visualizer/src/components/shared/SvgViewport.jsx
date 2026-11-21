@@ -30,6 +30,8 @@ export default function SvgViewport({
   children,
 }) {
   const [scale, setScale] = useState(1)
+  const scaleRef = useRef(scale)
+  scaleRef.current = scale
   const selecting = useOptionalChatContext()?.selectMode ?? false
   const [offset, setOffset] = useState({ x: 0, y: 0 })
   // Mirrored in state purely so the grabbing cursor re-renders; the ref holds
@@ -69,9 +71,12 @@ export default function SvgViewport({
     if (!host) return
 
     const onWheel = (e) => {
+      // At a zoom limit the wheel must scroll the page, not stay captured by the diagram.
+      const zoomingIn = e.deltaY < 0
+      if ((zoomingIn && scaleRef.current >= maxScale) || (!zoomingIn && scaleRef.current <= minScale)) return
       e.preventDefault()
       e.stopPropagation()
-      setScale((s) => clampScale(s * (e.deltaY < 0 ? 1.12 : 1 / 1.12)))
+      setScale((s) => clampScale(s * (zoomingIn ? 1.12 : 1 / 1.12)))
     }
 
     host.addEventListener('wheel', onWheel, { passive: false })
@@ -143,6 +148,8 @@ export default function SvgViewport({
           className="svg-viewport-svg"
           viewBox={`${vbX} ${vbY} ${vbW} ${vbH}`}
           preserveAspectRatio="xMidYMid meet"
+          // A small drawing keeps its natural size instead of being stretched to fill the panel.
+          style={{ maxWidth: width }}
         >
           {children}
         </svg>

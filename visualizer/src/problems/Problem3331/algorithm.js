@@ -1,3 +1,5 @@
+// Iterative DFS with child lists. Entering a node records it as the latest ancestor of its letter;
+// leaving it restores the previous ancestor and adds its subtree size to the effective parent.
 export function parseInput(text) {
   const input = JSON.parse(text)
   if (!input || typeof input !== 'object' || Array.isArray(input)) throw new Error('Use an object with parent and s.')
@@ -11,60 +13,95 @@ export function parseInput(text) {
   return { parent, s }
 }
 
+export const CODE_LINES = [
+  'def find_subtree_sizes(parent, s):',
+  '    n = len(s)',
+  '    head, nxt = [-1] * n, [-1] * n',
+  '    for i in range(1, n):',
+  '        nxt[i] = head[parent[i]]',
+  '        head[parent[i]] = i',
+  '    size = [1] * n',
+  '    last = {}',
+  '    stack = [(0, False, -1)]',
+  '    while stack:',
+  '        x, exiting, old = stack.pop()',
+  '        c = s[x]',
+  '        if not exiting:',
+  '            old = last.get(c, -1)',
+  '            last[c] = x',
+  '            stack.append((x, True, old))',
+  '            child = head[x]',
+  '            while child != -1:',
+  '                stack.append((child, False, -1))',
+  '                child = nxt[child]',
+  '        else:',
+  '            last[c] = old',
+  '            if x:',
+  '                p = old if old != -1 else parent[x]',
+  '                size[p] += size[x]',
+  '    return size',
+]
+export const code = CODE_LINES.map((text, index) => ({ line: index + 1, text }))
+export const python = CODE_LINES.join('\n') + '\n'
+
 export function buildTrace({ parent, s }) {
-  const n = parent.length
-  const newParent = [...parent]
+  const n = s.length
   const frames = []
-  frames.push({ pythonLine: 3, phase: 'start', activeLine: L('set new parent of every node'), node: -1, y: -1, sizes: null, message: 'Start with the original parents.' })
-  for (let x = 1; x < n; x++) {
-    let y = parent[x]
-    frames.push({ pythonLine: 5, phase: 'climb', activeLine: L('walk up from the original parent'), node: x, y, sizes: null, message: `Node ${x} (letter ${s[x]}) climbs from its parent ${y}.` })
-    while (y !== -1) {
-      if (s[y] === s[x]) {
-        newParent[x] = y
-        frames.push({ pythonLine: 8, phase: 'change', activeLine: L('if an ancestor y has the same letter'), node: x, y, sizes: null, message: `Node ${x} moves under ancestor ${y}, which has the same letter.` })
-        break
+  const head = Array(n).fill(-1)
+  const nxt = Array(n).fill(-1)
+  const size = Array(n).fill(1)
+  const last = {}
+  const snapshot = () => Object.fromEntries(Object.entries(last).sort())
+  const push = (frame) => frames.push({ sizes: [...size], last: snapshot(), node: -1, y: -1, ...frame })
+
+  push({ pythonLine: 2, activeLine: 2, phase: 'start', message: `Start with ${n} nodes; the root is node 0.` })
+  for (let i = 1; i < n; i++) {
+    nxt[i] = head[parent[i]]
+    head[parent[i]] = i
+    push({ pythonLine: 5, activeLine: 5, phase: 'build', node: i, y: parent[i], message: `Link node ${i} as a child of ${parent[i]}.` })
+  }
+  push({ pythonLine: 7, activeLine: 7, phase: 'start', message: 'Every subtree starts with size 1.' })
+
+  const stack = [[0, false, -1]]
+  push({ pythonLine: 9, activeLine: 9, phase: 'start', node: 0, message: 'Push the root onto the stack.' })
+  while (stack.length) {
+    let [x, exiting, old] = stack.pop()
+    const c = s[x]
+    if (!exiting) {
+      push({ pythonLine: 11, activeLine: 11, phase: 'enter', node: x, message: `Enter node ${x} (letter ${c}).` })
+      old = last[c] ?? -1
+      push({ pythonLine: 14, activeLine: 14, phase: 'enter', node: x, y: old, message: old === -1
+        ? `No ancestor with letter ${c} yet.`
+        : `Remember the previous ${c} ancestor, node ${old}.` })
+      last[c] = x
+      push({ pythonLine: 15, activeLine: 15, phase: 'link', node: x, y: x, message: `Node ${x} is now the latest ${c} on this path.` })
+      stack.push([x, true, old])
+      push({ pythonLine: 16, activeLine: 16, phase: 'children', node: x, message: `Push the exit marker for node ${x}, so it runs after its subtree.` })
+      const kids = []
+      for (let child = head[x]; child !== -1; child = nxt[child]) {
+        stack.push([child, false, -1])
+        kids.push(child)
       }
-      y = parent[y]
-      if (y !== -1) frames.push({ pythonLine: 10, phase: 'climb', activeLine: L('walk up from the original parent'), node: x, y, sizes: null, message: `Letter ${s[y === -1 ? 0 : y]} differs; continue upward.` })
+      push({ pythonLine: 18, activeLine: 18, phase: 'children', node: x, message: kids.length
+        ? `Push children ${kids.join(', ')} to visit next.`
+        : `Node ${x} is a leaf; nothing to push.` })
+    } else {
+      push({ pythonLine: 11, activeLine: 11, phase: 'exit', node: x, message: `Leave node ${x}.` })
+      last[c] = old
+      push({ pythonLine: 22, activeLine: 22, phase: 'exit', node: x, y: old, message: old === -1
+        ? `No earlier ${c} ancestor; remove ${c} from the path.`
+        : `Restore the ${c} ancestor to node ${old}.` })
+      if (x) {
+        const p = old !== -1 ? old : parent[x]
+        size[p] += size[x]
+        push({ pythonLine: 25, activeLine: 25, phase: 'merge', node: x, y: p, message: `Add subtree ${x} (size ${size[x]}) to node ${p}${old !== -1 ? ', its nearest same-letter ancestor' : ', its original parent'}.` })
+      }
     }
   }
-  const size = Array(n).fill(1)
-  frames.push({ pythonLine: 11, phase: 'size', activeLine: L('set size of every node to 1'), node: -1, y: -1, sizes: [...size], message: 'Every node starts with size 1.' })
-  for (let x = n - 1; x >= 1; x--) {
-    size[newParent[x]] += size[x]
-    frames.push({ pythonLine: 13, phase: 'size', activeLine: L('add size of x'), node: x, y: newParent[x], sizes: [...size], message: `Add subtree ${x} (size ${size[x]}) to node ${newParent[x]}.` })
-  }
-  frames.push({ pythonLine: 14, phase: 'done', activeLine: L('return sizes'), node: -1, y: -1, sizes: [...size], message: `Subtree sizes: [${size.join(', ')}].` })
+  push({ pythonLine: 26, activeLine: 26, phase: 'done', message: `Subtree sizes: [${size.join(', ')}].` })
+
   const children = Array.from({ length: n }, () => [])
   for (let i = 1; i < n; i++) children[parent[i]].push(i)
   const tree = id => ({ id, children: children[id].map(tree) })
   return { input: { parent, s }, root: tree(0), result: size, frames }
 }
-
-export const code = `subtree sizes after moving each node under its nearest same-letter ancestor
-  set new parent of every node to its original parent
-  for each node x from 1 to n minus 1
-    walk up from the original parent of x through the ancestors
-    if an ancestor y has the same letter as x then set the new parent of x to y and stop walking
-  set size of every node to 1
-  for each node x from n minus 1 down to 1
-    add size of x to the size of its new parent
-  return sizes`.split('\n').map((text, index) => ({ line: index + 1, text }))
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
-
-export const python = `def subtree_sizes_after_changes(parent, s):
-    n = len(parent)
-    new_parent = list(parent)
-    for x in range(1, n):
-        y = parent[x]
-        while y != -1:
-            if s[y] == s[x]:
-                new_parent[x] = y
-                break
-            y = parent[y]
-    size = [1] * n
-    for x in range(n - 1, 0, -1):
-        size[new_parent[x]] += size[x]
-    return size
-`

@@ -9,6 +9,12 @@
 .algorithm-workspace__phases { display: flex; flex-wrap: wrap; gap: 5px; width: 100%; }
 .algorithm-workspace__playback button { padding: 6px 10px; border: 1px solid var(--border); border-radius: 6px; background: var(--surface2); color: var(--text); cursor: pointer; }
 .algorithm-workspace__playback button:disabled { opacity: .5; cursor: default; }
+.algorithm-workspace__goal { padding: 10px 12px; border: 1px solid var(--border); border-radius: 10px; background: var(--surface); }
+.algorithm-workspace__goal p { margin: 0; }
+.algorithm-workspace__goal ul { margin: 8px 0 0; padding-inline-start: 20px; }
+.algorithm-workspace__goal > p + * { margin-top: 8px; }
+.goal-diagram { display: block; max-width: 100%; height: auto; margin: 12px 0 6px; }
+.algorithm-workspace__tabs { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
 .algorithm-workspace__narration { display: inline-flex; align-items: center; gap: 6px; padding: 4px 8px; }
 .algorithm-workspace__playback input[type="range"] { margin-inline: 8px; vertical-align: middle; }
 .algorithm-workspace__phases [aria-current="step"] { outline: 2px solid var(--primary); font-weight: 700; }

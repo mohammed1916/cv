@@ -33,6 +33,7 @@ export default function AlgorithmWorkspace({ definition, renderVisual, renderRea
   const [tutorialDivs, setTutorialDivs] = useState(null)
   const [tutorialMode, setTutorialMode] = useState('off')
   const [floating, setFloating] = useState(true)
+  const [goalTab, setGoalTab] = useState('visual')
   // Narration: pre-recorded clips per fixed preset. Clips drive the advance; a missing clip uses the normal timing.
   const [presetIndex, setPresetIndex] = useState(() => definition.examples.findIndex(example => example.input === definition.examples[0].input))
   const [narrationOn, setNarrationOn] = useState(false)
@@ -174,15 +175,30 @@ export default function AlgorithmWorkspace({ definition, renderVisual, renderRea
     </label>}
     <span>{run ? `${position + 1} / ${total} ${directed ? 'scenes' : 'frames'}` : 'No valid input'}</span>
   </div>
+  // The one-line goal always shows; the Goal tab expands the full requirement beside the mode switch.
+  const goal = definition.goal && <section className="algorithm-workspace__goal" aria-label="Problem goal">
+    <p><strong>Goal:</strong> {definition.goal.summary}</p>
+    {goalTab === 'goal' && <>
+      {definition.goalDiagram}
+      <ul>{definition.goal.requirement.map(item => <li key={item}>{item}</li>)}</ul>
+      <p><strong>Worked example:</strong> {definition.goal.example}</p>
+    </>}
+  </section>
+  const hideWorkspace = goalTab === 'goal' && !directed
   return <div className={`algorithm-workspace ${directed ? 'algorithm-workspace--tutorial' : ''}`}>
-    {supportsTutorial && <TabSwitch label="Tutorial mode" className="tutorial-mode-switch" value={tutorialMode} onChange={changeMode}
-      options={[{value:'off',label:'Full view'},{value:'steps',label:'Step-by-step'},{value:'why',label:'Reason-first'}]} />}
+    {goal}
+    <div className="algorithm-workspace__tabs">
+      {supportsTutorial && <TabSwitch label="Tutorial mode" className="tutorial-mode-switch" value={tutorialMode} onChange={changeMode}
+        options={[{value:'off',label:'Full view'},{value:'steps',label:'Step-by-step'},{value:'why',label:'Reason-first'}]} />}
+      {definition.goal && <TabSwitch label="Problem goal" className="goal-tab-switch" value={goalTab} onChange={setGoalTab}
+        options={[{value:'visual',label:'Visualization'},{value:'goal',label:'Goal'}]} />}
+    </div>
     {tutorial && !adaptive && <div className="algorithm-workspace__dock" style={!directed ? {display:'none'} : undefined}>
       <LuminoDockPanel panels={TUTORIAL_PANELS} initialCollapsed={['input']} onPanelReady={setTutorialDivs} />
       {Object.entries(tutorialViews).map(([id, content]) => tutorialDivs?.[id]
         ? createPortal(<div className="algorithm-workspace__panel">{content}</div>, tutorialDivs[id], id) : null)}
     </div>}
-    <div className="algorithm-workspace__dock" style={directed && !adaptive ? {display:'none'} : undefined}>
+    <div className="algorithm-workspace__dock" style={directed && !adaptive || hideWorkspace ? {display:'none'} : undefined}>
       <LuminoDockPanel panels={PANELS} focusPanel={adaptive && directed ? "visual" : null} onPanelReady={setPanelDivs} />
       {Object.entries({...views, input: inputPanel}).map(([id, content]) => panelDivs?.[id]
         ? createPortal(<div className={`algorithm-workspace__panel${id === "visual" ? " is-visual" : ""}`}>{content}</div>, panelDivs[id], id) : null)}

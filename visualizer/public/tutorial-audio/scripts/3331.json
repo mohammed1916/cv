@@ -1,0 +1,5394 @@
+{
+  "route": "3331",
+  "presets": [
+    {
+      "presetIndex": 0,
+      "label": "Mixed letters",
+      "input": "{\"parent\":[-1,0,1],\"s\":\"aba\"}",
+      "scenes": [
+        {
+          "key": "0-reason",
+          "kind": "reason",
+          "text": "Every node should end up under its nearest ancestor with the same letter. Walking the tree in DFS order gives those ancestors, so we track the latest node for each letter."
+        },
+        {
+          "key": "0-code",
+          "kind": "code",
+          "text": "Next, this line runs: Start with 3 nodes; the root is node 0."
+        },
+        {
+          "key": "0-impact",
+          "kind": "impact",
+          "text": "Start with 3 nodes; the root is node 0."
+        },
+        {
+          "key": "1-reason",
+          "kind": "reason",
+          "text": "Child lists are built from the parent array first, so the DFS can visit every child of a node."
+        },
+        {
+          "key": "1-code",
+          "kind": "code",
+          "text": "Next, this line runs: Link node 1 as a child of 0."
+        },
+        {
+          "key": "1-impact",
+          "kind": "impact",
+          "text": "Link node 1 as a child of 0."
+        },
+        {
+          "key": "2-reason",
+          "kind": "reason",
+          "text": "Child lists are built from the parent array first, so the DFS can visit every child of a node."
+        },
+        {
+          "key": "2-code",
+          "kind": "code",
+          "text": "Next, this line runs: Link node 2 as a child of 1."
+        },
+        {
+          "key": "2-impact",
+          "kind": "impact",
+          "text": "Link node 2 as a child of 1."
+        },
+        {
+          "key": "3-reason",
+          "kind": "reason",
+          "text": "Every node should end up under its nearest ancestor with the same letter. Walking the tree in DFS order gives those ancestors, so we track the latest node for each letter."
+        },
+        {
+          "key": "3-code",
+          "kind": "code",
+          "text": "Next, this line runs: Every subtree starts with size 1."
+        },
+        {
+          "key": "3-impact",
+          "kind": "impact",
+          "text": "Every subtree starts with size 1."
+        },
+        {
+          "key": "4-reason",
+          "kind": "reason",
+          "text": "Every node should end up under its nearest ancestor with the same letter. Walking the tree in DFS order gives those ancestors, so we track the latest node for each letter."
+        },
+        {
+          "key": "4-code",
+          "kind": "code",
+          "text": "Next, this line runs: Push the root onto the stack."
+        },
+        {
+          "key": "4-impact",
+          "kind": "impact",
+          "text": "Push the root onto the stack."
+        },
+        {
+          "key": "5-reason",
+          "kind": "reason",
+          "text": "Entering a node means its ancestors are the nodes already on the path. The latest same-letter entry is the candidate new parent, so we save it before overwriting."
+        },
+        {
+          "key": "5-code",
+          "kind": "code",
+          "text": "Next, this line runs: Enter node 0 (letter a)."
+        },
+        {
+          "key": "5-impact",
+          "kind": "impact",
+          "text": "Enter node 0 (letter a)."
+        },
+        {
+          "key": "6-reason",
+          "kind": "reason",
+          "text": "Entering a node means its ancestors are the nodes already on the path. The latest same-letter entry is the candidate new parent, so we save it before overwriting."
+        },
+        {
+          "key": "6-code",
+          "kind": "code",
+          "text": "Next, this line runs: No ancestor with letter a yet."
+        },
+        {
+          "key": "6-impact",
+          "kind": "impact",
+          "text": "No ancestor with letter a yet."
+        },
+        {
+          "key": "7-reason",
+          "kind": "reason",
+          "text": "Recording this node as the latest one with its letter lets every node in its subtree find it as the nearest same-letter ancestor."
+        },
+        {
+          "key": "7-code",
+          "kind": "code",
+          "text": "Next, this line runs: Node 0 is now the latest a on this path."
+        },
+        {
+          "key": "7-impact",
+          "kind": "impact",
+          "text": "Node 0 is now the latest a on this path."
+        },
+        {
+          "key": "8-reason",
+          "kind": "reason",
+          "text": "The exit marker is pushed before the children, so the node is finished only after its whole subtree has been processed."
+        },
+        {
+          "key": "8-code",
+          "kind": "code",
+          "text": "Next, this line runs: Push the exit marker for node 0, so it runs after its subtree."
+        },
+        {
+          "key": "8-impact",
+          "kind": "impact",
+          "text": "Push the exit marker for node 0, so it runs after its subtree."
+        },
+        {
+          "key": "9-reason",
+          "kind": "reason",
+          "text": "The exit marker is pushed before the children, so the node is finished only after its whole subtree has been processed."
+        },
+        {
+          "key": "9-code",
+          "kind": "code",
+          "text": "Next, this line runs: Push children 1 to visit next."
+        },
+        {
+          "key": "9-impact",
+          "kind": "impact",
+          "text": "Push children 1 to visit next."
+        },
+        {
+          "key": "10-reason",
+          "kind": "reason",
+          "text": "Entering a node means its ancestors are the nodes already on the path. The latest same-letter entry is the candidate new parent, so we save it before overwriting."
+        },
+        {
+          "key": "10-code",
+          "kind": "code",
+          "text": "Next, this line runs: Enter node 1 (letter b)."
+        },
+        {
+          "key": "10-impact",
+          "kind": "impact",
+          "text": "Enter node 1 (letter b)."
+        },
+        {
+          "key": "11-reason",
+          "kind": "reason",
+          "text": "Entering a node means its ancestors are the nodes already on the path. The latest same-letter entry is the candidate new parent, so we save it before overwriting."
+        },
+        {
+          "key": "11-code",
+          "kind": "code",
+          "text": "Next, this line runs: No ancestor with letter b yet."
+        },
+        {
+          "key": "11-impact",
+          "kind": "impact",
+          "text": "No ancestor with letter b yet."
+        },
+        {
+          "key": "12-reason",
+          "kind": "reason",
+          "text": "Recording this node as the latest one with its letter lets every node in its subtree find it as the nearest same-letter ancestor."
+        },
+        {
+          "key": "12-code",
+          "kind": "code",
+          "text": "Next, this line runs: Node 1 is now the latest b on this path."
+        },
+        {
+          "key": "12-impact",
+          "kind": "impact",
+          "text": "Node 1 is now the latest b on this path."
+        },
+        {
+          "key": "13-reason",
+          "kind": "reason",
+          "text": "The exit marker is pushed before the children, so the node is finished only after its whole subtree has been processed."
+        },
+        {
+          "key": "13-code",
+          "kind": "code",
+          "text": "Next, this line runs: Push the exit marker for node 1, so it runs after its subtree."
+        },
+        {
+          "key": "13-impact",
+          "kind": "impact",
+          "text": "Push the exit marker for node 1, so it runs after its subtree."
+        },
+        {
+          "key": "14-reason",
+          "kind": "reason",
+          "text": "The exit marker is pushed before the children, so the node is finished only after its whole subtree has been processed."
+        },
+        {
+          "key": "14-code",
+          "kind": "code",
+          "text": "Next, this line runs: Push children 2 to visit next."
+        },
+        {
+          "key": "14-impact",
+          "kind": "impact",
+          "text": "Push children 2 to visit next."
+        },
+        {
+          "key": "15-reason",
+          "kind": "reason",
+          "text": "Entering a node means its ancestors are the nodes already on the path. The latest same-letter entry is the candidate new parent, so we save it before overwriting."
+        },
+        {
+          "key": "15-code",
+          "kind": "code",
+          "text": "Next, this line runs: Enter node 2 (letter a)."
+        },
+        {
+          "key": "15-impact",
+          "kind": "impact",
+          "text": "Enter node 2 (letter a)."
+        },
+        {
+          "key": "16-reason",
+          "kind": "reason",
+          "text": "Entering a node means its ancestors are the nodes already on the path. The latest same-letter entry is the candidate new parent, so we save it before overwriting."
+        },
+        {
+          "key": "16-code",
+          "kind": "code",
+          "text": "Next, this line runs: Remember the previous a ancestor, node 0."
+        },
+        {
+          "key": "16-impact",
+          "kind": "impact",
+          "text": "Remember the previous a ancestor, node 0."
+        },
+        {
+          "key": "17-reason",
+          "kind": "reason",
+          "text": "Recording this node as the latest one with its letter lets every node in its subtree find it as the nearest same-letter ancestor."
+        },
+        {
+          "key": "17-code",
+          "kind": "code",
+          "text": "Next, this line runs: Node 2 is now the latest a on this path."
+        },
+        {
+          "key": "17-impact",
+          "kind": "impact",
+          "text": "Node 2 is now the latest a on this path."
+        },
+        {
+          "key": "18-reason",
+          "kind": "reason",
+          "text": "The exit marker is pushed before the children, so the node is finished only after its whole subtree has been processed."
+        },
+        {
+          "key": "18-code",
+          "kind": "code",
+          "text": "Next, this line runs: Push the exit marker for node 2, so it runs after its subtree."
+        },
+        {
+          "key": "18-impact",
+          "kind": "impact",
+          "text": "Push the exit marker for node 2, so it runs after its subtree."
+        },
+        {
+          "key": "19-reason",
+          "kind": "reason",
+          "text": "The exit marker is pushed before the children, so the node is finished only after its whole subtree has been processed."
+        },
+        {
+          "key": "19-code",
+          "kind": "code",
+          "text": "Next, this line runs: Node 2 is a leaf; nothing to push."
+        },
+        {
+          "key": "19-impact",
+          "kind": "impact",
+          "text": "Node 2 is a leaf; nothing to push."
+        },
+        {
+          "key": "20-reason",
+          "kind": "reason",
+          "text": "Leaving a node removes its letter from the path, so siblings and later branches do not see it as an ancestor."
+        },
+        {
+          "key": "20-code",
+          "kind": "code",
+          "text": "Next, this line runs: Leave node 2."
+        },
+        {
+          "key": "20-impact",
+          "kind": "impact",
+          "text": "Leave node 2."
+        },
+        {
+          "key": "21-reason",
+          "kind": "reason",
+          "text": "Leaving a node removes its letter from the path, so siblings and later branches do not see it as an ancestor."
+        },
+        {
+          "key": "21-code",
+          "kind": "code",
+          "text": "Next, this line runs: Restore the a ancestor to node 0."
+        },
+        {
+          "key": "21-impact",
+          "kind": "impact",
+          "text": "Restore the a ancestor to node 0."
+        },
+        {
+          "key": "22-reason",
+          "kind": "reason",
+          "text": "A finished subtree is added to its effective parent: the matching ancestor if one exists, otherwise the original parent."
+        },
+        {
+          "key": "22-code",
+          "kind": "code",
+          "text": "Next, this line runs: Add subtree 2 (size 1) to node 0, its nearest same-letter ancestor."
+        },
+        {
+          "key": "22-impact",
+          "kind": "impact",
+          "text": "Add subtree 2 (size 1) to node 0, its nearest same-letter ancestor."
+        },
+        {
+          "key": "23-reason",
+          "kind": "reason",
+          "text": "Leaving a node removes its letter from the path, so siblings and later branches do not see it as an ancestor."
+        },
+        {
+          "key": "23-code",
+          "kind": "code",
+          "text": "Next, this line runs: Leave node 1."
+        },
+        {
+          "key": "23-impact",
+          "kind": "impact",
+          "text": "Leave node 1."
+        },
+        {
+          "key": "24-reason",
+          "kind": "reason",
+          "text": "Leaving a node removes its letter from the path, so siblings and later branches do not see it as an ancestor."
+        },
+        {
+          "key": "24-code",
+          "kind": "code",
+          "text": "Next, this line runs: No earlier b ancestor; remove b from the path."
+        },
+        {
+          "key": "24-impact",
+          "kind": "impact",
+          "text": "No earlier b ancestor; remove b from the path."
+        },
+        {
+          "key": "25-reason",
+          "kind": "reason",
+          "text": "A finished subtree is added to its effective parent: the matching ancestor if one exists, otherwise the original parent."
+        },
+        {
+          "key": "25-code",
+          "kind": "code",
+          "text": "Next, this line runs: Add subtree 1 (size 1) to node 0, its original parent."
+        },
+        {
+          "key": "25-impact",
+          "kind": "impact",
+          "text": "Add subtree 1 (size 1) to node 0, its original parent."
+        },
+        {
+          "key": "26-reason",
+          "kind": "reason",
+          "text": "Leaving a node removes its letter from the path, so siblings and later branches do not see it as an ancestor."
+        },
+        {
+          "key": "26-code",
+          "kind": "code",
+          "text": "Next, this line runs: Leave node 0."
+        },
+        {
+          "key": "26-impact",
+          "kind": "impact",
+          "text": "Leave node 0."
+        },
+        {
+          "key": "27-reason",
+          "kind": "reason",
+          "text": "Leaving a node removes its letter from the path, so siblings and later branches do not see it as an ancestor."
+        },
+        {
+          "key": "27-code",
+          "kind": "code",
+          "text": "Next, this line runs: No earlier a ancestor; remove a from the path."
+        },
+        {
+          "key": "27-impact",
+          "kind": "impact",
+          "text": "No earlier a ancestor; remove a from the path."
+        },
+        {
+          "key": "28-reason",
+          "kind": "reason",
+          "text": "Every subtree has been added to its effective parent, so the sizes are final."
+        },
+        {
+          "key": "28-code",
+          "kind": "code",
+          "text": "Next, this line runs: Subtree sizes: [3, 1, 1]."
+        },
+        {
+          "key": "28-impact",
+          "kind": "impact",
+          "text": "Subtree sizes: [3, 1, 1]."
+        }
+      ]
+    },
+    {
+      "presetIndex": 1,
+      "label": "Chain, same letter",
+      "input": "{\"parent\":[-1,0,1,2],\"s\":\"aaaa\"}",
+      "scenes": [
+        {
+          "key": "0-reason",
+          "kind": "reason",
+          "text": "Every node should end up under its nearest ancestor with the same letter. Walking the tree in DFS order gives those ancestors, so we track the latest node for each letter."
+        },
+        {
+          "key": "0-code",
+          "kind": "code",
+          "text": "Next, this line runs: Start with 4 nodes; the root is node 0."
+        },
+        {
+          "key": "0-impact",
+          "kind": "impact",
+          "text": "Start with 4 nodes; the root is node 0."
+        },
+        {
+          "key": "1-reason",
+          "kind": "reason",
+          "text": "Child lists are built from the parent array first, so the DFS can visit every child of a node."
+        },
+        {
+          "key": "1-code",
+          "kind": "code",
+          "text": "Next, this line runs: Link node 1 as a child of 0."
+        },
+        {
+          "key": "1-impact",
+          "kind": "impact",
+          "text": "Link node 1 as a child of 0."
+        },
+        {
+          "key": "2-reason",
+          "kind": "reason",
+          "text": "Child lists are built from the parent array first, so the DFS can visit every child of a node."
+        },
+        {
+          "key": "2-code",
+          "kind": "code",
+          "text": "Next, this line runs: Link node 2 as a child of 1."
+        },
+        {
+          "key": "2-impact",
+          "kind": "impact",
+          "text": "Link node 2 as a child of 1."
+        },
+        {
+          "key": "3-reason",
+          "kind": "reason",
+          "text": "Child lists are built from the parent array first, so the DFS can visit every child of a node."
+        },
+        {
+          "key": "3-code",
+          "kind": "code",
+          "text": "Next, this line runs: Link node 3 as a child of 2."
+        },
+        {
+          "key": "3-impact",
+          "kind": "impact",
+          "text": "Link node 3 as a child of 2."
+        },
+        {
+          "key": "4-reason",
+          "kind": "reason",
+          "text": "Every node should end up under its nearest ancestor with the same letter. Walking the tree in DFS order gives those ancestors, so we track the latest node for each letter."
+        },
+        {
+          "key": "4-code",
+          "kind": "code",
+          "text": "Next, this line runs: Every subtree starts with size 1."
+        },
+        {
+          "key": "4-impact",
+          "kind": "impact",
+          "text": "Every subtree starts with size 1."
+        },
+        {
+          "key": "5-reason",
+          "kind": "reason",
+          "text": "Every node should end up under its nearest ancestor with the same letter. Walking the tree in DFS order gives those ancestors, so we track the latest node for each letter."
+        },
+        {
+          "key": "5-code",
+          "kind": "code",
+          "text": "Next, this line runs: Push the root onto the stack."
+        },
+        {
+          "key": "5-impact",
+          "kind": "impact",
+          "text": "Push the root onto the stack."
+        },
+        {
+          "key": "6-reason",
+          "kind": "reason",
+          "text": "Entering a node means its ancestors are the nodes already on the path. The latest same-letter entry is the candidate new parent, so we save it before overwriting."
+        },
+        {
+          "key": "6-code",
+          "kind": "code",
+          "text": "Next, this line runs: Enter node 0 (letter a)."
+        },
+        {
+          "key": "6-impact",
+          "kind": "impact",
+          "text": "Enter node 0 (letter a)."
+        },
+        {
+          "key": "7-reason",
+          "kind": "reason",
+          "text": "Entering a node means its ancestors are the nodes already on the path. The latest same-letter entry is the candidate new parent, so we save it before overwriting."
+        },
+        {
+          "key": "7-code",
+          "kind": "code",
+          "text": "Next, this line runs: No ancestor with letter a yet."
+        },
+        {
+          "key": "7-impact",
+          "kind": "impact",
+          "text": "No ancestor with letter a yet."
+        },
+        {
+          "key": "8-reason",
+          "kind": "reason",
+          "text": "Recording this node as the latest one with its letter lets every node in its subtree find it as the nearest same-letter ancestor."
+        },
+        {
+          "key": "8-code",
+          "kind": "code",
+          "text": "Next, this line runs: Node 0 is now the latest a on this path."
+        },
+        {
+          "key": "8-impact",
+          "kind": "impact",
+          "text": "Node 0 is now the latest a on this path."
+        },
+        {
+          "key": "9-reason",
+          "kind": "reason",
+          "text": "The exit marker is pushed before the children, so the node is finished only after its whole subtree has been processed."
+        },
+        {
+          "key": "9-code",
+          "kind": "code",
+          "text": "Next, this line runs: Push the exit marker for node 0, so it runs after its subtree."
+        },
+        {
+          "key": "9-impact",
+          "kind": "impact",
+          "text": "Push the exit marker for node 0, so it runs after its subtree."
+        },
+        {
+          "key": "10-reason",
+          "kind": "reason",
+          "text": "The exit marker is pushed before the children, so the node is finished only after its whole subtree has been processed."
+        },
+        {
+          "key": "10-code",
+          "kind": "code",
+          "text": "Next, this line runs: Push children 1 to visit next."
+        },
+        {
+          "key": "10-impact",
+          "kind": "impact",
+          "text": "Push children 1 to visit next."
+        },
+        {
+          "key": "11-reason",
+          "kind": "reason",
+          "text": "Entering a node means its ancestors are the nodes already on the path. The latest same-letter entry is the candidate new parent, so we save it before overwriting."
+        },
+        {
+          "key": "11-code",
+          "kind": "code",
+          "text": "Next, this line runs: Enter node 1 (letter a)."
+        },
+        {
+          "key": "11-impact",
+          "kind": "impact",
+          "text": "Enter node 1 (letter a)."
+        },
+        {
+          "key": "12-reason",
+          "kind": "reason",
+          "text": "Entering a node means its ancestors are the nodes already on the path. The latest same-letter entry is the candidate new parent, so we save it before overwriting."
+        },
+        {
+          "key": "12-code",
+          "kind": "code",
+          "text": "Next, this line runs: Remember the previous a ancestor, node 0."
+        },
+        {
+          "key": "12-impact",
+          "kind": "impact",
+          "text": "Remember the previous a ancestor, node 0."
+        },
+        {
+          "key": "13-reason",
+          "kind": "reason",
+          "text": "Recording this node as the latest one with its letter lets every node in its subtree find it as the nearest same-letter ancestor."
+        },
+        {
+          "key": "13-code",
+          "kind": "code",
+          "text": "Next, this line runs: Node 1 is now the latest a on this path."
+        },
+        {
+          "key": "13-impact",
+          "kind": "impact",
+          "text": "Node 1 is now the latest a on this path."
+        },
+        {
+          "key": "14-reason",
+          "kind": "reason",
+          "text": "The exit marker is pushed before the children, so the node is finished only after its whole subtree has been processed."
+        },
+        {
+          "key": "14-code",
+          "kind": "code",
+          "text": "Next, this line runs: Push the exit marker for node 1, so it runs after its subtree."
+        },
+        {
+          "key": "14-impact",
+          "kind": "impact",
+          "text": "Push the exit marker for node 1, so it runs after its subtree."
+        },
+        {
+          "key": "15-reason",
+          "kind": "reason",
+          "text": "The exit marker is pushed before the children, so the node is finished only after its whole subtree has been processed."
+        },
+        {
+          "key": "15-code",
+          "kind": "code",
+          "text": "Next, this line runs: Push children 2 to visit next."
+        },
+        {
+          "key": "15-impact",
+          "kind": "impact",
+          "text": "Push children 2 to visit next."
+        },
+        {
+          "key": "16-reason",
+          "kind": "reason",
+          "text": "Entering a node means its ancestors are the nodes already on the path. The latest same-letter entry is the candidate new parent, so we save it before overwriting."
+        },
+        {
+          "key": "16-code",
+          "kind": "code",
+          "text": "Next, this line runs: Enter node 2 (letter a)."
+        },
+        {
+          "key": "16-impact",
+          "kind": "impact",
+          "text": "Enter node 2 (letter a)."
+        },
+        {
+          "key": "17-reason",
+          "kind": "reason",
+          "text": "Entering a node means its ancestors are the nodes already on the path. The latest same-letter entry is the candidate new parent, so we save it before overwriting."
+        },
+        {
+          "key": "17-code",
+          "kind": "code",
+          "text": "Next, this line runs: Remember the previous a ancestor, node 1."
+        },
+        {
+          "key": "17-impact",
+          "kind": "impact",
+          "text": "Remember the previous a ancestor, node 1."
+        },
+        {
+          "key": "18-reason",
+          "kind": "reason",
+          "text": "Recording this node as the latest one with its letter lets every node in its subtree find it as the nearest same-letter ancestor."
+        },
+        {
+          "key": "18-code",
+          "kind": "code",
+          "text": "Next, this line runs: Node 2 is now the latest a on this path."
+        },
+        {
+          "key": "18-impact",
+          "kind": "impact",
+          "text": "Node 2 is now the latest a on this path."
+        },
+        {
+          "key": "19-reason",
+          "kind": "reason",
+          "text": "The exit marker is pushed before the children, so the node is finished only after its whole subtree has been processed."
+        },
+        {
+          "key": "19-code",
+          "kind": "code",
+          "text": "Next, this line runs: Push the exit marker for node 2, so it runs after its subtree."
+        },
+        {
+          "key": "19-impact",
+          "kind": "impact",
+          "text": "Push the exit marker for node 2, so it runs after its subtree."
+        },
+        {
+          "key": "20-reason",
+          "kind": "reason",
+          "text": "The exit marker is pushed before the children, so the node is finished only after its whole subtree has been processed."
+        },
+        {
+          "key": "20-code",
+          "kind": "code",
+          "text": "Next, this line runs: Push children 3 to visit next."
+        },
+        {
+          "key": "20-impact",
+          "kind": "impact",
+          "text": "Push children 3 to visit next."
+        },
+        {
+          "key": "21-reason",
+          "kind": "reason",
+          "text": "Entering a node means its ancestors are the nodes already on the path. The latest same-letter entry is the candidate new parent, so we save it before overwriting."
+        },
+        {
+          "key": "21-code",
+          "kind": "code",
+          "text": "Next, this line runs: Enter node 3 (letter a)."
+        },
+        {
+          "key": "21-impact",
+          "kind": "impact",
+          "text": "Enter node 3 (letter a)."
+        },
+        {
+          "key": "22-reason",
+          "kind": "reason",
+          "text": "Entering a node means its ancestors are the nodes already on the path. The latest same-letter entry is the candidate new parent, so we save it before overwriting."
+        },
+        {
+          "key": "22-code",
+          "kind": "code",
+          "text": "Next, this line runs: Remember the previous a ancestor, node 2."
+        },
+        {
+          "key": "22-impact",
+          "kind": "impact",
+          "text": "Remember the previous a ancestor, node 2."
+        },
+        {
+          "key": "23-reason",
+          "kind": "reason",
+          "text": "Recording this node as the latest one with its letter lets every node in its subtree find it as the nearest same-letter ancestor."
+        },
+        {
+          "key": "23-code",
+          "kind": "code",
+          "text": "Next, this line runs: Node 3 is now the latest a on this path."
+        },
+        {
+          "key": "23-impact",
+          "kind": "impact",
+          "text": "Node 3 is now the latest a on this path."
+        },
+        {
+          "key": "24-reason",
+          "kind": "reason",
+          "text": "The exit marker is pushed before the children, so the node is finished only after its whole subtree has been processed."
+        },
+        {
+          "key": "24-code",
+          "kind": "code",
+          "text": "Next, this line runs: Push the exit marker for node 3, so it runs after its subtree."
+        },
+        {
+          "key": "24-impact",
+          "kind": "impact",
+          "text": "Push the exit marker for node 3, so it runs after its subtree."
+        },
+        {
+          "key": "25-reason",
+          "kind": "reason",
+          "text": "The exit marker is pushed before the children, so the node is finished only after its whole subtree has been processed."
+        },
+        {
+          "key": "25-code",
+          "kind": "code",
+          "text": "Next, this line runs: Node 3 is a leaf; nothing to push."
+        },
+        {
+          "key": "25-impact",
+          "kind": "impact",
+          "text": "Node 3 is a leaf; nothing to push."
+        },
+        {
+          "key": "26-reason",
+          "kind": "reason",
+          "text": "Leaving a node removes its letter from the path, so siblings and later branches do not see it as an ancestor."
+        },
+        {
+          "key": "26-code",
+          "kind": "code",
+          "text": "Next, this line runs: Leave node 3."
+        },
+        {
+          "key": "26-impact",
+          "kind": "impact",
+          "text": "Leave node 3."
+        },
+        {
+          "key": "27-reason",
+          "kind": "reason",
+          "text": "Leaving a node removes its letter from the path, so siblings and later branches do not see it as an ancestor."
+        },
+        {
+          "key": "27-code",
+          "kind": "code",
+          "text": "Next, this line runs: Restore the a ancestor to node 2."
+        },
+        {
+          "key": "27-impact",
+          "kind": "impact",
+          "text": "Restore the a ancestor to node 2."
+        },
+        {
+          "key": "28-reason",
+          "kind": "reason",
+          "text": "A finished subtree is added to its effective parent: the matching ancestor if one exists, otherwise the original parent."
+        },
+        {
+          "key": "28-code",
+          "kind": "code",
+          "text": "Next, this line runs: Add subtree 3 (size 1) to node 2, its nearest same-letter ancestor."
+        },
+        {
+          "key": "28-impact",
+          "kind": "impact",
+          "text": "Add subtree 3 (size 1) to node 2, its nearest same-letter ancestor."
+        },
+        {
+          "key": "29-reason",
+          "kind": "reason",
+          "text": "Leaving a node removes its letter from the path, so siblings and later branches do not see it as an ancestor."
+        },
+        {
+          "key": "29-code",
+          "kind": "code",
+          "text": "Next, this line runs: Leave node 2."
+        },
+        {
+          "key": "29-impact",
+          "kind": "impact",
+          "text": "Leave node 2."
+        },
+        {
+          "key": "30-reason",
+          "kind": "reason",
+          "text": "Leaving a node removes its letter from the path, so siblings and later branches do not see it as an ancestor."
+        },
+        {
+          "key": "30-code",
+          "kind": "code",
+          "text": "Next, this line runs: Restore the a ancestor to node 1."
+        },
+        {
+          "key": "30-impact",
+          "kind": "impact",
+          "text": "Restore the a ancestor to node 1."
+        },
+        {
+          "key": "31-reason",
+          "kind": "reason",
+          "text": "A finished subtree is added to its effective parent: the matching ancestor if one exists, otherwise the original parent."
+        },
+        {
+          "key": "31-code",
+          "kind": "code",
+          "text": "Next, this line runs: Add subtree 2 (size 2) to node 1, its nearest same-letter ancestor."
+        },
+        {
+          "key": "31-impact",
+          "kind": "impact",
+          "text": "Add subtree 2 (size 2) to node 1, its nearest same-letter ancestor."
+        },
+        {
+          "key": "32-reason",
+          "kind": "reason",
+          "text": "Leaving a node removes its letter from the path, so siblings and later branches do not see it as an ancestor."
+        },
+        {
+          "key": "32-code",
+          "kind": "code",
+          "text": "Next, this line runs: Leave node 1."
+        },
+        {
+          "key": "32-impact",
+          "kind": "impact",
+          "text": "Leave node 1."
+        },
+        {
+          "key": "33-reason",
+          "kind": "reason",
+          "text": "Leaving a node removes its letter from the path, so siblings and later branches do not see it as an ancestor."
+        },
+        {
+          "key": "33-code",
+          "kind": "code",
+          "text": "Next, this line runs: Restore the a ancestor to node 0."
+        },
+        {
+          "key": "33-impact",
+          "kind": "impact",
+          "text": "Restore the a ancestor to node 0."
+        },
+        {
+          "key": "34-reason",
+          "kind": "reason",
+          "text": "A finished subtree is added to its effective parent: the matching ancestor if one exists, otherwise the original parent."
+        },
+        {
+          "key": "34-code",
+          "kind": "code",
+          "text": "Next, this line runs: Add subtree 1 (size 3) to node 0, its nearest same-letter ancestor."
+        },
+        {
+          "key": "34-impact",
+          "kind": "impact",
+          "text": "Add subtree 1 (size 3) to node 0, its nearest same-letter ancestor."
+        },
+        {
+          "key": "35-reason",
+          "kind": "reason",
+          "text": "Leaving a node removes its letter from the path, so siblings and later branches do not see it as an ancestor."
+        },
+        {
+          "key": "35-code",
+          "kind": "code",
+          "text": "Next, this line runs: Leave node 0."
+        },
+        {
+          "key": "35-impact",
+          "kind": "impact",
+          "text": "Leave node 0."
+        },
+        {
+          "key": "36-reason",
+          "kind": "reason",
+          "text": "Leaving a node removes its letter from the path, so siblings and later branches do not see it as an ancestor."
+        },
+        {
+          "key": "36-code",
+          "kind": "code",
+          "text": "Next, this line runs: No earlier a ancestor; remove a from the path."
+        },
+        {
+          "key": "36-impact",
+          "kind": "impact",
+          "text": "No earlier a ancestor; remove a from the path."
+        },
+        {
+          "key": "37-reason",
+          "kind": "reason",
+          "text": "Every subtree has been added to its effective parent, so the sizes are final."
+        },
+        {
+          "key": "37-code",
+          "kind": "code",
+          "text": "Next, this line runs: Subtree sizes: [4, 3, 2, 1]."
+        },
+        {
+          "key": "37-impact",
+          "kind": "impact",
+          "text": "Subtree sizes: [4, 3, 2, 1]."
+        }
+      ]
+    },
+    {
+      "presetIndex": 2,
+      "label": "Single node",
+      "input": "{\"parent\":[-1],\"s\":\"a\"}",
+      "scenes": [
+        {
+          "key": "0-reason",
+          "kind": "reason",
+          "text": "Every node should end up under its nearest ancestor with the same letter. Walking the tree in DFS order gives those ancestors, so we track the latest node for each letter."
+        },
+        {
+          "key": "0-code",
+          "kind": "code",
+          "text": "Next, this line runs: Start with 1 nodes; the root is node 0."
+        },
+        {
+          "key": "0-impact",
+          "kind": "impact",
+          "text": "Start with 1 nodes; the root is node 0."
+        },
+        {
+          "key": "1-reason",
+          "kind": "reason",
+          "text": "Every node should end up under its nearest ancestor with the same letter. Walking the tree in DFS order gives those ancestors, so we track the latest node for each letter."
+        },
+        {
+          "key": "1-code",
+          "kind": "code",
+          "text": "Next, this line runs: Every subtree starts with size 1."
+        },
+        {
+          "key": "1-impact",
+          "kind": "impact",
+          "text": "Every subtree starts with size 1."
+        },
+        {
+          "key": "2-reason",
+          "kind": "reason",
+          "text": "Every node should end up under its nearest ancestor with the same letter. Walking the tree in DFS order gives those ancestors, so we track the latest node for each letter."
+        },
+        {
+          "key": "2-code",
+          "kind": "code",
+          "text": "Next, this line runs: Push the root onto the stack."
+        },
+        {
+          "key": "2-impact",
+          "kind": "impact",
+          "text": "Push the root onto the stack."
+        },
+        {
+          "key": "3-reason",
+          "kind": "reason",
+          "text": "Entering a node means its ancestors are the nodes already on the path. The latest same-letter entry is the candidate new parent, so we save it before overwriting."
+        },
+        {
+          "key": "3-code",
+          "kind": "code",
+          "text": "Next, this line runs: Enter node 0 (letter a)."
+        },
+        {
+          "key": "3-impact",
+          "kind": "impact",
+          "text": "Enter node 0 (letter a)."
+        },
+        {
+          "key": "4-reason",
+          "kind": "reason",
+          "text": "Entering a node means its ancestors are the nodes already on the path. The latest same-letter entry is the candidate new parent, so we save it before overwriting."
+        },
+        {
+          "key": "4-code",
+          "kind": "code",
+          "text": "Next, this line runs: No ancestor with letter a yet."
+        },
+        {
+          "key": "4-impact",
+          "kind": "impact",
+          "text": "No ancestor with letter a yet."
+        },
+        {
+          "key": "5-reason",
+          "kind": "reason",
+          "text": "Recording this node as the latest one with its letter lets every node in its subtree find it as the nearest same-letter ancestor."
+        },
+        {
+          "key": "5-code",
+          "kind": "code",
+          "text": "Next, this line runs: Node 0 is now the latest a on this path."
+        },
+        {
+          "key": "5-impact",
+          "kind": "impact",
+          "text": "Node 0 is now the latest a on this path."
+        },
+        {
+          "key": "6-reason",
+          "kind": "reason",
+          "text": "The exit marker is pushed before the children, so the node is finished only after its whole subtree has been processed."
+        },
+        {
+          "key": "6-code",
+          "kind": "code",
+          "text": "Next, this line runs: Push the exit marker for node 0, so it runs after its subtree."
+        },
+        {
+          "key": "6-impact",
+          "kind": "impact",
+          "text": "Push the exit marker for node 0, so it runs after its subtree."
+        },
+        {
+          "key": "7-reason",
+          "kind": "reason",
+          "text": "The exit marker is pushed before the children, so the node is finished only after its whole subtree has been processed."
+        },
+        {
+          "key": "7-code",
+          "kind": "code",
+          "text": "Next, this line runs: Node 0 is a leaf; nothing to push."
+        },
+        {
+          "key": "7-impact",
+          "kind": "impact",
+          "text": "Node 0 is a leaf; nothing to push."
+        },
+        {
+          "key": "8-reason",
+          "kind": "reason",
+          "text": "Leaving a node removes its letter from the path, so siblings and later branches do not see it as an ancestor."
+        },
+        {
+          "key": "8-code",
+          "kind": "code",
+          "text": "Next, this line runs: Leave node 0."
+        },
+        {
+          "key": "8-impact",
+          "kind": "impact",
+          "text": "Leave node 0."
+        },
+        {
+          "key": "9-reason",
+          "kind": "reason",
+          "text": "Leaving a node removes its letter from the path, so siblings and later branches do not see it as an ancestor."
+        },
+        {
+          "key": "9-code",
+          "kind": "code",
+          "text": "Next, this line runs: No earlier a ancestor; remove a from the path."
+        },
+        {
+          "key": "9-impact",
+          "kind": "impact",
+          "text": "No earlier a ancestor; remove a from the path."
+        },
+        {
+          "key": "10-reason",
+          "kind": "reason",
+          "text": "Every subtree has been added to its effective parent, so the sizes are final."
+        },
+        {
+          "key": "10-code",
+          "kind": "code",
+          "text": "Next, this line runs: Subtree sizes: [1]."
+        },
+        {
+          "key": "10-impact",
+          "kind": "impact",
+          "text": "Subtree sizes: [1]."
+        }
+      ]
+    },
+    {
+      "presetIndex": 3,
+      "label": "Star, same letter",
+      "input": "{\"parent\":[-1,0,0,0,0],\"s\":\"aaaaa\"}",
+      "scenes": [
+        {
+          "key": "0-reason",
+          "kind": "reason",
+          "text": "Every node should end up under its nearest ancestor with the same letter. Walking the tree in DFS order gives those ancestors, so we track the latest node for each letter."
+        },
+        {
+          "key": "0-code",
+          "kind": "code",
+          "text": "Next, this line runs: Start with 5 nodes; the root is node 0."
+        },
+        {
+          "key": "0-impact",
+          "kind": "impact",
+          "text": "Start with 5 nodes; the root is node 0."
+        },
+        {
+          "key": "1-reason",
+          "kind": "reason",
+          "text": "Child lists are built from the parent array first, so the DFS can visit every child of a node."
+        },
+        {
+          "key": "1-code",
+          "kind": "code",
+          "text": "Next, this line runs: Link node 1 as a child of 0."
+        },
+        {
+          "key": "1-impact",
+          "kind": "impact",
+          "text": "Link node 1 as a child of 0."
+        },
+        {
+          "key": "2-reason",
+          "kind": "reason",
+          "text": "Child lists are built from the parent array first, so the DFS can visit every child of a node."
+        },
+        {
+          "key": "2-code",
+          "kind": "code",
+          "text": "Next, this line runs: Link node 2 as a child of 0."
+        },
+        {
+          "key": "2-impact",
+          "kind": "impact",
+          "text": "Link node 2 as a child of 0."
+        },
+        {
+          "key": "3-reason",
+          "kind": "reason",
+          "text": "Child lists are built from the parent array first, so the DFS can visit every child of a node."
+        },
+        {
+          "key": "3-code",
+          "kind": "code",
+          "text": "Next, this line runs: Link node 3 as a child of 0."
+        },
+        {
+          "key": "3-impact",
+          "kind": "impact",
+          "text": "Link node 3 as a child of 0."
+        },
+        {
+          "key": "4-reason",
+          "kind": "reason",
+          "text": "Child lists are built from the parent array first, so the DFS can visit every child of a node."
+        },
+        {
+          "key": "4-code",
+          "kind": "code",
+          "text": "Next, this line runs: Link node 4 as a child of 0."
+        },
+        {
+          "key": "4-impact",
+          "kind": "impact",
+          "text": "Link node 4 as a child of 0."
+        },
+        {
+          "key": "5-reason",
+          "kind": "reason",
+          "text": "Every node should end up under its nearest ancestor with the same letter. Walking the tree in DFS order gives those ancestors, so we track the latest node for each letter."
+        },
+        {
+          "key": "5-code",
+          "kind": "code",
+          "text": "Next, this line runs: Every subtree starts with size 1."
+        },
+        {
+          "key": "5-impact",
+          "kind": "impact",
+          "text": "Every subtree starts with size 1."
+        },
+        {
+          "key": "6-reason",
+          "kind": "reason",
+          "text": "Every node should end up under its nearest ancestor with the same letter. Walking the tree in DFS order gives those ancestors, so we track the latest node for each letter."
+        },
+        {
+          "key": "6-code",
+          "kind": "code",
+          "text": "Next, this line runs: Push the root onto the stack."
+        },
+        {
+          "key": "6-impact",
+          "kind": "impact",
+          "text": "Push the root onto the stack."
+        },
+        {
+          "key": "7-reason",
+          "kind": "reason",
+          "text": "Entering a node means its ancestors are the nodes already on the path. The latest same-letter entry is the candidate new parent, so we save it before overwriting."
+        },
+        {
+          "key": "7-code",
+          "kind": "code",
+          "text": "Next, this line runs: Enter node 0 (letter a)."
+        },
+        {
+          "key": "7-impact",
+          "kind": "impact",
+          "text": "Enter node 0 (letter a)."
+        },
+        {
+          "key": "8-reason",
+          "kind": "reason",
+          "text": "Entering a node means its ancestors are the nodes already on the path. The latest same-letter entry is the candidate new parent, so we save it before overwriting."
+        },
+        {
+          "key": "8-code",
+          "kind": "code",
+          "text": "Next, this line runs: No ancestor with letter a yet."
+        },
+        {
+          "key": "8-impact",
+          "kind": "impact",
+          "text": "No ancestor with letter a yet."
+        },
+        {
+          "key": "9-reason",
+          "kind": "reason",
+          "text": "Recording this node as the latest one with its letter lets every node in its subtree find it as the nearest same-letter ancestor."
+        },
+        {
+          "key": "9-code",
+          "kind": "code",
+          "text": "Next, this line runs: Node 0 is now the latest a on this path."
+        },
+        {
+          "key": "9-impact",
+          "kind": "impact",
+          "text": "Node 0 is now the latest a on this path."
+        },
+        {
+          "key": "10-reason",
+          "kind": "reason",
+          "text": "The exit marker is pushed before the children, so the node is finished only after its whole subtree has been processed."
+        },
+        {
+          "key": "10-code",
+          "kind": "code",
+          "text": "Next, this line runs: Push the exit marker for node 0, so it runs after its subtree."
+        },
+        {
+          "key": "10-impact",
+          "kind": "impact",
+          "text": "Push the exit marker for node 0, so it runs after its subtree."
+        },
+        {
+          "key": "11-reason",
+          "kind": "reason",
+          "text": "The exit marker is pushed before the children, so the node is finished only after its whole subtree has been processed."
+        },
+        {
+          "key": "11-code",
+          "kind": "code",
+          "text": "Next, this line runs: Push children 4, 3, 2, 1 to visit next."
+        },
+        {
+          "key": "11-impact",
+          "kind": "impact",
+          "text": "Push children 4, 3, 2, 1 to visit next."
+        },
+        {
+          "key": "12-reason",
+          "kind": "reason",
+          "text": "Entering a node means its ancestors are the nodes already on the path. The latest same-letter entry is the candidate new parent, so we save it before overwriting."
+        },
+        {
+          "key": "12-code",
+          "kind": "code",
+          "text": "Next, this line runs: Enter node 1 (letter a)."
+        },
+        {
+          "key": "12-impact",
+          "kind": "impact",
+          "text": "Enter node 1 (letter a)."
+        },
+        {
+          "key": "13-reason",
+          "kind": "reason",
+          "text": "Entering a node means its ancestors are the nodes already on the path. The latest same-letter entry is the candidate new parent, so we save it before overwriting."
+        },
+        {
+          "key": "13-code",
+          "kind": "code",
+          "text": "Next, this line runs: Remember the previous a ancestor, node 0."
+        },
+        {
+          "key": "13-impact",
+          "kind": "impact",
+          "text": "Remember the previous a ancestor, node 0."
+        },
+        {
+          "key": "14-reason",
+          "kind": "reason",
+          "text": "Recording this node as the latest one with its letter lets every node in its subtree find it as the nearest same-letter ancestor."
+        },
+        {
+          "key": "14-code",
+          "kind": "code",
+          "text": "Next, this line runs: Node 1 is now the latest a on this path."
+        },
+        {
+          "key": "14-impact",
+          "kind": "impact",
+          "text": "Node 1 is now the latest a on this path."
+        },
+        {
+          "key": "15-reason",
+          "kind": "reason",
+          "text": "The exit marker is pushed before the children, so the node is finished only after its whole subtree has been processed."
+        },
+        {
+          "key": "15-code",
+          "kind": "code",
+          "text": "Next, this line runs: Push the exit marker for node 1, so it runs after its subtree."
+        },
+        {
+          "key": "15-impact",
+          "kind": "impact",
+          "text": "Push the exit marker for node 1, so it runs after its subtree."
+        },
+        {
+          "key": "16-reason",
+          "kind": "reason",
+          "text": "The exit marker is pushed before the children, so the node is finished only after its whole subtree has been processed."
+        },
+        {
+          "key": "16-code",
+          "kind": "code",
+          "text": "Next, this line runs: Node 1 is a leaf; nothing to push."
+        },
+        {
+          "key": "16-impact",
+          "kind": "impact",
+          "text": "Node 1 is a leaf; nothing to push."
+        },
+        {
+          "key": "17-reason",
+          "kind": "reason",
+          "text": "Leaving a node removes its letter from the path, so siblings and later branches do not see it as an ancestor."
+        },
+        {
+          "key": "17-code",
+          "kind": "code",
+          "text": "Next, this line runs: Leave node 1."
+        },
+        {
+          "key": "17-impact",
+          "kind": "impact",
+          "text": "Leave node 1."
+        },
+        {
+          "key": "18-reason",
+          "kind": "reason",
+          "text": "Leaving a node removes its letter from the path, so siblings and later branches do not see it as an ancestor."
+        },
+        {
+          "key": "18-code",
+          "kind": "code",
+          "text": "Next, this line runs: Restore the a ancestor to node 0."
+        },
+        {
+          "key": "18-impact",
+          "kind": "impact",
+          "text": "Restore the a ancestor to node 0."
+        },
+        {
+          "key": "19-reason",
+          "kind": "reason",
+          "text": "A finished subtree is added to its effective parent: the matching ancestor if one exists, otherwise the original parent."
+        },
+        {
+          "key": "19-code",
+          "kind": "code",
+          "text": "Next, this line runs: Add subtree 1 (size 1) to node 0, its nearest same-letter ancestor."
+        },
+        {
+          "key": "19-impact",
+          "kind": "impact",
+          "text": "Add subtree 1 (size 1) to node 0, its nearest same-letter ancestor."
+        },
+        {
+          "key": "20-reason",
+          "kind": "reason",
+          "text": "Entering a node means its ancestors are the nodes already on the path. The latest same-letter entry is the candidate new parent, so we save it before overwriting."
+        },
+        {
+          "key": "20-code",
+          "kind": "code",
+          "text": "Next, this line runs: Enter node 2 (letter a)."
+        },
+        {
+          "key": "20-impact",
+          "kind": "impact",
+          "text": "Enter node 2 (letter a)."
+        },
+        {
+          "key": "21-reason",
+          "kind": "reason",
+          "text": "Entering a node means its ancestors are the nodes already on the path. The latest same-letter entry is the candidate new parent, so we save it before overwriting."
+        },
+        {
+          "key": "21-code",
+          "kind": "code",
+          "text": "Next, this line runs: Remember the previous a ancestor, node 0."
+        },
+        {
+          "key": "21-impact",
+          "kind": "impact",
+          "text": "Remember the previous a ancestor, node 0."
+        },
+        {
+          "key": "22-reason",
+          "kind": "reason",
+          "text": "Recording this node as the latest one with its letter lets every node in its subtree find it as the nearest same-letter ancestor."
+        },
+        {
+          "key": "22-code",
+          "kind": "code",
+          "text": "Next, this line runs: Node 2 is now the latest a on this path."
+        },
+        {
+          "key": "22-impact",
+          "kind": "impact",
+          "text": "Node 2 is now the latest a on this path."
+        },
+        {
+          "key": "23-reason",
+          "kind": "reason",
+          "text": "The exit marker is pushed before the children, so the node is finished only after its whole subtree has been processed."
+        },
+        {
+          "key": "23-code",
+          "kind": "code",
+          "text": "Next, this line runs: Push the exit marker for node 2, so it runs after its subtree."
+        },
+        {
+          "key": "23-impact",
+          "kind": "impact",
+          "text": "Push the exit marker for node 2, so it runs after its subtree."
+        },
+        {
+          "key": "24-reason",
+          "kind": "reason",
+          "text": "The exit marker is pushed before the children, so the node is finished only after its whole subtree has been processed."
+        },
+        {
+          "key": "24-code",
+          "kind": "code",
+          "text": "Next, this line runs: Node 2 is a leaf; nothing to push."
+        },
+        {
+          "key": "24-impact",
+          "kind": "impact",
+          "text": "Node 2 is a leaf; nothing to push."
+        },
+        {
+          "key": "25-reason",
+          "kind": "reason",
+          "text": "Leaving a node removes its letter from the path, so siblings and later branches do not see it as an ancestor."
+        },
+        {
+          "key": "25-code",
+          "kind": "code",
+          "text": "Next, this line runs: Leave node 2."
+        },
+        {
+          "key": "25-impact",
+          "kind": "impact",
+          "text": "Leave node 2."
+        },
+        {
+          "key": "26-reason",
+          "kind": "reason",
+          "text": "Leaving a node removes its letter from the path, so siblings and later branches do not see it as an ancestor."
+        },
+        {
+          "key": "26-code",
+          "kind": "code",
+          "text": "Next, this line runs: Restore the a ancestor to node 0."
+        },
+        {
+          "key": "26-impact",
+          "kind": "impact",
+          "text": "Restore the a ancestor to node 0."
+        },
+        {
+          "key": "27-reason",
+          "kind": "reason",
+          "text": "A finished subtree is added to its effective parent: the matching ancestor if one exists, otherwise the original parent."
+        },
+        {
+          "key": "27-code",
+          "kind": "code",
+          "text": "Next, this line runs: Add subtree 2 (size 1) to node 0, its nearest same-letter ancestor."
+        },
+        {
+          "key": "27-impact",
+          "kind": "impact",
+          "text": "Add subtree 2 (size 1) to node 0, its nearest same-letter ancestor."
+        },
+        {
+          "key": "28-reason",
+          "kind": "reason",
+          "text": "Entering a node means its ancestors are the nodes already on the path. The latest same-letter entry is the candidate new parent, so we save it before overwriting."
+        },
+        {
+          "key": "28-code",
+          "kind": "code",
+          "text": "Next, this line runs: Enter node 3 (letter a)."
+        },
+        {
+          "key": "28-impact",
+          "kind": "impact",
+          "text": "Enter node 3 (letter a)."
+        },
+        {
+          "key": "29-reason",
+          "kind": "reason",
+          "text": "Entering a node means its ancestors are the nodes already on the path. The latest same-letter entry is the candidate new parent, so we save it before overwriting."
+        },
+        {
+          "key": "29-code",
+          "kind": "code",
+          "text": "Next, this line runs: Remember the previous a ancestor, node 0."
+        },
+        {
+          "key": "29-impact",
+          "kind": "impact",
+          "text": "Remember the previous a ancestor, node 0."
+        },
+        {
+          "key": "30-reason",
+          "kind": "reason",
+          "text": "Recording this node as the latest one with its letter lets every node in its subtree find it as the nearest same-letter ancestor."
+        },
+        {
+          "key": "30-code",
+          "kind": "code",
+          "text": "Next, this line runs: Node 3 is now the latest a on this path."
+        },
+        {
+          "key": "30-impact",
+          "kind": "impact",
+          "text": "Node 3 is now the latest a on this path."
+        },
+        {
+          "key": "31-reason",
+          "kind": "reason",
+          "text": "The exit marker is pushed before the children, so the node is finished only after its whole subtree has been processed."
+        },
+        {
+          "key": "31-code",
+          "kind": "code",
+          "text": "Next, this line runs: Push the exit marker for node 3, so it runs after its subtree."
+        },
+        {
+          "key": "31-impact",
+          "kind": "impact",
+          "text": "Push the exit marker for node 3, so it runs after its subtree."
+        },
+        {
+          "key": "32-reason",
+          "kind": "reason",
+          "text": "The exit marker is pushed before the children, so the node is finished only after its whole subtree has been processed."
+        },
+        {
+          "key": "32-code",
+          "kind": "code",
+          "text": "Next, this line runs: Node 3 is a leaf; nothing to push."
+        },
+        {
+          "key": "32-impact",
+          "kind": "impact",
+          "text": "Node 3 is a leaf; nothing to push."
+        },
+        {
+          "key": "33-reason",
+          "kind": "reason",
+          "text": "Leaving a node removes its letter from the path, so siblings and later branches do not see it as an ancestor."
+        },
+        {
+          "key": "33-code",
+          "kind": "code",
+          "text": "Next, this line runs: Leave node 3."
+        },
+        {
+          "key": "33-impact",
+          "kind": "impact",
+          "text": "Leave node 3."
+        },
+        {
+          "key": "34-reason",
+          "kind": "reason",
+          "text": "Leaving a node removes its letter from the path, so siblings and later branches do not see it as an ancestor."
+        },
+        {
+          "key": "34-code",
+          "kind": "code",
+          "text": "Next, this line runs: Restore the a ancestor to node 0."
+        },
+        {
+          "key": "34-impact",
+          "kind": "impact",
+          "text": "Restore the a ancestor to node 0."
+        },
+        {
+          "key": "35-reason",
+          "kind": "reason",
+          "text": "A finished subtree is added to its effective parent: the matching ancestor if one exists, otherwise the original parent."
+        },
+        {
+          "key": "35-code",
+          "kind": "code",
+          "text": "Next, this line runs: Add subtree 3 (size 1) to node 0, its nearest same-letter ancestor."
+        },
+        {
+          "key": "35-impact",
+          "kind": "impact",
+          "text": "Add subtree 3 (size 1) to node 0, its nearest same-letter ancestor."
+        },
+        {
+          "key": "36-reason",
+          "kind": "reason",
+          "text": "Entering a node means its ancestors are the nodes already on the path. The latest same-letter entry is the candidate new parent, so we save it before overwriting."
+        },
+        {
+          "key": "36-code",
+          "kind": "code",
+          "text": "Next, this line runs: Enter node 4 (letter a)."
+        },
+        {
+          "key": "36-impact",
+          "kind": "impact",
+          "text": "Enter node 4 (letter a)."
+        },
+        {
+          "key": "37-reason",
+          "kind": "reason",
+          "text": "Entering a node means its ancestors are the nodes already on the path. The latest same-letter entry is the candidate new parent, so we save it before overwriting."
+        },
+        {
+          "key": "37-code",
+          "kind": "code",
+          "text": "Next, this line runs: Remember the previous a ancestor, node 0."
+        },
+        {
+          "key": "37-impact",
+          "kind": "impact",
+          "text": "Remember the previous a ancestor, node 0."
+        },
+        {
+          "key": "38-reason",
+          "kind": "reason",
+          "text": "Recording this node as the latest one with its letter lets every node in its subtree find it as the nearest same-letter ancestor."
+        },
+        {
+          "key": "38-code",
+          "kind": "code",
+          "text": "Next, this line runs: Node 4 is now the latest a on this path."
+        },
+        {
+          "key": "38-impact",
+          "kind": "impact",
+          "text": "Node 4 is now the latest a on this path."
+        },
+        {
+          "key": "39-reason",
+          "kind": "reason",
+          "text": "The exit marker is pushed before the children, so the node is finished only after its whole subtree has been processed."
+        },
+        {
+          "key": "39-code",
+          "kind": "code",
+          "text": "Next, this line runs: Push the exit marker for node 4, so it runs after its subtree."
+        },
+        {
+          "key": "39-impact",
+          "kind": "impact",
+          "text": "Push the exit marker for node 4, so it runs after its subtree."
+        },
+        {
+          "key": "40-reason",
+          "kind": "reason",
+          "text": "The exit marker is pushed before the children, so the node is finished only after its whole subtree has been processed."
+        },
+        {
+          "key": "40-code",
+          "kind": "code",
+          "text": "Next, this line runs: Node 4 is a leaf; nothing to push."
+        },
+        {
+          "key": "40-impact",
+          "kind": "impact",
+          "text": "Node 4 is a leaf; nothing to push."
+        },
+        {
+          "key": "41-reason",
+          "kind": "reason",
+          "text": "Leaving a node removes its letter from the path, so siblings and later branches do not see it as an ancestor."
+        },
+        {
+          "key": "41-code",
+          "kind": "code",
+          "text": "Next, this line runs: Leave node 4."
+        },
+        {
+          "key": "41-impact",
+          "kind": "impact",
+          "text": "Leave node 4."
+        },
+        {
+          "key": "42-reason",
+          "kind": "reason",
+          "text": "Leaving a node removes its letter from the path, so siblings and later branches do not see it as an ancestor."
+        },
+        {
+          "key": "42-code",
+          "kind": "code",
+          "text": "Next, this line runs: Restore the a ancestor to node 0."
+        },
+        {
+          "key": "42-impact",
+          "kind": "impact",
+          "text": "Restore the a ancestor to node 0."
+        },
+        {
+          "key": "43-reason",
+          "kind": "reason",
+          "text": "A finished subtree is added to its effective parent: the matching ancestor if one exists, otherwise the original parent."
+        },
+        {
+          "key": "43-code",
+          "kind": "code",
+          "text": "Next, this line runs: Add subtree 4 (size 1) to node 0, its nearest same-letter ancestor."
+        },
+        {
+          "key": "43-impact",
+          "kind": "impact",
+          "text": "Add subtree 4 (size 1) to node 0, its nearest same-letter ancestor."
+        },
+        {
+          "key": "44-reason",
+          "kind": "reason",
+          "text": "Leaving a node removes its letter from the path, so siblings and later branches do not see it as an ancestor."
+        },
+        {
+          "key": "44-code",
+          "kind": "code",
+          "text": "Next, this line runs: Leave node 0."
+        },
+        {
+          "key": "44-impact",
+          "kind": "impact",
+          "text": "Leave node 0."
+        },
+        {
+          "key": "45-reason",
+          "kind": "reason",
+          "text": "Leaving a node removes its letter from the path, so siblings and later branches do not see it as an ancestor."
+        },
+        {
+          "key": "45-code",
+          "kind": "code",
+          "text": "Next, this line runs: No earlier a ancestor; remove a from the path."
+        },
+        {
+          "key": "45-impact",
+          "kind": "impact",
+          "text": "No earlier a ancestor; remove a from the path."
+        },
+        {
+          "key": "46-reason",
+          "kind": "reason",
+          "text": "Every subtree has been added to its effective parent, so the sizes are final."
+        },
+        {
+          "key": "46-code",
+          "kind": "code",
+          "text": "Next, this line runs: Subtree sizes: [5, 1, 1, 1, 1]."
+        },
+        {
+          "key": "46-impact",
+          "kind": "impact",
+          "text": "Subtree sizes: [5, 1, 1, 1, 1]."
+        }
+      ]
+    },
+    {
+      "presetIndex": 4,
+      "label": "Ancestor two levels up",
+      "input": "{\"parent\":[-1,0,1,2,0],\"s\":\"abaca\"}",
+      "scenes": [
+        {
+          "key": "0-reason",
+          "kind": "reason",
+          "text": "Every node should end up under its nearest ancestor with the same letter. Walking the tree in DFS order gives those ancestors, so we track the latest node for each letter."
+        },
+        {
+          "key": "0-code",
+          "kind": "code",
+          "text": "Next, this line runs: Start with 5 nodes; the root is node 0."
+        },
+        {
+          "key": "0-impact",
+          "kind": "impact",
+          "text": "Start with 5 nodes; the root is node 0."
+        },
+        {
+          "key": "1-reason",
+          "kind": "reason",
+          "text": "Child lists are built from the parent array first, so the DFS can visit every child of a node."
+        },
+        {
+          "key": "1-code",
+          "kind": "code",
+          "text": "Next, this line runs: Link node 1 as a child of 0."
+        },
+        {
+          "key": "1-impact",
+          "kind": "impact",
+          "text": "Link node 1 as a child of 0."
+        },
+        {
+          "key": "2-reason",
+          "kind": "reason",
+          "text": "Child lists are built from the parent array first, so the DFS can visit every child of a node."
+        },
+        {
+          "key": "2-code",
+          "kind": "code",
+          "text": "Next, this line runs: Link node 2 as a child of 1."
+        },
+        {
+          "key": "2-impact",
+          "kind": "impact",
+          "text": "Link node 2 as a child of 1."
+        },
+        {
+          "key": "3-reason",
+          "kind": "reason",
+          "text": "Child lists are built from the parent array first, so the DFS can visit every child of a node."
+        },
+        {
+          "key": "3-code",
+          "kind": "code",
+          "text": "Next, this line runs: Link node 3 as a child of 2."
+        },
+        {
+          "key": "3-impact",
+          "kind": "impact",
+          "text": "Link node 3 as a child of 2."
+        },
+        {
+          "key": "4-reason",
+          "kind": "reason",
+          "text": "Child lists are built from the parent array first, so the DFS can visit every child of a node."
+        },
+        {
+          "key": "4-code",
+          "kind": "code",
+          "text": "Next, this line runs: Link node 4 as a child of 0."
+        },
+        {
+          "key": "4-impact",
+          "kind": "impact",
+          "text": "Link node 4 as a child of 0."
+        },
+        {
+          "key": "5-reason",
+          "kind": "reason",
+          "text": "Every node should end up under its nearest ancestor with the same letter. Walking the tree in DFS order gives those ancestors, so we track the latest node for each letter."
+        },
+        {
+          "key": "5-code",
+          "kind": "code",
+          "text": "Next, this line runs: Every subtree starts with size 1."
+        },
+        {
+          "key": "5-impact",
+          "kind": "impact",
+          "text": "Every subtree starts with size 1."
+        },
+        {
+          "key": "6-reason",
+          "kind": "reason",
+          "text": "Every node should end up under its nearest ancestor with the same letter. Walking the tree in DFS order gives those ancestors, so we track the latest node for each letter."
+        },
+        {
+          "key": "6-code",
+          "kind": "code",
+          "text": "Next, this line runs: Push the root onto the stack."
+        },
+        {
+          "key": "6-impact",
+          "kind": "impact",
+          "text": "Push the root onto the stack."
+        },
+        {
+          "key": "7-reason",
+          "kind": "reason",
+          "text": "Entering a node means its ancestors are the nodes already on the path. The latest same-letter entry is the candidate new parent, so we save it before overwriting."
+        },
+        {
+          "key": "7-code",
+          "kind": "code",
+          "text": "Next, this line runs: Enter node 0 (letter a)."
+        },
+        {
+          "key": "7-impact",
+          "kind": "impact",
+          "text": "Enter node 0 (letter a)."
+        },
+        {
+          "key": "8-reason",
+          "kind": "reason",
+          "text": "Entering a node means its ancestors are the nodes already on the path. The latest same-letter entry is the candidate new parent, so we save it before overwriting."
+        },
+        {
+          "key": "8-code",
+          "kind": "code",
+          "text": "Next, this line runs: No ancestor with letter a yet."
+        },
+        {
+          "key": "8-impact",
+          "kind": "impact",
+          "text": "No ancestor with letter a yet."
+        },
+        {
+          "key": "9-reason",
+          "kind": "reason",
+          "text": "Recording this node as the latest one with its letter lets every node in its subtree find it as the nearest same-letter ancestor."
+        },
+        {
+          "key": "9-code",
+          "kind": "code",
+          "text": "Next, this line runs: Node 0 is now the latest a on this path."
+        },
+        {
+          "key": "9-impact",
+          "kind": "impact",
+          "text": "Node 0 is now the latest a on this path."
+        },
+        {
+          "key": "10-reason",
+          "kind": "reason",
+          "text": "The exit marker is pushed before the children, so the node is finished only after its whole subtree has been processed."
+        },
+        {
+          "key": "10-code",
+          "kind": "code",
+          "text": "Next, this line runs: Push the exit marker for node 0, so it runs after its subtree."
+        },
+        {
+          "key": "10-impact",
+          "kind": "impact",
+          "text": "Push the exit marker for node 0, so it runs after its subtree."
+        },
+        {
+          "key": "11-reason",
+          "kind": "reason",
+          "text": "The exit marker is pushed before the children, so the node is finished only after its whole subtree has been processed."
+        },
+        {
+          "key": "11-code",
+          "kind": "code",
+          "text": "Next, this line runs: Push children 4, 1 to visit next."
+        },
+        {
+          "key": "11-impact",
+          "kind": "impact",
+          "text": "Push children 4, 1 to visit next."
+        },
+        {
+          "key": "12-reason",
+          "kind": "reason",
+          "text": "Entering a node means its ancestors are the nodes already on the path. The latest same-letter entry is the candidate new parent, so we save it before overwriting."
+        },
+        {
+          "key": "12-code",
+          "kind": "code",
+          "text": "Next, this line runs: Enter node 1 (letter b)."
+        },
+        {
+          "key": "12-impact",
+          "kind": "impact",
+          "text": "Enter node 1 (letter b)."
+        },
+        {
+          "key": "13-reason",
+          "kind": "reason",
+          "text": "Entering a node means its ancestors are the nodes already on the path. The latest same-letter entry is the candidate new parent, so we save it before overwriting."
+        },
+        {
+          "key": "13-code",
+          "kind": "code",
+          "text": "Next, this line runs: No ancestor with letter b yet."
+        },
+        {
+          "key": "13-impact",
+          "kind": "impact",
+          "text": "No ancestor with letter b yet."
+        },
+        {
+          "key": "14-reason",
+          "kind": "reason",
+          "text": "Recording this node as the latest one with its letter lets every node in its subtree find it as the nearest same-letter ancestor."
+        },
+        {
+          "key": "14-code",
+          "kind": "code",
+          "text": "Next, this line runs: Node 1 is now the latest b on this path."
+        },
+        {
+          "key": "14-impact",
+          "kind": "impact",
+          "text": "Node 1 is now the latest b on this path."
+        },
+        {
+          "key": "15-reason",
+          "kind": "reason",
+          "text": "The exit marker is pushed before the children, so the node is finished only after its whole subtree has been processed."
+        },
+        {
+          "key": "15-code",
+          "kind": "code",
+          "text": "Next, this line runs: Push the exit marker for node 1, so it runs after its subtree."
+        },
+        {
+          "key": "15-impact",
+          "kind": "impact",
+          "text": "Push the exit marker for node 1, so it runs after its subtree."
+        },
+        {
+          "key": "16-reason",
+          "kind": "reason",
+          "text": "The exit marker is pushed before the children, so the node is finished only after its whole subtree has been processed."
+        },
+        {
+          "key": "16-code",
+          "kind": "code",
+          "text": "Next, this line runs: Push children 2 to visit next."
+        },
+        {
+          "key": "16-impact",
+          "kind": "impact",
+          "text": "Push children 2 to visit next."
+        },
+        {
+          "key": "17-reason",
+          "kind": "reason",
+          "text": "Entering a node means its ancestors are the nodes already on the path. The latest same-letter entry is the candidate new parent, so we save it before overwriting."
+        },
+        {
+          "key": "17-code",
+          "kind": "code",
+          "text": "Next, this line runs: Enter node 2 (letter a)."
+        },
+        {
+          "key": "17-impact",
+          "kind": "impact",
+          "text": "Enter node 2 (letter a)."
+        },
+        {
+          "key": "18-reason",
+          "kind": "reason",
+          "text": "Entering a node means its ancestors are the nodes already on the path. The latest same-letter entry is the candidate new parent, so we save it before overwriting."
+        },
+        {
+          "key": "18-code",
+          "kind": "code",
+          "text": "Next, this line runs: Remember the previous a ancestor, node 0."
+        },
+        {
+          "key": "18-impact",
+          "kind": "impact",
+          "text": "Remember the previous a ancestor, node 0."
+        },
+        {
+          "key": "19-reason",
+          "kind": "reason",
+          "text": "Recording this node as the latest one with its letter lets every node in its subtree find it as the nearest same-letter ancestor."
+        },
+        {
+          "key": "19-code",
+          "kind": "code",
+          "text": "Next, this line runs: Node 2 is now the latest a on this path."
+        },
+        {
+          "key": "19-impact",
+          "kind": "impact",
+          "text": "Node 2 is now the latest a on this path."
+        },
+        {
+          "key": "20-reason",
+          "kind": "reason",
+          "text": "The exit marker is pushed before the children, so the node is finished only after its whole subtree has been processed."
+        },
+        {
+          "key": "20-code",
+          "kind": "code",
+          "text": "Next, this line runs: Push the exit marker for node 2, so it runs after its subtree."
+        },
+        {
+          "key": "20-impact",
+          "kind": "impact",
+          "text": "Push the exit marker for node 2, so it runs after its subtree."
+        },
+        {
+          "key": "21-reason",
+          "kind": "reason",
+          "text": "The exit marker is pushed before the children, so the node is finished only after its whole subtree has been processed."
+        },
+        {
+          "key": "21-code",
+          "kind": "code",
+          "text": "Next, this line runs: Push children 3 to visit next."
+        },
+        {
+          "key": "21-impact",
+          "kind": "impact",
+          "text": "Push children 3 to visit next."
+        },
+        {
+          "key": "22-reason",
+          "kind": "reason",
+          "text": "Entering a node means its ancestors are the nodes already on the path. The latest same-letter entry is the candidate new parent, so we save it before overwriting."
+        },
+        {
+          "key": "22-code",
+          "kind": "code",
+          "text": "Next, this line runs: Enter node 3 (letter c)."
+        },
+        {
+          "key": "22-impact",
+          "kind": "impact",
+          "text": "Enter node 3 (letter c)."
+        },
+        {
+          "key": "23-reason",
+          "kind": "reason",
+          "text": "Entering a node means its ancestors are the nodes already on the path. The latest same-letter entry is the candidate new parent, so we save it before overwriting."
+        },
+        {
+          "key": "23-code",
+          "kind": "code",
+          "text": "Next, this line runs: No ancestor with letter c yet."
+        },
+        {
+          "key": "23-impact",
+          "kind": "impact",
+          "text": "No ancestor with letter c yet."
+        },
+        {
+          "key": "24-reason",
+          "kind": "reason",
+          "text": "Recording this node as the latest one with its letter lets every node in its subtree find it as the nearest same-letter ancestor."
+        },
+        {
+          "key": "24-code",
+          "kind": "code",
+          "text": "Next, this line runs: Node 3 is now the latest c on this path."
+        },
+        {
+          "key": "24-impact",
+          "kind": "impact",
+          "text": "Node 3 is now the latest c on this path."
+        },
+        {
+          "key": "25-reason",
+          "kind": "reason",
+          "text": "The exit marker is pushed before the children, so the node is finished only after its whole subtree has been processed."
+        },
+        {
+          "key": "25-code",
+          "kind": "code",
+          "text": "Next, this line runs: Push the exit marker for node 3, so it runs after its subtree."
+        },
+        {
+          "key": "25-impact",
+          "kind": "impact",
+          "text": "Push the exit marker for node 3, so it runs after its subtree."
+        },
+        {
+          "key": "26-reason",
+          "kind": "reason",
+          "text": "The exit marker is pushed before the children, so the node is finished only after its whole subtree has been processed."
+        },
+        {
+          "key": "26-code",
+          "kind": "code",
+          "text": "Next, this line runs: Node 3 is a leaf; nothing to push."
+        },
+        {
+          "key": "26-impact",
+          "kind": "impact",
+          "text": "Node 3 is a leaf; nothing to push."
+        },
+        {
+          "key": "27-reason",
+          "kind": "reason",
+          "text": "Leaving a node removes its letter from the path, so siblings and later branches do not see it as an ancestor."
+        },
+        {
+          "key": "27-code",
+          "kind": "code",
+          "text": "Next, this line runs: Leave node 3."
+        },
+        {
+          "key": "27-impact",
+          "kind": "impact",
+          "text": "Leave node 3."
+        },
+        {
+          "key": "28-reason",
+          "kind": "reason",
+          "text": "Leaving a node removes its letter from the path, so siblings and later branches do not see it as an ancestor."
+        },
+        {
+          "key": "28-code",
+          "kind": "code",
+          "text": "Next, this line runs: No earlier c ancestor; remove c from the path."
+        },
+        {
+          "key": "28-impact",
+          "kind": "impact",
+          "text": "No earlier c ancestor; remove c from the path."
+        },
+        {
+          "key": "29-reason",
+          "kind": "reason",
+          "text": "A finished subtree is added to its effective parent: the matching ancestor if one exists, otherwise the original parent."
+        },
+        {
+          "key": "29-code",
+          "kind": "code",
+          "text": "Next, this line runs: Add subtree 3 (size 1) to node 2, its original parent."
+        },
+        {
+          "key": "29-impact",
+          "kind": "impact",
+          "text": "Add subtree 3 (size 1) to node 2, its original parent."
+        },
+        {
+          "key": "30-reason",
+          "kind": "reason",
+          "text": "Leaving a node removes its letter from the path, so siblings and later branches do not see it as an ancestor."
+        },
+        {
+          "key": "30-code",
+          "kind": "code",
+          "text": "Next, this line runs: Leave node 2."
+        },
+        {
+          "key": "30-impact",
+          "kind": "impact",
+          "text": "Leave node 2."
+        },
+        {
+          "key": "31-reason",
+          "kind": "reason",
+          "text": "Leaving a node removes its letter from the path, so siblings and later branches do not see it as an ancestor."
+        },
+        {
+          "key": "31-code",
+          "kind": "code",
+          "text": "Next, this line runs: Restore the a ancestor to node 0."
+        },
+        {
+          "key": "31-impact",
+          "kind": "impact",
+          "text": "Restore the a ancestor to node 0."
+        },
+        {
+          "key": "32-reason",
+          "kind": "reason",
+          "text": "A finished subtree is added to its effective parent: the matching ancestor if one exists, otherwise the original parent."
+        },
+        {
+          "key": "32-code",
+          "kind": "code",
+          "text": "Next, this line runs: Add subtree 2 (size 2) to node 0, its nearest same-letter ancestor."
+        },
+        {
+          "key": "32-impact",
+          "kind": "impact",
+          "text": "Add subtree 2 (size 2) to node 0, its nearest same-letter ancestor."
+        },
+        {
+          "key": "33-reason",
+          "kind": "reason",
+          "text": "Leaving a node removes its letter from the path, so siblings and later branches do not see it as an ancestor."
+        },
+        {
+          "key": "33-code",
+          "kind": "code",
+          "text": "Next, this line runs: Leave node 1."
+        },
+        {
+          "key": "33-impact",
+          "kind": "impact",
+          "text": "Leave node 1."
+        },
+        {
+          "key": "34-reason",
+          "kind": "reason",
+          "text": "Leaving a node removes its letter from the path, so siblings and later branches do not see it as an ancestor."
+        },
+        {
+          "key": "34-code",
+          "kind": "code",
+          "text": "Next, this line runs: No earlier b ancestor; remove b from the path."
+        },
+        {
+          "key": "34-impact",
+          "kind": "impact",
+          "text": "No earlier b ancestor; remove b from the path."
+        },
+        {
+          "key": "35-reason",
+          "kind": "reason",
+          "text": "A finished subtree is added to its effective parent: the matching ancestor if one exists, otherwise the original parent."
+        },
+        {
+          "key": "35-code",
+          "kind": "code",
+          "text": "Next, this line runs: Add subtree 1 (size 1) to node 0, its original parent."
+        },
+        {
+          "key": "35-impact",
+          "kind": "impact",
+          "text": "Add subtree 1 (size 1) to node 0, its original parent."
+        },
+        {
+          "key": "36-reason",
+          "kind": "reason",
+          "text": "Entering a node means its ancestors are the nodes already on the path. The latest same-letter entry is the candidate new parent, so we save it before overwriting."
+        },
+        {
+          "key": "36-code",
+          "kind": "code",
+          "text": "Next, this line runs: Enter node 4 (letter a)."
+        },
+        {
+          "key": "36-impact",
+          "kind": "impact",
+          "text": "Enter node 4 (letter a)."
+        },
+        {
+          "key": "37-reason",
+          "kind": "reason",
+          "text": "Entering a node means its ancestors are the nodes already on the path. The latest same-letter entry is the candidate new parent, so we save it before overwriting."
+        },
+        {
+          "key": "37-code",
+          "kind": "code",
+          "text": "Next, this line runs: Remember the previous a ancestor, node 0."
+        },
+        {
+          "key": "37-impact",
+          "kind": "impact",
+          "text": "Remember the previous a ancestor, node 0."
+        },
+        {
+          "key": "38-reason",
+          "kind": "reason",
+          "text": "Recording this node as the latest one with its letter lets every node in its subtree find it as the nearest same-letter ancestor."
+        },
+        {
+          "key": "38-code",
+          "kind": "code",
+          "text": "Next, this line runs: Node 4 is now the latest a on this path."
+        },
+        {
+          "key": "38-impact",
+          "kind": "impact",
+          "text": "Node 4 is now the latest a on this path."
+        },
+        {
+          "key": "39-reason",
+          "kind": "reason",
+          "text": "The exit marker is pushed before the children, so the node is finished only after its whole subtree has been processed."
+        },
+        {
+          "key": "39-code",
+          "kind": "code",
+          "text": "Next, this line runs: Push the exit marker for node 4, so it runs after its subtree."
+        },
+        {
+          "key": "39-impact",
+          "kind": "impact",
+          "text": "Push the exit marker for node 4, so it runs after its subtree."
+        },
+        {
+          "key": "40-reason",
+          "kind": "reason",
+          "text": "The exit marker is pushed before the children, so the node is finished only after its whole subtree has been processed."
+        },
+        {
+          "key": "40-code",
+          "kind": "code",
+          "text": "Next, this line runs: Node 4 is a leaf; nothing to push."
+        },
+        {
+          "key": "40-impact",
+          "kind": "impact",
+          "text": "Node 4 is a leaf; nothing to push."
+        },
+        {
+          "key": "41-reason",
+          "kind": "reason",
+          "text": "Leaving a node removes its letter from the path, so siblings and later branches do not see it as an ancestor."
+        },
+        {
+          "key": "41-code",
+          "kind": "code",
+          "text": "Next, this line runs: Leave node 4."
+        },
+        {
+          "key": "41-impact",
+          "kind": "impact",
+          "text": "Leave node 4."
+        },
+        {
+          "key": "42-reason",
+          "kind": "reason",
+          "text": "Leaving a node removes its letter from the path, so siblings and later branches do not see it as an ancestor."
+        },
+        {
+          "key": "42-code",
+          "kind": "code",
+          "text": "Next, this line runs: Restore the a ancestor to node 0."
+        },
+        {
+          "key": "42-impact",
+          "kind": "impact",
+          "text": "Restore the a ancestor to node 0."
+        },
+        {
+          "key": "43-reason",
+          "kind": "reason",
+          "text": "A finished subtree is added to its effective parent: the matching ancestor if one exists, otherwise the original parent."
+        },
+        {
+          "key": "43-code",
+          "kind": "code",
+          "text": "Next, this line runs: Add subtree 4 (size 1) to node 0, its nearest same-letter ancestor."
+        },
+        {
+          "key": "43-impact",
+          "kind": "impact",
+          "text": "Add subtree 4 (size 1) to node 0, its nearest same-letter ancestor."
+        },
+        {
+          "key": "44-reason",
+          "kind": "reason",
+          "text": "Leaving a node removes its letter from the path, so siblings and later branches do not see it as an ancestor."
+        },
+        {
+          "key": "44-code",
+          "kind": "code",
+          "text": "Next, this line runs: Leave node 0."
+        },
+        {
+          "key": "44-impact",
+          "kind": "impact",
+          "text": "Leave node 0."
+        },
+        {
+          "key": "45-reason",
+          "kind": "reason",
+          "text": "Leaving a node removes its letter from the path, so siblings and later branches do not see it as an ancestor."
+        },
+        {
+          "key": "45-code",
+          "kind": "code",
+          "text": "Next, this line runs: No earlier a ancestor; remove a from the path."
+        },
+        {
+          "key": "45-impact",
+          "kind": "impact",
+          "text": "No earlier a ancestor; remove a from the path."
+        },
+        {
+          "key": "46-reason",
+          "kind": "reason",
+          "text": "Every subtree has been added to its effective parent, so the sizes are final."
+        },
+        {
+          "key": "46-code",
+          "kind": "code",
+          "text": "Next, this line runs: Subtree sizes: [5, 1, 2, 1, 1]."
+        },
+        {
+          "key": "46-impact",
+          "kind": "impact",
+          "text": "Subtree sizes: [5, 1, 2, 1, 1]."
+        }
+      ]
+    },
+    {
+      "presetIndex": 5,
+      "label": "Longest chain, 10 nodes",
+      "input": "{\"parent\":[-1,0,1,2,3,4,5,6,7,8],\"s\":\"abcdeabcde\"}",
+      "scenes": [
+        {
+          "key": "0-reason",
+          "kind": "reason",
+          "text": "Every node should end up under its nearest ancestor with the same letter. Walking the tree in DFS order gives those ancestors, so we track the latest node for each letter."
+        },
+        {
+          "key": "0-code",
+          "kind": "code",
+          "text": "Next, this line runs: Start with 10 nodes; the root is node 0."
+        },
+        {
+          "key": "0-impact",
+          "kind": "impact",
+          "text": "Start with 10 nodes; the root is node 0."
+        },
+        {
+          "key": "1-reason",
+          "kind": "reason",
+          "text": "Child lists are built from the parent array first, so the DFS can visit every child of a node."
+        },
+        {
+          "key": "1-code",
+          "kind": "code",
+          "text": "Next, this line runs: Link node 1 as a child of 0."
+        },
+        {
+          "key": "1-impact",
+          "kind": "impact",
+          "text": "Link node 1 as a child of 0."
+        },
+        {
+          "key": "2-reason",
+          "kind": "reason",
+          "text": "Child lists are built from the parent array first, so the DFS can visit every child of a node."
+        },
+        {
+          "key": "2-code",
+          "kind": "code",
+          "text": "Next, this line runs: Link node 2 as a child of 1."
+        },
+        {
+          "key": "2-impact",
+          "kind": "impact",
+          "text": "Link node 2 as a child of 1."
+        },
+        {
+          "key": "3-reason",
+          "kind": "reason",
+          "text": "Child lists are built from the parent array first, so the DFS can visit every child of a node."
+        },
+        {
+          "key": "3-code",
+          "kind": "code",
+          "text": "Next, this line runs: Link node 3 as a child of 2."
+        },
+        {
+          "key": "3-impact",
+          "kind": "impact",
+          "text": "Link node 3 as a child of 2."
+        },
+        {
+          "key": "4-reason",
+          "kind": "reason",
+          "text": "Child lists are built from the parent array first, so the DFS can visit every child of a node."
+        },
+        {
+          "key": "4-code",
+          "kind": "code",
+          "text": "Next, this line runs: Link node 4 as a child of 3."
+        },
+        {
+          "key": "4-impact",
+          "kind": "impact",
+          "text": "Link node 4 as a child of 3."
+        },
+        {
+          "key": "5-reason",
+          "kind": "reason",
+          "text": "Child lists are built from the parent array first, so the DFS can visit every child of a node."
+        },
+        {
+          "key": "5-code",
+          "kind": "code",
+          "text": "Next, this line runs: Link node 5 as a child of 4."
+        },
+        {
+          "key": "5-impact",
+          "kind": "impact",
+          "text": "Link node 5 as a child of 4."
+        },
+        {
+          "key": "6-reason",
+          "kind": "reason",
+          "text": "Child lists are built from the parent array first, so the DFS can visit every child of a node."
+        },
+        {
+          "key": "6-code",
+          "kind": "code",
+          "text": "Next, this line runs: Link node 6 as a child of 5."
+        },
+        {
+          "key": "6-impact",
+          "kind": "impact",
+          "text": "Link node 6 as a child of 5."
+        },
+        {
+          "key": "7-reason",
+          "kind": "reason",
+          "text": "Child lists are built from the parent array first, so the DFS can visit every child of a node."
+        },
+        {
+          "key": "7-code",
+          "kind": "code",
+          "text": "Next, this line runs: Link node 7 as a child of 6."
+        },
+        {
+          "key": "7-impact",
+          "kind": "impact",
+          "text": "Link node 7 as a child of 6."
+        },
+        {
+          "key": "8-reason",
+          "kind": "reason",
+          "text": "Child lists are built from the parent array first, so the DFS can visit every child of a node."
+        },
+        {
+          "key": "8-code",
+          "kind": "code",
+          "text": "Next, this line runs: Link node 8 as a child of 7."
+        },
+        {
+          "key": "8-impact",
+          "kind": "impact",
+          "text": "Link node 8 as a child of 7."
+        },
+        {
+          "key": "9-reason",
+          "kind": "reason",
+          "text": "Child lists are built from the parent array first, so the DFS can visit every child of a node."
+        },
+        {
+          "key": "9-code",
+          "kind": "code",
+          "text": "Next, this line runs: Link node 9 as a child of 8."
+        },
+        {
+          "key": "9-impact",
+          "kind": "impact",
+          "text": "Link node 9 as a child of 8."
+        },
+        {
+          "key": "10-reason",
+          "kind": "reason",
+          "text": "Every node should end up under its nearest ancestor with the same letter. Walking the tree in DFS order gives those ancestors, so we track the latest node for each letter."
+        },
+        {
+          "key": "10-code",
+          "kind": "code",
+          "text": "Next, this line runs: Every subtree starts with size 1."
+        },
+        {
+          "key": "10-impact",
+          "kind": "impact",
+          "text": "Every subtree starts with size 1."
+        },
+        {
+          "key": "11-reason",
+          "kind": "reason",
+          "text": "Every node should end up under its nearest ancestor with the same letter. Walking the tree in DFS order gives those ancestors, so we track the latest node for each letter."
+        },
+        {
+          "key": "11-code",
+          "kind": "code",
+          "text": "Next, this line runs: Push the root onto the stack."
+        },
+        {
+          "key": "11-impact",
+          "kind": "impact",
+          "text": "Push the root onto the stack."
+        },
+        {
+          "key": "12-reason",
+          "kind": "reason",
+          "text": "Entering a node means its ancestors are the nodes already on the path. The latest same-letter entry is the candidate new parent, so we save it before overwriting."
+        },
+        {
+          "key": "12-code",
+          "kind": "code",
+          "text": "Next, this line runs: Enter node 0 (letter a)."
+        },
+        {
+          "key": "12-impact",
+          "kind": "impact",
+          "text": "Enter node 0 (letter a)."
+        },
+        {
+          "key": "13-reason",
+          "kind": "reason",
+          "text": "Entering a node means its ancestors are the nodes already on the path. The latest same-letter entry is the candidate new parent, so we save it before overwriting."
+        },
+        {
+          "key": "13-code",
+          "kind": "code",
+          "text": "Next, this line runs: No ancestor with letter a yet."
+        },
+        {
+          "key": "13-impact",
+          "kind": "impact",
+          "text": "No ancestor with letter a yet."
+        },
+        {
+          "key": "14-reason",
+          "kind": "reason",
+          "text": "Recording this node as the latest one with its letter lets every node in its subtree find it as the nearest same-letter ancestor."
+        },
+        {
+          "key": "14-code",
+          "kind": "code",
+          "text": "Next, this line runs: Node 0 is now the latest a on this path."
+        },
+        {
+          "key": "14-impact",
+          "kind": "impact",
+          "text": "Node 0 is now the latest a on this path."
+        },
+        {
+          "key": "15-reason",
+          "kind": "reason",
+          "text": "The exit marker is pushed before the children, so the node is finished only after its whole subtree has been processed."
+        },
+        {
+          "key": "15-code",
+          "kind": "code",
+          "text": "Next, this line runs: Push the exit marker for node 0, so it runs after its subtree."
+        },
+        {
+          "key": "15-impact",
+          "kind": "impact",
+          "text": "Push the exit marker for node 0, so it runs after its subtree."
+        },
+        {
+          "key": "16-reason",
+          "kind": "reason",
+          "text": "The exit marker is pushed before the children, so the node is finished only after its whole subtree has been processed."
+        },
+        {
+          "key": "16-code",
+          "kind": "code",
+          "text": "Next, this line runs: Push children 1 to visit next."
+        },
+        {
+          "key": "16-impact",
+          "kind": "impact",
+          "text": "Push children 1 to visit next."
+        },
+        {
+          "key": "17-reason",
+          "kind": "reason",
+          "text": "Entering a node means its ancestors are the nodes already on the path. The latest same-letter entry is the candidate new parent, so we save it before overwriting."
+        },
+        {
+          "key": "17-code",
+          "kind": "code",
+          "text": "Next, this line runs: Enter node 1 (letter b)."
+        },
+        {
+          "key": "17-impact",
+          "kind": "impact",
+          "text": "Enter node 1 (letter b)."
+        },
+        {
+          "key": "18-reason",
+          "kind": "reason",
+          "text": "Entering a node means its ancestors are the nodes already on the path. The latest same-letter entry is the candidate new parent, so we save it before overwriting."
+        },
+        {
+          "key": "18-code",
+          "kind": "code",
+          "text": "Next, this line runs: No ancestor with letter b yet."
+        },
+        {
+          "key": "18-impact",
+          "kind": "impact",
+          "text": "No ancestor with letter b yet."
+        },
+        {
+          "key": "19-reason",
+          "kind": "reason",
+          "text": "Recording this node as the latest one with its letter lets every node in its subtree find it as the nearest same-letter ancestor."
+        },
+        {
+          "key": "19-code",
+          "kind": "code",
+          "text": "Next, this line runs: Node 1 is now the latest b on this path."
+        },
+        {
+          "key": "19-impact",
+          "kind": "impact",
+          "text": "Node 1 is now the latest b on this path."
+        },
+        {
+          "key": "20-reason",
+          "kind": "reason",
+          "text": "The exit marker is pushed before the children, so the node is finished only after its whole subtree has been processed."
+        },
+        {
+          "key": "20-code",
+          "kind": "code",
+          "text": "Next, this line runs: Push the exit marker for node 1, so it runs after its subtree."
+        },
+        {
+          "key": "20-impact",
+          "kind": "impact",
+          "text": "Push the exit marker for node 1, so it runs after its subtree."
+        },
+        {
+          "key": "21-reason",
+          "kind": "reason",
+          "text": "The exit marker is pushed before the children, so the node is finished only after its whole subtree has been processed."
+        },
+        {
+          "key": "21-code",
+          "kind": "code",
+          "text": "Next, this line runs: Push children 2 to visit next."
+        },
+        {
+          "key": "21-impact",
+          "kind": "impact",
+          "text": "Push children 2 to visit next."
+        },
+        {
+          "key": "22-reason",
+          "kind": "reason",
+          "text": "Entering a node means its ancestors are the nodes already on the path. The latest same-letter entry is the candidate new parent, so we save it before overwriting."
+        },
+        {
+          "key": "22-code",
+          "kind": "code",
+          "text": "Next, this line runs: Enter node 2 (letter c)."
+        },
+        {
+          "key": "22-impact",
+          "kind": "impact",
+          "text": "Enter node 2 (letter c)."
+        },
+        {
+          "key": "23-reason",
+          "kind": "reason",
+          "text": "Entering a node means its ancestors are the nodes already on the path. The latest same-letter entry is the candidate new parent, so we save it before overwriting."
+        },
+        {
+          "key": "23-code",
+          "kind": "code",
+          "text": "Next, this line runs: No ancestor with letter c yet."
+        },
+        {
+          "key": "23-impact",
+          "kind": "impact",
+          "text": "No ancestor with letter c yet."
+        },
+        {
+          "key": "24-reason",
+          "kind": "reason",
+          "text": "Recording this node as the latest one with its letter lets every node in its subtree find it as the nearest same-letter ancestor."
+        },
+        {
+          "key": "24-code",
+          "kind": "code",
+          "text": "Next, this line runs: Node 2 is now the latest c on this path."
+        },
+        {
+          "key": "24-impact",
+          "kind": "impact",
+          "text": "Node 2 is now the latest c on this path."
+        },
+        {
+          "key": "25-reason",
+          "kind": "reason",
+          "text": "The exit marker is pushed before the children, so the node is finished only after its whole subtree has been processed."
+        },
+        {
+          "key": "25-code",
+          "kind": "code",
+          "text": "Next, this line runs: Push the exit marker for node 2, so it runs after its subtree."
+        },
+        {
+          "key": "25-impact",
+          "kind": "impact",
+          "text": "Push the exit marker for node 2, so it runs after its subtree."
+        },
+        {
+          "key": "26-reason",
+          "kind": "reason",
+          "text": "The exit marker is pushed before the children, so the node is finished only after its whole subtree has been processed."
+        },
+        {
+          "key": "26-code",
+          "kind": "code",
+          "text": "Next, this line runs: Push children 3 to visit next."
+        },
+        {
+          "key": "26-impact",
+          "kind": "impact",
+          "text": "Push children 3 to visit next."
+        },
+        {
+          "key": "27-reason",
+          "kind": "reason",
+          "text": "Entering a node means its ancestors are the nodes already on the path. The latest same-letter entry is the candidate new parent, so we save it before overwriting."
+        },
+        {
+          "key": "27-code",
+          "kind": "code",
+          "text": "Next, this line runs: Enter node 3 (letter d)."
+        },
+        {
+          "key": "27-impact",
+          "kind": "impact",
+          "text": "Enter node 3 (letter d)."
+        },
+        {
+          "key": "28-reason",
+          "kind": "reason",
+          "text": "Entering a node means its ancestors are the nodes already on the path. The latest same-letter entry is the candidate new parent, so we save it before overwriting."
+        },
+        {
+          "key": "28-code",
+          "kind": "code",
+          "text": "Next, this line runs: No ancestor with letter d yet."
+        },
+        {
+          "key": "28-impact",
+          "kind": "impact",
+          "text": "No ancestor with letter d yet."
+        },
+        {
+          "key": "29-reason",
+          "kind": "reason",
+          "text": "Recording this node as the latest one with its letter lets every node in its subtree find it as the nearest same-letter ancestor."
+        },
+        {
+          "key": "29-code",
+          "kind": "code",
+          "text": "Next, this line runs: Node 3 is now the latest d on this path."
+        },
+        {
+          "key": "29-impact",
+          "kind": "impact",
+          "text": "Node 3 is now the latest d on this path."
+        },
+        {
+          "key": "30-reason",
+          "kind": "reason",
+          "text": "The exit marker is pushed before the children, so the node is finished only after its whole subtree has been processed."
+        },
+        {
+          "key": "30-code",
+          "kind": "code",
+          "text": "Next, this line runs: Push the exit marker for node 3, so it runs after its subtree."
+        },
+        {
+          "key": "30-impact",
+          "kind": "impact",
+          "text": "Push the exit marker for node 3, so it runs after its subtree."
+        },
+        {
+          "key": "31-reason",
+          "kind": "reason",
+          "text": "The exit marker is pushed before the children, so the node is finished only after its whole subtree has been processed."
+        },
+        {
+          "key": "31-code",
+          "kind": "code",
+          "text": "Next, this line runs: Push children 4 to visit next."
+        },
+        {
+          "key": "31-impact",
+          "kind": "impact",
+          "text": "Push children 4 to visit next."
+        },
+        {
+          "key": "32-reason",
+          "kind": "reason",
+          "text": "Entering a node means its ancestors are the nodes already on the path. The latest same-letter entry is the candidate new parent, so we save it before overwriting."
+        },
+        {
+          "key": "32-code",
+          "kind": "code",
+          "text": "Next, this line runs: Enter node 4 (letter e)."
+        },
+        {
+          "key": "32-impact",
+          "kind": "impact",
+          "text": "Enter node 4 (letter e)."
+        },
+        {
+          "key": "33-reason",
+          "kind": "reason",
+          "text": "Entering a node means its ancestors are the nodes already on the path. The latest same-letter entry is the candidate new parent, so we save it before overwriting."
+        },
+        {
+          "key": "33-code",
+          "kind": "code",
+          "text": "Next, this line runs: No ancestor with letter e yet."
+        },
+        {
+          "key": "33-impact",
+          "kind": "impact",
+          "text": "No ancestor with letter e yet."
+        },
+        {
+          "key": "34-reason",
+          "kind": "reason",
+          "text": "Recording this node as the latest one with its letter lets every node in its subtree find it as the nearest same-letter ancestor."
+        },
+        {
+          "key": "34-code",
+          "kind": "code",
+          "text": "Next, this line runs: Node 4 is now the latest e on this path."
+        },
+        {
+          "key": "34-impact",
+          "kind": "impact",
+          "text": "Node 4 is now the latest e on this path."
+        },
+        {
+          "key": "35-reason",
+          "kind": "reason",
+          "text": "The exit marker is pushed before the children, so the node is finished only after its whole subtree has been processed."
+        },
+        {
+          "key": "35-code",
+          "kind": "code",
+          "text": "Next, this line runs: Push the exit marker for node 4, so it runs after its subtree."
+        },
+        {
+          "key": "35-impact",
+          "kind": "impact",
+          "text": "Push the exit marker for node 4, so it runs after its subtree."
+        },
+        {
+          "key": "36-reason",
+          "kind": "reason",
+          "text": "The exit marker is pushed before the children, so the node is finished only after its whole subtree has been processed."
+        },
+        {
+          "key": "36-code",
+          "kind": "code",
+          "text": "Next, this line runs: Push children 5 to visit next."
+        },
+        {
+          "key": "36-impact",
+          "kind": "impact",
+          "text": "Push children 5 to visit next."
+        },
+        {
+          "key": "37-reason",
+          "kind": "reason",
+          "text": "Entering a node means its ancestors are the nodes already on the path. The latest same-letter entry is the candidate new parent, so we save it before overwriting."
+        },
+        {
+          "key": "37-code",
+          "kind": "code",
+          "text": "Next, this line runs: Enter node 5 (letter a)."
+        },
+        {
+          "key": "37-impact",
+          "kind": "impact",
+          "text": "Enter node 5 (letter a)."
+        },
+        {
+          "key": "38-reason",
+          "kind": "reason",
+          "text": "Entering a node means its ancestors are the nodes already on the path. The latest same-letter entry is the candidate new parent, so we save it before overwriting."
+        },
+        {
+          "key": "38-code",
+          "kind": "code",
+          "text": "Next, this line runs: Remember the previous a ancestor, node 0."
+        },
+        {
+          "key": "38-impact",
+          "kind": "impact",
+          "text": "Remember the previous a ancestor, node 0."
+        },
+        {
+          "key": "39-reason",
+          "kind": "reason",
+          "text": "Recording this node as the latest one with its letter lets every node in its subtree find it as the nearest same-letter ancestor."
+        },
+        {
+          "key": "39-code",
+          "kind": "code",
+          "text": "Next, this line runs: Node 5 is now the latest a on this path."
+        },
+        {
+          "key": "39-impact",
+          "kind": "impact",
+          "text": "Node 5 is now the latest a on this path."
+        },
+        {
+          "key": "40-reason",
+          "kind": "reason",
+          "text": "The exit marker is pushed before the children, so the node is finished only after its whole subtree has been processed."
+        },
+        {
+          "key": "40-code",
+          "kind": "code",
+          "text": "Next, this line runs: Push the exit marker for node 5, so it runs after its subtree."
+        },
+        {
+          "key": "40-impact",
+          "kind": "impact",
+          "text": "Push the exit marker for node 5, so it runs after its subtree."
+        },
+        {
+          "key": "41-reason",
+          "kind": "reason",
+          "text": "The exit marker is pushed before the children, so the node is finished only after its whole subtree has been processed."
+        },
+        {
+          "key": "41-code",
+          "kind": "code",
+          "text": "Next, this line runs: Push children 6 to visit next."
+        },
+        {
+          "key": "41-impact",
+          "kind": "impact",
+          "text": "Push children 6 to visit next."
+        },
+        {
+          "key": "42-reason",
+          "kind": "reason",
+          "text": "Entering a node means its ancestors are the nodes already on the path. The latest same-letter entry is the candidate new parent, so we save it before overwriting."
+        },
+        {
+          "key": "42-code",
+          "kind": "code",
+          "text": "Next, this line runs: Enter node 6 (letter b)."
+        },
+        {
+          "key": "42-impact",
+          "kind": "impact",
+          "text": "Enter node 6 (letter b)."
+        },
+        {
+          "key": "43-reason",
+          "kind": "reason",
+          "text": "Entering a node means its ancestors are the nodes already on the path. The latest same-letter entry is the candidate new parent, so we save it before overwriting."
+        },
+        {
+          "key": "43-code",
+          "kind": "code",
+          "text": "Next, this line runs: Remember the previous b ancestor, node 1."
+        },
+        {
+          "key": "43-impact",
+          "kind": "impact",
+          "text": "Remember the previous b ancestor, node 1."
+        },
+        {
+          "key": "44-reason",
+          "kind": "reason",
+          "text": "Recording this node as the latest one with its letter lets every node in its subtree find it as the nearest same-letter ancestor."
+        },
+        {
+          "key": "44-code",
+          "kind": "code",
+          "text": "Next, this line runs: Node 6 is now the latest b on this path."
+        },
+        {
+          "key": "44-impact",
+          "kind": "impact",
+          "text": "Node 6 is now the latest b on this path."
+        },
+        {
+          "key": "45-reason",
+          "kind": "reason",
+          "text": "The exit marker is pushed before the children, so the node is finished only after its whole subtree has been processed."
+        },
+        {
+          "key": "45-code",
+          "kind": "code",
+          "text": "Next, this line runs: Push the exit marker for node 6, so it runs after its subtree."
+        },
+        {
+          "key": "45-impact",
+          "kind": "impact",
+          "text": "Push the exit marker for node 6, so it runs after its subtree."
+        },
+        {
+          "key": "46-reason",
+          "kind": "reason",
+          "text": "The exit marker is pushed before the children, so the node is finished only after its whole subtree has been processed."
+        },
+        {
+          "key": "46-code",
+          "kind": "code",
+          "text": "Next, this line runs: Push children 7 to visit next."
+        },
+        {
+          "key": "46-impact",
+          "kind": "impact",
+          "text": "Push children 7 to visit next."
+        },
+        {
+          "key": "47-reason",
+          "kind": "reason",
+          "text": "Entering a node means its ancestors are the nodes already on the path. The latest same-letter entry is the candidate new parent, so we save it before overwriting."
+        },
+        {
+          "key": "47-code",
+          "kind": "code",
+          "text": "Next, this line runs: Enter node 7 (letter c)."
+        },
+        {
+          "key": "47-impact",
+          "kind": "impact",
+          "text": "Enter node 7 (letter c)."
+        },
+        {
+          "key": "48-reason",
+          "kind": "reason",
+          "text": "Entering a node means its ancestors are the nodes already on the path. The latest same-letter entry is the candidate new parent, so we save it before overwriting."
+        },
+        {
+          "key": "48-code",
+          "kind": "code",
+          "text": "Next, this line runs: Remember the previous c ancestor, node 2."
+        },
+        {
+          "key": "48-impact",
+          "kind": "impact",
+          "text": "Remember the previous c ancestor, node 2."
+        },
+        {
+          "key": "49-reason",
+          "kind": "reason",
+          "text": "Recording this node as the latest one with its letter lets every node in its subtree find it as the nearest same-letter ancestor."
+        },
+        {
+          "key": "49-code",
+          "kind": "code",
+          "text": "Next, this line runs: Node 7 is now the latest c on this path."
+        },
+        {
+          "key": "49-impact",
+          "kind": "impact",
+          "text": "Node 7 is now the latest c on this path."
+        },
+        {
+          "key": "50-reason",
+          "kind": "reason",
+          "text": "The exit marker is pushed before the children, so the node is finished only after its whole subtree has been processed."
+        },
+        {
+          "key": "50-code",
+          "kind": "code",
+          "text": "Next, this line runs: Push the exit marker for node 7, so it runs after its subtree."
+        },
+        {
+          "key": "50-impact",
+          "kind": "impact",
+          "text": "Push the exit marker for node 7, so it runs after its subtree."
+        },
+        {
+          "key": "51-reason",
+          "kind": "reason",
+          "text": "The exit marker is pushed before the children, so the node is finished only after its whole subtree has been processed."
+        },
+        {
+          "key": "51-code",
+          "kind": "code",
+          "text": "Next, this line runs: Push children 8 to visit next."
+        },
+        {
+          "key": "51-impact",
+          "kind": "impact",
+          "text": "Push children 8 to visit next."
+        },
+        {
+          "key": "52-reason",
+          "kind": "reason",
+          "text": "Entering a node means its ancestors are the nodes already on the path. The latest same-letter entry is the candidate new parent, so we save it before overwriting."
+        },
+        {
+          "key": "52-code",
+          "kind": "code",
+          "text": "Next, this line runs: Enter node 8 (letter d)."
+        },
+        {
+          "key": "52-impact",
+          "kind": "impact",
+          "text": "Enter node 8 (letter d)."
+        },
+        {
+          "key": "53-reason",
+          "kind": "reason",
+          "text": "Entering a node means its ancestors are the nodes already on the path. The latest same-letter entry is the candidate new parent, so we save it before overwriting."
+        },
+        {
+          "key": "53-code",
+          "kind": "code",
+          "text": "Next, this line runs: Remember the previous d ancestor, node 3."
+        },
+        {
+          "key": "53-impact",
+          "kind": "impact",
+          "text": "Remember the previous d ancestor, node 3."
+        },
+        {
+          "key": "54-reason",
+          "kind": "reason",
+          "text": "Recording this node as the latest one with its letter lets every node in its subtree find it as the nearest same-letter ancestor."
+        },
+        {
+          "key": "54-code",
+          "kind": "code",
+          "text": "Next, this line runs: Node 8 is now the latest d on this path."
+        },
+        {
+          "key": "54-impact",
+          "kind": "impact",
+          "text": "Node 8 is now the latest d on this path."
+        },
+        {
+          "key": "55-reason",
+          "kind": "reason",
+          "text": "The exit marker is pushed before the children, so the node is finished only after its whole subtree has been processed."
+        },
+        {
+          "key": "55-code",
+          "kind": "code",
+          "text": "Next, this line runs: Push the exit marker for node 8, so it runs after its subtree."
+        },
+        {
+          "key": "55-impact",
+          "kind": "impact",
+          "text": "Push the exit marker for node 8, so it runs after its subtree."
+        },
+        {
+          "key": "56-reason",
+          "kind": "reason",
+          "text": "The exit marker is pushed before the children, so the node is finished only after its whole subtree has been processed."
+        },
+        {
+          "key": "56-code",
+          "kind": "code",
+          "text": "Next, this line runs: Push children 9 to visit next."
+        },
+        {
+          "key": "56-impact",
+          "kind": "impact",
+          "text": "Push children 9 to visit next."
+        },
+        {
+          "key": "57-reason",
+          "kind": "reason",
+          "text": "Entering a node means its ancestors are the nodes already on the path. The latest same-letter entry is the candidate new parent, so we save it before overwriting."
+        },
+        {
+          "key": "57-code",
+          "kind": "code",
+          "text": "Next, this line runs: Enter node 9 (letter e)."
+        },
+        {
+          "key": "57-impact",
+          "kind": "impact",
+          "text": "Enter node 9 (letter e)."
+        },
+        {
+          "key": "58-reason",
+          "kind": "reason",
+          "text": "Entering a node means its ancestors are the nodes already on the path. The latest same-letter entry is the candidate new parent, so we save it before overwriting."
+        },
+        {
+          "key": "58-code",
+          "kind": "code",
+          "text": "Next, this line runs: Remember the previous e ancestor, node 4."
+        },
+        {
+          "key": "58-impact",
+          "kind": "impact",
+          "text": "Remember the previous e ancestor, node 4."
+        },
+        {
+          "key": "59-reason",
+          "kind": "reason",
+          "text": "Recording this node as the latest one with its letter lets every node in its subtree find it as the nearest same-letter ancestor."
+        },
+        {
+          "key": "59-code",
+          "kind": "code",
+          "text": "Next, this line runs: Node 9 is now the latest e on this path."
+        },
+        {
+          "key": "59-impact",
+          "kind": "impact",
+          "text": "Node 9 is now the latest e on this path."
+        },
+        {
+          "key": "60-reason",
+          "kind": "reason",
+          "text": "The exit marker is pushed before the children, so the node is finished only after its whole subtree has been processed."
+        },
+        {
+          "key": "60-code",
+          "kind": "code",
+          "text": "Next, this line runs: Push the exit marker for node 9, so it runs after its subtree."
+        },
+        {
+          "key": "60-impact",
+          "kind": "impact",
+          "text": "Push the exit marker for node 9, so it runs after its subtree."
+        },
+        {
+          "key": "61-reason",
+          "kind": "reason",
+          "text": "The exit marker is pushed before the children, so the node is finished only after its whole subtree has been processed."
+        },
+        {
+          "key": "61-code",
+          "kind": "code",
+          "text": "Next, this line runs: Node 9 is a leaf; nothing to push."
+        },
+        {
+          "key": "61-impact",
+          "kind": "impact",
+          "text": "Node 9 is a leaf; nothing to push."
+        },
+        {
+          "key": "62-reason",
+          "kind": "reason",
+          "text": "Leaving a node removes its letter from the path, so siblings and later branches do not see it as an ancestor."
+        },
+        {
+          "key": "62-code",
+          "kind": "code",
+          "text": "Next, this line runs: Leave node 9."
+        },
+        {
+          "key": "62-impact",
+          "kind": "impact",
+          "text": "Leave node 9."
+        },
+        {
+          "key": "63-reason",
+          "kind": "reason",
+          "text": "Leaving a node removes its letter from the path, so siblings and later branches do not see it as an ancestor."
+        },
+        {
+          "key": "63-code",
+          "kind": "code",
+          "text": "Next, this line runs: Restore the e ancestor to node 4."
+        },
+        {
+          "key": "63-impact",
+          "kind": "impact",
+          "text": "Restore the e ancestor to node 4."
+        },
+        {
+          "key": "64-reason",
+          "kind": "reason",
+          "text": "A finished subtree is added to its effective parent: the matching ancestor if one exists, otherwise the original parent."
+        },
+        {
+          "key": "64-code",
+          "kind": "code",
+          "text": "Next, this line runs: Add subtree 9 (size 1) to node 4, its nearest same-letter ancestor."
+        },
+        {
+          "key": "64-impact",
+          "kind": "impact",
+          "text": "Add subtree 9 (size 1) to node 4, its nearest same-letter ancestor."
+        },
+        {
+          "key": "65-reason",
+          "kind": "reason",
+          "text": "Leaving a node removes its letter from the path, so siblings and later branches do not see it as an ancestor."
+        },
+        {
+          "key": "65-code",
+          "kind": "code",
+          "text": "Next, this line runs: Leave node 8."
+        },
+        {
+          "key": "65-impact",
+          "kind": "impact",
+          "text": "Leave node 8."
+        },
+        {
+          "key": "66-reason",
+          "kind": "reason",
+          "text": "Leaving a node removes its letter from the path, so siblings and later branches do not see it as an ancestor."
+        },
+        {
+          "key": "66-code",
+          "kind": "code",
+          "text": "Next, this line runs: Restore the d ancestor to node 3."
+        },
+        {
+          "key": "66-impact",
+          "kind": "impact",
+          "text": "Restore the d ancestor to node 3."
+        },
+        {
+          "key": "67-reason",
+          "kind": "reason",
+          "text": "A finished subtree is added to its effective parent: the matching ancestor if one exists, otherwise the original parent."
+        },
+        {
+          "key": "67-code",
+          "kind": "code",
+          "text": "Next, this line runs: Add subtree 8 (size 1) to node 3, its nearest same-letter ancestor."
+        },
+        {
+          "key": "67-impact",
+          "kind": "impact",
+          "text": "Add subtree 8 (size 1) to node 3, its nearest same-letter ancestor."
+        },
+        {
+          "key": "68-reason",
+          "kind": "reason",
+          "text": "Leaving a node removes its letter from the path, so siblings and later branches do not see it as an ancestor."
+        },
+        {
+          "key": "68-code",
+          "kind": "code",
+          "text": "Next, this line runs: Leave node 7."
+        },
+        {
+          "key": "68-impact",
+          "kind": "impact",
+          "text": "Leave node 7."
+        },
+        {
+          "key": "69-reason",
+          "kind": "reason",
+          "text": "Leaving a node removes its letter from the path, so siblings and later branches do not see it as an ancestor."
+        },
+        {
+          "key": "69-code",
+          "kind": "code",
+          "text": "Next, this line runs: Restore the c ancestor to node 2."
+        },
+        {
+          "key": "69-impact",
+          "kind": "impact",
+          "text": "Restore the c ancestor to node 2."
+        },
+        {
+          "key": "70-reason",
+          "kind": "reason",
+          "text": "A finished subtree is added to its effective parent: the matching ancestor if one exists, otherwise the original parent."
+        },
+        {
+          "key": "70-code",
+          "kind": "code",
+          "text": "Next, this line runs: Add subtree 7 (size 1) to node 2, its nearest same-letter ancestor."
+        },
+        {
+          "key": "70-impact",
+          "kind": "impact",
+          "text": "Add subtree 7 (size 1) to node 2, its nearest same-letter ancestor."
+        },
+        {
+          "key": "71-reason",
+          "kind": "reason",
+          "text": "Leaving a node removes its letter from the path, so siblings and later branches do not see it as an ancestor."
+        },
+        {
+          "key": "71-code",
+          "kind": "code",
+          "text": "Next, this line runs: Leave node 6."
+        },
+        {
+          "key": "71-impact",
+          "kind": "impact",
+          "text": "Leave node 6."
+        },
+        {
+          "key": "72-reason",
+          "kind": "reason",
+          "text": "Leaving a node removes its letter from the path, so siblings and later branches do not see it as an ancestor."
+        },
+        {
+          "key": "72-code",
+          "kind": "code",
+          "text": "Next, this line runs: Restore the b ancestor to node 1."
+        },
+        {
+          "key": "72-impact",
+          "kind": "impact",
+          "text": "Restore the b ancestor to node 1."
+        },
+        {
+          "key": "73-reason",
+          "kind": "reason",
+          "text": "A finished subtree is added to its effective parent: the matching ancestor if one exists, otherwise the original parent."
+        },
+        {
+          "key": "73-code",
+          "kind": "code",
+          "text": "Next, this line runs: Add subtree 6 (size 1) to node 1, its nearest same-letter ancestor."
+        },
+        {
+          "key": "73-impact",
+          "kind": "impact",
+          "text": "Add subtree 6 (size 1) to node 1, its nearest same-letter ancestor."
+        },
+        {
+          "key": "74-reason",
+          "kind": "reason",
+          "text": "Leaving a node removes its letter from the path, so siblings and later branches do not see it as an ancestor."
+        },
+        {
+          "key": "74-code",
+          "kind": "code",
+          "text": "Next, this line runs: Leave node 5."
+        },
+        {
+          "key": "74-impact",
+          "kind": "impact",
+          "text": "Leave node 5."
+        },
+        {
+          "key": "75-reason",
+          "kind": "reason",
+          "text": "Leaving a node removes its letter from the path, so siblings and later branches do not see it as an ancestor."
+        },
+        {
+          "key": "75-code",
+          "kind": "code",
+          "text": "Next, this line runs: Restore the a ancestor to node 0."
+        },
+        {
+          "key": "75-impact",
+          "kind": "impact",
+          "text": "Restore the a ancestor to node 0."
+        },
+        {
+          "key": "76-reason",
+          "kind": "reason",
+          "text": "A finished subtree is added to its effective parent: the matching ancestor if one exists, otherwise the original parent."
+        },
+        {
+          "key": "76-code",
+          "kind": "code",
+          "text": "Next, this line runs: Add subtree 5 (size 1) to node 0, its nearest same-letter ancestor."
+        },
+        {
+          "key": "76-impact",
+          "kind": "impact",
+          "text": "Add subtree 5 (size 1) to node 0, its nearest same-letter ancestor."
+        },
+        {
+          "key": "77-reason",
+          "kind": "reason",
+          "text": "Leaving a node removes its letter from the path, so siblings and later branches do not see it as an ancestor."
+        },
+        {
+          "key": "77-code",
+          "kind": "code",
+          "text": "Next, this line runs: Leave node 4."
+        },
+        {
+          "key": "77-impact",
+          "kind": "impact",
+          "text": "Leave node 4."
+        },
+        {
+          "key": "78-reason",
+          "kind": "reason",
+          "text": "Leaving a node removes its letter from the path, so siblings and later branches do not see it as an ancestor."
+        },
+        {
+          "key": "78-code",
+          "kind": "code",
+          "text": "Next, this line runs: No earlier e ancestor; remove e from the path."
+        },
+        {
+          "key": "78-impact",
+          "kind": "impact",
+          "text": "No earlier e ancestor; remove e from the path."
+        },
+        {
+          "key": "79-reason",
+          "kind": "reason",
+          "text": "A finished subtree is added to its effective parent: the matching ancestor if one exists, otherwise the original parent."
+        },
+        {
+          "key": "79-code",
+          "kind": "code",
+          "text": "Next, this line runs: Add subtree 4 (size 2) to node 3, its original parent."
+        },
+        {
+          "key": "79-impact",
+          "kind": "impact",
+          "text": "Add subtree 4 (size 2) to node 3, its original parent."
+        },
+        {
+          "key": "80-reason",
+          "kind": "reason",
+          "text": "Leaving a node removes its letter from the path, so siblings and later branches do not see it as an ancestor."
+        },
+        {
+          "key": "80-code",
+          "kind": "code",
+          "text": "Next, this line runs: Leave node 3."
+        },
+        {
+          "key": "80-impact",
+          "kind": "impact",
+          "text": "Leave node 3."
+        },
+        {
+          "key": "81-reason",
+          "kind": "reason",
+          "text": "Leaving a node removes its letter from the path, so siblings and later branches do not see it as an ancestor."
+        },
+        {
+          "key": "81-code",
+          "kind": "code",
+          "text": "Next, this line runs: No earlier d ancestor; remove d from the path."
+        },
+        {
+          "key": "81-impact",
+          "kind": "impact",
+          "text": "No earlier d ancestor; remove d from the path."
+        },
+        {
+          "key": "82-reason",
+          "kind": "reason",
+          "text": "A finished subtree is added to its effective parent: the matching ancestor if one exists, otherwise the original parent."
+        },
+        {
+          "key": "82-code",
+          "kind": "code",
+          "text": "Next, this line runs: Add subtree 3 (size 4) to node 2, its original parent."
+        },
+        {
+          "key": "82-impact",
+          "kind": "impact",
+          "text": "Add subtree 3 (size 4) to node 2, its original parent."
+        },
+        {
+          "key": "83-reason",
+          "kind": "reason",
+          "text": "Leaving a node removes its letter from the path, so siblings and later branches do not see it as an ancestor."
+        },
+        {
+          "key": "83-code",
+          "kind": "code",
+          "text": "Next, this line runs: Leave node 2."
+        },
+        {
+          "key": "83-impact",
+          "kind": "impact",
+          "text": "Leave node 2."
+        },
+        {
+          "key": "84-reason",
+          "kind": "reason",
+          "text": "Leaving a node removes its letter from the path, so siblings and later branches do not see it as an ancestor."
+        },
+        {
+          "key": "84-code",
+          "kind": "code",
+          "text": "Next, this line runs: No earlier c ancestor; remove c from the path."
+        },
+        {
+          "key": "84-impact",
+          "kind": "impact",
+          "text": "No earlier c ancestor; remove c from the path."
+        },
+        {
+          "key": "85-reason",
+          "kind": "reason",
+          "text": "A finished subtree is added to its effective parent: the matching ancestor if one exists, otherwise the original parent."
+        },
+        {
+          "key": "85-code",
+          "kind": "code",
+          "text": "Next, this line runs: Add subtree 2 (size 6) to node 1, its original parent."
+        },
+        {
+          "key": "85-impact",
+          "kind": "impact",
+          "text": "Add subtree 2 (size 6) to node 1, its original parent."
+        },
+        {
+          "key": "86-reason",
+          "kind": "reason",
+          "text": "Leaving a node removes its letter from the path, so siblings and later branches do not see it as an ancestor."
+        },
+        {
+          "key": "86-code",
+          "kind": "code",
+          "text": "Next, this line runs: Leave node 1."
+        },
+        {
+          "key": "86-impact",
+          "kind": "impact",
+          "text": "Leave node 1."
+        },
+        {
+          "key": "87-reason",
+          "kind": "reason",
+          "text": "Leaving a node removes its letter from the path, so siblings and later branches do not see it as an ancestor."
+        },
+        {
+          "key": "87-code",
+          "kind": "code",
+          "text": "Next, this line runs: No earlier b ancestor; remove b from the path."
+        },
+        {
+          "key": "87-impact",
+          "kind": "impact",
+          "text": "No earlier b ancestor; remove b from the path."
+        },
+        {
+          "key": "88-reason",
+          "kind": "reason",
+          "text": "A finished subtree is added to its effective parent: the matching ancestor if one exists, otherwise the original parent."
+        },
+        {
+          "key": "88-code",
+          "kind": "code",
+          "text": "Next, this line runs: Add subtree 1 (size 8) to node 0, its original parent."
+        },
+        {
+          "key": "88-impact",
+          "kind": "impact",
+          "text": "Add subtree 1 (size 8) to node 0, its original parent."
+        },
+        {
+          "key": "89-reason",
+          "kind": "reason",
+          "text": "Leaving a node removes its letter from the path, so siblings and later branches do not see it as an ancestor."
+        },
+        {
+          "key": "89-code",
+          "kind": "code",
+          "text": "Next, this line runs: Leave node 0."
+        },
+        {
+          "key": "89-impact",
+          "kind": "impact",
+          "text": "Leave node 0."
+        },
+        {
+          "key": "90-reason",
+          "kind": "reason",
+          "text": "Leaving a node removes its letter from the path, so siblings and later branches do not see it as an ancestor."
+        },
+        {
+          "key": "90-code",
+          "kind": "code",
+          "text": "Next, this line runs: No earlier a ancestor; remove a from the path."
+        },
+        {
+          "key": "90-impact",
+          "kind": "impact",
+          "text": "No earlier a ancestor; remove a from the path."
+        },
+        {
+          "key": "91-reason",
+          "kind": "reason",
+          "text": "Every subtree has been added to its effective parent, so the sizes are final."
+        },
+        {
+          "key": "91-code",
+          "kind": "code",
+          "text": "Next, this line runs: Subtree sizes: [10, 8, 6, 4, 2, 1, 1, 1, 1, 1]."
+        },
+        {
+          "key": "91-impact",
+          "kind": "impact",
+          "text": "Subtree sizes: [10, 8, 6, 4, 2, 1, 1, 1, 1, 1]."
+        }
+      ]
+    },
+    {
+      "presetIndex": 6,
+      "label": "Branching, 10 nodes",
+      "input": "{\"parent\":[-1,0,1,1,1,1,5,3,7,0],\"s\":\"abbebcbbbe\"}",
+      "scenes": [
+        {
+          "key": "0-reason",
+          "kind": "reason",
+          "text": "Every node should end up under its nearest ancestor with the same letter. Walking the tree in DFS order gives those ancestors, so we track the latest node for each letter."
+        },
+        {
+          "key": "0-code",
+          "kind": "code",
+          "text": "Next, this line runs: Start with 10 nodes; the root is node 0."
+        },
+        {
+          "key": "0-impact",
+          "kind": "impact",
+          "text": "Start with 10 nodes; the root is node 0."
+        },
+        {
+          "key": "1-reason",
+          "kind": "reason",
+          "text": "Child lists are built from the parent array first, so the DFS can visit every child of a node."
+        },
+        {
+          "key": "1-code",
+          "kind": "code",
+          "text": "Next, this line runs: Link node 1 as a child of 0."
+        },
+        {
+          "key": "1-impact",
+          "kind": "impact",
+          "text": "Link node 1 as a child of 0."
+        },
+        {
+          "key": "2-reason",
+          "kind": "reason",
+          "text": "Child lists are built from the parent array first, so the DFS can visit every child of a node."
+        },
+        {
+          "key": "2-code",
+          "kind": "code",
+          "text": "Next, this line runs: Link node 2 as a child of 1."
+        },
+        {
+          "key": "2-impact",
+          "kind": "impact",
+          "text": "Link node 2 as a child of 1."
+        },
+        {
+          "key": "3-reason",
+          "kind": "reason",
+          "text": "Child lists are built from the parent array first, so the DFS can visit every child of a node."
+        },
+        {
+          "key": "3-code",
+          "kind": "code",
+          "text": "Next, this line runs: Link node 3 as a child of 1."
+        },
+        {
+          "key": "3-impact",
+          "kind": "impact",
+          "text": "Link node 3 as a child of 1."
+        },
+        {
+          "key": "4-reason",
+          "kind": "reason",
+          "text": "Child lists are built from the parent array first, so the DFS can visit every child of a node."
+        },
+        {
+          "key": "4-code",
+          "kind": "code",
+          "text": "Next, this line runs: Link node 4 as a child of 1."
+        },
+        {
+          "key": "4-impact",
+          "kind": "impact",
+          "text": "Link node 4 as a child of 1."
+        },
+        {
+          "key": "5-reason",
+          "kind": "reason",
+          "text": "Child lists are built from the parent array first, so the DFS can visit every child of a node."
+        },
+        {
+          "key": "5-code",
+          "kind": "code",
+          "text": "Next, this line runs: Link node 5 as a child of 1."
+        },
+        {
+          "key": "5-impact",
+          "kind": "impact",
+          "text": "Link node 5 as a child of 1."
+        },
+        {
+          "key": "6-reason",
+          "kind": "reason",
+          "text": "Child lists are built from the parent array first, so the DFS can visit every child of a node."
+        },
+        {
+          "key": "6-code",
+          "kind": "code",
+          "text": "Next, this line runs: Link node 6 as a child of 5."
+        },
+        {
+          "key": "6-impact",
+          "kind": "impact",
+          "text": "Link node 6 as a child of 5."
+        },
+        {
+          "key": "7-reason",
+          "kind": "reason",
+          "text": "Child lists are built from the parent array first, so the DFS can visit every child of a node."
+        },
+        {
+          "key": "7-code",
+          "kind": "code",
+          "text": "Next, this line runs: Link node 7 as a child of 3."
+        },
+        {
+          "key": "7-impact",
+          "kind": "impact",
+          "text": "Link node 7 as a child of 3."
+        },
+        {
+          "key": "8-reason",
+          "kind": "reason",
+          "text": "Child lists are built from the parent array first, so the DFS can visit every child of a node."
+        },
+        {
+          "key": "8-code",
+          "kind": "code",
+          "text": "Next, this line runs: Link node 8 as a child of 7."
+        },
+        {
+          "key": "8-impact",
+          "kind": "impact",
+          "text": "Link node 8 as a child of 7."
+        },
+        {
+          "key": "9-reason",
+          "kind": "reason",
+          "text": "Child lists are built from the parent array first, so the DFS can visit every child of a node."
+        },
+        {
+          "key": "9-code",
+          "kind": "code",
+          "text": "Next, this line runs: Link node 9 as a child of 0."
+        },
+        {
+          "key": "9-impact",
+          "kind": "impact",
+          "text": "Link node 9 as a child of 0."
+        },
+        {
+          "key": "10-reason",
+          "kind": "reason",
+          "text": "Every node should end up under its nearest ancestor with the same letter. Walking the tree in DFS order gives those ancestors, so we track the latest node for each letter."
+        },
+        {
+          "key": "10-code",
+          "kind": "code",
+          "text": "Next, this line runs: Every subtree starts with size 1."
+        },
+        {
+          "key": "10-impact",
+          "kind": "impact",
+          "text": "Every subtree starts with size 1."
+        },
+        {
+          "key": "11-reason",
+          "kind": "reason",
+          "text": "Every node should end up under its nearest ancestor with the same letter. Walking the tree in DFS order gives those ancestors, so we track the latest node for each letter."
+        },
+        {
+          "key": "11-code",
+          "kind": "code",
+          "text": "Next, this line runs: Push the root onto the stack."
+        },
+        {
+          "key": "11-impact",
+          "kind": "impact",
+          "text": "Push the root onto the stack."
+        },
+        {
+          "key": "12-reason",
+          "kind": "reason",
+          "text": "Entering a node means its ancestors are the nodes already on the path. The latest same-letter entry is the candidate new parent, so we save it before overwriting."
+        },
+        {
+          "key": "12-code",
+          "kind": "code",
+          "text": "Next, this line runs: Enter node 0 (letter a)."
+        },
+        {
+          "key": "12-impact",
+          "kind": "impact",
+          "text": "Enter node 0 (letter a)."
+        },
+        {
+          "key": "13-reason",
+          "kind": "reason",
+          "text": "Entering a node means its ancestors are the nodes already on the path. The latest same-letter entry is the candidate new parent, so we save it before overwriting."
+        },
+        {
+          "key": "13-code",
+          "kind": "code",
+          "text": "Next, this line runs: No ancestor with letter a yet."
+        },
+        {
+          "key": "13-impact",
+          "kind": "impact",
+          "text": "No ancestor with letter a yet."
+        },
+        {
+          "key": "14-reason",
+          "kind": "reason",
+          "text": "Recording this node as the latest one with its letter lets every node in its subtree find it as the nearest same-letter ancestor."
+        },
+        {
+          "key": "14-code",
+          "kind": "code",
+          "text": "Next, this line runs: Node 0 is now the latest a on this path."
+        },
+        {
+          "key": "14-impact",
+          "kind": "impact",
+          "text": "Node 0 is now the latest a on this path."
+        },
+        {
+          "key": "15-reason",
+          "kind": "reason",
+          "text": "The exit marker is pushed before the children, so the node is finished only after its whole subtree has been processed."
+        },
+        {
+          "key": "15-code",
+          "kind": "code",
+          "text": "Next, this line runs: Push the exit marker for node 0, so it runs after its subtree."
+        },
+        {
+          "key": "15-impact",
+          "kind": "impact",
+          "text": "Push the exit marker for node 0, so it runs after its subtree."
+        },
+        {
+          "key": "16-reason",
+          "kind": "reason",
+          "text": "The exit marker is pushed before the children, so the node is finished only after its whole subtree has been processed."
+        },
+        {
+          "key": "16-code",
+          "kind": "code",
+          "text": "Next, this line runs: Push children 9, 1 to visit next."
+        },
+        {
+          "key": "16-impact",
+          "kind": "impact",
+          "text": "Push children 9, 1 to visit next."
+        },
+        {
+          "key": "17-reason",
+          "kind": "reason",
+          "text": "Entering a node means its ancestors are the nodes already on the path. The latest same-letter entry is the candidate new parent, so we save it before overwriting."
+        },
+        {
+          "key": "17-code",
+          "kind": "code",
+          "text": "Next, this line runs: Enter node 1 (letter b)."
+        },
+        {
+          "key": "17-impact",
+          "kind": "impact",
+          "text": "Enter node 1 (letter b)."
+        },
+        {
+          "key": "18-reason",
+          "kind": "reason",
+          "text": "Entering a node means its ancestors are the nodes already on the path. The latest same-letter entry is the candidate new parent, so we save it before overwriting."
+        },
+        {
+          "key": "18-code",
+          "kind": "code",
+          "text": "Next, this line runs: No ancestor with letter b yet."
+        },
+        {
+          "key": "18-impact",
+          "kind": "impact",
+          "text": "No ancestor with letter b yet."
+        },
+        {
+          "key": "19-reason",
+          "kind": "reason",
+          "text": "Recording this node as the latest one with its letter lets every node in its subtree find it as the nearest same-letter ancestor."
+        },
+        {
+          "key": "19-code",
+          "kind": "code",
+          "text": "Next, this line runs: Node 1 is now the latest b on this path."
+        },
+        {
+          "key": "19-impact",
+          "kind": "impact",
+          "text": "Node 1 is now the latest b on this path."
+        },
+        {
+          "key": "20-reason",
+          "kind": "reason",
+          "text": "The exit marker is pushed before the children, so the node is finished only after its whole subtree has been processed."
+        },
+        {
+          "key": "20-code",
+          "kind": "code",
+          "text": "Next, this line runs: Push the exit marker for node 1, so it runs after its subtree."
+        },
+        {
+          "key": "20-impact",
+          "kind": "impact",
+          "text": "Push the exit marker for node 1, so it runs after its subtree."
+        },
+        {
+          "key": "21-reason",
+          "kind": "reason",
+          "text": "The exit marker is pushed before the children, so the node is finished only after its whole subtree has been processed."
+        },
+        {
+          "key": "21-code",
+          "kind": "code",
+          "text": "Next, this line runs: Push children 5, 4, 3, 2 to visit next."
+        },
+        {
+          "key": "21-impact",
+          "kind": "impact",
+          "text": "Push children 5, 4, 3, 2 to visit next."
+        },
+        {
+          "key": "22-reason",
+          "kind": "reason",
+          "text": "Entering a node means its ancestors are the nodes already on the path. The latest same-letter entry is the candidate new parent, so we save it before overwriting."
+        },
+        {
+          "key": "22-code",
+          "kind": "code",
+          "text": "Next, this line runs: Enter node 2 (letter b)."
+        },
+        {
+          "key": "22-impact",
+          "kind": "impact",
+          "text": "Enter node 2 (letter b)."
+        },
+        {
+          "key": "23-reason",
+          "kind": "reason",
+          "text": "Entering a node means its ancestors are the nodes already on the path. The latest same-letter entry is the candidate new parent, so we save it before overwriting."
+        },
+        {
+          "key": "23-code",
+          "kind": "code",
+          "text": "Next, this line runs: Remember the previous b ancestor, node 1."
+        },
+        {
+          "key": "23-impact",
+          "kind": "impact",
+          "text": "Remember the previous b ancestor, node 1."
+        },
+        {
+          "key": "24-reason",
+          "kind": "reason",
+          "text": "Recording this node as the latest one with its letter lets every node in its subtree find it as the nearest same-letter ancestor."
+        },
+        {
+          "key": "24-code",
+          "kind": "code",
+          "text": "Next, this line runs: Node 2 is now the latest b on this path."
+        },
+        {
+          "key": "24-impact",
+          "kind": "impact",
+          "text": "Node 2 is now the latest b on this path."
+        },
+        {
+          "key": "25-reason",
+          "kind": "reason",
+          "text": "The exit marker is pushed before the children, so the node is finished only after its whole subtree has been processed."
+        },
+        {
+          "key": "25-code",
+          "kind": "code",
+          "text": "Next, this line runs: Push the exit marker for node 2, so it runs after its subtree."
+        },
+        {
+          "key": "25-impact",
+          "kind": "impact",
+          "text": "Push the exit marker for node 2, so it runs after its subtree."
+        },
+        {
+          "key": "26-reason",
+          "kind": "reason",
+          "text": "The exit marker is pushed before the children, so the node is finished only after its whole subtree has been processed."
+        },
+        {
+          "key": "26-code",
+          "kind": "code",
+          "text": "Next, this line runs: Node 2 is a leaf; nothing to push."
+        },
+        {
+          "key": "26-impact",
+          "kind": "impact",
+          "text": "Node 2 is a leaf; nothing to push."
+        },
+        {
+          "key": "27-reason",
+          "kind": "reason",
+          "text": "Leaving a node removes its letter from the path, so siblings and later branches do not see it as an ancestor."
+        },
+        {
+          "key": "27-code",
+          "kind": "code",
+          "text": "Next, this line runs: Leave node 2."
+        },
+        {
+          "key": "27-impact",
+          "kind": "impact",
+          "text": "Leave node 2."
+        },
+        {
+          "key": "28-reason",
+          "kind": "reason",
+          "text": "Leaving a node removes its letter from the path, so siblings and later branches do not see it as an ancestor."
+        },
+        {
+          "key": "28-code",
+          "kind": "code",
+          "text": "Next, this line runs: Restore the b ancestor to node 1."
+        },
+        {
+          "key": "28-impact",
+          "kind": "impact",
+          "text": "Restore the b ancestor to node 1."
+        },
+        {
+          "key": "29-reason",
+          "kind": "reason",
+          "text": "A finished subtree is added to its effective parent: the matching ancestor if one exists, otherwise the original parent."
+        },
+        {
+          "key": "29-code",
+          "kind": "code",
+          "text": "Next, this line runs: Add subtree 2 (size 1) to node 1, its nearest same-letter ancestor."
+        },
+        {
+          "key": "29-impact",
+          "kind": "impact",
+          "text": "Add subtree 2 (size 1) to node 1, its nearest same-letter ancestor."
+        },
+        {
+          "key": "30-reason",
+          "kind": "reason",
+          "text": "Entering a node means its ancestors are the nodes already on the path. The latest same-letter entry is the candidate new parent, so we save it before overwriting."
+        },
+        {
+          "key": "30-code",
+          "kind": "code",
+          "text": "Next, this line runs: Enter node 3 (letter e)."
+        },
+        {
+          "key": "30-impact",
+          "kind": "impact",
+          "text": "Enter node 3 (letter e)."
+        },
+        {
+          "key": "31-reason",
+          "kind": "reason",
+          "text": "Entering a node means its ancestors are the nodes already on the path. The latest same-letter entry is the candidate new parent, so we save it before overwriting."
+        },
+        {
+          "key": "31-code",
+          "kind": "code",
+          "text": "Next, this line runs: No ancestor with letter e yet."
+        },
+        {
+          "key": "31-impact",
+          "kind": "impact",
+          "text": "No ancestor with letter e yet."
+        },
+        {
+          "key": "32-reason",
+          "kind": "reason",
+          "text": "Recording this node as the latest one with its letter lets every node in its subtree find it as the nearest same-letter ancestor."
+        },
+        {
+          "key": "32-code",
+          "kind": "code",
+          "text": "Next, this line runs: Node 3 is now the latest e on this path."
+        },
+        {
+          "key": "32-impact",
+          "kind": "impact",
+          "text": "Node 3 is now the latest e on this path."
+        },
+        {
+          "key": "33-reason",
+          "kind": "reason",
+          "text": "The exit marker is pushed before the children, so the node is finished only after its whole subtree has been processed."
+        },
+        {
+          "key": "33-code",
+          "kind": "code",
+          "text": "Next, this line runs: Push the exit marker for node 3, so it runs after its subtree."
+        },
+        {
+          "key": "33-impact",
+          "kind": "impact",
+          "text": "Push the exit marker for node 3, so it runs after its subtree."
+        },
+        {
+          "key": "34-reason",
+          "kind": "reason",
+          "text": "The exit marker is pushed before the children, so the node is finished only after its whole subtree has been processed."
+        },
+        {
+          "key": "34-code",
+          "kind": "code",
+          "text": "Next, this line runs: Push children 7 to visit next."
+        },
+        {
+          "key": "34-impact",
+          "kind": "impact",
+          "text": "Push children 7 to visit next."
+        },
+        {
+          "key": "35-reason",
+          "kind": "reason",
+          "text": "Entering a node means its ancestors are the nodes already on the path. The latest same-letter entry is the candidate new parent, so we save it before overwriting."
+        },
+        {
+          "key": "35-code",
+          "kind": "code",
+          "text": "Next, this line runs: Enter node 7 (letter b)."
+        },
+        {
+          "key": "35-impact",
+          "kind": "impact",
+          "text": "Enter node 7 (letter b)."
+        },
+        {
+          "key": "36-reason",
+          "kind": "reason",
+          "text": "Entering a node means its ancestors are the nodes already on the path. The latest same-letter entry is the candidate new parent, so we save it before overwriting."
+        },
+        {
+          "key": "36-code",
+          "kind": "code",
+          "text": "Next, this line runs: Remember the previous b ancestor, node 1."
+        },
+        {
+          "key": "36-impact",
+          "kind": "impact",
+          "text": "Remember the previous b ancestor, node 1."
+        },
+        {
+          "key": "37-reason",
+          "kind": "reason",
+          "text": "Recording this node as the latest one with its letter lets every node in its subtree find it as the nearest same-letter ancestor."
+        },
+        {
+          "key": "37-code",
+          "kind": "code",
+          "text": "Next, this line runs: Node 7 is now the latest b on this path."
+        },
+        {
+          "key": "37-impact",
+          "kind": "impact",
+          "text": "Node 7 is now the latest b on this path."
+        },
+        {
+          "key": "38-reason",
+          "kind": "reason",
+          "text": "The exit marker is pushed before the children, so the node is finished only after its whole subtree has been processed."
+        },
+        {
+          "key": "38-code",
+          "kind": "code",
+          "text": "Next, this line runs: Push the exit marker for node 7, so it runs after its subtree."
+        },
+        {
+          "key": "38-impact",
+          "kind": "impact",
+          "text": "Push the exit marker for node 7, so it runs after its subtree."
+        },
+        {
+          "key": "39-reason",
+          "kind": "reason",
+          "text": "The exit marker is pushed before the children, so the node is finished only after its whole subtree has been processed."
+        },
+        {
+          "key": "39-code",
+          "kind": "code",
+          "text": "Next, this line runs: Push children 8 to visit next."
+        },
+        {
+          "key": "39-impact",
+          "kind": "impact",
+          "text": "Push children 8 to visit next."
+        },
+        {
+          "key": "40-reason",
+          "kind": "reason",
+          "text": "Entering a node means its ancestors are the nodes already on the path. The latest same-letter entry is the candidate new parent, so we save it before overwriting."
+        },
+        {
+          "key": "40-code",
+          "kind": "code",
+          "text": "Next, this line runs: Enter node 8 (letter b)."
+        },
+        {
+          "key": "40-impact",
+          "kind": "impact",
+          "text": "Enter node 8 (letter b)."
+        },
+        {
+          "key": "41-reason",
+          "kind": "reason",
+          "text": "Entering a node means its ancestors are the nodes already on the path. The latest same-letter entry is the candidate new parent, so we save it before overwriting."
+        },
+        {
+          "key": "41-code",
+          "kind": "code",
+          "text": "Next, this line runs: Remember the previous b ancestor, node 7."
+        },
+        {
+          "key": "41-impact",
+          "kind": "impact",
+          "text": "Remember the previous b ancestor, node 7."
+        },
+        {
+          "key": "42-reason",
+          "kind": "reason",
+          "text": "Recording this node as the latest one with its letter lets every node in its subtree find it as the nearest same-letter ancestor."
+        },
+        {
+          "key": "42-code",
+          "kind": "code",
+          "text": "Next, this line runs: Node 8 is now the latest b on this path."
+        },
+        {
+          "key": "42-impact",
+          "kind": "impact",
+          "text": "Node 8 is now the latest b on this path."
+        },
+        {
+          "key": "43-reason",
+          "kind": "reason",
+          "text": "The exit marker is pushed before the children, so the node is finished only after its whole subtree has been processed."
+        },
+        {
+          "key": "43-code",
+          "kind": "code",
+          "text": "Next, this line runs: Push the exit marker for node 8, so it runs after its subtree."
+        },
+        {
+          "key": "43-impact",
+          "kind": "impact",
+          "text": "Push the exit marker for node 8, so it runs after its subtree."
+        },
+        {
+          "key": "44-reason",
+          "kind": "reason",
+          "text": "The exit marker is pushed before the children, so the node is finished only after its whole subtree has been processed."
+        },
+        {
+          "key": "44-code",
+          "kind": "code",
+          "text": "Next, this line runs: Node 8 is a leaf; nothing to push."
+        },
+        {
+          "key": "44-impact",
+          "kind": "impact",
+          "text": "Node 8 is a leaf; nothing to push."
+        },
+        {
+          "key": "45-reason",
+          "kind": "reason",
+          "text": "Leaving a node removes its letter from the path, so siblings and later branches do not see it as an ancestor."
+        },
+        {
+          "key": "45-code",
+          "kind": "code",
+          "text": "Next, this line runs: Leave node 8."
+        },
+        {
+          "key": "45-impact",
+          "kind": "impact",
+          "text": "Leave node 8."
+        },
+        {
+          "key": "46-reason",
+          "kind": "reason",
+          "text": "Leaving a node removes its letter from the path, so siblings and later branches do not see it as an ancestor."
+        },
+        {
+          "key": "46-code",
+          "kind": "code",
+          "text": "Next, this line runs: Restore the b ancestor to node 7."
+        },
+        {
+          "key": "46-impact",
+          "kind": "impact",
+          "text": "Restore the b ancestor to node 7."
+        },
+        {
+          "key": "47-reason",
+          "kind": "reason",
+          "text": "A finished subtree is added to its effective parent: the matching ancestor if one exists, otherwise the original parent."
+        },
+        {
+          "key": "47-code",
+          "kind": "code",
+          "text": "Next, this line runs: Add subtree 8 (size 1) to node 7, its nearest same-letter ancestor."
+        },
+        {
+          "key": "47-impact",
+          "kind": "impact",
+          "text": "Add subtree 8 (size 1) to node 7, its nearest same-letter ancestor."
+        },
+        {
+          "key": "48-reason",
+          "kind": "reason",
+          "text": "Leaving a node removes its letter from the path, so siblings and later branches do not see it as an ancestor."
+        },
+        {
+          "key": "48-code",
+          "kind": "code",
+          "text": "Next, this line runs: Leave node 7."
+        },
+        {
+          "key": "48-impact",
+          "kind": "impact",
+          "text": "Leave node 7."
+        },
+        {
+          "key": "49-reason",
+          "kind": "reason",
+          "text": "Leaving a node removes its letter from the path, so siblings and later branches do not see it as an ancestor."
+        },
+        {
+          "key": "49-code",
+          "kind": "code",
+          "text": "Next, this line runs: Restore the b ancestor to node 1."
+        },
+        {
+          "key": "49-impact",
+          "kind": "impact",
+          "text": "Restore the b ancestor to node 1."
+        },
+        {
+          "key": "50-reason",
+          "kind": "reason",
+          "text": "A finished subtree is added to its effective parent: the matching ancestor if one exists, otherwise the original parent."
+        },
+        {
+          "key": "50-code",
+          "kind": "code",
+          "text": "Next, this line runs: Add subtree 7 (size 2) to node 1, its nearest same-letter ancestor."
+        },
+        {
+          "key": "50-impact",
+          "kind": "impact",
+          "text": "Add subtree 7 (size 2) to node 1, its nearest same-letter ancestor."
+        },
+        {
+          "key": "51-reason",
+          "kind": "reason",
+          "text": "Leaving a node removes its letter from the path, so siblings and later branches do not see it as an ancestor."
+        },
+        {
+          "key": "51-code",
+          "kind": "code",
+          "text": "Next, this line runs: Leave node 3."
+        },
+        {
+          "key": "51-impact",
+          "kind": "impact",
+          "text": "Leave node 3."
+        },
+        {
+          "key": "52-reason",
+          "kind": "reason",
+          "text": "Leaving a node removes its letter from the path, so siblings and later branches do not see it as an ancestor."
+        },
+        {
+          "key": "52-code",
+          "kind": "code",
+          "text": "Next, this line runs: No earlier e ancestor; remove e from the path."
+        },
+        {
+          "key": "52-impact",
+          "kind": "impact",
+          "text": "No earlier e ancestor; remove e from the path."
+        },
+        {
+          "key": "53-reason",
+          "kind": "reason",
+          "text": "A finished subtree is added to its effective parent: the matching ancestor if one exists, otherwise the original parent."
+        },
+        {
+          "key": "53-code",
+          "kind": "code",
+          "text": "Next, this line runs: Add subtree 3 (size 1) to node 1, its original parent."
+        },
+        {
+          "key": "53-impact",
+          "kind": "impact",
+          "text": "Add subtree 3 (size 1) to node 1, its original parent."
+        },
+        {
+          "key": "54-reason",
+          "kind": "reason",
+          "text": "Entering a node means its ancestors are the nodes already on the path. The latest same-letter entry is the candidate new parent, so we save it before overwriting."
+        },
+        {
+          "key": "54-code",
+          "kind": "code",
+          "text": "Next, this line runs: Enter node 4 (letter b)."
+        },
+        {
+          "key": "54-impact",
+          "kind": "impact",
+          "text": "Enter node 4 (letter b)."
+        },
+        {
+          "key": "55-reason",
+          "kind": "reason",
+          "text": "Entering a node means its ancestors are the nodes already on the path. The latest same-letter entry is the candidate new parent, so we save it before overwriting."
+        },
+        {
+          "key": "55-code",
+          "kind": "code",
+          "text": "Next, this line runs: Remember the previous b ancestor, node 1."
+        },
+        {
+          "key": "55-impact",
+          "kind": "impact",
+          "text": "Remember the previous b ancestor, node 1."
+        },
+        {
+          "key": "56-reason",
+          "kind": "reason",
+          "text": "Recording this node as the latest one with its letter lets every node in its subtree find it as the nearest same-letter ancestor."
+        },
+        {
+          "key": "56-code",
+          "kind": "code",
+          "text": "Next, this line runs: Node 4 is now the latest b on this path."
+        },
+        {
+          "key": "56-impact",
+          "kind": "impact",
+          "text": "Node 4 is now the latest b on this path."
+        },
+        {
+          "key": "57-reason",
+          "kind": "reason",
+          "text": "The exit marker is pushed before the children, so the node is finished only after its whole subtree has been processed."
+        },
+        {
+          "key": "57-code",
+          "kind": "code",
+          "text": "Next, this line runs: Push the exit marker for node 4, so it runs after its subtree."
+        },
+        {
+          "key": "57-impact",
+          "kind": "impact",
+          "text": "Push the exit marker for node 4, so it runs after its subtree."
+        },
+        {
+          "key": "58-reason",
+          "kind": "reason",
+          "text": "The exit marker is pushed before the children, so the node is finished only after its whole subtree has been processed."
+        },
+        {
+          "key": "58-code",
+          "kind": "code",
+          "text": "Next, this line runs: Node 4 is a leaf; nothing to push."
+        },
+        {
+          "key": "58-impact",
+          "kind": "impact",
+          "text": "Node 4 is a leaf; nothing to push."
+        },
+        {
+          "key": "59-reason",
+          "kind": "reason",
+          "text": "Leaving a node removes its letter from the path, so siblings and later branches do not see it as an ancestor."
+        },
+        {
+          "key": "59-code",
+          "kind": "code",
+          "text": "Next, this line runs: Leave node 4."
+        },
+        {
+          "key": "59-impact",
+          "kind": "impact",
+          "text": "Leave node 4."
+        },
+        {
+          "key": "60-reason",
+          "kind": "reason",
+          "text": "Leaving a node removes its letter from the path, so siblings and later branches do not see it as an ancestor."
+        },
+        {
+          "key": "60-code",
+          "kind": "code",
+          "text": "Next, this line runs: Restore the b ancestor to node 1."
+        },
+        {
+          "key": "60-impact",
+          "kind": "impact",
+          "text": "Restore the b ancestor to node 1."
+        },
+        {
+          "key": "61-reason",
+          "kind": "reason",
+          "text": "A finished subtree is added to its effective parent: the matching ancestor if one exists, otherwise the original parent."
+        },
+        {
+          "key": "61-code",
+          "kind": "code",
+          "text": "Next, this line runs: Add subtree 4 (size 1) to node 1, its nearest same-letter ancestor."
+        },
+        {
+          "key": "61-impact",
+          "kind": "impact",
+          "text": "Add subtree 4 (size 1) to node 1, its nearest same-letter ancestor."
+        },
+        {
+          "key": "62-reason",
+          "kind": "reason",
+          "text": "Entering a node means its ancestors are the nodes already on the path. The latest same-letter entry is the candidate new parent, so we save it before overwriting."
+        },
+        {
+          "key": "62-code",
+          "kind": "code",
+          "text": "Next, this line runs: Enter node 5 (letter c)."
+        },
+        {
+          "key": "62-impact",
+          "kind": "impact",
+          "text": "Enter node 5 (letter c)."
+        },
+        {
+          "key": "63-reason",
+          "kind": "reason",
+          "text": "Entering a node means its ancestors are the nodes already on the path. The latest same-letter entry is the candidate new parent, so we save it before overwriting."
+        },
+        {
+          "key": "63-code",
+          "kind": "code",
+          "text": "Next, this line runs: No ancestor with letter c yet."
+        },
+        {
+          "key": "63-impact",
+          "kind": "impact",
+          "text": "No ancestor with letter c yet."
+        },
+        {
+          "key": "64-reason",
+          "kind": "reason",
+          "text": "Recording this node as the latest one with its letter lets every node in its subtree find it as the nearest same-letter ancestor."
+        },
+        {
+          "key": "64-code",
+          "kind": "code",
+          "text": "Next, this line runs: Node 5 is now the latest c on this path."
+        },
+        {
+          "key": "64-impact",
+          "kind": "impact",
+          "text": "Node 5 is now the latest c on this path."
+        },
+        {
+          "key": "65-reason",
+          "kind": "reason",
+          "text": "The exit marker is pushed before the children, so the node is finished only after its whole subtree has been processed."
+        },
+        {
+          "key": "65-code",
+          "kind": "code",
+          "text": "Next, this line runs: Push the exit marker for node 5, so it runs after its subtree."
+        },
+        {
+          "key": "65-impact",
+          "kind": "impact",
+          "text": "Push the exit marker for node 5, so it runs after its subtree."
+        },
+        {
+          "key": "66-reason",
+          "kind": "reason",
+          "text": "The exit marker is pushed before the children, so the node is finished only after its whole subtree has been processed."
+        },
+        {
+          "key": "66-code",
+          "kind": "code",
+          "text": "Next, this line runs: Push children 6 to visit next."
+        },
+        {
+          "key": "66-impact",
+          "kind": "impact",
+          "text": "Push children 6 to visit next."
+        },
+        {
+          "key": "67-reason",
+          "kind": "reason",
+          "text": "Entering a node means its ancestors are the nodes already on the path. The latest same-letter entry is the candidate new parent, so we save it before overwriting."
+        },
+        {
+          "key": "67-code",
+          "kind": "code",
+          "text": "Next, this line runs: Enter node 6 (letter b)."
+        },
+        {
+          "key": "67-impact",
+          "kind": "impact",
+          "text": "Enter node 6 (letter b)."
+        },
+        {
+          "key": "68-reason",
+          "kind": "reason",
+          "text": "Entering a node means its ancestors are the nodes already on the path. The latest same-letter entry is the candidate new parent, so we save it before overwriting."
+        },
+        {
+          "key": "68-code",
+          "kind": "code",
+          "text": "Next, this line runs: Remember the previous b ancestor, node 1."
+        },
+        {
+          "key": "68-impact",
+          "kind": "impact",
+          "text": "Remember the previous b ancestor, node 1."
+        },
+        {
+          "key": "69-reason",
+          "kind": "reason",
+          "text": "Recording this node as the latest one with its letter lets every node in its subtree find it as the nearest same-letter ancestor."
+        },
+        {
+          "key": "69-code",
+          "kind": "code",
+          "text": "Next, this line runs: Node 6 is now the latest b on this path."
+        },
+        {
+          "key": "69-impact",
+          "kind": "impact",
+          "text": "Node 6 is now the latest b on this path."
+        },
+        {
+          "key": "70-reason",
+          "kind": "reason",
+          "text": "The exit marker is pushed before the children, so the node is finished only after its whole subtree has been processed."
+        },
+        {
+          "key": "70-code",
+          "kind": "code",
+          "text": "Next, this line runs: Push the exit marker for node 6, so it runs after its subtree."
+        },
+        {
+          "key": "70-impact",
+          "kind": "impact",
+          "text": "Push the exit marker for node 6, so it runs after its subtree."
+        },
+        {
+          "key": "71-reason",
+          "kind": "reason",
+          "text": "The exit marker is pushed before the children, so the node is finished only after its whole subtree has been processed."
+        },
+        {
+          "key": "71-code",
+          "kind": "code",
+          "text": "Next, this line runs: Node 6 is a leaf; nothing to push."
+        },
+        {
+          "key": "71-impact",
+          "kind": "impact",
+          "text": "Node 6 is a leaf; nothing to push."
+        },
+        {
+          "key": "72-reason",
+          "kind": "reason",
+          "text": "Leaving a node removes its letter from the path, so siblings and later branches do not see it as an ancestor."
+        },
+        {
+          "key": "72-code",
+          "kind": "code",
+          "text": "Next, this line runs: Leave node 6."
+        },
+        {
+          "key": "72-impact",
+          "kind": "impact",
+          "text": "Leave node 6."
+        },
+        {
+          "key": "73-reason",
+          "kind": "reason",
+          "text": "Leaving a node removes its letter from the path, so siblings and later branches do not see it as an ancestor."
+        },
+        {
+          "key": "73-code",
+          "kind": "code",
+          "text": "Next, this line runs: Restore the b ancestor to node 1."
+        },
+        {
+          "key": "73-impact",
+          "kind": "impact",
+          "text": "Restore the b ancestor to node 1."
+        },
+        {
+          "key": "74-reason",
+          "kind": "reason",
+          "text": "A finished subtree is added to its effective parent: the matching ancestor if one exists, otherwise the original parent."
+        },
+        {
+          "key": "74-code",
+          "kind": "code",
+          "text": "Next, this line runs: Add subtree 6 (size 1) to node 1, its nearest same-letter ancestor."
+        },
+        {
+          "key": "74-impact",
+          "kind": "impact",
+          "text": "Add subtree 6 (size 1) to node 1, its nearest same-letter ancestor."
+        },
+        {
+          "key": "75-reason",
+          "kind": "reason",
+          "text": "Leaving a node removes its letter from the path, so siblings and later branches do not see it as an ancestor."
+        },
+        {
+          "key": "75-code",
+          "kind": "code",
+          "text": "Next, this line runs: Leave node 5."
+        },
+        {
+          "key": "75-impact",
+          "kind": "impact",
+          "text": "Leave node 5."
+        },
+        {
+          "key": "76-reason",
+          "kind": "reason",
+          "text": "Leaving a node removes its letter from the path, so siblings and later branches do not see it as an ancestor."
+        },
+        {
+          "key": "76-code",
+          "kind": "code",
+          "text": "Next, this line runs: No earlier c ancestor; remove c from the path."
+        },
+        {
+          "key": "76-impact",
+          "kind": "impact",
+          "text": "No earlier c ancestor; remove c from the path."
+        },
+        {
+          "key": "77-reason",
+          "kind": "reason",
+          "text": "A finished subtree is added to its effective parent: the matching ancestor if one exists, otherwise the original parent."
+        },
+        {
+          "key": "77-code",
+          "kind": "code",
+          "text": "Next, this line runs: Add subtree 5 (size 1) to node 1, its original parent."
+        },
+        {
+          "key": "77-impact",
+          "kind": "impact",
+          "text": "Add subtree 5 (size 1) to node 1, its original parent."
+        },
+        {
+          "key": "78-reason",
+          "kind": "reason",
+          "text": "Leaving a node removes its letter from the path, so siblings and later branches do not see it as an ancestor."
+        },
+        {
+          "key": "78-code",
+          "kind": "code",
+          "text": "Next, this line runs: Leave node 1."
+        },
+        {
+          "key": "78-impact",
+          "kind": "impact",
+          "text": "Leave node 1."
+        },
+        {
+          "key": "79-reason",
+          "kind": "reason",
+          "text": "Leaving a node removes its letter from the path, so siblings and later branches do not see it as an ancestor."
+        },
+        {
+          "key": "79-code",
+          "kind": "code",
+          "text": "Next, this line runs: No earlier b ancestor; remove b from the path."
+        },
+        {
+          "key": "79-impact",
+          "kind": "impact",
+          "text": "No earlier b ancestor; remove b from the path."
+        },
+        {
+          "key": "80-reason",
+          "kind": "reason",
+          "text": "A finished subtree is added to its effective parent: the matching ancestor if one exists, otherwise the original parent."
+        },
+        {
+          "key": "80-code",
+          "kind": "code",
+          "text": "Next, this line runs: Add subtree 1 (size 8) to node 0, its original parent."
+        },
+        {
+          "key": "80-impact",
+          "kind": "impact",
+          "text": "Add subtree 1 (size 8) to node 0, its original parent."
+        },
+        {
+          "key": "81-reason",
+          "kind": "reason",
+          "text": "Entering a node means its ancestors are the nodes already on the path. The latest same-letter entry is the candidate new parent, so we save it before overwriting."
+        },
+        {
+          "key": "81-code",
+          "kind": "code",
+          "text": "Next, this line runs: Enter node 9 (letter e)."
+        },
+        {
+          "key": "81-impact",
+          "kind": "impact",
+          "text": "Enter node 9 (letter e)."
+        },
+        {
+          "key": "82-reason",
+          "kind": "reason",
+          "text": "Entering a node means its ancestors are the nodes already on the path. The latest same-letter entry is the candidate new parent, so we save it before overwriting."
+        },
+        {
+          "key": "82-code",
+          "kind": "code",
+          "text": "Next, this line runs: No ancestor with letter e yet."
+        },
+        {
+          "key": "82-impact",
+          "kind": "impact",
+          "text": "No ancestor with letter e yet."
+        },
+        {
+          "key": "83-reason",
+          "kind": "reason",
+          "text": "Recording this node as the latest one with its letter lets every node in its subtree find it as the nearest same-letter ancestor."
+        },
+        {
+          "key": "83-code",
+          "kind": "code",
+          "text": "Next, this line runs: Node 9 is now the latest e on this path."
+        },
+        {
+          "key": "83-impact",
+          "kind": "impact",
+          "text": "Node 9 is now the latest e on this path."
+        },
+        {
+          "key": "84-reason",
+          "kind": "reason",
+          "text": "The exit marker is pushed before the children, so the node is finished only after its whole subtree has been processed."
+        },
+        {
+          "key": "84-code",
+          "kind": "code",
+          "text": "Next, this line runs: Push the exit marker for node 9, so it runs after its subtree."
+        },
+        {
+          "key": "84-impact",
+          "kind": "impact",
+          "text": "Push the exit marker for node 9, so it runs after its subtree."
+        },
+        {
+          "key": "85-reason",
+          "kind": "reason",
+          "text": "The exit marker is pushed before the children, so the node is finished only after its whole subtree has been processed."
+        },
+        {
+          "key": "85-code",
+          "kind": "code",
+          "text": "Next, this line runs: Node 9 is a leaf; nothing to push."
+        },
+        {
+          "key": "85-impact",
+          "kind": "impact",
+          "text": "Node 9 is a leaf; nothing to push."
+        },
+        {
+          "key": "86-reason",
+          "kind": "reason",
+          "text": "Leaving a node removes its letter from the path, so siblings and later branches do not see it as an ancestor."
+        },
+        {
+          "key": "86-code",
+          "kind": "code",
+          "text": "Next, this line runs: Leave node 9."
+        },
+        {
+          "key": "86-impact",
+          "kind": "impact",
+          "text": "Leave node 9."
+        },
+        {
+          "key": "87-reason",
+          "kind": "reason",
+          "text": "Leaving a node removes its letter from the path, so siblings and later branches do not see it as an ancestor."
+        },
+        {
+          "key": "87-code",
+          "kind": "code",
+          "text": "Next, this line runs: No earlier e ancestor; remove e from the path."
+        },
+        {
+          "key": "87-impact",
+          "kind": "impact",
+          "text": "No earlier e ancestor; remove e from the path."
+        },
+        {
+          "key": "88-reason",
+          "kind": "reason",
+          "text": "A finished subtree is added to its effective parent: the matching ancestor if one exists, otherwise the original parent."
+        },
+        {
+          "key": "88-code",
+          "kind": "code",
+          "text": "Next, this line runs: Add subtree 9 (size 1) to node 0, its original parent."
+        },
+        {
+          "key": "88-impact",
+          "kind": "impact",
+          "text": "Add subtree 9 (size 1) to node 0, its original parent."
+        },
+        {
+          "key": "89-reason",
+          "kind": "reason",
+          "text": "Leaving a node removes its letter from the path, so siblings and later branches do not see it as an ancestor."
+        },
+        {
+          "key": "89-code",
+          "kind": "code",
+          "text": "Next, this line runs: Leave node 0."
+        },
+        {
+          "key": "89-impact",
+          "kind": "impact",
+          "text": "Leave node 0."
+        },
+        {
+          "key": "90-reason",
+          "kind": "reason",
+          "text": "Leaving a node removes its letter from the path, so siblings and later branches do not see it as an ancestor."
+        },
+        {
+          "key": "90-code",
+          "kind": "code",
+          "text": "Next, this line runs: No earlier a ancestor; remove a from the path."
+        },
+        {
+          "key": "90-impact",
+          "kind": "impact",
+          "text": "No earlier a ancestor; remove a from the path."
+        },
+        {
+          "key": "91-reason",
+          "kind": "reason",
+          "text": "Every subtree has been added to its effective parent, so the sizes are final."
+        },
+        {
+          "key": "91-code",
+          "kind": "code",
+          "text": "Next, this line runs: Subtree sizes: [10, 8, 1, 1, 1, 1, 1, 2, 1, 1]."
+        },
+        {
+          "key": "91-impact",
+          "kind": "impact",
+          "text": "Subtree sizes: [10, 8, 1, 1, 1, 1, 1, 2, 1, 1]."
+        }
+      ]
+    }
+  ]
+}
