@@ -9,6 +9,8 @@
 .algorithm-workspace__phases { display: flex; flex-wrap: wrap; gap: 5px; width: 100%; }
 .algorithm-workspace__playback button { padding: 6px 10px; border: 1px solid var(--border); border-radius: 6px; background: var(--surface2); color: var(--text); cursor: pointer; }
 .algorithm-workspace__playback button:disabled { opacity: .5; cursor: default; }
+.algorithm-workspace__narration { display: inline-flex; align-items: center; gap: 6px; padding: 4px 8px; }
+.algorithm-workspace__playback input[type="range"] { margin-inline: 8px; vertical-align: middle; }
 .algorithm-workspace__phases [aria-current="step"] { outline: 2px solid var(--primary); font-weight: 700; }
 .algorithm-workspace__phases [aria-current="step"]::before { content: '▶ '; }
 .algorithm-workspace__current-state { margin: 0; width: 100%; font-size: .85rem; }

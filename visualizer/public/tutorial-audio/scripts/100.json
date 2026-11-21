@@ -1,0 +1,5746 @@
+{
+  "route": "100",
+  "presets": [
+    {
+      "presetIndex": 0,
+      "label": "Identical sparse trees",
+      "input": "{\"p\":[18,7,29,null,12,24,null,10,null,null,26],\"q\":[18,7,29,null,12,24,null,10,null,null,26]}",
+      "scenes": [
+        {
+          "key": "0-reason",
+          "kind": "reason",
+          "text": "Compare corresponding positions together. Each recursive call decides whether one pair of subtrees matches."
+        },
+        {
+          "key": "0-code",
+          "kind": "code",
+          "text": "Next, this line runs: Start with the roots."
+        },
+        {
+          "key": "0-impact",
+          "kind": "impact",
+          "text": "Call isSameTree(p, q). Begin recursive DFS."
+        },
+        {
+          "key": "1-reason",
+          "kind": "reason",
+          "text": "Two absent children describe the same structure. Settle that base case before reading either value."
+        },
+        {
+          "key": "1-code",
+          "kind": "code",
+          "text": "Next, this line runs: Check the empty pair."
+        },
+        {
+          "key": "1-impact",
+          "kind": "impact",
+          "text": "Check: p=18, q=18 — both null?"
+        },
+        {
+          "key": "2-reason",
+          "kind": "reason",
+          "text": "Equal values elsewhere cannot repair a missing child. If only one node exists here, this pair fails."
+        },
+        {
+          "key": "2-code",
+          "kind": "code",
+          "text": "Next, this line runs: Check structural agreement."
+        },
+        {
+          "key": "2-impact",
+          "kind": "impact",
+          "text": "One of p/q is null — structural mismatch?"
+        },
+        {
+          "key": "3-reason",
+          "kind": "reason",
+          "text": "Matching structure is not enough: the values at corresponding positions must also agree."
+        },
+        {
+          "key": "3-code",
+          "kind": "code",
+          "text": "Next, this line runs: Compare this pair of values."
+        },
+        {
+          "key": "3-impact",
+          "kind": "impact",
+          "text": "Compare values: p.val=18 vs q.val=18"
+        },
+        {
+          "key": "4-reason",
+          "kind": "reason",
+          "text": "Matching values establish only a local match. The left children become the next pair, and this call waits for its boolean."
+        },
+        {
+          "key": "4-code",
+          "kind": "code",
+          "text": "Next, this line runs: Call the left children."
+        },
+        {
+          "key": "4-impact",
+          "kind": "impact",
+          "text": "Values match (18) — call the left children"
+        },
+        {
+          "key": "5-reason",
+          "kind": "reason",
+          "text": "Two absent children describe the same structure. Settle that base case before reading either value."
+        },
+        {
+          "key": "5-code",
+          "kind": "code",
+          "text": "Next, this line runs: Check the empty pair."
+        },
+        {
+          "key": "5-impact",
+          "kind": "impact",
+          "text": "Check: p=7, q=7 — both null?"
+        },
+        {
+          "key": "6-reason",
+          "kind": "reason",
+          "text": "Equal values elsewhere cannot repair a missing child. If only one node exists here, this pair fails."
+        },
+        {
+          "key": "6-code",
+          "kind": "code",
+          "text": "Next, this line runs: Check structural agreement."
+        },
+        {
+          "key": "6-impact",
+          "kind": "impact",
+          "text": "One of p/q is null — structural mismatch?"
+        },
+        {
+          "key": "7-reason",
+          "kind": "reason",
+          "text": "Matching structure is not enough: the values at corresponding positions must also agree."
+        },
+        {
+          "key": "7-code",
+          "kind": "code",
+          "text": "Next, this line runs: Compare this pair of values."
+        },
+        {
+          "key": "7-impact",
+          "kind": "impact",
+          "text": "Compare values: p.val=7 vs q.val=7"
+        },
+        {
+          "key": "8-reason",
+          "kind": "reason",
+          "text": "Matching values establish only a local match. The left children become the next pair, and this call waits for its boolean."
+        },
+        {
+          "key": "8-code",
+          "kind": "code",
+          "text": "Next, this line runs: Call the left children."
+        },
+        {
+          "key": "8-impact",
+          "kind": "impact",
+          "text": "Values match (7) — call the left children"
+        },
+        {
+          "key": "9-reason",
+          "kind": "reason",
+          "text": "Two absent children describe the same structure. Settle that base case before reading either value."
+        },
+        {
+          "key": "9-code",
+          "kind": "code",
+          "text": "Next, this line runs: Check the empty pair."
+        },
+        {
+          "key": "9-impact",
+          "kind": "impact",
+          "text": "Check: p=null, q=null — both null?"
+        },
+        {
+          "key": "10-reason",
+          "kind": "reason",
+          "text": "Two absent children match. This call returns true to its parent without reading any values."
+        },
+        {
+          "key": "10-code",
+          "kind": "code",
+          "text": "Next, this line runs: Base case returns true."
+        },
+        {
+          "key": "10-impact",
+          "kind": "impact",
+          "text": "Both nodes are null → return True (base case)"
+        },
+        {
+          "key": "11-reason",
+          "kind": "reason",
+          "text": "The left call has returned a boolean. This pair keeps it as left_ok before moving on."
+        },
+        {
+          "key": "11-code",
+          "kind": "code",
+          "text": "Next, this line runs: Store the left result."
+        },
+        {
+          "key": "11-impact",
+          "kind": "impact",
+          "text": "Left child returned true → left_ok = true"
+        },
+        {
+          "key": "12-reason",
+          "kind": "reason",
+          "text": "The left result covers only half of this pair. The right children become the next pair before both results are combined."
+        },
+        {
+          "key": "12-code",
+          "kind": "code",
+          "text": "Next, this line runs: Call the right children."
+        },
+        {
+          "key": "12-impact",
+          "kind": "impact",
+          "text": "Call the right children"
+        },
+        {
+          "key": "13-reason",
+          "kind": "reason",
+          "text": "Two absent children describe the same structure. Settle that base case before reading either value."
+        },
+        {
+          "key": "13-code",
+          "kind": "code",
+          "text": "Next, this line runs: Check the empty pair."
+        },
+        {
+          "key": "13-impact",
+          "kind": "impact",
+          "text": "Check: p=12, q=12 — both null?"
+        },
+        {
+          "key": "14-reason",
+          "kind": "reason",
+          "text": "Equal values elsewhere cannot repair a missing child. If only one node exists here, this pair fails."
+        },
+        {
+          "key": "14-code",
+          "kind": "code",
+          "text": "Next, this line runs: Check structural agreement."
+        },
+        {
+          "key": "14-impact",
+          "kind": "impact",
+          "text": "One of p/q is null — structural mismatch?"
+        },
+        {
+          "key": "15-reason",
+          "kind": "reason",
+          "text": "Matching structure is not enough: the values at corresponding positions must also agree."
+        },
+        {
+          "key": "15-code",
+          "kind": "code",
+          "text": "Next, this line runs: Compare this pair of values."
+        },
+        {
+          "key": "15-impact",
+          "kind": "impact",
+          "text": "Compare values: p.val=12 vs q.val=12"
+        },
+        {
+          "key": "16-reason",
+          "kind": "reason",
+          "text": "Matching values establish only a local match. The left children become the next pair, and this call waits for its boolean."
+        },
+        {
+          "key": "16-code",
+          "kind": "code",
+          "text": "Next, this line runs: Call the left children."
+        },
+        {
+          "key": "16-impact",
+          "kind": "impact",
+          "text": "Values match (12) — call the left children"
+        },
+        {
+          "key": "17-reason",
+          "kind": "reason",
+          "text": "Two absent children describe the same structure. Settle that base case before reading either value."
+        },
+        {
+          "key": "17-code",
+          "kind": "code",
+          "text": "Next, this line runs: Check the empty pair."
+        },
+        {
+          "key": "17-impact",
+          "kind": "impact",
+          "text": "Check: p=10, q=10 — both null?"
+        },
+        {
+          "key": "18-reason",
+          "kind": "reason",
+          "text": "Equal values elsewhere cannot repair a missing child. If only one node exists here, this pair fails."
+        },
+        {
+          "key": "18-code",
+          "kind": "code",
+          "text": "Next, this line runs: Check structural agreement."
+        },
+        {
+          "key": "18-impact",
+          "kind": "impact",
+          "text": "One of p/q is null — structural mismatch?"
+        },
+        {
+          "key": "19-reason",
+          "kind": "reason",
+          "text": "Matching structure is not enough: the values at corresponding positions must also agree."
+        },
+        {
+          "key": "19-code",
+          "kind": "code",
+          "text": "Next, this line runs: Compare this pair of values."
+        },
+        {
+          "key": "19-impact",
+          "kind": "impact",
+          "text": "Compare values: p.val=10 vs q.val=10"
+        },
+        {
+          "key": "20-reason",
+          "kind": "reason",
+          "text": "Matching values establish only a local match. The left children become the next pair, and this call waits for its boolean."
+        },
+        {
+          "key": "20-code",
+          "kind": "code",
+          "text": "Next, this line runs: Call the left children."
+        },
+        {
+          "key": "20-impact",
+          "kind": "impact",
+          "text": "Values match (10) — call the left children"
+        },
+        {
+          "key": "21-reason",
+          "kind": "reason",
+          "text": "Two absent children describe the same structure. Settle that base case before reading either value."
+        },
+        {
+          "key": "21-code",
+          "kind": "code",
+          "text": "Next, this line runs: Check the empty pair."
+        },
+        {
+          "key": "21-impact",
+          "kind": "impact",
+          "text": "Check: p=null, q=null — both null?"
+        },
+        {
+          "key": "22-reason",
+          "kind": "reason",
+          "text": "Two absent children match. This call returns true to its parent without reading any values."
+        },
+        {
+          "key": "22-code",
+          "kind": "code",
+          "text": "Next, this line runs: Base case returns true."
+        },
+        {
+          "key": "22-impact",
+          "kind": "impact",
+          "text": "Both nodes are null → return True (base case)"
+        },
+        {
+          "key": "23-reason",
+          "kind": "reason",
+          "text": "The left call has returned a boolean. This pair keeps it as left_ok before moving on."
+        },
+        {
+          "key": "23-code",
+          "kind": "code",
+          "text": "Next, this line runs: Store the left result."
+        },
+        {
+          "key": "23-impact",
+          "kind": "impact",
+          "text": "Left child returned true → left_ok = true"
+        },
+        {
+          "key": "24-reason",
+          "kind": "reason",
+          "text": "The left result covers only half of this pair. The right children become the next pair before both results are combined."
+        },
+        {
+          "key": "24-code",
+          "kind": "code",
+          "text": "Next, this line runs: Call the right children."
+        },
+        {
+          "key": "24-impact",
+          "kind": "impact",
+          "text": "Call the right children"
+        },
+        {
+          "key": "25-reason",
+          "kind": "reason",
+          "text": "Two absent children describe the same structure. Settle that base case before reading either value."
+        },
+        {
+          "key": "25-code",
+          "kind": "code",
+          "text": "Next, this line runs: Check the empty pair."
+        },
+        {
+          "key": "25-impact",
+          "kind": "impact",
+          "text": "Check: p=null, q=null — both null?"
+        },
+        {
+          "key": "26-reason",
+          "kind": "reason",
+          "text": "Two absent children match. This call returns true to its parent without reading any values."
+        },
+        {
+          "key": "26-code",
+          "kind": "code",
+          "text": "Next, this line runs: Base case returns true."
+        },
+        {
+          "key": "26-impact",
+          "kind": "impact",
+          "text": "Both nodes are null → return True (base case)"
+        },
+        {
+          "key": "27-reason",
+          "kind": "reason",
+          "text": "The right call has returned a boolean. This pair keeps it as right_ok before combining both results."
+        },
+        {
+          "key": "27-code",
+          "kind": "code",
+          "text": "Next, this line runs: Store the right result."
+        },
+        {
+          "key": "27-impact",
+          "kind": "impact",
+          "text": "Right child returned true → right_ok = true"
+        },
+        {
+          "key": "28-reason",
+          "kind": "reason",
+          "text": "A pair matches only when both child results are true. This boolean returns to the caller, which receives it as its left_ok or right_ok."
+        },
+        {
+          "key": "28-code",
+          "kind": "code",
+          "text": "Next, this line runs: Return both results combined."
+        },
+        {
+          "key": "28-impact",
+          "kind": "impact",
+          "text": "Return true for node 10"
+        },
+        {
+          "key": "29-reason",
+          "kind": "reason",
+          "text": "The left call has returned a boolean. This pair keeps it as left_ok before moving on."
+        },
+        {
+          "key": "29-code",
+          "kind": "code",
+          "text": "Next, this line runs: Store the left result."
+        },
+        {
+          "key": "29-impact",
+          "kind": "impact",
+          "text": "Left child returned true → left_ok = true"
+        },
+        {
+          "key": "30-reason",
+          "kind": "reason",
+          "text": "The left result covers only half of this pair. The right children become the next pair before both results are combined."
+        },
+        {
+          "key": "30-code",
+          "kind": "code",
+          "text": "Next, this line runs: Call the right children."
+        },
+        {
+          "key": "30-impact",
+          "kind": "impact",
+          "text": "Call the right children"
+        },
+        {
+          "key": "31-reason",
+          "kind": "reason",
+          "text": "Two absent children describe the same structure. Settle that base case before reading either value."
+        },
+        {
+          "key": "31-code",
+          "kind": "code",
+          "text": "Next, this line runs: Check the empty pair."
+        },
+        {
+          "key": "31-impact",
+          "kind": "impact",
+          "text": "Check: p=null, q=null — both null?"
+        },
+        {
+          "key": "32-reason",
+          "kind": "reason",
+          "text": "Two absent children match. This call returns true to its parent without reading any values."
+        },
+        {
+          "key": "32-code",
+          "kind": "code",
+          "text": "Next, this line runs: Base case returns true."
+        },
+        {
+          "key": "32-impact",
+          "kind": "impact",
+          "text": "Both nodes are null → return True (base case)"
+        },
+        {
+          "key": "33-reason",
+          "kind": "reason",
+          "text": "The right call has returned a boolean. This pair keeps it as right_ok before combining both results."
+        },
+        {
+          "key": "33-code",
+          "kind": "code",
+          "text": "Next, this line runs: Store the right result."
+        },
+        {
+          "key": "33-impact",
+          "kind": "impact",
+          "text": "Right child returned true → right_ok = true"
+        },
+        {
+          "key": "34-reason",
+          "kind": "reason",
+          "text": "A pair matches only when both child results are true. This boolean returns to the caller, which receives it as its left_ok or right_ok."
+        },
+        {
+          "key": "34-code",
+          "kind": "code",
+          "text": "Next, this line runs: Return both results combined."
+        },
+        {
+          "key": "34-impact",
+          "kind": "impact",
+          "text": "Return true for node 12"
+        },
+        {
+          "key": "35-reason",
+          "kind": "reason",
+          "text": "The right call has returned a boolean. This pair keeps it as right_ok before combining both results."
+        },
+        {
+          "key": "35-code",
+          "kind": "code",
+          "text": "Next, this line runs: Store the right result."
+        },
+        {
+          "key": "35-impact",
+          "kind": "impact",
+          "text": "Right child returned true → right_ok = true"
+        },
+        {
+          "key": "36-reason",
+          "kind": "reason",
+          "text": "A pair matches only when both child results are true. This boolean returns to the caller, which receives it as its left_ok or right_ok."
+        },
+        {
+          "key": "36-code",
+          "kind": "code",
+          "text": "Next, this line runs: Return both results combined."
+        },
+        {
+          "key": "36-impact",
+          "kind": "impact",
+          "text": "Return true for node 7"
+        },
+        {
+          "key": "37-reason",
+          "kind": "reason",
+          "text": "The left call has returned a boolean. This pair keeps it as left_ok before moving on."
+        },
+        {
+          "key": "37-code",
+          "kind": "code",
+          "text": "Next, this line runs: Store the left result."
+        },
+        {
+          "key": "37-impact",
+          "kind": "impact",
+          "text": "Left child returned true → left_ok = true"
+        },
+        {
+          "key": "38-reason",
+          "kind": "reason",
+          "text": "The left result covers only half of this pair. The right children become the next pair before both results are combined."
+        },
+        {
+          "key": "38-code",
+          "kind": "code",
+          "text": "Next, this line runs: Call the right children."
+        },
+        {
+          "key": "38-impact",
+          "kind": "impact",
+          "text": "Call the right children"
+        },
+        {
+          "key": "39-reason",
+          "kind": "reason",
+          "text": "Two absent children describe the same structure. Settle that base case before reading either value."
+        },
+        {
+          "key": "39-code",
+          "kind": "code",
+          "text": "Next, this line runs: Check the empty pair."
+        },
+        {
+          "key": "39-impact",
+          "kind": "impact",
+          "text": "Check: p=29, q=29 — both null?"
+        },
+        {
+          "key": "40-reason",
+          "kind": "reason",
+          "text": "Equal values elsewhere cannot repair a missing child. If only one node exists here, this pair fails."
+        },
+        {
+          "key": "40-code",
+          "kind": "code",
+          "text": "Next, this line runs: Check structural agreement."
+        },
+        {
+          "key": "40-impact",
+          "kind": "impact",
+          "text": "One of p/q is null — structural mismatch?"
+        },
+        {
+          "key": "41-reason",
+          "kind": "reason",
+          "text": "Matching structure is not enough: the values at corresponding positions must also agree."
+        },
+        {
+          "key": "41-code",
+          "kind": "code",
+          "text": "Next, this line runs: Compare this pair of values."
+        },
+        {
+          "key": "41-impact",
+          "kind": "impact",
+          "text": "Compare values: p.val=29 vs q.val=29"
+        },
+        {
+          "key": "42-reason",
+          "kind": "reason",
+          "text": "Matching values establish only a local match. The left children become the next pair, and this call waits for its boolean."
+        },
+        {
+          "key": "42-code",
+          "kind": "code",
+          "text": "Next, this line runs: Call the left children."
+        },
+        {
+          "key": "42-impact",
+          "kind": "impact",
+          "text": "Values match (29) — call the left children"
+        },
+        {
+          "key": "43-reason",
+          "kind": "reason",
+          "text": "Two absent children describe the same structure. Settle that base case before reading either value."
+        },
+        {
+          "key": "43-code",
+          "kind": "code",
+          "text": "Next, this line runs: Check the empty pair."
+        },
+        {
+          "key": "43-impact",
+          "kind": "impact",
+          "text": "Check: p=24, q=24 — both null?"
+        },
+        {
+          "key": "44-reason",
+          "kind": "reason",
+          "text": "Equal values elsewhere cannot repair a missing child. If only one node exists here, this pair fails."
+        },
+        {
+          "key": "44-code",
+          "kind": "code",
+          "text": "Next, this line runs: Check structural agreement."
+        },
+        {
+          "key": "44-impact",
+          "kind": "impact",
+          "text": "One of p/q is null — structural mismatch?"
+        },
+        {
+          "key": "45-reason",
+          "kind": "reason",
+          "text": "Matching structure is not enough: the values at corresponding positions must also agree."
+        },
+        {
+          "key": "45-code",
+          "kind": "code",
+          "text": "Next, this line runs: Compare this pair of values."
+        },
+        {
+          "key": "45-impact",
+          "kind": "impact",
+          "text": "Compare values: p.val=24 vs q.val=24"
+        },
+        {
+          "key": "46-reason",
+          "kind": "reason",
+          "text": "Matching values establish only a local match. The left children become the next pair, and this call waits for its boolean."
+        },
+        {
+          "key": "46-code",
+          "kind": "code",
+          "text": "Next, this line runs: Call the left children."
+        },
+        {
+          "key": "46-impact",
+          "kind": "impact",
+          "text": "Values match (24) — call the left children"
+        },
+        {
+          "key": "47-reason",
+          "kind": "reason",
+          "text": "Two absent children describe the same structure. Settle that base case before reading either value."
+        },
+        {
+          "key": "47-code",
+          "kind": "code",
+          "text": "Next, this line runs: Check the empty pair."
+        },
+        {
+          "key": "47-impact",
+          "kind": "impact",
+          "text": "Check: p=null, q=null — both null?"
+        },
+        {
+          "key": "48-reason",
+          "kind": "reason",
+          "text": "Two absent children match. This call returns true to its parent without reading any values."
+        },
+        {
+          "key": "48-code",
+          "kind": "code",
+          "text": "Next, this line runs: Base case returns true."
+        },
+        {
+          "key": "48-impact",
+          "kind": "impact",
+          "text": "Both nodes are null → return True (base case)"
+        },
+        {
+          "key": "49-reason",
+          "kind": "reason",
+          "text": "The left call has returned a boolean. This pair keeps it as left_ok before moving on."
+        },
+        {
+          "key": "49-code",
+          "kind": "code",
+          "text": "Next, this line runs: Store the left result."
+        },
+        {
+          "key": "49-impact",
+          "kind": "impact",
+          "text": "Left child returned true → left_ok = true"
+        },
+        {
+          "key": "50-reason",
+          "kind": "reason",
+          "text": "The left result covers only half of this pair. The right children become the next pair before both results are combined."
+        },
+        {
+          "key": "50-code",
+          "kind": "code",
+          "text": "Next, this line runs: Call the right children."
+        },
+        {
+          "key": "50-impact",
+          "kind": "impact",
+          "text": "Call the right children"
+        },
+        {
+          "key": "51-reason",
+          "kind": "reason",
+          "text": "Two absent children describe the same structure. Settle that base case before reading either value."
+        },
+        {
+          "key": "51-code",
+          "kind": "code",
+          "text": "Next, this line runs: Check the empty pair."
+        },
+        {
+          "key": "51-impact",
+          "kind": "impact",
+          "text": "Check: p=26, q=26 — both null?"
+        },
+        {
+          "key": "52-reason",
+          "kind": "reason",
+          "text": "Equal values elsewhere cannot repair a missing child. If only one node exists here, this pair fails."
+        },
+        {
+          "key": "52-code",
+          "kind": "code",
+          "text": "Next, this line runs: Check structural agreement."
+        },
+        {
+          "key": "52-impact",
+          "kind": "impact",
+          "text": "One of p/q is null — structural mismatch?"
+        },
+        {
+          "key": "53-reason",
+          "kind": "reason",
+          "text": "Matching structure is not enough: the values at corresponding positions must also agree."
+        },
+        {
+          "key": "53-code",
+          "kind": "code",
+          "text": "Next, this line runs: Compare this pair of values."
+        },
+        {
+          "key": "53-impact",
+          "kind": "impact",
+          "text": "Compare values: p.val=26 vs q.val=26"
+        },
+        {
+          "key": "54-reason",
+          "kind": "reason",
+          "text": "Matching values establish only a local match. The left children become the next pair, and this call waits for its boolean."
+        },
+        {
+          "key": "54-code",
+          "kind": "code",
+          "text": "Next, this line runs: Call the left children."
+        },
+        {
+          "key": "54-impact",
+          "kind": "impact",
+          "text": "Values match (26) — call the left children"
+        },
+        {
+          "key": "55-reason",
+          "kind": "reason",
+          "text": "Two absent children describe the same structure. Settle that base case before reading either value."
+        },
+        {
+          "key": "55-code",
+          "kind": "code",
+          "text": "Next, this line runs: Check the empty pair."
+        },
+        {
+          "key": "55-impact",
+          "kind": "impact",
+          "text": "Check: p=null, q=null — both null?"
+        },
+        {
+          "key": "56-reason",
+          "kind": "reason",
+          "text": "Two absent children match. This call returns true to its parent without reading any values."
+        },
+        {
+          "key": "56-code",
+          "kind": "code",
+          "text": "Next, this line runs: Base case returns true."
+        },
+        {
+          "key": "56-impact",
+          "kind": "impact",
+          "text": "Both nodes are null → return True (base case)"
+        },
+        {
+          "key": "57-reason",
+          "kind": "reason",
+          "text": "The left call has returned a boolean. This pair keeps it as left_ok before moving on."
+        },
+        {
+          "key": "57-code",
+          "kind": "code",
+          "text": "Next, this line runs: Store the left result."
+        },
+        {
+          "key": "57-impact",
+          "kind": "impact",
+          "text": "Left child returned true → left_ok = true"
+        },
+        {
+          "key": "58-reason",
+          "kind": "reason",
+          "text": "The left result covers only half of this pair. The right children become the next pair before both results are combined."
+        },
+        {
+          "key": "58-code",
+          "kind": "code",
+          "text": "Next, this line runs: Call the right children."
+        },
+        {
+          "key": "58-impact",
+          "kind": "impact",
+          "text": "Call the right children"
+        },
+        {
+          "key": "59-reason",
+          "kind": "reason",
+          "text": "Two absent children describe the same structure. Settle that base case before reading either value."
+        },
+        {
+          "key": "59-code",
+          "kind": "code",
+          "text": "Next, this line runs: Check the empty pair."
+        },
+        {
+          "key": "59-impact",
+          "kind": "impact",
+          "text": "Check: p=null, q=null — both null?"
+        },
+        {
+          "key": "60-reason",
+          "kind": "reason",
+          "text": "Two absent children match. This call returns true to its parent without reading any values."
+        },
+        {
+          "key": "60-code",
+          "kind": "code",
+          "text": "Next, this line runs: Base case returns true."
+        },
+        {
+          "key": "60-impact",
+          "kind": "impact",
+          "text": "Both nodes are null → return True (base case)"
+        },
+        {
+          "key": "61-reason",
+          "kind": "reason",
+          "text": "The right call has returned a boolean. This pair keeps it as right_ok before combining both results."
+        },
+        {
+          "key": "61-code",
+          "kind": "code",
+          "text": "Next, this line runs: Store the right result."
+        },
+        {
+          "key": "61-impact",
+          "kind": "impact",
+          "text": "Right child returned true → right_ok = true"
+        },
+        {
+          "key": "62-reason",
+          "kind": "reason",
+          "text": "A pair matches only when both child results are true. This boolean returns to the caller, which receives it as its left_ok or right_ok."
+        },
+        {
+          "key": "62-code",
+          "kind": "code",
+          "text": "Next, this line runs: Return both results combined."
+        },
+        {
+          "key": "62-impact",
+          "kind": "impact",
+          "text": "Return true for node 26"
+        },
+        {
+          "key": "63-reason",
+          "kind": "reason",
+          "text": "The right call has returned a boolean. This pair keeps it as right_ok before combining both results."
+        },
+        {
+          "key": "63-code",
+          "kind": "code",
+          "text": "Next, this line runs: Store the right result."
+        },
+        {
+          "key": "63-impact",
+          "kind": "impact",
+          "text": "Right child returned true → right_ok = true"
+        },
+        {
+          "key": "64-reason",
+          "kind": "reason",
+          "text": "A pair matches only when both child results are true. This boolean returns to the caller, which receives it as its left_ok or right_ok."
+        },
+        {
+          "key": "64-code",
+          "kind": "code",
+          "text": "Next, this line runs: Return both results combined."
+        },
+        {
+          "key": "64-impact",
+          "kind": "impact",
+          "text": "Return true for node 24"
+        },
+        {
+          "key": "65-reason",
+          "kind": "reason",
+          "text": "The left call has returned a boolean. This pair keeps it as left_ok before moving on."
+        },
+        {
+          "key": "65-code",
+          "kind": "code",
+          "text": "Next, this line runs: Store the left result."
+        },
+        {
+          "key": "65-impact",
+          "kind": "impact",
+          "text": "Left child returned true → left_ok = true"
+        },
+        {
+          "key": "66-reason",
+          "kind": "reason",
+          "text": "The left result covers only half of this pair. The right children become the next pair before both results are combined."
+        },
+        {
+          "key": "66-code",
+          "kind": "code",
+          "text": "Next, this line runs: Call the right children."
+        },
+        {
+          "key": "66-impact",
+          "kind": "impact",
+          "text": "Call the right children"
+        },
+        {
+          "key": "67-reason",
+          "kind": "reason",
+          "text": "Two absent children describe the same structure. Settle that base case before reading either value."
+        },
+        {
+          "key": "67-code",
+          "kind": "code",
+          "text": "Next, this line runs: Check the empty pair."
+        },
+        {
+          "key": "67-impact",
+          "kind": "impact",
+          "text": "Check: p=null, q=null — both null?"
+        },
+        {
+          "key": "68-reason",
+          "kind": "reason",
+          "text": "Two absent children match. This call returns true to its parent without reading any values."
+        },
+        {
+          "key": "68-code",
+          "kind": "code",
+          "text": "Next, this line runs: Base case returns true."
+        },
+        {
+          "key": "68-impact",
+          "kind": "impact",
+          "text": "Both nodes are null → return True (base case)"
+        },
+        {
+          "key": "69-reason",
+          "kind": "reason",
+          "text": "The right call has returned a boolean. This pair keeps it as right_ok before combining both results."
+        },
+        {
+          "key": "69-code",
+          "kind": "code",
+          "text": "Next, this line runs: Store the right result."
+        },
+        {
+          "key": "69-impact",
+          "kind": "impact",
+          "text": "Right child returned true → right_ok = true"
+        },
+        {
+          "key": "70-reason",
+          "kind": "reason",
+          "text": "A pair matches only when both child results are true. This boolean returns to the caller, which receives it as its left_ok or right_ok."
+        },
+        {
+          "key": "70-code",
+          "kind": "code",
+          "text": "Next, this line runs: Return both results combined."
+        },
+        {
+          "key": "70-impact",
+          "kind": "impact",
+          "text": "Return true for node 29"
+        },
+        {
+          "key": "71-reason",
+          "kind": "reason",
+          "text": "The right call has returned a boolean. This pair keeps it as right_ok before combining both results."
+        },
+        {
+          "key": "71-code",
+          "kind": "code",
+          "text": "Next, this line runs: Store the right result."
+        },
+        {
+          "key": "71-impact",
+          "kind": "impact",
+          "text": "Right child returned true → right_ok = true"
+        },
+        {
+          "key": "72-reason",
+          "kind": "reason",
+          "text": "A pair matches only when both child results are true. This boolean returns to the caller, which receives it as its left_ok or right_ok."
+        },
+        {
+          "key": "72-code",
+          "kind": "code",
+          "text": "Next, this line runs: Return both results combined."
+        },
+        {
+          "key": "72-impact",
+          "kind": "impact",
+          "text": "Return true for node 18"
+        },
+        {
+          "key": "73-reason",
+          "kind": "reason",
+          "text": "Trees are identical! isSameTree returns True."
+        },
+        {
+          "key": "73-code",
+          "kind": "code",
+          "text": "Next, this line runs: Report the tree comparison."
+        },
+        {
+          "key": "73-impact",
+          "kind": "impact",
+          "text": "Trees are identical! isSameTree returns True."
+        }
+      ]
+    },
+    {
+      "presetIndex": 1,
+      "label": "Deep value mismatch",
+      "input": "{\"p\":[8,3,14,1,6,10,19],\"q\":[8,3,14,1,7,10,19]}",
+      "scenes": [
+        {
+          "key": "0-reason",
+          "kind": "reason",
+          "text": "Compare corresponding positions together. Each recursive call decides whether one pair of subtrees matches."
+        },
+        {
+          "key": "0-code",
+          "kind": "code",
+          "text": "Next, this line runs: Start with the roots."
+        },
+        {
+          "key": "0-impact",
+          "kind": "impact",
+          "text": "Call isSameTree(p, q). Begin recursive DFS."
+        },
+        {
+          "key": "1-reason",
+          "kind": "reason",
+          "text": "Two absent children describe the same structure. Settle that base case before reading either value."
+        },
+        {
+          "key": "1-code",
+          "kind": "code",
+          "text": "Next, this line runs: Check the empty pair."
+        },
+        {
+          "key": "1-impact",
+          "kind": "impact",
+          "text": "Check: p=8, q=8 — both null?"
+        },
+        {
+          "key": "2-reason",
+          "kind": "reason",
+          "text": "Equal values elsewhere cannot repair a missing child. If only one node exists here, this pair fails."
+        },
+        {
+          "key": "2-code",
+          "kind": "code",
+          "text": "Next, this line runs: Check structural agreement."
+        },
+        {
+          "key": "2-impact",
+          "kind": "impact",
+          "text": "One of p/q is null — structural mismatch?"
+        },
+        {
+          "key": "3-reason",
+          "kind": "reason",
+          "text": "Matching structure is not enough: the values at corresponding positions must also agree."
+        },
+        {
+          "key": "3-code",
+          "kind": "code",
+          "text": "Next, this line runs: Compare this pair of values."
+        },
+        {
+          "key": "3-impact",
+          "kind": "impact",
+          "text": "Compare values: p.val=8 vs q.val=8"
+        },
+        {
+          "key": "4-reason",
+          "kind": "reason",
+          "text": "Matching values establish only a local match. The left children become the next pair, and this call waits for its boolean."
+        },
+        {
+          "key": "4-code",
+          "kind": "code",
+          "text": "Next, this line runs: Call the left children."
+        },
+        {
+          "key": "4-impact",
+          "kind": "impact",
+          "text": "Values match (8) — call the left children"
+        },
+        {
+          "key": "5-reason",
+          "kind": "reason",
+          "text": "Two absent children describe the same structure. Settle that base case before reading either value."
+        },
+        {
+          "key": "5-code",
+          "kind": "code",
+          "text": "Next, this line runs: Check the empty pair."
+        },
+        {
+          "key": "5-impact",
+          "kind": "impact",
+          "text": "Check: p=3, q=3 — both null?"
+        },
+        {
+          "key": "6-reason",
+          "kind": "reason",
+          "text": "Equal values elsewhere cannot repair a missing child. If only one node exists here, this pair fails."
+        },
+        {
+          "key": "6-code",
+          "kind": "code",
+          "text": "Next, this line runs: Check structural agreement."
+        },
+        {
+          "key": "6-impact",
+          "kind": "impact",
+          "text": "One of p/q is null — structural mismatch?"
+        },
+        {
+          "key": "7-reason",
+          "kind": "reason",
+          "text": "Matching structure is not enough: the values at corresponding positions must also agree."
+        },
+        {
+          "key": "7-code",
+          "kind": "code",
+          "text": "Next, this line runs: Compare this pair of values."
+        },
+        {
+          "key": "7-impact",
+          "kind": "impact",
+          "text": "Compare values: p.val=3 vs q.val=3"
+        },
+        {
+          "key": "8-reason",
+          "kind": "reason",
+          "text": "Matching values establish only a local match. The left children become the next pair, and this call waits for its boolean."
+        },
+        {
+          "key": "8-code",
+          "kind": "code",
+          "text": "Next, this line runs: Call the left children."
+        },
+        {
+          "key": "8-impact",
+          "kind": "impact",
+          "text": "Values match (3) — call the left children"
+        },
+        {
+          "key": "9-reason",
+          "kind": "reason",
+          "text": "Two absent children describe the same structure. Settle that base case before reading either value."
+        },
+        {
+          "key": "9-code",
+          "kind": "code",
+          "text": "Next, this line runs: Check the empty pair."
+        },
+        {
+          "key": "9-impact",
+          "kind": "impact",
+          "text": "Check: p=1, q=1 — both null?"
+        },
+        {
+          "key": "10-reason",
+          "kind": "reason",
+          "text": "Equal values elsewhere cannot repair a missing child. If only one node exists here, this pair fails."
+        },
+        {
+          "key": "10-code",
+          "kind": "code",
+          "text": "Next, this line runs: Check structural agreement."
+        },
+        {
+          "key": "10-impact",
+          "kind": "impact",
+          "text": "One of p/q is null — structural mismatch?"
+        },
+        {
+          "key": "11-reason",
+          "kind": "reason",
+          "text": "Matching structure is not enough: the values at corresponding positions must also agree."
+        },
+        {
+          "key": "11-code",
+          "kind": "code",
+          "text": "Next, this line runs: Compare this pair of values."
+        },
+        {
+          "key": "11-impact",
+          "kind": "impact",
+          "text": "Compare values: p.val=1 vs q.val=1"
+        },
+        {
+          "key": "12-reason",
+          "kind": "reason",
+          "text": "Matching values establish only a local match. The left children become the next pair, and this call waits for its boolean."
+        },
+        {
+          "key": "12-code",
+          "kind": "code",
+          "text": "Next, this line runs: Call the left children."
+        },
+        {
+          "key": "12-impact",
+          "kind": "impact",
+          "text": "Values match (1) — call the left children"
+        },
+        {
+          "key": "13-reason",
+          "kind": "reason",
+          "text": "Two absent children describe the same structure. Settle that base case before reading either value."
+        },
+        {
+          "key": "13-code",
+          "kind": "code",
+          "text": "Next, this line runs: Check the empty pair."
+        },
+        {
+          "key": "13-impact",
+          "kind": "impact",
+          "text": "Check: p=null, q=null — both null?"
+        },
+        {
+          "key": "14-reason",
+          "kind": "reason",
+          "text": "Two absent children match. This call returns true to its parent without reading any values."
+        },
+        {
+          "key": "14-code",
+          "kind": "code",
+          "text": "Next, this line runs: Base case returns true."
+        },
+        {
+          "key": "14-impact",
+          "kind": "impact",
+          "text": "Both nodes are null → return True (base case)"
+        },
+        {
+          "key": "15-reason",
+          "kind": "reason",
+          "text": "The left call has returned a boolean. This pair keeps it as left_ok before moving on."
+        },
+        {
+          "key": "15-code",
+          "kind": "code",
+          "text": "Next, this line runs: Store the left result."
+        },
+        {
+          "key": "15-impact",
+          "kind": "impact",
+          "text": "Left child returned true → left_ok = true"
+        },
+        {
+          "key": "16-reason",
+          "kind": "reason",
+          "text": "The left result covers only half of this pair. The right children become the next pair before both results are combined."
+        },
+        {
+          "key": "16-code",
+          "kind": "code",
+          "text": "Next, this line runs: Call the right children."
+        },
+        {
+          "key": "16-impact",
+          "kind": "impact",
+          "text": "Call the right children"
+        },
+        {
+          "key": "17-reason",
+          "kind": "reason",
+          "text": "Two absent children describe the same structure. Settle that base case before reading either value."
+        },
+        {
+          "key": "17-code",
+          "kind": "code",
+          "text": "Next, this line runs: Check the empty pair."
+        },
+        {
+          "key": "17-impact",
+          "kind": "impact",
+          "text": "Check: p=null, q=null — both null?"
+        },
+        {
+          "key": "18-reason",
+          "kind": "reason",
+          "text": "Two absent children match. This call returns true to its parent without reading any values."
+        },
+        {
+          "key": "18-code",
+          "kind": "code",
+          "text": "Next, this line runs: Base case returns true."
+        },
+        {
+          "key": "18-impact",
+          "kind": "impact",
+          "text": "Both nodes are null → return True (base case)"
+        },
+        {
+          "key": "19-reason",
+          "kind": "reason",
+          "text": "The right call has returned a boolean. This pair keeps it as right_ok before combining both results."
+        },
+        {
+          "key": "19-code",
+          "kind": "code",
+          "text": "Next, this line runs: Store the right result."
+        },
+        {
+          "key": "19-impact",
+          "kind": "impact",
+          "text": "Right child returned true → right_ok = true"
+        },
+        {
+          "key": "20-reason",
+          "kind": "reason",
+          "text": "A pair matches only when both child results are true. This boolean returns to the caller, which receives it as its left_ok or right_ok."
+        },
+        {
+          "key": "20-code",
+          "kind": "code",
+          "text": "Next, this line runs: Return both results combined."
+        },
+        {
+          "key": "20-impact",
+          "kind": "impact",
+          "text": "Return true for node 1"
+        },
+        {
+          "key": "21-reason",
+          "kind": "reason",
+          "text": "The left call has returned a boolean. This pair keeps it as left_ok before moving on."
+        },
+        {
+          "key": "21-code",
+          "kind": "code",
+          "text": "Next, this line runs: Store the left result."
+        },
+        {
+          "key": "21-impact",
+          "kind": "impact",
+          "text": "Left child returned true → left_ok = true"
+        },
+        {
+          "key": "22-reason",
+          "kind": "reason",
+          "text": "The left result covers only half of this pair. The right children become the next pair before both results are combined."
+        },
+        {
+          "key": "22-code",
+          "kind": "code",
+          "text": "Next, this line runs: Call the right children."
+        },
+        {
+          "key": "22-impact",
+          "kind": "impact",
+          "text": "Call the right children"
+        },
+        {
+          "key": "23-reason",
+          "kind": "reason",
+          "text": "Two absent children describe the same structure. Settle that base case before reading either value."
+        },
+        {
+          "key": "23-code",
+          "kind": "code",
+          "text": "Next, this line runs: Check the empty pair."
+        },
+        {
+          "key": "23-impact",
+          "kind": "impact",
+          "text": "Check: p=6, q=7 — both null?"
+        },
+        {
+          "key": "24-reason",
+          "kind": "reason",
+          "text": "Equal values elsewhere cannot repair a missing child. If only one node exists here, this pair fails."
+        },
+        {
+          "key": "24-code",
+          "kind": "code",
+          "text": "Next, this line runs: Check structural agreement."
+        },
+        {
+          "key": "24-impact",
+          "kind": "impact",
+          "text": "One of p/q is null — structural mismatch?"
+        },
+        {
+          "key": "25-reason",
+          "kind": "reason",
+          "text": "Matching structure is not enough: the values at corresponding positions must also agree."
+        },
+        {
+          "key": "25-code",
+          "kind": "code",
+          "text": "Next, this line runs: Compare this pair of values."
+        },
+        {
+          "key": "25-impact",
+          "kind": "impact",
+          "text": "Compare values: p.val=6 vs q.val=7"
+        },
+        {
+          "key": "26-reason",
+          "kind": "reason",
+          "text": "The values at this position disagree, so this pair fails and the call returns false."
+        },
+        {
+          "key": "26-code",
+          "kind": "code",
+          "text": "Next, this line runs: Values differ: return false."
+        },
+        {
+          "key": "26-impact",
+          "kind": "impact",
+          "text": "p.val (6) ≠ q.val (7) → return False"
+        },
+        {
+          "key": "27-reason",
+          "kind": "reason",
+          "text": "The right call has returned a boolean. This pair keeps it as right_ok before combining both results."
+        },
+        {
+          "key": "27-code",
+          "kind": "code",
+          "text": "Next, this line runs: Store the right result."
+        },
+        {
+          "key": "27-impact",
+          "kind": "impact",
+          "text": "Right child returned false → right_ok = false"
+        },
+        {
+          "key": "28-reason",
+          "kind": "reason",
+          "text": "A pair matches only when both child results are true. This boolean returns to the caller, which receives it as its left_ok or right_ok."
+        },
+        {
+          "key": "28-code",
+          "kind": "code",
+          "text": "Next, this line runs: Return both results combined."
+        },
+        {
+          "key": "28-impact",
+          "kind": "impact",
+          "text": "Return false for node 3"
+        },
+        {
+          "key": "29-reason",
+          "kind": "reason",
+          "text": "The left call has returned a boolean. This pair keeps it as left_ok before moving on."
+        },
+        {
+          "key": "29-code",
+          "kind": "code",
+          "text": "Next, this line runs: Store the left result."
+        },
+        {
+          "key": "29-impact",
+          "kind": "impact",
+          "text": "Left child returned false → left_ok = false"
+        },
+        {
+          "key": "30-reason",
+          "kind": "reason",
+          "text": "The left result covers only half of this pair. The right children become the next pair before both results are combined."
+        },
+        {
+          "key": "30-code",
+          "kind": "code",
+          "text": "Next, this line runs: Call the right children."
+        },
+        {
+          "key": "30-impact",
+          "kind": "impact",
+          "text": "Call the right children"
+        },
+        {
+          "key": "31-reason",
+          "kind": "reason",
+          "text": "Two absent children describe the same structure. Settle that base case before reading either value."
+        },
+        {
+          "key": "31-code",
+          "kind": "code",
+          "text": "Next, this line runs: Check the empty pair."
+        },
+        {
+          "key": "31-impact",
+          "kind": "impact",
+          "text": "Check: p=14, q=14 — both null?"
+        },
+        {
+          "key": "32-reason",
+          "kind": "reason",
+          "text": "Equal values elsewhere cannot repair a missing child. If only one node exists here, this pair fails."
+        },
+        {
+          "key": "32-code",
+          "kind": "code",
+          "text": "Next, this line runs: Check structural agreement."
+        },
+        {
+          "key": "32-impact",
+          "kind": "impact",
+          "text": "One of p/q is null — structural mismatch?"
+        },
+        {
+          "key": "33-reason",
+          "kind": "reason",
+          "text": "Matching structure is not enough: the values at corresponding positions must also agree."
+        },
+        {
+          "key": "33-code",
+          "kind": "code",
+          "text": "Next, this line runs: Compare this pair of values."
+        },
+        {
+          "key": "33-impact",
+          "kind": "impact",
+          "text": "Compare values: p.val=14 vs q.val=14"
+        },
+        {
+          "key": "34-reason",
+          "kind": "reason",
+          "text": "Matching values establish only a local match. The left children become the next pair, and this call waits for its boolean."
+        },
+        {
+          "key": "34-code",
+          "kind": "code",
+          "text": "Next, this line runs: Call the left children."
+        },
+        {
+          "key": "34-impact",
+          "kind": "impact",
+          "text": "Values match (14) — call the left children"
+        },
+        {
+          "key": "35-reason",
+          "kind": "reason",
+          "text": "Two absent children describe the same structure. Settle that base case before reading either value."
+        },
+        {
+          "key": "35-code",
+          "kind": "code",
+          "text": "Next, this line runs: Check the empty pair."
+        },
+        {
+          "key": "35-impact",
+          "kind": "impact",
+          "text": "Check: p=10, q=10 — both null?"
+        },
+        {
+          "key": "36-reason",
+          "kind": "reason",
+          "text": "Equal values elsewhere cannot repair a missing child. If only one node exists here, this pair fails."
+        },
+        {
+          "key": "36-code",
+          "kind": "code",
+          "text": "Next, this line runs: Check structural agreement."
+        },
+        {
+          "key": "36-impact",
+          "kind": "impact",
+          "text": "One of p/q is null — structural mismatch?"
+        },
+        {
+          "key": "37-reason",
+          "kind": "reason",
+          "text": "Matching structure is not enough: the values at corresponding positions must also agree."
+        },
+        {
+          "key": "37-code",
+          "kind": "code",
+          "text": "Next, this line runs: Compare this pair of values."
+        },
+        {
+          "key": "37-impact",
+          "kind": "impact",
+          "text": "Compare values: p.val=10 vs q.val=10"
+        },
+        {
+          "key": "38-reason",
+          "kind": "reason",
+          "text": "Matching values establish only a local match. The left children become the next pair, and this call waits for its boolean."
+        },
+        {
+          "key": "38-code",
+          "kind": "code",
+          "text": "Next, this line runs: Call the left children."
+        },
+        {
+          "key": "38-impact",
+          "kind": "impact",
+          "text": "Values match (10) — call the left children"
+        },
+        {
+          "key": "39-reason",
+          "kind": "reason",
+          "text": "Two absent children describe the same structure. Settle that base case before reading either value."
+        },
+        {
+          "key": "39-code",
+          "kind": "code",
+          "text": "Next, this line runs: Check the empty pair."
+        },
+        {
+          "key": "39-impact",
+          "kind": "impact",
+          "text": "Check: p=null, q=null — both null?"
+        },
+        {
+          "key": "40-reason",
+          "kind": "reason",
+          "text": "Two absent children match. This call returns true to its parent without reading any values."
+        },
+        {
+          "key": "40-code",
+          "kind": "code",
+          "text": "Next, this line runs: Base case returns true."
+        },
+        {
+          "key": "40-impact",
+          "kind": "impact",
+          "text": "Both nodes are null → return True (base case)"
+        },
+        {
+          "key": "41-reason",
+          "kind": "reason",
+          "text": "The left call has returned a boolean. This pair keeps it as left_ok before moving on."
+        },
+        {
+          "key": "41-code",
+          "kind": "code",
+          "text": "Next, this line runs: Store the left result."
+        },
+        {
+          "key": "41-impact",
+          "kind": "impact",
+          "text": "Left child returned true → left_ok = true"
+        },
+        {
+          "key": "42-reason",
+          "kind": "reason",
+          "text": "The left result covers only half of this pair. The right children become the next pair before both results are combined."
+        },
+        {
+          "key": "42-code",
+          "kind": "code",
+          "text": "Next, this line runs: Call the right children."
+        },
+        {
+          "key": "42-impact",
+          "kind": "impact",
+          "text": "Call the right children"
+        },
+        {
+          "key": "43-reason",
+          "kind": "reason",
+          "text": "Two absent children describe the same structure. Settle that base case before reading either value."
+        },
+        {
+          "key": "43-code",
+          "kind": "code",
+          "text": "Next, this line runs: Check the empty pair."
+        },
+        {
+          "key": "43-impact",
+          "kind": "impact",
+          "text": "Check: p=null, q=null — both null?"
+        },
+        {
+          "key": "44-reason",
+          "kind": "reason",
+          "text": "Two absent children match. This call returns true to its parent without reading any values."
+        },
+        {
+          "key": "44-code",
+          "kind": "code",
+          "text": "Next, this line runs: Base case returns true."
+        },
+        {
+          "key": "44-impact",
+          "kind": "impact",
+          "text": "Both nodes are null → return True (base case)"
+        },
+        {
+          "key": "45-reason",
+          "kind": "reason",
+          "text": "The right call has returned a boolean. This pair keeps it as right_ok before combining both results."
+        },
+        {
+          "key": "45-code",
+          "kind": "code",
+          "text": "Next, this line runs: Store the right result."
+        },
+        {
+          "key": "45-impact",
+          "kind": "impact",
+          "text": "Right child returned true → right_ok = true"
+        },
+        {
+          "key": "46-reason",
+          "kind": "reason",
+          "text": "A pair matches only when both child results are true. This boolean returns to the caller, which receives it as its left_ok or right_ok."
+        },
+        {
+          "key": "46-code",
+          "kind": "code",
+          "text": "Next, this line runs: Return both results combined."
+        },
+        {
+          "key": "46-impact",
+          "kind": "impact",
+          "text": "Return true for node 10"
+        },
+        {
+          "key": "47-reason",
+          "kind": "reason",
+          "text": "The left call has returned a boolean. This pair keeps it as left_ok before moving on."
+        },
+        {
+          "key": "47-code",
+          "kind": "code",
+          "text": "Next, this line runs: Store the left result."
+        },
+        {
+          "key": "47-impact",
+          "kind": "impact",
+          "text": "Left child returned true → left_ok = true"
+        },
+        {
+          "key": "48-reason",
+          "kind": "reason",
+          "text": "The left result covers only half of this pair. The right children become the next pair before both results are combined."
+        },
+        {
+          "key": "48-code",
+          "kind": "code",
+          "text": "Next, this line runs: Call the right children."
+        },
+        {
+          "key": "48-impact",
+          "kind": "impact",
+          "text": "Call the right children"
+        },
+        {
+          "key": "49-reason",
+          "kind": "reason",
+          "text": "Two absent children describe the same structure. Settle that base case before reading either value."
+        },
+        {
+          "key": "49-code",
+          "kind": "code",
+          "text": "Next, this line runs: Check the empty pair."
+        },
+        {
+          "key": "49-impact",
+          "kind": "impact",
+          "text": "Check: p=19, q=19 — both null?"
+        },
+        {
+          "key": "50-reason",
+          "kind": "reason",
+          "text": "Equal values elsewhere cannot repair a missing child. If only one node exists here, this pair fails."
+        },
+        {
+          "key": "50-code",
+          "kind": "code",
+          "text": "Next, this line runs: Check structural agreement."
+        },
+        {
+          "key": "50-impact",
+          "kind": "impact",
+          "text": "One of p/q is null — structural mismatch?"
+        },
+        {
+          "key": "51-reason",
+          "kind": "reason",
+          "text": "Matching structure is not enough: the values at corresponding positions must also agree."
+        },
+        {
+          "key": "51-code",
+          "kind": "code",
+          "text": "Next, this line runs: Compare this pair of values."
+        },
+        {
+          "key": "51-impact",
+          "kind": "impact",
+          "text": "Compare values: p.val=19 vs q.val=19"
+        },
+        {
+          "key": "52-reason",
+          "kind": "reason",
+          "text": "Matching values establish only a local match. The left children become the next pair, and this call waits for its boolean."
+        },
+        {
+          "key": "52-code",
+          "kind": "code",
+          "text": "Next, this line runs: Call the left children."
+        },
+        {
+          "key": "52-impact",
+          "kind": "impact",
+          "text": "Values match (19) — call the left children"
+        },
+        {
+          "key": "53-reason",
+          "kind": "reason",
+          "text": "Two absent children describe the same structure. Settle that base case before reading either value."
+        },
+        {
+          "key": "53-code",
+          "kind": "code",
+          "text": "Next, this line runs: Check the empty pair."
+        },
+        {
+          "key": "53-impact",
+          "kind": "impact",
+          "text": "Check: p=null, q=null — both null?"
+        },
+        {
+          "key": "54-reason",
+          "kind": "reason",
+          "text": "Two absent children match. This call returns true to its parent without reading any values."
+        },
+        {
+          "key": "54-code",
+          "kind": "code",
+          "text": "Next, this line runs: Base case returns true."
+        },
+        {
+          "key": "54-impact",
+          "kind": "impact",
+          "text": "Both nodes are null → return True (base case)"
+        },
+        {
+          "key": "55-reason",
+          "kind": "reason",
+          "text": "The left call has returned a boolean. This pair keeps it as left_ok before moving on."
+        },
+        {
+          "key": "55-code",
+          "kind": "code",
+          "text": "Next, this line runs: Store the left result."
+        },
+        {
+          "key": "55-impact",
+          "kind": "impact",
+          "text": "Left child returned true → left_ok = true"
+        },
+        {
+          "key": "56-reason",
+          "kind": "reason",
+          "text": "The left result covers only half of this pair. The right children become the next pair before both results are combined."
+        },
+        {
+          "key": "56-code",
+          "kind": "code",
+          "text": "Next, this line runs: Call the right children."
+        },
+        {
+          "key": "56-impact",
+          "kind": "impact",
+          "text": "Call the right children"
+        },
+        {
+          "key": "57-reason",
+          "kind": "reason",
+          "text": "Two absent children describe the same structure. Settle that base case before reading either value."
+        },
+        {
+          "key": "57-code",
+          "kind": "code",
+          "text": "Next, this line runs: Check the empty pair."
+        },
+        {
+          "key": "57-impact",
+          "kind": "impact",
+          "text": "Check: p=null, q=null — both null?"
+        },
+        {
+          "key": "58-reason",
+          "kind": "reason",
+          "text": "Two absent children match. This call returns true to its parent without reading any values."
+        },
+        {
+          "key": "58-code",
+          "kind": "code",
+          "text": "Next, this line runs: Base case returns true."
+        },
+        {
+          "key": "58-impact",
+          "kind": "impact",
+          "text": "Both nodes are null → return True (base case)"
+        },
+        {
+          "key": "59-reason",
+          "kind": "reason",
+          "text": "The right call has returned a boolean. This pair keeps it as right_ok before combining both results."
+        },
+        {
+          "key": "59-code",
+          "kind": "code",
+          "text": "Next, this line runs: Store the right result."
+        },
+        {
+          "key": "59-impact",
+          "kind": "impact",
+          "text": "Right child returned true → right_ok = true"
+        },
+        {
+          "key": "60-reason",
+          "kind": "reason",
+          "text": "A pair matches only when both child results are true. This boolean returns to the caller, which receives it as its left_ok or right_ok."
+        },
+        {
+          "key": "60-code",
+          "kind": "code",
+          "text": "Next, this line runs: Return both results combined."
+        },
+        {
+          "key": "60-impact",
+          "kind": "impact",
+          "text": "Return true for node 19"
+        },
+        {
+          "key": "61-reason",
+          "kind": "reason",
+          "text": "The right call has returned a boolean. This pair keeps it as right_ok before combining both results."
+        },
+        {
+          "key": "61-code",
+          "kind": "code",
+          "text": "Next, this line runs: Store the right result."
+        },
+        {
+          "key": "61-impact",
+          "kind": "impact",
+          "text": "Right child returned true → right_ok = true"
+        },
+        {
+          "key": "62-reason",
+          "kind": "reason",
+          "text": "A pair matches only when both child results are true. This boolean returns to the caller, which receives it as its left_ok or right_ok."
+        },
+        {
+          "key": "62-code",
+          "kind": "code",
+          "text": "Next, this line runs: Return both results combined."
+        },
+        {
+          "key": "62-impact",
+          "kind": "impact",
+          "text": "Return true for node 14"
+        },
+        {
+          "key": "63-reason",
+          "kind": "reason",
+          "text": "The right call has returned a boolean. This pair keeps it as right_ok before combining both results."
+        },
+        {
+          "key": "63-code",
+          "kind": "code",
+          "text": "Next, this line runs: Store the right result."
+        },
+        {
+          "key": "63-impact",
+          "kind": "impact",
+          "text": "Right child returned true → right_ok = true"
+        },
+        {
+          "key": "64-reason",
+          "kind": "reason",
+          "text": "A pair matches only when both child results are true. This boolean returns to the caller, which receives it as its left_ok or right_ok."
+        },
+        {
+          "key": "64-code",
+          "kind": "code",
+          "text": "Next, this line runs: Return both results combined."
+        },
+        {
+          "key": "64-impact",
+          "kind": "impact",
+          "text": "Return false for node 8"
+        },
+        {
+          "key": "65-reason",
+          "kind": "reason",
+          "text": "Trees differ. isSameTree returns False."
+        },
+        {
+          "key": "65-code",
+          "kind": "code",
+          "text": "Next, this line runs: Report the tree comparison."
+        },
+        {
+          "key": "65-impact",
+          "kind": "impact",
+          "text": "Trees differ. isSameTree returns False."
+        }
+      ]
+    },
+    {
+      "presetIndex": 2,
+      "label": "Equal values, different shape",
+      "input": "{\"p\":[8,3,null],\"q\":[8,null,3]}",
+      "scenes": [
+        {
+          "key": "0-reason",
+          "kind": "reason",
+          "text": "Compare corresponding positions together. Each recursive call decides whether one pair of subtrees matches."
+        },
+        {
+          "key": "0-code",
+          "kind": "code",
+          "text": "Next, this line runs: Start with the roots."
+        },
+        {
+          "key": "0-impact",
+          "kind": "impact",
+          "text": "Call isSameTree(p, q). Begin recursive DFS."
+        },
+        {
+          "key": "1-reason",
+          "kind": "reason",
+          "text": "Two absent children describe the same structure. Settle that base case before reading either value."
+        },
+        {
+          "key": "1-code",
+          "kind": "code",
+          "text": "Next, this line runs: Check the empty pair."
+        },
+        {
+          "key": "1-impact",
+          "kind": "impact",
+          "text": "Check: p=8, q=8 — both null?"
+        },
+        {
+          "key": "2-reason",
+          "kind": "reason",
+          "text": "Equal values elsewhere cannot repair a missing child. If only one node exists here, this pair fails."
+        },
+        {
+          "key": "2-code",
+          "kind": "code",
+          "text": "Next, this line runs: Check structural agreement."
+        },
+        {
+          "key": "2-impact",
+          "kind": "impact",
+          "text": "One of p/q is null — structural mismatch?"
+        },
+        {
+          "key": "3-reason",
+          "kind": "reason",
+          "text": "Matching structure is not enough: the values at corresponding positions must also agree."
+        },
+        {
+          "key": "3-code",
+          "kind": "code",
+          "text": "Next, this line runs: Compare this pair of values."
+        },
+        {
+          "key": "3-impact",
+          "kind": "impact",
+          "text": "Compare values: p.val=8 vs q.val=8"
+        },
+        {
+          "key": "4-reason",
+          "kind": "reason",
+          "text": "Matching values establish only a local match. The left children become the next pair, and this call waits for its boolean."
+        },
+        {
+          "key": "4-code",
+          "kind": "code",
+          "text": "Next, this line runs: Call the left children."
+        },
+        {
+          "key": "4-impact",
+          "kind": "impact",
+          "text": "Values match (8) — call the left children"
+        },
+        {
+          "key": "5-reason",
+          "kind": "reason",
+          "text": "Two absent children describe the same structure. Settle that base case before reading either value."
+        },
+        {
+          "key": "5-code",
+          "kind": "code",
+          "text": "Next, this line runs: Check the empty pair."
+        },
+        {
+          "key": "5-impact",
+          "kind": "impact",
+          "text": "Check: p=3, q=null — both null?"
+        },
+        {
+          "key": "6-reason",
+          "kind": "reason",
+          "text": "Equal values elsewhere cannot repair a missing child. If only one node exists here, this pair fails."
+        },
+        {
+          "key": "6-code",
+          "kind": "code",
+          "text": "Next, this line runs: Check structural agreement."
+        },
+        {
+          "key": "6-impact",
+          "kind": "impact",
+          "text": "One of p/q is null — structural mismatch?"
+        },
+        {
+          "key": "7-reason",
+          "kind": "reason",
+          "text": "Exactly one child exists at this position. The pair cannot match, so this call returns false."
+        },
+        {
+          "key": "7-code",
+          "kind": "code",
+          "text": "Next, this line runs: Structure differs: return false."
+        },
+        {
+          "key": "7-impact",
+          "kind": "impact",
+          "text": "One node is null, other is 3 → return False"
+        },
+        {
+          "key": "8-reason",
+          "kind": "reason",
+          "text": "The left call has returned a boolean. This pair keeps it as left_ok before moving on."
+        },
+        {
+          "key": "8-code",
+          "kind": "code",
+          "text": "Next, this line runs: Store the left result."
+        },
+        {
+          "key": "8-impact",
+          "kind": "impact",
+          "text": "Left child returned false → left_ok = false"
+        },
+        {
+          "key": "9-reason",
+          "kind": "reason",
+          "text": "The left result covers only half of this pair. The right children become the next pair before both results are combined."
+        },
+        {
+          "key": "9-code",
+          "kind": "code",
+          "text": "Next, this line runs: Call the right children."
+        },
+        {
+          "key": "9-impact",
+          "kind": "impact",
+          "text": "Call the right children"
+        },
+        {
+          "key": "10-reason",
+          "kind": "reason",
+          "text": "Two absent children describe the same structure. Settle that base case before reading either value."
+        },
+        {
+          "key": "10-code",
+          "kind": "code",
+          "text": "Next, this line runs: Check the empty pair."
+        },
+        {
+          "key": "10-impact",
+          "kind": "impact",
+          "text": "Check: p=null, q=3 — both null?"
+        },
+        {
+          "key": "11-reason",
+          "kind": "reason",
+          "text": "Equal values elsewhere cannot repair a missing child. If only one node exists here, this pair fails."
+        },
+        {
+          "key": "11-code",
+          "kind": "code",
+          "text": "Next, this line runs: Check structural agreement."
+        },
+        {
+          "key": "11-impact",
+          "kind": "impact",
+          "text": "One of p/q is null — structural mismatch?"
+        },
+        {
+          "key": "12-reason",
+          "kind": "reason",
+          "text": "Exactly one child exists at this position. The pair cannot match, so this call returns false."
+        },
+        {
+          "key": "12-code",
+          "kind": "code",
+          "text": "Next, this line runs: Structure differs: return false."
+        },
+        {
+          "key": "12-impact",
+          "kind": "impact",
+          "text": "One node is null, other is 3 → return False"
+        },
+        {
+          "key": "13-reason",
+          "kind": "reason",
+          "text": "The right call has returned a boolean. This pair keeps it as right_ok before combining both results."
+        },
+        {
+          "key": "13-code",
+          "kind": "code",
+          "text": "Next, this line runs: Store the right result."
+        },
+        {
+          "key": "13-impact",
+          "kind": "impact",
+          "text": "Right child returned false → right_ok = false"
+        },
+        {
+          "key": "14-reason",
+          "kind": "reason",
+          "text": "A pair matches only when both child results are true. This boolean returns to the caller, which receives it as its left_ok or right_ok."
+        },
+        {
+          "key": "14-code",
+          "kind": "code",
+          "text": "Next, this line runs: Return both results combined."
+        },
+        {
+          "key": "14-impact",
+          "kind": "impact",
+          "text": "Return false for node 8"
+        },
+        {
+          "key": "15-reason",
+          "kind": "reason",
+          "text": "Trees differ. isSameTree returns False."
+        },
+        {
+          "key": "15-code",
+          "kind": "code",
+          "text": "Next, this line runs: Report the tree comparison."
+        },
+        {
+          "key": "15-impact",
+          "kind": "impact",
+          "text": "Trees differ. isSameTree returns False."
+        }
+      ]
+    },
+    {
+      "presetIndex": 3,
+      "label": "Only one empty",
+      "input": "{\"p\":[],\"q\":[17]}",
+      "scenes": [
+        {
+          "key": "0-reason",
+          "kind": "reason",
+          "text": "Compare corresponding positions together. Each recursive call decides whether one pair of subtrees matches."
+        },
+        {
+          "key": "0-code",
+          "kind": "code",
+          "text": "Next, this line runs: Start with the roots."
+        },
+        {
+          "key": "0-impact",
+          "kind": "impact",
+          "text": "Call isSameTree(p, q). Begin recursive DFS."
+        },
+        {
+          "key": "1-reason",
+          "kind": "reason",
+          "text": "Two absent children describe the same structure. Settle that base case before reading either value."
+        },
+        {
+          "key": "1-code",
+          "kind": "code",
+          "text": "Next, this line runs: Check the empty pair."
+        },
+        {
+          "key": "1-impact",
+          "kind": "impact",
+          "text": "Check: p=null, q=17 — both null?"
+        },
+        {
+          "key": "2-reason",
+          "kind": "reason",
+          "text": "Equal values elsewhere cannot repair a missing child. If only one node exists here, this pair fails."
+        },
+        {
+          "key": "2-code",
+          "kind": "code",
+          "text": "Next, this line runs: Check structural agreement."
+        },
+        {
+          "key": "2-impact",
+          "kind": "impact",
+          "text": "One of p/q is null — structural mismatch?"
+        },
+        {
+          "key": "3-reason",
+          "kind": "reason",
+          "text": "Exactly one child exists at this position. The pair cannot match, so this call returns false."
+        },
+        {
+          "key": "3-code",
+          "kind": "code",
+          "text": "Next, this line runs: Structure differs: return false."
+        },
+        {
+          "key": "3-impact",
+          "kind": "impact",
+          "text": "One node is null, other is 17 → return False"
+        },
+        {
+          "key": "4-reason",
+          "kind": "reason",
+          "text": "Trees differ. isSameTree returns False."
+        },
+        {
+          "key": "4-code",
+          "kind": "code",
+          "text": "Next, this line runs: Report the tree comparison."
+        },
+        {
+          "key": "4-impact",
+          "kind": "impact",
+          "text": "Trees differ. isSameTree returns False."
+        }
+      ]
+    },
+    {
+      "presetIndex": 4,
+      "label": "Both empty",
+      "input": "{\"p\":[],\"q\":[]}",
+      "scenes": [
+        {
+          "key": "0-reason",
+          "kind": "reason",
+          "text": "Compare corresponding positions together. Each recursive call decides whether one pair of subtrees matches."
+        },
+        {
+          "key": "0-code",
+          "kind": "code",
+          "text": "Next, this line runs: Start with the roots."
+        },
+        {
+          "key": "0-impact",
+          "kind": "impact",
+          "text": "Call isSameTree(p, q). Begin recursive DFS."
+        },
+        {
+          "key": "1-reason",
+          "kind": "reason",
+          "text": "Two absent children describe the same structure. Settle that base case before reading either value."
+        },
+        {
+          "key": "1-code",
+          "kind": "code",
+          "text": "Next, this line runs: Check the empty pair."
+        },
+        {
+          "key": "1-impact",
+          "kind": "impact",
+          "text": "Check: p=null, q=null — both null?"
+        },
+        {
+          "key": "2-reason",
+          "kind": "reason",
+          "text": "Two absent children match. This call returns true to its parent without reading any values."
+        },
+        {
+          "key": "2-code",
+          "kind": "code",
+          "text": "Next, this line runs: Base case returns true."
+        },
+        {
+          "key": "2-impact",
+          "kind": "impact",
+          "text": "Both nodes are null → return True (base case)"
+        },
+        {
+          "key": "3-reason",
+          "kind": "reason",
+          "text": "Trees are identical! isSameTree returns True."
+        },
+        {
+          "key": "3-code",
+          "kind": "code",
+          "text": "Next, this line runs: Report the tree comparison."
+        },
+        {
+          "key": "3-impact",
+          "kind": "impact",
+          "text": "Trees are identical! isSameTree returns True."
+        }
+      ]
+    },
+    {
+      "presetIndex": 5,
+      "label": "Equal values, same shape",
+      "input": "{\"p\":[1,1,1],\"q\":[1,1,1]}",
+      "scenes": [
+        {
+          "key": "0-reason",
+          "kind": "reason",
+          "text": "Compare corresponding positions together. Each recursive call decides whether one pair of subtrees matches."
+        },
+        {
+          "key": "0-code",
+          "kind": "code",
+          "text": "Next, this line runs: Start with the roots."
+        },
+        {
+          "key": "0-impact",
+          "kind": "impact",
+          "text": "Call isSameTree(p, q). Begin recursive DFS."
+        },
+        {
+          "key": "1-reason",
+          "kind": "reason",
+          "text": "Two absent children describe the same structure. Settle that base case before reading either value."
+        },
+        {
+          "key": "1-code",
+          "kind": "code",
+          "text": "Next, this line runs: Check the empty pair."
+        },
+        {
+          "key": "1-impact",
+          "kind": "impact",
+          "text": "Check: p=1, q=1 — both null?"
+        },
+        {
+          "key": "2-reason",
+          "kind": "reason",
+          "text": "Equal values elsewhere cannot repair a missing child. If only one node exists here, this pair fails."
+        },
+        {
+          "key": "2-code",
+          "kind": "code",
+          "text": "Next, this line runs: Check structural agreement."
+        },
+        {
+          "key": "2-impact",
+          "kind": "impact",
+          "text": "One of p/q is null — structural mismatch?"
+        },
+        {
+          "key": "3-reason",
+          "kind": "reason",
+          "text": "Matching structure is not enough: the values at corresponding positions must also agree."
+        },
+        {
+          "key": "3-code",
+          "kind": "code",
+          "text": "Next, this line runs: Compare this pair of values."
+        },
+        {
+          "key": "3-impact",
+          "kind": "impact",
+          "text": "Compare values: p.val=1 vs q.val=1"
+        },
+        {
+          "key": "4-reason",
+          "kind": "reason",
+          "text": "Matching values establish only a local match. The left children become the next pair, and this call waits for its boolean."
+        },
+        {
+          "key": "4-code",
+          "kind": "code",
+          "text": "Next, this line runs: Call the left children."
+        },
+        {
+          "key": "4-impact",
+          "kind": "impact",
+          "text": "Values match (1) — call the left children"
+        },
+        {
+          "key": "5-reason",
+          "kind": "reason",
+          "text": "Two absent children describe the same structure. Settle that base case before reading either value."
+        },
+        {
+          "key": "5-code",
+          "kind": "code",
+          "text": "Next, this line runs: Check the empty pair."
+        },
+        {
+          "key": "5-impact",
+          "kind": "impact",
+          "text": "Check: p=1, q=1 — both null?"
+        },
+        {
+          "key": "6-reason",
+          "kind": "reason",
+          "text": "Equal values elsewhere cannot repair a missing child. If only one node exists here, this pair fails."
+        },
+        {
+          "key": "6-code",
+          "kind": "code",
+          "text": "Next, this line runs: Check structural agreement."
+        },
+        {
+          "key": "6-impact",
+          "kind": "impact",
+          "text": "One of p/q is null — structural mismatch?"
+        },
+        {
+          "key": "7-reason",
+          "kind": "reason",
+          "text": "Matching structure is not enough: the values at corresponding positions must also agree."
+        },
+        {
+          "key": "7-code",
+          "kind": "code",
+          "text": "Next, this line runs: Compare this pair of values."
+        },
+        {
+          "key": "7-impact",
+          "kind": "impact",
+          "text": "Compare values: p.val=1 vs q.val=1"
+        },
+        {
+          "key": "8-reason",
+          "kind": "reason",
+          "text": "Matching values establish only a local match. The left children become the next pair, and this call waits for its boolean."
+        },
+        {
+          "key": "8-code",
+          "kind": "code",
+          "text": "Next, this line runs: Call the left children."
+        },
+        {
+          "key": "8-impact",
+          "kind": "impact",
+          "text": "Values match (1) — call the left children"
+        },
+        {
+          "key": "9-reason",
+          "kind": "reason",
+          "text": "Two absent children describe the same structure. Settle that base case before reading either value."
+        },
+        {
+          "key": "9-code",
+          "kind": "code",
+          "text": "Next, this line runs: Check the empty pair."
+        },
+        {
+          "key": "9-impact",
+          "kind": "impact",
+          "text": "Check: p=null, q=null — both null?"
+        },
+        {
+          "key": "10-reason",
+          "kind": "reason",
+          "text": "Two absent children match. This call returns true to its parent without reading any values."
+        },
+        {
+          "key": "10-code",
+          "kind": "code",
+          "text": "Next, this line runs: Base case returns true."
+        },
+        {
+          "key": "10-impact",
+          "kind": "impact",
+          "text": "Both nodes are null → return True (base case)"
+        },
+        {
+          "key": "11-reason",
+          "kind": "reason",
+          "text": "The left call has returned a boolean. This pair keeps it as left_ok before moving on."
+        },
+        {
+          "key": "11-code",
+          "kind": "code",
+          "text": "Next, this line runs: Store the left result."
+        },
+        {
+          "key": "11-impact",
+          "kind": "impact",
+          "text": "Left child returned true → left_ok = true"
+        },
+        {
+          "key": "12-reason",
+          "kind": "reason",
+          "text": "The left result covers only half of this pair. The right children become the next pair before both results are combined."
+        },
+        {
+          "key": "12-code",
+          "kind": "code",
+          "text": "Next, this line runs: Call the right children."
+        },
+        {
+          "key": "12-impact",
+          "kind": "impact",
+          "text": "Call the right children"
+        },
+        {
+          "key": "13-reason",
+          "kind": "reason",
+          "text": "Two absent children describe the same structure. Settle that base case before reading either value."
+        },
+        {
+          "key": "13-code",
+          "kind": "code",
+          "text": "Next, this line runs: Check the empty pair."
+        },
+        {
+          "key": "13-impact",
+          "kind": "impact",
+          "text": "Check: p=null, q=null — both null?"
+        },
+        {
+          "key": "14-reason",
+          "kind": "reason",
+          "text": "Two absent children match. This call returns true to its parent without reading any values."
+        },
+        {
+          "key": "14-code",
+          "kind": "code",
+          "text": "Next, this line runs: Base case returns true."
+        },
+        {
+          "key": "14-impact",
+          "kind": "impact",
+          "text": "Both nodes are null → return True (base case)"
+        },
+        {
+          "key": "15-reason",
+          "kind": "reason",
+          "text": "The right call has returned a boolean. This pair keeps it as right_ok before combining both results."
+        },
+        {
+          "key": "15-code",
+          "kind": "code",
+          "text": "Next, this line runs: Store the right result."
+        },
+        {
+          "key": "15-impact",
+          "kind": "impact",
+          "text": "Right child returned true → right_ok = true"
+        },
+        {
+          "key": "16-reason",
+          "kind": "reason",
+          "text": "A pair matches only when both child results are true. This boolean returns to the caller, which receives it as its left_ok or right_ok."
+        },
+        {
+          "key": "16-code",
+          "kind": "code",
+          "text": "Next, this line runs: Return both results combined."
+        },
+        {
+          "key": "16-impact",
+          "kind": "impact",
+          "text": "Return true for node 1"
+        },
+        {
+          "key": "17-reason",
+          "kind": "reason",
+          "text": "The left call has returned a boolean. This pair keeps it as left_ok before moving on."
+        },
+        {
+          "key": "17-code",
+          "kind": "code",
+          "text": "Next, this line runs: Store the left result."
+        },
+        {
+          "key": "17-impact",
+          "kind": "impact",
+          "text": "Left child returned true → left_ok = true"
+        },
+        {
+          "key": "18-reason",
+          "kind": "reason",
+          "text": "The left result covers only half of this pair. The right children become the next pair before both results are combined."
+        },
+        {
+          "key": "18-code",
+          "kind": "code",
+          "text": "Next, this line runs: Call the right children."
+        },
+        {
+          "key": "18-impact",
+          "kind": "impact",
+          "text": "Call the right children"
+        },
+        {
+          "key": "19-reason",
+          "kind": "reason",
+          "text": "Two absent children describe the same structure. Settle that base case before reading either value."
+        },
+        {
+          "key": "19-code",
+          "kind": "code",
+          "text": "Next, this line runs: Check the empty pair."
+        },
+        {
+          "key": "19-impact",
+          "kind": "impact",
+          "text": "Check: p=1, q=1 — both null?"
+        },
+        {
+          "key": "20-reason",
+          "kind": "reason",
+          "text": "Equal values elsewhere cannot repair a missing child. If only one node exists here, this pair fails."
+        },
+        {
+          "key": "20-code",
+          "kind": "code",
+          "text": "Next, this line runs: Check structural agreement."
+        },
+        {
+          "key": "20-impact",
+          "kind": "impact",
+          "text": "One of p/q is null — structural mismatch?"
+        },
+        {
+          "key": "21-reason",
+          "kind": "reason",
+          "text": "Matching structure is not enough: the values at corresponding positions must also agree."
+        },
+        {
+          "key": "21-code",
+          "kind": "code",
+          "text": "Next, this line runs: Compare this pair of values."
+        },
+        {
+          "key": "21-impact",
+          "kind": "impact",
+          "text": "Compare values: p.val=1 vs q.val=1"
+        },
+        {
+          "key": "22-reason",
+          "kind": "reason",
+          "text": "Matching values establish only a local match. The left children become the next pair, and this call waits for its boolean."
+        },
+        {
+          "key": "22-code",
+          "kind": "code",
+          "text": "Next, this line runs: Call the left children."
+        },
+        {
+          "key": "22-impact",
+          "kind": "impact",
+          "text": "Values match (1) — call the left children"
+        },
+        {
+          "key": "23-reason",
+          "kind": "reason",
+          "text": "Two absent children describe the same structure. Settle that base case before reading either value."
+        },
+        {
+          "key": "23-code",
+          "kind": "code",
+          "text": "Next, this line runs: Check the empty pair."
+        },
+        {
+          "key": "23-impact",
+          "kind": "impact",
+          "text": "Check: p=null, q=null — both null?"
+        },
+        {
+          "key": "24-reason",
+          "kind": "reason",
+          "text": "Two absent children match. This call returns true to its parent without reading any values."
+        },
+        {
+          "key": "24-code",
+          "kind": "code",
+          "text": "Next, this line runs: Base case returns true."
+        },
+        {
+          "key": "24-impact",
+          "kind": "impact",
+          "text": "Both nodes are null → return True (base case)"
+        },
+        {
+          "key": "25-reason",
+          "kind": "reason",
+          "text": "The left call has returned a boolean. This pair keeps it as left_ok before moving on."
+        },
+        {
+          "key": "25-code",
+          "kind": "code",
+          "text": "Next, this line runs: Store the left result."
+        },
+        {
+          "key": "25-impact",
+          "kind": "impact",
+          "text": "Left child returned true → left_ok = true"
+        },
+        {
+          "key": "26-reason",
+          "kind": "reason",
+          "text": "The left result covers only half of this pair. The right children become the next pair before both results are combined."
+        },
+        {
+          "key": "26-code",
+          "kind": "code",
+          "text": "Next, this line runs: Call the right children."
+        },
+        {
+          "key": "26-impact",
+          "kind": "impact",
+          "text": "Call the right children"
+        },
+        {
+          "key": "27-reason",
+          "kind": "reason",
+          "text": "Two absent children describe the same structure. Settle that base case before reading either value."
+        },
+        {
+          "key": "27-code",
+          "kind": "code",
+          "text": "Next, this line runs: Check the empty pair."
+        },
+        {
+          "key": "27-impact",
+          "kind": "impact",
+          "text": "Check: p=null, q=null — both null?"
+        },
+        {
+          "key": "28-reason",
+          "kind": "reason",
+          "text": "Two absent children match. This call returns true to its parent without reading any values."
+        },
+        {
+          "key": "28-code",
+          "kind": "code",
+          "text": "Next, this line runs: Base case returns true."
+        },
+        {
+          "key": "28-impact",
+          "kind": "impact",
+          "text": "Both nodes are null → return True (base case)"
+        },
+        {
+          "key": "29-reason",
+          "kind": "reason",
+          "text": "The right call has returned a boolean. This pair keeps it as right_ok before combining both results."
+        },
+        {
+          "key": "29-code",
+          "kind": "code",
+          "text": "Next, this line runs: Store the right result."
+        },
+        {
+          "key": "29-impact",
+          "kind": "impact",
+          "text": "Right child returned true → right_ok = true"
+        },
+        {
+          "key": "30-reason",
+          "kind": "reason",
+          "text": "A pair matches only when both child results are true. This boolean returns to the caller, which receives it as its left_ok or right_ok."
+        },
+        {
+          "key": "30-code",
+          "kind": "code",
+          "text": "Next, this line runs: Return both results combined."
+        },
+        {
+          "key": "30-impact",
+          "kind": "impact",
+          "text": "Return true for node 1"
+        },
+        {
+          "key": "31-reason",
+          "kind": "reason",
+          "text": "The right call has returned a boolean. This pair keeps it as right_ok before combining both results."
+        },
+        {
+          "key": "31-code",
+          "kind": "code",
+          "text": "Next, this line runs: Store the right result."
+        },
+        {
+          "key": "31-impact",
+          "kind": "impact",
+          "text": "Right child returned true → right_ok = true"
+        },
+        {
+          "key": "32-reason",
+          "kind": "reason",
+          "text": "A pair matches only when both child results are true. This boolean returns to the caller, which receives it as its left_ok or right_ok."
+        },
+        {
+          "key": "32-code",
+          "kind": "code",
+          "text": "Next, this line runs: Return both results combined."
+        },
+        {
+          "key": "32-impact",
+          "kind": "impact",
+          "text": "Return true for node 1"
+        },
+        {
+          "key": "33-reason",
+          "kind": "reason",
+          "text": "Trees are identical! isSameTree returns True."
+        },
+        {
+          "key": "33-code",
+          "kind": "code",
+          "text": "Next, this line runs: Report the tree comparison."
+        },
+        {
+          "key": "33-impact",
+          "kind": "impact",
+          "text": "Trees are identical! isSameTree returns True."
+        }
+      ]
+    },
+    {
+      "presetIndex": 6,
+      "label": "Boundary values at the limit",
+      "input": "{\"p\":[100,-100,100],\"q\":[100,-100,100]}",
+      "scenes": [
+        {
+          "key": "0-reason",
+          "kind": "reason",
+          "text": "Compare corresponding positions together. Each recursive call decides whether one pair of subtrees matches."
+        },
+        {
+          "key": "0-code",
+          "kind": "code",
+          "text": "Next, this line runs: Start with the roots."
+        },
+        {
+          "key": "0-impact",
+          "kind": "impact",
+          "text": "Call isSameTree(p, q). Begin recursive DFS."
+        },
+        {
+          "key": "1-reason",
+          "kind": "reason",
+          "text": "Two absent children describe the same structure. Settle that base case before reading either value."
+        },
+        {
+          "key": "1-code",
+          "kind": "code",
+          "text": "Next, this line runs: Check the empty pair."
+        },
+        {
+          "key": "1-impact",
+          "kind": "impact",
+          "text": "Check: p=100, q=100 — both null?"
+        },
+        {
+          "key": "2-reason",
+          "kind": "reason",
+          "text": "Equal values elsewhere cannot repair a missing child. If only one node exists here, this pair fails."
+        },
+        {
+          "key": "2-code",
+          "kind": "code",
+          "text": "Next, this line runs: Check structural agreement."
+        },
+        {
+          "key": "2-impact",
+          "kind": "impact",
+          "text": "One of p/q is null — structural mismatch?"
+        },
+        {
+          "key": "3-reason",
+          "kind": "reason",
+          "text": "Matching structure is not enough: the values at corresponding positions must also agree."
+        },
+        {
+          "key": "3-code",
+          "kind": "code",
+          "text": "Next, this line runs: Compare this pair of values."
+        },
+        {
+          "key": "3-impact",
+          "kind": "impact",
+          "text": "Compare values: p.val=100 vs q.val=100"
+        },
+        {
+          "key": "4-reason",
+          "kind": "reason",
+          "text": "Matching values establish only a local match. The left children become the next pair, and this call waits for its boolean."
+        },
+        {
+          "key": "4-code",
+          "kind": "code",
+          "text": "Next, this line runs: Call the left children."
+        },
+        {
+          "key": "4-impact",
+          "kind": "impact",
+          "text": "Values match (100) — call the left children"
+        },
+        {
+          "key": "5-reason",
+          "kind": "reason",
+          "text": "Two absent children describe the same structure. Settle that base case before reading either value."
+        },
+        {
+          "key": "5-code",
+          "kind": "code",
+          "text": "Next, this line runs: Check the empty pair."
+        },
+        {
+          "key": "5-impact",
+          "kind": "impact",
+          "text": "Check: p=-100, q=-100 — both null?"
+        },
+        {
+          "key": "6-reason",
+          "kind": "reason",
+          "text": "Equal values elsewhere cannot repair a missing child. If only one node exists here, this pair fails."
+        },
+        {
+          "key": "6-code",
+          "kind": "code",
+          "text": "Next, this line runs: Check structural agreement."
+        },
+        {
+          "key": "6-impact",
+          "kind": "impact",
+          "text": "One of p/q is null — structural mismatch?"
+        },
+        {
+          "key": "7-reason",
+          "kind": "reason",
+          "text": "Matching structure is not enough: the values at corresponding positions must also agree."
+        },
+        {
+          "key": "7-code",
+          "kind": "code",
+          "text": "Next, this line runs: Compare this pair of values."
+        },
+        {
+          "key": "7-impact",
+          "kind": "impact",
+          "text": "Compare values: p.val=-100 vs q.val=-100"
+        },
+        {
+          "key": "8-reason",
+          "kind": "reason",
+          "text": "Matching values establish only a local match. The left children become the next pair, and this call waits for its boolean."
+        },
+        {
+          "key": "8-code",
+          "kind": "code",
+          "text": "Next, this line runs: Call the left children."
+        },
+        {
+          "key": "8-impact",
+          "kind": "impact",
+          "text": "Values match (-100) — call the left children"
+        },
+        {
+          "key": "9-reason",
+          "kind": "reason",
+          "text": "Two absent children describe the same structure. Settle that base case before reading either value."
+        },
+        {
+          "key": "9-code",
+          "kind": "code",
+          "text": "Next, this line runs: Check the empty pair."
+        },
+        {
+          "key": "9-impact",
+          "kind": "impact",
+          "text": "Check: p=null, q=null — both null?"
+        },
+        {
+          "key": "10-reason",
+          "kind": "reason",
+          "text": "Two absent children match. This call returns true to its parent without reading any values."
+        },
+        {
+          "key": "10-code",
+          "kind": "code",
+          "text": "Next, this line runs: Base case returns true."
+        },
+        {
+          "key": "10-impact",
+          "kind": "impact",
+          "text": "Both nodes are null → return True (base case)"
+        },
+        {
+          "key": "11-reason",
+          "kind": "reason",
+          "text": "The left call has returned a boolean. This pair keeps it as left_ok before moving on."
+        },
+        {
+          "key": "11-code",
+          "kind": "code",
+          "text": "Next, this line runs: Store the left result."
+        },
+        {
+          "key": "11-impact",
+          "kind": "impact",
+          "text": "Left child returned true → left_ok = true"
+        },
+        {
+          "key": "12-reason",
+          "kind": "reason",
+          "text": "The left result covers only half of this pair. The right children become the next pair before both results are combined."
+        },
+        {
+          "key": "12-code",
+          "kind": "code",
+          "text": "Next, this line runs: Call the right children."
+        },
+        {
+          "key": "12-impact",
+          "kind": "impact",
+          "text": "Call the right children"
+        },
+        {
+          "key": "13-reason",
+          "kind": "reason",
+          "text": "Two absent children describe the same structure. Settle that base case before reading either value."
+        },
+        {
+          "key": "13-code",
+          "kind": "code",
+          "text": "Next, this line runs: Check the empty pair."
+        },
+        {
+          "key": "13-impact",
+          "kind": "impact",
+          "text": "Check: p=null, q=null — both null?"
+        },
+        {
+          "key": "14-reason",
+          "kind": "reason",
+          "text": "Two absent children match. This call returns true to its parent without reading any values."
+        },
+        {
+          "key": "14-code",
+          "kind": "code",
+          "text": "Next, this line runs: Base case returns true."
+        },
+        {
+          "key": "14-impact",
+          "kind": "impact",
+          "text": "Both nodes are null → return True (base case)"
+        },
+        {
+          "key": "15-reason",
+          "kind": "reason",
+          "text": "The right call has returned a boolean. This pair keeps it as right_ok before combining both results."
+        },
+        {
+          "key": "15-code",
+          "kind": "code",
+          "text": "Next, this line runs: Store the right result."
+        },
+        {
+          "key": "15-impact",
+          "kind": "impact",
+          "text": "Right child returned true → right_ok = true"
+        },
+        {
+          "key": "16-reason",
+          "kind": "reason",
+          "text": "A pair matches only when both child results are true. This boolean returns to the caller, which receives it as its left_ok or right_ok."
+        },
+        {
+          "key": "16-code",
+          "kind": "code",
+          "text": "Next, this line runs: Return both results combined."
+        },
+        {
+          "key": "16-impact",
+          "kind": "impact",
+          "text": "Return true for node -100"
+        },
+        {
+          "key": "17-reason",
+          "kind": "reason",
+          "text": "The left call has returned a boolean. This pair keeps it as left_ok before moving on."
+        },
+        {
+          "key": "17-code",
+          "kind": "code",
+          "text": "Next, this line runs: Store the left result."
+        },
+        {
+          "key": "17-impact",
+          "kind": "impact",
+          "text": "Left child returned true → left_ok = true"
+        },
+        {
+          "key": "18-reason",
+          "kind": "reason",
+          "text": "The left result covers only half of this pair. The right children become the next pair before both results are combined."
+        },
+        {
+          "key": "18-code",
+          "kind": "code",
+          "text": "Next, this line runs: Call the right children."
+        },
+        {
+          "key": "18-impact",
+          "kind": "impact",
+          "text": "Call the right children"
+        },
+        {
+          "key": "19-reason",
+          "kind": "reason",
+          "text": "Two absent children describe the same structure. Settle that base case before reading either value."
+        },
+        {
+          "key": "19-code",
+          "kind": "code",
+          "text": "Next, this line runs: Check the empty pair."
+        },
+        {
+          "key": "19-impact",
+          "kind": "impact",
+          "text": "Check: p=100, q=100 — both null?"
+        },
+        {
+          "key": "20-reason",
+          "kind": "reason",
+          "text": "Equal values elsewhere cannot repair a missing child. If only one node exists here, this pair fails."
+        },
+        {
+          "key": "20-code",
+          "kind": "code",
+          "text": "Next, this line runs: Check structural agreement."
+        },
+        {
+          "key": "20-impact",
+          "kind": "impact",
+          "text": "One of p/q is null — structural mismatch?"
+        },
+        {
+          "key": "21-reason",
+          "kind": "reason",
+          "text": "Matching structure is not enough: the values at corresponding positions must also agree."
+        },
+        {
+          "key": "21-code",
+          "kind": "code",
+          "text": "Next, this line runs: Compare this pair of values."
+        },
+        {
+          "key": "21-impact",
+          "kind": "impact",
+          "text": "Compare values: p.val=100 vs q.val=100"
+        },
+        {
+          "key": "22-reason",
+          "kind": "reason",
+          "text": "Matching values establish only a local match. The left children become the next pair, and this call waits for its boolean."
+        },
+        {
+          "key": "22-code",
+          "kind": "code",
+          "text": "Next, this line runs: Call the left children."
+        },
+        {
+          "key": "22-impact",
+          "kind": "impact",
+          "text": "Values match (100) — call the left children"
+        },
+        {
+          "key": "23-reason",
+          "kind": "reason",
+          "text": "Two absent children describe the same structure. Settle that base case before reading either value."
+        },
+        {
+          "key": "23-code",
+          "kind": "code",
+          "text": "Next, this line runs: Check the empty pair."
+        },
+        {
+          "key": "23-impact",
+          "kind": "impact",
+          "text": "Check: p=null, q=null — both null?"
+        },
+        {
+          "key": "24-reason",
+          "kind": "reason",
+          "text": "Two absent children match. This call returns true to its parent without reading any values."
+        },
+        {
+          "key": "24-code",
+          "kind": "code",
+          "text": "Next, this line runs: Base case returns true."
+        },
+        {
+          "key": "24-impact",
+          "kind": "impact",
+          "text": "Both nodes are null → return True (base case)"
+        },
+        {
+          "key": "25-reason",
+          "kind": "reason",
+          "text": "The left call has returned a boolean. This pair keeps it as left_ok before moving on."
+        },
+        {
+          "key": "25-code",
+          "kind": "code",
+          "text": "Next, this line runs: Store the left result."
+        },
+        {
+          "key": "25-impact",
+          "kind": "impact",
+          "text": "Left child returned true → left_ok = true"
+        },
+        {
+          "key": "26-reason",
+          "kind": "reason",
+          "text": "The left result covers only half of this pair. The right children become the next pair before both results are combined."
+        },
+        {
+          "key": "26-code",
+          "kind": "code",
+          "text": "Next, this line runs: Call the right children."
+        },
+        {
+          "key": "26-impact",
+          "kind": "impact",
+          "text": "Call the right children"
+        },
+        {
+          "key": "27-reason",
+          "kind": "reason",
+          "text": "Two absent children describe the same structure. Settle that base case before reading either value."
+        },
+        {
+          "key": "27-code",
+          "kind": "code",
+          "text": "Next, this line runs: Check the empty pair."
+        },
+        {
+          "key": "27-impact",
+          "kind": "impact",
+          "text": "Check: p=null, q=null — both null?"
+        },
+        {
+          "key": "28-reason",
+          "kind": "reason",
+          "text": "Two absent children match. This call returns true to its parent without reading any values."
+        },
+        {
+          "key": "28-code",
+          "kind": "code",
+          "text": "Next, this line runs: Base case returns true."
+        },
+        {
+          "key": "28-impact",
+          "kind": "impact",
+          "text": "Both nodes are null → return True (base case)"
+        },
+        {
+          "key": "29-reason",
+          "kind": "reason",
+          "text": "The right call has returned a boolean. This pair keeps it as right_ok before combining both results."
+        },
+        {
+          "key": "29-code",
+          "kind": "code",
+          "text": "Next, this line runs: Store the right result."
+        },
+        {
+          "key": "29-impact",
+          "kind": "impact",
+          "text": "Right child returned true → right_ok = true"
+        },
+        {
+          "key": "30-reason",
+          "kind": "reason",
+          "text": "A pair matches only when both child results are true. This boolean returns to the caller, which receives it as its left_ok or right_ok."
+        },
+        {
+          "key": "30-code",
+          "kind": "code",
+          "text": "Next, this line runs: Return both results combined."
+        },
+        {
+          "key": "30-impact",
+          "kind": "impact",
+          "text": "Return true for node 100"
+        },
+        {
+          "key": "31-reason",
+          "kind": "reason",
+          "text": "The right call has returned a boolean. This pair keeps it as right_ok before combining both results."
+        },
+        {
+          "key": "31-code",
+          "kind": "code",
+          "text": "Next, this line runs: Store the right result."
+        },
+        {
+          "key": "31-impact",
+          "kind": "impact",
+          "text": "Right child returned true → right_ok = true"
+        },
+        {
+          "key": "32-reason",
+          "kind": "reason",
+          "text": "A pair matches only when both child results are true. This boolean returns to the caller, which receives it as its left_ok or right_ok."
+        },
+        {
+          "key": "32-code",
+          "kind": "code",
+          "text": "Next, this line runs: Return both results combined."
+        },
+        {
+          "key": "32-impact",
+          "kind": "impact",
+          "text": "Return true for node 100"
+        },
+        {
+          "key": "33-reason",
+          "kind": "reason",
+          "text": "Trees are identical! isSameTree returns True."
+        },
+        {
+          "key": "33-code",
+          "kind": "code",
+          "text": "Next, this line runs: Report the tree comparison."
+        },
+        {
+          "key": "33-impact",
+          "kind": "impact",
+          "text": "Trees are identical! isSameTree returns True."
+        }
+      ]
+    },
+    {
+      "presetIndex": 7,
+      "label": "Long run: 15 entries",
+      "input": "{\"p\":[-16,87,89,-94,-52,75,63,-10,3,90,80,-46,42,48,31],\"q\":[-16,87,89,-94,-52,75,63,-10,3,90,80,-46,42,48,0]}",
+      "scenes": [
+        {
+          "key": "0-reason",
+          "kind": "reason",
+          "text": "Compare corresponding positions together. Each recursive call decides whether one pair of subtrees matches."
+        },
+        {
+          "key": "0-code",
+          "kind": "code",
+          "text": "Next, this line runs: Start with the roots."
+        },
+        {
+          "key": "0-impact",
+          "kind": "impact",
+          "text": "Call isSameTree(p, q). Begin recursive DFS."
+        },
+        {
+          "key": "1-reason",
+          "kind": "reason",
+          "text": "Two absent children describe the same structure. Settle that base case before reading either value."
+        },
+        {
+          "key": "1-code",
+          "kind": "code",
+          "text": "Next, this line runs: Check the empty pair."
+        },
+        {
+          "key": "1-impact",
+          "kind": "impact",
+          "text": "Check: p=-16, q=-16 — both null?"
+        },
+        {
+          "key": "2-reason",
+          "kind": "reason",
+          "text": "Equal values elsewhere cannot repair a missing child. If only one node exists here, this pair fails."
+        },
+        {
+          "key": "2-code",
+          "kind": "code",
+          "text": "Next, this line runs: Check structural agreement."
+        },
+        {
+          "key": "2-impact",
+          "kind": "impact",
+          "text": "One of p/q is null — structural mismatch?"
+        },
+        {
+          "key": "3-reason",
+          "kind": "reason",
+          "text": "Matching structure is not enough: the values at corresponding positions must also agree."
+        },
+        {
+          "key": "3-code",
+          "kind": "code",
+          "text": "Next, this line runs: Compare this pair of values."
+        },
+        {
+          "key": "3-impact",
+          "kind": "impact",
+          "text": "Compare values: p.val=-16 vs q.val=-16"
+        },
+        {
+          "key": "4-reason",
+          "kind": "reason",
+          "text": "Matching values establish only a local match. The left children become the next pair, and this call waits for its boolean."
+        },
+        {
+          "key": "4-code",
+          "kind": "code",
+          "text": "Next, this line runs: Call the left children."
+        },
+        {
+          "key": "4-impact",
+          "kind": "impact",
+          "text": "Values match (-16) — call the left children"
+        },
+        {
+          "key": "5-reason",
+          "kind": "reason",
+          "text": "Two absent children describe the same structure. Settle that base case before reading either value."
+        },
+        {
+          "key": "5-code",
+          "kind": "code",
+          "text": "Next, this line runs: Check the empty pair."
+        },
+        {
+          "key": "5-impact",
+          "kind": "impact",
+          "text": "Check: p=87, q=87 — both null?"
+        },
+        {
+          "key": "6-reason",
+          "kind": "reason",
+          "text": "Equal values elsewhere cannot repair a missing child. If only one node exists here, this pair fails."
+        },
+        {
+          "key": "6-code",
+          "kind": "code",
+          "text": "Next, this line runs: Check structural agreement."
+        },
+        {
+          "key": "6-impact",
+          "kind": "impact",
+          "text": "One of p/q is null — structural mismatch?"
+        },
+        {
+          "key": "7-reason",
+          "kind": "reason",
+          "text": "Matching structure is not enough: the values at corresponding positions must also agree."
+        },
+        {
+          "key": "7-code",
+          "kind": "code",
+          "text": "Next, this line runs: Compare this pair of values."
+        },
+        {
+          "key": "7-impact",
+          "kind": "impact",
+          "text": "Compare values: p.val=87 vs q.val=87"
+        },
+        {
+          "key": "8-reason",
+          "kind": "reason",
+          "text": "Matching values establish only a local match. The left children become the next pair, and this call waits for its boolean."
+        },
+        {
+          "key": "8-code",
+          "kind": "code",
+          "text": "Next, this line runs: Call the left children."
+        },
+        {
+          "key": "8-impact",
+          "kind": "impact",
+          "text": "Values match (87) — call the left children"
+        },
+        {
+          "key": "9-reason",
+          "kind": "reason",
+          "text": "Two absent children describe the same structure. Settle that base case before reading either value."
+        },
+        {
+          "key": "9-code",
+          "kind": "code",
+          "text": "Next, this line runs: Check the empty pair."
+        },
+        {
+          "key": "9-impact",
+          "kind": "impact",
+          "text": "Check: p=-94, q=-94 — both null?"
+        },
+        {
+          "key": "10-reason",
+          "kind": "reason",
+          "text": "Equal values elsewhere cannot repair a missing child. If only one node exists here, this pair fails."
+        },
+        {
+          "key": "10-code",
+          "kind": "code",
+          "text": "Next, this line runs: Check structural agreement."
+        },
+        {
+          "key": "10-impact",
+          "kind": "impact",
+          "text": "One of p/q is null — structural mismatch?"
+        },
+        {
+          "key": "11-reason",
+          "kind": "reason",
+          "text": "Matching structure is not enough: the values at corresponding positions must also agree."
+        },
+        {
+          "key": "11-code",
+          "kind": "code",
+          "text": "Next, this line runs: Compare this pair of values."
+        },
+        {
+          "key": "11-impact",
+          "kind": "impact",
+          "text": "Compare values: p.val=-94 vs q.val=-94"
+        },
+        {
+          "key": "12-reason",
+          "kind": "reason",
+          "text": "Matching values establish only a local match. The left children become the next pair, and this call waits for its boolean."
+        },
+        {
+          "key": "12-code",
+          "kind": "code",
+          "text": "Next, this line runs: Call the left children."
+        },
+        {
+          "key": "12-impact",
+          "kind": "impact",
+          "text": "Values match (-94) — call the left children"
+        },
+        {
+          "key": "13-reason",
+          "kind": "reason",
+          "text": "Two absent children describe the same structure. Settle that base case before reading either value."
+        },
+        {
+          "key": "13-code",
+          "kind": "code",
+          "text": "Next, this line runs: Check the empty pair."
+        },
+        {
+          "key": "13-impact",
+          "kind": "impact",
+          "text": "Check: p=-10, q=-10 — both null?"
+        },
+        {
+          "key": "14-reason",
+          "kind": "reason",
+          "text": "Equal values elsewhere cannot repair a missing child. If only one node exists here, this pair fails."
+        },
+        {
+          "key": "14-code",
+          "kind": "code",
+          "text": "Next, this line runs: Check structural agreement."
+        },
+        {
+          "key": "14-impact",
+          "kind": "impact",
+          "text": "One of p/q is null — structural mismatch?"
+        },
+        {
+          "key": "15-reason",
+          "kind": "reason",
+          "text": "Matching structure is not enough: the values at corresponding positions must also agree."
+        },
+        {
+          "key": "15-code",
+          "kind": "code",
+          "text": "Next, this line runs: Compare this pair of values."
+        },
+        {
+          "key": "15-impact",
+          "kind": "impact",
+          "text": "Compare values: p.val=-10 vs q.val=-10"
+        },
+        {
+          "key": "16-reason",
+          "kind": "reason",
+          "text": "Matching values establish only a local match. The left children become the next pair, and this call waits for its boolean."
+        },
+        {
+          "key": "16-code",
+          "kind": "code",
+          "text": "Next, this line runs: Call the left children."
+        },
+        {
+          "key": "16-impact",
+          "kind": "impact",
+          "text": "Values match (-10) — call the left children"
+        },
+        {
+          "key": "17-reason",
+          "kind": "reason",
+          "text": "Two absent children describe the same structure. Settle that base case before reading either value."
+        },
+        {
+          "key": "17-code",
+          "kind": "code",
+          "text": "Next, this line runs: Check the empty pair."
+        },
+        {
+          "key": "17-impact",
+          "kind": "impact",
+          "text": "Check: p=null, q=null — both null?"
+        },
+        {
+          "key": "18-reason",
+          "kind": "reason",
+          "text": "Two absent children match. This call returns true to its parent without reading any values."
+        },
+        {
+          "key": "18-code",
+          "kind": "code",
+          "text": "Next, this line runs: Base case returns true."
+        },
+        {
+          "key": "18-impact",
+          "kind": "impact",
+          "text": "Both nodes are null → return True (base case)"
+        },
+        {
+          "key": "19-reason",
+          "kind": "reason",
+          "text": "The left call has returned a boolean. This pair keeps it as left_ok before moving on."
+        },
+        {
+          "key": "19-code",
+          "kind": "code",
+          "text": "Next, this line runs: Store the left result."
+        },
+        {
+          "key": "19-impact",
+          "kind": "impact",
+          "text": "Left child returned true → left_ok = true"
+        },
+        {
+          "key": "20-reason",
+          "kind": "reason",
+          "text": "The left result covers only half of this pair. The right children become the next pair before both results are combined."
+        },
+        {
+          "key": "20-code",
+          "kind": "code",
+          "text": "Next, this line runs: Call the right children."
+        },
+        {
+          "key": "20-impact",
+          "kind": "impact",
+          "text": "Call the right children"
+        },
+        {
+          "key": "21-reason",
+          "kind": "reason",
+          "text": "Two absent children describe the same structure. Settle that base case before reading either value."
+        },
+        {
+          "key": "21-code",
+          "kind": "code",
+          "text": "Next, this line runs: Check the empty pair."
+        },
+        {
+          "key": "21-impact",
+          "kind": "impact",
+          "text": "Check: p=null, q=null — both null?"
+        },
+        {
+          "key": "22-reason",
+          "kind": "reason",
+          "text": "Two absent children match. This call returns true to its parent without reading any values."
+        },
+        {
+          "key": "22-code",
+          "kind": "code",
+          "text": "Next, this line runs: Base case returns true."
+        },
+        {
+          "key": "22-impact",
+          "kind": "impact",
+          "text": "Both nodes are null → return True (base case)"
+        },
+        {
+          "key": "23-reason",
+          "kind": "reason",
+          "text": "The right call has returned a boolean. This pair keeps it as right_ok before combining both results."
+        },
+        {
+          "key": "23-code",
+          "kind": "code",
+          "text": "Next, this line runs: Store the right result."
+        },
+        {
+          "key": "23-impact",
+          "kind": "impact",
+          "text": "Right child returned true → right_ok = true"
+        },
+        {
+          "key": "24-reason",
+          "kind": "reason",
+          "text": "A pair matches only when both child results are true. This boolean returns to the caller, which receives it as its left_ok or right_ok."
+        },
+        {
+          "key": "24-code",
+          "kind": "code",
+          "text": "Next, this line runs: Return both results combined."
+        },
+        {
+          "key": "24-impact",
+          "kind": "impact",
+          "text": "Return true for node -10"
+        },
+        {
+          "key": "25-reason",
+          "kind": "reason",
+          "text": "The left call has returned a boolean. This pair keeps it as left_ok before moving on."
+        },
+        {
+          "key": "25-code",
+          "kind": "code",
+          "text": "Next, this line runs: Store the left result."
+        },
+        {
+          "key": "25-impact",
+          "kind": "impact",
+          "text": "Left child returned true → left_ok = true"
+        },
+        {
+          "key": "26-reason",
+          "kind": "reason",
+          "text": "The left result covers only half of this pair. The right children become the next pair before both results are combined."
+        },
+        {
+          "key": "26-code",
+          "kind": "code",
+          "text": "Next, this line runs: Call the right children."
+        },
+        {
+          "key": "26-impact",
+          "kind": "impact",
+          "text": "Call the right children"
+        },
+        {
+          "key": "27-reason",
+          "kind": "reason",
+          "text": "Two absent children describe the same structure. Settle that base case before reading either value."
+        },
+        {
+          "key": "27-code",
+          "kind": "code",
+          "text": "Next, this line runs: Check the empty pair."
+        },
+        {
+          "key": "27-impact",
+          "kind": "impact",
+          "text": "Check: p=3, q=3 — both null?"
+        },
+        {
+          "key": "28-reason",
+          "kind": "reason",
+          "text": "Equal values elsewhere cannot repair a missing child. If only one node exists here, this pair fails."
+        },
+        {
+          "key": "28-code",
+          "kind": "code",
+          "text": "Next, this line runs: Check structural agreement."
+        },
+        {
+          "key": "28-impact",
+          "kind": "impact",
+          "text": "One of p/q is null — structural mismatch?"
+        },
+        {
+          "key": "29-reason",
+          "kind": "reason",
+          "text": "Matching structure is not enough: the values at corresponding positions must also agree."
+        },
+        {
+          "key": "29-code",
+          "kind": "code",
+          "text": "Next, this line runs: Compare this pair of values."
+        },
+        {
+          "key": "29-impact",
+          "kind": "impact",
+          "text": "Compare values: p.val=3 vs q.val=3"
+        },
+        {
+          "key": "30-reason",
+          "kind": "reason",
+          "text": "Matching values establish only a local match. The left children become the next pair, and this call waits for its boolean."
+        },
+        {
+          "key": "30-code",
+          "kind": "code",
+          "text": "Next, this line runs: Call the left children."
+        },
+        {
+          "key": "30-impact",
+          "kind": "impact",
+          "text": "Values match (3) — call the left children"
+        },
+        {
+          "key": "31-reason",
+          "kind": "reason",
+          "text": "Two absent children describe the same structure. Settle that base case before reading either value."
+        },
+        {
+          "key": "31-code",
+          "kind": "code",
+          "text": "Next, this line runs: Check the empty pair."
+        },
+        {
+          "key": "31-impact",
+          "kind": "impact",
+          "text": "Check: p=null, q=null — both null?"
+        },
+        {
+          "key": "32-reason",
+          "kind": "reason",
+          "text": "Two absent children match. This call returns true to its parent without reading any values."
+        },
+        {
+          "key": "32-code",
+          "kind": "code",
+          "text": "Next, this line runs: Base case returns true."
+        },
+        {
+          "key": "32-impact",
+          "kind": "impact",
+          "text": "Both nodes are null → return True (base case)"
+        },
+        {
+          "key": "33-reason",
+          "kind": "reason",
+          "text": "The left call has returned a boolean. This pair keeps it as left_ok before moving on."
+        },
+        {
+          "key": "33-code",
+          "kind": "code",
+          "text": "Next, this line runs: Store the left result."
+        },
+        {
+          "key": "33-impact",
+          "kind": "impact",
+          "text": "Left child returned true → left_ok = true"
+        },
+        {
+          "key": "34-reason",
+          "kind": "reason",
+          "text": "The left result covers only half of this pair. The right children become the next pair before both results are combined."
+        },
+        {
+          "key": "34-code",
+          "kind": "code",
+          "text": "Next, this line runs: Call the right children."
+        },
+        {
+          "key": "34-impact",
+          "kind": "impact",
+          "text": "Call the right children"
+        },
+        {
+          "key": "35-reason",
+          "kind": "reason",
+          "text": "Two absent children describe the same structure. Settle that base case before reading either value."
+        },
+        {
+          "key": "35-code",
+          "kind": "code",
+          "text": "Next, this line runs: Check the empty pair."
+        },
+        {
+          "key": "35-impact",
+          "kind": "impact",
+          "text": "Check: p=null, q=null — both null?"
+        },
+        {
+          "key": "36-reason",
+          "kind": "reason",
+          "text": "Two absent children match. This call returns true to its parent without reading any values."
+        },
+        {
+          "key": "36-code",
+          "kind": "code",
+          "text": "Next, this line runs: Base case returns true."
+        },
+        {
+          "key": "36-impact",
+          "kind": "impact",
+          "text": "Both nodes are null → return True (base case)"
+        },
+        {
+          "key": "37-reason",
+          "kind": "reason",
+          "text": "The right call has returned a boolean. This pair keeps it as right_ok before combining both results."
+        },
+        {
+          "key": "37-code",
+          "kind": "code",
+          "text": "Next, this line runs: Store the right result."
+        },
+        {
+          "key": "37-impact",
+          "kind": "impact",
+          "text": "Right child returned true → right_ok = true"
+        },
+        {
+          "key": "38-reason",
+          "kind": "reason",
+          "text": "A pair matches only when both child results are true. This boolean returns to the caller, which receives it as its left_ok or right_ok."
+        },
+        {
+          "key": "38-code",
+          "kind": "code",
+          "text": "Next, this line runs: Return both results combined."
+        },
+        {
+          "key": "38-impact",
+          "kind": "impact",
+          "text": "Return true for node 3"
+        },
+        {
+          "key": "39-reason",
+          "kind": "reason",
+          "text": "The right call has returned a boolean. This pair keeps it as right_ok before combining both results."
+        },
+        {
+          "key": "39-code",
+          "kind": "code",
+          "text": "Next, this line runs: Store the right result."
+        },
+        {
+          "key": "39-impact",
+          "kind": "impact",
+          "text": "Right child returned true → right_ok = true"
+        },
+        {
+          "key": "40-reason",
+          "kind": "reason",
+          "text": "A pair matches only when both child results are true. This boolean returns to the caller, which receives it as its left_ok or right_ok."
+        },
+        {
+          "key": "40-code",
+          "kind": "code",
+          "text": "Next, this line runs: Return both results combined."
+        },
+        {
+          "key": "40-impact",
+          "kind": "impact",
+          "text": "Return true for node -94"
+        },
+        {
+          "key": "41-reason",
+          "kind": "reason",
+          "text": "The left call has returned a boolean. This pair keeps it as left_ok before moving on."
+        },
+        {
+          "key": "41-code",
+          "kind": "code",
+          "text": "Next, this line runs: Store the left result."
+        },
+        {
+          "key": "41-impact",
+          "kind": "impact",
+          "text": "Left child returned true → left_ok = true"
+        },
+        {
+          "key": "42-reason",
+          "kind": "reason",
+          "text": "The left result covers only half of this pair. The right children become the next pair before both results are combined."
+        },
+        {
+          "key": "42-code",
+          "kind": "code",
+          "text": "Next, this line runs: Call the right children."
+        },
+        {
+          "key": "42-impact",
+          "kind": "impact",
+          "text": "Call the right children"
+        },
+        {
+          "key": "43-reason",
+          "kind": "reason",
+          "text": "Two absent children describe the same structure. Settle that base case before reading either value."
+        },
+        {
+          "key": "43-code",
+          "kind": "code",
+          "text": "Next, this line runs: Check the empty pair."
+        },
+        {
+          "key": "43-impact",
+          "kind": "impact",
+          "text": "Check: p=-52, q=-52 — both null?"
+        },
+        {
+          "key": "44-reason",
+          "kind": "reason",
+          "text": "Equal values elsewhere cannot repair a missing child. If only one node exists here, this pair fails."
+        },
+        {
+          "key": "44-code",
+          "kind": "code",
+          "text": "Next, this line runs: Check structural agreement."
+        },
+        {
+          "key": "44-impact",
+          "kind": "impact",
+          "text": "One of p/q is null — structural mismatch?"
+        },
+        {
+          "key": "45-reason",
+          "kind": "reason",
+          "text": "Matching structure is not enough: the values at corresponding positions must also agree."
+        },
+        {
+          "key": "45-code",
+          "kind": "code",
+          "text": "Next, this line runs: Compare this pair of values."
+        },
+        {
+          "key": "45-impact",
+          "kind": "impact",
+          "text": "Compare values: p.val=-52 vs q.val=-52"
+        },
+        {
+          "key": "46-reason",
+          "kind": "reason",
+          "text": "Matching values establish only a local match. The left children become the next pair, and this call waits for its boolean."
+        },
+        {
+          "key": "46-code",
+          "kind": "code",
+          "text": "Next, this line runs: Call the left children."
+        },
+        {
+          "key": "46-impact",
+          "kind": "impact",
+          "text": "Values match (-52) — call the left children"
+        },
+        {
+          "key": "47-reason",
+          "kind": "reason",
+          "text": "Two absent children describe the same structure. Settle that base case before reading either value."
+        },
+        {
+          "key": "47-code",
+          "kind": "code",
+          "text": "Next, this line runs: Check the empty pair."
+        },
+        {
+          "key": "47-impact",
+          "kind": "impact",
+          "text": "Check: p=90, q=90 — both null?"
+        },
+        {
+          "key": "48-reason",
+          "kind": "reason",
+          "text": "Equal values elsewhere cannot repair a missing child. If only one node exists here, this pair fails."
+        },
+        {
+          "key": "48-code",
+          "kind": "code",
+          "text": "Next, this line runs: Check structural agreement."
+        },
+        {
+          "key": "48-impact",
+          "kind": "impact",
+          "text": "One of p/q is null — structural mismatch?"
+        },
+        {
+          "key": "49-reason",
+          "kind": "reason",
+          "text": "Matching structure is not enough: the values at corresponding positions must also agree."
+        },
+        {
+          "key": "49-code",
+          "kind": "code",
+          "text": "Next, this line runs: Compare this pair of values."
+        },
+        {
+          "key": "49-impact",
+          "kind": "impact",
+          "text": "Compare values: p.val=90 vs q.val=90"
+        },
+        {
+          "key": "50-reason",
+          "kind": "reason",
+          "text": "Matching values establish only a local match. The left children become the next pair, and this call waits for its boolean."
+        },
+        {
+          "key": "50-code",
+          "kind": "code",
+          "text": "Next, this line runs: Call the left children."
+        },
+        {
+          "key": "50-impact",
+          "kind": "impact",
+          "text": "Values match (90) — call the left children"
+        },
+        {
+          "key": "51-reason",
+          "kind": "reason",
+          "text": "Two absent children describe the same structure. Settle that base case before reading either value."
+        },
+        {
+          "key": "51-code",
+          "kind": "code",
+          "text": "Next, this line runs: Check the empty pair."
+        },
+        {
+          "key": "51-impact",
+          "kind": "impact",
+          "text": "Check: p=null, q=null — both null?"
+        },
+        {
+          "key": "52-reason",
+          "kind": "reason",
+          "text": "Two absent children match. This call returns true to its parent without reading any values."
+        },
+        {
+          "key": "52-code",
+          "kind": "code",
+          "text": "Next, this line runs: Base case returns true."
+        },
+        {
+          "key": "52-impact",
+          "kind": "impact",
+          "text": "Both nodes are null → return True (base case)"
+        },
+        {
+          "key": "53-reason",
+          "kind": "reason",
+          "text": "The left call has returned a boolean. This pair keeps it as left_ok before moving on."
+        },
+        {
+          "key": "53-code",
+          "kind": "code",
+          "text": "Next, this line runs: Store the left result."
+        },
+        {
+          "key": "53-impact",
+          "kind": "impact",
+          "text": "Left child returned true → left_ok = true"
+        },
+        {
+          "key": "54-reason",
+          "kind": "reason",
+          "text": "The left result covers only half of this pair. The right children become the next pair before both results are combined."
+        },
+        {
+          "key": "54-code",
+          "kind": "code",
+          "text": "Next, this line runs: Call the right children."
+        },
+        {
+          "key": "54-impact",
+          "kind": "impact",
+          "text": "Call the right children"
+        },
+        {
+          "key": "55-reason",
+          "kind": "reason",
+          "text": "Two absent children describe the same structure. Settle that base case before reading either value."
+        },
+        {
+          "key": "55-code",
+          "kind": "code",
+          "text": "Next, this line runs: Check the empty pair."
+        },
+        {
+          "key": "55-impact",
+          "kind": "impact",
+          "text": "Check: p=null, q=null — both null?"
+        },
+        {
+          "key": "56-reason",
+          "kind": "reason",
+          "text": "Two absent children match. This call returns true to its parent without reading any values."
+        },
+        {
+          "key": "56-code",
+          "kind": "code",
+          "text": "Next, this line runs: Base case returns true."
+        },
+        {
+          "key": "56-impact",
+          "kind": "impact",
+          "text": "Both nodes are null → return True (base case)"
+        },
+        {
+          "key": "57-reason",
+          "kind": "reason",
+          "text": "The right call has returned a boolean. This pair keeps it as right_ok before combining both results."
+        },
+        {
+          "key": "57-code",
+          "kind": "code",
+          "text": "Next, this line runs: Store the right result."
+        },
+        {
+          "key": "57-impact",
+          "kind": "impact",
+          "text": "Right child returned true → right_ok = true"
+        },
+        {
+          "key": "58-reason",
+          "kind": "reason",
+          "text": "A pair matches only when both child results are true. This boolean returns to the caller, which receives it as its left_ok or right_ok."
+        },
+        {
+          "key": "58-code",
+          "kind": "code",
+          "text": "Next, this line runs: Return both results combined."
+        },
+        {
+          "key": "58-impact",
+          "kind": "impact",
+          "text": "Return true for node 90"
+        },
+        {
+          "key": "59-reason",
+          "kind": "reason",
+          "text": "The left call has returned a boolean. This pair keeps it as left_ok before moving on."
+        },
+        {
+          "key": "59-code",
+          "kind": "code",
+          "text": "Next, this line runs: Store the left result."
+        },
+        {
+          "key": "59-impact",
+          "kind": "impact",
+          "text": "Left child returned true → left_ok = true"
+        },
+        {
+          "key": "60-reason",
+          "kind": "reason",
+          "text": "The left result covers only half of this pair. The right children become the next pair before both results are combined."
+        },
+        {
+          "key": "60-code",
+          "kind": "code",
+          "text": "Next, this line runs: Call the right children."
+        },
+        {
+          "key": "60-impact",
+          "kind": "impact",
+          "text": "Call the right children"
+        },
+        {
+          "key": "61-reason",
+          "kind": "reason",
+          "text": "Two absent children describe the same structure. Settle that base case before reading either value."
+        },
+        {
+          "key": "61-code",
+          "kind": "code",
+          "text": "Next, this line runs: Check the empty pair."
+        },
+        {
+          "key": "61-impact",
+          "kind": "impact",
+          "text": "Check: p=80, q=80 — both null?"
+        },
+        {
+          "key": "62-reason",
+          "kind": "reason",
+          "text": "Equal values elsewhere cannot repair a missing child. If only one node exists here, this pair fails."
+        },
+        {
+          "key": "62-code",
+          "kind": "code",
+          "text": "Next, this line runs: Check structural agreement."
+        },
+        {
+          "key": "62-impact",
+          "kind": "impact",
+          "text": "One of p/q is null — structural mismatch?"
+        },
+        {
+          "key": "63-reason",
+          "kind": "reason",
+          "text": "Matching structure is not enough: the values at corresponding positions must also agree."
+        },
+        {
+          "key": "63-code",
+          "kind": "code",
+          "text": "Next, this line runs: Compare this pair of values."
+        },
+        {
+          "key": "63-impact",
+          "kind": "impact",
+          "text": "Compare values: p.val=80 vs q.val=80"
+        },
+        {
+          "key": "64-reason",
+          "kind": "reason",
+          "text": "Matching values establish only a local match. The left children become the next pair, and this call waits for its boolean."
+        },
+        {
+          "key": "64-code",
+          "kind": "code",
+          "text": "Next, this line runs: Call the left children."
+        },
+        {
+          "key": "64-impact",
+          "kind": "impact",
+          "text": "Values match (80) — call the left children"
+        },
+        {
+          "key": "65-reason",
+          "kind": "reason",
+          "text": "Two absent children describe the same structure. Settle that base case before reading either value."
+        },
+        {
+          "key": "65-code",
+          "kind": "code",
+          "text": "Next, this line runs: Check the empty pair."
+        },
+        {
+          "key": "65-impact",
+          "kind": "impact",
+          "text": "Check: p=null, q=null — both null?"
+        },
+        {
+          "key": "66-reason",
+          "kind": "reason",
+          "text": "Two absent children match. This call returns true to its parent without reading any values."
+        },
+        {
+          "key": "66-code",
+          "kind": "code",
+          "text": "Next, this line runs: Base case returns true."
+        },
+        {
+          "key": "66-impact",
+          "kind": "impact",
+          "text": "Both nodes are null → return True (base case)"
+        },
+        {
+          "key": "67-reason",
+          "kind": "reason",
+          "text": "The left call has returned a boolean. This pair keeps it as left_ok before moving on."
+        },
+        {
+          "key": "67-code",
+          "kind": "code",
+          "text": "Next, this line runs: Store the left result."
+        },
+        {
+          "key": "67-impact",
+          "kind": "impact",
+          "text": "Left child returned true → left_ok = true"
+        },
+        {
+          "key": "68-reason",
+          "kind": "reason",
+          "text": "The left result covers only half of this pair. The right children become the next pair before both results are combined."
+        },
+        {
+          "key": "68-code",
+          "kind": "code",
+          "text": "Next, this line runs: Call the right children."
+        },
+        {
+          "key": "68-impact",
+          "kind": "impact",
+          "text": "Call the right children"
+        },
+        {
+          "key": "69-reason",
+          "kind": "reason",
+          "text": "Two absent children describe the same structure. Settle that base case before reading either value."
+        },
+        {
+          "key": "69-code",
+          "kind": "code",
+          "text": "Next, this line runs: Check the empty pair."
+        },
+        {
+          "key": "69-impact",
+          "kind": "impact",
+          "text": "Check: p=null, q=null — both null?"
+        },
+        {
+          "key": "70-reason",
+          "kind": "reason",
+          "text": "Two absent children match. This call returns true to its parent without reading any values."
+        },
+        {
+          "key": "70-code",
+          "kind": "code",
+          "text": "Next, this line runs: Base case returns true."
+        },
+        {
+          "key": "70-impact",
+          "kind": "impact",
+          "text": "Both nodes are null → return True (base case)"
+        },
+        {
+          "key": "71-reason",
+          "kind": "reason",
+          "text": "The right call has returned a boolean. This pair keeps it as right_ok before combining both results."
+        },
+        {
+          "key": "71-code",
+          "kind": "code",
+          "text": "Next, this line runs: Store the right result."
+        },
+        {
+          "key": "71-impact",
+          "kind": "impact",
+          "text": "Right child returned true → right_ok = true"
+        },
+        {
+          "key": "72-reason",
+          "kind": "reason",
+          "text": "A pair matches only when both child results are true. This boolean returns to the caller, which receives it as its left_ok or right_ok."
+        },
+        {
+          "key": "72-code",
+          "kind": "code",
+          "text": "Next, this line runs: Return both results combined."
+        },
+        {
+          "key": "72-impact",
+          "kind": "impact",
+          "text": "Return true for node 80"
+        },
+        {
+          "key": "73-reason",
+          "kind": "reason",
+          "text": "The right call has returned a boolean. This pair keeps it as right_ok before combining both results."
+        },
+        {
+          "key": "73-code",
+          "kind": "code",
+          "text": "Next, this line runs: Store the right result."
+        },
+        {
+          "key": "73-impact",
+          "kind": "impact",
+          "text": "Right child returned true → right_ok = true"
+        },
+        {
+          "key": "74-reason",
+          "kind": "reason",
+          "text": "A pair matches only when both child results are true. This boolean returns to the caller, which receives it as its left_ok or right_ok."
+        },
+        {
+          "key": "74-code",
+          "kind": "code",
+          "text": "Next, this line runs: Return both results combined."
+        },
+        {
+          "key": "74-impact",
+          "kind": "impact",
+          "text": "Return true for node -52"
+        },
+        {
+          "key": "75-reason",
+          "kind": "reason",
+          "text": "The right call has returned a boolean. This pair keeps it as right_ok before combining both results."
+        },
+        {
+          "key": "75-code",
+          "kind": "code",
+          "text": "Next, this line runs: Store the right result."
+        },
+        {
+          "key": "75-impact",
+          "kind": "impact",
+          "text": "Right child returned true → right_ok = true"
+        },
+        {
+          "key": "76-reason",
+          "kind": "reason",
+          "text": "A pair matches only when both child results are true. This boolean returns to the caller, which receives it as its left_ok or right_ok."
+        },
+        {
+          "key": "76-code",
+          "kind": "code",
+          "text": "Next, this line runs: Return both results combined."
+        },
+        {
+          "key": "76-impact",
+          "kind": "impact",
+          "text": "Return true for node 87"
+        },
+        {
+          "key": "77-reason",
+          "kind": "reason",
+          "text": "The left call has returned a boolean. This pair keeps it as left_ok before moving on."
+        },
+        {
+          "key": "77-code",
+          "kind": "code",
+          "text": "Next, this line runs: Store the left result."
+        },
+        {
+          "key": "77-impact",
+          "kind": "impact",
+          "text": "Left child returned true → left_ok = true"
+        },
+        {
+          "key": "78-reason",
+          "kind": "reason",
+          "text": "The left result covers only half of this pair. The right children become the next pair before both results are combined."
+        },
+        {
+          "key": "78-code",
+          "kind": "code",
+          "text": "Next, this line runs: Call the right children."
+        },
+        {
+          "key": "78-impact",
+          "kind": "impact",
+          "text": "Call the right children"
+        },
+        {
+          "key": "79-reason",
+          "kind": "reason",
+          "text": "Two absent children describe the same structure. Settle that base case before reading either value."
+        },
+        {
+          "key": "79-code",
+          "kind": "code",
+          "text": "Next, this line runs: Check the empty pair."
+        },
+        {
+          "key": "79-impact",
+          "kind": "impact",
+          "text": "Check: p=89, q=89 — both null?"
+        },
+        {
+          "key": "80-reason",
+          "kind": "reason",
+          "text": "Equal values elsewhere cannot repair a missing child. If only one node exists here, this pair fails."
+        },
+        {
+          "key": "80-code",
+          "kind": "code",
+          "text": "Next, this line runs: Check structural agreement."
+        },
+        {
+          "key": "80-impact",
+          "kind": "impact",
+          "text": "One of p/q is null — structural mismatch?"
+        },
+        {
+          "key": "81-reason",
+          "kind": "reason",
+          "text": "Matching structure is not enough: the values at corresponding positions must also agree."
+        },
+        {
+          "key": "81-code",
+          "kind": "code",
+          "text": "Next, this line runs: Compare this pair of values."
+        },
+        {
+          "key": "81-impact",
+          "kind": "impact",
+          "text": "Compare values: p.val=89 vs q.val=89"
+        },
+        {
+          "key": "82-reason",
+          "kind": "reason",
+          "text": "Matching values establish only a local match. The left children become the next pair, and this call waits for its boolean."
+        },
+        {
+          "key": "82-code",
+          "kind": "code",
+          "text": "Next, this line runs: Call the left children."
+        },
+        {
+          "key": "82-impact",
+          "kind": "impact",
+          "text": "Values match (89) — call the left children"
+        },
+        {
+          "key": "83-reason",
+          "kind": "reason",
+          "text": "Two absent children describe the same structure. Settle that base case before reading either value."
+        },
+        {
+          "key": "83-code",
+          "kind": "code",
+          "text": "Next, this line runs: Check the empty pair."
+        },
+        {
+          "key": "83-impact",
+          "kind": "impact",
+          "text": "Check: p=75, q=75 — both null?"
+        },
+        {
+          "key": "84-reason",
+          "kind": "reason",
+          "text": "Equal values elsewhere cannot repair a missing child. If only one node exists here, this pair fails."
+        },
+        {
+          "key": "84-code",
+          "kind": "code",
+          "text": "Next, this line runs: Check structural agreement."
+        },
+        {
+          "key": "84-impact",
+          "kind": "impact",
+          "text": "One of p/q is null — structural mismatch?"
+        },
+        {
+          "key": "85-reason",
+          "kind": "reason",
+          "text": "Matching structure is not enough: the values at corresponding positions must also agree."
+        },
+        {
+          "key": "85-code",
+          "kind": "code",
+          "text": "Next, this line runs: Compare this pair of values."
+        },
+        {
+          "key": "85-impact",
+          "kind": "impact",
+          "text": "Compare values: p.val=75 vs q.val=75"
+        },
+        {
+          "key": "86-reason",
+          "kind": "reason",
+          "text": "Matching values establish only a local match. The left children become the next pair, and this call waits for its boolean."
+        },
+        {
+          "key": "86-code",
+          "kind": "code",
+          "text": "Next, this line runs: Call the left children."
+        },
+        {
+          "key": "86-impact",
+          "kind": "impact",
+          "text": "Values match (75) — call the left children"
+        },
+        {
+          "key": "87-reason",
+          "kind": "reason",
+          "text": "Two absent children describe the same structure. Settle that base case before reading either value."
+        },
+        {
+          "key": "87-code",
+          "kind": "code",
+          "text": "Next, this line runs: Check the empty pair."
+        },
+        {
+          "key": "87-impact",
+          "kind": "impact",
+          "text": "Check: p=-46, q=-46 — both null?"
+        },
+        {
+          "key": "88-reason",
+          "kind": "reason",
+          "text": "Equal values elsewhere cannot repair a missing child. If only one node exists here, this pair fails."
+        },
+        {
+          "key": "88-code",
+          "kind": "code",
+          "text": "Next, this line runs: Check structural agreement."
+        },
+        {
+          "key": "88-impact",
+          "kind": "impact",
+          "text": "One of p/q is null — structural mismatch?"
+        },
+        {
+          "key": "89-reason",
+          "kind": "reason",
+          "text": "Matching structure is not enough: the values at corresponding positions must also agree."
+        },
+        {
+          "key": "89-code",
+          "kind": "code",
+          "text": "Next, this line runs: Compare this pair of values."
+        },
+        {
+          "key": "89-impact",
+          "kind": "impact",
+          "text": "Compare values: p.val=-46 vs q.val=-46"
+        },
+        {
+          "key": "90-reason",
+          "kind": "reason",
+          "text": "Matching values establish only a local match. The left children become the next pair, and this call waits for its boolean."
+        },
+        {
+          "key": "90-code",
+          "kind": "code",
+          "text": "Next, this line runs: Call the left children."
+        },
+        {
+          "key": "90-impact",
+          "kind": "impact",
+          "text": "Values match (-46) — call the left children"
+        },
+        {
+          "key": "91-reason",
+          "kind": "reason",
+          "text": "Two absent children describe the same structure. Settle that base case before reading either value."
+        },
+        {
+          "key": "91-code",
+          "kind": "code",
+          "text": "Next, this line runs: Check the empty pair."
+        },
+        {
+          "key": "91-impact",
+          "kind": "impact",
+          "text": "Check: p=null, q=null — both null?"
+        },
+        {
+          "key": "92-reason",
+          "kind": "reason",
+          "text": "Two absent children match. This call returns true to its parent without reading any values."
+        },
+        {
+          "key": "92-code",
+          "kind": "code",
+          "text": "Next, this line runs: Base case returns true."
+        },
+        {
+          "key": "92-impact",
+          "kind": "impact",
+          "text": "Both nodes are null → return True (base case)"
+        },
+        {
+          "key": "93-reason",
+          "kind": "reason",
+          "text": "The left call has returned a boolean. This pair keeps it as left_ok before moving on."
+        },
+        {
+          "key": "93-code",
+          "kind": "code",
+          "text": "Next, this line runs: Store the left result."
+        },
+        {
+          "key": "93-impact",
+          "kind": "impact",
+          "text": "Left child returned true → left_ok = true"
+        },
+        {
+          "key": "94-reason",
+          "kind": "reason",
+          "text": "The left result covers only half of this pair. The right children become the next pair before both results are combined."
+        },
+        {
+          "key": "94-code",
+          "kind": "code",
+          "text": "Next, this line runs: Call the right children."
+        },
+        {
+          "key": "94-impact",
+          "kind": "impact",
+          "text": "Call the right children"
+        },
+        {
+          "key": "95-reason",
+          "kind": "reason",
+          "text": "Two absent children describe the same structure. Settle that base case before reading either value."
+        },
+        {
+          "key": "95-code",
+          "kind": "code",
+          "text": "Next, this line runs: Check the empty pair."
+        },
+        {
+          "key": "95-impact",
+          "kind": "impact",
+          "text": "Check: p=null, q=null — both null?"
+        },
+        {
+          "key": "96-reason",
+          "kind": "reason",
+          "text": "Two absent children match. This call returns true to its parent without reading any values."
+        },
+        {
+          "key": "96-code",
+          "kind": "code",
+          "text": "Next, this line runs: Base case returns true."
+        },
+        {
+          "key": "96-impact",
+          "kind": "impact",
+          "text": "Both nodes are null → return True (base case)"
+        },
+        {
+          "key": "97-reason",
+          "kind": "reason",
+          "text": "The right call has returned a boolean. This pair keeps it as right_ok before combining both results."
+        },
+        {
+          "key": "97-code",
+          "kind": "code",
+          "text": "Next, this line runs: Store the right result."
+        },
+        {
+          "key": "97-impact",
+          "kind": "impact",
+          "text": "Right child returned true → right_ok = true"
+        },
+        {
+          "key": "98-reason",
+          "kind": "reason",
+          "text": "A pair matches only when both child results are true. This boolean returns to the caller, which receives it as its left_ok or right_ok."
+        },
+        {
+          "key": "98-code",
+          "kind": "code",
+          "text": "Next, this line runs: Return both results combined."
+        },
+        {
+          "key": "98-impact",
+          "kind": "impact",
+          "text": "Return true for node -46"
+        },
+        {
+          "key": "99-reason",
+          "kind": "reason",
+          "text": "The left call has returned a boolean. This pair keeps it as left_ok before moving on."
+        },
+        {
+          "key": "99-code",
+          "kind": "code",
+          "text": "Next, this line runs: Store the left result."
+        },
+        {
+          "key": "99-impact",
+          "kind": "impact",
+          "text": "Left child returned true → left_ok = true"
+        },
+        {
+          "key": "100-reason",
+          "kind": "reason",
+          "text": "The left result covers only half of this pair. The right children become the next pair before both results are combined."
+        },
+        {
+          "key": "100-code",
+          "kind": "code",
+          "text": "Next, this line runs: Call the right children."
+        },
+        {
+          "key": "100-impact",
+          "kind": "impact",
+          "text": "Call the right children"
+        },
+        {
+          "key": "101-reason",
+          "kind": "reason",
+          "text": "Two absent children describe the same structure. Settle that base case before reading either value."
+        },
+        {
+          "key": "101-code",
+          "kind": "code",
+          "text": "Next, this line runs: Check the empty pair."
+        },
+        {
+          "key": "101-impact",
+          "kind": "impact",
+          "text": "Check: p=42, q=42 — both null?"
+        },
+        {
+          "key": "102-reason",
+          "kind": "reason",
+          "text": "Equal values elsewhere cannot repair a missing child. If only one node exists here, this pair fails."
+        },
+        {
+          "key": "102-code",
+          "kind": "code",
+          "text": "Next, this line runs: Check structural agreement."
+        },
+        {
+          "key": "102-impact",
+          "kind": "impact",
+          "text": "One of p/q is null — structural mismatch?"
+        },
+        {
+          "key": "103-reason",
+          "kind": "reason",
+          "text": "Matching structure is not enough: the values at corresponding positions must also agree."
+        },
+        {
+          "key": "103-code",
+          "kind": "code",
+          "text": "Next, this line runs: Compare this pair of values."
+        },
+        {
+          "key": "103-impact",
+          "kind": "impact",
+          "text": "Compare values: p.val=42 vs q.val=42"
+        },
+        {
+          "key": "104-reason",
+          "kind": "reason",
+          "text": "Matching values establish only a local match. The left children become the next pair, and this call waits for its boolean."
+        },
+        {
+          "key": "104-code",
+          "kind": "code",
+          "text": "Next, this line runs: Call the left children."
+        },
+        {
+          "key": "104-impact",
+          "kind": "impact",
+          "text": "Values match (42) — call the left children"
+        },
+        {
+          "key": "105-reason",
+          "kind": "reason",
+          "text": "Two absent children describe the same structure. Settle that base case before reading either value."
+        },
+        {
+          "key": "105-code",
+          "kind": "code",
+          "text": "Next, this line runs: Check the empty pair."
+        },
+        {
+          "key": "105-impact",
+          "kind": "impact",
+          "text": "Check: p=null, q=null — both null?"
+        },
+        {
+          "key": "106-reason",
+          "kind": "reason",
+          "text": "Two absent children match. This call returns true to its parent without reading any values."
+        },
+        {
+          "key": "106-code",
+          "kind": "code",
+          "text": "Next, this line runs: Base case returns true."
+        },
+        {
+          "key": "106-impact",
+          "kind": "impact",
+          "text": "Both nodes are null → return True (base case)"
+        },
+        {
+          "key": "107-reason",
+          "kind": "reason",
+          "text": "The left call has returned a boolean. This pair keeps it as left_ok before moving on."
+        },
+        {
+          "key": "107-code",
+          "kind": "code",
+          "text": "Next, this line runs: Store the left result."
+        },
+        {
+          "key": "107-impact",
+          "kind": "impact",
+          "text": "Left child returned true → left_ok = true"
+        },
+        {
+          "key": "108-reason",
+          "kind": "reason",
+          "text": "The left result covers only half of this pair. The right children become the next pair before both results are combined."
+        },
+        {
+          "key": "108-code",
+          "kind": "code",
+          "text": "Next, this line runs: Call the right children."
+        },
+        {
+          "key": "108-impact",
+          "kind": "impact",
+          "text": "Call the right children"
+        },
+        {
+          "key": "109-reason",
+          "kind": "reason",
+          "text": "Two absent children describe the same structure. Settle that base case before reading either value."
+        },
+        {
+          "key": "109-code",
+          "kind": "code",
+          "text": "Next, this line runs: Check the empty pair."
+        },
+        {
+          "key": "109-impact",
+          "kind": "impact",
+          "text": "Check: p=null, q=null — both null?"
+        },
+        {
+          "key": "110-reason",
+          "kind": "reason",
+          "text": "Two absent children match. This call returns true to its parent without reading any values."
+        },
+        {
+          "key": "110-code",
+          "kind": "code",
+          "text": "Next, this line runs: Base case returns true."
+        },
+        {
+          "key": "110-impact",
+          "kind": "impact",
+          "text": "Both nodes are null → return True (base case)"
+        },
+        {
+          "key": "111-reason",
+          "kind": "reason",
+          "text": "The right call has returned a boolean. This pair keeps it as right_ok before combining both results."
+        },
+        {
+          "key": "111-code",
+          "kind": "code",
+          "text": "Next, this line runs: Store the right result."
+        },
+        {
+          "key": "111-impact",
+          "kind": "impact",
+          "text": "Right child returned true → right_ok = true"
+        },
+        {
+          "key": "112-reason",
+          "kind": "reason",
+          "text": "A pair matches only when both child results are true. This boolean returns to the caller, which receives it as its left_ok or right_ok."
+        },
+        {
+          "key": "112-code",
+          "kind": "code",
+          "text": "Next, this line runs: Return both results combined."
+        },
+        {
+          "key": "112-impact",
+          "kind": "impact",
+          "text": "Return true for node 42"
+        },
+        {
+          "key": "113-reason",
+          "kind": "reason",
+          "text": "The right call has returned a boolean. This pair keeps it as right_ok before combining both results."
+        },
+        {
+          "key": "113-code",
+          "kind": "code",
+          "text": "Next, this line runs: Store the right result."
+        },
+        {
+          "key": "113-impact",
+          "kind": "impact",
+          "text": "Right child returned true → right_ok = true"
+        },
+        {
+          "key": "114-reason",
+          "kind": "reason",
+          "text": "A pair matches only when both child results are true. This boolean returns to the caller, which receives it as its left_ok or right_ok."
+        },
+        {
+          "key": "114-code",
+          "kind": "code",
+          "text": "Next, this line runs: Return both results combined."
+        },
+        {
+          "key": "114-impact",
+          "kind": "impact",
+          "text": "Return true for node 75"
+        },
+        {
+          "key": "115-reason",
+          "kind": "reason",
+          "text": "The left call has returned a boolean. This pair keeps it as left_ok before moving on."
+        },
+        {
+          "key": "115-code",
+          "kind": "code",
+          "text": "Next, this line runs: Store the left result."
+        },
+        {
+          "key": "115-impact",
+          "kind": "impact",
+          "text": "Left child returned true → left_ok = true"
+        },
+        {
+          "key": "116-reason",
+          "kind": "reason",
+          "text": "The left result covers only half of this pair. The right children become the next pair before both results are combined."
+        },
+        {
+          "key": "116-code",
+          "kind": "code",
+          "text": "Next, this line runs: Call the right children."
+        },
+        {
+          "key": "116-impact",
+          "kind": "impact",
+          "text": "Call the right children"
+        },
+        {
+          "key": "117-reason",
+          "kind": "reason",
+          "text": "Two absent children describe the same structure. Settle that base case before reading either value."
+        },
+        {
+          "key": "117-code",
+          "kind": "code",
+          "text": "Next, this line runs: Check the empty pair."
+        },
+        {
+          "key": "117-impact",
+          "kind": "impact",
+          "text": "Check: p=63, q=63 — both null?"
+        },
+        {
+          "key": "118-reason",
+          "kind": "reason",
+          "text": "Equal values elsewhere cannot repair a missing child. If only one node exists here, this pair fails."
+        },
+        {
+          "key": "118-code",
+          "kind": "code",
+          "text": "Next, this line runs: Check structural agreement."
+        },
+        {
+          "key": "118-impact",
+          "kind": "impact",
+          "text": "One of p/q is null — structural mismatch?"
+        },
+        {
+          "key": "119-reason",
+          "kind": "reason",
+          "text": "Matching structure is not enough: the values at corresponding positions must also agree."
+        },
+        {
+          "key": "119-code",
+          "kind": "code",
+          "text": "Next, this line runs: Compare this pair of values."
+        },
+        {
+          "key": "119-impact",
+          "kind": "impact",
+          "text": "Compare values: p.val=63 vs q.val=63"
+        },
+        {
+          "key": "120-reason",
+          "kind": "reason",
+          "text": "Matching values establish only a local match. The left children become the next pair, and this call waits for its boolean."
+        },
+        {
+          "key": "120-code",
+          "kind": "code",
+          "text": "Next, this line runs: Call the left children."
+        },
+        {
+          "key": "120-impact",
+          "kind": "impact",
+          "text": "Values match (63) — call the left children"
+        },
+        {
+          "key": "121-reason",
+          "kind": "reason",
+          "text": "Two absent children describe the same structure. Settle that base case before reading either value."
+        },
+        {
+          "key": "121-code",
+          "kind": "code",
+          "text": "Next, this line runs: Check the empty pair."
+        },
+        {
+          "key": "121-impact",
+          "kind": "impact",
+          "text": "Check: p=48, q=48 — both null?"
+        },
+        {
+          "key": "122-reason",
+          "kind": "reason",
+          "text": "Equal values elsewhere cannot repair a missing child. If only one node exists here, this pair fails."
+        },
+        {
+          "key": "122-code",
+          "kind": "code",
+          "text": "Next, this line runs: Check structural agreement."
+        },
+        {
+          "key": "122-impact",
+          "kind": "impact",
+          "text": "One of p/q is null — structural mismatch?"
+        },
+        {
+          "key": "123-reason",
+          "kind": "reason",
+          "text": "Matching structure is not enough: the values at corresponding positions must also agree."
+        },
+        {
+          "key": "123-code",
+          "kind": "code",
+          "text": "Next, this line runs: Compare this pair of values."
+        },
+        {
+          "key": "123-impact",
+          "kind": "impact",
+          "text": "Compare values: p.val=48 vs q.val=48"
+        },
+        {
+          "key": "124-reason",
+          "kind": "reason",
+          "text": "Matching values establish only a local match. The left children become the next pair, and this call waits for its boolean."
+        },
+        {
+          "key": "124-code",
+          "kind": "code",
+          "text": "Next, this line runs: Call the left children."
+        },
+        {
+          "key": "124-impact",
+          "kind": "impact",
+          "text": "Values match (48) — call the left children"
+        },
+        {
+          "key": "125-reason",
+          "kind": "reason",
+          "text": "Two absent children describe the same structure. Settle that base case before reading either value."
+        },
+        {
+          "key": "125-code",
+          "kind": "code",
+          "text": "Next, this line runs: Check the empty pair."
+        },
+        {
+          "key": "125-impact",
+          "kind": "impact",
+          "text": "Check: p=null, q=null — both null?"
+        },
+        {
+          "key": "126-reason",
+          "kind": "reason",
+          "text": "Two absent children match. This call returns true to its parent without reading any values."
+        },
+        {
+          "key": "126-code",
+          "kind": "code",
+          "text": "Next, this line runs: Base case returns true."
+        },
+        {
+          "key": "126-impact",
+          "kind": "impact",
+          "text": "Both nodes are null → return True (base case)"
+        },
+        {
+          "key": "127-reason",
+          "kind": "reason",
+          "text": "The left call has returned a boolean. This pair keeps it as left_ok before moving on."
+        },
+        {
+          "key": "127-code",
+          "kind": "code",
+          "text": "Next, this line runs: Store the left result."
+        },
+        {
+          "key": "127-impact",
+          "kind": "impact",
+          "text": "Left child returned true → left_ok = true"
+        },
+        {
+          "key": "128-reason",
+          "kind": "reason",
+          "text": "The left result covers only half of this pair. The right children become the next pair before both results are combined."
+        },
+        {
+          "key": "128-code",
+          "kind": "code",
+          "text": "Next, this line runs: Call the right children."
+        },
+        {
+          "key": "128-impact",
+          "kind": "impact",
+          "text": "Call the right children"
+        },
+        {
+          "key": "129-reason",
+          "kind": "reason",
+          "text": "Two absent children describe the same structure. Settle that base case before reading either value."
+        },
+        {
+          "key": "129-code",
+          "kind": "code",
+          "text": "Next, this line runs: Check the empty pair."
+        },
+        {
+          "key": "129-impact",
+          "kind": "impact",
+          "text": "Check: p=null, q=null — both null?"
+        },
+        {
+          "key": "130-reason",
+          "kind": "reason",
+          "text": "Two absent children match. This call returns true to its parent without reading any values."
+        },
+        {
+          "key": "130-code",
+          "kind": "code",
+          "text": "Next, this line runs: Base case returns true."
+        },
+        {
+          "key": "130-impact",
+          "kind": "impact",
+          "text": "Both nodes are null → return True (base case)"
+        },
+        {
+          "key": "131-reason",
+          "kind": "reason",
+          "text": "The right call has returned a boolean. This pair keeps it as right_ok before combining both results."
+        },
+        {
+          "key": "131-code",
+          "kind": "code",
+          "text": "Next, this line runs: Store the right result."
+        },
+        {
+          "key": "131-impact",
+          "kind": "impact",
+          "text": "Right child returned true → right_ok = true"
+        },
+        {
+          "key": "132-reason",
+          "kind": "reason",
+          "text": "A pair matches only when both child results are true. This boolean returns to the caller, which receives it as its left_ok or right_ok."
+        },
+        {
+          "key": "132-code",
+          "kind": "code",
+          "text": "Next, this line runs: Return both results combined."
+        },
+        {
+          "key": "132-impact",
+          "kind": "impact",
+          "text": "Return true for node 48"
+        },
+        {
+          "key": "133-reason",
+          "kind": "reason",
+          "text": "The left call has returned a boolean. This pair keeps it as left_ok before moving on."
+        },
+        {
+          "key": "133-code",
+          "kind": "code",
+          "text": "Next, this line runs: Store the left result."
+        },
+        {
+          "key": "133-impact",
+          "kind": "impact",
+          "text": "Left child returned true → left_ok = true"
+        },
+        {
+          "key": "134-reason",
+          "kind": "reason",
+          "text": "The left result covers only half of this pair. The right children become the next pair before both results are combined."
+        },
+        {
+          "key": "134-code",
+          "kind": "code",
+          "text": "Next, this line runs: Call the right children."
+        },
+        {
+          "key": "134-impact",
+          "kind": "impact",
+          "text": "Call the right children"
+        },
+        {
+          "key": "135-reason",
+          "kind": "reason",
+          "text": "Two absent children describe the same structure. Settle that base case before reading either value."
+        },
+        {
+          "key": "135-code",
+          "kind": "code",
+          "text": "Next, this line runs: Check the empty pair."
+        },
+        {
+          "key": "135-impact",
+          "kind": "impact",
+          "text": "Check: p=31, q=0 — both null?"
+        },
+        {
+          "key": "136-reason",
+          "kind": "reason",
+          "text": "Equal values elsewhere cannot repair a missing child. If only one node exists here, this pair fails."
+        },
+        {
+          "key": "136-code",
+          "kind": "code",
+          "text": "Next, this line runs: Check structural agreement."
+        },
+        {
+          "key": "136-impact",
+          "kind": "impact",
+          "text": "One of p/q is null — structural mismatch?"
+        },
+        {
+          "key": "137-reason",
+          "kind": "reason",
+          "text": "Matching structure is not enough: the values at corresponding positions must also agree."
+        },
+        {
+          "key": "137-code",
+          "kind": "code",
+          "text": "Next, this line runs: Compare this pair of values."
+        },
+        {
+          "key": "137-impact",
+          "kind": "impact",
+          "text": "Compare values: p.val=31 vs q.val=0"
+        },
+        {
+          "key": "138-reason",
+          "kind": "reason",
+          "text": "The values at this position disagree, so this pair fails and the call returns false."
+        },
+        {
+          "key": "138-code",
+          "kind": "code",
+          "text": "Next, this line runs: Values differ: return false."
+        },
+        {
+          "key": "138-impact",
+          "kind": "impact",
+          "text": "p.val (31) ≠ q.val (0) → return False"
+        },
+        {
+          "key": "139-reason",
+          "kind": "reason",
+          "text": "The right call has returned a boolean. This pair keeps it as right_ok before combining both results."
+        },
+        {
+          "key": "139-code",
+          "kind": "code",
+          "text": "Next, this line runs: Store the right result."
+        },
+        {
+          "key": "139-impact",
+          "kind": "impact",
+          "text": "Right child returned false → right_ok = false"
+        },
+        {
+          "key": "140-reason",
+          "kind": "reason",
+          "text": "A pair matches only when both child results are true. This boolean returns to the caller, which receives it as its left_ok or right_ok."
+        },
+        {
+          "key": "140-code",
+          "kind": "code",
+          "text": "Next, this line runs: Return both results combined."
+        },
+        {
+          "key": "140-impact",
+          "kind": "impact",
+          "text": "Return false for node 63"
+        },
+        {
+          "key": "141-reason",
+          "kind": "reason",
+          "text": "The right call has returned a boolean. This pair keeps it as right_ok before combining both results."
+        },
+        {
+          "key": "141-code",
+          "kind": "code",
+          "text": "Next, this line runs: Store the right result."
+        },
+        {
+          "key": "141-impact",
+          "kind": "impact",
+          "text": "Right child returned false → right_ok = false"
+        },
+        {
+          "key": "142-reason",
+          "kind": "reason",
+          "text": "A pair matches only when both child results are true. This boolean returns to the caller, which receives it as its left_ok or right_ok."
+        },
+        {
+          "key": "142-code",
+          "kind": "code",
+          "text": "Next, this line runs: Return both results combined."
+        },
+        {
+          "key": "142-impact",
+          "kind": "impact",
+          "text": "Return false for node 89"
+        },
+        {
+          "key": "143-reason",
+          "kind": "reason",
+          "text": "The right call has returned a boolean. This pair keeps it as right_ok before combining both results."
+        },
+        {
+          "key": "143-code",
+          "kind": "code",
+          "text": "Next, this line runs: Store the right result."
+        },
+        {
+          "key": "143-impact",
+          "kind": "impact",
+          "text": "Right child returned false → right_ok = false"
+        },
+        {
+          "key": "144-reason",
+          "kind": "reason",
+          "text": "A pair matches only when both child results are true. This boolean returns to the caller, which receives it as its left_ok or right_ok."
+        },
+        {
+          "key": "144-code",
+          "kind": "code",
+          "text": "Next, this line runs: Return both results combined."
+        },
+        {
+          "key": "144-impact",
+          "kind": "impact",
+          "text": "Return false for node -16"
+        },
+        {
+          "key": "145-reason",
+          "kind": "reason",
+          "text": "Trees differ. isSameTree returns False."
+        },
+        {
+          "key": "145-code",
+          "kind": "code",
+          "text": "Next, this line runs: Report the tree comparison."
+        },
+        {
+          "key": "145-impact",
+          "kind": "impact",
+          "text": "Trees differ. isSameTree returns False."
+        }
+      ]
+    }
+  ]
+}

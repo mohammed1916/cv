@@ -34,6 +34,7 @@ export default function SameTreeWorkspace() {
     <AlgorithmWorkspace
       definition={definition}
       tutorial={sameTreeTutorial}
+      narration="100"
       renderVisual={({ step }) => <SameTreeScene step={step} />}
       renderReasoning={({ step }) => <p>{step.explanation ?? step.message}</p>}
     />
