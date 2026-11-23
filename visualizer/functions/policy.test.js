@@ -1,7 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { status, entitlementEnd, PLANS, trialStart, TRIAL_MS, refundable, REFUND_WINDOW_MS } from './policy.js';
-import { isFreeProblem, PLANS as UI_PLANS } from '../src/access/policy.js';
+import { status, entitlementEnd, PLANS, PRICES, priceFor, trialStart, TRIAL_MS, refundable, REFUND_WINDOW_MS } from './policy.js';
+import { isFreeProblem, PRICES as UI_PRICES, PLANS as UI_PLANS } from '../src/access/policy.js';
+const UI_PLAN_DAYS = Object.fromEntries(Object.keys(UI_PLANS).map(key => [key, UI_PLANS[key].days]));
 const now = Date.parse('2026-09-10T10:00:00Z');
 test('entitlements expire and renewal extends only the remaining period', () => {
   assert.equal(status({ expiresAt: now }, now).pro, false);
@@ -9,15 +10,17 @@ test('entitlements expire and renewal extends only the remaining period', () => 
   assert.equal(entitlementEnd(now - 1, 30, now), now + 30 * 86400000);
   assert.equal(entitlementEnd(now + 1000, 30, now), now + 1000 + 30 * 86400000);
 });
-test('UI prices match trusted backend amounts', () => {
-  assert.equal(PLANS.monthly.amount, 999);
-  assert.equal(PLANS.annual.amount, 7900);
-  assert.equal(PLANS.lifetime.amount, 14999);
-  for (const key of Object.keys(PLANS)) {
-    assert.equal(UI_PLANS[key].amount, PLANS[key].amount);
-    assert.equal(UI_PLANS[key].days, PLANS[key].days);
+test('UI prices match trusted backend amounts in every currency', () => {
+  for (const currency of Object.keys(PRICES)) {
+    for (const plan of Object.keys(PLANS)) {
+      assert.equal(UI_PRICES[currency][plan], PRICES[currency][plan], `${currency} ${plan}`);
+      assert.equal(priceFor(plan, currency), PRICES[currency][plan]);
+      assert.equal(UI_PLAN_DAYS[plan], PLANS[plan].days);
+    }
   }
+  assert.equal(priceFor('monthly', 'EUR'), null);
 });
+
 test('Basics and Easy plus curated Medium are free, unavailable entries are not sold', () => {
   const p = { implemented: true, difficulty: 'Hard', number: '42', tags: [] };
   assert.equal(isFreeProblem(p), true);

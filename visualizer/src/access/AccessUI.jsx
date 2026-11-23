@@ -2,12 +2,11 @@ import { trackEvent } from '../analytics/client';
 import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { accessCall, backendEnabled, checkoutEnabled } from './firebase';
-import { PLANS, FREE_MEDIUM, BETA_FREE_ACCESS } from './policy';
+import { PLANS, PRICES, FREE_MEDIUM, BETA_FREE_ACCESS, planFor, formatPrice, defaultCurrency } from './policy';
 import './access.css';
 import './PlansToggle.css';
 
 // Amounts are stored in paise; the saving is 12 monthly payments minus one annual payment.
-const YEARLY_SAVING_USD = (12 * PLANS.monthly.amount - PLANS.annual.amount) / 100;
 const CYCLES = {
   monthly: { period: 'per month', key: 'monthly' },
   annual: { period: 'per year', key: 'annual' },
@@ -68,7 +67,8 @@ export function Plans({ access, reason }) {
   const [pending, setPending] = useState(false);
   const [message, setMessage] = useState('');
   const [cycle, setCycle] = useState('monthly');
-  const selected = PLANS[cycle];
+  const [currency, setCurrency] = useState(defaultCurrency);
+  const selected = planFor(cycle, currency);
   async function purchase(plan, dialog) {
     if (BETA_FREE_ACCESS) return;
     if (!access.user) { await access.login(); return; }
@@ -78,17 +78,17 @@ export function Plans({ access, reason }) {
     setPending(true); setMessage('');
     try {
       await loadCheckout();
-      const order = await accessCall('createProOrder', { plan });
-      trackEvent('begin_checkout', { plan, currency: 'USD', value: order.amount / 100 });
+      const order = await accessCall('createProOrder', { plan, currency });
+      trackEvent('begin_checkout', { plan, currency: order.currency, value: order.amount / 100 });
       const checkout = new window.Razorpay({
-        key: order.key, order_id: order.id, amount: order.amount, currency: 'USD',
-        name: 'Visualizer Pro', description: `Pro · ${PLANS[plan].label}`,
+        key: order.key, order_id: order.id, amount: order.amount, currency: order.currency,
+        name: 'Visualizer Pro', description: `Pro · ${planFor(plan, currency).label}`,
         prefill: { email: access.user.email || '' },
         modal: { ondismiss: () => { setPending(false); restoreDialog(); } },
         handler: async (payment) => {
           try {
             await accessCall('verifyProPayment', payment);
-            trackEvent('purchase', { plan, currency: 'USD', value: order.amount / 100, transaction_id: payment.razorpay_payment_id });
+            trackEvent('purchase', { plan, currency: order.currency, value: order.amount / 100, transaction_id: payment.razorpay_payment_id });
             await access.refresh(); setMessage('Payment verified. Your Pro access is ready.');
           } catch { setMessage('We could not confirm access yet. Use Refresh access below; do not pay again.'); }
           finally { setPending(false); restoreDialog(); }
@@ -114,12 +114,15 @@ export function Plans({ access, reason }) {
             {key === 'monthly' ? 'Monthly' : key === 'annual' ? 'Yearly' : 'Lifetime'}
           </button>)}
         </div>
+        <div className="plans-toggle" role="group" aria-label="Currency">
+          {['USD', 'INR'].map((code) => <button type="button" key={code} className="plans-toggle-btn" aria-pressed={currency === code} onClick={() => setCurrency(code)}>{code}</button>)}
+        </div>
         <div className="plans-price">
           <strong className="plans-price-amount">{BETA_FREE_ACCESS ? '$0' : selected.display}</strong>
           {!BETA_FREE_ACCESS && <span className="plans-price-period">{CYCLES[cycle].period}</span>}
           {BETA_FREE_ACCESS && <span className="plans-price-beta">Free during beta</span>}
         </div>
-        {!BETA_FREE_ACCESS && cycle === 'annual' && <p className="plans-saving">Save ${YEARLY_SAVING_USD.toFixed(2)} a year</p>}
+        {!BETA_FREE_ACCESS && cycle === 'annual' && <p className="plans-saving">Save {formatPrice(12 * PRICES[currency].monthly - PRICES[currency].annual, currency)} a year</p>}
         <ul><li>All implemented problem visualizers unlocked</li><li>Unlimited code playground time</li><li>New visualizers included during beta</li></ul>
         {BETA_FREE_ACCESS ? <p role="status"><strong>Beta stage: no payment required.</strong> Sign in for free access to every Pro problem during beta. Free problems and the code playground remain open without sign-in.</p> : <p>Try Pro free for 3 days. No card required and no automatic charge.</p>}
         {access.account?.trialActive && access.pro && <p role="status">Free trial active until {new Date(access.account.trialEndsAt).toLocaleString()}.</p>}
@@ -130,7 +133,7 @@ export function Plans({ access, reason }) {
         {!BETA_FREE_ACCESS && <button className="access-primary" disabled={pending || access.busy || !checkoutEnabled || (access.pro && access.account?.paid)} onClick={(event) => purchase(cycle, event.currentTarget.closest('dialog'))}>
           {access.pro && access.account?.paid ? 'Paid Pro active' : `${selected.display} / ${selected.label}`}
         </button>}
-        {!BETA_FREE_ACCESS && <small>Yearly plan: {PLANS.annual.display} for 365 days, instead of {PLANS.monthly.display} a month. Lifetime is a one-time {PLANS.lifetime.display} with no renewal. If you buy during your trial, your paid time starts after the trial ends.</small>}
+        {!BETA_FREE_ACCESS && <small>Yearly plan: {planFor('annual', currency).display} for 365 days, instead of {planFor('monthly', currency).display} a month. Lifetime is a one-time {planFor('lifetime', currency).display} with no renewal. If you buy during your trial, your paid time starts after the trial ends.</small>}
         <small>{BETA_FREE_ACCESS ? "No payment, trial countdown or automatic charge. Reference prices are not charged during beta." : "One-time payment. No automatic renewal."} Catalog-only entries are coming soon. AI provider limits remain separate.</small>
         {!BETA_FREE_ACCESS && !checkoutEnabled && <p className="access-notice">Pro purchases are coming soon. Checkout is not open yet.</p>}
       </section>

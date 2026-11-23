@@ -4,7 +4,7 @@ import { getFirestore } from 'firebase-admin/firestore';
 import { onCall, onRequest, HttpsError } from 'firebase-functions/v2/https';
 import { defineSecret } from 'firebase-functions/params';
 import { createHmac, timingSafeEqual } from 'node:crypto';
-import { PLANS, status, entitlementEnd, trialStart, refundable } from './policy.js';
+import { PLANS, priceFor, status, entitlementEnd, trialStart, refundable } from './policy.js';
 initializeApp();
 const db = getFirestore();
 const keyId = defineSecret('RAZORPAY_KEY_ID');
@@ -65,8 +65,10 @@ function validSignature(text, signature, secret) {
   return timingSafeEqual(expected, Buffer.from(signature, 'hex'));
 }
 export const createProOrder = onCall(paymentOptions, async request => {
-  const user = uid(request), plan = request.data?.plan;
+  const user = uid(request), plan = request.data?.plan, currency = request.data?.currency || 'USD';
   if (!Object.hasOwn(PLANS, plan || '')) throw new HttpsError('invalid-argument', 'Unknown plan.');
+  const amount = priceFor(plan, currency);
+  if (amount === null) throw new HttpsError('invalid-argument', 'Unsupported currency.');
   // Launch switch is server-owned and absent by default.
   const config = (await db.doc('config/billing').get()).data();
   if (!config?.enabled) throw new HttpsError('failed-precondition', 'Checkout is not open yet.');
@@ -77,9 +79,9 @@ export const createProOrder = onCall(paymentOptions, async request => {
     if (prior?.at > Date.now() - 30000) throw new HttpsError('resource-exhausted', 'Wait 30 seconds before starting another checkout.');
     tx.set(rate, { at: Date.now() });
   });
-  const order = await razorpay('orders', { amount: PLANS[plan].amount, currency: 'USD', receipt: ref.id, notes: { product: 'visualizer-pro' } });
-  await db.doc(`orders/${order.id}`).set({ uid: user, plan, amount: PLANS[plan].amount, status: 'created', createdAt: Date.now() });
-  return { id: order.id, amount: PLANS[plan].amount, key: keyId.value() };
+  const order = await razorpay('orders', { amount, currency, receipt: ref.id, notes: { product: 'visualizer-pro' } });
+  await db.doc(`orders/${order.id}`).set({ uid: user, plan, amount, currency, status: 'created', createdAt: Date.now() });
+  return { id: order.id, amount, currency, key: keyId.value() };
 });
 // Used by both verified checkout and signed webhooks. Duplicate deliveries do
 // not extend a plan twice. Payment metadata never determines a trusted price.
@@ -95,7 +97,7 @@ async function activate(payment, expectedUid) {
     // Acknowledge those events without retrying or granting product access.
     if (!order && !expectedUid) return { ignored: true };
     if (!order || (expectedUid && order.uid !== expectedUid)) throw new HttpsError('permission-denied', 'Order does not belong to this account.');
-    if (payment.status !== 'captured' || payment.currency !== 'USD' || payment.amount !== order.amount || payment.amount_refunded > 0) throw new HttpsError('failed-precondition', 'Payment has not been captured or was refunded.');
+    if (payment.status !== 'captured' || payment.currency !== order.currency || payment.amount !== order.amount || payment.amount_refunded > 0) throw new HttpsError('failed-precondition', 'Payment has not been captured or was refunded.');
     if (order.status === 'refunded') throw new HttpsError('failed-precondition', 'Payment was refunded.');
     if (order.status === 'paid') return { activated: true };
     const accountRef = db.doc(`accounts/${order.uid}`);

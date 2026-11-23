@@ -1,10 +1,18 @@
-// Prices in US dollar cents. Keep in step with src/access/policy.js.
+// Minor units per currency (cents for USD, paise for INR). Keep in step with src/access/policy.js.
 // Lifetime uses 36500 days so the existing expiry logic applies unchanged.
-export const PLANS = {
-  monthly: { amount: 999, days: 30 },
-  annual: { amount: 7900, days: 365 },
-  lifetime: { amount: 14999, days: 36500 },
+export const PRICES = {
+  USD: { monthly: 214, annual: 1613, lifetime: 5378 },
+  INR: { monthly: 19900, annual: 149900, lifetime: 499900 },
 };
+export const CURRENCIES = Object.keys(PRICES);
+export const PLANS = {
+  monthly: { days: 30 },
+  annual: { days: 365 },
+  lifetime: { days: 36500 },
+};
+export function priceFor(plan, currency) {
+  return Object.hasOwn(PRICES, currency || '') && Object.hasOwn(PRICES[currency], plan) ? PRICES[currency][plan] : null;
+}
 export const TRIAL_MS = 3 * 86400000;
 export function status(data = {}, now = Date.now()) {
   const paidExpiresAt = Number(data.expiresAt || 0);

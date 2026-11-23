@@ -4,7 +4,7 @@ import { createHmac } from 'node:crypto';
 import process from 'node:process';
 import { getFirestore } from 'firebase-admin/firestore';
 import { verifyProPayment, paymentWebhook, startProTrial, playgroundLease, createProOrder } from './index.js';
-import { PLANS, TRIAL_MS } from './policy.js';
+import { PLANS, PRICES, TRIAL_MS } from './policy.js';
 
 // Exercise real handlers with deterministic Firestore and Razorpay boundaries.
 // This validates business logic without secrets, network calls or real payments.
@@ -24,8 +24,8 @@ db.runTransaction = async fn => fn({
 globalThis.fetch = async () => ({ ok: true, json: async () => payment });
 function reset() {
   // Orders opened before the price change still verify against their stored amount.
-  records = new Map([['orders/order_one', { uid: 'owner', plan: 'monthly', amount: 999, status: 'created' }]]);
-  payment = { id: 'pay_one', order_id: 'order_one', status: 'captured', amount: 999, currency: 'USD', amount_refunded: 0 };
+  records = new Map([['orders/order_one', { uid: 'owner', plan: 'monthly', amount: 214, currency: 'USD', status: 'created' }]]);
+  payment = { id: 'pay_one', order_id: 'order_one', status: 'captured', amount: 214, currency: 'USD', amount_refunded: 0 };
 }
 function request(user = 'owner') {
   return {
@@ -84,14 +84,37 @@ test('checkout sends the trusted new monthly and annual prices, ignoring client 
     assert.equal(body.currency, 'USD');
     return { ok: true, json: async () => ({ id: 'order_new', amount: body.amount }) };
   });
-  for (const [plan, expected] of [['monthly', 999], ['annual', 7900], ['lifetime', 14999]]) {
+  for (const [plan, expected] of [['monthly', 214], ['annual', 1613], ['lifetime', 5378]]) {
     reset();
     records.set('config/billing', { enabled: true });
     const order = await createProOrder.run({ ...request(), data: { plan, amount: 1 } });
     assert.equal(order.amount, expected);
     assert.equal(records.get('orders/order_new').amount, expected);
-    assert.equal(expected, PLANS[plan].amount);
+    assert.equal(expected, PRICES[plan] ?? PRICES.USD[plan]);
   }
+});
+
+test('checkout in rupees charges the trusted INR price and records the currency', async t => {
+  t.mock.method(db, 'collection', () => ({ doc: () => ({ id: 'receipt_test' }) }));
+  t.mock.method(globalThis, 'fetch', async (_url, options) => {
+    const body = JSON.parse(options.body);
+    assert.equal(body.currency, 'INR');
+    return { ok: true, json: async () => ({ id: 'order_inr', amount: body.amount }) };
+  });
+  for (const [plan, expected] of [['monthly', 19900], ['annual', 149900], ['lifetime', 499900]]) {
+    reset();
+    records.set('config/billing', { enabled: true });
+    const order = await createProOrder.run({ ...request(), data: { plan, currency: 'INR', amount: 1 } });
+    assert.equal(order.amount, expected);
+    assert.equal(order.currency, 'INR');
+    assert.equal(records.get('orders/order_inr').currency, 'INR');
+  }
+});
+
+test('checkout rejects currencies without a price', async () => {
+  reset();
+  records.set('config/billing', { enabled: true });
+  await assert.rejects(createProOrder.run({ ...request(), data: { plan: 'monthly', currency: 'EUR' } }), /Unsupported currency/);
 });
 
 test('verified payment preserves unused trial time', async t => {
