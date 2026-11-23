@@ -1,0 +1,11 @@
+.problem-notes { margin: 10px 0; padding: 10px 14px; border: 1px solid var(--border); border-radius: 10px; background: var(--surface); }
+.problem-notes > summary { cursor: pointer; font-weight: 700; font-size: 15px; }
+.problem-notes__statement { margin: 10px 0; }
+.problem-notes__statement-btn { display: inline-block; padding: 6px 12px; border-radius: 999px; border: 1px solid var(--primary); background: color-mix(in srgb, var(--primary) 14%, var(--surface2)); color: var(--primary); font-weight: 700; text-decoration: none; }
+.problem-notes__statement-btn:hover { background: color-mix(in srgb, var(--primary) 26%, var(--surface2)); }
+.problem-notes__section { margin: 10px 0; }
+.problem-notes__section h3 { font-size: 14px; margin: 0 0 4px; }
+.problem-notes__section ul { margin: 6px 0; padding-inline-start: 20px; }
+.problem-notes__approaches { width: 100%; border-collapse: collapse; margin: 8px 0; font-size: 13px; }
+.problem-notes__approaches th, .problem-notes__approaches td { border: 1px solid var(--border); padding: 4px 6px; text-align: start; vertical-align: top; }
+.goal-diagram { display: block; max-width: 100%; height: auto; margin: 12px 0 6px; }

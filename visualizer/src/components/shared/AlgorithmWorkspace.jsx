@@ -14,6 +14,7 @@ import CompactPlayback from './CompactPlayback'
 import TabSwitch from './TabSwitch'
 import './TabSwitch.css'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
+import { usePublishProblemNotes } from '../ProblemNotes'
 import './AlgorithmWorkspace.css'
 
 const PANELS = [
@@ -39,6 +40,11 @@ export default function AlgorithmWorkspace({ definition, renderVisual, renderRea
   const [narrating, setNarrating] = useState(false)
   const audioRef = useRef(null)
   const adaptive = !!visuals
+  const publishNotes = usePublishProblemNotes()
+  useEffect(() => {
+    publishNotes({ goal: definition.goal, goalDiagram: definition.goalDiagram, question: definition.question, approaches: definition.approaches, complexity: definition.complexity, url: definition.url ?? null })
+    return () => publishNotes(null)
+  }, [definition, publishNotes])
   const supportsTutorial = adaptive || !!tutorial
   const directed = supportsTutorial && tutorialMode !== 'off'
   const narrated = !!narration && narrationOn && directed && presetIndex >= 0
@@ -167,27 +173,6 @@ export default function AlgorithmWorkspace({ definition, renderVisual, renderRea
     </label>}
     <span>{run ? `${position + 1} / ${total} ${directed ? 'scenes' : 'frames'}` : 'No valid input'}</span>
   </div>
-  // The goal is always shown in full. The question and approaches sit in a dropdown below it.
-  const goal = definition.goal && <details className="algorithm-workspace__goal" open aria-label="Problem goal">
-    <summary>Goal</summary>
-    <p>{definition.goal.summary}</p>
-    {definition.goalDiagram}
-    <ul>{definition.goal.requirement.map(item => <li key={item}>{item}</li>)}</ul>
-    <p><strong>Worked example:</strong> {definition.goal.example}</p>
-  </details>
-  const notes = <details className="algorithm-workspace__notes">
-    <summary>Problem question and approaches</summary>
-    {definition.url && <p className="algorithm-workspace__statement">
-      <a className="algorithm-workspace__statement-btn" href={definition.url} target="_blank" rel="noreferrer">View the original statement on LeetCode ↗</a>
-    </p>}
-    {definition.question && <p>{definition.question}</p>}
-    {definition.approaches?.length ? <table className="algorithm-workspace__approaches">
-      <thead><tr><th>Approach</th><th>Intuition</th><th>Time</th><th>Space</th></tr></thead>
-      <tbody>{definition.approaches.map(row => <tr key={row.name}><td>{row.name}</td><td>{row.intuition}</td><td>{row.time}</td><td>{row.space}</td></tr>)}</tbody>
-    </table> : null}
-    {renderReasoning && run && <div className="algorithm-workspace__static">{renderReasoning({ run, step })}</div>}
-    <p>{definition.complexity}</p>
-  </details>
   const whyPanel = run && <section className="algorithm-workspace__why" aria-label="Why it works and current state">
     {!directed && <nav className="algorithm-workspace__phases" aria-label="Algorithm states">
       {definition.phases.map(phase => <button type="button" key={phase.id}
@@ -201,8 +186,6 @@ export default function AlgorithmWorkspace({ definition, renderVisual, renderRea
     </div>
   </section>
   return <div className={`algorithm-workspace ${directed ? 'algorithm-workspace--tutorial' : ''}`}>
-    {goal}
-    {notes}
     <div className="algorithm-workspace__tabs">
       {supportsTutorial && <TabSwitch label="Tutorial mode" className="tutorial-mode-switch" value={tutorialMode === 'off' ? 'off' : 'steps'} onChange={changeMode}
         options={[{value:'off',label:'Visuals & custom inputs'},{value:'steps',label:'Step-by-step'}]} />}

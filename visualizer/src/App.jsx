@@ -1,4 +1,5 @@
 import ProblemNavigation from "./components/ProblemNavigation";
+import ProblemNotes, { ProblemNotesProvider } from "./components/ProblemNotes";
 import ViewMenu from './components/ViewMenu';
 import { ALL_PROBLEMS } from './data/problemRoutes.js';
 import { createPortal } from 'react-dom';
@@ -521,7 +522,9 @@ function ProblemPage({
         </div>
         <div className="problem-utilities">{utilityControls}</div>
       </header>
+      <ProblemNotesProvider>
       <div className="problem-content" data-visualizer-root onPointerDown={() => { if (!navHidden && window.matchMedia("(max-width: 720px)").matches) setNavHidden(true); }}>
+        <ProblemNotes problem={problem} />
         <div className="problem-title-mobile" aria-hidden="true">
           <span className="problem-num">#{problem.number}</span>
           <h2 className="problem-title">{problem.title}</h2>
@@ -543,6 +546,7 @@ function ProblemPage({
           )}
         </ErrorBoundary>
       </div>
+      </ProblemNotesProvider>
     </Shell>
   );
 }
