@@ -26,6 +26,7 @@ const definition = {
   title: 'The Maze II',
   phases,
   parse: parseInput, build: buildTrace, code, python,
+  pythonLineMap: Object.fromEntries(code.map(line => [line.line, line.line])),
   inputLabel: 'Object with maze (0 empty, 1 wall), start [row, col] and destination [row, col]',
   url: 'https://leetcode.com/problems/the-maze-ii/',
   complexity: 'Dijkstra over stopping cells. With the simple selection used here it is O(V squared) for V stopping cells. The visualization caps the maze at 5 by 5.',

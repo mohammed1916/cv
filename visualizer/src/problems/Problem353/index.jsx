@@ -23,6 +23,7 @@ const goalDiagram = (
 const definition = {
   phases,
   parse: parseInput, build: buildTrace, code, python,
+  pythonLineMap: Object.fromEntries(code.map(line => [line.line, line.line])),
   inputLabel: 'Object with width, height, food ([row, col] list, in order) and moves (U, D, L or R)',
   url: 'https://leetcode.com/problems/design-snake-game/',
   complexity: 'Each move is O(1) on average with a set for the body and a deque for the order, and O(L) space for a snake of length L. The visualization caps the grid at 4 by 4.',

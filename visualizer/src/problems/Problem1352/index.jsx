@@ -16,6 +16,7 @@ const definition = {
     { id: 'done', label: 'Complete', description: 'Report every answer.' },
   ],
   parse: parseInput, build: buildTrace, code, python,
+  pythonLineMap: Object.fromEntries(code.map(line => [line.line, line.line])),
   inputLabel: 'An object with operations: up to 12 entries of ["add", 0-9] or ["getProduct", k]',
   url: 'https://leetcode.com/problems/product-of-the-last-k-numbers/',
   complexity: 'O(k) time per getProduct, because the solution multiplies the last k numbers each time, and O(n) space for the stored numbers. The visualization caps input at 12 operations.',

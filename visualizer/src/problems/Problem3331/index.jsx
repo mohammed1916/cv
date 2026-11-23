@@ -36,6 +36,7 @@ const goalDiagram = (
 const definition = {
   phases,
   parse: parseInput, build: buildTrace, code, python,
+  pythonLineMap: Object.fromEntries(code.map(line => [line.line, line.line])),
   inputLabel: 'Object with parent (parent[0] = -1, parents come earlier) and s (letters a to e)',
   url: 'https://leetcode.com/problems/find-subtree-sizes-after-changes/',
   complexity: 'O(n) time and space with the iterative DFS: each node and edge is handled a constant number of times. The visualization caps the tree at 10 nodes.',

@@ -12,6 +12,7 @@ const definition = {
     { id: 'done', label: 'Result', description: 'Report every batch sum.' },
   ],
   parse: parseInput, build: buildTrace, code, python,
+  pythonLineMap: Object.fromEntries(code.map(line => [line.line, line.line])),
   inputLabel: 'Object with values (0 to 9, up to 12 entries) and k (batch size, 1 to 4)',
   complexity: 'O(n) time and O(n/k) space for the batch sums.',
   goal: {

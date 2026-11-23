@@ -28,6 +28,7 @@ const definition = {
   title: 'Max Consecutive Ones II',
   phases,
   parse: parseInput, build: buildTrace, code, python,
+  pythonLineMap: Object.fromEntries(code.map(line => [line.line, line.line])),
   inputLabel: 'Object with nums: an array of 0s and 1s (up to 12 entries)',
   url: 'https://leetcode.com/problems/max-consecutive-ones-ii/',
   complexity: 'O(n) time, because each edge moves forward once, and O(1) extra space.',
