@@ -42,7 +42,8 @@ export function CodePanel({ code, step, title = 'Solution Code', getRowExtra }) 
     if (!isFullyVisible) {
       el.scrollIntoView({ block: 'nearest', behavior: 'auto' })
     }
-  }, [step, selection.enabled])
+  // Scroll only when the highlighted line changes, so the user's own scrolling is not overridden on re-renders.
+  }, [step?.activeLine, selection.enabled])
 
   useEffect(() => {
     if (!copied) return

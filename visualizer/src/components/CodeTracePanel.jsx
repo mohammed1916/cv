@@ -49,6 +49,7 @@ export default function CodeTracePanel({
   useNarrativeTrace(resolvedStep, resolvedCodeLines);
   const codeRef = useRef(null);
   const lastManualScrollTsRef = useRef(0);
+  const lastAutoScrollTsRef = useRef(0);
   const [copied, setCopied] = useState(false);
   const [panelHeight, setPanelHeight] = useState(() => {
     try {
@@ -81,7 +82,9 @@ export default function CodeTracePanel({
     }
 
     // Auto-scroll if enabled
-    if (selection.enabled || !autoScroll || Date.now() - lastManualScrollTsRef.current < MANUAL_SCROLL_GRACE_MS) return;
+    // On phones the panel only highlights the current line; on larger screens it keeps scrolling to it.
+    const phone = typeof window !== "undefined" && window.matchMedia("(max-width: 720px)").matches;
+    if (phone || selection.enabled || !autoScroll || Date.now() - lastManualScrollTsRef.current < MANUAL_SCROLL_GRACE_MS) return;
 
     const container = codeRef.current;
     const elTop = el.offsetTop;
@@ -89,6 +92,7 @@ export default function CodeTracePanel({
     const ctTop = container.scrollTop;
     const ctBottom = ctTop + container.clientHeight;
     if (elTop < ctTop || elBottom > ctBottom) {
+      lastAutoScrollTsRef.current = Date.now();
       el.scrollIntoView({ block: "nearest", behavior: "auto" });
     }
   }, [resolvedStep, autoScroll, onActiveLineDomChange, selection.enabled]);
@@ -108,6 +112,10 @@ export default function CodeTracePanel({
 
   const markManualScroll = () => {
     lastManualScrollTsRef.current = Date.now();
+  };
+  // Any scroll the panel did not start itself (scrollbar, keyboard, wheel, touch) counts as the user's.
+  const handleScroll = () => {
+    if (Date.now() - lastAutoScrollTsRef.current > 400) markManualScroll();
   };
 
   const highlightedLineSet = useMemo(() => new Set(resolvedHighlightedLines), [resolvedHighlightedLines]);
@@ -223,6 +231,7 @@ export default function CodeTracePanel({
         className="ctp-scroll"
         data-code-selection
         ref={codeRef}
+        onScroll={handleScroll}
         onWheel={markManualScroll}
         onTouchMove={markManualScroll}
         style={
