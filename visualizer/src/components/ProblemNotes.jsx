@@ -45,7 +45,7 @@ export default function ProblemNotes({ problem: problemProp, panel = false }) {
       <h3>Goal</h3>
       <p>{notes.goal.summary}</p>
       {notes.goalDiagram}
-      <ul>{notes.goal.requirement.map(item => <li key={item}>{item}</li>)}</ul>
+      <ul>{(notes.goal.requirement ?? []).map(item => <li key={item}>{item}</li>)}</ul>
       <p><strong>Worked example:</strong> {notes.goal.example}</p>
     </section>}
     {(notes?.question || notes?.approaches?.length) && <section className="problem-notes__section" aria-label="Question and approaches">

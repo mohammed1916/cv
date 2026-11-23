@@ -86,7 +86,7 @@ export default function SequenceStory({ definition }) {
             )}
             {step.sourceRecords ? (
               <RecordStateTable {...step.sourceRecords} />
-            ) : matrix ? (
+            ) : matrix?.length && matrix[0]?.length ? (
               <Matrix
                 values={matrix}
                 label={step.matrixLabel ?? "Source matrix"}
@@ -107,7 +107,7 @@ export default function SequenceStory({ definition }) {
                 }
               />
             )}
-            {step.outputMatrix && (
+            {step.outputMatrix?.length && step.outputMatrix[0]?.length && (
               <Matrix
                 values={step.outputMatrix}
                 label={
@@ -161,9 +161,9 @@ export default function SequenceStory({ definition }) {
                   </tr>
                 </thead>
                 <tbody>
-                  {step.table.map((row, i) => (
+                  {(step.table ?? []).map((row, i) => (
                     <tr key={i}>
-                      {row.map((value, j) => (
+                      {(row ?? []).map((value, j) => (
                         <td key={j}>{display(value)}</td>
                       ))}
                     </tr>
