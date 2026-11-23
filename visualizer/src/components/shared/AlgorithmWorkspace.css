@@ -98,3 +98,4 @@
 .algorithm-workspace__statement { margin: 10px 0; }
 .algorithm-workspace__stack { display: flex; flex-direction: column; gap: 12px; }
 .algorithm-workspace__stack-panel { min-width: 0; }
+@media (min-width: 721px) { 

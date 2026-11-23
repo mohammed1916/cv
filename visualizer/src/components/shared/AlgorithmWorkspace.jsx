@@ -18,7 +18,7 @@ import ProblemNotes, { usePublishProblemNotes } from '../ProblemNotes'
 import './AlgorithmWorkspace.css'
 
 // Only the main visual shows at first; secondary panels start in the shelf and can be opened from there.
-const SECONDARY_PANELS = ['code']
+const SECONDARY_PANELS = []
 // Layout: problem notes and input across the top; algorithm state and solution code across the bottom.
 const PANELS = [
   { id: 'visual', title: 'Algorithm state' },
@@ -40,6 +40,7 @@ export default function AlgorithmWorkspace({ definition, renderVisual, renderRea
   const [floating, setFloating] = useState(true)
   // Phones stack the panels in one column instead of the dock layout.
   const floatingOn = floating
+  // Phones: playback controls and the Why panel sit inline, shown as part of the page.
   const [narrow, setNarrow] = useState(() => typeof window !== 'undefined' && window.matchMedia('(max-width: 720px)').matches)
   useEffect(() => {
     const query = window.matchMedia('(max-width: 720px)')
@@ -223,16 +224,16 @@ export default function AlgorithmWorkspace({ definition, renderVisual, renderRea
       {Object.entries({...views, input: inputPanel}).map(([id, content]) => panelDivs?.[id]
         ? createPortal(<div className={`algorithm-workspace__panel${id === "visual" ? " is-visual" : ""}`}>{content}</div>, panelDivs[id], id) : null)}
     </div>}
-    {floatingOn ? createPortal(<FloatingPanel title="Playback Controls" storageKey="algorithm-workspace-playback-size"
+    {floatingOn && !narrow ? createPortal(<FloatingPanel title="Playback Controls" storageKey="algorithm-workspace-playback-size"
       defaultSize={{ width: Math.min(520, window.innerWidth - 16), height: Math.min(380, window.innerHeight - 32) }}
       collapsedBar={<CompactPlayback isPlaying={narrated ? narrating : playback.isPlaying} isDone={narrated ? position >= total - 1 : playback.isDone}
         onPlayToggle={togglePlay}
         onPrev={() => seek(Math.max(0, playback.stepIndex - 1))}
         onNext={() => seek(Math.min(total - 1, position + 1))}
         prevDisabled={!playback.canPrev} nextDisabled={!playback.canNext}
-        stepIndex={position} total={total} onSeek={seek} />}>{controls}</FloatingPanel>, document.body) : controls}
-    {floatingOn ? createPortal(<FloatingPanel title="Why it works" storageKey="algorithm-workspace-why-size"
+        stepIndex={position} total={total} onSeek={seek} />}>{controls}</FloatingPanel>, document.body) : <div className="algorithm-workspace__tools">{controls}</div>}
+    {floatingOn && !narrow ? createPortal(<FloatingPanel title="Why it works" storageKey="algorithm-workspace-why-size"
       defaultSize={{ width: Math.min(360, window.innerWidth - 16), height: 150 }}
-      defaultPosition={{ x: Math.max(8, window.innerWidth - Math.min(360, window.innerWidth - 16) - 16), y: 96 }}>{whyPanel}</FloatingPanel>, document.body) : whyPanel}
+      defaultPosition={{ x: Math.max(8, window.innerWidth - Math.min(360, window.innerWidth - 16) - 16), y: 96 }}>{whyPanel}</FloatingPanel>, document.body) : <div className="algorithm-workspace__tools">{whyPanel}</div>}
   </div>
 }
