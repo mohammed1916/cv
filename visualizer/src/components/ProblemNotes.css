@@ -1,4 +1,4 @@
-.problem-notes { margin: 10px 0; padding: 10px 14px; border: 1px solid var(--border); border-radius: 10px; background: var(--surface); }
+.problem-notes { position: relative; z-index: 20; isolation: isolate; margin: 10px 0 18px; padding: 10px 14px 16px; border: 1px solid var(--border); border-radius: 10px; background: var(--surface); }
 .problem-notes > summary { cursor: pointer; font-weight: 700; font-size: 15px; }
 .problem-notes__statement { margin: 10px 0; }
 .problem-notes__statement-btn { display: inline-block; padding: 6px 12px; border-radius: 999px; border: 1px solid var(--primary); background: color-mix(in srgb, var(--primary) 14%, var(--surface2)); color: var(--primary); font-weight: 700; text-decoration: none; }
