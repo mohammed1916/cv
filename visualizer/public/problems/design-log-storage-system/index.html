@@ -3,16 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>534. Design Log Storage System | Visualizer Pro</title>
-  <meta name="description" content="Design a log storage system with put and retrieve operations supporting granularities." />
+  <title>635. Design Log Storage System | Visualizer Pro</title>
+  <meta name="description" content="Keep log ids with their timestamps, then answer range queries after trimming each stamp to a chosen unit such as hour or day." />
   <link rel="canonical" href="https://visualizer.pro/problems/design-log-storage-system/" />
-  <meta property="og:title" content="534. Design Log Storage System | Visualizer Pro" />
-  <meta property="og:description" content="Design a log storage system with put and retrieve operations supporting granularities." />
+  <meta property="og:title" content="635. Design Log Storage System | Visualizer Pro" />
+  <meta property="og:description" content="Keep log ids with their timestamps, then answer range queries after trimming each stamp to a chosen unit such as hour or day." />
   <meta property="og:url" content="https://visualizer.pro/problems/design-log-storage-system/" />
   <meta property="og:image" content="https://visualizer.pro/og-image-v2.jpg" />
   <meta name="twitter:card" content="summary_large_image" />
   <style>
-    :root { color-scheme: light dark; --fg: #0f172a; --muted: #475569; --accent: #0284c7; --bg: #ffffff; }
+    :root { color-scheme: light dark; --fg: #0f172a; --muted: #475569; --accent: #0f766e; --bg: #ffffff; }
     @media (prefers-color-scheme: dark) { :root { --fg: #e2e8f0; --muted: #94a3b8; --bg: #0b1120; } }
     body { margin: 0; background: var(--bg); color: var(--fg); font: 16px/1.6 system-ui, -apple-system, Segoe UI, sans-serif; }
     main { max-width: 720px; margin: 0 auto; padding: 32px 16px; }
@@ -27,10 +27,10 @@
 </head>
 <body>
   <main>
-    <p class="meta">Problem 534 &middot; Medium</p>
+    <p class="meta">Problem 635 &middot; Medium</p>
     <h1>Design Log Storage System</h1>
-    <p>Design a log storage system with put and retrieve operations supporting granularities.</p>
-    <ul class="tags"><li>Design</li><li>System</li></ul>
+    <p>Keep log ids with their timestamps, then answer range queries after trimming each stamp to a chosen unit such as hour or day.</p>
+    <ul class="tags"><li>Design</li><li>Hash Table</li><li>String</li></ul>
     <p><a class="cta" href="/#design-log-storage-system">Open the interactive visualisation</a></p>
     <footer>
       <a href="/">All problems</a> &middot; <a href="/privacy.html">Privacy</a> &middot; <a href="/terms.html">Terms</a>
