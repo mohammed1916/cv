@@ -18,7 +18,6 @@ import './AlgorithmWorkspace.css'
 
 const PANELS = [
   { id: 'visual', title: 'Algorithm state' },
-  { id: 'story', title: 'Story · Why this works', dockMode: 'split-right' },
   { id: 'code', title: 'Solution code', dockMode: 'split-bottom' },
   { id: 'input', title: 'Input & examples', dockMode: 'split-bottom', ref: 'visual', ratio: .24 },
 ]
@@ -26,7 +25,7 @@ const PANELS = [
 const TUTORIAL_PANELS = [{ id: 'story', title: 'Tutorial story' }, { id: 'input', title: 'Input & examples', dockMode: 'split-right', ratio: .3 }];
 
 // Problems own validation, execution states, and views. This owns only the shell.
-export default function AlgorithmWorkspace({ definition, renderVisual, renderReasoning, tutorial, visuals, narration, tutorialModes }) {
+export default function AlgorithmWorkspace({ definition, renderVisual, renderReasoning, tutorial, visuals, narration }) {
   const [draft, setDraft] = useState(definition.examples[0].input)
   const [run, setRun] = useState(() => definition.build(definition.parse(definition.examples[0].input)))
   const [error, setError] = useState('')
@@ -34,7 +33,6 @@ export default function AlgorithmWorkspace({ definition, renderVisual, renderRea
   const [tutorialDivs, setTutorialDivs] = useState(null)
   const [tutorialMode, setTutorialMode] = useState('off')
   const [floating, setFloating] = useState(true)
-  const [goalTab, setGoalTab] = useState('visual')
   // Narration: pre-recorded clips per fixed preset. Clips drive the advance; a missing clip uses the normal timing.
   const [presetIndex, setPresetIndex] = useState(() => definition.examples.findIndex(example => example.input === definition.examples[0].input))
   const [narrationOn, setNarrationOn] = useState(false)
@@ -44,7 +42,9 @@ export default function AlgorithmWorkspace({ definition, renderVisual, renderRea
   const supportsTutorial = adaptive || !!tutorial
   const directed = supportsTutorial && tutorialMode !== 'off'
   const narrated = !!narration && narrationOn && directed && presetIndex >= 0
-  const sequence = useMemo(() => adaptive ? buildAdaptiveSequence(run, tutorial, tutorialMode) : buildTutorialSequence(run, tutorial, tutorialMode), [run, tutorial, tutorialMode, adaptive])
+  // Step-by-step always includes the reason beats, so the spoken and written reasons are never skipped.
+  const sequenceMode = tutorialMode === 'steps' ? 'why' : tutorialMode
+  const sequence = useMemo(() => adaptive ? buildAdaptiveSequence(run, tutorial, sequenceMode) : buildTutorialSequence(run, tutorial, sequenceMode), [run, tutorial, sequenceMode, adaptive])
   const total = directed ? sequence.length : run?.frames.length || 0
   const playback = usePlaybackState(total)
   const position = Math.min(Math.max(0, playback.stepIndex), Math.max(0, total - 1))
@@ -53,7 +53,8 @@ export default function AlgorithmWorkspace({ definition, renderVisual, renderRea
   const step = run?.frames[frameIndex]
   function changeMode(mode) {
     playback.setIsPlaying(false)
-    const next = adaptive ? buildAdaptiveSequence(run, tutorial, mode) : buildTutorialSequence(run, tutorial, mode)
+    const nextMode = mode === 'steps' ? 'why' : mode
+    const next = adaptive ? buildAdaptiveSequence(run, tutorial, nextMode) : buildTutorialSequence(run, tutorial, nextMode)
     playback.setStepIndex(mode === 'off' ? frameIndex : tutorialPosition(next, frameIndex))
     if (mode !== 'off' && !directed) { playback.setSpeed(2400); setFloating(false) }
     if (mode === 'off') playback.setSpeed(500)
@@ -128,12 +129,6 @@ export default function AlgorithmWorkspace({ definition, renderVisual, renderRea
   const views = run ? {
     visual: adaptive ? <AdaptiveStage visuals={visuals} definition={definition} run={run} step={step}
       previousStep={run.frames[frameIndex-1]} mode={tutorialMode} beat={beat} /> : renderVisual({ run, step }),
-    story: <>
-      <p className="algorithm-workspace__event" role="status">{step.message}</p>
-      {renderReasoning({ run, step })}
-      <p>{definition.complexity}</p>
-      {definition.url && <a href={definition.url} target="_blank" rel="noreferrer">Official problem statement</a>}
-    </>,
     code: <AlgorithmCodePanel key={definition.number} definition={definition} step={step} input={draft} />,
   } : {}
   const inputPanel = <form className="algorithm-workspace__input" onSubmit={event => { event.preventDefault(); execute(draft) }}>
@@ -147,17 +142,7 @@ export default function AlgorithmWorkspace({ definition, renderVisual, renderRea
     ? <TutorialScene beat={beat} definition={definition} step={step}>{renderVisual({run,step})}</TutorialScene>
     : <p role="status">Open Input & examples below to enter valid input.</p> }
   const controls = <div className="algorithm-workspace__playback">
-    <button type="button" onClick={() => setFloating(value => !value)}>{floating ? 'Dock controls' : 'Float controls'}</button>
     {run && <>
-      {!directed && <nav className="algorithm-workspace__phases" aria-label="Algorithm states">
-        {definition.phases.map(phase => <button type="button" key={phase.id}
-          data-phase={phase.id} aria-current={step.phase === phase.id ? 'step' : undefined}
-          disabled={!phaseStarts.has(phase.id)} title={phase.description}
-          onClick={() => seek(phaseStarts.get(phase.id))}>{phase.label}</button>)}
-      </nav>}
-      <p role="status" className="algorithm-workspace__current-state">
-        {definition.phases.find(phase => phase.id === step.phase)?.label} · Pseudocode line {step.activeLine}: {directed ? `${beat.kind === 'reason' ? 'Why' : beat.kind === 'code' ? 'Code' : 'Effect'} scene` : step.message}
-      </p>
       <PlaybackControls onReset={() => seek(0)} onPrev={() => seek(Math.max(0, playback.stepIndex - 1))}
         onNext={() => seek(Math.min(total - 1, position + 1))}
         onPlayToggle={togglePlay} isPlaying={narrated ? narrating : playback.isPlaying} isDone={narrated ? position >= total - 1 : playback.isDone}
@@ -182,30 +167,50 @@ export default function AlgorithmWorkspace({ definition, renderVisual, renderRea
     </label>}
     <span>{run ? `${position + 1} / ${total} ${directed ? 'scenes' : 'frames'}` : 'No valid input'}</span>
   </div>
-  // The one-line goal always shows; the Goal tab expands the full requirement beside the mode switch.
-  const goal = definition.goal && <section className="algorithm-workspace__goal" aria-label="Problem goal">
-    <p><strong>Goal:</strong> {definition.goal.summary}</p>
-    {goalTab === 'goal' && <>
-      {definition.goalDiagram}
-      <ul>{definition.goal.requirement.map(item => <li key={item}>{item}</li>)}</ul>
-      <p><strong>Worked example:</strong> {definition.goal.example}</p>
-    </>}
+  // The goal is always shown in full. The question and approaches sit in a dropdown below it.
+  const goal = definition.goal && <details className="algorithm-workspace__goal" open aria-label="Problem goal">
+    <summary>Goal</summary>
+    <p>{definition.goal.summary}</p>
+    {definition.goalDiagram}
+    <ul>{definition.goal.requirement.map(item => <li key={item}>{item}</li>)}</ul>
+    <p><strong>Worked example:</strong> {definition.goal.example}</p>
+  </details>
+  const notes = <details className="algorithm-workspace__notes">
+    <summary>Problem question and approaches</summary>
+    {definition.question && <p>{definition.question}</p>}
+    {definition.approaches?.length ? <table className="algorithm-workspace__approaches">
+      <thead><tr><th>Approach</th><th>Intuition</th><th>Time</th><th>Space</th></tr></thead>
+      <tbody>{definition.approaches.map(row => <tr key={row.name}><td>{row.name}</td><td>{row.intuition}</td><td>{row.time}</td><td>{row.space}</td></tr>)}</tbody>
+    </table> : null}
+    {renderReasoning && run && <div className="algorithm-workspace__static">{renderReasoning({ run, step })}</div>}
+    <p>{definition.complexity}</p>
+    {definition.url && <a href={definition.url} target="_blank" rel="noreferrer">Official problem statement</a>}
+  </details>
+  const whyPanel = run && <section className="algorithm-workspace__why" aria-label="Why it works and current state">
+    {!directed && <nav className="algorithm-workspace__phases" aria-label="Algorithm states">
+      {definition.phases.map(phase => <button type="button" key={phase.id}
+        data-phase={phase.id} aria-current={step.phase === phase.id ? 'step' : undefined}
+        disabled={!phaseStarts.has(phase.id)} title={phase.description}
+        onClick={() => seek(phaseStarts.get(phase.id))}>{phase.label}</button>)}
+    </nav>}
+    <div className="algorithm-workspace__why-body">
+      <p className="algorithm-workspace__event" role="status">{step.message}</p>
+      <p className="algorithm-workspace__current-state">{definition.phases.find(phase => phase.id === step.phase)?.label} · Pseudocode line {step.activeLine}</p>
+    </div>
   </section>
-  const hideWorkspace = goalTab === 'goal' && !directed
   return <div className={`algorithm-workspace ${directed ? 'algorithm-workspace--tutorial' : ''}`}>
     {goal}
+    {notes}
     <div className="algorithm-workspace__tabs">
-      {supportsTutorial && <TabSwitch label="Tutorial mode" className="tutorial-mode-switch" value={tutorialMode} onChange={changeMode}
-        options={[{value:'off',label:'Full view'},{value:'steps',label:'Step-by-step'},{value:'why',label:'Reason-first'}].filter(option => !tutorialModes || tutorialModes.includes(option.value))} />}
-      {definition.goal && <TabSwitch label="Problem goal" className="goal-tab-switch" value={goalTab} onChange={setGoalTab}
-        options={[{value:'visual',label:'Visualization'},{value:'goal',label:'Goal'}]} />}
+      {supportsTutorial && <TabSwitch label="Tutorial mode" className="tutorial-mode-switch" value={tutorialMode === 'off' ? 'off' : 'steps'} onChange={changeMode}
+        options={[{value:'off',label:'Visuals & custom inputs'},{value:'steps',label:'Step-by-step'}]} />}
     </div>
     {tutorial && !adaptive && <div className="algorithm-workspace__dock" style={!directed ? {display:'none'} : undefined}>
       <LuminoDockPanel panels={TUTORIAL_PANELS} initialCollapsed={['input']} onPanelReady={setTutorialDivs} />
       {Object.entries(tutorialViews).map(([id, content]) => tutorialDivs?.[id]
         ? createPortal(<div className="algorithm-workspace__panel">{content}</div>, tutorialDivs[id], id) : null)}
     </div>}
-    <div className="algorithm-workspace__dock" style={directed && !adaptive || hideWorkspace ? {display:'none'} : undefined}>
+    <div className="algorithm-workspace__dock" style={directed && !adaptive ? {display:'none'} : undefined}>
       <LuminoDockPanel panels={PANELS} focusPanel={adaptive && directed ? "visual" : null} onPanelReady={setPanelDivs} />
       {Object.entries({...views, input: inputPanel}).map(([id, content]) => panelDivs?.[id]
         ? createPortal(<div className={`algorithm-workspace__panel${id === "visual" ? " is-visual" : ""}`}>{content}</div>, panelDivs[id], id) : null)}
@@ -218,5 +223,8 @@ export default function AlgorithmWorkspace({ definition, renderVisual, renderRea
         onNext={() => seek(Math.min(total - 1, position + 1))}
         prevDisabled={!playback.canPrev} nextDisabled={!playback.canNext}
         stepIndex={position} total={total} onSeek={seek} />}>{controls}</FloatingPanel>, document.body) : controls}
+    {floating ? createPortal(<FloatingPanel title="Why it works" storageKey="algorithm-workspace-why-size"
+      defaultSize={{ width: Math.min(360, window.innerWidth - 16), height: 150 }}
+      defaultPosition={{ x: Math.max(8, window.innerWidth - Math.min(360, window.innerWidth - 16) - 16), y: 96 }}>{whyPanel}</FloatingPanel>, document.body) : whyPanel}
   </div>
 }

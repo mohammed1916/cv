@@ -85,7 +85,7 @@
 .floating-panel-title {
   flex: 1;
 
-  font-size: 0.78rem;
+  font-size: 0.62rem;
   font-weight: 700;
 
   color: var(--text);
@@ -314,3 +314,8 @@ body.resizing-playback * {
   padding: 0;
   flex-shrink: 0;
 }
+
+.floating-panel-menu { position: relative; display: inline-flex; }
+.floating-panel-menu-list { position: absolute; top: 100%; right: 0; z-index: 5; display: flex; flex-direction: column; min-width: 180px; padding: 4px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface); box-shadow: 0 6px 18px rgba(0, 0, 0, .25); }
+.floating-panel-menu-list button { text-align: start; padding: 6px 8px; border: 0; border-radius: 6px; background: transparent; color: var(--text); cursor: pointer; font-size: 12px; }
+.floating-panel-menu-list button:hover { background: var(--surface2); }

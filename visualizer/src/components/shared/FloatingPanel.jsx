@@ -20,6 +20,8 @@ export default function FloatingPanel({
   const panelRef = useRef(null);
   const [host] = useState(() => document.createElement('div'));
   const [docked, setDocked] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [barHidden, setBarHidden] = useState(false);
   const [collapsed, setCollapsed] = useState(false);
   const [canDock, setCanDock] = useState(false);
   const undockRef = useRef(null);
@@ -306,9 +308,7 @@ export default function FloatingPanel({
         docked ? "is-docked" : "",
         collapsed ? "collapsed" : "",
         isPinned ? "pinned" : "",
-        isPlaybackPanel
-          ? "has-size-control"
-          : "",
+        "has-size-control",
       ]
         .filter(Boolean)
         .join(" ")}
@@ -351,26 +351,14 @@ export default function FloatingPanel({
         )}
 
         {canDock && <button type="button" className="floating-panel-pin" onClick={() => docked ? floatPanel() : dockPanel()} title={docked ? 'Float panel over workspace' : 'Dock panel below workspace'}>{docked ? 'Float' : 'Dock'}</button>}
-        {!docked && <button type="button" className="floating-panel-pin" title="Reset to compact size" aria-label="Reset playback to compact size" onClick={() => { setSize(defaultSize); setControlScale(100); }}>↺</button>}
-        <button
-          type="button"
-          className="floating-panel-pin"
-          onClick={() =>
-            setIsPinned((current) => !current)
-          }
-          title={
-            isPinned
-              ? "Unpin panel"
-              : "Pin panel"
-          }
-          aria-label={
-            isPinned
-              ? "Unpin panel"
-              : "Pin panel"
-          }
-        >
-          {isPinned ? "📌" : "📍"}
-        </button>
+        <span className="floating-panel-menu">
+          <button type="button" className="floating-panel-pin" aria-label="Panel options" aria-expanded={menuOpen} title="Panel options" onClick={() => setMenuOpen(open => !open)}>⋯</button>
+          {menuOpen && <span className="floating-panel-menu-list" role="menu">
+            <button type="button" role="menuitem" onClick={() => { setIsPinned(current => !current); setMenuOpen(false); }}>{isPinned ? 'Unpin panel' : 'Pin panel'}</button>
+            <button type="button" role="menuitem" onClick={() => { setBarHidden(hidden => !hidden); setMenuOpen(false); }}>{barHidden ? 'Show controls' : 'Hide controls'}</button>
+            {!docked && <button type="button" role="menuitem" onClick={() => { setSize(defaultSize); setControlScale(100); setMenuOpen(false); }}>Reset to compact size</button>}
+          </span>}
+        </span>
 
         <button
           type="button"
@@ -395,8 +383,7 @@ export default function FloatingPanel({
         </div>
       )}
 
-      {!collapsed &&
-        isPlaybackPanel && (
+      {!collapsed && !barHidden && (
           <div className="floating-panel-scale-area">
             <PanelScaleControl
               value={controlScale}
@@ -407,7 +394,7 @@ export default function FloatingPanel({
           </div>
         )}
 
-      {!collapsed && !docked && (
+      {!collapsed && !docked && !barHidden && (
         <div
           className="floating-panel-resizer"
           role="separator"

@@ -80,3 +80,15 @@
 .algorithm-sequence__cell[data-role="even"] { color: var(--text-muted); }
 .algorithm-sequence__cell[data-role="pair"] { border: 2px solid var(--success); background: color-mix(in srgb, var(--success) 18%, var(--surface)); }
 .algorithm-sequence__cell[data-role="future"] { opacity: .4; }
+
+.algorithm-workspace__notes { margin: 6px 0; padding: 8px 12px; border: 1px solid var(--border); border-radius: 10px; background: var(--surface); }
+.algorithm-workspace__notes summary { cursor: pointer; font-weight: 700; }
+.algorithm-workspace__approaches { width: 100%; border-collapse: collapse; margin: 8px 0; font-size: 13px; }
+.algorithm-workspace__approaches th, .algorithm-workspace__approaches td { border: 1px solid var(--border); padding: 4px 6px; text-align: start; vertical-align: top; }
+.algorithm-workspace__why { padding: 10px 12px; border: 1px solid var(--border); border-radius: 10px; background: var(--surface); font-size: 14px; }
+.algorithm-workspace__why p { margin: 0 0 6px; }
+
+.algorithm-workspace__why { display: flex; gap: 10px; align-items: flex-start; }
+.algorithm-workspace__why > .algorithm-workspace__phases { flex-direction: column; flex-wrap: nowrap; width: auto; min-width: 96px; gap: 4px; }
+.algorithm-workspace__why > .algorithm-workspace__phases button { text-align: start; }
+.algorithm-workspace__why-body { flex: 1; min-width: 0; }
