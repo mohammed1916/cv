@@ -9,3 +9,9 @@
 .problem-notes__approaches { width: 100%; border-collapse: collapse; margin: 8px 0; font-size: 13px; }
 .problem-notes__approaches th, .problem-notes__approaches td { border: 1px solid var(--border); padding: 4px 6px; text-align: start; vertical-align: top; }
 .goal-diagram { display: block; max-width: 100%; height: auto; margin: 12px 0 6px; }
+.problem-notes { box-sizing: border-box; width: 100%; max-width: 100%; }
+.problem-notes p, .problem-notes li, .problem-notes td, .problem-notes th, .problem-notes__section { overflow-wrap: anywhere; word-break: normal; max-width: 100%; }
+.problem-notes table { table-layout: fixed; }
+.problem-notes code { white-space: pre-wrap; overflow-wrap: anywhere; }
+.problem-notes { position: relative; z-index: 30; max-height: 60vh; overflow-y: auto; overscroll-behavior: contain; }
+.problem-notes__more { position: sticky; bottom: 0; text-align: center; padding: 4px 0; margin-top: -4px; font-size: 12px; font-weight: 700; color: var(--text-muted); background: linear-gradient(to bottom, transparent, var(--surface) 60%); pointer-events: none; }

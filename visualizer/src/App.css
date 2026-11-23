@@ -1193,3 +1193,33 @@ img.brand-icon {
 @media (max-width: 720px) {
   .problem-header .view-menu__popover, .problem-header .view-menu > div { top: 64px; }
 }
+
+/* Phones: the page scrolls as one column, so panels at the bottom can be reached. */
+@media (max-width: 720px) {
+  .problem-page { height: auto; min-height: 100%; overflow: visible; }
+  .problem-content { overflow: visible; display: block; flex: 0 0 auto; }
+  .problem-content .algorithm-workspace { height: auto; overflow: visible; }
+}
+
+/* Phones: the navigation bar stays at the top while the page scrolls; its chevron tab stays visible when hidden. */
+@media (max-width: 720px) {
+  .problem-header { position: sticky; top: 0; z-index: 50; background: var(--surface); }
+  .problem-header.is-hidden { transform: translateY(calc(-100% + 22px)); }
+}
+
+/* Phones: the prerequisite map strip takes too much width, so it is hidden; the top bar sits below the toolbar. */
+@media (max-width: 720px) {
+  .prerequisite-edge, .prerequisite-edge-track { display: none; }
+  .problem-header { top: 0; }
+}
+
+/* Phones: leave room at the bottom so the floating Ask AI button does not cover the last content. */
+@media (max-width: 720px) {
+  .problem-content { padding-bottom: 88px; }
+}
+
+/* Phones, simplified navigation: a plain bar at the top of the page, always visible, no sticky or sliding. */
+@media (max-width: 720px) {
+  .problem-header, .problem-header.is-hidden { position: relative; top: auto; transform: none; transition: none; z-index: auto; }
+  .problem-header .problem-nav-tab { display: none; }
+}

@@ -1,14 +1,14 @@
-import { createContext, useCallback, useContext, useState } from 'react';
+import { createContext, useCallback, useContext, useEffect, useRef, useState } from 'react';
 import './ProblemNotes.css';
 
 // One "Problem" section per page. A visualizer publishes its goal, question and approaches; every page shows them
 // in the same place, with the statement link. Pages with nothing published fall back to the catalogue description.
 const NotesContext = createContext(null);
 
-export function ProblemNotesProvider({ children }) {
+export function ProblemNotesProvider({ problem, children }) {
   const [notes, setNotes] = useState(null);
   const publish = useCallback(value => setNotes(value), []);
-  return <NotesContext.Provider value={{ notes, publish }}>{children}</NotesContext.Provider>;
+  return <NotesContext.Provider value={{ notes, publish, problem }}>{children}</NotesContext.Provider>;
 }
 
 export function usePublishProblemNotes() {
@@ -17,10 +17,26 @@ export function usePublishProblemNotes() {
 
 const isLeetCode = problem => !problem.tags?.some(tag => tag === 'Basics' || tag === 'Codeforces') && problem.slug !== 'query-batching';
 
-export default function ProblemNotes({ problem }) {
-  const notes = useContext(NotesContext)?.notes ?? null;
+// In the page (panel=false) it steps aside when a visualizer hosts it as a dock panel; in a dock panel it always shows.
+export default function ProblemNotes({ problem: problemProp, panel = false }) {
+  const context = useContext(NotesContext);
+  const problem = problemProp ?? context?.problem;
+  const notes = context?.notes ?? null;
+  if (!problem) return null;
+  if (!panel && notes?.hosted) return null;
+  const ref = useRef(null);
+  const [more, setMore] = useState(false);
+  const update = () => { const el = ref.current; if (el) setMore(el.scrollHeight - el.clientHeight - el.scrollTop > 6); };
+  useEffect(() => {
+    update();
+    const el = ref.current;
+    const observer = typeof ResizeObserver !== 'undefined' && el ? new ResizeObserver(update) : null;
+    if (observer) observer.observe(el);
+    return () => observer?.disconnect();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [notes]);
   const url = notes ? notes.url : isLeetCode(problem) ? `https://leetcode.com/problems/${problem.slug}/` : null;
-  return <details className="problem-notes" open>
+  return <details ref={ref} className="problem-notes" open onScroll={update}>
     <summary>Problem</summary>
     {url && <p className="problem-notes__statement">
       <a className="problem-notes__statement-btn" href={url} target="_blank" rel="noreferrer">View the original statement on LeetCode ↗</a>
@@ -45,5 +61,6 @@ export default function ProblemNotes({ problem }) {
       {notes.story}
     </section>}
     {notes?.complexity ? <p>{notes.complexity}</p> : problem.description ? <p>{problem.description}</p> : null}
+    {more && <div className="problem-notes__more" aria-hidden="true">↓ more below</div>}
   </details>;
 }

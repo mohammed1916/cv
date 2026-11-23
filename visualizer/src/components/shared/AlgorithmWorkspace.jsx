@@ -14,13 +14,17 @@ import CompactPlayback from './CompactPlayback'
 import TabSwitch from './TabSwitch'
 import './TabSwitch.css'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
-import { usePublishProblemNotes } from '../ProblemNotes'
+import ProblemNotes, { usePublishProblemNotes } from '../ProblemNotes'
 import './AlgorithmWorkspace.css'
 
+// Only the main visual shows at first; secondary panels start in the shelf and can be opened from there.
+const SECONDARY_PANELS = ['code']
+// Layout: problem notes and input across the top; algorithm state and solution code across the bottom.
 const PANELS = [
   { id: 'visual', title: 'Algorithm state' },
-  { id: 'code', title: 'Solution code', dockMode: 'split-bottom' },
-  { id: 'input', title: 'Input & examples', dockMode: 'split-bottom', ref: 'visual', ratio: .24 },
+  { id: 'notes', title: 'Problem', dockMode: 'split-top', ref: 'visual', ratio: .3 },
+  { id: 'input', title: 'Input & examples', dockMode: 'split-right', ref: 'notes', ratio: .5 },
+  { id: 'code', title: 'Solution code', dockMode: 'split-right', ref: 'visual', ratio: .5 },
 ]
 
 const TUTORIAL_PANELS = [{ id: 'story', title: 'Tutorial story' }, { id: 'input', title: 'Input & examples', dockMode: 'split-right', ratio: .3 }];
@@ -34,21 +38,21 @@ export default function AlgorithmWorkspace({ definition, renderVisual, renderRea
   const [tutorialDivs, setTutorialDivs] = useState(null)
   const [tutorialMode, setTutorialMode] = useState('off')
   const [floating, setFloating] = useState(true)
+  // Phones stack the panels in one column instead of the dock layout.
+  const floatingOn = floating
+  const [narrow, setNarrow] = useState(() => typeof window !== 'undefined' && window.matchMedia('(max-width: 720px)').matches)
+  useEffect(() => {
+    const query = window.matchMedia('(max-width: 720px)')
+    const update = () => setNarrow(query.matches)
+    query.addEventListener('change', update)
+    return () => query.removeEventListener('change', update)
+  }, [])
   // Narration: pre-recorded clips per fixed preset. Clips drive the advance; a missing clip uses the normal timing.
   const [presetIndex, setPresetIndex] = useState(() => definition.examples.findIndex(example => example.input === definition.examples[0].input))
   const [narrationOn, setNarrationOn] = useState(false)
   const [narrating, setNarrating] = useState(false)
   const audioRef = useRef(null)
   const adaptive = !!visuals
-  const publishNotes = usePublishProblemNotes()
-  // The story text is the visualizer's renderReasoning; it lives in the Problem section, not a panel.
-  const reasoningRef = useRef(renderReasoning)
-  reasoningRef.current = renderReasoning
-  useEffect(() => {
-    const story = run && reasoningRef.current && step ? reasoningRef.current({ run, step }) : null
-    publishNotes({ goal: definition.goal, goalDiagram: definition.goalDiagram, question: definition.question, approaches: definition.approaches, complexity: definition.complexity, url: definition.url ?? null, story })
-  }, [definition, publishNotes, run, step])
-  useEffect(() => () => publishNotes(null), [publishNotes])
   const supportsTutorial = adaptive || !!tutorial
   const directed = supportsTutorial && tutorialMode !== 'off'
   const narrated = !!narration && narrationOn && directed && presetIndex >= 0
@@ -61,6 +65,15 @@ export default function AlgorithmWorkspace({ definition, renderVisual, renderRea
   const beat = directed ? sequence[position] : null
   const frameIndex = beat?.frameIndex ?? position
   const step = run?.frames[frameIndex]
+  const publishNotes = usePublishProblemNotes()
+  // The story text is the visualizer's renderReasoning; it lives in the Problem section, not a panel.
+  const reasoningRef = useRef(renderReasoning)
+  reasoningRef.current = renderReasoning
+  useEffect(() => {
+    const story = run && reasoningRef.current && step ? reasoningRef.current({ run, step }) : null
+    publishNotes({ hosted: true, goal: definition.goal, goalDiagram: definition.goalDiagram, question: definition.question, approaches: definition.approaches, complexity: definition.complexity, url: definition.url ?? null, story })
+  }, [definition, publishNotes, run, step])
+  useEffect(() => () => publishNotes(null), [publishNotes])
   function changeMode(mode) {
     playback.setIsPlaying(false)
     const nextMode = mode === 'steps' ? 'why' : mode
@@ -136,11 +149,12 @@ export default function AlgorithmWorkspace({ definition, renderVisual, renderRea
       setError(failure.message)
     }
   }
-  const views = run ? {
+  const views = { notes: <ProblemNotes panel /> }
+  if (run) Object.assign(views, {
     visual: adaptive ? <AdaptiveStage visuals={visuals} definition={definition} run={run} step={step}
       previousStep={run.frames[frameIndex-1]} mode={tutorialMode} beat={beat} /> : renderVisual({ run, step }),
     code: <AlgorithmCodePanel key={definition.number} definition={definition} step={step} input={draft} />,
-  } : {}
+  })
   const inputPanel = <form className="algorithm-workspace__input" onSubmit={event => { event.preventDefault(); execute(draft) }}>
     <label>{definition.inputLabel}<textarea aria-label={definition.inputLabel} value={draft} onChange={event => setDraft(event.target.value)} rows={4} /></label>
     <button type="submit">Run input</button>
@@ -199,12 +213,17 @@ export default function AlgorithmWorkspace({ definition, renderVisual, renderRea
       {Object.entries(tutorialViews).map(([id, content]) => tutorialDivs?.[id]
         ? createPortal(<div className="algorithm-workspace__panel">{content}</div>, tutorialDivs[id], id) : null)}
     </div>}
-    <div className="algorithm-workspace__dock" style={directed && !adaptive ? {display:'none'} : undefined}>
-      <LuminoDockPanel panels={PANELS} focusPanel={adaptive && directed ? "visual" : null} onPanelReady={setPanelDivs} />
+    {narrow && !directed && !adaptive ? <div className="algorithm-workspace__stack">
+      {['notes', 'input', 'visual', 'code'].map(id => {
+        const content = id === 'input' ? inputPanel : views[id]
+        return content ? <section key={id} className={`algorithm-workspace__stack-panel${id === 'visual' ? ' is-visual' : ''}`} aria-label={PANELS.find(panel => panel.id === id)?.title || id}>{content}</section> : null
+      })}
+    </div> : <div className="algorithm-workspace__dock" style={directed && !adaptive ? {display:'none'} : undefined}>
+      <LuminoDockPanel panels={PANELS} initialCollapsed={SECONDARY_PANELS} focusPanel={adaptive && directed ? "visual" : null} onPanelReady={setPanelDivs} />
       {Object.entries({...views, input: inputPanel}).map(([id, content]) => panelDivs?.[id]
         ? createPortal(<div className={`algorithm-workspace__panel${id === "visual" ? " is-visual" : ""}`}>{content}</div>, panelDivs[id], id) : null)}
-    </div>
-    {floating ? createPortal(<FloatingPanel title="Playback Controls" storageKey="algorithm-workspace-playback-size"
+    </div>}
+    {floatingOn ? createPortal(<FloatingPanel title="Playback Controls" storageKey="algorithm-workspace-playback-size"
       defaultSize={{ width: Math.min(520, window.innerWidth - 16), height: Math.min(380, window.innerHeight - 32) }}
       collapsedBar={<CompactPlayback isPlaying={narrated ? narrating : playback.isPlaying} isDone={narrated ? position >= total - 1 : playback.isDone}
         onPlayToggle={togglePlay}
@@ -212,7 +231,7 @@ export default function AlgorithmWorkspace({ definition, renderVisual, renderRea
         onNext={() => seek(Math.min(total - 1, position + 1))}
         prevDisabled={!playback.canPrev} nextDisabled={!playback.canNext}
         stepIndex={position} total={total} onSeek={seek} />}>{controls}</FloatingPanel>, document.body) : controls}
-    {floating ? createPortal(<FloatingPanel title="Why it works" storageKey="algorithm-workspace-why-size"
+    {floatingOn ? createPortal(<FloatingPanel title="Why it works" storageKey="algorithm-workspace-why-size"
       defaultSize={{ width: Math.min(360, window.innerWidth - 16), height: 150 }}
       defaultPosition={{ x: Math.max(8, window.innerWidth - Math.min(360, window.innerWidth - 16) - 16), y: 96 }}>{whyPanel}</FloatingPanel>, document.body) : whyPanel}
   </div>

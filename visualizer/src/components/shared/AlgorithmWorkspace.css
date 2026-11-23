@@ -96,3 +96,5 @@
 .algorithm-workspace__statement-btn:hover { background: color-mix(in srgb, var(--primary) 26%, var(--surface2)); }
 
 .algorithm-workspace__statement { margin: 10px 0; }
+.algorithm-workspace__stack { display: flex; flex-direction: column; gap: 12px; }
+.algorithm-workspace__stack-panel { min-width: 0; }

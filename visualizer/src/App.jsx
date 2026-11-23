@@ -522,7 +522,7 @@ function ProblemPage({
         </div>
         <div className="problem-utilities">{utilityControls}</div>
       </header>
-      <ProblemNotesProvider>
+      <ProblemNotesProvider problem={problem}>
       <div className="problem-content" data-visualizer-root onPointerDown={() => { if (!navHidden && window.matchMedia("(max-width: 720px)").matches) setNavHidden(true); }}>
         <ProblemNotes problem={problem} />
         <div className="problem-title-mobile" aria-hidden="true">
