@@ -170,7 +170,7 @@ export default function AlgorithmWorkspace({ definition, renderVisual, renderRea
   // The goal is always shown in full. The question and approaches sit in a dropdown below it.
   const goal = definition.goal && <details className="algorithm-workspace__goal" open aria-label="Problem goal">
     <summary>Goal</summary>
-    <p>{definition.goal.summary}</p>
+    <p>{definition.goal.summary}{definition.url && <> <a href={definition.url} target="_blank" rel="noreferrer">Read the original statement on LeetCode</a>.</>}</p>
     {definition.goalDiagram}
     <ul>{definition.goal.requirement.map(item => <li key={item}>{item}</li>)}</ul>
     <p><strong>Worked example:</strong> {definition.goal.example}</p>
@@ -184,7 +184,6 @@ export default function AlgorithmWorkspace({ definition, renderVisual, renderRea
     </table> : null}
     {renderReasoning && run && <div className="algorithm-workspace__static">{renderReasoning({ run, step })}</div>}
     <p>{definition.complexity}</p>
-    {definition.url && <a href={definition.url} target="_blank" rel="noreferrer">Official problem statement</a>}
   </details>
   const whyPanel = run && <section className="algorithm-workspace__why" aria-label="Why it works and current state">
     {!directed && <nav className="algorithm-workspace__phases" aria-label="Algorithm states">

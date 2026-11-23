@@ -22,7 +22,6 @@ import PrivacyPreferences from './analytics/PrivacyPreferences';
 import { trackPage, trackEvent, openPrivacyPreferences } from './analytics/client';
 
 import ProblemScaffold from "./components/panels/ProblemScaffold";
-import ProblemNavigation from "./components/ProblemNavigation";
 
 import { ZoomProvider } from "./context/ZoomContext";
 import ThemeToggle from "./components/ThemeToggle";
@@ -515,15 +514,9 @@ function ProblemPage({
             {problem.difficulty}
           </span>
         </div>
-        <ViewMenu layoutWidth={layoutWidth} onLayoutChange={onLayoutChange} />
+        <ViewMenu layoutWidth={layoutWidth} onLayoutChange={onLayoutChange} showTheme />
         <div className="problem-utilities">{utilityControls}</div>
       </header>
-      <ProblemNavigation
-        problem={problem}
-        problems={problems}
-        pro={pro}
-        onSelect={onSelect}
-      />
       <div className="problem-content" data-visualizer-root>
         <ErrorBoundary key={problem.id}>
           {Component ? (

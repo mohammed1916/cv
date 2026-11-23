@@ -1145,3 +1145,4 @@ img.brand-icon {
 .home-page .cards-grid--virtual .cards-row {
   box-sizing: border-box;
 }
+.problem-header-nav { display: inline-flex; align-items: center; gap: 6px; }
