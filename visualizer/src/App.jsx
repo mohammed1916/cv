@@ -1,3 +1,4 @@
+import ProblemNavigation from "./components/ProblemNavigation";
 import ViewMenu from './components/ViewMenu';
 import { ALL_PROBLEMS } from './data/problemRoutes.js';
 import { createPortal } from 'react-dom';
@@ -470,6 +471,7 @@ function ProblemPage({
   utilityControls,
 }) {
   const Component = problem.component;
+  const [navHidden, setNavHidden] = useState(false);
   const { publishStep, publishDescription } = useVisualizationContext();
   useEffect(() => {
     publishStep(null, problem.title);
@@ -490,21 +492,24 @@ function ProblemPage({
     : {};
   return (
     <Shell className="problem-page" {...shellProps}>
-      <header className="problem-header">
-        <button className="back-btn" onClick={onBack}>
-          <svg
-            width="14"
-            height="14"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2.5"
-            strokeLinecap="round"
-          >
-            <path d="M19 12H5M12 5l-7 7 7 7" />
-          </svg>
-          Problems
+      <header className={`problem-header${navHidden ? " is-hidden" : ""}`}>
+        <button type="button" className="problem-nav-tab" aria-expanded={!navHidden} aria-label={navHidden ? "Show navigation" : "Hide navigation"} onClick={() => setNavHidden(hidden => !hidden)}>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d={navHidden ? "M6 9l6 6 6-6" : "M6 15l6-6 6 6"} /></svg>
         </button>
+        <ProblemNavigation
+          variant="header"
+          trailing={<ViewMenu layoutWidth={layoutWidth} onLayoutChange={onLayoutChange} showTheme />}
+          homeButton={<button className="back-btn" onClick={onBack} aria-label="Home" title="Home">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <path d="M3 10.5 12 3l9 7.5" />
+              <path d="M5 9.5V21h14V9.5" />
+            </svg>
+          </button>}
+          problem={problem}
+          problems={problems}
+          pro={pro}
+          onSelect={onSelect}
+        />
         <div className="problem-title-group">
           <span className="problem-num">#{problem.number}</span>
           <h1 className="problem-title">{problem.title}</h1>
@@ -514,10 +519,14 @@ function ProblemPage({
             {problem.difficulty}
           </span>
         </div>
-        <ViewMenu layoutWidth={layoutWidth} onLayoutChange={onLayoutChange} showTheme />
         <div className="problem-utilities">{utilityControls}</div>
       </header>
-      <div className="problem-content" data-visualizer-root>
+      <div className="problem-content" data-visualizer-root onPointerDown={() => { if (!navHidden && window.matchMedia("(max-width: 720px)").matches) setNavHidden(true); }}>
+        <div className="problem-title-mobile" aria-hidden="true">
+          <span className="problem-num">#{problem.number}</span>
+          <h2 className="problem-title">{problem.title}</h2>
+          <span className={`difficulty badge difficulty-${problem.difficulty.toLowerCase()}`}>{problem.difficulty}</span>
+        </div>
         <ErrorBoundary key={problem.id}>
           {Component ? (
             <Suspense
@@ -1031,13 +1040,19 @@ export default function App() {
     }
   };
 
-  const renderUtilityControls = ({ settings = true } = {}) => (
+  const renderUtilityControls = ({ settings = true, theme = true } = {}) => (
     <>
       <button
-        className="access-toolbar-btn"
+        type="button"
+        className="access-toolbar-btn access-toolbar-icon"
         onClick={() => navigateTour(0)}
+        aria-label="Help and tutorial"
+        title="Help and tutorial"
       >
-        Help & tutorial
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+          <path d="M2 4h6a4 4 0 0 1 4 4v12a3 3 0 0 0-3-3H2z" />
+          <path d="M22 4h-6a4 4 0 0 0-4 4v12a3 3 0 0 1 3-3h7z" />
+        </svg>
       </button>
       <button
         className="access-toolbar-btn pro"
@@ -1074,7 +1089,7 @@ export default function App() {
           Sign in
         </button>
       )}
-      <ThemeToggle />
+      {theme && <ThemeToggle />}
       {settings && (
         <SettingsMenu
           navigationTransitionsEnabled={navigationTransitionsEnabled}
@@ -1139,7 +1154,7 @@ export default function App() {
       layoutWidth={layoutWidth}
       onLayoutChange={setLayoutWidth}
       enableTransitions={navigationTransitionsEnabled}
-      utilityControls={renderUtilityControls({ settings: false })}
+      utilityControls={renderUtilityControls({ settings: false, theme: false })}
     />
   ) : (
     <HomePage

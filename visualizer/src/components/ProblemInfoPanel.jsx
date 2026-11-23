@@ -22,7 +22,7 @@ function isLeetCodeProblem(slug, number) {
   return true;
 }
 
-export default function ProblemInfoPanel({ slug, number, before, after }) {
+export default function ProblemInfoPanel({ slug, number, before, middle, after, trailing = null, hideInfo = false }) {
   const [open, setOpen] = useState(false);
 
   const premium = isPremiumProblem(number);
@@ -33,6 +33,7 @@ export default function ProblemInfoPanel({ slug, number, before, after }) {
   // Available if we have a summary or it's a LeetCode problem
   const available = Boolean(summaryText || isLeetCode);
 
+  if (hideInfo) return <div className="problem-info-bar">{before}{middle}{after}{trailing}</div>;
   return (
     <>
       {/* Toggle bar */}

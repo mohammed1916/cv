@@ -1146,3 +1146,50 @@ img.brand-icon {
   box-sizing: border-box;
 }
 .problem-header-nav { display: inline-flex; align-items: center; gap: 6px; }
+
+.access-toolbar-icon { display: inline-flex; align-items: center; justify-content: center; width: 34px; padding: 0; }
+
+/* Compact navigation bar; on phones the title moves into the content and the header keeps the View button. */
+.problem-info-bar { gap: 2px; padding: 2px; }
+.problem-info-bar .problem-nav-button,
+.problem-info-bar .problem-info-toggle { width: 28px; height: 28px; min-width: 28px; padding: 0; }
+.problem-title-mobile { display: none; }
+@media (max-width: 720px) {
+  .problem-header .problem-num,
+  .problem-header .problem-title,
+  .problem-header .problem-title-group .difficulty { display: none; }
+  .problem-title-mobile { display: flex; align-items: center; gap: 8px; padding: 6px 12px; }
+  .problem-title-mobile .problem-title { font-size: 1rem; margin: 0; }
+}
+
+/* Phones: View sits at the far right after the navigation arrows; its popover opens from the right edge. */
+@media (max-width: 720px) {
+  .problem-header .problem-title-group { flex: 0 0 0; min-width: 0; padding: 0; margin: 0; overflow: hidden; }
+  .problem-header .view-menu { margin-left: 2px; }
+  .problem-header .view-menu__popover,
+  .problem-header .view-menu > div {
+    position: fixed;
+    top: auto;
+    left: 8px;
+    right: 8px;
+    max-width: none;
+    width: auto;
+  }
+}
+
+/* Phones: the navigation slides away and a chevron tab stays on the right. Tapping the content hides it. */
+.problem-nav-tab { display: none; }
+@media (max-width: 720px) {
+  .problem-header { position: relative; transition: transform .2s ease; }
+  .problem-header.is-hidden { transform: translateY(calc(-100% + 22px)); }
+  .problem-header .problem-nav-tab {
+    display: inline-flex; align-items: center; justify-content: center;
+    position: absolute; right: 8px; bottom: -22px; width: 36px; height: 22px;
+    border: 1px solid var(--border); border-top: 0; border-radius: 0 0 8px 8px;
+    background: var(--surface2); color: var(--text);
+  }
+}
+
+@media (max-width: 720px) {
+  .problem-header .view-menu__popover, .problem-header .view-menu > div { top: 64px; }
+}

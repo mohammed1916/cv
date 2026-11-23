@@ -17,6 +17,9 @@ export default function ProblemNavigation({
   problems,
   pro,
   onSelect,
+  variant = "panel",
+  homeButton = null,
+  trailing = null,
 }) {
   const dialog = useRef(null);
   const current = useRef(null);
@@ -65,6 +68,9 @@ export default function ProblemNavigation({
       <ProblemInfoPanel
         slug={problem.slug}
         number={problem.number}
+        hideInfo={variant === "header"}
+        middle={homeButton}
+        trailing={trailing}
         before={
           <button
             className="problem-nav-button"

@@ -92,3 +92,7 @@
 .algorithm-workspace__why > .algorithm-workspace__phases { flex-direction: column; flex-wrap: nowrap; width: auto; min-width: 96px; gap: 4px; }
 .algorithm-workspace__why > .algorithm-workspace__phases button { text-align: start; }
 .algorithm-workspace__why-body { flex: 1; min-width: 0; }
+.algorithm-workspace__statement-btn { display: inline-block; padding: 6px 12px; border-radius: 999px; border: 1px solid var(--primary); background: color-mix(in srgb, var(--primary) 14%, var(--surface2)); color: var(--primary); font-weight: 700; text-decoration: none; }
+.algorithm-workspace__statement-btn:hover { background: color-mix(in srgb, var(--primary) 26%, var(--surface2)); }
+
+.algorithm-workspace__statement { margin: 10px 0; }

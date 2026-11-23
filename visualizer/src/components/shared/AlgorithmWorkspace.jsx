@@ -170,13 +170,16 @@ export default function AlgorithmWorkspace({ definition, renderVisual, renderRea
   // The goal is always shown in full. The question and approaches sit in a dropdown below it.
   const goal = definition.goal && <details className="algorithm-workspace__goal" open aria-label="Problem goal">
     <summary>Goal</summary>
-    <p>{definition.goal.summary}{definition.url && <> <a href={definition.url} target="_blank" rel="noreferrer">Read the original statement on LeetCode</a>.</>}</p>
+    <p>{definition.goal.summary}</p>
     {definition.goalDiagram}
     <ul>{definition.goal.requirement.map(item => <li key={item}>{item}</li>)}</ul>
     <p><strong>Worked example:</strong> {definition.goal.example}</p>
   </details>
   const notes = <details className="algorithm-workspace__notes">
     <summary>Problem question and approaches</summary>
+    {definition.url && <p className="algorithm-workspace__statement">
+      <a className="algorithm-workspace__statement-btn" href={definition.url} target="_blank" rel="noreferrer">View the original statement on LeetCode ↗</a>
+    </p>}
     {definition.question && <p>{definition.question}</p>}
     {definition.approaches?.length ? <table className="algorithm-workspace__approaches">
       <thead><tr><th>Approach</th><th>Intuition</th><th>Time</th><th>Space</th></tr></thead>
