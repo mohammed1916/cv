@@ -7119,8 +7119,8 @@
     },
     {
       "folder": "Problem217",
-      "number": "219",
-      "title": "Contains Duplicate II",
+      "number": "217",
+      "title": "Contains Duplicate",
       "kind": "catalog-story",
       "checks": 1,
       "rules": 2,
@@ -7281,8 +7281,8 @@
     },
     {
       "folder": "Problem219",
-      "number": "220",
-      "title": "Contains Duplicate III",
+      "number": "219",
+      "title": "Contains Duplicate II",
       "kind": "catalog-story",
       "checks": 2,
       "rules": 3,
@@ -7371,8 +7371,8 @@
     },
     {
       "folder": "Problem220",
-      "number": "217",
-      "title": "Contains Duplicate",
+      "number": "220",
+      "title": "Contains Duplicate III",
       "kind": "catalog-story",
       "checks": 1,
       "rules": 1,
@@ -9286,14 +9286,14 @@
     {
       "folder": "Problem351",
       "number": "351",
-      "title": "Data Stream as Disjoint Intervals",
+      "title": "Android Unlock Patterns",
       "kind": "catalog-story",
       "checks": 0,
       "rules": 1,
       "edgeNotes": 1
     },
     {
-      "folder": "Problem351Canonical",
+      "folder": "Problem351",
       "number": "351",
       "title": "Android Unlock Patterns",
       "kind": "catalog-story",
@@ -9313,7 +9313,7 @@
     {
       "folder": "Problem353",
       "number": "353",
-      "title": "Design Underground System",
+      "title": "Design Snake Game",
       "kind": "catalog-story",
       "checks": 0,
       "rules": 1,
@@ -9592,14 +9592,14 @@
     {
       "folder": "Problem381",
       "number": "381",
-      "title": "Random Pick with Blacklist",
+      "title": "Insert Delete GetRandom O(1) - Duplicates allowed",
       "kind": "catalog-story",
       "checks": 0,
       "rules": 2,
       "edgeNotes": 1
     },
     {
-      "folder": "Problem381Canonical",
+      "folder": "Problem381",
       "number": "381",
       "title": "Insert Delete GetRandom O(1) - Duplicates allowed",
       "kind": "catalog-story",
@@ -10186,14 +10186,14 @@
     {
       "folder": "Problem427",
       "number": "427",
-      "title": "Build an Expression Tree from Tokens",
+      "title": "Construct Quad Tree",
       "kind": "catalog-story",
       "checks": 0,
       "rules": 1,
       "edgeNotes": 1
     },
     {
-      "folder": "Problem427Canonical",
+      "folder": "Problem427",
       "number": "427",
       "title": "Construct Quad Tree",
       "kind": "catalog-story",
@@ -10786,14 +10786,14 @@
     {
       "folder": "Problem487",
       "number": "487",
-      "title": "Max Consecutive Ones III",
+      "title": "Max Consecutive Ones II",
       "kind": "catalog-story",
       "checks": 0,
       "rules": 2,
       "edgeNotes": 1
     },
     {
-      "folder": "Problem487Canonical",
+      "folder": "Problem487",
       "number": "487",
       "title": "Max Consecutive Ones II",
       "kind": "catalog-story",
@@ -10984,14 +10984,14 @@
     {
       "folder": "Problem505",
       "number": "505",
-      "title": "Distribute Candies to People",
+      "title": "The Maze II",
       "kind": "catalog-story",
       "checks": 0,
       "rules": 0,
       "edgeNotes": 1
     },
     {
-      "folder": "Problem505Canonical",
+      "folder": "Problem505",
       "number": "505",
       "title": "The Maze II",
       "kind": "catalog-story",
@@ -11281,14 +11281,14 @@
     {
       "folder": "Problem534",
       "number": "534",
-      "title": "Design Log Storage System",
+      "title": "Game Play Analysis III",
       "kind": "catalog-story",
       "checks": 0,
       "rules": 4,
       "edgeNotes": 1
     },
     {
-      "folder": "Problem534Canonical",
+      "folder": "Problem534",
       "number": "534",
       "title": "Game Play Analysis III",
       "kind": "catalog-story",
@@ -11658,15 +11658,6 @@
     },
     {
       "folder": "Problem571",
-      "number": 571,
-      "title": "Maximum Distance in Arrays",
-      "kind": "catalog-story",
-      "checks": 0,
-      "rules": 2,
-      "edgeNotes": 1
-    },
-    {
-      "folder": "Problem571Canonical",
       "number": "571",
       "title": "Find Median Given Frequency of Numbers",
       "kind": "catalog-story",
@@ -11721,15 +11712,6 @@
     },
     {
       "folder": "Problem577",
-      "number": 577,
-      "title": "Employee Free Time",
-      "kind": "catalog-story",
-      "checks": 0,
-      "rules": 1,
-      "edgeNotes": 1
-    },
-    {
-      "folder": "Problem577Canonical",
       "number": "577",
       "title": "Employee Bonus",
       "kind": "catalog-story",

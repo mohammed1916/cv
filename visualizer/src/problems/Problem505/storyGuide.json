@@ -1,0 +1,35 @@
+{
+  "number": "505",
+  "title": "The Maze II",
+  "goal": "Find the shortest distance a rolling ball travels to stop exactly at the destination.",
+  "strategy": "Run Dijkstra over the cells where the ball can stop. Repeatedly finish the closest unfinished stop, roll from it in each direction, and record shorter distances to the stops reached.",
+  "phases": [
+    "start",
+    "pick",
+    "roll",
+    "relax",
+    "done",
+    "lose"
+  ],
+  "phasePurposes": {
+    "start": "Start at the ball position with distance 0.",
+    "pick": "Finish the closest unfinished stop; its distance is final.",
+    "roll": "Roll in one direction until a wall or edge stops the ball.",
+    "relax": "Record a shorter distance to the stop reached.",
+    "done": "The destination is finished with its shortest distance.",
+    "lose": "No unfinished stop is reachable, so the answer is -1."
+  },
+  "edgeCases": [
+    "A ball boxed in by walls returns -1",
+    "A start that is the destination returns 0",
+    "The ball must stop at the destination, not merely pass it"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "Unit tests cover the algorithm; the page has not been checked in a browser."
+  }
+}

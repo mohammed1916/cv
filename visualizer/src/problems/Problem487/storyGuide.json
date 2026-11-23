@@ -1,0 +1,35 @@
+{
+  "number": "487",
+  "title": "Max Consecutive Ones II",
+  "goal": "Find the longest run of 1s after flipping at most one 0 to 1.",
+  "strategy": "Slide a window that contains at most one zero across the array, moving the left edge when a second zero enters, and keep the largest window length.",
+  "phases": [
+    "start",
+    "right",
+    "zero",
+    "shrink",
+    "best",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Start with an empty window and no zeros.",
+    "right": "Extend the window by one value on the right.",
+    "zero": "A zero uses up the one flip allowed.",
+    "shrink": "Move the left edge until at most one zero remains.",
+    "best": "Keep the largest valid window length seen so far.",
+    "done": "Report the best length."
+  },
+  "edgeCases": [
+    "An array with no zeros returns its full length",
+    "An array of only zeros returns 1",
+    "A single zero inside a longer run is flipped to join it"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "Unit tests cover the algorithm; the page has not been checked in a browser."
+  }
+}

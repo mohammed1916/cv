@@ -1,0 +1,35 @@
+{
+  "number": "353",
+  "title": "Design Snake Game",
+  "goal": "Simulate a snake on a grid that grows when it eats food, and report the score after every move, or -1 when the game ends.",
+  "strategy": "Keep the snake body as a queue with the head first. Each move adds a new head; the tail is removed unless the snake eats, and a move into the body or off the grid ends the game.",
+  "phases": [
+    "start",
+    "move",
+    "eat",
+    "slide",
+    "lose",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "The snake starts at the top-left cell with length 1.",
+    "move": "The head steps into the next cell, and the grid bounds are checked before anything else.",
+    "eat": "Food makes the snake grow, so the tail stays and the score increases.",
+    "slide": "Without food the tail moves up, which keeps the length the same.",
+    "lose": "Leaving the grid or hitting the body ends the game with -1.",
+    "done": "Every move has produced its result."
+  },
+  "edgeCases": [
+    "A move into the cell the tail just vacated is allowed",
+    "Eating into the tail cell is a collision",
+    "The game ends on the first losing move, and later moves are not played"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "Unit tests cover the algorithm; the page has not been checked in a browser."
+  }
+}
