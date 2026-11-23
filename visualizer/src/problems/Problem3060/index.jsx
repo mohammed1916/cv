@@ -20,6 +20,10 @@ const definition = {
   phases, parse: parseInput, build: buildTrace, code, sql, python, inputLabel,
   url: `https://leetcode.com/problems/${meta.slug}/`,
   complexity, examples,
+  question: "Find users who have two sessions of the same type with a gap of at most twelve hours.",
+  approaches: [
+    { name: "Sort then compare with previous", intuition: "Sort each user's sessions by type and start time, and compare each start with the previous end.", time: "O(n log n)", space: "O(n)" },
+  ],
 }
 
 function Rows({ columns = [], rows = [] }) {

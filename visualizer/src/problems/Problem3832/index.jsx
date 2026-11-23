@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with an activity list of user_id, action_date (YYYY-MM-DD) and action',
   url: 'https://leetcode.com/problems/find-users-with-persistent-behavior-patterns/',
   complexity: 'O(a log a) for a activity rows, plus a scan of the runs.',
+  question: "Find users with a persistent run of at least five consecutive days doing one unchanging action each day.",
+  approaches: [
+    { name: "Find runs per user", intuition: "Group user-days, break runs at any day with another action, and keep each user's best run.", time: "O(a log a)", space: "O(a)" },
+  ],
   examples: [
     { label: 'Sample', input: sampleText },
     { label: 'One action', input: '{"activity":[{"user_id":1,"action_date":"2026-01-01","action":"open"}]}' },

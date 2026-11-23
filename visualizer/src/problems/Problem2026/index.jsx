@@ -15,6 +15,10 @@ const definition = {
   phases, parse: parseInput, build: buildTrace, code, sql, python, inputLabel,
   url: `https://leetcode.com/problems/${meta.slug}/`,
   complexity, examples,
+  question: "List problems whose quality is low, that is, problems with a low rating in the given data.",
+  approaches: [
+    { name: "Group and filter", intuition: "Group problems and keep those whose average falls below a cutoff.", time: "O(n log n)", space: "O(n)" },
+  ],
 }
 
 function Rows({ columns = [], rows = [] }) {

@@ -15,6 +15,10 @@ const definition = {
   phases, parse: parseInput, build: buildTrace, code, sql, python, inputLabel,
   url: `https://leetcode.com/problems/${meta.slug}/`,
   complexity, examples,
+  question: "List candidates who accepted an offer from interviews where each candidate has a project and a result.",
+  approaches: [
+    { name: "Join and filter", intuition: "Join candidates to interviews and keep accepted candidates.", time: "O(n log n)", space: "O(n)" },
+  ],
 }
 
 function Rows({ columns = [], rows = [] }) {

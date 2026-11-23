@@ -6,6 +6,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'Object with queens and king (JSON)',
   complexity: 'O(1) time for a fixed 8 by 8 board: at most eight rays of at most seven steps.',
+  question: "Find the queens that can attack a king on a chessboard.",
+  approaches: [
+    { name: "Eight rays from the king", intuition: "From the king, walk each direction and keep the first queen on each ray.", time: "O(1)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Near queens', input: '{"queens":[[0,3],[2,3],[6,3],[3,0],[3,6],[1,1],[0,0],[5,5],[2,6]],"king":[3,3]}' },
     { label: 'Corner king', input: '{"queens":[[0,5],[6,0],[4,4]],"king":[0,0]}' },

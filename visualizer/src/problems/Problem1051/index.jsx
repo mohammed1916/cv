@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Heights (JSON object with heights)',
   url: 'https://leetcode.com/problems/height-checker/',
   complexity: 'O(n log n) time for the sorted copy and O(n) extra space. The visualization caps input at 30 heights.',
+  question: "Count students standing out of order when compared with their heights sorted in ascending order.",
+  approaches: [
+    { name: "Sorted copy comparison", intuition: "Sort a copy and count the positions where the original and sorted values differ.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Repeated heights', input: '{"heights":[6,3,5,3,8,4,6,2,7,5]}' },
     { label: 'Already sorted', input: '{"heights":[2,2,4,6,6,9]}' },

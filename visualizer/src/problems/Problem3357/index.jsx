@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with nums (integers 1 to 20, or -1 for missing)',
   url: 'https://leetcode.com/problems/minimize-the-maximum-adjacent-element-difference/description/',
   complexity: 'Teaching model: every pair in the known range, each checked by a dynamic program over the positions. The visualization caps values at 20 and the length at 8.',
+  question: "Arrange a set of values so that the largest difference between adjacent elements is as small as possible.",
+  approaches: [
+    { name: "Enumerate value ranges with dynamic programming", intuition: "Try every pair of range endpoints and check the placements with a dynamic program over positions.", time: "Teaching model", space: "Teaching model" },
+  ],
   examples: [
     { label: 'Invented mixed', input: '{"nums":[2,-1,7,-1,13]}' },
     { label: 'All missing', input: '{"nums":[-1,-1,-1,-1]}' },

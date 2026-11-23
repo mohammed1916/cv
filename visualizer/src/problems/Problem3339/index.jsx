@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with n (length), m (largest value) and k (good pairs)',
   url: 'https://leetcode.com/problems/find-the-number-of-k-even-arrays/',
   complexity: 'O(n * k) time and O(k) space with modular arithmetic. Reading used here: a pair is good when both entries are even, which is the parity condition behind a*b-a-b being even; the answer is taken modulo 1000000007. The visualization caps n at 12 and m at 30.',
+  question: "Count arrays of length n with values from 1 to m where exactly k pairs of adjacent entries are both even.",
+  approaches: [
+    { name: "Dynamic programming over positions", intuition: "Track the number of arrays by their last value's parity and the even pairs so far.", time: "O(n * k)", space: "O(k)" },
+  ],
   examples: [
     { label: 'Small table', input: '{"n":4,"m":5,"k":2}' },
     { label: 'Single good pair', input: '{"n":3,"m":4,"k":1}' },

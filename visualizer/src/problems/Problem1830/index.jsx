@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'String (JSON object with lowercase s)',
   url: 'https://leetcode.com/problems/minimum-number-of-operations-to-make-string-sorted/',
   complexity: 'O(n * 26 * n) time for the multinomial counts. The visualization caps input at 8 letters.',
+  question: "Count the swap operations needed to sort a string into its lexicographically smallest order using a specific move.",
+  approaches: [
+    { name: "Multinomial counts", intuition: "Count the permutations of the smaller letters with factorial counts.", time: "O(n * 26 * n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Descending', input: '{"s":"cba"}' },
     { label: 'Repeated letters', input: '{"s":"aabaa"}' },

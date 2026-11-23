@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Array (JSON object with nums)',
   url: 'https://leetcode.com/problems/minimum-operations-to-make-array-parity-alternating/',
   complexity: 'O(n^2) time in this teaching version (candidate low ends). The visualization caps input at 12 values.',
+  question: "Find the fewest operations that make the parity of each array element alternate.",
+  approaches: [
+    { name: "Try each candidate low end", intuition: "Only two parity patterns are possible; try each low end and let every element take its smallest candidate.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"nums":[-2,-3,1,4]}' },
     { label: 'Example 2', input: '{"nums":[0,2,-2]}' },

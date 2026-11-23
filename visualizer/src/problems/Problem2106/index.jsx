@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON object with fruits, startPos and k',
   url: 'https://leetcode.com/problems/maximum-fruits-harvested-after-at-most-k-steps/',
   complexity: 'O(n) time after sorting-free input (positions are already increasing), using prefix sums and two pointers; O(n) space for prefix sums.',
+  question: "Find the most fruit that can be harvested on a line when you start at a given position and may take at most k steps.",
+  approaches: [
+    { name: "Sliding window with a walk-cost check", intuition: "For each left end, extend the right end while going to one side and back costs at most k steps.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Go left then right', input: '{"fruits":[[1,4],[3,2],[7,5]],"startPos":4,"k":3}' },
     { label: 'Only one side', input: '{"fruits":[[0,9],[4,1],[5,7],[10,2]],"startPos":4,"k":6}' },

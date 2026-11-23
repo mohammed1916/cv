@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with s (lowercase letters) and k (JSON)',
   url: 'https://leetcode.com/problems/longest-ideal-subsequence/',
   complexity: 'O(n * 26) time and O(26) space for a string of length n. The visualization caps s at 10 letters.',
+  question: "Find the longest subsequence where each pair of adjacent letters differs by at most k in alphabet position.",
+  approaches: [
+    { name: "DP over letters", intuition: "Keep the best subsequence length ending at each letter, and extend it from nearby letters.", time: "O(26 * n)", space: "O(26)" },
+  ],
   examples: [
     { label: 'Six letters, k 4', input: '{"s":"mxqabc","k":4}' },
     { label: 'Five letters, k 2', input: '{"s":"zebra","k":2}' },

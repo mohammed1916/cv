@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON {"points": [[x, y], ...] (x increasing), "k": 1-10}',
   url: 'https://leetcode.com/problems/max-value-of-equation/',
   complexity: 'O(n) time with a deque of candidate indices, O(n) space. The visualization caps input at 12 points.',
+  question: "Maximise y_i + y_j + |x_i - x_j| over pairs with i less than j.",
+  approaches: [
+    { name: "Monotonic deque", intuition: "Keep candidate points in a deque ordered by y - x and pair each new point with the front.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Own: four points, k 2', input: '{"points":[[0,4],[3,-2],[4,7],[9,1]],"k":2}' },
     { label: 'Five points, reach five', input: '{"points":[[0,5],[2,-3],[7,4],[8,0],[9,9]],"k":5}' },

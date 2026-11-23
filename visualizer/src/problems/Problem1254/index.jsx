@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Grid of 0 (land) and 1 (water) as JSON rows',
   url: 'https://leetcode.com/problems/number-of-closed-islands/',
   complexity: 'O(m * n) time and space: every cell is reached by at most one flood, and edge floods are not repeated.',
+  question: "Count islands in a grid that do not touch the border.",
+  approaches: [
+    { name: "Flood from the border", intuition: "Flood every land cell connected to the border, then count the remaining land components.", time: "O(m x n)", space: "O(m x n)" },
+  ],
   examples: [
     { label: 'Lake inside', input: '[[1,1,1,1],[1,0,0,1],[1,0,1,1],[1,1,1,1]]' },
     { label: 'Touches edge', input: '[[0,0,1],[1,0,1],[1,1,0]]' },

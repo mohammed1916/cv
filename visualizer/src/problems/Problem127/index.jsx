@@ -8,6 +8,10 @@ const definition = {
   inputLabel: 'Object with beginWord, endWord and wordList (JSON)',
   url: 'https://leetcode.com/problems/word-ladder/',
   complexity: 'With L-letter words and N words, building buckets costs O(N L) and each bucket is scanned once.',
+  question: "Find the fewest word changes that turn one word into another, changing one letter at a time.",
+  approaches: [
+    { name: "Breadth-first with wildcard buckets", intuition: "Group words by a pattern with one letter masked, and search level by level.", time: "O(N x L^2)", space: "O(N x L)" },
+  ],
   examples: [
     { label: 'Short ladder', input: '{"beginWord":"cat","endWord":"dog","wordList":["cot","dot","dog"]}' },
     { label: 'Direct neighbour', input: '{"beginWord":"ab","endWord":"ad","wordList":["ac","ad"]}' },

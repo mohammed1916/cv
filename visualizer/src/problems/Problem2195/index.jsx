@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON with nums and k, e.g. {"nums":[5,6,8],"k":2}',
   url: 'https://leetcode.com/problems/append-k-integers-with-minimal-sum/',
   complexity: 'O(n log n) time for the sort and O(n + k) for the gap walk. The page caps the list at 10 values and k at 10.',
+  question: "Append k distinct positive integers that are not already in an array so that the total added sum is as small as possible.",
+  approaches: [
+    { name: "Fill the gaps from one upward", intuition: "Walk the sorted distinct values and take each unused positive integer in order until k are chosen.", time: "O(n log n)", space: "O(1) extra" },
+  ],
   examples: [
     { label: 'Gap fill', input: '{"nums":[5,6,8],"k":2}' },
     { label: 'Start at one', input: '{"nums":[1,2,3],"k":2}' },

@@ -18,6 +18,10 @@ const definition = {
   inputLabel: 'Moves JSON with s and k',
   url: 'https://leetcode.com/problems/maximum-manhattan-distance-after-k-changes/',
   complexity: 'O(n) time and O(1) extra space for n moves per corner. The visualization caps s at 12 moves.',
+  question: "Given moves on a grid and some changes you may make, find the largest Manhattan distance from the start.",
+  approaches: [
+    { name: "Track each corner direction", intuition: "For each of the four diagonal directions, spend changes greedily and track the best distance.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Short walk', input: '{"s":"NNEW","k":1}' },
     { label: 'Mixed walk', input: '{"s":"SWSEN","k":2}' },

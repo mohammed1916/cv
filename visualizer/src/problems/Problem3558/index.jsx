@@ -11,6 +11,10 @@ const definition = {
   inputLabel: 'Object with edges, the edges of a tree on nodes 1 to n',
   url: 'https://leetcode.com/problems/number-of-ways-to-assign-edge-weights-i/',
   complexity: 'O(n) time and O(n) space. Replacing the counting loop with fast exponentiation of 2^(d-1) makes that part O(log d). The visualization caps n at 40.',
+  question: "Count the ways to assign weights to the edges of a path so that the total is odd.",
+  approaches: [
+    { name: "Powers of two", intuition: "Count weightings from powers of two, with a fast exponentiation shortcut.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Branching tree', input: '{"edges":[[1,2],[1,3],[2,4],[2,5],[5,6],[3,7]]}' },
     { label: 'Two deepest nodes', input: '{"edges":[[4,1],[2,1],[3,2],[5,4]]}' },

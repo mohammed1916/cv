@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'An object with nums: 1 to 12 integers from 0 to 20',
   url: 'https://leetcode.com/problems/minimum-average-difference/',
   complexity: 'O(n) time and O(1) extra space. The visualization caps nums at 12 entries.',
+  question: "Find the index whose prefix average and suffix average differ by the smallest absolute amount.",
+  approaches: [
+    { name: "Running sums", intuition: "Keep running sums from the left and the total from the right, and compute both averages at each index.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Own: four values with zero', input: '{"nums":[7,0,12,4]}' },
     { label: 'Single', input: '{"nums":[0]}' },

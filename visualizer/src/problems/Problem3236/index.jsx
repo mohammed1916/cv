@@ -19,7 +19,7 @@ const examples = [
   { label: 'Long run: 12 employees', input: '{"Employees":[{"employee_id":1,"employee_name":"Emp1","manager_id":null,"salary":42},{"employee_id":2,"employee_name":"Emp2","manager_id":1,"salary":93},{"employee_id":3,"employee_name":"Emp3","manager_id":1,"salary":199},{"employee_id":4,"employee_name":"Emp4","manager_id":1,"salary":118},{"employee_id":5,"employee_name":"Emp5","manager_id":3,"salary":99},{"employee_id":6,"employee_name":"Emp6","manager_id":3,"salary":85},{"employee_id":7,"employee_name":"Emp7","manager_id":5,"salary":120},{"employee_id":8,"employee_name":"Emp8","manager_id":7,"salary":73},{"employee_id":9,"employee_name":"Emp9","manager_id":2,"salary":134},{"employee_id":10,"employee_name":"Emp10","manager_id":2,"salary":40},{"employee_id":11,"employee_name":"Emp11","manager_id":1,"salary":139},{"employee_id":12,"employee_name":"Emp12","manager_id":4,"salary":161}]}' },
 ]
 
-const definition = { number: meta.number, phases, parse: parseInput, build: buildTrace, code, sql, python, inputLabel, complexity, examples }
+const definition = { question: "From an employees table, count for each employee how many people report to them directly or indirectly, and report the employee hierarchy.", approaches: [{ name: "Tree walk and subtree count", intuition: "Walk the reporting tree once and count the people below each employee.", time: "O(n)", space: "O(n)" }], number: meta.number, phases, parse: parseInput, build: buildTrace, code, sql, python, inputLabel, complexity, examples }
 
 const tableStyle = { borderCollapse: 'collapse', width: '100%', fontSize: '0.9rem' }
 const cellStyle = { border: '1px solid currentColor', padding: '0.3rem 0.5rem', textAlign: 'left' }

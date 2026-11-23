@@ -8,6 +8,10 @@ const definition = {
   inputLabel: 'Even-length integer array (JSON)',
   url: 'https://leetcode.com/problems/partition-array-into-two-arrays-to-minimize-sum-difference/',
   complexity: 'O(2^n * n) subset sums per half, then O(2^n * log 2^n) for the closest-partner search (n = half length).',
+  question: "Split an array into two halves of equal size so that the absolute difference of their sums is as small as possible.",
+  approaches: [
+    { name: "Meet in the middle", intuition: "Split the array in two, enumerate subset sums of each half grouped by size, and pair sums with a target.", time: "O(2^(n/2) * n)", space: "O(2^(n/2))" },
+  ],
   examples: [
     { label: 'Four values', input: '[5,1,4,2]' },
     { label: 'Negatives', input: '[-7,3,2,-1,6,4]' },

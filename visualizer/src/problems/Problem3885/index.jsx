@@ -13,6 +13,11 @@ const definition = {
   inputLabel: 'Object with events ([id, priority] pairs) and ops (["poll"] or ["update", id, priority])',
   url: 'https://leetcode.com/problems/design-event-manager/',
   complexity: 'This visual scans the active map on each poll: O(n) per poll. A heap with lazy updates would make polls faster on large inputs.',
+  question: "Design an event manager that keeps priorities and removes the highest-priority active event.",
+  approaches: [
+    { name: "Scan the active map", intuition: "Each poll scans every active event for the highest priority, breaking ties by the smaller id.", time: "O(n) per poll", space: "O(n)" },
+    { name: "Heap with lazy updates", intuition: "Keep a heap of priorities and skip stale entries when polling.", time: "O(log n) per update", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example', input: '{"events":[[3,2],[8,5],[6,5]],"ops":[["poll"],["update",3,9],["poll"],["poll"],["poll"]]}' },
     { label: 'Single event', input: '{"events":[[1,5]],"ops":[["poll"]]}' },

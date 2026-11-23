@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with nums (integers)',
   url: 'https://leetcode.com/problems/adjacent-increasing-subarrays-detection-ii/',
   complexity: 'O(n) time and O(n) space for the run lengths.',
+  question: "Find the largest k such that two adjacent strictly increasing subarrays of length k exist in an array.",
+  approaches: [
+    { name: "Run lengths", intuition: "Compute the length of each increasing run, then take the best value of the smaller of two adjacent runs.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"nums":[4,6,1,2,5,9,3]}' },
     { label: 'Example 2', input: '{"nums":[3,3,1,2,4,2,5,6]}' },

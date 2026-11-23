@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with n (1 to 10), w (1 to 10) and maxWeight (0 to 200) (JSON)',
   url: 'https://leetcode.com/problems/maximum-containers-on-a-ship/',
   complexity: 'O(min(n * n, maxWeight / w)) time. The visualization caps the grid at 10 by 10.',
+  question: "Load containers onto a ship with a weight limit and maximize how many fit.",
+  approaches: [
+    { name: "Greedy by weight", intuition: "Place the lightest containers first until the limit is reached.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"n":3,"w":2,"maxWeight":7}' },
     { label: 'Example 2', input: '{"n":3,"w":3,"maxWeight":7}' },

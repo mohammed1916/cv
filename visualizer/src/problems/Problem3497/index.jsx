@@ -42,6 +42,10 @@ const definition = {
   inputLabel: 'Object with user_activity rows (user_id, activity_date, activity_type trial or paid, activity_duration)',
   url: 'https://leetcode.com/problems/analyze-subscription-conversion/description/',
   complexity: 'O(r + u * r) time for r rows and u users in this small teaching trace. A production query can use one grouped pass.',
+  question: "From a table of subscriptions, count the users who converted from trial to paid plans.",
+  approaches: [
+    { name: "Grouped pass", intuition: "Group rows by user and count the conversion events in one pass.", time: "O(r + u r)", space: "O(u)" },
+  ],
   examples: [
     {
       label: 'Sample',

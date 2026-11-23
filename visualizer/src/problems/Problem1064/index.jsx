@@ -11,6 +11,10 @@ const definition = {
   inputLabel: 'JSON array of strictly increasing integers',
   url: 'https://leetcode.com/problems/fixed-point/',
   complexity: 'O(log n) time and O(1) extra space. Each probe discards one side of the window.',
+  question: "Find the smallest index whose value equals the index in a sorted array of distinct integers.",
+  approaches: [
+    { name: "Binary search", intuition: "Value minus index is non-decreasing for distinct sorted integers, so binary search for the first index where value equals index.", time: "O(log n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Run of fixed points', input: '[-3,1,2,3,7]' },
     { label: 'Single fixed point', input: '[-2,0,1,3,5]' },

@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Matrix size and increment pairs (JSON)',
   url: 'https://leetcode.com/problems/cells-with-odd-values-in-a-matrix/',
   complexity: 'O(q + m * n) time for q operations on an m by n matrix, and O(m + n) space for the two counter arrays.',
+  question: "After applying increment operations to rows and columns, count the cells with odd values.",
+  approaches: [
+    { name: "Row and column parity counters", intuition: "Track the parity of each row and column; a cell is odd when its row and column parities differ.", time: "O(q + m x n)", space: "O(m + n)" },
+  ],
   examples: [
     { label: 'Mixed', input: '{"m":3,"n":4,"indices":[[0,1],[2,3],[2,0]]}' },
     { label: 'Same cell twice', input: '{"m":2,"n":2,"indices":[[1,1],[1,1]]}' },

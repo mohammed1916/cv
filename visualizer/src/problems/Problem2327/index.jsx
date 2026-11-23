@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with n, delay, and forget (1 <= delay < forget <= n)',
   url: 'https://leetcode.com/problems/number-of-people-aware-of-a-secret/',
   complexity: 'O(n * forget) time and O(n) space. The visualization caps n at 40.',
+  question: "Count the people who know a secret after a given number of days, where each person shares after a delay and forgets after another delay.",
+  approaches: [
+    { name: "Sliding window of sharers", intuition: "Track how many people learn the secret each day and how many can still share, using a window over the days.", time: "O(n * forget)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Nine days, delay 2', input: '{"n":9,"delay":2,"forget":6}' },
     { label: 'Eight days, forget 4', input: '{"n":8,"delay":1,"forget":4}' },

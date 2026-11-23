@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Integer array as JSON',
   url: 'https://leetcode.com/problems/sort-even-and-odd-indices-independently/',
   complexity: 'O(n log n) time for the two sorts; O(n) space.',
+  question: "Sort the values at even indices in ascending order and the values at odd indices in descending order.",
+  approaches: [
+    { name: "Split, sort, and merge back", intuition: "Collect the even-index values and sort them ascending, collect the odd-index values and sort them descending, then fill the positions in order.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Four values', input: '[9,4,2,7]' },
     { label: 'Five values', input: '[5,30,1,2,8]' },

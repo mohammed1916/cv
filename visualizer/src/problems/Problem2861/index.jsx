@@ -13,6 +13,11 @@ const definition = {
   inputLabel: 'JSON object with n, k, budget, composition, stock and cost',
   url: 'https://leetcode.com/problems/maximum-number-of-alloys/',
   complexity: 'O(k * n * log(max)) time. The visualization caps input at 3 metals and 3 machines.',
+  question: "Find the largest number of alloys that can be made with a limited budget, given each machine's composition and stock.",
+  approaches: [
+    { name: "Binary search with feasibility check", intuition: "If a count is feasible for a machine, smaller counts are too; check each machine for a target number of alloys.", time: "O(k n log max)", space: "O(n)" },
+    { name: "Try each machine fully", intuition: "For each machine, greedily compute the largest number of alloys within budget.", time: "O(k n log max)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Two metals, two machines', input: '{"n":2,"k":2,"budget":12,"composition":[[2,1],[1,3]],"stock":[0,1],"cost":[1,2]}' },
     { label: 'Example 2', input: '{"n":3,"k":2,"budget":15,"composition":[[1,1,10],[1,1,1]],"stock":[0,0,100],"cost":[1,2,3]}' },

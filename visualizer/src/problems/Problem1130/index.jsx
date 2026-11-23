@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Leaf values (JSON array)',
   url: 'https://leetcode.com/problems/minimum-cost-tree-from-leaf-values/',
   complexity: 'O(n) time and O(n) space for n leaves. The visualization caps n at 30.',
+  question: "Build a binary tree from leaf values in order so that the sum of non-leaf products is as small as possible.",
+  approaches: [
+    { name: "Monotonic stack greedy", intuition: "Repeatedly join the smaller leaf with its smaller neighbour, using a stack of decreasing values.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Mixed', input: '[3,8,5,2]' },
     { label: 'Two leaves', input: '[4,11]' },

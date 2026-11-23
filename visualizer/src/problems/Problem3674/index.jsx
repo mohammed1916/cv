@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with nums (list of integers)',
   url: 'https://leetcode.com/problems/minimum-operations-to-equalize-array/',
   complexity: 'O(n) time and O(1) extra space. The visualization caps nums at 10 values.',
+  question: "Find the fewest operations to make all array values equal, where an operation uses the AND of values.",
+  approaches: [
+    { name: "Check the AND", intuition: "Check whether the AND of the values allows the array to become equal, then return the count.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example', input: '{"nums":[6,10,14]}' },
     { label: 'Already equal', input: '{"nums":[9,9,9,9]}' },

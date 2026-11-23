@@ -13,6 +13,11 @@ const definition = {
   inputLabel: 'Users and rides as JSON',
   url: 'https://leetcode.com/problems/total-traveled-distance/',
   complexity: 'Walkthrough: one left join and one sum per user.',
+  question: "For each user, compute the total distance traveled over their rides, including users with no rides.",
+  approaches: [
+    { name: "Left join and sum", intuition: "Join users to rides and sum distances per user, treating missing sums as zero.", time: "O(n log n)", space: "O(n)" },
+    { name: "Correlated subquery", intuition: "Sum each user's rides with a subquery.", time: "O(n m)", space: "O(1)" },
+  ],
   examples: [{ label: 'Sample tables', input: JSON.stringify(sample) },
     { label: "User with no rides", input: "{\"users\":[{\"user_id\":9,\"name\":\"Dan\"}],\"rides\":[]}" },
     { label: "Equal distances", input: "{\"users\":[{\"user_id\":1,\"name\":\"Ann\"},{\"user_id\":2,\"name\":\"Ben\"}],\"rides\":[{\"ride_id\":1,\"user_id\":1,\"distance\":50},{\"ride_id\":2,\"user_id\":2,\"distance\":50}]}" },

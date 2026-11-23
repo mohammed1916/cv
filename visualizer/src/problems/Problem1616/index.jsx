@@ -7,6 +7,11 @@ const definition = {
   inputLabel: 'Object with a and b, two equal-length lowercase strings (JSON)',
   url: 'https://leetcode.com/problems/split-two-strings-to-make-palindrome/',
   complexity: 'O(n) time and O(1) extra space per direction: two pointers move inward once, and the middle check scans at most n characters.',
+  question: "Given two equal-length strings, decide whether cutting each one at a point and swapping the pieces can produce a palindrome.",
+  approaches: [
+    { name: "Match from both ends", intuition: "Compare mirrored characters inward; the leftover middle must already be a palindrome.", time: "O(n)", space: "O(1)" },
+    { name: "Try every cut", intuition: "Test each split point and check the combined string directly.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Mirror pair', input: '{"a":"abxcd","b":"dcyba"}' },
     { label: 'No split', input: '{"a":"ab","b":"cd"}' },

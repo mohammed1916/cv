@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'JSON: {"nums": [...], "queries": [[l, r, k], ...]}',
   url: 'https://leetcode.com/problems/k-th-smallest-remaining-even-integer-in-subarray-queries/',
   complexity: 'O(length of each subarray) per query after the sorted input. The visualization caps nums at 8 entries.',
+  question: "For a query subarray, find the k-th even integer that has not been removed, starting from the sorted evens.",
+  approaches: [
+    { name: "Walk past removed evens", intuition: "Start at the k-th even and step forward past each removed even at or below the running answer.", time: "O(subarray length) per query", space: "O(1) extra" },
+  ],
   examples: [
     { label: 'Own: four increasing values', input: '{"nums":[2,5,9,14],"queries":[[0,3,2],[1,2,1]]}' },
     { label: 'Own: three values, k 3 and 5', input: '{"nums":[3,6,20],"queries":[[0,2,3],[1,1,5]]}' },

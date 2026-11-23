@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with nums (1 to 12 integers, 1 to 8) (JSON)',
   url: 'https://leetcode.com/problems/find-the-median-of-the-uniqueness-array/',
   complexity: 'O(n log n) time with a sliding window per probe. The visualization caps the input at 12 numbers.',
+  question: "Find the median of the sorted list of distinct-value counts over all subarrays.",
+  approaches: [
+    { name: "Binary search with a sliding window", intuition: "Count subarrays with at most v distinct values using a window, and binary search the smallest v that reaches the median position.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"nums":[1,2,3]}' },
     { label: 'Example 2', input: '{"nums":[3,4,3,4,5]}' },

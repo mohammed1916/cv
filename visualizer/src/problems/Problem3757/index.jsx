@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with nums (integers from 1 to 15)',
   url: 'https://leetcode.com/problems/number-of-effective-subsequences/',
   complexity: 'O(2^b * n) time for b set bits in the strength, with exact small powers of two. The visualization caps nums at 8 values from 1 to 15.',
+  question: "Count the subsequences whose removal lowers the bitwise OR of the array.",
+  approaches: [
+    { name: "Inclusion-exclusion over submasks", intuition: "Count the subsets that keep the full OR by summing over submasks of the total strength.", time: "O(2^b * n)", space: "O(2^b)" },
+  ],
   examples: [
     { label: 'Example', input: '{"nums":[3,5,6]}' },
     { label: 'Repeated', input: '{"nums":[4,4,1,2]}' },

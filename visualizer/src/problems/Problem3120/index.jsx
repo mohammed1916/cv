@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with "word" (English letters), JSON',
   url: 'https://leetcode.com/problems/count-the-number-of-special-characters-i/',
   complexity: 'O(n) time and O(1) extra space for 52 letters. The visualization caps input at 30 letters.',
+  question: "Count the letters that appear in both lowercase and uppercase in a string.",
+  approaches: [
+    { name: "Membership check per letter", intuition: "A letter counts when its uppercase form is also present, checked in constant time per distinct lowercase letter.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"word":"aaAbcBC"}' },
     { label: 'Example 2', input: '{"word":"abBCab"}' },

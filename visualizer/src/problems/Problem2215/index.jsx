@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON with nums1 and nums2, e.g. {"nums1":[1,2,3,3],"nums2":[1,4,6]}',
   url: 'https://leetcode.com/problems/find-the-difference-of-two-arrays/',
   complexity: 'O(n + m) time with hash sets and O(n + m) space. The page caps each array at 10 values from 0 to 9.',
+  question: "Return two lists: the values in the first array that are missing from the second, and the values in the second that are missing from the first.",
+  approaches: [
+    { name: "Hash sets", intuition: "Put the values of each array in a set and take the values of one set that are not in the other.", time: "O(n + m)", space: "O(n + m)" },
+  ],
   examples: [
     { label: 'Partial overlap', input: '{"nums1":[1,2,3,3],"nums2":[1,4,6]}' },
     { label: 'Same values', input: '{"nums1":[5,5],"nums2":[5]}' },

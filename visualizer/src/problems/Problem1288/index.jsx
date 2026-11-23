@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Array of [start, end] pairs (JSON)',
   url: 'https://leetcode.com/problems/remove-covered-intervals/',
   complexity: 'O(n log n) time for sorting, then O(n) for the sweep; O(n) space for the order.',
+  question: "Count the intervals that are not covered by another interval.",
+  approaches: [
+    { name: "Sort and sweep", intuition: "Sort by start, and by end descending for ties, then keep intervals whose end exceeds the running maximum.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Nested pair', input: '[[1,4],[2,3],[5,7]]' },
     { label: 'Chain', input: '[[0,10],[2,4],[3,9],[9,12]]' },

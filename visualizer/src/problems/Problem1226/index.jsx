@@ -32,6 +32,10 @@ const definition = {
   inputLabel: 'Object with n philosophers and events: ["hungry", p] or ["finish", p]',
   url: 'https://leetcode.com/problems/the-dining-philosophers/',
   complexity: 'O(1) per event with one fork per seat. Taking the lower numbered fork first removes the circular wait.',
+  question: "Design a protocol where philosophers pick up forks without deadlock.",
+  approaches: [
+    { name: "Ordered fork acquisition", intuition: "Always take the lower-numbered fork first, which breaks the circular wait.", time: "O(1) per event", space: "O(forks)" },
+  ],
   examples: [
     { label: 'Ordered', input: '{"n":3,"events":[["hungry",0],["hungry",1],["hungry",2],["finish",0],["hungry",1],["finish",1],["hungry",2],["finish",2]]}' },
     { label: 'Single finish each, reversed order', input: '{\"n\":3,\"events\":[[\"hungry\",2],[\"finish\",2],[\"hungry\",0],[\"finish\",0]]}' },

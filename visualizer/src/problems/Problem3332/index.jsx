@@ -11,6 +11,10 @@ const definition = {
   inputLabel: 'Tour (JSON object with n, k, stay_score and travel_score)',
   url: 'https://leetcode.com/problems/maximum-points-tourist-can-earn/',
   complexity: 'O(k * n^2) time and O(n) space. The visualization caps n and k at 6.',
+  question: "Find the most points a tourist can collect over a fixed number of days by staying or travelling between cities.",
+  approaches: [
+    { name: "Dynamic programming over days", intuition: "For each day and city, keep the best score from staying or from travelling in from another city.", time: "O(k * n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Invented three cities, one day', input: '{"n":3,"k":1,"stay_score":[[4,1,2]],"travel_score":[[0,3,1],[2,0,5],[1,2,0]]}' },
     { label: 'Invented two cities, two days', input: '{"n":2,"k":2,"stay_score":[[1,6],[2,3]],"travel_score":[[0,4],[1,0]]}' },

@@ -6,6 +6,10 @@ const definition = {
   number: meta.number,
   phases, parse: parseInput, build: buildTrace, code, python, inputLabel,
   url: `https://leetcode.com/problems/${meta.slug}/`,
+  question: "Find the maximum length of a concatenated string with unique letters from a list of strings.",
+  approaches: [
+    { name: "Backtracking with bitmasks", intuition: "Extend the chosen strings only when their letter masks do not overlap.", time: "O(2^n)", space: "O(n)" },
+  ],
   complexity, examples,
 }
 

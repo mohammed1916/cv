@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with lcp (a square matrix)',
   url: 'https://leetcode.com/problems/find-the-string-with-lcp/',
   complexity: 'O(n * n) time and space for the table. The visualization caps the matrix at 6 by 6.',
+  question: "Given an LCP matrix, build a string that matches it or report that none exists.",
+  approaches: [
+    { name: "Greedy assignment then verify", intuition: "Assign letters greedily, then rebuild the LCP table and compare it with the input.", time: "O(n^2)", space: "O(n^2)" },
+  ],
   examples: [
     { label: 'Word aba', input: '{"lcp":[[3,0,1],[0,2,0],[1,0,1]]}' },
     { label: 'Two pairs', input: '{"lcp":[[4,1,0,0],[1,3,0,0],[0,0,2,1],[0,0,1,1]]}' },

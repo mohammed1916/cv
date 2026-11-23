@@ -14,6 +14,11 @@ const definition = {
   inputLabel: 'Object with s, a, b and k (JSON)',
   url: 'https://leetcode.com/problems/find-beautiful-indices-in-the-given-array-ii/',
   complexity: 'O(n + m) time after finding occurrences, and O(n) space. The visualization caps s at 40 letters.',
+  question: "Find the indices in a string where pattern a occurs with a nearby occurrence of pattern b, for a large string.",
+  approaches: [
+    { name: "Occurrences then two pointers", intuition: "Find occurrences of each pattern and sweep both lists with two pointers.", time: "O(n + m)", space: "O(n)" },
+    { name: "Nested check", intuition: "Check every pair of occurrences directly against the distance limit.", time: "O(n\u00b7m)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Two windows, one edit', input: '{"s":"bbbaab","a":"ba","b":"bb","k":1}' },
     { label: 'Repeated z, budget three', input: '{"s":"zzzz","a":"z","b":"zz","k":3}' },

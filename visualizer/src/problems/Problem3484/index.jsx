@@ -16,6 +16,10 @@ const definition = {
   inputLabel: 'Object with rows (1 to 9) and ops (set, reset or get lists)',
   url: 'https://leetcode.com/problems/design-spreadsheet/',
   complexity: 'Each operation is O(1) with a map of stored cells. The visualization shows columns A to E only.',
+  question: "Build a spreadsheet with cells that can be set, read and summed over a small grid of columns.",
+  approaches: [
+    { name: "Map of stored cells", intuition: "Store only the set cells in a map and compute reads on demand.", time: "O(1) per operation", space: "O(cells)" },
+  ],
   examples: [
     { label: 'Three rows', input: '{"rows":3,"ops":[["set","C3",4],["set","A1",2],["get","=A1+C3"],["reset","C3"],["get","=A1+C3"]]}' },
   ],

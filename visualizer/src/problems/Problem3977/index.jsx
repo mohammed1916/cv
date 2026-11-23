@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with cost, edges, source, target and power',
   url: 'https://leetcode.com/problems/minimum-time-to-reach-target-with-limited-power/',
   complexity: 'Dijkstra over (vertex, power) states. The visual scans for the earliest state, so it is O(S^2) on these small tables.',
+  question: "Travel along directed edges where each departure drains power; report the fastest arrival within the power limits.",
+  approaches: [
+    { name: "Dijkstra over vertex and power states", intuition: "Track time and remaining power together, expanding the earliest-arrival states first.", time: "O(S log S + E)", space: "O(V x P)" },
+  ],
   examples: [
     { label: 'Cheaper hop', input: '{"cost":[2,1,3,1],"edges":[[0,1,4],[0,2,1],[1,3,2],[2,3,1]],"source":0,"target":3,"power":4}' },
     { label: 'Direct shortcut', input: '{"cost":[1,1,1],"edges":[[0,1,2],[0,2,2],[1,2,1]],"source":0,"target":2,"power":3}' },

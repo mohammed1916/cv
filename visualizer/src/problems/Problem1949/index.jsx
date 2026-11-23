@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON object with friendship: [user1_id, user2_id] pairs with user1_id < user2_id',
   url: 'https://leetcode.com/problems/strong-friendship/',
   complexity: 'O(f · d) for f friendships and average degree d in this trace; a database uses the same self-join with an index on the pair.',
+  question: "List pairs of users who are friends and share at least three common friends, ordered by the pair.",
+  approaches: [
+    { name: "Two-way edges and common count", intuition: "Store each friendship in both directions, count common friends per stored pair, and keep pairs with at least three.", time: "O(f^2)", space: "O(f)" },
+  ],
   examples: [
     { label: 'Dense group', input: '{"friendship":[[1,2],[1,3],[1,4],[2,3],[2,4],[2,5],[3,4],[3,5],[4,5]]}' },
     { label: 'Sparse', input: '{"friendship":[[1,2],[1,3],[2,3],[2,4],[3,4]]}' },

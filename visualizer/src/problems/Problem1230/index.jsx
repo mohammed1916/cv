@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with prob (heads chances) and target ({"prob":[0.25,0.75],"target":1})',
   url: 'https://leetcode.com/problems/toss-strange-coins/',
   complexity: 'O(n^2) time and O(n) space for n coins. The visualization caps the coins at 8; the official limit is 10.',
+  question: "Find the probability that exactly a target number of heads appear when tossing coins with different biases.",
+  approaches: [
+    { name: "Coin-by-coin probability table", intuition: "Add one coin at a time and update the probability for each head count.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Biased trio', input: '{"prob":[0.25,0.75,0.5],"target":2}' },
     { label: 'Mostly tails', input: '{"prob":[0.9,0.1],"target":0}' },

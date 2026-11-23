@@ -13,6 +13,11 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'String s (JSON)',
   url: 'https://leetcode.com/problems/letter-case-permutation/',
   complexity: 'O(2^L * n) time for L letters and length n; O(n) recursion depth plus output.',
+  question: "Given a string, list every string obtained by changing the case of each letter while leaving digits unchanged.",
+  approaches: [
+    { name: "Backtracking on letters", intuition: "At each letter branch into lower and upper case; digits have only one branch.", time: "O(2^L * n) for L letters", space: "O(n) recursion depth plus output" },
+    { name: "Iterative expansion", intuition: "Start with one string and, for each letter, double the list with both cases.", time: "O(2^L * n)", space: "O(2^L * n)" },
+  ],
   examples: [
     { label: 'a1b2', input: '"a1b2"' },
     { label: '3z4', input: '"3z4"' },

@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with enemies (list of energies) and energy',
   url: 'https://leetcode.com/problems/maximum-points-after-enemy-battles/',
   complexity: 'O(n log n) time for the sort; the loop moves two pointers across the sorted list.',
+  question: "Find the maximum points you can gain by spending energy on enemies and marking them, where an enemy can be marked only after earning a point.",
+  approaches: [
+    { name: "Greedy with two pointers", intuition: "Pay for the cheapest enemy to gain points, and mark the strongest enemies only when stuck.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Invented example', input: '{"enemies":[5,1,4],"energy":4}' },
     { label: 'Single enemy', input: '{"enemies":[6],"energy":13}' },

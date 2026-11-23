@@ -11,6 +11,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Employees and id (JSON object)',
   url: 'https://leetcode.com/problems/employee-importance/',
   complexity: 'O(n) time for n employees and O(depth) recursion space.',
+  question: "Add up the importance of an employee and all subordinates reachable through the reporting tree.",
+  approaches: [
+    { name: "DFS over reports", intuition: "Walk the reporting tree from one employee, adding importance over every subordinate reached.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Two reports', input: '{"employees":[[1,5,[2,3]],[2,3,[]],[3,2,[]]],"id":1}' },
     { label: 'Middle manager', input: '{"employees":[[10,4,[11]],[11,6,[12,13]],[12,1,[]],[13,2,[]]],"id":11}' },

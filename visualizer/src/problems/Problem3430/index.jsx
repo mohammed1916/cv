@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Array and limit (JSON object with nums and k)',
   url: 'https://leetcode.com/problems/maximum-and-minimum-sums-of-at-most-size-k-subarrays/',
   complexity: 'O(n * k) time and O(1) space in this trace. The visualization caps n at 12.',
+  question: "For subarrays of length up to k, add up the maximum and minimum values across all of them.",
+  approaches: [
+    { name: "Extend from each start", intuition: "From each start, extend up to k cells while tracking running min and max.", time: "O(n k)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Six mixed values, k three', input: '{"nums":[4,-3,9,0,-8,2],"k":3}' },
     { label: 'Negatives and a peak', input: '{"nums":[-20,-5,30],"k":2}' },

@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON object with grid and k',
   url: 'https://leetcode.com/problems/minimum-absolute-difference-in-sliding-submatrix/',
   complexity: 'O((m - k + 1)(n - k + 1) * k^2 log k) time. The visualization caps the grid at 6 by 6.',
+  question: "Find the minimum absolute difference inside each sliding square submatrix.",
+  approaches: [
+    { name: "Sort each window", intuition: "Collect the values of each submatrix, sort them, and compare neighbours.", time: "O(w k^2 log k)", space: "O(k^2)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"grid":[[1,8,3],[5,2,7],[4,6,9]],"k":2}' },
     { label: 'All equal', input: '{"grid":[[4,4],[4,4]],"k":2}' },

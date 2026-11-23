@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON object with label from 1 to 1000000, for example {"label":14}',
   url: 'https://leetcode.com/problems/path-in-zigzag-labelled-binary-tree/',
   complexity: 'O(log label) time and space, one step per row.',
+  question: "Return the labels on the path from the root to a node in a zigzag-labelled perfect binary tree.",
+  approaches: [
+    { name: "Mirrored row parent", intuition: "Each row reverses label order; mirror the position in its row, then move to the parent by halving.", time: "O(log label)", space: "O(log label)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"label":14}' },
     { label: 'Example 2', input: '{"label":26}' },

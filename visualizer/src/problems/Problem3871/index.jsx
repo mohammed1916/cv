@@ -11,6 +11,10 @@ const definition = {
   inputLabel: 'Object with n (up to 1000000000000000)',
   url: 'https://leetcode.com/problems/count-commas-in-range-ii/',
   complexity: 'Only one step per thousand-group up to n, so the loop runs a handful of times. Arithmetic uses BigInt to stay exact.',
+  question: "Count the total commas used when writing every integer from 1 to n with standard grouping.",
+  approaches: [
+    { name: "Sum by thousand group", intuition: "Count the numbers in each thousand group that receive commas and add them up with exact integers.", time: "O(log n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example', input: '{"n":987654321}' },
     { label: 'Million', input: '{"n":1000000}' },

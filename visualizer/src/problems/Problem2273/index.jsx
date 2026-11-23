@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Words (JSON object with words)',
   url: 'https://leetcode.com/problems/find-resultant-array-after-removing-anagrams/',
   complexity: 'O(n * m log m) time for sorting letters of each word. The visualization caps input at 20 words.',
+  question: "Given a list of words, drop each word that is an anagram of the last word kept before it, and return the remaining words in order.",
+  approaches: [
+    { name: "Sorted-letter signature", intuition: "Sort the letters of each word so anagrams share a signature, then compare each word only with the last kept one.", time: "O(n * m log m)", space: "O(n * m)" },
+  ],
   examples: [
     { label: 'Own: three short words', input: '{"words":["xy","yx","zz"]}' },
     { label: 'No anagrams', input: '{"words":["a","b","c","d","e"]}' },

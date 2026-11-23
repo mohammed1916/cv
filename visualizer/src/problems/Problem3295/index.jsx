@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with "message" and "banned_words" (lists of lowercase words), JSON',
   url: 'https://leetcode.com/problems/report-spam-message/',
   complexity: 'O(m + b) time with a hash set of banned words. The visualization caps lists at 8 words.',
+  question: "Decide whether a message is spam, which means it contains any banned word.",
+  approaches: [
+    { name: "Hash set of banned words", intuition: "Put the banned words in a set and check each word of the message against it.", time: "O(m + b)", space: "O(b)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"message":["hello","world","leetcode"],"banned_words":["world","hello"]}' },
     { label: 'Example 2', input: '{"message":["hello","programming","fellow","leetcode"],"banned_words":["world","hello"]}' },

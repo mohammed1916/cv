@@ -22,6 +22,10 @@ const definition = {
   inputLabel: "Roman numeral from I to MMMCMXCIX (e.g. MCMXCIV)",
   url: "https://leetcode.com/problems/roman-to-integer/",
   complexity: "O(n) time and O(1) extra space for a numeral of n symbols.",
+  question: "Convert a Roman numeral to its integer value.",
+  approaches: [
+    { name: "Subtract when smaller precedes larger", intuition: "Add each symbol's value, but subtract it if the next symbol is larger.", time: "O(n)", space: "O(1)" },
+  ],
   examples: getExamples("roman-to-integer").map(example => ({ label: example.label, input: example.s })),
 };
 

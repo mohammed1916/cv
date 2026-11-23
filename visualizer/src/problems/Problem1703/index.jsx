@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON object with nums (0 and 1 values) and k',
   url: 'https://leetcode.com/problems/minimum-adjacent-swaps-for-k-consecutive-ones/',
   complexity: 'O(n log n) time for the sorting-free scan with prefix idea; the visualization is O(n * k) and caps n at 20.',
+  question: "Find the fewest adjacent swaps needed to bring k ones together into one consecutive block.",
+  approaches: [
+    { name: "Window of k ones around the median", intuition: "Slide a window over the positions of the ones and move them toward the middle one, costing the distance from it.", time: "O(n * k) in the visual", space: "O(n)" },
+  ],
   examples: [
     { label: 'Eight bits, k three', input: '{"nums":[0,1,1,1,0,0,1,0],"k":3}' },
     { label: 'Scattered ones, k two', input: '{"nums":[1,0,0,1,0,1,1],"k":2}' },

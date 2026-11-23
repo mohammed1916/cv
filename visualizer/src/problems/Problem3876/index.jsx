@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with nums1, a list of distinct integers',
   url: 'https://leetcode.com/problems/construct-uniform-parity-array-ii/',
   complexity: 'O(n) time and O(n) space for the constructed array.',
+  question: "Build a uniform-parity array where a value may only subtract a strictly smaller value.",
+  approaches: [
+    { name: "Parity pattern with strict subtraction", intuition: "Like the first construction, but each subtraction must use a strictly smaller value.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Odd helper works', input: '{"nums1":[3,6,9]}' },
     { label: 'Fails', input: '{"nums1":[5,4]}' },

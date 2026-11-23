@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON {"nums": [1, 6, 9, 16, 2]}',
   url: 'https://leetcode.com/problems/longest-nice-subarray/',
   complexity: 'O(n) time and O(1) extra space. The window keeps the OR of its values, and each pointer moves right at most n times.',
+  question: "Find the longest subarray where every pair of elements has no common set bit.",
+  approaches: [
+    { name: "Sliding window with OR mask", intuition: "Keep the OR of the window, and shrink from the left while the next value shares a bit with it.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example', input: '{"nums":[1,6,9,16,2]}' },
     { label: 'Single', input: '{"nums":[3,1,5,11,13]}' },

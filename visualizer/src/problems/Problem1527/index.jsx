@@ -25,6 +25,10 @@ const definition = {
   inputLabel: 'Object with a Patients list of { patient_id, patient_name, conditions } rows; conditions is space-separated',
   url: 'https://leetcode.com/problems/patients-with-a-condition/',
   complexity: 'O(total length of the condition text) to scan every code once.',
+  question: "List patients whose condition codes include one that starts with DIAB1.",
+  approaches: [
+    { name: "Scan and test codes", intuition: "Split each condition text into codes and test each for the prefix.", time: "O(total text length)", space: "O(output)" },
+  ],
   examples: [
     { label: 'Example', input: '{"Patients":[{"patient_id":1,"patient_name":"Daniel","conditions":"YFEV COUGH"},{"patient_id":2,"patient_name":"Alice","conditions":"DIAB100 MYOP"},{"patient_id":3,"patient_name":"Bob","conditions":"ACNE DIAB100"},{"patient_id":4,"patient_name":"Carol","conditions":"MYOP DIAB1"},{"patient_id":5,"patient_name":"Dan","conditions":"XDIAB1 DIAB2"}]}' },
     { label: 'Single patient', input: '{"Patients":[{"patient_id":9,"patient_name":"Eve","conditions":"DIAB1"}]}' },

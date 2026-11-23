@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Numbers and minimum length (JSON)',
   url: 'https://leetcode.com/problems/maximum-average-subarray-ii/',
   complexity: 'O(n log(range / precision)) time with prefix sums. The visualization caps input at 30 values and runs a fixed 40 iterations.',
+  question: "Find the maximum average of a contiguous subarray whose length is at least k.",
+  approaches: [
+    { name: "Binary search on the answer", intuition: "Subtract a guessed average from each value and check whether a subarray of length at least k has a non-negative sum.", time: "O(n log(range))", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"nums":[1,12,-5,-6,50,3],"k":4}' },
     { label: 'Single value', input: '{"nums":[5],"k":1}' },

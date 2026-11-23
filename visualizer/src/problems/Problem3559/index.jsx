@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with n, edges and queries (JSON)',
   url: 'https://leetcode.com/problems/number-of-ways-to-assign-edge-weights-ii/',
   complexity: 'O(q * n) time with this climbing method. The visualization caps n at 10 and queries at 6.',
+  question: "Answer queries about the number of ways to assign weights to edges on a path in a tree.",
+  approaches: [
+    { name: "Climb the tree", intuition: "Climb from each query's endpoints to the root and count the path edges.", time: "O(q n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"n":2,"edges":[[1,2]],"queries":[[1,1],[1,2]]}' },
     { label: 'Example 2', input: '{"n":5,"edges":[[1,2],[1,3],[3,4],[3,5]],"queries":[[1,4],[3,4],[2,5]]}' },

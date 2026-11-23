@@ -12,6 +12,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Source lines (JSON array of strings)',
   url: 'https://leetcode.com/problems/remove-comments/',
   complexity: 'O(total characters) time and O(total characters) space for the output.',
+  question: "Remove comments from source code, handling line and block comments.",
+  approaches: [
+    { name: "Character state machine", intuition: "Scan the source as a small state machine: line comments end a line, block comments may span lines.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Line and block', input: '["/*Test program */", "int main()", "{ ", "  // variable declaration ", "int a, b, c;", "/* This is a test", "   multiline  ", "   comment for ", "   testing */", "a = b + c;", "}"]' },
     { label: 'Mixed on one line', input: '["a/*comment", "line", "more_comment*/b"]' },

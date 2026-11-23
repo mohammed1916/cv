@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Permutation of 0 to n-1 (e.g. [4,2,0,3,1])',
   url: 'https://leetcode.com/problems/sort-array-by-moving-items-to-empty-space/',
   complexity: 'O(n) time and O(n) space for the cycle walk, run once per accepted arrangement. The visualization caps the input at 8 positions.',
+  question: "Using the empty slot 0 to swap items, find the fewest moves needed to sort the array into a target arrangement.",
+  approaches: [
+    { name: "Cycle counting", intuition: "Follow the cycles of misplaced items for each target arrangement, then keep the cheaper of the two.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Five slots', input: '[4,2,0,3,1]' },
     { label: 'Already zero last', input: '[1,2,3,0]' },

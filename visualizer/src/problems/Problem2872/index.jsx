@@ -14,6 +14,11 @@ const definition = {
   inputLabel: 'Tree with n nodes, edges, node values, and k (JSON object)',
   url: 'https://leetcode.com/problems/maximum-number-of-k-divisible-components/',
   complexity: 'O(n) time and O(n) space. The visualization caps the tree at 12 nodes.',
+  question: "Cut a tree into the most components whose value sums are all divisible by k.",
+  approaches: [
+    { name: "Bottom-up subtree sums", intuition: "Cut an edge exactly when a subtree sum is divisible by k, counting the cuts as components.", time: "O(n)", space: "O(n)" },
+    { name: "Try cutting each edge", intuition: "Check each edge removal and count the resulting components.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Path', input: '{"n":3,"edges":[[0,1],[1,2]],"values":[1,2,3],"k":3}' },
     { label: 'Star', input: '{"n":4,"edges":[[0,1],[0,2],[0,3]],"values":[3,3,3,3],"k":3}' },

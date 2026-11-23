@@ -19,6 +19,10 @@ const definition = {
   inputLabel: 'JSON object: {"nums": [1, 2, 3, 4, 5]}',
   url: "https://leetcode.com/problems/minimum-cost-to-make-array-equalindromic/",
   complexity: "O(n log n) for sorting plus the palindrome search and O(n) per candidate. The visualization caps values at 1000 and n at 50.",
+  question: "Find the cheapest way to turn an array into an all-equal palindromic array, where each change costs the absolute difference.",
+  approaches: [
+    { name: "Median and nearest palindromes", intuition: "Only the palindromes closest to the median can be optimal, so test those candidates and keep the cheapest total.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: "Example 1", input: '{"nums": [1, 2, 3, 4, 5]}' },
     { label: "Example 2", input: '{"nums": [10, 12, 13, 14, 15]}' },

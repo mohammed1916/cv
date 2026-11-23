@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with word (lowercase, 1 to 50 letters) and k (1 to the word length)',
   url: 'https://leetcode.com/problems/minimum-time-to-revert-word-to-initial-state-i/',
   complexity: 'O(n^2) time in the worst case with direct string comparison, where n is the word length.',
+  question: "Find the smallest number of steps after which removing a fixed count from the front returns the word to its start.",
+  approaches: [
+    { name: "Compare shifted strings", intuition: "Try each step count and check whether the remaining suffix matches the prefix.", time: "O(n^2 / k)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"word":"xyxzxy","k":2}' },
     { label: 'Example 2', input: '{"word":"mnmnm","k":1}' },

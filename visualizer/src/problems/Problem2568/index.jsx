@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with nums: 1 to 30 integers from 1 to 1000, e.g. {"nums":[2,1]}',
   url: 'https://leetcode.com/problems/minimum-impossible-or/',
   complexity: 'O(n + log A) time and O(n) space for the set. The visualization caps the input at 30 values.',
+  question: "Find the smallest power of two that cannot be formed as the OR of some subset of nums.",
+  approaches: [
+    { name: "Set of present values", intuition: "Put the values in a set and check each power of two in order until one is missing.", time: "O(n + log A)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"nums":[2,1]}' },
     { label: 'Example 2', input: '{"nums":[5,3,2]}' },

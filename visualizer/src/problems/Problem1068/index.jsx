@@ -3,6 +3,10 @@ import { meta } from './meta'
 import { buildTrace, parseInput, code, sql, python, phases, examples, complexity, inputLabel } from './algorithm'
 
 const definition = {
+  question: "Report each sale's product name, year, and quantity from the sales table, joined to the product table.",
+  approaches: [
+    { name: "Join and group in SQL", intuition: "Look up each sale's product name in a map built from the product table and output the matched rows.", time: "O(n + m)", space: "O(m)" },
+  ],
   number: meta.number,
   phases, parse: parseInput, build: buildTrace, code, sql, python, inputLabel,
   url: `https://leetcode.com/problems/${meta.slug}/`,

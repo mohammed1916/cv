@@ -15,6 +15,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Grid (JSON 0/1 matrix)',
   url: 'https://leetcode.com/problems/shortest-bridge/',
   complexity: 'O(n^2) time and space. The visualization caps the grid at 12x12.',
+  question: "Two islands sit in a grid of water; find the fewest water cells to flip so that they connect.",
+  approaches: [
+    { name: "Label one island then BFS", intuition: "Label the first island with DFS, then expand outward in breadth-first layers until the second island is reached.", time: "O(n^2)", space: "O(n^2)" },
+  ],
   examples: [
     { label: 'Own: two single cells', input: '[[1,0,0],[0,0,1]]' },
     { label: 'Two domino islands', input: '[[1,1,0],[0,0,0],[0,1,1]]' },

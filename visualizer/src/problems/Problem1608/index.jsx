@@ -8,6 +8,10 @@ const definition = {
   inputLabel: 'Array of integers (JSON)',
   url: 'https://leetcode.com/problems/special-array-with-x-elements-greater-than-or-equal-x/',
   complexity: 'O(n * n) time for a direct count of each candidate, and O(1) extra space.',
+  question: "Find a value x such that exactly x numbers in the array are at least x.",
+  approaches: [
+    { name: "Count for each candidate", intuition: "Test each candidate value by counting the numbers at or above it.", time: "O(n^2)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Answer 3', input: '[1,9,2,0,5,5]' },
     { label: 'No answer', input: '[0,0,0]' },

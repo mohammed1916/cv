@@ -14,6 +14,10 @@ const definition = {
   complexity,
   inputLabel: 'JSON array of [width, height] pairs',
   url: 'https://leetcode.com/problems/number-of-rectangles-that-can-form-the-largest-square/',
+  question: "Count the rectangles that give the largest possible square side.",
+  approaches: [
+    { name: "Track the best side", intuition: "Take each rectangle's shorter side, keep the largest, and count how often it appears.", time: "O(n)", space: "O(1)" },
+  ],
 }
 
 export default function Problem1725Visualizer() {

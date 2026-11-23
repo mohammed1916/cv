@@ -12,6 +12,11 @@ const definition = {
   inputLabel: 'JSON {"n": 4}',
   url: 'https://leetcode.com/problems/factorial-generator/',
   complexity: 'O(n) multiplications in total; each next() call does one multiplication. The visualization caps n at 10.',
+  question: "Write a generator that produces factorials of the integers from 0 up to a given value, one per request.",
+  approaches: [
+    { name: "Running product generator", intuition: "Keep a running product and yield after each multiplication.", time: "O(n) total", space: "O(1)" },
+    { name: "Precomputed list", intuition: "Compute every factorial first and yield from the list.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Four steps', input: '{"n":4}' },
     { label: 'Zero', input: '{"n":0}' },

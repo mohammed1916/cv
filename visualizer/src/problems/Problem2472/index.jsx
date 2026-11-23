@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON object with a lowercase string s (up to 30 letters) and k, for example {"s":"abaccbdb","k":3}',
   url: 'https://leetcode.com/problems/maximum-number-of-non-overlapping-palindrome-substrings/',
   complexity: 'O(n^2) time for the palindrome table and the prefix scan. The visualization caps s at 30 characters.',
+  question: "Choose as many non-overlapping palindromic substrings of length at least k as possible.",
+  approaches: [
+    { name: "Palindrome table and greedy scan", intuition: "Mark every palindrome in a table, then scan left to right and take the earliest palindrome that ends each time.", time: "O(n^2)", space: "O(n^2)" },
+  ],
   examples: [
     { label: 'Example', input: '{"s":"abaccbdb","k":3}' },
     { label: 'Single letters', input: '{"s":"ten","k":1}' },

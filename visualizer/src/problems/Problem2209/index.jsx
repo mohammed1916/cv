@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON with floor, numCarpets and carpetLen, e.g. {"floor":"10110101","numCarpets":2,"carpetLen":2}',
   url: 'https://leetcode.com/problems/minimum-white-tiles-after-covering-with-carpets/',
   complexity: 'O(n * numCarpets) time and space for the table. The page caps the floor at 12 tiles, carpets at 3 and carpet length at 4.',
+  question: "Cover a row of tiles that contain white and black tiles with carpets so the number of visible white tiles is as small as possible.",
+  approaches: [
+    { name: "Dynamic programming over tiles and carpets used", intuition: "For each prefix and carpet count, keep the fewest white tiles left visible; a carpet covers a run of tiles.", time: "O(n * k)", space: "O(n * k)" },
+  ],
   examples: [
     { label: 'Mixed floor', input: '{"floor":"10110101","numCarpets":2,"carpetLen":2}' },
     { label: 'All white covered', input: '{"floor":"11111","numCarpets":2,"carpetLen":3}' },

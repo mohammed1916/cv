@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Hours as a JSON array of integers',
   url: 'https://leetcode.com/problems/count-pairs-that-form-a-complete-day-ii/',
   complexity: 'O(n) time and O(24) space.',
+  question: "Count the pairs of hours whose sum is a multiple of 24, for larger inputs.",
+  approaches: [
+    { name: "Count remainders modulo 24", intuition: "Only each hour's remainder modulo 24 matters, so a 24-entry table of counts completes each pair in one pass.", time: "O(n)", space: "O(24)" },
+  ],
   examples: [
     { label: 'Four entries, a repeated pair', input: '[17,6,6,21]' },
     { label: 'Five entries, mixed', input: '[40,12,29,29,3]' },

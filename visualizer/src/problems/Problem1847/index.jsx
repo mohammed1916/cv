@@ -13,6 +13,11 @@ const definition = {
   inputLabel: 'JSON object: {"rooms": [[id, size], ...], "queries": [[preferred, minSize], ...]}',
   url: 'https://leetcode.com/problems/closest-room/',
   complexity: 'Sorting dominates, then each room insert and query is a binary search over the usable ids. The visualization caps input at 6 rooms and 6 queries.',
+  question: "For each query, find the room that meets a minimum size and is closest to a preferred room number.",
+  approaches: [
+    { name: "Sort queries and add rooms in size order", intuition: "Process queries by minimum size descending, add qualifying rooms to a sorted set of ids, then search for the nearest id.", time: "O((r + q) log r)", space: "O(r + q)" },
+    { name: "Brute force scan", intuition: "For each query, check every room and keep the closest valid one.", time: "O(r * q)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Three rooms, three queries', input: '{"rooms":[[5,4],[7,6],[2,9]],"queries":[[7,5],[2,10],[3,1]]}' },
     { label: 'Example 2', input: '{"rooms":[[4,1],[6,1]],"queries":[[5,1],[5,2]]}' },

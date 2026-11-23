@@ -15,6 +15,11 @@ const definition = {
   inputLabel: 'Object with nums (1 to 12 integers) and queries ([index, k] pairs)',
   url: 'https://leetcode.com/problems/mark-elements-on-array-by-performing-queries/',
   complexity: 'O(q * n log n) in this trace. A heap of unmarked values gives O(n log n + q * k log n) in the contest form.',
+  question: "Mark array values by processing queries that mark an index and then the smallest unmarked values.",
+  approaches: [
+    { name: "Sorted pointer marking", intuition: "Sort indices by value and index, then mark them with a pointer that skips already marked positions.", time: "O(n log n + q)", space: "O(n)" },
+    { name: "Direct simulation", intuition: "For each query scan the array to find the next unmarked values.", time: "O(n\u00b7q)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Mixed values, two queries', input: '{"nums":[4,1,4,6,1],"queries":[[0,2],[4,1]]}' },
     { label: "Single element", input: "{\"nums\":[5],\"queries\":[[0,1]]}" },

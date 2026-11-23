@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'JSON {"tasks": [2, 2, 3, 3, 2, 4, 4, 4, 4, 4]}',
   url: 'https://leetcode.com/problems/minimum-rounds-to-complete-all-tasks/',
   complexity: 'O(n) time and O(d) space for n tasks with d distinct difficulties.',
+  question: "Find the fewest rounds needed to finish all tasks, where each round completes two or three tasks of the same difficulty.",
+  approaches: [
+    { name: "Count frequencies and decompose", intuition: "Count each difficulty; a count of 1 is impossible, and each count is split into threes with a final two if needed.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Mixed', input: '{"tasks":[5,5,6,6,6,8,8,8,8,8]}' },
     { label: 'Lone task', input: '{"tasks":[1,1,2]}' },

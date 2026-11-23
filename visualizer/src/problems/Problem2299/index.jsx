@@ -17,6 +17,10 @@ const definition = {
   inputLabel: 'Object with "password" (string), JSON',
   url: 'https://leetcode.com/problems/strong-password-checker-ii/',
   complexity: 'O(n) time and O(1) extra space. The visualization caps passwords at 30 characters.',
+  question: "Check whether a password meets rules about length, character types, repeated characters, and a special character set.",
+  approaches: [
+    { name: "Single pass flags", intuition: "Scan the password once, setting flags for each rule, then check all rules.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Strong', input: '{"password":"IloveLe3tcode!"}' },
     { label: 'Adjacent repeat', input: '{"password":"Me+You--IsMyDream"}' },

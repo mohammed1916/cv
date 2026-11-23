@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with nums (JSON list of positive integers)',
   url: 'https://leetcode.com/problems/minimum-number-of-operations-to-make-all-array-elements-equal-to-1/',
   complexity: 'O(n^2 log M) time for the window scan, with n values up to M. The visualization caps input at 10 values.',
+  question: "Given an array, find the minimum operations to make every element equal to 1 by repeatedly taking the gcd of adjacent elements, or -1 if it cannot be done.",
+  approaches: [
+    { name: "Find the smallest gcd-1 window", intuition: "Find the shortest subarray whose gcd is 1, then the answer is the count of other elements plus the operations needed to reach 1.", time: "O(n^2 log M)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"nums":[2,6,3,4]}' },
     { label: 'Impossible', input: '{"nums":[2,10,6,14]}' },

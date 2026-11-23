@@ -8,6 +8,11 @@ const definition = {
   inputLabel: 'Object with employees (rows of name and salary)',
   url: 'https://leetcode.com/problems/create-a-new-column/',
   complexity: 'O(n) time and O(n) extra space for the new column, where n is the number of rows. The visualization shows up to 12 rows.',
+  question: "Add a bonus column to a table whose values are twice each salary.",
+  approaches: [
+    { name: "Vectorized column assignment", intuition: "Multiply the salary column by two and assign the result to a new column.", time: "O(n)", space: "O(n)" },
+    { name: "Row-by-row computation", intuition: "Compute the bonus for each row and store it.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Small team', input: '{"employees":[{"name":"Mira","salary":1200},{"name":"Tomas","salary":950},{"name":"Noor","salary":3100},{"name":"Ivo","salary":2045}]}' },
     { label: 'One row, zero salary', input: '{"employees":[{"name":"Intern","salary":0}]}' },

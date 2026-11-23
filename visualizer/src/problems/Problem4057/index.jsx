@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Intervals (JSON object with intervals)',
   url: 'https://leetcode.com/problems/number-of-intersecting-interval-pairs-ii/',
   complexity: 'O(n log n) time and O(n) space. The visualization caps input at 12 intervals.',
+  question: "Count the pairs of closed intervals that share at least one point, by counting the disjoint pairs and subtracting them.",
+  approaches: [
+    { name: "Sort the starts", intuition: "Count disjoint pairs after sorting the starts, then subtract them from all pairs.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"intervals":[[1,2],[2,3],[3,4]]}' },
     { label: 'Example 2', input: '{"intervals":[[1,5],[2,4],[3,6]]}' },

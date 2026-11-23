@@ -8,6 +8,10 @@ const definition = {
   inputLabel: 'Dominoes (JSON array of [a, b] pairs)',
   url: 'https://leetcode.com/problems/number-of-equivalent-domino-pairs/',
   complexity: 'O(n) expected time and O(n) space for n dominoes. The visualization caps n at 40.',
+  question: "Count pairs of dominoes that are equal when rotations are allowed.",
+  approaches: [
+    { name: "Normalise and count", intuition: "Sort each domino's two values, count each normalised key, and add the earlier count before each new one.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Turned copies', input: '[[2,3],[3,2],[4,4],[2,3]]' },
     { label: 'All equal', input: '[[4,4],[4,4],[4,4]]' },

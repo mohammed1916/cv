@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Edges as JSON, where edges[i] is the node that i points to, e.g. {"edges": [1,0,0,0]}',
   url: 'https://leetcode.com/problems/node-with-highest-edge-score/',
   complexity: 'O(n) time and O(n) space.',
+  question: "Each node points to one other node, and each node gains the sum of the labels pointing at it; find the node with the highest score.",
+  approaches: [
+    { name: "Accumulate edge scores", intuition: "Add each node's index to its target's score, then take the maximum with the smallest index on ties.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Own: four-node loop', input: '{"edges": [1,2,3,0]}' },
     { label: 'Own: five nodes', input: '{"edges": [1,2,2,4,3]}' },

@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with nums (1 to 40 integers from 1 to 60) and k, for example {"nums":[2,5,6,8,5],"k":4}',
   url: 'https://leetcode.com/problems/minimum-operations-to-make-median-of-array-equal-to-k/',
   complexity: 'O(n log n) time for the sort. The visualization caps the array at 40 numbers.',
+  question: "Find the fewest single-step changes that make the median of an array equal k.",
+  approaches: [
+    { name: "Sort and push the median", intuition: "Only the median position decides the median, so from the sorted array the numbers from the median onward (or up to it) are moved toward k.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Four values, k 13', input: '{"nums":[14,8,21,8],"k":13}' },
     { label: 'Three multiples', input: '{"nums":[10,20,30],"k":20}' },

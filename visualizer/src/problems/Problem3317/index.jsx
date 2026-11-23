@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with n performers, x stages and y maximum score (JSON)',
   url: 'https://leetcode.com/problems/find-the-number-of-possible-ways-for-an-event/',
   complexity: 'O(n^2) time for the Stirling table. The visualization caps n at 8, x at 6 and y at 5.',
+  question: "Count the ways that n performers can fill x stages and y awards, with every stage used at least once.",
+  approaches: [
+    { name: "Stirling table", intuition: "Build a table of ways to split items into groups, then combine it with the ways to order the groups.", time: "O(n^2)", space: "O(n^2)" },
+  ],
   examples: [
     { label: 'One performer', input: '{"n":1,"x":2,"y":3}' },
     { label: 'Five performers', input: '{"n":5,"x":2,"y":1}' },

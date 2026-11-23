@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with values in level order, null for missing (JSON)',
   url: 'https://leetcode.com/problems/count-good-nodes-in-binary-tree/',
   complexity: 'O(n) time and O(h) space for the recursion.',
+  question: "Count the nodes whose value is at least as large as every value on the path from the root.",
+  approaches: [
+    { name: "Depth-first with path maximum", intuition: "Pass the largest value so far down the recursion.", time: "O(n)", space: "O(h)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"values":[3,1,4,3,null,1,5]}' },
     { label: 'Example 2', input: '{"values":[3,3,null,4,2]}' },

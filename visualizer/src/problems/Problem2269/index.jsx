@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON object with num (1 to 1000000000) and k, for example {"num":240,"k":2}',
   url: 'https://leetcode.com/problems/find-the-k-beauty-of-a-number/',
   complexity: 'O(d * k) time for d digits, which is constant for a bounded number. The visualization caps num at 10 digits.',
+  question: "Count the substrings of length k that divide the number evenly, where the substring is not zero.",
+  approaches: [
+    { name: "Sliding substring check", intuition: "Read each length-k substring as a number and test whether it divides the original number.", time: "O(d * k)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Five-digit number, k 2', input: '{"num":80512,"k":2}' },
     { label: 'Zero window', input: '{"num":100,"k":2}' },

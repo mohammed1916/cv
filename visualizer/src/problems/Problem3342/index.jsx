@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Opening times move_time (JSON)',
   url: 'https://leetcode.com/problems/find-minimum-time-to-reach-last-room-ii/',
   complexity: 'O(m n log(m n)) time with two states per room. The visualization caps the grid at 5 by 5.',
+  question: "Find the least time to reach the bottom-right room in a grid where rooms have opening times and moves alternate in cost.",
+  approaches: [
+    { name: "Dijkstra with two move states", intuition: "Track each room with both move parities in a min-heap keyed by time.", time: "O(m n log(m n))", space: "O(m n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"move_time":[[0,4],[4,4]]}' },
     { label: 'Zeros', input: '{"move_time":[[0,0,0],[0,0,0]]}' },

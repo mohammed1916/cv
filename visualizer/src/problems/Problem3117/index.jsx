@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Array and targets (JSON object with nums and and_values)',
   url: 'https://leetcode.com/problems/minimum-sum-of-values-by-dividing-array/',
   complexity: 'O(m * n^2) time and O(n) space in this trace. The visualization caps n at 10.',
+  question: "Split an array into a required number of consecutive pieces, each with a required bitwise AND, minimizing the total of the last element of each piece.",
+  approaches: [
+    { name: "Dynamic programming over piece ends", intuition: "The best cost for a prefix uses the best cost before each valid piece start, plus the piece's last value.", time: "O(m * n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"nums":[3,5,6,2,7],"and_values":[1,2]}' },
     { label: 'Example 2', input: '{"nums":[4,6,4,5,6,7],"and_values":[4,4,6]}' },

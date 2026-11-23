@@ -18,6 +18,10 @@ const definition = {
     { id: 'right', label: 'Sum descending', description: 'Include the peak through the last index.' },
     { id: 'done', label: 'Compare', description: 'Return 0, 1, or −1 according to the larger sum.' },
   ],
+  question: "Given a bitonic array with a shared peak, compare the sums of the two inclusive sides of the peak.",
+  approaches: [
+    { name: "Locate peak, then accumulate", intuition: "Find the peak, sum the left and right inclusive sides, and compare the totals.", time: "O(n)", space: "O(1)" },
+  ],
   examples: authoredExamples0,
 }
 

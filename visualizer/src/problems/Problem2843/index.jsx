@@ -17,6 +17,11 @@ const definition = {
   inputLabel: "low and high (e.g. {\"low\": 1, \"high\": 100})",
   url: "https://leetcode.com/problems/count-symmetric-integers/",
   complexity: "O((high - low) * digits) time and O(1) extra space. The visualization caps the range at 120 numbers.",
+  question: "Count the numbers in a range that are symmetric, meaning the sum of the first half of digits equals the sum of the second half.",
+  approaches: [
+    { name: "Check each number", intuition: "For each number with an even digit count, compare the two halves' digit sums.", time: "O(range digits)", space: "O(1)" },
+    { name: "Digit dynamic programming", intuition: "Count digit strings under the bound with the matching sum.", time: "O(digits sum^2)", space: "O(digits sum)" },
+  ],
   examples: [
     { label: "Example 1", input: "{\"low\": 1, \"high\": 100}" },
     { label: "Example 2", input: "{\"low\": 1200, \"high\": 1230}" },

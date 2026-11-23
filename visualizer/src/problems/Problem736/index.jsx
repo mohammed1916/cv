@@ -17,6 +17,10 @@ const definition = {
   inputLabel: 'Expression (JSON string)',
   url: 'https://leetcode.com/problems/parse-lisp-expression/',
   complexity: 'O(n * d) time for n tokens and scope depth d. The visualization caps the expression at 300 characters.',
+  question: "Evaluate a Lisp-like expression that uses let, add and mult with nested variable scopes.",
+  approaches: [
+    { name: "Recursive descent with scope stack", intuition: "Tokenise the expression, parse recursively, and keep a stack of variable scopes for let bindings.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Own: a plus b times a', input: '"(let a 5 b 3 (add a (mult b a)))"' },
     { label: 'Own: nested add and mult', input: '"(let p -2 q 4 (add (mult p p) q))"' },

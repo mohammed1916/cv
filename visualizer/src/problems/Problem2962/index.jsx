@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'JSON object with nums and k',
   url: 'https://leetcode.com/problems/count-subarrays-where-max-element-appears-at-least-k-times/',
   complexity: 'O(n) time with a sliding window. The visualization caps input at 12 values.',
+  question: "Count subarrays where the maximum value appears at least k times.",
+  approaches: [
+    { name: "Sliding window counting", intuition: "Track the count of the maximum in a window and count all valid subarrays ending at each right end.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Seven values, k of two', input: '{"nums":[1,5,2,5,3,5,1],"k":2}' },
     { label: 'No match', input: '{"nums":[1,4,2,1],"k":3}' },

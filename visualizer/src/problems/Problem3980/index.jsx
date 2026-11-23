@@ -5,6 +5,10 @@ import { buildTrace, parseInput, code, python, phases, inputLabel, complexity, e
 
 const definition = {
   number: meta.number,
+  question: "Turn binary string s1 into s2 with the fewest operations, where one operation sets a single 0 to 1 or clears two adjacent 1s.",
+  approaches: [
+    { name: "Two-state boundary DP", intuition: "Track the cheapest cost for each state at every boundary and take the transitions that match s2.", time: "O(n)", space: "O(1)" },
+  ],
   phases, parse: parseInput, build: buildTrace, code, python, inputLabel, complexity, examples,
   url: `https://leetcode.com/problems/${meta.slug}/`,
 }

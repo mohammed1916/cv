@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Array of 3 to 12 integers from 1 to 50 (JSON)',
   url: 'https://leetcode.com/problems/divide-an-array-into-subarrays-with-minimum-cost-i/',
   complexity: 'O(n log n) with the sort. The visualization caps input at 12 values.',
+  question: "Split an array into three subarrays with the least total cost, where cost is the first value of each part.",
+  approaches: [
+    { name: "Fix first value then two smallest", intuition: "The first subarray starts at index 0, so add the two smallest values of the rest.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Four mixed values', input: '[5,9,3,14]' },
     { label: 'Repeated pairs', input: '[20,6,20,6,6]' },

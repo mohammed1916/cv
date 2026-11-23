@@ -12,6 +12,11 @@ const definition = {
   inputLabel: 'Object with inventory (1 to 4 colour counts, each 1 to 8) and orders',
   url: 'https://leetcode.com/problems/sell-diminishing-valued-colored-balls/',
   complexity: 'O(orders * colours) time for the visualization. A heap gives O(orders log colours) for large inputs.',
+  question: "Sell balls at the current price of their colour, which drops by one each time, to maximise revenue over a set of orders.",
+  approaches: [
+    { name: "Take the best colour each order", intuition: "Each order takes the colour with the highest current value; the visual steps through orders one by one.", time: "O(orders * colours)", space: "O(colours)" },
+    { name: "Max heap", intuition: "Keep colour values in a max heap and pop the top for each ball.", time: "O(orders log colours)", space: "O(colours)" },
+  ],
   examples: [
     { label: 'Three colours, six orders', input: '{"inventory":[2,7,4],"orders":6}' },
     { label: 'Two colours, four orders', input: '{"inventory":[1,8],"orders":4}' },

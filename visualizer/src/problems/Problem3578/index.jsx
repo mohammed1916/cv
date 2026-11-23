@@ -13,6 +13,11 @@ const definition = {
   inputLabel: 'Object with nums (integers from 1 to 20) and k (0 to 20)',
   url: 'https://leetcode.com/problems/count-partitions-with-max-min-difference-at-most-k/',
   complexity: 'O(n^2) time for the direct scan and O(n) space. The visualization caps input at 12 numbers.',
+  question: "Count the ways to split an array into contiguous parts where each part has max minus min at most k.",
+  approaches: [
+    { name: "Scan back from each end", intuition: "Let dp[i] count the valid splits of a prefix, and for each end scan backward while the spread stays within k.", time: "O(n^2)", space: "O(n)" },
+    { name: "Sliding window with prefix sums", intuition: "Keep the earliest valid start with monotone deques and sum the dp values inside a moving window.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Five numbers, k six', input: '{"nums":[4,9,2,7,7],"k":6}' },
     { label: 'k = 0', input: '{"nums":[1,2,3,4],"k":0}' },

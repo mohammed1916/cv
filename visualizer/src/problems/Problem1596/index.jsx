@@ -12,6 +12,10 @@ const definition = {
   phases, parse: parseInput, build: buildTrace, code, python, sql,
   inputLabel: INPUT_LABEL,
   complexity: COMPLEXITY,
+  question: "Find the most frequently ordered products for each customer.",
+  approaches: [
+    { name: "SQL count and rank", intuition: "Count orders per customer and product, then keep the top counts for each customer.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [{ label: 'Sample', input: EXAMPLE },
     { label: "Single order", input: "{\"customers\":[{\"customer_id\":1,\"name\":\"Ana\"}],\"products\":[{\"product_id\":10,\"product_name\":\"P1\",\"price\":5}],\"orders\":[{\"order_id\":1,\"order_date\":\"2020-03-01\",\"customer_id\":1,\"product_id\":10}]}" },
     { label: "Tie for the top product", input: "{\"customers\":[{\"customer_id\":1,\"name\":\"Ana\"}],\"products\":[{\"product_id\":10,\"product_name\":\"P1\",\"price\":5},{\"product_id\":20,\"product_name\":\"P2\",\"price\":6}],\"orders\":[{\"order_id\":1,\"order_date\":\"2020-03-01\",\"customer_id\":1,\"product_id\":10},{\"order_id\":2,\"order_date\":\"2020-03-02\",\"customer_id\":1,\"product_id\":20}]}" },

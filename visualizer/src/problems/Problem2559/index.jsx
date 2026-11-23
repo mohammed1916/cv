@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON object with words and queries ([l, r] pairs)',
   url: 'https://leetcode.com/problems/count-vowel-strings-in-ranges/',
   complexity: 'O(total length + q) time with prefix counts. The visualization caps words at 12 and queries at 8.',
+  question: "For each query range of words, count the words that start and end with a vowel.",
+  approaches: [
+    { name: "Prefix counts", intuition: "Precompute how many valid words appear before each index, then subtract for each query.", time: "O(total length + q)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Six words, three ranges', input: '{"words":["sun","moon","star","sea","tide","dune"],"queries":[[0,2],[3,5],[2,4]]}' },
     { label: 'Two words, two queries', input: '{"words":["oak","pine"],"queries":[[0,1],[1,1]]}' },

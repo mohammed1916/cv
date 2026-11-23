@@ -13,6 +13,11 @@ const definition = {
   inputLabel: 'Square grid of 0 (empty) and 1 (thief) (JSON)',
   url: 'https://leetcode.com/problems/find-the-safest-path-in-a-grid/',
   complexity: 'O(n^2 log n^2) time for a square grid of side n. The visualization caps the side at 6.',
+  question: "On a grid with thieves, find the path from the top-left to the bottom-right that keeps the largest minimum distance from any thief.",
+  approaches: [
+    { name: "Multi-source BFS plus max-heap search", intuition: "Compute each cell's distance to the nearest thief, then search outward preferring larger safety, similar to a widest-path search.", time: "O(n^2 log n)", space: "O(n^2)" },
+    { name: "Binary search on safety with BFS", intuition: "Check whether a path exists where every cell is at least a given distance from thieves.", time: "O(n^2 log n)", space: "O(n^2)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"grid":[[1,0,0],[0,0,0],[0,0,1]]}' },
     { label: 'Example 2', input: '{"grid":[[0,0,1],[0,0,0],[0,0,0]]}' },

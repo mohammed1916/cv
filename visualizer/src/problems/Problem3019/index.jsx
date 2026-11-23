@@ -16,6 +16,10 @@ const definition = {
   inputLabel: "JSON object: {\"s\": \"...\"} (1 to 100 English letters)",
   url: "https://leetcode.com/problems/number-of-changing-keys/",
   complexity: "O(n) time and O(1) extra space.",
+  question: "Count how many times the typed key changes when letter case is ignored.",
+  approaches: [
+    { name: "Compare neighbours ignoring case", intuition: "Scan the string and count each position where the lower-case letter differs from the previous one.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: "Case flips only", input: "{\"s\": \"xXyYzz\"}" },
     { label: "Alternating case", input: "{\"s\": \"MmMnNn\"}" },

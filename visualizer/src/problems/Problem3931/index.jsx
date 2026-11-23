@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'A string of 2 to 100 decimal digits',
   url: 'https://leetcode.com/problems/check-adjacent-digit-differences/',
   complexity: 'O(n) time and O(n) space for n digits. The visualization accepts the full 100-digit range.',
+  question: "Compare each neighbouring pair of digits by numeric value, and decide based on the first pair that differs by more than two.",
+  approaches: [
+    { name: "Pairwise scan with early decision", intuition: "Walk adjacent digit pairs and stop at the first pair whose difference exceeds two.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Gap too large', input: '3142' },
     { label: 'All close', input: '5753' },

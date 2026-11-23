@@ -14,6 +14,10 @@ const definition = {
   phases, parse: parseInput, build: buildTrace, code, sql, python, inputLabel,
   url: `https://leetcode.com/problems/${meta.slug}/`,
   complexity, examples,
+  question: "Find accounts that logged in from different IP addresses during overlapping sessions.",
+  approaches: [
+    { name: "Self join on sessions", intuition: "Self join the login sessions and flag accounts with overlapping sessions on different IPs.", time: "O(n^2)", space: "O(n)" },
+  ],
 }
 
 const CELL = { border: '1px solid var(--border)', padding: '3px 8px', color: 'var(--text)', fontFamily: 'monospace' }

@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'Object with a dashed preorder traversal string (JSON)',
   url: 'https://leetcode.com/problems/recover-a-tree-from-preorder-traversal/',
   complexity: 'O(n) time and O(h) space for the stack. The visualization caps input at 15 values.',
+  question: "Rebuild a binary tree from a preorder string where each value is preceded by dashes giving its depth.",
+  approaches: [
+    { name: "Stack by depth", intuition: "Parse each value with its depth; the stack holds the current path, and the depth decides the parent by popping deeper entries.", time: "O(n)", space: "O(h)" },
+  ],
   examples: [
     { label: 'Seven values', input: '{"traversal":"1-2--3--4-5--6--7"}' },
     { label: 'Left-heavy', input: '{"traversal":"1-401--349---90--88"}' },

@@ -12,6 +12,11 @@ const definition = {
   inputLabel: 'Tree values (JSON level-order array, null for a missing child)',
   url: 'https://leetcode.com/problems/deepest-leaves-sum/',
   complexity: 'O(n) time and O(w) space for the widest level. The visualization caps the tree at 15 entries.',
+  question: "Add up the values on the deepest level of a binary tree.",
+  approaches: [
+    { name: "Level-order sweep", intuition: "Visit the tree one level at a time and keep only the sum of the last level reached.", time: "O(n)", space: "O(w)" },
+    { name: "Depth-first with depth", intuition: "Track each node's depth and keep the sum of the largest depth seen so far.", time: "O(n)", space: "O(h)" },
+  ],
   examples: [
     { label: 'Deepest value on the right', input: '[9,4,15,2,6,null,20,1,null,null,null,null,null,null,30]' },
     { label: 'Left-heavy sum tree', input: '[12,7,18,3,9,null,25,1,null,null,5]' },

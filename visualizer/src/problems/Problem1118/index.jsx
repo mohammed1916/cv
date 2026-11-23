@@ -6,6 +6,10 @@ const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', '
 const yesNo = value => (value === undefined || value === null ? '-' : value ? 'yes' : 'no')
 
 const definition = {
+  question: "Return the number of days in a given month of a given year, accounting for leap years.",
+  approaches: [
+    { name: "Lookup table with leap rule", intuition: "Use a table of month lengths and add one day to February in leap years.", time: "O(1)", space: "O(1)" },
+  ],
   phases, parse: parseInput, build: buildTrace, code, python,
   inputLabel,
   url: 'https://leetcode.com/problems/number-of-days-in-a-month/',

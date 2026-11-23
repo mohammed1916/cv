@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with nums and m (JSON)',
   url: 'https://leetcode.com/problems/maximum-product-of-first-and-last-elements-of-a-subsequence/',
   complexity: 'O(n^2) time and O(1) space. The visualization caps nums at 10 entries.',
+  question: "Pick a subsequence of a fixed size whose first and last elements have the largest possible product.",
+  approaches: [
+    { name: "Fix the first index", intuition: "For each possible first index, pair it with the best last index that still leaves room for the required size.", time: "O(n^2)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Mixed signs, m four', input: '{"nums":[4,-2,8,-6,3,1],"m":4}' },
     { label: 'All negative values', input: '{"nums":[-4,-9,-1,-6],"m":2}' },

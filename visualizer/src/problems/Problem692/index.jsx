@@ -12,6 +12,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Words and k (JSON object)',
   url: 'https://leetcode.com/problems/top-k-frequent-words/',
   complexity: 'O(n + d log d) time for n words with d distinct values, and O(d) space for the counts.',
+  question: "Pick the k most frequent words, breaking ties alphabetically.",
+  approaches: [
+    { name: "Count then heap", intuition: "Count frequencies, then keep the best k with a heap ordered by count and then alphabetically.", time: "O(n log k)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Tie by letter', input: '{"words":["red","blue","red","green","blue","blue"],"k":2}' },
     { label: 'Everything', input: '{"words":["m","n","m"],"k":2}' },

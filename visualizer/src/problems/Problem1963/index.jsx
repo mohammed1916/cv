@@ -11,6 +11,10 @@ const definition = {
   inputLabel: 'Even-length string of [ and ] (e.g. ][][)',
   url: 'https://leetcode.com/problems/minimum-number-of-swaps-to-make-the-string-balanced/',
   complexity: 'O(n) time and O(1) extra space: one scan with a running count.',
+  question: "Find the fewest swaps that make a bracket string balanced.",
+  approaches: [
+    { name: "Count unmatched closers", intuition: "Scan with a count of open brackets; every unmatched closer needs one swap, and each swap fixes two.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'One swap', input: '][][' },
     { label: 'Two swaps', input: ']]][[[' },

@@ -20,6 +20,10 @@ const examples = [{
 const reasoning = 'Each ranking record adds one to its artist. Sorting the finished counts by occurrences (largest first) and then by artist name gives the output order.'
 
 const definition = {
+  question: "Given a ranking table of artists, count how many times each artist appears and return them sorted by count, then name.",
+  approaches: [
+    { name: "Count then sort", intuition: "Tally the occurrences per artist, then sort by count and name.", time: "O(n log n)", space: "O(n)" },
+  ],
   number: meta.number,
   phases, parse: parseInput, build: buildTrace, code, sql, python, inputLabel,
   url: `https://leetcode.com/problems/${meta.slug}/`,

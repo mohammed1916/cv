@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Array of integers from 1 to 40 (JSON)',
   url: 'https://leetcode.com/problems/find-the-number-of-subsequences-with-equal-gcd/',
   complexity: 'O(n * G^2) time where G is the largest gcd state (at most 40 here), and O(G^2) space. The visualization caps input at 8 numbers.',
+  question: "Count the non-empty subsequences whose elements have the same greatest common divisor for two groups.",
+  approaches: [
+    { name: "Dynamic programming over gcd pairs", intuition: "Track the number of ways to reach each pair of gcd values as elements are processed.", time: "O(n * G^2)", space: "O(G^2)" },
+  ],
   examples: [
     { label: 'Three distinct values', input: '[11,26,4]' },
     { label: 'Alternating extremes', input: '[40,1,40,1,7]' },

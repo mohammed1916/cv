@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'n and k (JSON)',
   url: 'https://leetcode.com/problems/cracking-the-safe/',
   complexity: 'O(k^n) edges visited, each with O(n) string work. The visualization caps k^n at 500.',
+  question: "Build the shortest string that contains every password of a given length and alphabet as a substring.",
+  approaches: [
+    { name: "Hierholzer Eulerian cycle", intuition: "Walk an Eulerian cycle of the de Bruijn graph with Hierholzer DFS to build the shortest string.", time: "O(k^n)", space: "O(k^n)" },
+  ],
   examples: [{ label: 'Five symbols, two wide', input: '{"n":2,"k":5}' }, { label: 'Four symbols, three wide', input: '{"n":3,"k":4}' }, { label: 'Three digits', input: '{"n": 3, "k": 3}' }, { label: 'Single digit', input: '{"n":1,"k":1}' }, { label: 'One-symbol alphabet', input: '{"n":3,"k":1}' }, { label: 'Ten symbols, two wide', input: '{"n":2,"k":10}' }, { label: 'Long run: 256 passwords', input: '{"n":4,"k":4}' }],
 }
 

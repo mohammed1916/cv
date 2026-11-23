@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Start, target and special roads (JSON)',
   url: 'https://leetcode.com/problems/minimum-cost-of-a-path-with-special-roads/',
   complexity: 'O(P^2) time for P points (at most 12 here), since every point can walk to every other point.',
+  question: "Given a grid of costs and special roads, find the minimum cost to go from start to target.",
+  approaches: [
+    { name: "Dijkstra over special points", intuition: "Treat the start, the targets, and special endpoints as nodes and run Dijkstra's algorithm.", time: "O(P^2)", space: "O(P)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"start":[1,1],"target":[5,5],"special_roads":[[1,2,3,3,2],[3,4,4,5,1]]}' },
     { label: 'Example 2', input: '{"start":[3,2],"target":[5,7],"special_roads":[[3,2,3,4,4],[3,3,1,0,2],[4,0,0,4,4]]}' },

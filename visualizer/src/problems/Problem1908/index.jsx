@@ -12,6 +12,10 @@ const definition = {
   inputLabel: "A JSON list of heap sizes, e.g. [1,2,3]",
   url: "https://leetcode.com/problems/game-of-nim/",
   complexity: "O(h) time for h heaps and O(1) space. The visualization shows up to 6 heaps of size up to 15 so each XOR step fits on screen.",
+  question: "Decide whether the first player wins a game in which players alternately remove any positive number of stones from one heap.",
+  approaches: [
+    { name: "XOR of heap sizes", intuition: "The first player wins exactly when the XOR of all heap sizes is nonzero.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: "Balanced", input: "[1,2,3]" },
     { label: "Winning", input: "[1,2]" },

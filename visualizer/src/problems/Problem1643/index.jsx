@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Destination (JSON object with destination as [rows, columns] and k)',
   url: 'https://leetcode.com/problems/kth-smallest-instructions/',
   complexity: 'O(rows + columns) binomial evaluations. The visualization caps each dimension at 6.',
+  question: "Find the k-th lexicographically smallest path of right and down moves across a grid.",
+  approaches: [
+    { name: "Choose letter by letter", intuition: "At each step count the completions that start with each move, and pick the move that contains the k-th path.", time: "O(rows + columns) binomial evaluations", space: "O(1)" },
+  ],
   examples: [
     { label: 'Two by five, option four', input: '{"destination":[2,5],"k":4}' },
     { label: 'Four by two, option five', input: '{"destination":[4,2],"k":5}' },

@@ -11,6 +11,10 @@ const definition = {
   inputLabel: 'Object with nums, a list of integers from 0 to 20',
   url: 'https://leetcode.com/problems/minimum-increase-to-maximize-special-indices/',
   complexity: 'O(n) time for the costs and the two-step DP. The visual caps nums at 12 values.',
+  question: "Raise values so that as many interior positions as possible are strict peaks, using the fewest raises.",
+  approaches: [
+    { name: "Two-step dynamic programme over costs", intuition: "Each interior position has a raise cost to become a peak; a two-state table chooses non-adjacent peaks.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example A', input: '{"nums":[3,3,1,3]}' },
     { label: 'Example B', input: '{"nums":[4,4,1,2]}' },

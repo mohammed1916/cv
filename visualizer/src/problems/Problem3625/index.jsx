@@ -9,6 +9,10 @@ const definition = {
   inputLabel: 'Object with points, a list of [x, y] pairs',
   url: `https://leetcode.com/problems/${meta.slug}/`,
   complexity: 'O(n²) time and space over all pairs of points, with a logarithmic gcd for each pair. The official limit is 500 points; this page draws up to 10.',
+  question: "Count trapezoids that can be formed among a set of points using pairs of parallel segments.",
+  approaches: [
+    { name: "Direction and line tables", intuition: "Group pairs of points by reduced direction and by line offset, then count pairs of segments that share a direction.", time: "O(n^2 log V)", space: "O(n^2)" },
+  ],
   examples: [
     { label: 'Two rails', input: '{"points":[[0,0],[2,0],[5,0],[1,3],[3,3]]}' },
     { label: 'Parallelogram', input: '{"points":[[0,0],[3,0],[4,2],[1,2]]}' },

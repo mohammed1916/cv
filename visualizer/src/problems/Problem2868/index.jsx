@@ -8,6 +8,11 @@ const definition = {
   inputLabel: 'Object with alice and bob word lists (e.g. {"alice":["ab"],"bob":["ac"]})',
   url: 'https://leetcode.com/problems/the-wording-game/',
   complexity: 'O(A * B * L) time with memoization over the last word and mover, where A and B are the list sizes and L is the word length. The visualization caps each list at 6 words of length 5; the official bounds are not verified here.',
+  question: "Two players alternate choosing words from their lists under the rules of a word game; determine the outcome under optimal play.",
+  approaches: [
+    { name: "Memoized game search", intuition: "The state is the last word and whose turn it is; compute win or loss with memoization.", time: "O(A B L)", space: "O(A B)" },
+    { name: "Plain minimax recursion", intuition: "Explore every move without memory.", time: "exponential", space: "O(depth)" },
+  ],
   examples: [
     { label: 'Bob stuck', input: '{"alice":["ab"],"bob":["ac"]}' },
     { label: 'Chain of letters', input: '{"alice":["a","c"],"bob":["b"]}' },

@@ -21,6 +21,10 @@ const definition = {
   inputLabel: 'Object with colors (one integer per node) and edges (n - 1 pairs of node numbers)',
   url: "https://leetcode.com/problems/maximum-subtree-of-the-same-color/",
   complexity: "O(n) time and O(n) space for n nodes: one depth-first pass that carries each subtree's size and single-colour flag up to its parent. The visualization caps the tree at 10 nodes.",
+  question: "Find the largest subtree in which every node has the same color.",
+  approaches: [
+    { name: "DFS merging same-color children", intuition: "Compute each subtree's largest same-colored subtree while merging children of the same color.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: "Root subtree is one colour", input: '{"colors":[3,3,3,3],"edges":[[0,1],[1,2],[1,3]]}' },
     { label: "Inner subtree wins", input: '{"colors":[2,2,2,1,2,2],"edges":[[0,1],[0,2],[1,3],[1,4],[2,5]]}' },

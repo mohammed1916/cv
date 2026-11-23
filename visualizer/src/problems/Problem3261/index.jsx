@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'JSON object with s, k and queries',
   url: 'https://leetcode.com/problems/count-substrings-that-satisfy-k-constraint-ii/',
   complexity: 'O(n) per query with a sliding window. The visualization caps input at 12 characters.',
+  question: "Answer queries about substrings that satisfy the k-constraint, counting the valid ones in each range.",
+  approaches: [
+    { name: "Sliding window per query", intuition: "For each query range, grow and shrink a window while counting valid substrings.", time: "O(n) per query", space: "O(1)" },
+  ],
   examples: [
     { label: 'Own: two windows', input: '{"s":"101100","k":1,"queries":[[1,4],[0,5]]}' },
     { label: 'Two queries', input: '{"s":"010101","k":1,"queries":[[0,2],[2,5]]}' },

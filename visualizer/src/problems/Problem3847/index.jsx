@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with nums',
   url: 'https://leetcode.com/problems/find-the-score-difference-in-a-game/',
   complexity: 'One pass over the games, so O(n) time and O(1) extra space. The visual caps the list at 16 games.',
+  question: "Find the score difference of a game in which the active player swaps according to the rules on each game.",
+  approaches: [
+    { name: "Simulate the games", intuition: "Track the active player and the scores while going through the games in order.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example', input: '{"nums":[2,3,4]}' },
     { label: 'Sixth game', input: '{"nums":[7,2,2,2,2,2]}' },

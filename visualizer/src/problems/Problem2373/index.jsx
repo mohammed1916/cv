@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON object with a square grid',
   url: 'https://leetcode.com/problems/largest-local-values-in-a-matrix/',
   complexity: 'O(n^2) windows with 9 comparisons each, so O(9 n^2) time. The visualization caps the grid at 7 by 7.',
+  question: "Build a smaller grid where each cell holds the largest value in the 3 by 3 window it covers.",
+  approaches: [
+    { name: "Scan 3 by 3 windows", intuition: "Visit each window and take the maximum of its nine values.", time: "O(9 * n^2)", space: "O(n^2)" },
+  ],
   examples: [
     { label: 'Own: three by three grid', input: '{"grid":[[4,7,2],[9,1,5],[3,8,6]]}' },
     { label: 'Own: ring with a centre value', input: '{"grid":[[2,2,2],[2,5,2],[2,2,2]]}' },

@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with a queries list of query_name, result, position and rating',
   url: 'https://leetcode.com/problems/queries-quality-and-percentage/',
   complexity: 'O(q) to scan q observations, plus a sort of the group names.',
+  question: "Report the quality and poor-query percentage for each query name in a table of query results.",
+  approaches: [
+    { name: "Aggregate per query name", intuition: "Group rows by query name and average the ratio and the poor-rating share.", time: "O(q)", space: "O(names)" },
+  ],
   examples: [
     { label: 'Sample', input: sampleText },
     { label: 'Single query', input: '{\"queries\":[{\"query_name\":\"Dog\",\"result\":\"Rex\",\"position\":1,\"rating\":5}]}' },

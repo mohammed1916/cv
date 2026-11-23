@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with n and x from 1 to 200, e.g. {"n":3,"x":4}',
   url: 'https://leetcode.com/problems/minimum-array-end/',
   complexity: 'O(log n) time and O(1) space. The visualization caps n and x at 200.',
+  question: "Find the smallest possible last value of an increasing sequence of n values where every value keeps all the bits of x.",
+  approaches: [
+    { name: "Fill free bits with the counter", intuition: "Only zero bits of x can change, so the bits of n minus 1 are placed into those free positions from lowest to highest.", time: "O(log n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Seven items, x three', input: '{"n":7,"x":3}' },
     { label: 'Twelve items, x twenty', input: '{"n":12,"x":20}' },

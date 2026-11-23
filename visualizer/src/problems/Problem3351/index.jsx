@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Array of positive integers (JSON)',
   url: 'https://leetcode.com/problems/sum-of-good-subsequences/',
   complexity: 'O(n) expected time with hash maps. The visualization caps the array at 12 values up to 1000.',
+  question: "Sum the values of good subsequences, where a good subsequence has adjacent values differing by exactly one.",
+  approaches: [
+    { name: "Hash maps keyed by value", intuition: "Track the total for subsequences ending in each value, updating from the previous value's total.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Five values, repeats', input: '[5,2,9,2,7]' },
     { label: 'Two equal starts', input: '[1,1,3,8]' },

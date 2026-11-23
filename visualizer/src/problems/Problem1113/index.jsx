@@ -4,6 +4,10 @@ import { buildTrace, parseInput, code, sql, python, phases, inputLabel, complexi
 import { meta } from './meta'
 
 const definition = {
+  question: "Count the posts reported on each day within a window.",
+  approaches: [
+    { name: "Join and group in SQL", intuition: "Keep report rows on the target days, remove duplicate posts, and group by day.", time: "O(n)", space: "O(n)" },
+  ],
   number: meta.number,
   phases,
   parse: parseInput,

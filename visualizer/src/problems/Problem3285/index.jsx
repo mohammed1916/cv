@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with height (array) and threshold',
   url: 'https://leetcode.com/problems/find-indices-of-stable-mountains/',
   complexity: 'O(n) time and O(n) space for the result.',
+  question: "Find the indices of mountains whose height is above a threshold and whose neighbour is not a stable mountain.",
+  approaches: [
+    { name: "Single pass over neighbours", intuition: "Check each index against its neighbour's height in one pass and collect the stable positions.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example', input: '{"height":[5,9,2,8,7,1],"threshold":6}' },
     { label: 'None stable', input: '{"height":[3,1,4],"threshold":9}' },

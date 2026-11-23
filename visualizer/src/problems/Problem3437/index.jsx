@@ -21,6 +21,10 @@ const definition = {
   inputLabel: 'Object with n (e.g. {"n":4})',
   url: "https://leetcode.com/problems/permutations-iii/",
   complexity: "The search extends one path position at a time, trying each of the n values, so the work grows with the search tree; the result list itself grows factorially. The visualization caps n at 6.",
+  question: "Generate permutations of 1 to n in which adjacent values never share the same parity.",
+  approaches: [
+    { name: "Depth-first search with pruning", intuition: "Build the path one value at a time and skip any value with the same parity as the last.", time: "Output-sensitive", space: "O(n)" },
+  ],
   examples: [
     { label: "Three values", input: '{"n":3}' },
     { label: "Four values", input: '{"n":4}' },

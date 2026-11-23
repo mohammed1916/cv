@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Object with points (JSON list of [x, y])',
   url: 'https://leetcode.com/problems/min-cost-to-connect-all-points/',
   complexity: 'O(n^2) time and O(n) space with Prim\'s algorithm and Manhattan distances. The visualization caps n at 15.',
+  question: "Connect all points with the cheapest total Manhattan distance.",
+  approaches: [
+    { name: "Prim's minimum spanning tree", intuition: "Grow the tree from one point, always adding the closest point not yet connected.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Square corners', input: '{"points":[[1,1],[5,1],[1,6],[4,4]]}' },
     { label: 'Line', input: '{"points":[[1,1],[4,1],[7,1]]}' },

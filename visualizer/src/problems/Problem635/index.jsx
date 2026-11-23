@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with ops: put [id, stamp] or retrieve [start, end, granularity]',
   url: 'https://leetcode.com/problems/design-log-storage-system/',
   complexity: 'O(n) per retrieve, where n is the number of stored logs. The visualization caps the input at 20 operations.',
+  question: "Store logs with ids and timestamps, then return the ids whose timestamps fall in a range trimmed to a chosen granularity.",
+  approaches: [
+    { name: "Sorted list with granularity trim", intuition: "Keep logs sorted by timestamp and binary-search the range after trimming the boundary to the chosen unit.", time: "O(log n + answer)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Day range', input: '{"ops":[["put",1,"2018:03:09:23:59:59"],["put",2,"2018:03:10:22:00:00"],["retrieve","2018:03:09:00:00:00","2018:03:10:23:59:59","Day"]]}' },
     { label: 'Hour range', input: '{"ops":[["put",3,"2016:07:14:10:05:00"],["put",4,"2016:07:14:12:00:00"],["retrieve","2016:07:14:10:00:00","2016:07:14:11:00:00","Hour"]]}' },

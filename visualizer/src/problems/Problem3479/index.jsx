@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON {"fruits": [...], "baskets": [...]} (1 to 10 each)',
   url: 'https://leetcode.com/problems/fruits-into-baskets-iii/',
   complexity: 'O(n log m) time with a segment tree over the baskets; the visualization caps both lists at 12 values.',
+  question: "Place each fruit into the leftmost basket with enough capacity, using a segment tree of basket capacities.",
+  approaches: [
+    { name: "Segment tree search", intuition: "Store the largest capacity in each segment and descend to the leftmost fitting basket.", time: "O(n log m)", space: "O(m)" },
+  ],
   examples: [
     { label: 'Three fruits and baskets', input: '{"fruits":[4,9,2],"baskets":[3,7,8]}' },
     { label: 'Five fruits, mixed sizes', input: '{"fruits":[10,1,5,5,2],"baskets":[7,6,1,9,3]}' },

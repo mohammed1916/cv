@@ -14,6 +14,10 @@ const definition = {
   complexity,
   inputLabel: 'JSON array of encoded values (even length, so the permutation length is odd)',
   url: 'https://leetcode.com/problems/decode-xored-permutation/',
+  question: "Recover a permutation from the XOR of each adjacent pair.",
+  approaches: [
+    { name: "Odd positions, then chain", intuition: "The XOR of 1 through n with the odd-index encoded values gives the first element; chain XOR to get the rest.", time: "O(n)", space: "O(n)" },
+  ],
 }
 
 export default function Problem1734Visualizer() {

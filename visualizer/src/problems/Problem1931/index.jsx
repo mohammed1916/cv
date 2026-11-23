@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Grid (JSON object with m rows and n columns)',
   url: 'https://leetcode.com/problems/painting-a-grid-with-three-different-colors/',
   complexity: 'O(n * p^2) time for p = 3 * 2^(m-1) column patterns. The visualization caps the grid at 3 rows and 6 columns.',
+  question: "Count the ways to paint a grid with three colours so that no two adjacent cells share a colour.",
+  approaches: [
+    { name: "Column-pattern DP", intuition: "List the valid colourings of one column, then count transitions between compatible column patterns.", time: "O(cols * P^2)", space: "O(P)" },
+  ],
   examples: [
     { label: 'One cell', input: '{"m":1,"n":1}' },
     { label: 'Three by three', input: '{"m":3,"n":3}' },

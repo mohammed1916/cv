@@ -11,6 +11,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Input (JSON object with nums and k)',
   url: 'https://leetcode.com/problems/find-k-th-smallest-pair-distance/',
   complexity: 'O(n log n + n · log W) time, where W is the value range, and O(1) extra space after sorting.',
+  question: "Find the kth smallest distance among all pairs of values.",
+  approaches: [
+    { name: "Binary search with two-pointer counting", intuition: "Binary search the distance and count pairs within it using a sliding window over the sorted values.", time: "O(n log n + n log W)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Classic', input: '{"nums":[1,3,1],"k":1}' },
     { label: 'Spread', input: '{"nums":[1,6,1],"k":3}' },

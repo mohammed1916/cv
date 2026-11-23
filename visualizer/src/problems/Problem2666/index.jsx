@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with calls, a list of argument lists (e.g. {"calls":[[1,2],[3],[]]})',
   url: "https://leetcode.com/problems/allow-one-function-call/",
   complexity: "O(c) time for c calls, with O(1) extra state beyond the recorded results. The visualization caps calls at 6 with up to 4 integer arguments each; the page caps calls at 6 for teaching. fn is a stand-in that sums its arguments.",
+  question: "Write a wrapper that lets a function run once and returns its first result on every later call.",
+  approaches: [
+    { name: "Flag and cached result", intuition: "Store whether the function has run and reuse the saved result after the first call.", time: "O(1)", space: "O(1)" },
+  ],
   examples: [
     { label: "Example", input: '{"calls":[[1,2],[3],[]]}' },
     { label: "Single call", input: '{"calls":[[4]]}' },

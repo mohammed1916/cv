@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Three integer arrays (JSON)',
   url: 'https://leetcode.com/problems/two-out-of-three/',
   complexity: 'O(n1 + n2 + n3) expected time with hash sets.',
+  question: "Return the values that appear in at least two of three arrays.",
+  approaches: [
+    { name: "Presence bitmasks", intuition: "Record which arrays contain each value as a bitmask, and keep values with at least two bits set.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Common pair', input: '{"nums1":[7,8],"nums2":[8,9],"nums3":[4,9]}' },
     { label: 'Repeats', input: '{"nums1":[5,5,5],"nums2":[6],"nums3":[7]}' },

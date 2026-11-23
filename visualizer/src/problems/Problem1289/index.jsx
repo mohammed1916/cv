@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Square grid (JSON object with a grid of integers from -9 to 9, up to 5 by 5)',
   url: 'https://leetcode.com/problems/minimum-falling-path-sum-ii/',
   complexity: 'O(n^3) time with the smallest value outside a column found by a scan. The visualization caps the grid at 5 by 5.',
+  question: "Find the minimum sum of a falling path through a grid that never uses the same column in consecutive rows.",
+  approaches: [
+    { name: "Row DP keeping the best two", intuition: "Keep the smallest and second smallest totals of the previous row so each column can skip its own.", time: "O(n^3)", space: "O(n^2)" },
+  ],
   examples: [
     { label: 'Official', input: '{"grid":[[1,2,3],[4,5,6],[7,8,9]]}' },
     { label: 'Same column', input: '{"grid":[[1,5],[1,9]]}' },

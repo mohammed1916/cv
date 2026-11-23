@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Seats (JSON object with seats as rows of . (working) and # (broken))',
   url: 'https://leetcode.com/problems/maximum-students-taking-exam/',
   complexity: 'O(rows * 4^cols) time with one bitmask per seating. The visualization caps the hall at 5 rows and 4 columns.',
+  question: "Seat the most students in a hall so no one can see a neighbour's paper.",
+  approaches: [
+    { name: "Row bitmask DP", intuition: "Each row's seating is a bitmask, and rows are linked only to compatible masks.", time: "O(rows 4^cols)", space: "O(4^cols)" },
+  ],
   examples: [
     { label: 'Two rows', input: '{"seats":[".#..","#..#"]}' },
     { label: 'Full hall', input: '{"seats":["....","....","...."]}' },

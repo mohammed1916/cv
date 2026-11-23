@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON array of positive integers, e.g. [5,19,8,1]',
   url: 'https://leetcode.com/problems/minimum-operations-to-halve-array-sum/',
   complexity: 'O(n + k log n) time with a heap, where k is the number of halvings. The page caps the array at 8 values up to 20.',
+  question: "Find the fewest halving operations needed to reduce the sum of an array by at least half.",
+  approaches: [
+    { name: "Max-heap greedy", intuition: "Always halve the current largest value, since that removes the most sum.", time: "O(n log n + k log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Mixed', input: '[5,19,8,1]' },
     { label: 'Small trio', input: '[3,8,20]' },

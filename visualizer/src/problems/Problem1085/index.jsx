@@ -4,6 +4,10 @@ import { buildTrace, parseInput, code, python, phases, examples, complexity, inp
 import { Sequence, Vars } from './SeqKit'
 
 const definition = {
+  question: "Find the smallest value in an array, then report whether the sum of its digits is odd or even.",
+  approaches: [
+    { name: "Scan and digit sum", intuition: "Track the smallest value in one pass, then add its digits.", time: "O(n + d)", space: "O(1)" },
+  ],
   number: meta.number, phases, parse: parseInput, build: buildTrace, code, python, inputLabel,
   url: `https://leetcode.com/problems/${meta.slug}/`, complexity, examples,
 }

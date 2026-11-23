@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'JSON array of integers',
   url: 'https://leetcode.com/problems/minimum-prefix-removal-to-make-array-strictly-increasing/',
   complexity: 'O(n) time and O(1) extra space. The scan walks left once from the end.',
+  question: "Remove the shortest prefix so that the remaining suffix is strictly increasing.",
+  approaches: [
+    { name: "Backward scan", intuition: "Walk from the end while values keep increasing; the removed prefix is what remains before that point.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example', input: '[1, 3, 2, 4]' },
     { label: 'Already increasing', input: '[1, 2, 3]' },

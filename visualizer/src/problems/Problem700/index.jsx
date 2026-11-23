@@ -11,6 +11,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'BST and value (JSON object with root and val)',
   url: 'https://leetcode.com/problems/search-in-a-binary-search-tree/',
   complexity: 'O(h) time for height h, and O(1) extra space for the iterative walk.',
+  question: "Find the subtree rooted at the node holding a target value in a binary search tree.",
+  approaches: [
+    { name: "Iterative BST search", intuition: "Move left or right by comparing values until the target is found.", time: "O(h)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Found', input: '{"root":[8,3,10,1,6,null,14],"val":6}' },
     { label: 'Left side', input: '{"root":[8,3,10,1,6,null,14],"val":1}' },

@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Image (JSON array of 0/1 rows)',
   url: 'https://leetcode.com/problems/flipping-an-image/',
   complexity: 'O(n^2) time and O(1) extra space when the image is changed in place.',
+  question: "Flip an image horizontally and then invert each pixel.",
+  approaches: [
+    { name: "Two-pointer swap and invert", intuition: "Swap mirrored pixels from both ends of each row while inverting them.", time: "O(n^2)", space: "O(1) extra" },
+  ],
   examples: [
     { label: 'Three by three', input: '[[1,0,0],[0,1,1],[1,0,1]]' },
     { label: 'Two by two', input: '[[0,1],[1,1]]' },

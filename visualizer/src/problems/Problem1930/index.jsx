@@ -11,6 +11,10 @@ const definition = {
   inputLabel: 'Lowercase string (e.g. abcaba)',
   url: 'https://leetcode.com/problems/unique-length-3-palindromic-subsequences/',
   complexity: 'O(26 n) time with a scan of the outer pair for each letter.',
+  question: "Count distinct length-three palindromes that can be formed as subsequences of a string.",
+  approaches: [
+    { name: "First and last occurrence per letter", intuition: "For each letter, count distinct letters that appear between its first and last occurrence.", time: "O(26 n)", space: "O(26)" },
+  ],
   examples: [
     { label: 'Repeated outer letters', input: 'abcaba' },
     { label: 'Short', input: 'aabca' },

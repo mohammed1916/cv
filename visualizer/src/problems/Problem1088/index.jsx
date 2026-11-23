@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Integer n from 1 to 1000 (e.g. 20)',
   url: 'https://leetcode.com/problems/confusing-number-ii/',
   complexity: 'O(V) time and O(depth) recursion space, where V is the number of valid digit strings up to n (at most about 5 per digit). The visualization caps n at 1000; the official bound was not verified.',
+  question: "Count the numbers up to n that are confusing: rotating every digit gives a valid number that differs from the original.",
+  approaches: [
+    { name: "DFS building valid numbers", intuition: "Grow numbers from rotatable digits, prune when they exceed n, and check each candidate for a different rotation.", time: "O(V)", space: "O(depth)" },
+  ],
   examples: [
     { label: 'n = 30', input: '30' },
     { label: 'n = 250', input: '250' },

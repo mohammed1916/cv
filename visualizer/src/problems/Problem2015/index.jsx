@@ -8,6 +8,10 @@ const definition = {
   inputLabel: 'Buildings as [start, end, height] (JSON)',
   url: 'https://leetcode.com/problems/average-height-of-buildings-in-each-segment/',
   complexity: 'O(b log b) time for b buildings: sort the boundaries, then one sweep.',
+  question: "For each segment of the number line, find the average height of the buildings covering it.",
+  approaches: [
+    { name: "Sweep with events", intuition: "Sort building endpoints, track the running total and count of heights, and emit each segment's average.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Overlap', input: '[[2,5,8],[3,6,4]]' },
     { label: 'Equal averages', input: '[[1,3,4],[3,6,4]]' },

@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with arrival (arrival times) and state (0 enter, 1 exit) per person',
   url: "https://leetcode.com/problems/time-taken-to-cross-the-door/description/",
   complexity: "O(T * n) time for T simulated seconds and n people, O(n) space. The visualization caps people at 10 and arrival times at 0 to 20;",
+  question: "People cross a door one at a time under a queueing rule, and you need each person's crossing time.",
+  approaches: [
+    { name: "Second-by-second simulation", intuition: "Step through the seconds, letting the door serve the next eligible person each time.", time: "O(T * n)", space: "O(n)" },
+  ],
   examples: [
     { label: "Example", input: '{"arrival":[0,1,1],"state":[0,1,0]}' },
     { label: "Idle gap", input: '{"arrival":[0,3,3],"state":[1,0,1]}' },

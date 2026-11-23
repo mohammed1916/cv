@@ -17,7 +17,7 @@ const examples = [
   { label: 'Long run: 12 users', input: '{"user_permissions":[{"user_id":1,"permissions":336880},{"user_id":2,"permissions":231385},{"user_id":3,"permissions":806300},{"user_id":4,"permissions":929367},{"user_id":5,"permissions":285770},{"user_id":6,"permissions":427643},{"user_id":7,"permissions":517848},{"user_id":8,"permissions":45310},{"user_id":9,"permissions":883472},{"user_id":10,"permissions":494759},{"user_id":11,"permissions":166950},{"user_id":12,"permissions":559355}]}' },
 ]
 
-const definition = { number: meta.number, phases, parse: parseInput, build: buildTrace, code, sql, python, inputLabel, complexity, examples }
+const definition = { question: "From a table of user permissions, classify each user by the permissions their integer value encodes.", approaches: [{ name: "Check each user's bits", intuition: "Each user's integer is inspected bit by bit, so the work is constant per user.", time: "O(n)", space: "O(n)" }], number: meta.number, phases, parse: parseInput, build: buildTrace, code, sql, python, inputLabel, complexity, examples }
 
 const tableStyle = { borderCollapse: 'collapse', width: '100%', fontSize: '0.9rem' }
 const cellStyle = { border: '1px solid currentColor', padding: '0.3rem 0.5rem', textAlign: 'left' }

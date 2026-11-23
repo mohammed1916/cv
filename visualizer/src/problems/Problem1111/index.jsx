@@ -4,6 +4,10 @@ import { meta } from './meta'
 import { buildTrace, parseInput, code, python, pythonLineMap, phases, examples, complexity, inputLabel } from './algorithm'
 
 const definition = {
+  question: "Split a valid parentheses string into two valid strings so that the larger of their maximum depths is as small as possible.",
+  approaches: [
+    { name: "Depth parity assignment", intuition: "Give each bracket the group that matches the parity of its depth, so both groups stay shallow.", time: "O(n)", space: "O(n)" },
+  ],
   number: meta.number, phases, parse: parseInput, build: buildTrace, code, python, pythonLineMap,
   inputLabel, url: `https://leetcode.com/problems/${meta.slug}/`, complexity, examples,
 }

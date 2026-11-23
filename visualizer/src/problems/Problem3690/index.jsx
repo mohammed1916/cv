@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with nums1 and nums2 (equal length, 2 to 6, permutation)',
   url: 'https://leetcode.com/problems/split-and-merge-array-transformation/',
   complexity: 'Breadth-first search over distinct arrangements, at most 6! states. The visualization caps length at 6.',
+  question: "Find the fewest split-and-merge operations that turn one array into another.",
+  approaches: [
+    { name: "Breadth-first search over arrangements", intuition: "Search over distinct arrangements, applying split-and-merge moves level by level.", time: "O(n!)", space: "O(n!)" },
+  ],
   examples: [
     { label: 'One move', input: '{"nums1":[2,3,1,4],"nums2":[1,4,2,3]}' },
     { label: 'Three moves', input: '{"nums1":[1,2,3,4,5],"nums2":[5,4,3,2,1]}' },

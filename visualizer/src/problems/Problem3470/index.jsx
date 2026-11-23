@@ -11,6 +11,10 @@ const definition = {
   inputLabel: 'JSON {"n": 1-8, "k": rank among alternating permutations}',
   url: 'https://leetcode.com/problems/permutations-iv/',
   complexity: 'O(n^2) candidate checks with memoised completion counts, each O(n^2) states. The visualization caps n at 8.',
+  question: "Count permutations of 1 to n whose adjacent elements alternate between odd and even in a required way.",
+  approaches: [
+    { name: "Memoized completion counts", intuition: "Count completions for each remaining odd and even count and last parity.", time: "O(n^2)", space: "O(n^2)" },
+  ],
   examples: [
     { label: 'n 3, k 2', input: '{"n":3,"k":2}' },
     { label: 'n 4, k 2', input: '{"n":4,"k":2}' },

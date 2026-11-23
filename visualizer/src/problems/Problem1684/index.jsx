@@ -8,6 +8,10 @@ const definition = {
   inputLabel: 'Object with allowed and words (JSON)',
   url: `https://leetcode.com/problems/${meta.slug}/`,
   complexity: 'O(total length of the words) time with a set of allowed letters; each letter is checked once.',
+  question: "Count the words whose letters all appear in an allowed set.",
+  approaches: [
+    { name: "Set membership check", intuition: "Build a set of allowed letters, then check each word's letters against it.", time: "O(total length)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Mixed', input: '{"allowed":"ab","words":["ab","ba","aab","abc","ca"]}' },
     { label: 'All allowed', input: '{"allowed":"xyz","words":["zyx","xyzz"]}' },

@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with n and a strictly increasing sick array (JSON)',
   url: 'https://leetcode.com/problems/count-the-number-of-infection-sequences/',
   complexity: 'O(n log MOD) time for the modular inverses. The visualization caps n at 10.',
+  question: "Count the infection sequences for a line of healthy people between sick ones.",
+  approaches: [
+    { name: "Multinomial over gaps", intuition: "Count the orderings of the healthy people inside each gap with factorial ratios, then combine with the end-gap rules.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Six positions, sick at ends', input: '{"n":6,"sick":[0,4]}' },
     { label: 'Two ends', input: '{"n":5,"sick":[0,4]}' },

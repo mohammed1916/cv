@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Object with nums (JSON)',
   url: 'https://leetcode.com/problems/minimum-numbers-of-function-calls-to-make-target-array/',
   complexity: 'O(n log M) time and O(1) extra space, where M is the largest value: count bits per element, then take the bit length of the maximum.',
+  question: "Count the minimum number of operations to build an array from zeros with increment and double steps.",
+  approaches: [
+    { name: "Count bits", intuition: "Each set bit is one increment, and the largest value gives the number of doublings.", time: "O(n log M)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Mixed values', input: '{"nums":[3,5,1]}' },
     { label: 'Equal powers', input: '{"nums":[8,8]}' },

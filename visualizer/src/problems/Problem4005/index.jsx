@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Object with nums (integers from 1 to 1000000000)',
   url: 'https://leetcode.com/problems/minimum-operations-to-make-array-equal-iii/',
   complexity: 'With D distinct values up to V, finding divisors takes O(D·√V) and the tallies take time proportional to the total divisor count, at most 1344 per value. At full size, trial division by primes up to √V is needed in place of the simple loop. The visualization caps nums at 12 entries.',
+  question: "Each move scales a value up by a factor or down by an exact divisor; find the fewest moves to make every value equal.",
+  approaches: [
+    { name: "Divisor tallies", intuition: "Find the divisors of each distinct value and tally the shared targets they reach.", time: "O(D x sqrt(V) + total divisors)", space: "O(total divisors)" },
+  ],
   examples: [
     { label: 'A chain and a stranger', input: '{"nums":[4,8,16,7]}' },
     { label: 'Duplicates win', input: '{"nums":[9,9,9,4,5]}' },

@@ -61,6 +61,10 @@ const definition = {
   inputLabel: 'Object with a UserVisits list of { user_id, visit_date } rows; dates are YYYY-MM-DD on or before 2021-01-01',
   url: 'https://leetcode.com/problems/biggest-window-between-visits/',
   complexity: 'O(n log n) to sort the visits by user and date, then one pass for the windows.',
+  question: "For each user, find the longest gap between consecutive visits by date.",
+  approaches: [
+    { name: "Sort then scan", intuition: "Sort visits by user and date, then measure the gaps between consecutive visits for each user.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example', input: '{"UserVisits":[{"user_id":2,"visit_date":"2020-06-15"},{"user_id":1,"visit_date":"2020-12-01"},{"user_id":3,"visit_date":"2020-12-31"},{"user_id":1,"visit_date":"2020-01-01"},{"user_id":3,"visit_date":"2020-12-31"},{"user_id":1,"visit_date":"2020-01-11"}]}' },
   { label: 'One visit', input: '{"UserVisits":[{"user_id":4,"visit_date":"2020-05-05"}]}' },

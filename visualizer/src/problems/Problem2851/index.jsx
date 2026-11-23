@@ -12,6 +12,11 @@ const definition = {
   inputLabel: 'Object with s, t (equal length) and k (1 to 8)',
   url: 'https://leetcode.com/problems/string-transformation/',
   complexity: 'O(n * k) time with the two-count recurrence, O(n) extra space. The visualization caps n at 6 and k at 8.',
+  question: "Count the ways to turn one string into another in exactly k operations, where each operation rotates the string by a chosen amount.",
+  approaches: [
+    { name: "Rotation count with two-state recurrence", intuition: "Count the rotations that map s to t, then use a recurrence on how many steps stay on or leave the matching state.", time: "O(n k)", space: "O(n)" },
+    { name: "Matrix power over transitions", intuition: "Model the two kinds of state as a transition matrix and raise it to the k-th power.", time: "O(log k)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Four letters, k of three', input: '{"s":"wxyz","t":"yzwx","k":3}' },
     { label: 'Two letters', input: '{"s":"ab","t":"ba","k":1}' },

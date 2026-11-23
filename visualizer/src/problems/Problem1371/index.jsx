@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Text (JSON object with s)',
   url: 'https://leetcode.com/problems/find-the-longest-substring-containing-vowels-in-even-counts/',
   complexity: 'O(n) time and O(1) extra space: at most 32 parity masks are stored. The visualization accepts up to 200 letters.',
+  question: "Find the longest substring where each vowel appears an even number of times.",
+  approaches: [
+    { name: "Parity mask prefix map", intuition: "Each prefix has a 5-bit parity mask, and equal masks bound an even-count substring.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Double a', input: '{"s":"aa"}' },
     { label: 'Mixed', input: '{"s":"xaabyy"}' },

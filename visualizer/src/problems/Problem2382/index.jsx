@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'nums and remove_queries as JSON, e.g. {"nums": [1,2,5,6,1], "remove_queries": [0,3,2,4,1]}',
   url: 'https://leetcode.com/problems/maximum-segment-sum-after-removals/',
   complexity: 'O(n α(n)) time with union-find. The visualization caps nums at 8 values.',
+  question: "After removing values one at a time, find the largest segment sum among the remaining segments after each removal.",
+  approaches: [
+    { name: "Reverse union-find", intuition: "Add the values back in reverse order with union-find, tracking the largest segment sum.", time: "O(n alpha(n))", space: "O(n)" },
+  ],
   examples: [
     { label: 'Own: four values, reverse order', input: '{"nums":[4,9,2,7],"remove_queries":[2,0,3,1]}' },
     { label: 'Single element', input: '{"nums":[5],"remove_queries":[0]}' },

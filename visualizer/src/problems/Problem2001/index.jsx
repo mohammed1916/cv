@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Rectangles as [width, height] (JSON)',
   url: 'https://leetcode.com/problems/number-of-pairs-of-interchangeable-rectangles/',
   complexity: 'O(n log C) time for the gcd of each rectangle and O(n) map operations.',
+  question: "Count pairs of rectangles whose width-to-height ratios are equal.",
+  approaches: [
+    { name: "Reduced ratio counts", intuition: "Reduce each ratio by its gcd and count equal ratios with a hash map.", time: "O(n log V)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Three pairs', input: '[[2,4],[1,2],[3,6],[5,7]]' },
     { label: 'No match', input: '[[4,5],[7,8]]' },

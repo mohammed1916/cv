@@ -63,6 +63,11 @@ function makeDefinition(approach) {
         {[0,4,8,12].map(t => <text key={t} x={40 + t * 26 - 4} y="126" fontSize="10" fill="currentColor">{t}</text>)}
       </svg>
     ),
+    question: "For k servers and a stream of requests, find which servers handled the most requests.",
+    approaches: [
+      { name: "Sorted free list with binary search", intuition: "Keep free servers in a sorted list, search it with binary search, and keep busy servers in a heap ordered by finish time.", time: "O(m log k)", space: "O(k + m)" },
+      { name: "Virtual keys in two heaps", intuition: "Encode the circular order as numeric keys in a heap of free servers, with a second heap for busy ones.", time: "O(m log k)", space: "O(k + m)" },
+    ],
     goal: {"summary": "Given k servers and a list of requests, find which server handled the most requests.", "requirement": ["Request i arrives at time arrival[i] and needs load[i] time units on one server.", "Each request tries the server at index i mod k first, then the next indexes in order, wrapping around to 0. It goes to the first server that is free at its arrival time.", "If every server is busy, the request is dropped and counts for no server.", "Return the indexes of the server or servers with the highest number of handled requests, in increasing order.", "Input limits used by this visualizer: 1–6 servers, 1–12 requests, arrival times strictly increasing from 1 to 60, loads from 1 to 20."], "example": "k = 2, arrival = [1, 2, 3, 8], load = [10, 5, 1, 1]. Request 1 takes server 0 (busy until 11). Request 2 takes server 1 (busy until 7). Request 3 finds both busy and is dropped. Request 4 starts at server 0, which is still busy, then moves to server 1, which is free at time 8. Server 1 handled two requests, so the answer is [1]."},
     url: 'https://leetcode.com/problems/find-servers-that-handled-most-number-of-requests/',
     complexity: virtual

@@ -14,6 +14,11 @@ const definition = {
   inputLabel: 'JSON object with nums',
   url: 'https://leetcode.com/problems/count-complete-subarrays-in-an-array/',
   complexity: 'O(n) expected time with a frequency map. The visualization caps input at 12 values.',
+  question: "Count the subarrays that contain every distinct value present in the whole array.",
+  approaches: [
+    { name: "Sliding window with a frequency map", intuition: "For each left edge, the smallest right edge that covers all values gives the count of valid ends.", time: "O(n) expected", space: "O(n)" },
+    { name: "Check every subarray", intuition: "Test each subarray for the full set of distinct values.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"nums":[1,2,3,1,2,3]}' },
     { label: 'Equal values', input: '{"nums":[6,6,6]}' },

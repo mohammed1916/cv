@@ -12,6 +12,11 @@ const definition = {
   inputLabel: 'A JSON string of lowercase letters, for example "abcabcabc"',
   url: 'https://leetcode.com/problems/distinct-echo-substrings/',
   complexity: 'O(n^3) time in this direct form, with O(1) hash comparisons. The visualization caps input at 20 letters.',
+  question: "Count distinct substrings made of a block repeated twice in a row.",
+  approaches: [
+    { name: "Length and start enumeration", intuition: "Try each even length and start, compare the two halves, and store the distinct echoes in a set.", time: "O(n^3)", space: "O(n^2)" },
+    { name: "Rolling hash comparison", intuition: "Compare halves with hashes in constant time, which speeds up the same enumeration.", time: "O(n^2)", space: "O(n^2)" },
+  ],
   examples: [
     { label: 'Interleaved repeats', input: '"mnmnopmn"' },
     { label: 'Repeated letter', input: '"aaaa"' },

@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with s1, s2 and s3, each lowercase letters',
   url: 'https://leetcode.com/problems/make-three-strings-equal/',
   complexity: 'O(min length) time and O(1) extra space. The visualization caps each string at 20 letters.',
+  question: "Find the fewest deletions from the ends of three strings that make them equal, or report that it is impossible.",
+  approaches: [
+    { name: "Common prefix length", intuition: "Take the longest prefix shared by all three strings, since only deletions from the ends are allowed.", time: "O(min length)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Shared start', input: '{"s1":"xyzab","s2":"xyzq","s3":"xyz"}' },
     { label: 'No shared start', input: '{"s1":"ab","s2":"cd","s3":"ef"}' },

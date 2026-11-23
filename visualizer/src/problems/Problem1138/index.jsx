@@ -19,6 +19,10 @@ const definition = {
   inputLabel: 'JSON object with a lowercase target string',
   url: 'https://leetcode.com/problems/alphabet-board-path/',
   complexity: 'O(n) time for n target letters, since each move is computed from row and column arithmetic. The visualization caps the target at 100 letters.',
+  question: "Give the moves on a letter board that spell a target word, starting from a top-left position.",
+  approaches: [
+    { name: "Coordinate arithmetic", intuition: "Each letter has a row and column; move vertically and horizontally, and handle the last row specially.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"target":"leet"}' },
     { label: 'Example 2', input: '{"target":"code"}' },

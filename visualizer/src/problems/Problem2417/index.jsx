@@ -12,6 +12,10 @@ const definition = {
   inputLabel: "Positive integer n (e.g. 2)",
   url: "https://leetcode.com/problems/closest-fair-integer/description/",
   complexity: "O(d * k) time for k candidates tested, each with d digits. The visualization caps n at 1000 and walks upward one candidate at a time.",
+  question: "Find the smallest integer at least n whose even digits and odd digits are equal in count.",
+  approaches: [
+    { name: "Test candidates upward", intuition: "Start at n and test each following number until one has equal even and odd digit counts.", time: "O(d * k)", space: "O(1)" },
+  ],
   examples: [
     { label: "Example", input: "2" },
     { label: "Already fair", input: "10" },

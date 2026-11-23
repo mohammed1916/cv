@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with a and b (two integer lists)',
   url: 'https://leetcode.com/problems/array-wrapper/',
   complexity: 'O(length of each list) to sum, plus constant work for the conversions.',
+  question: "Write an array-like wrapper class whose values can be summed and converted to strings.",
+  approaches: [
+    { name: "Sum on demand", intuition: "Add the stored values when asked, and format them into the string form.", time: "O(length)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Two wrappers', input: '{"a":[1,2],"b":[3]}' },
     { label: 'Negative values', input: '{"a":[],"b":[-4,1]}' },

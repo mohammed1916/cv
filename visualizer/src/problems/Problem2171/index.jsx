@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Bag sizes as JSON, e.g. [4,1,6,5]',
   url: 'https://leetcode.com/problems/removing-minimum-number-of-magic-beans/',
   complexity: 'O(n log n) time for the sort and O(n) for the scan. The visualization caps the bags at 12, each from 1 to 20.',
+  question: "Remove the fewest magic beans so that every remaining non-empty bag holds the same number of beans.",
+  approaches: [
+    { name: "Sort and try each bag as the target", intuition: "Sort the bags; if the target is a bag's count, remove the smaller bags entirely and trim the larger ones to match.", time: "O(n log n)", space: "O(1) extra" },
+  ],
   examples: [
     { label: 'Four bags', input: '[4,1,6,5]' },
     { label: 'Repeated size', input: '[2,10,3,2]' },

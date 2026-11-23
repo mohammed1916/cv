@@ -13,6 +13,11 @@ const definition = {
   inputLabel: 'JSON array of non-negative integers, for example {"nums":[3,1,3,2,0]}',
   url: 'https://leetcode.com/problems/find-maximum-balanced-xor-subarray-length/',
   complexity: 'O(n) expected time with a hash map. The visualization caps the array at 12 values.',
+  question: "Find the longest subarray whose prefix-XOR and even-minus-odd balance pair repeats.",
+  approaches: [
+    { name: "Prefix key with first occurrence", intuition: "Use prefix XOR and the balance as one key, and keep the first position where each key appears.", time: "O(n) expected", space: "O(n)" },
+    { name: "Check every subarray", intuition: "Compare each subarray directly.", time: "O(n^2)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"nums":[3,1,3,2,0]}' },
     { label: 'Example 3', input: '{"nums":[0]}' },

@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Intervals (JSON object with intervals)',
   url: 'https://leetcode.com/problems/number-of-intersecting-interval-pairs-i/',
   complexity: 'O(n²) time and O(1) extra space. The visualization caps input at 12 intervals.',
+  question: "Count the pairs of closed intervals that share at least one point, including a shared endpoint.",
+  approaches: [
+    { name: "Pairwise check", intuition: "Check each pair of intervals for overlap, including endpoints.", time: "O(n^2)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"intervals":[[1,2],[2,3],[3,4]]}' },
     { label: 'Example 2', input: '{"intervals":[[1,5],[2,4],[3,6]]}' },

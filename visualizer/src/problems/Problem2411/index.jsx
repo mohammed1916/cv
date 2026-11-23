@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON {"nums": [1, 0, 2, 1, 3]}',
   url: 'https://leetcode.com/problems/smallest-subarrays-with-maximum-bitwise-or/',
   complexity: 'O(n * b) time and O(b) extra space for b bits. The visualization uses four bits.',
+  question: "For each index, find the smallest subarray starting there whose bitwise OR is the largest possible.",
+  approaches: [
+    { name: "Last seen bit positions", intuition: "For each bit, track the nearest index that sets it, and the subarray must reach the furthest such index.", time: "O(n * b)", space: "O(b)" },
+  ],
   examples: [
     { label: 'Own: six values', input: '{"nums":[0,0,5,3,6,1]}' },
     { label: 'Two', input: '{"nums":[1,2]}' },

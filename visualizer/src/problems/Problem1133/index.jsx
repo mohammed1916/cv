@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Object with a list nums (JSON)',
   url: 'https://leetcode.com/problems/largest-unique-number/',
   complexity: 'O(n) time to count and O(k log k) to order the k distinct values, with O(k) extra space. The visualization caps the list at 20 entries.',
+  question: "Return the largest number that appears exactly once, or -1 when none does.",
+  approaches: [
+    { name: "Count then scan", intuition: "Count frequencies, then scan the values that appear once for the largest.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Mixed repeats', input: '{"nums":[5,7,7,3,5,9]}' },
     { label: 'No unique value', input: '{"nums":[4,4,2,2]}' },

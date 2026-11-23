@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON: {"n", "edges": [[u, v, w], ...], "source", "target", "k"}',
   url: 'https://leetcode.com/problems/minimum-threshold-path-with-limited-heavy-edges/',
   complexity: 'O(E log E) for sorting the thresholds, plus one O(V + E) 0-1 search per threshold. The visualization caps n at 8.',
+  question: "Find the smallest threshold weight for which the target is reachable from the source using at most k edges heavier than that threshold.",
+  approaches: [
+    { name: "Thresholds with a 0-1 search", intuition: "Try thresholds in increasing order and run a 0-1 search that counts heavy edges.", time: "O(E log E) sort, plus O(V + E) per threshold", space: "O(V + E)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"n":6,"edges":[[0,1,5],[1,2,3],[3,4,4],[4,5,1],[1,4,2]],"source":0,"target":3,"k":1}' },
     { label: 'Example 2', input: '{"n":6,"edges":[[0,1,3],[1,2,4],[3,4,5],[4,5,6]],"source":0,"target":4,"k":1}' },

@@ -17,6 +17,10 @@ const definition = {
   inputLabel: 'Decimal digits (1 to 30), e.g. 2581 or "90210"',
   url: 'https://leetcode.com/problems/minimum-rotations-to-dial-a-number-ii/',
   complexity: 'O(n) time and O(n) space for n digits. The visualization caps the string at 30 digits; the official limit is 100000.',
+  question: "Find the fewest dial rotations needed when one tail of the digit string may be reversed before dialing.",
+  approaches: [
+    { name: "Suffix pricing sweep", intuition: "Price every tail reversal in one sweep, since only its link into the prefix changes the cost.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Reverse the tail', input: '91' },
     { label: 'Mixed digits', input: '3072' },

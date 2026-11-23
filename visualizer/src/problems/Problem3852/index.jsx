@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Array (JSON object with nums)',
   url: 'https://leetcode.com/problems/smallest-pair-with-different-frequencies/',
   complexity: 'O(n + d^2) time where d is the number of distinct values. The visualization caps input at 30 values.',
+  question: "Find the smallest pair of values x and y, with y larger than x, whose counts differ.",
+  approaches: [
+    { name: "Count then scan", intuition: "Count each value once, then take the smallest x and the smallest larger y with a different count.", time: "O(n + d^2)", space: "O(d)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"nums":[1,1,2,2,3,4]}' },
     { label: 'No pair', input: '{"nums":[1,5]}' },

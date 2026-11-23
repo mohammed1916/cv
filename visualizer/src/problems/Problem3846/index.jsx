@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with s (lowercase letters, up to 40)',
   url: 'https://leetcode.com/problems/total-distance-to-type-a-string-using-one-finger/',
   complexity: 'O(n) time for a string of length n, with a fixed 26-key lookup table.',
+  question: "Total the keyboard distance of typing a string with one finger on a three-row keyboard.",
+  approaches: [
+    { name: "Coordinates and Manhattan steps", intuition: "Give each key a row and column, then add the steps between consecutive letters.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Short word', input: '{"s":"gnome"}' },
     { label: 'Corner keys', input: '{"s":"zpqm"}' },

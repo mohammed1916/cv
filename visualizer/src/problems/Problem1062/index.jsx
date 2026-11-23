@@ -19,6 +19,10 @@ const definition = {
   inputLabel: 'Object with a string s',
   url: 'https://leetcode.com/problems/longest-repeating-substring/description/',
   complexity: 'O(n^2) time and O(n^2) space for a string of length n, using a table of runs for each pair of positions. The visualization caps s at 20 characters; the official bound is not verified.',
+  question: "Find the length of the longest substring that occurs at least twice, possibly overlapping.",
+  approaches: [
+    { name: "Pairwise run table", intuition: "For each pair of start positions, track the matching run length; the largest run between distinct starts is the answer.", time: "O(n^2)", space: "O(n^2)" },
+  ],
   examples: [
     { label: 'Overlapping pair', input: '{"s":"banana"}' },
     { label: 'No repeat', input: '{"s":"qwerty"}' },

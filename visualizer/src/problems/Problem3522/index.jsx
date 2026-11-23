@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'JSON object with instructions ("add" or "jump") and values',
   url: 'https://leetcode.com/problems/calculate-score-after-performing-instructions/',
   complexity: 'O(n) time and O(n) space, since each instruction runs at most once. The visualization caps the list at 20.',
+  question: "Run a list of instructions that move through a sequence, scoring each step, until an instruction repeats.",
+  approaches: [
+    { name: "Simulate with visited set", intuition: "Follow the instructions once each, adding scores until a repeat.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Three steps, mixed', input: '{"instructions":["jump","add","jump"],"values":[2,-3,4]}' },
     { label: 'Example 2', input: '{"instructions":["add","jump","add","add"],"values":[3,-2,5,1]}' },

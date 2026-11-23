@@ -11,6 +11,10 @@ const definition = {
   inputLabel: 'Object with s, a string of lowercase letters and digits',
   url: 'https://leetcode.com/problems/mirror-frequency-distance/',
   complexity: 'O(n) to count plus a constant number of mirror pairs. The visual caps s at 60 characters.',
+  question: "Pair each letter and digit with its mirror and add up the frequency gaps across the pairs.",
+  approaches: [
+    { name: "Count and pair mirrors", intuition: "Count every letter and digit, then add the gap between each mirror pair.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example A', input: '{"s":"aaz9"}' },
     { label: 'Example B', input: '{"s":"0912"}' },

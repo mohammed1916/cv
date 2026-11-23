@@ -11,6 +11,10 @@ const definition = {
   python,
   inputLabel: 'JSON: {"words":[...],"chars":"..."}',
   complexity: 'O(total word length + chars) time with O(26) counts. The trace accepts up to 6 words of up to 6 letters and 20 supply letters.',
+  question: "Count the total length of the words that can be spelled using only the letters available in a bag of characters.",
+  approaches: [
+    { name: "Letter count comparison", intuition: "Count letters in the bag and in each word, and keep a word only when every letter count is covered.", time: "O(total word length + chars)", space: "O(26)" },
+  ],
   examples: [
     { label: 'Three words', input: '{"words":["ab","bc","abc"],"chars":"abcc"}' },
     { label: 'Missing copy', input: '{"words":["aa","b"],"chars":"a"}' },

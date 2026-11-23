@@ -12,6 +12,11 @@ const definition = {
   inputLabel: 'Object with n and queries (JSON)',
   url: 'https://leetcode.com/problems/increment-submatrices-by-one/',
   complexity: 'O(n^2 + q) time and O(n^2) space. The visualization caps input at 8 by 8 with 8 queries.',
+  question: "Each query adds one to every cell of a square submatrix; return the final grid.",
+  approaches: [
+    { name: "Difference array with prefix sums", intuition: "Mark the corners of each query in a difference grid, then accumulate it into the final values.", time: "O(n^2 + q)", space: "O(n^2)" },
+    { name: "Apply each query directly", intuition: "Add one to every cell of each query's square.", time: "O(q * n^2)", space: "O(n^2)" },
+  ],
   examples: [
     { label: 'Full grid then a strip', input: '{"n":5,"queries":[[0,0,4,4],[1,2,3,3],[4,0,4,2]]}' },
     { label: 'Single cell', input: '{"n":1,"queries":[[0,0,0,0]]}' },

@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON array of paths, each an array of city ids',
   url: 'https://leetcode.com/problems/longest-common-subpath/',
   complexity: 'O(S log m) expected time for S total cities and shortest path m, using rolling hashes. The visualization caps input at 4 paths of 8 cities.',
+  question: "Find the length of the longest sequence that appears as a contiguous path in every given country route.",
+  approaches: [
+    { name: "Binary search with rolling hash", intuition: "Binary search the length, and check with rolling hashes whether a shared window of that length exists in every route.", time: "O(T log L)", space: "O(T)" },
+  ],
   examples: [
     { label: 'Three routes over five cities', input: '[[2,0,4],[3,1],[1,2,3,0,4]]' },
     { label: 'Alternating', input: '[[0,1,0,1],[1,0,1,0],[0,1,0,1,0]]' },

@@ -10,6 +10,10 @@ const definition = {
   inputLabel: 'Object with an employees table (emp_id, name, salary, dept)',
   url: 'https://leetcode.com/problems/second-highest-salary-ii/description/',
   complexity: 'Teaching model: one pass to group, then one sort per department. Visualization caps the table at 12 rows.',
+  question: "Find the second highest salary in each department, using the rules of the statement.",
+  approaches: [
+    { name: "Group and sort", intuition: "Group rows by department and sort each group to read the second highest salary.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example', input: '{"employees":[{"emp_id":1,"name":"Ana","salary":900,"dept":"Eng"},{"emp_id":2,"name":"Bo","salary":700,"dept":"Eng"},{"emp_id":3,"name":"Cy","salary":700,"dept":"Eng"},{"emp_id":4,"name":"Di","salary":500,"dept":"Ops"},{"emp_id":5,"name":"Ed","salary":800,"dept":"Ops"},{"emp_id":6,"name":"Fay","salary":900,"dept":"Eng"},{"emp_id":7,"name":"Gil","salary":400,"dept":"Solo"}]}' },
     { label: 'Single employee', input: '{"employees":[{"emp_id":1,"name":"Ana","salary":500,"dept":"Eng"}]}' },

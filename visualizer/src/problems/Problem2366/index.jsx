@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON object with nums: 1 to 12 positive integers up to 50',
   url: 'https://leetcode.com/problems/minimum-replacements-to-sort-the-array/',
   complexity: 'O(n) time for n values. The visualization caps values at 12.',
+  question: "Find the fewest operations that make an array non-decreasing, where an operation splits one value into parts.",
+  approaches: [
+    { name: "Right to left with minimal splits", intuition: "Walk from right to left, splitting each value into the fewest parts that fit the next value.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Own: five values', input: '{"nums":[7,2,8,2,5]}' },
     { label: 'Sorted', input: '{"nums":[1,2,3,4,5]}' },

@@ -14,6 +14,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Array arr (JSON)',
   url: 'https://leetcode.com/problems/longest-mountain-in-array/',
   complexity: 'O(n) time and O(n) space for the two run-length arrays (an O(1) two-pointer version also exists).',
+  question: "Find the length of the longest subarray that rises strictly and then falls strictly.",
+  approaches: [
+    { name: "Single pass with up and down counts", intuition: "Track the length of the current rising slope and falling slope, resetting when the pattern breaks.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Eight values, mixed', input: '[1,5,2,8,4,3,9,0]' },
     { label: 'Runs of repeated values', input: '[0,0,7,7,7,0]' },

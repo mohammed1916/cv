@@ -16,6 +16,10 @@ const definition = {
     { id: 'red', label: '(30, 90]?', description: 'Red excludes 30 and includes 90.' },
     { id: 'done', label: 'Return', description: 'Return the matched color or Invalid.' },
   ],
+  question: "Decide which traffic signal colour is lit from a timer value, or report that the timer is invalid.",
+  approaches: [
+    { name: "Boundary condition checks", intuition: "Check the exact timer boundaries in order and light the matching colour.", time: "O(1)", space: "O(1)" },
+  ],
   examples: authoredExamples0,
 }
 function TrafficSignal() {

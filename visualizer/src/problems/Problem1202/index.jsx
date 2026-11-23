@@ -5,6 +5,10 @@ import { buildTrace, parseInput, code, python, pythonLineMap, phases, inputLabel
 
 const definition = {
   number: meta.number, phases, parse: parseInput, build: buildTrace, code, python, pythonLineMap, inputLabel,
+  question: "Given pairs of swappable positions in a string, return the smallest string reachable by those swaps.",
+  approaches: [
+    { name: "Union-find and sorted groups", intuition: "Join swappable positions with union-find, then place each group's sorted letters into its positions.", time: "O(n log n)", space: "O(n)" },
+  ],
   url: `https://leetcode.com/problems/${meta.slug}/`, complexity, examples,
 }
 

@@ -17,6 +17,11 @@ const definition = {
   inputLabel: 'Object with items ([profit, category] pairs) and k (JSON)',
   url: 'https://leetcode.com/problems/maximum-elegance-of-a-k-length-subsequence/',
   complexity: 'O(n log n) time for sorting, then one pass. The visualization caps n at 8.',
+  question: "Choose k items to maximize total profit plus the square of the number of distinct categories among them.",
+  approaches: [
+    { name: "Greedy swap with sorted profits", intuition: "Start with the top k profits; then swap in new categories for duplicate items with the smallest profit loss.", time: "O(n log n)", space: "O(n)" },
+    { name: "Try each category count", intuition: "For each distinct-category count, choose the best items with that many categories.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Five items across four categories', input: '{"items":[[4,1],[9,2],[2,3],[6,1],[7,4]],"k":3}' },
     { label: 'Swap case', input: '{"items":[[5,1],[5,1],[3,2]],"k":2}' },

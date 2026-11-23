@@ -3,6 +3,10 @@ import { meta } from './meta'
 import { buildTrace, parseInput, code, sql, python, phases, examples, complexity, inputLabel } from './algorithm'
 
 const definition = {
+  question: "Find actors and directors who worked together at least three times.",
+  approaches: [
+    { name: "Join and group in SQL", intuition: "Group collaborations by actor and director pair and keep pairs with at least three rows.", time: "O(n)", space: "O(p)" },
+  ],
   number: meta.number,
   phases, parse: parseInput, build: buildTrace, code, sql, python, inputLabel,
   url: `https://leetcode.com/problems/${meta.slug}/`,

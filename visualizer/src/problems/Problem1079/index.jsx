@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with an uppercase string tiles (JSON)',
   url: 'https://leetcode.com/problems/letter-tile-possibilities/',
   complexity: 'Exponential in the number of tiles in the worst case. The visualization caps tiles at 7.',
+  question: "Count the distinct non-empty sequences that can be formed from the letter tiles, using each tile at most once.",
+  approaches: [
+    { name: "Backtracking over letter counts", intuition: "Keep counts of each letter; from each available letter, recurse and count one new sequence per node.", time: "O(n!) worst case", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"tiles":"AAB"}' },
     { label: 'Example 2', input: '{"tiles":"AAABBC"}' },

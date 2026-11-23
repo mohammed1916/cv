@@ -18,6 +18,10 @@ const definition = {
   inputLabel: 'Object with nums and target, e.g. {"nums":[2,3],"target":5}',
   url: 'https://leetcode.com/problems/minimum-operations-to-form-subset-sum-ii/',
   complexity: 'O(n * target * V) time where V is the number of values each element reaches, plus a breadth-first search per element. The visualization caps nums at 6 values, values at 20 and target at 30.',
+  question: "Each element may be doubled or halved at a cost; find the cheapest way to reach the target sum.",
+  approaches: [
+    { name: "Subset-sum table with a search per element", intuition: "Keep the cheapest way to reach every sum, element by element.", time: "O(n x target x V)", space: "O(target)" },
+  ],
   examples: [
     { label: 'Doubling helps', input: '{"nums":[3,5,4],"target":10}' },
     { label: 'Halving helps', input: '{"nums":[5,6],"target":7}' },

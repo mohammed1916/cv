@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'Object with nums (integers)',
   url: 'https://leetcode.com/problems/longest-balanced-subarray-i/',
   complexity: 'O(n^2) subarrays with set updates. The visualization caps nums at 16 values.',
+  question: "Find the length of the longest balanced subarray of an array.",
+  approaches: [
+    { name: "Check every subarray", intuition: "Check each subarray with set updates and keep the longest balanced one.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Whole array', input: '{"nums":[1,2,3,4]}' },
     { label: 'Mixed run', input: '{"nums":[2,5,4,3,8]}' },

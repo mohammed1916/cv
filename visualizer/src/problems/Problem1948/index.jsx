@@ -11,6 +11,10 @@ const definition = {
   inputLabel: 'JSON array of folder paths (e.g. [["a"],["a","x"],["b"],["b","x"]])',
   url: 'https://leetcode.com/problems/delete-duplicate-folders-in-system/',
   complexity: 'O(total path length · log) time for the signature sort and hash counts. The visualization caps input at 12 paths.',
+  question: "Remove every folder that has an identical non-empty twin in the folder tree, along with its subtree.",
+  approaches: [
+    { name: "Subtree signatures", intuition: "Give each folder a signature from its sorted children, mark duplicates by signature, and delete marked folders.", time: "O(total path length * log)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Two identical branches', input: '[["a"],["a","x"],["a","x","y"],["a","z"],["b"],["b","x"],["b","x","y"],["b","z"]]' },
     { label: 'Distinct sibling', input: '[["a"],["a","x"],["a","x","y"],["a","z"],["b"],["b","w"],["b","x"],["b","x","y"],["b","z"]]' },

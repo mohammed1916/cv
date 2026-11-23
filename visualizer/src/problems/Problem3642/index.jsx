@@ -22,6 +22,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'Object with books, reviews and min_reviews',
   complexity: 'O(B * R) with a simple filter per book.',
+  question: "Using book and review tables, list the books whose review pattern is polarised, and report them.",
+  approaches: [
+    { name: "Count then filter", intuition: "Count reviews per book with an aggregate, then keep books that meet the polarisation rule.", time: "O(B * R)", space: "O(B)" },
+  ],
   examples: [{ label: 'Sample', input: SAMPLE_TEXT },
   { label: 'One book, one review', input: '{"books":[{"book_id":1,"title":"Lone"}],"reviews":[{"book_id":1,"rating":3}],"min_reviews":1}' },
   { label: 'Equal ratings at the minimum', input: '{"books":[{"book_id":1,"title":"Ash"},{"book_id":2,"title":"Birch"}],"reviews":[{"book_id":1,"rating":2},{"book_id":1,"rating":2},{"book_id":2,"rating":4},{"book_id":2,"rating":4}],"min_reviews":2}' },

@@ -15,6 +15,10 @@ const definition = {
   inputLabel: "Object with strengths and boosts ([left, right, value] triples), e.g. {\"strengths\":[4,2,6],\"boosts\":[[0,1,3]]}",
   url: "https://leetcode.com/problems/minimum-initial-strength-to-defeat-all-monsters/",
   complexity: "O(n * m * log S) time for n monsters, m boost ranges and strength sum S. The visualization caps n at 8.",
+  question: "Find the smallest starting strength that defeats every monster in order, using boost ranges along the way.",
+  approaches: [
+    { name: "Binary search on strength", intuition: "Probe starting strengths by bisection and simulate each monster fight.", time: "O(n x m x log S)", space: "O(n + m)" },
+  ],
   examples: [
     { label: "One boosted range", input: "{\"strengths\":[4,2,6],\"boosts\":[[0,1,3]]}" },
     { label: "Large first monster", input: "{\"strengths\":[10,1,1],\"boosts\":[[1,2,2]]}" },

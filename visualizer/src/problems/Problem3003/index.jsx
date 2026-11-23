@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with s (lowercase letters) and k (JSON)',
   url: 'https://leetcode.com/problems/maximize-the-number-of-partitions-after-operations/',
   complexity: 'O(26 * n^2) time in this trace, which tries every single change and rescans; the Python version does the same. The visualization caps s at 8 letters.',
+  question: "Count the partitions of a string into pieces with at most k distinct letters, allowing one character change.",
+  approaches: [
+    { name: "Greedy cut with one-change search", intuition: "Scan greedily cutting when a piece would exceed k distinct letters, and try the single change that gives the most cuts.", time: "O(26\u00b7n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Six letters, k of four', input: '{"s":"qwerty","k":4}' },
     { label: 'Four letters, k at maximum', input: '{"s":"zxcv","k":26}' },

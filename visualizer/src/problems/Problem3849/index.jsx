@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with s and t (binary strings of equal length)',
   url: 'https://leetcode.com/problems/maximum-bitwise-xor-after-rearrangement/',
   complexity: 'One pass with counts, so O(n) time. The visual caps the strings at 16 digits.',
+  question: "Rearrange bits to maximise the XOR of two binary strings.",
+  approaches: [
+    { name: "Greedy by bit counts", intuition: "Give each bit of s the target that yields a 1 in the XOR when one is available.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example', input: '{"s":"0011","t":"1101"}' },
     { label: 'All ones', input: '{"s":"1010","t":"1111"}' },

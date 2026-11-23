@@ -11,6 +11,10 @@ const definition = {
   inputLabel: 'JSON: {"n": n}',
   url: 'https://leetcode.com/problems/digit-frequency-score/',
   complexity: 'O(log n) time and O(1) extra space, since a number has at most ten distinct digits.',
+  question: "Given a number, add each digit multiplied by how many times that digit appears.",
+  approaches: [
+    { name: "Count digits, then weight", intuition: "Tally digit frequencies and sum digit times count.", time: "O(log n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"n":122}' },
     { label: 'Example 2', input: '{"n":101}' },

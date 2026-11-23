@@ -21,6 +21,10 @@ const definition = {
   inputLabel: 'Length n and divisor k (JSON, e.g. {"n": 3, "k": 5})',
   url: "https://leetcode.com/problems/find-the-largest-palindrome-divisible-by-k/",
   complexity: "O(n) time for the reach sets and greedy pass (about 10 * k work per position) and O(n) space. The visualization accepts n up to 40.",
+  question: "Find the largest n-digit palindrome with no leading zero that is divisible by k.",
+  approaches: [
+    { name: "Remainder reachability, outside in", intuition: "Compute which remainders each remaining digit pair can reach, then fix the outer digits greedily from the largest down.", time: "O(n * k)", space: "O(n)" },
+  ],
   examples: [
     { label: "n 3, k 5 (from statement)", input: '{"n": 3, "k": 5}' },
     { label: "n 5, k 6 (from statement)", input: '{"n": 5, "k": 6}' },

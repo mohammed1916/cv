@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'n, k and maxPts (JSON object)',
   url: 'https://leetcode.com/problems/new-21-game/',
   complexity: 'O(n) time and O(n) space for the table; the window itself is O(1).',
+  question: "A player draws random points from 1 to maxPts until the total reaches at least k; find the probability that the final total is at most n.",
+  approaches: [
+    { name: "Sliding window of probabilities", intuition: "The probability of each total depends on the previous maxPts totals, so keep their running sum as a window.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Wide draws', input: '{"n":12,"k":7,"maxPts":8}' },
     { label: 'Early stop', input: '{"n":6,"k":3,"maxPts":5}' },

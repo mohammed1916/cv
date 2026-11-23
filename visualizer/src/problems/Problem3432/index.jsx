@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'An object with nums: 2 to 12 integers from 1 to 10',
   url: 'https://leetcode.com/problems/count-partitions-with-even-sum-difference/',
   complexity: 'O(n) time and O(1) extra space. The visualization caps nums at 12 entries.',
+  question: "Count the cut points in an array where the left and right sums differ by an even number.",
+  approaches: [
+    { name: "Prefix sums with parity", intuition: "The difference is even exactly when the total sum is even, so one running sum decides every cut.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"nums":[10,10,3,7,6]}' },
     { label: 'Example 2', input: '{"nums":[1,2,2]}' },

@@ -12,6 +12,11 @@ const definition = {
   inputLabel: 'Object with a binary string s (JSON)',
   url: 'https://leetcode.com/problems/partition-string-into-minimum-beautiful-substrings/',
   complexity: 'O(n^2) substring checks, each in O(n) time. The visualization caps s at 15 characters.',
+  question: "Split a binary string into the fewest substrings, where each piece has no leading zero and represents a power of five in binary.",
+  approaches: [
+    { name: "Dynamic programming over end positions", intuition: "Let dp[i] be the fewest pieces for the prefix ending at i, and try every valid start for the last piece.", time: "O(n^2) substring checks", space: "O(n)" },
+    { name: "Precomputed powers of five", intuition: "Only a few powers of five fit in the length, so check each candidate against that short list instead of recomputing.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"s":"1011"}' },
     { label: 'Example 2', input: '{"s":"111"}' },

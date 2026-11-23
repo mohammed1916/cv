@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Integer array as JSON',
   url: 'https://leetcode.com/problems/find-all-lonely-numbers-in-the-array/',
   complexity: 'O(n log n) time with the sorted distinct values; O(n) space for the counts.',
+  question: "Find every lonely number, meaning a value that appears once and whose neighbours one less and one more do not appear at all.",
+  approaches: [
+    { name: "Count occurrences", intuition: "Count each value in a map, then check the value and its two neighbours.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Some lonely', input: '[10,6,5,8]' },
     { label: 'Adjacent pairs', input: '[1,3,5,3]' },

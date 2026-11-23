@@ -12,6 +12,11 @@ const definition = {
   inputLabel: 'Object with words (equal-length lowercase strings)',
   url: 'https://leetcode.com/problems/count-caesar-cipher-pairs/',
   complexity: 'O(n * m) time to build the signatures and a hash map of counts.',
+  question: "Count pairs of words that are cyclic alphabet shifts of each other.",
+  approaches: [
+    { name: "Letter-gap signatures", intuition: "Describe each word by its letter gaps from the first letter and count matching descriptions.", time: "O(n * m)", space: "O(n)" },
+    { name: "Compare every pair", intuition: "Test whether each pair of words is a shift of the other.", time: "O(n^2 * m)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Shifted pairs', input: '{"words":["abc","bcd","xyz","xab"]}' },
     { label: 'Same letters', input: '{"words":["aa","bb","cd"]}' },

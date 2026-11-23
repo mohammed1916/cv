@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Number of plots on one side (integer 1 to 60)',
   url: 'https://leetcode.com/problems/count-number-of-ways-to-place-houses/',
   complexity: 'O(n) time and O(n) space. The visualization caps input at 60 plots.',
+  question: "Count the ways to place houses on both sides of a street so that no two houses on one side are adjacent.",
+  approaches: [
+    { name: "Fibonacci-style DP", intuition: "The count for one side follows a simple recurrence, and the two sides multiply.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'One plot', input: '1' },
     { label: 'Three plots', input: '3' },

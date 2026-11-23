@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Digit string of 1 to 20 digits (JSON string)',
   url: 'https://leetcode.com/problems/lexicographically-smallest-string-after-a-swap/',
   complexity: 'O(n) time and O(n) space for the output. The visualization caps input at 20 digits.',
+  question: "Find the lexicographically smallest string reachable by at most one swap of two digits with the same parity.",
+  approaches: [
+    { name: "Swap the leftmost useful pair", intuition: "A swap helps only when the left digit is larger, and the leftmost such pair decides the result.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Five digits', input: '"70814"' },
     { label: 'Four digits with zeros', input: '"1009"' },

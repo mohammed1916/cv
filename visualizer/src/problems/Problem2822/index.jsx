@@ -14,6 +14,11 @@ const definition = {
   inputLabel: 'JSON {"pairs": [["a", 1], ["b", 2], ["c", 1]]}',
   url: 'https://leetcode.com/problems/inversion-of-object/',
   complexity: 'O(n) time and O(n) space for n pairs.',
+  question: "Invert an object so that each value becomes a key mapping to the list of original keys that held it.",
+  approaches: [
+    { name: "Single pass grouping", intuition: "For each key, push it into the list stored under its value, creating the list if needed.", time: "O(n)", space: "O(n)" },
+    { name: "Two passes", intuition: "First collect the values, then fill the lists in a second pass.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Shared value', input: '{"pairs":[["a","x"],["b","y"],["c","x"]]}' },
     { label: 'Three keys share', input: '{"pairs":[["id",7],["code",7],["tag",9],["size",7]]}' },

@@ -13,6 +13,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Array arr (JSON, even length)',
   url: 'https://leetcode.com/problems/array-of-doubled-pairs/',
   complexity: 'O(n log n) time, O(n) space. The visualization caps input at 30 values.',
+  question: "Decide whether an array can be reordered so that each element at an odd index is twice the element before it.",
+  approaches: [
+    { name: "Greedy pairing from the smallest", intuition: "Pair the smallest remaining value with its double using counts.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Pairs of positives', input: '[4,8,2,4]' },
     { label: 'Zero and negatives', input: '[0,0,-2,4]' },

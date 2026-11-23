@@ -11,6 +11,10 @@ const definition = {
   inputLabel: 'Tree (JSON object with parent and nums)',
   url: 'https://leetcode.doocs.org/en/lc/4015/',
   complexity: 'O(n) time and O(n) space. The visualization caps the tree at 12 nodes.',
+  question: "Weight each node by how many levels lie at or below its depth, and sum the weights.",
+  approaches: [
+    { name: "Depth scan", intuition: "Compute each node's depth from the root, then weight it by the number of levels at or below that depth.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"parent":[-1,0,0,1,1,3],"nums":[2,4,1,3,5,6]}' },
     { label: 'Example 2', input: '{"parent":[-1,0,0],"nums":[7,1,2]}' },

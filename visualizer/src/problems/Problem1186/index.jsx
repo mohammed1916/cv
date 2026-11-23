@@ -12,6 +12,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, pythonLineMap, phases,
   inputLabel: 'Integer array (JSON object)',
   complexity: 'O(n) time and O(1) extra space: each position updates two running states.',
+  question: "Find the maximum sum of a subarray after deleting at most one element.",
+  approaches: [
+    { name: "Two-state Kadane", intuition: "Track the best sum with no deletion and the best sum where one element has been removed.", time: "O(n)", space: "O(1)" },
+  ],
   examples: authoredExamples0,
 };
 

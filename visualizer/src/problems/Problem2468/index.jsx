@@ -24,6 +24,10 @@ const definition = {
   inputLabel: 'JSON {"message": "short message", "limit": 15}',
   url: "https://leetcode.com/problems/split-message-based-on-limit/",
   complexity: "O(n) time and O(n) space for message length n, using the closed-form capacity check for each part count. The visualization caps the message at 50 characters and the limit at 50.",
+  question: "Split a message into numbered parts that each fit a length limit, with a consistent total part count, or return nothing.",
+  approaches: [
+    { name: "Try each part count", intuition: "For each possible number of parts, check whether the message fits with the index suffixes.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [{ label: "Words split across parts", input: '{"message":"quiet harbor lights","limit":12}' }, { label: 'Single letter', input: '{"message":"a","limit":1}' }, { label: 'Only spaces', input: '{"message":"   ","limit":2}' }, { label: 'Largest limit', input: '{"message":"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa","limit":50}' }, { label: 'Long run: 50 characters', input: '{"message":" lar  msd wqraayyojf zjb lfd onwjomakirrxixjqod   ","limit":12}' }],
 };
 

@@ -43,6 +43,10 @@ const definition = {
   inputLabel: 'Object with products and sales lists',
   url: 'https://leetcode.com/problems/seasonal-sales-analysis/description/',
   complexity: 'O(s + g log g) time for s sales and g season-category groups in this trace. Totals live in a small map keyed by season and category.',
+  question: "From sales records, total the sales by season and category.",
+  approaches: [
+    { name: "Map of totals", intuition: "Add each sale into a map keyed by season and category.", time: "O(s + g log g)", space: "O(g)" },
+  ],
   examples: [
     {
       label: 'Sample',

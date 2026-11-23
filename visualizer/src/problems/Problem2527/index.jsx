@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with nums (values 0 to 63), for example {"nums":[1,4]}',
   url: 'https://leetcode.com/problems/find-xor-beauty-of-array/',
   complexity: 'O(n) time and O(1) extra space. The formula replaces the O(n^3) triple enumeration.',
+  question: "Compute the xor-beauty of an array, defined by the xor of a sum over all triples.",
+  approaches: [
+    { name: "Closed form", intuition: "Each element's contribution simplifies, so the answer is the xor of all values.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"nums":[1,4]}' },
     { label: 'Example 2', input: '{"nums":[15,45,20,2,34,35,5,44,32,30]}' },

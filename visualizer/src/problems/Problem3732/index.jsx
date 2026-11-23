@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with nums (at least three integers)',
   url: 'https://leetcode.com/problems/maximum-product-of-three-elements-after-one-replacement/description/',
   complexity: 'O(n^2 log n) for this visualization: two bounds per position, each sorted once.',
+  question: "Find the largest product of three elements after replacing one element with a chosen value.",
+  approaches: [
+    { name: "Try bounds at each position", intuition: "Try the two bounds at each position and sort to find the best product of three.", time: "O(n^2 log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example', input: '{"nums":[-4,6,0]}' },
     { label: 'All negative', input: '{"nums":[-1,-2,-3]}' },

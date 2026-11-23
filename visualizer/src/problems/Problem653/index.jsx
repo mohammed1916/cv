@@ -12,6 +12,11 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'BST and target (JSON object with root and k)',
   url: 'https://leetcode.com/problems/two-sum-iv-input-is-a-bst/',
   complexity: 'O(n) time and O(n) space for the in-order list; O(h) stack space for the walk.',
+  question: "Decide whether two different nodes of a binary search tree sum to a target.",
+  approaches: [
+    { name: "In-order with two pointers", intuition: "Flatten the tree in sorted order and move two pointers inward.", time: "O(n)", space: "O(n)" },
+    { name: "Hash set during traversal", intuition: "Store seen values and check each complement.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Pair', input: '{"root":[4,2,6,1,3,null,7],"k":9}' },
     { label: 'No pair', input: '{"root":[4,2,6,1,3,null,7],"k":20}' },

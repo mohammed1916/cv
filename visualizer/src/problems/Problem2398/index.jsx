@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'JSON object with charge_times, running_costs and budget',
   url: 'https://leetcode.com/problems/maximum-number-of-robots-within-budget/',
   complexity: 'O(n) time with a monotonic deque. The visualization caps input at 12 robots.',
+  question: "Choose the largest number of robots that can run within a budget where the cost is the maximum charge plus the sum of running costs.",
+  approaches: [
+    { name: "Sliding window with monotonic deque", intuition: "Keep the window's max charge in a monotonic deque and its running cost sum, shrinking when over budget.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Sliding window', input: '{"charge_times":[4,2,7,5,1],"running_costs":[1,3,2,2,6],"budget":24}' },
     { label: 'No robot fits', input: '{"charge_times":[11,12,19],"running_costs":[10,8,7],"budget":19}' },

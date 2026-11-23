@@ -14,6 +14,11 @@ const definition = {
   inputLabel: 'Array and limit (JSON object with nums and k)',
   url: 'https://leetcode.com/problems/count-subarrays-with-cost-less-than-or-equal-to-k/',
   complexity: 'O(n^2) time for this teaching version. The visualization caps input at 20 values.',
+  question: "Count subarrays whose cost, the value spread times the length, is at most k.",
+  approaches: [
+    { name: "Check each subarray", intuition: "Test every subarray directly for this teaching version.", time: "O(n^2)", space: "O(1)" },
+    { name: "Two pointers", intuition: "A window that fits stays fit inside any sub-window, so the left end only moves forward.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Four values, k six', input: '{"nums":[12,5,20,8],"k":6}' },
     { label: 'Equal values', input: '{"nums":[5,5,5,5],"k":0}' },

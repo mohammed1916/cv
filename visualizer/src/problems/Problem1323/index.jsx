@@ -3,6 +3,10 @@ import IndexedSequence from '../../components/shared/IndexedSequence'
 import { buildTrace, parseInput, code, python, phases, examples } from './algorithm'
 
 const definition = {
+  question: "Change at most one digit to get the largest possible number.",
+  approaches: [
+    { name: "Change the leftmost six", intuition: "Changing the first six to nine gives the largest value.", time: "O(d)", space: "O(d)" },
+  ],
   number: '1323', phases, parse: parseInput, build: buildTrace, code, python, examples,
   inputLabel: 'Object with num made of 6 and 9 digits (JSON)',
   url: 'https://leetcode.com/problems/maximum-69-number/',

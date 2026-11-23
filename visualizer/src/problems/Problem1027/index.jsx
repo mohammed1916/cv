@@ -9,6 +9,10 @@ const definition = {
   inputLabel: 'Integers (JSON array)',
   url: 'https://leetcode.com/problems/longest-arithmetic-subsequence/',
   complexity: 'O(n²) pairs with a map per index: O(n²) time and space in this trace.',
+  question: "Find the length of the longest subsequence whose consecutive gaps are all equal.",
+  approaches: [
+    { name: "DP over last index and difference", intuition: "For each index and each earlier index, store the best length ending there for the gap between them.", time: "O(n^2)", space: "O(n^2)" },
+  ],
   examples: [
     { label: 'Run of four', input: '[2,4,7,10,13,5]' },
     { label: 'Descending', input: '[9,6,3,0,-4]' },

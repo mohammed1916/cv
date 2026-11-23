@@ -12,6 +12,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Operations (JSON array of ["insert", word, value] or ["sum", prefix])',
   url: 'https://leetcode.com/problems/map-sum-pairs/',
   complexity: 'O(k) per insert and O(n · k) per sum for n stored words of length up to k, using the scan shown here.',
+  question: "Store key-value pairs and return the sum of values whose keys start with a prefix.",
+  approaches: [
+    { name: "Trie with running sums", intuition: "Add each value to the sum at every prefix node, so a query is one walk down the trie.", time: "O(L)", space: "O(total chars)" },
+  ],
   examples: [
     { label: 'Prefix grows', input: '[["insert","bell",4],["sum","be"],["insert","bee",2],["insert","bell",1],["sum","be"]]' },
     { label: 'No match', input: '[["insert","cat",5],["sum","do"]]' },

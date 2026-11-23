@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with arr (JSON)',
   url: 'https://leetcode.com/problems/partition-array-into-three-parts-with-equal-sum/',
   complexity: 'O(n) time and O(1) auxiliary space: one total pass and one scan.',
+  question: "Decide whether an array can be cut into three non-empty contiguous parts that have equal sums.",
+  approaches: [
+    { name: "Prefix target scan", intuition: "The total must split into thirds; scan for prefix sums reaching one third and then two thirds in order.", time: "O(n)", space: "O(1)" },
+  ],
   examples: authoredExamples,
 }
 

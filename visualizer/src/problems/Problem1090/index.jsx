@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'JSON object with values, labels, num_wanted and use_limit (values up to 12 items)',
   url: 'https://leetcode.com/problems/largest-values-from-labels/',
   complexity: 'O(n log n) time for n items. The visualization caps items at 12.',
+  question: "Choose a set of items with a size limit, where each label can be used only a limited number of times, to maximise total value.",
+  approaches: [
+    { name: "Sort by value with label caps", intuition: "Take items from highest to lowest value, skipping any label that has reached its cap.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"values":[5,4,3,2,1],"labels":[1,1,2,2,3],"num_wanted":3,"use_limit":1}' },
     { label: 'Example 2', input: '{"values":[9,8,8,7,6],"labels":[0,0,0,1,1],"num_wanted":3,"use_limit":1}' },

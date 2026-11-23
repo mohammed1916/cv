@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON string of lowercase letters',
   url: 'https://leetcode.com/problems/equal-score-substrings/',
   complexity: 'O(n) time with one running total.',
+  question: "Find the split points of a string where the scores of the two halves are equal.",
+  approaches: [
+    { name: "Running total", intuition: "Keep a running total and check each cut point for equal halves.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example', input: '"xaax"' },
     { label: 'No split', input: '"mnop"' },

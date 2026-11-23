@@ -11,6 +11,10 @@ const definition = {
   inputLabel: "List of late-day counts (e.g. [1,4,9])",
   url: "https://leetcode.com/problems/library-late-fee-calculator/",
   complexity: "O(n) time and O(1) extra space for n books. The visualization caps the list at 12 books, each from 1 to 60 days late.",
+  question: "Given counts of late days for each book, compute the total late fee.",
+  approaches: [
+    { name: "Fee per count", intuition: "Compute the fee for each late count with its rule and add the fees together.", time: "O(k)", space: "O(1)" },
+  ],
   examples: [
     { label: "One book in each tier", input: "[1,4,9]" },
     { label: "Long overdue books", input: "[12,3,1,5]" },

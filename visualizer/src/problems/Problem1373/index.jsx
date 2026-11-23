@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with a level-order tree, for example {"tree":[1,4,3]}',
   url: 'https://leetcode.com/problems/maximum-sum-bst-in-binary-tree/',
   complexity: 'O(n) time and O(h) stack space. The visualization caps input at 15 nodes.',
+  question: "Find the largest sum of a subtree that is a valid binary search tree.",
+  approaches: [
+    { name: "Post-order with bounds", intuition: "Each subtree reports its minimum, maximum and sum, and is valid if its children are.", time: "O(n)", space: "O(h)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"tree":[1,4,3,2,4,2,5,null,null,null,null,null,null,4,6]}' },
     { label: 'Example 2', input: '{"tree":[4,3,null,1,2]}' },

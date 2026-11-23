@@ -4,6 +4,11 @@ import { StackLane } from '../../components/shared/AlgorithmStatePrimitives'
 import { buildTrace, parseInput, code, python, phases, examples } from './algorithm'
 
 const definition = {
+  question: "From a start index, decide whether a jump of plus or minus the current value can reach any zero.",
+  approaches: [
+    { name: "Breadth-first search", intuition: "Explore reachable indices in layers, marking each index visited once.", time: "O(n)", space: "O(n)" },
+    { name: "Depth-first search", intuition: "Follow each jump recursively and stop early when a zero is found.", time: "O(n)", space: "O(n)" },
+  ],
   number: '1306', phases, parse: parseInput, build: buildTrace, code, python, examples,
   inputLabel: 'Array and start index (JSON object)',
   url: 'https://leetcode.com/problems/jump-game-iii/',

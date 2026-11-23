@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with tasks: up to 3 entries of [start, end, duration] (times 1 to 10)',
   url: 'https://leetcode.com/problems/minimum-time-to-complete-all-tasks/',
   complexity: 'O(n log n + n * H) time for the sort and the window scans, where H is the largest end time. The visualization caps input at 3 tasks and times at 10.',
+  question: "Tasks each need a number of time slots inside an interval; find the fewest time points that must be on to finish them all.",
+  approaches: [
+    { name: "Greedy by latest deadline", intuition: "Process tasks by end time, and turn on the latest possible points that still serve the remaining needs.", time: "O(n log n + n * H)", space: "O(H)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"tasks":[[2,3,1],[4,5,1],[1,5,2]]}' },
     { label: 'Example 2', input: '{"tasks":[[1,3,2],[2,5,3],[5,6,2]]}' },

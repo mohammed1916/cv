@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Target integer (e.g. 27)',
   url: 'https://leetcode.com/problems/minimum-number-of-primes-to-sum-to-target/',
   complexity: 'O(target × π(target)) time and O(target) space, where π(target) counts primes up to the target. The visualization caps the target at 60; the official numeric bounds are not verified here.',
+  question: "Find the fewest prime numbers, counting repeats, that add up to a target.",
+  approaches: [
+    { name: "Unbounded DP over primes", intuition: "Use a coin-change style table where each prime is a coin and the value is the fewest primes needed.", time: "O(target * pi(target))", space: "O(target)" },
+  ],
   examples: [
     { label: 'Three primes', input: '27' },
     { label: 'Small target', input: '4' },

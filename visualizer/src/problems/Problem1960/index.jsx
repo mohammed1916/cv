@@ -11,6 +11,10 @@ const definition = {
   inputLabel: 'Lowercase string (e.g. abcbaxyzy)',
   url: 'https://leetcode.com/problems/maximum-product-of-the-length-of-two-palindromic-substrings/',
   complexity: 'O(n²) time in the worst case from expanding every centre, with O(n) arrays. The visualization caps the string at 14 letters.',
+  question: "Find the maximum product of the lengths of two non-overlapping palindromic substrings of a string.",
+  approaches: [
+    { name: "Manacher and prefix or suffix best", intuition: "Find the longest palindrome at each position with Manacher's algorithm, then combine the best prefix and suffix palindromes.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Two palindromes', input: 'abcbaxyzy' },
     { label: 'Repeated letters', input: 'aaaa' },

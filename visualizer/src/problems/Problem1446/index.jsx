@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Lowercase string',
   url: 'https://leetcode.com/problems/consecutive-characters/',
   complexity: 'O(n) time and O(1) extra space: one pass with a running count.',
+  question: "Find the length of the longest run of the same character.",
+  approaches: [
+    { name: "One pass with running count", intuition: "Count the current run and keep the best length.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Triple o', input: 'mooo' },
     { label: 'Mixed runs', input: 'aabbbbcc' },

@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'Object with n, k and edges ([u, v, cost] triples)',
   url: 'https://leetcode.com/problems/minimum-cost-to-repair-edges-to-traverse-a-graph/',
   complexity: 'O(E log E + log E * (n + E)) time: a binary search over sorted costs, with one breadth-first search per test. The visualization caps n at 10.',
+  question: "Find the smallest repair threshold for which a short enough path exists after repairing cheap edges.",
+  approaches: [
+    { name: "Binary search with breadth-first search", intuition: "The threshold can be searched by halving, and each test checks the path with a breadth-first search.", time: "O(E log E + log E * (n + E))", space: "O(n + E)" },
+  ],
   examples: [
     { label: 'Shortcut by repair', input: '{"n":5,"k":2,"edges":[[0,1,4],[1,4,7],[0,2,2],[2,3,6],[3,4,5],[1,3,1]]}' },
     { label: 'Too few hops', input: '{"n":3,"k":1,"edges":[[0,1,3],[1,2,8],[0,2,6]]}' },

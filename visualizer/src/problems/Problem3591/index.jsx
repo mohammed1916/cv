@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'Array nums of integers 1 to 100 (JSON object)',
   url: 'https://leetcode.com/problems/check-if-any-element-has-prime-frequency/',
   complexity: 'O(n + m * sqrt(n)) time, where m is the number of distinct values. The visualization caps the array at 30 values.',
+  question: "Decide whether any value in an array occurs a prime number of times.",
+  approaches: [
+    { name: "Count, then test primes", intuition: "Count each value's frequency, then test each distinct frequency for primality with trial division.", time: "O(n + m * sqrt(n))", space: "O(n)" },
+  ],
   examples: [
     { label: 'Triple value', input: '{"nums":[1,2,2,2]}' },
     { label: 'No prime count', input: '{"nums":[1,2,3]}' },

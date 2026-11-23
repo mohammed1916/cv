@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with lowercase text (JSON)',
   url: 'https://leetcode.com/problems/longest-chunked-palindrome-decomposition/',
   complexity: 'O(n^3) time in this straightforward form. The visualization caps input at 40 letters.',
+  question: "Split a string into the largest number of chunks that form a palindrome of chunks.",
+  approaches: [
+    { name: "Two-end chunk matching", intuition: "Match the shortest equal prefix and suffix, then recurse on the middle.", time: "O(n^3)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"text":"ghiabcdefhelloadamhelloabcdefghi"}' },
     { label: 'Single letter', input: '{"text":"merchant"}' },

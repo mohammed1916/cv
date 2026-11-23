@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Values (JSON object with nums as distinct integers)',
   url: 'https://leetcode.com/problems/number-of-ways-to-reorder-array-to-get-same-bst/',
   complexity: 'O(n^2) time for the binomial table and O(n^2) recursion. The visualization caps input at 7 values.',
+  question: "Count the ways to reorder an array so that it builds the same binary search tree.",
+  approaches: [
+    { name: "Recursive interleavings", intuition: "The root splits the rest into left and right; interleavings multiply with binomial coefficients.", time: "O(n^2)", space: "O(n^2)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"nums":[2,1,3]}' },
     { label: 'Example 2', input: '{"nums":[3,4,5,1,2]}' },

@@ -18,6 +18,10 @@ const definition = {
   inputLabel: 'Sentence s (e.g. {"s":"A BRIGHT TEA"})',
   url: "https://leetcode.com/problems/print-words-vertically/",
   complexity: "O(n) time and O(n) space for the 200-character limit, where n is the length of s.",
+  question: "Print the words of a sentence read down the columns, with trailing spaces removed.",
+  approaches: [
+    { name: "Column buckets", intuition: "Place the letters of each word into columns, padding shorter rows with spaces.", time: "O(total letters)", space: "O(total letters)" },
+  ],
   examples: [
     { label: "A BRIGHT TEA", input: '{"s":"A BRIGHT TEA"}' },
     { label: "LATE NIGHT WALK", input: '{"s":"LATE NIGHT WALK"}' },

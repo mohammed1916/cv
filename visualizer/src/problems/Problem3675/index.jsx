@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with s (lowercase letters)',
   url: 'https://leetcode.com/problems/minimum-operations-to-transform-string/',
   complexity: 'O(n) time and O(1) extra space. The visualization caps s at 20 characters.',
+  question: "Find the fewest operations to transform a string into a target form, changing letters step by step.",
+  approaches: [
+    { name: "Scan letters", intuition: "Scan the string once and count the letters that need to change.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example', input: '{"s":"cab"}' },
     { label: 'Already a', input: '{"s":"aaa"}' },

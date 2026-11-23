@@ -11,6 +11,10 @@ const definition = {
   inputLabel: "List of lowercase words (e.g. [\"cat\",\"dog\",\"cat\"])",
   url: "https://leetcode.com/problems/maximum-distance-between-unequal-words-in-array-i/",
   complexity: "O(n) time and O(1) extra space: one scan from the right against the first word and one from the left against the last word. The visualization caps the list at 12 words.",
+  question: "Find the largest distance between two positions that hold different words.",
+  approaches: [
+    { name: "Scan from both ends", intuition: "Scan from both ends to find the farthest positions whose words differ.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: "Mid-list difference", input: "[\"cat\",\"cat\",\"dog\",\"cat\",\"cat\"]" },
     { label: "Scattered words", input: "[\"red\",\"blue\",\"blue\",\"red\",\"green\",\"red\"]" },

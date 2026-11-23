@@ -13,6 +13,11 @@ const definition = {
   inputLabel: 'Object with usageLimits (1 to 6 values, 1 to 6) (JSON)',
   url: 'https://leetcode.com/problems/maximum-number-of-groups-with-increasing-length/',
   complexity: 'O(log n * n * k) time for this check. The visualization caps the input at 6 numbers.',
+  question: "Find the largest number of groups that can be formed with strictly increasing sizes, given usage limits for each item type.",
+  approaches: [
+    { name: "Binary search on the group count with a feasibility check", intuition: "If k groups of sizes 1 to k are feasible, fewer groups are too; check feasibility greedily from the top size down.", time: "O(log n * n)", space: "O(1)" },
+    { name: "Greedy sort of limits", intuition: "Sort the usage limits and build groups of growing size as capacity allows.", time: "O(n log n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"usageLimits":[1,2,5]}' },
     { label: 'Example 2', input: '{"usageLimits":[2,1,2]}' },

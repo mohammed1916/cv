@@ -12,6 +12,11 @@ const definition = {
   inputLabel: 'JSON array of at least four values (e.g. [2,9,4,1,7])',
   url: 'https://leetcode.com/problems/maximum-product-difference-between-two-pairs/',
   complexity: 'O(n log n) time for the sort and O(1) extra space for the two products. The visualization caps the array at 12 values.',
+  question: "Given an array, find the largest difference between two products, each formed from two of its values.",
+  approaches: [
+    { name: "Track two largest and two smallest", intuition: "Scan once and remember the two largest and two smallest values; the answer is the largest product minus the smallest product.", time: "O(n)", space: "O(1)" },
+    { name: "Sort", intuition: "Sort the array and read the two largest and two smallest values from the ends.", time: "O(n log n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Five values', input: '[2,9,4,1,7]' },
     { label: 'Repeated values', input: '[3,3,8,1]' },

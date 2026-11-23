@@ -6,6 +6,10 @@ const definition = {
   inputLabel: 'Letter string',
   url: 'https://leetcode.com/problems/make-the-string-great/',
   complexity: 'O(n) time and O(n) space: each letter is pushed or popped at most once.',
+  question: "Remove adjacent pairs of the same letter in different cases until none remain.",
+  approaches: [
+    { name: "Stack reduction", intuition: "Push each letter and pop when it cancels the top one.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Full cancel', input: 'abBAcC' },
     { label: 'Partial', input: 'xXyYzq' },

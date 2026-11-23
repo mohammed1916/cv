@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'List of integers from 1 to 50, JSON',
   url: 'https://leetcode.com/problems/find-the-distinct-difference-array/',
   complexity: 'O(n) time and O(n) space with hash sets. The visualization caps input at 20 values.',
+  question: "Given an array, return for each index the number of distinct values to its left minus the number of distinct values to its right.",
+  approaches: [
+    { name: "Prefix and suffix sets", intuition: "Build the distinct counts from the left and the right, and subtract them at each index.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Six distinct values', input: '[10,4,15,2,8,6]' },
     { label: 'Repeated values', input: '[7,7,1,9]' },

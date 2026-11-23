@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'JSON {"nums": [6, 12, 3, 9], "k": 3}',
   url: 'https://leetcode.com/problems/number-of-subarrays-with-gcd-equal-to-k/',
   complexity: 'O(n^2 log V) time and O(1) extra space for values up to V. The early stop keeps the inner loop short.',
+  question: "Count contiguous subarrays whose gcd equals k.",
+  approaches: [
+    { name: "Extend from each start", intuition: "From every start, extend the subarray and keep the running gcd, stopping once it drops below k.", time: "O(n^2 log V)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example', input: '{"nums":[6,12,3,9],"k":3}' },
     { label: 'None', input: '{"nums":[4,8],"k":5}' },

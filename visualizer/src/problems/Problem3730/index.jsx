@@ -12,6 +12,10 @@ const definition = {
   inputLabel: "List of block heights (e.g. [3,10,4,1])",
   url: "https://leetcode.com/problems/maximum-calories-burnt-from-jumps/",
   complexity: "O(n log n) time for the sort and O(n) for the alternating pass; O(n) space for the sorted copy. Reading used: the route starts on the ground at height zero and alternates highest and lowest. The visualization caps the list at 10 blocks of height 0 to 50.",
+  question: "Find the maximum calories burnt from jumps across blocks of given heights.",
+  approaches: [
+    { name: "Alternate highest and lowest", intuition: "Sort the heights and alternately take the highest and lowest remaining values.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: "Tall first", input: "[3,10,4,1]" },
     { label: "Repeated heights", input: "[0,7,7,2,5]" },

@@ -22,6 +22,10 @@ const definition = {
   inputLabel: "Level-order array (e.g. [3,9,20,null,null,15,7])",
   url: "https://leetcode.com/problems/binary-tree-level-order-traversal/",
   complexity: "O(n) time and O(n) space for n nodes. The visualization accepts up to 15 entries.",
+  question: "Return the values of a binary tree grouped by depth, from top to bottom.",
+  approaches: [
+    { name: "Level-order queue", intuition: "Process the queue one level at a time, recording values and enqueuing children.", time: "O(n)", space: "O(n)" },
+  ],
   examples: getExamples("binary-tree-level-order-traversal").length
     ? getExamples("binary-tree-level-order-traversal").map(example => ({ label: example.label, input: JSON.stringify(example.arr ?? example.root) }))
     : [{ label: "Several levels", input: "[3,9,20,null,null,15,7]" }],

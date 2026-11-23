@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with n, edges, start and target (binary strings)',
   url: 'https://leetcode.com/problems/minimum-edge-toggles-on-a-tree/',
   complexity: 'O(n) time: one traversal and one pass over the nodes.',
+  question: "Find the fewest edge toggles on a tree that turn each node from its start value to its target value.",
+  approaches: [
+    { name: "Leaves up", intuition: "Process the tree from the leaves upward; an edge is toggled exactly when the node below it still differs.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Path', input: '{"n":4,"edges":[[0,1],[1,2],[2,3]],"start":"0000","target":"0110"}' },
     { label: 'Odd mismatch', input: '{"n":3,"edges":[[1,0],[2,1]],"start":"001","target":"110"}' },

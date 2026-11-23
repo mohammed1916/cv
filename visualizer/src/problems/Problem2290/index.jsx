@@ -13,6 +13,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Grid (JSON rows of 0 empty and 1 obstacle)',
   url: 'https://leetcode.com/problems/minimum-obstacle-removal-to-reach-corner/',
   complexity: 'O(m n) time: each step costs 0 or 1, so a deque gives 0-1 BFS. Visualization limited to 6 by 6.',
+  question: "On a grid of open and blocked cells, find the fewest blocked cells you must remove to walk from the top left to the bottom right.",
+  approaches: [
+    { name: "0-1 BFS with a deque", intuition: "Each step costs 0 or 1, so push zero-cost moves to the front of a deque and one-cost moves to the back.", time: "O(m * n)", space: "O(m * n)" },
+  ],
   examples: [
     { label: 'remove 2', input: '[[0,1,1],[1,1,0],[1,1,0]]' },
     { label: 'remove 0', input: '[[0,1,0,0,0],[0,1,0,1,0],[0,0,0,1,0]]' },

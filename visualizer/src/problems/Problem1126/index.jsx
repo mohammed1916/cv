@@ -4,6 +4,10 @@ import { buildTrace, parseInput, code, sql, python, phases, inputLabel, complexi
 import { meta } from './meta'
 
 const definition = {
+  question: "Find active businesses that have more events of a type than that type's average.",
+  approaches: [
+    { name: "Join and group in SQL", intuition: "Compute each event type's average, then count each business's qualifying events.", time: "O(n)", space: "O(n)" },
+  ],
   number: meta.number,
   phases,
   parse: parseInput,

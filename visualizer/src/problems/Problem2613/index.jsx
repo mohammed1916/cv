@@ -20,6 +20,10 @@ const definition = {
   inputLabel: 'Object with nums1 and nums2 (same length, 2 to 8 points)',
   url: 'https://leetcode.com/problems/beautiful-pairs/',
   complexity: 'O(n log n) time and O(n) space for n points: each point makes two Fenwick-tree queries and two updates. Ties are broken by the smallest index pair. The visualization caps n at 8 and coordinates at -9..9; the official limits are larger.',
+  question: "Given points, find a pair with the smallest distance and a pair with the largest distance, using the same checking rule for both.",
+  approaches: [
+    { name: "Fenwick tree sweep", intuition: "Sweep points by coordinate and use Fenwick trees indexed by value to find nearest neighbors on each side.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Five points', input: '{"nums1":[1,4,2,7,5],"nums2":[3,1,6,2,4]}' },
     { label: 'Diagonal', input: '{"nums1":[0,3,6,9],"nums2":[0,3,6,9]}' },

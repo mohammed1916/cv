@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON object with a lowercase string word',
   url: 'https://leetcode.com/problems/remove-adjacent-almost-equal-characters/',
   complexity: 'O(n) time and O(1) extra space. The visualization caps the word at 30 letters.',
+  question: "Count the changes needed so that no two adjacent characters are equal or neighbouring in the alphabet.",
+  approaches: [
+    { name: "Greedy scan", intuition: "Walk the word and when a character is almost equal to the previous kept one, count a change and skip the previous character.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"word":"aaaaa"}' },
     { label: 'Example 2', input: '{"word":"abddez"}' },

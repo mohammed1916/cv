@@ -5,6 +5,10 @@ import SqlStages from './SqlStages'
 import './SqlStages.css'
 
 const definition = {
+  question: "Find products that were sold only within a fixed date window.",
+  approaches: [
+    { name: "Join and group in SQL", intuition: "Compare each product's first and last sale dates with the window.", time: "O(n + m)", space: "O(p)" },
+  ],
   number: meta.number,
   phases, parse: parseInput, build: buildTrace, code, sql, python, inputLabel,
   url: `https://leetcode.com/problems/${meta.slug}/`,

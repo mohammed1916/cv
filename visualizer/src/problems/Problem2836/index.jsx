@@ -18,6 +18,11 @@ const definition = {
   inputLabel: "receiver and k (e.g. {\"receiver\": [2,0,1], \"k\": 4})",
   url: "https://leetcode.com/problems/maximize-value-of-function-in-a-ball-passing-game/",
   complexity: "O(n log k) time and O(n log k) space. The visualization caps n at 24 players.",
+  question: "In a ball passing game, find the largest sum of a player's id and all receivers along k passes starting from each player.",
+  approaches: [
+    { name: "Binary lifting", intuition: "Precompute the receiver and total after 2^j passes, then combine powers of two for k passes.", time: "O(n log k)", space: "O(n log k)" },
+    { name: "Simulate each start", intuition: "Follow the passes from each start for k steps.", time: "O(n k)", space: "O(n)" },
+  ],
   examples: [
     { label: "Example 1", input: "{\"receiver\": [2, 0, 1], \"k\": 4}" },
     { label: "Example 2", input: "{\"receiver\": [1, 1, 1, 2, 3], \"k\": 3}" },

@@ -17,6 +17,10 @@ const definition = {
   inputLabel: 'JSON: {"grid": [["B","W","B"],["B","W","W"],["B","W","B"]]}',
   url: "https://leetcode.com/problems/make-a-square-with-the-same-color/",
   complexity: "O(1) time and O(1) space for the fixed 3 by 3 grid.",
+  question: "Decide whether a 3 by 3 grid of two colours can become a single-colour 2 by 2 square with at most one change.",
+  approaches: [
+    { name: "Count the blue cells", intuition: "A square needs one change exactly when it holds one or three blue cells, so counting decides the answer.", time: "O(1)", space: "O(1)" },
+  ],
   examples: [
     { label: "Example 1", input: '{"grid":[["B","W","B"],["B","W","W"],["B","W","B"]]}' },
     { label: "All white", input: "{\"grid\":[[\"W\",\"W\",\"W\"],[\"W\",\"W\",\"W\"],[\"W\",\"W\",\"W\"]]}" },

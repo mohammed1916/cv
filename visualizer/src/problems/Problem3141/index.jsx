@@ -21,6 +21,10 @@ const definition = {
   inputLabel: 'Object with nums and m (e.g. {"nums":[1,2,3],"m":2})',
   url: "https://leetcode.com/problems/maximum-hamming-distances/",
   complexity: "O(n² × m) time with the pair scan, O(n) extra space for the answers. The visualization accepts up to 10 numbers and m up to 10; the bounds shown are this visualization's own limits, and a faster solution is not traced.",
+  question: "For each number in an array, find the largest Hamming distance to any other number, using binary digits with leading zeros.",
+  approaches: [
+    { name: "Pairwise bit comparison", intuition: "Compare every pair of numbers bit by bit and keep the largest differing count for each number.", time: "O(n^2 * m)", space: "O(n)" },
+  ],
   examples: [
     { label: "Three numbers", input: '{"nums":[2,5,9,12],"m":4}' },
     { label: "Repeated values", input: '{"nums":[7,0,7],"m":3}' },

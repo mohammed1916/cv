@@ -17,6 +17,10 @@ const definition = {
   inputLabel: 'Operations (LeetCode JSON: names, args)',
   url: 'https://leetcode.com/problems/maximum-frequency-stack/',
   complexity: 'O(1) per push and pop; O(n) space for the level stacks.',
+  question: "Design a stack-like structure where pop removes the most frequent value, breaking ties by most recent push.",
+  approaches: [
+    { name: "Frequency map and stack per frequency", intuition: "Track each value's count and keep a stack of values for each count level; pop from the highest level.", time: "O(1) per operation", space: "O(n)" },
+  ],
   examples: [
     { label: 'Official', input: '[["FreqStack","push","push","push","push","push","push","pop","pop","pop","pop"],[[],[5],[7],[5],[7],[4],[5],[],[],[],[]]]' },
     { label: 'Tie by recency', input: '[["FreqStack","push","push","push","pop","pop","pop"],[[],[1],[2],[3],[],[],[]]]' },

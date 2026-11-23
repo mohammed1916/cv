@@ -22,6 +22,10 @@ const definition = {
   inputLabel: "Ratings (JSON object, e.g. {\"ratings\": [1,0,2]})",
   url: "https://leetcode.com/problems/candy/",
   complexity: "O(n) time and O(n) space for n children. The visualization caps the line at 40 children.",
+  question: "Give each child at least one candy so higher-rated neighbours get more.",
+  approaches: [
+    { name: "Two passes", intuition: "Scan left to right, then right to left, keeping the larger requirement.", time: "O(n)", space: "O(n)" },
+  ],
   examples: getExamples("candy").map(({ label, ratings }) => ({ label, input: JSON.stringify({ ratings }) })),
 };
 

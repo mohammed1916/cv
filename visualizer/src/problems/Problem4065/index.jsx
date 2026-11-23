@@ -17,6 +17,10 @@ const definition = {
   inputLabel: 'JSON array of integers from 1 to 100, e.g. [4, 4, 2, 9, 2]',
   url: 'https://leetcode.com/problems/rearrange-array-by-removing-distinct-values/description/',
   complexity: 'O(n log n) time: each round sorts its distinct values and removes at most n copies in total. The visualization caps the array at 24 values.',
+  question: "Rearrange an array by repeatedly removing one copy of each distinct value, in increasing order, until nothing remains.",
+  approaches: [
+    { name: "Round-by-round counting", intuition: "Count every value, then each round takes one copy of every value still present in increasing order.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Two rounds', input: '[4, 4, 2, 9, 2]' },
     { label: 'Single copies', input: '[7, 3, 5]' },

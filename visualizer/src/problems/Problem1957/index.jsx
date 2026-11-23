@@ -11,6 +11,10 @@ const definition = {
   inputLabel: 'Lowercase string (e.g. aaaabbcc)',
   url: 'https://leetcode.com/problems/delete-characters-to-make-fancy-string/',
   complexity: 'O(n) time and O(n) space for the kept characters.',
+  question: "Delete the fewest characters so that the string has no three equal characters in a row.",
+  approaches: [
+    { name: "Stack greedy", intuition: "Keep each character unless it would create three equal characters in a row.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Run of four', input: 'aaaabbcc' },
     { label: 'Mixed run', input: 'xxxyzzzz' },

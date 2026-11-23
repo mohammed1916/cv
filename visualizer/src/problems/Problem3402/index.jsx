@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with grid, a rectangle of integers from 0 to 9, for example {"grid":[[3,2],[1,3],[3,4],[0,1]]}',
   url: 'https://leetcode.com/problems/minimum-operations-to-make-columns-strictly-increasing/',
   complexity: 'O(m * n) time and O(1) extra space. The visualization caps the grid at 5 by 5.',
+  question: "Find the fewest operations that make every column of a grid strictly increasing, where an operation increases a value by one.",
+  approaches: [
+    { name: "Greedy column by column", intuition: "Go down each column and raise each value just enough to exceed the one above it.", time: "O(m * n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"grid":[[3,2],[1,3],[3,4],[0,1]]}' },
     { label: 'Example 2', input: '{"grid":[[3,2,1],[0,3,2]]}' },

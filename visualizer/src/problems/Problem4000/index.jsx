@@ -13,6 +13,10 @@ const definition = {
   inputLabel: "Object with n (digit count) and s (digit sum), e.g. {\"n\":4,\"s\":23}",
   url: "https://leetcode.com/problems/largest-integer-with-given-digit-sum/",
   complexity: "O(n) time and O(n) space for n digit positions. The visualization caps n at 10.",
+  question: "Decide how many digit sequences of a fixed length can reach a target sum, placing one digit at a time.",
+  approaches: [
+    { name: "Digit-by-digit search with pruning", intuition: "Place one digit at a time and prune branches whose remaining sum cannot fit.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: "Four digits", input: "{\"n\":4,\"s\":23}" },
     { label: "Sum too large", input: "{\"n\":3,\"s\":30}" },

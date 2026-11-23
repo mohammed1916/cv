@@ -14,6 +14,11 @@ const definition = {
   inputLabel: 'Object with a prices list, e.g. {"prices":[4,7,2,9,5,11]}',
   url: 'https://leetcode.com/problems/maximum-linear-stock-score/',
   complexity: 'O(n) time and O(n) space with a hash map keyed by price minus index. The visualization caps the list at 12 days with prices from 1 to 30.',
+  question: "Pick a subsequence of stock prices with a constant difference between price and index, and maximize its total score.",
+  approaches: [
+    { name: "Hash map by price minus index", intuition: "Positions sharing the same price minus index form a valid group; add each price into its group's sum and keep the maximum.", time: "O(n)", space: "O(n)" },
+    { name: "Check every pair", intuition: "For each pair of indexes, check the difference and extend a chain.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Mixed run', input: '{"prices":[4,7,2,9,5,11]}' },
     { label: 'Equal prices', input: '{"prices":[3,3,3]}' },

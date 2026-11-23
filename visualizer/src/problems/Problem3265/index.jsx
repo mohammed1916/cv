@@ -19,6 +19,10 @@ const definition = {
   inputLabel: 'Numbers (JSON, e.g. {"nums": [123, 231]})',
   url: "https://leetcode.com/problems/count-almost-equal-pairs-i/",
   complexity: "O(n^2 * d^3) for n numbers with d digits: each number's one-swap reach is built and checked against earlier numbers. The visualization accepts 12 numbers up to 999999.",
+  question: "Count index pairs whose numbers become equal after swapping two digits in at most one of them.",
+  approaches: [
+    { name: "Enumerate one-swap reachable numbers", intuition: "Generate every number reachable by one digit swap from each value and count matching pairs with a map.", time: "O(n^2 * d^3)", space: "O(n * d^2)" },
+  ],
   examples: [
     { label: "Invented three values", input: '{"nums": [14, 41, 22]}' },
     { label: "Leading zero case (illustrative, not from the statement)", input: '{"nums": [100, 1]}' },

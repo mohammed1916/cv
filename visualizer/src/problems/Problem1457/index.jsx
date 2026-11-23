@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'JSON object with values: level-order digits 1-9 (null = missing)',
   url: 'https://leetcode.com/problems/pseudo-palindromic-paths-in-a-binary-tree/',
   complexity: 'O(n) time and O(h) stack space, using a 10-bit parity mask. The visualization caps input at 15 entries.',
+  question: "Count root-to-leaf paths whose digits can be rearranged into a palindrome.",
+  approaches: [
+    { name: "DFS with a parity mask", intuition: "Keep one bit per digit for odd counts; a path passes when at most one bit is set at a leaf.", time: "O(n)", space: "O(h) for the recursion depth" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"values":[2,3,1,3,1,null,1]}' },
     { label: 'Example 2', input: '{"values":[2,1,1,1,3,null,null,null,null,null,1]}' },

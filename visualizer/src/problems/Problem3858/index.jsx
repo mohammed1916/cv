@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Grid of values (JSON object with grid)',
   url: 'https://leetcode.com/problems/minimum-bitwise-or-from-grid/',
   complexity: 'O(b * m * n) time where b is the bit width. The visualization caps the grid at 30 values.',
+  question: "Choose one value from each row of a grid so that their bitwise OR is as small as possible.",
+  approaches: [
+    { name: "Clear bits from the top", intuition: "Clear each bit from the top down whenever every row still has a value that fits the smaller mask.", time: "O(b * m * n)", space: "O(m * n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"grid":[[1,5],[2,4]]}' },
     { label: 'Example 2', input: '{"grid":[[3,5],[6,4]]}' },

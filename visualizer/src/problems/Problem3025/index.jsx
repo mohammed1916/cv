@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'JSON array of 2 to 10 distinct points [x, y] with coordinates 0 to 50',
   url: 'https://leetcode.com/problems/find-the-number-of-ways-to-place-people-i/',
   complexity: 'O(n^3) time in this trace: every ordered pair is checked against every other point.',
+  question: "Count the pairs of points where one is the upper-left corner of the rectangle formed by the other and the rectangle contains no other point.",
+  approaches: [
+    { name: "Pairs with empty rectangle check", intuition: "For each ordered pair, test every other point against the rectangle's boundary.", time: "O(n^3)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '[[2,5],[4,3],[6,1]]' },
     { label: 'Example 2', input: '[[0,4],[3,3],[1,0],[5,6]]' },

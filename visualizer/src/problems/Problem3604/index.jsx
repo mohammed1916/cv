@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Directed time-window graph {"n", "edges": [[u, v, start, end], ...]} (JSON)',
   url: 'https://leetcode.com/problems/minimum-time-to-reach-destination-in-directed-graph/',
   complexity: 'O((V + E) log V) time. The visualization caps input at 6 nodes and 8 edges.',
+  question: "Find the earliest time to reach the last node from the first node in a directed graph where edges open only at certain times.",
+  approaches: [
+    { name: "Dijkstra with waiting", intuition: "Settle nodes by earliest arrival time, and when an edge is not open yet, wait until it opens.", time: "O((V + E) log V)", space: "O(V + E)" },
+  ],
   examples: [
     { label: 'Wait', input: '{"n":3,"edges":[[0,1,0,1],[1,2,2,3]]}' },
     { label: 'Closed', input: '{"n":3,"edges":[[0,1,1,1],[1,2,0,0]]}' },

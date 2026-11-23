@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with k and root: {len, left, right} or {len, text}',
   url: 'https://leetcode.com/problems/extract-kth-character-from-the-rope-tree/',
   complexity: 'O(h) time and O(1) extra space for a tree of height h, reading only stored lengths on the way down. The visualization caps the tree at 15 nodes and 40 characters.',
+  question: "Given a rope tree with leaf strings and a k, find the k-th character of the final string.",
+  approaches: [
+    { name: "Descend by stored lengths", intuition: "Use each node's stored length to decide whether the k-th character lies in the left or right child.", time: "O(h)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Split at the top', input: '{"k":5,"root":{"len":8,"left":{"len":4,"left":{"len":2,"text":"ca"},"right":{"len":2,"text":"ts"}},"right":{"len":4,"left":{"len":1,"text":"e"},"right":{"len":3,"text":"dog"}}}}' },
     { label: 'Single leaf', input: '{"k":3,"root":{"len":3,"text":"run"}}' },

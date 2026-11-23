@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with events: an array of [startDay, endDay] pairs (days 1 to 30)',
   url: 'https://leetcode.com/problems/maximum-number-of-events-that-can-be-attended/',
   complexity: 'O(n log n) time with a heap for the waiting events. The visualization caps input at 8 events.',
+  question: "Attend as many events as possible, one per day.",
+  approaches: [
+    { name: "Greedy with min-heap", intuition: "Each day take the event that ends soonest among those open.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"events":[[1,2],[2,3],[3,4]]}' },
     { label: 'Example 2', input: '{"events":[[1,2],[2,2],[3,4],[3,4]]}' },

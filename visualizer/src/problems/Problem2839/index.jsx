@@ -16,6 +16,11 @@ const definition = {
   inputLabel: "s1 and s2 (e.g. {\"s1\": \"abcd\", \"s2\": \"cdab\"})",
   url: "https://leetcode.com/problems/check-if-strings-can-be-made-equal-with-operations-i/",
   complexity: "O(1) time and O(1) space for length 4.",
+  question: "Decide whether two four-letter strings can be made equal by swapping positions two apart on either string.",
+  approaches: [
+    { name: "Compare by parity positions", intuition: "Swaps keep letters within the same parity group, so check whether each group matches as a multiset.", time: "O(1)", space: "O(1)" },
+    { name: "Brute force reachable states", intuition: "Enumerate all states reachable by allowed swaps.", time: "O(1)", space: "O(1)" },
+  ],
   examples: [
     { label: "Example 1", input: "{\"s1\": \"abcd\", \"s2\": \"cdab\"}" },
     { label: "Example 2", input: "{\"s1\": \"abcd\", \"s2\": \"dacb\"}" },

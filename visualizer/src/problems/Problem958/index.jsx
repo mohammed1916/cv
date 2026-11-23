@@ -14,6 +14,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Tree root (JSON level-order)',
   url: 'https://leetcode.com/problems/check-completeness-of-a-binary-tree/',
   complexity: 'O(n) time and space. The visualization caps input at 30 nodes.',
+  question: "Decide whether a binary tree is complete: every level is full except possibly the last, which fills from the left.",
+  approaches: [
+    { name: "Level order check", intuition: "In breadth-first order, once a missing node appears, every later node must also be missing.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Gap on left side', input: '[8,4,10,null,2,9]' },
     { label: 'Last leaf missing', input: '[5,3,8,1,4,6,null]' },

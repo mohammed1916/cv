@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with arr1 and arr2 (JSON)',
   url: 'https://leetcode.com/problems/make-array-strictly-increasing/',
   complexity: 'O(n * m log m) time with the sorted unique arr2. The visualization caps each array at 8 values.',
+  question: "Make an array strictly increasing by replacing elements with values from a second array, using the fewest replacements.",
+  approaches: [
+    { name: "DP over last value", intuition: "Keep the fewest replacements for each last value, and binary search the sorted second array for the next larger value.", time: "O(n x m log m)", space: "O(n x m)" },
+  ],
   examples: [
     { label: 'Four against three', input: '{"arr1":[9,1,12,5],"arr2":[3,10,1]}' },
     { label: 'Repeated values', input: '{"arr1":[3,8,3,14],"arr2":[14,3]}' },

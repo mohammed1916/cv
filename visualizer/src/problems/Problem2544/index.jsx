@@ -16,6 +16,10 @@ const definition = {
   inputLabel: 'Number object (JSON, e.g. {"n": 521})',
   url: 'https://leetcode.com/problems/alternating-digit-sum/',
   complexity: 'O(d) time and O(d) space for d digits, where d is at most 10. The visualization accepts n up to 10^9.',
+  question: "Compute the alternating digit sum of a number, positive for the first digit and alternating after that.",
+  approaches: [
+    { name: "Single pass with signs", intuition: "Read the digits and flip the sign after each one.", time: "O(d)", space: "O(d)" },
+  ],
   examples: [
     { label: 'Mixed signs', input: '{"n": 521}' },
     { label: 'Repeated digit', input: '{"n": 111}' },

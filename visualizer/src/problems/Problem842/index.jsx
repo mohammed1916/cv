@@ -14,6 +14,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Digit string (JSON)',
   url: 'https://leetcode.com/problems/split-array-into-fibonacci-sequence/',
   complexity: 'Only the first two numbers branch (at most 10 digits each); the rest are forced by the sum, so about O(n^2 * n) time. The recursion stack is O(n).',
+  question: "Split a digit string into a Fibonacci-like sequence of non-negative 32-bit integers.",
+  approaches: [
+    { name: "Backtracking on the first two terms", intuition: "Choose the first two lengths, then extend the sequence greedily and backtrack when a term does not match the digits.", time: "O(n^2) starts, each checked in O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Three-piece Fibonacci', input: '"5813"' },
     { label: 'Repeating pattern', input: '"1212"' },

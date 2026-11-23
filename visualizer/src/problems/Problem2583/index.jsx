@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'Object with root (level-order array) and k (JSON)',
   url: 'https://leetcode.com/problems/kth-largest-sum-in-a-binary-tree/',
   complexity: 'O(n log k) time for n nodes. The visualization caps the tree at 15 entries.',
+  question: "Find the kth largest level sum of a binary tree.",
+  approaches: [
+    { name: "Level sums with a size-k min heap", intuition: "Sum each level, keep the k largest sums in a min heap, and read the top.", time: "O(n log k)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Negative values, k two', input: '{"root":[4,-2,9,null,-7,3,null,-5],"k":2}' },
     { label: 'Too few levels', input: '{"root":[1,2,null,3],"k":4}' },

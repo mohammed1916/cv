@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with nums1 and nums2 as [id, value] lists (JSON)',
   url: 'https://leetcode.com/problems/merge-two-2d-arrays-by-summing-values/',
   complexity: 'O(n + m) time and O(n + m) space.',
+  question: "Merge two lists of id and value pairs, each sorted by id, adding the values for ids that appear in both.",
+  approaches: [
+    { name: "Two-pointer merge", intuition: "Walk both sorted lists together, emitting the smaller id and summing ties.", time: "O(n + m)", space: "O(n + m)" },
+  ],
   examples: [
     { label: 'Sparse ids', input: '{"nums1":[[1,8],[4,2],[7,9],[10,5]],"nums2":[[1,3],[7,4],[9,6]]}' },
     { label: 'Single shared id', input: '{"nums1":[[2,10]],"nums2":[[2,12],[3,1],[8,30]]}' },

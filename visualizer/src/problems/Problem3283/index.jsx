@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'kx, ky, and positions (JSON object)',
   url: 'https://leetcode.com/problems/maximum-number-of-moves-to-kill-all-pawns/',
   complexity: 'O(2^n * n^2) time and O(2^n * n) space for n pawns, plus n+1 breadth-first searches on the 50 x 50 board. The visualization caps positions at 6 pawns.',
+  question: "Pawns sit on a board; a knight captures pawns in turn, one pawn each time, and the goal is the fewest moves to capture them all.",
+  approaches: [
+    { name: "Bitmask minimax over captured pawns", intuition: "Precompute knight distances, then choose the next pawn for each set of captured pawns with a memoised search over bitmasks.", time: "O(2^n * n^2)", space: "O(2^n * n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"kx": 2, "ky": 1, "positions": [[0, 0]]}' },
     { label: 'Example 2', input: '{"kx": 0, "ky": 0, "positions": [[2, 1], [1, 2], [3, 3]]}' },

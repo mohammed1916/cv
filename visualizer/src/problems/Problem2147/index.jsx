@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Corridor string of S (seat) and P (plant)',
   url: 'https://leetcode.com/problems/number-of-ways-to-divide-a-long-corridor/',
   complexity: 'O(n) time for the scan and the gap product; O(number of seats) space for the seat positions.',
+  question: "Count the ways to place dividers in a corridor so that every section has exactly two seats.",
+  approaches: [
+    { name: "Multiply gaps between seat pairs", intuition: "Seats come in pairs; between the second seat of one pair and the first seat of the next, the divider can go in any of the empty cells, so multiply those gap counts.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Two gaps', input: 'SSPPSPSPSS' },
     { label: 'Odd seats', input: 'SSPPS' },

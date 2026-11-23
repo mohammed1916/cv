@@ -18,6 +18,10 @@ const definition = {
   inputLabel: 'Array of values (e.g. [2,4,8,3,6])',
   url: 'https://leetcode.com/problems/maximum-valid-split-positions-i/',
   complexity: 'O(n^3) time in this direct form: n + 1 choices, n splits, and a gcd over each side. The visualization caps the array at 12 values; the official limit is 1000.',
+  question: "Remove at most one element, then count the splits whose two sides share the same gcd; maximise that count.",
+  approaches: [
+    { name: "Brute force removal and split count", intuition: "Try each removal, and for each remaining array count the splits whose two sides share the same gcd.", time: "O(n^3)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Removal helps', input: '[2,4,8,3,6]' },
     { label: 'Shared factor', input: '[12,6,9,3,15,6]' },

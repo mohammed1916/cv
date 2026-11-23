@@ -16,6 +16,10 @@ const definition = {
   inputLabel: 'Object with nums and k (k must divide the length)',
   url: 'https://leetcode.com/problems/reverse-k-subarrays/',
   complexity: 'O(n) time and O(n) space for the result copy. Each element moves at most once. The visualization caps the array at 16 values.',
+  question: "Split an array into k equal blocks and reverse each block in place.",
+  approaches: [
+    { name: "Reverse each block", intuition: "Split the array into equal blocks and reverse each one.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Two blocks', input: '{"nums":[1,2,3,4,5,6,7,8],"k":2}' },
     { label: 'Three blocks', input: '{"nums":[5,-1,0,3,9,9],"k":3}' },

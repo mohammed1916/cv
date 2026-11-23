@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with script: a list of ["subscribe" | "unsubscribe" | "emit", event, listener]',
   url: 'https://leetcode.com/problems/event-emitter/',
   complexity: 'Subscribe is O(1). Emit calls each listener of one event once, in order.',
+  question: "Design an event emitter that subscribes listeners to named events, emits events with arguments, and unsubscribes on request.",
+  approaches: [
+    { name: "Map of listener arrays", intuition: "Keep a list of listeners per event name, call them in order on emit, and remove the one returned by unsubscribe.", time: "O(1) subscribe", space: "O(listeners)" },
+  ],
   examples: [
     { label: 'Two listeners, one removed', input: '{"script":[["subscribe","save","a"],["subscribe","save","b"],["emit","save"],["unsubscribe","save","a"],["emit","save"]]}' },
     { label: 'Other event', input: '{"script":[["subscribe","open","x"],["emit","close"],["emit","open"]]}' },

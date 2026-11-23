@@ -23,6 +23,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'Object with stores and inventory rows',
   complexity: 'O(I + S log S) for I inventory rows and S stores.',
+  question: "Using store and product inventory rows, find products whose price is out of line with the store average, and report them.",
+  approaches: [
+    { name: "Average then compare", intuition: "Compute each store's average price with a window function, then keep rows that fall outside the allowed band.", time: "O(I + S log S)", space: "O(I)" },
+  ],
   examples: [
     { label: 'Sample', input: SAMPLE_TEXT },
     { label: 'One product, no stock', input: '{"stores":[{"store_id":1,"store_name":"Alpha"}],"inventory":[{"store_id":1,"product_id":1,"price":10,"quantity":0}]}' },

@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Two rows of points as JSON',
   url: 'https://leetcode.com/problems/grid-game/',
   complexity: 'O(n) time: one prefix pass over the two rows.',
+  question: "Two robots move across a two-row grid collecting points; find the best score when the first robot tries to minimise the second's maximum.",
+  approaches: [
+    { name: "Prefix sums on two rows", intuition: "For each switch column, compare the remaining top-row sum and the collected bottom-row sum, keeping the best minimum.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Lower bottom row', input: '[[4,1,6],[2,3,1]]' },
     { label: 'Equal rows', input: '[[2,2],[2,2]]' },

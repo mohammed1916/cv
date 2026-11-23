@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'An object with s, for example {"s": "babab"}',
   url: 'https://leetcode.com/problems/smallest-palindromic-rearrangement-i/',
   complexity: 'O(n + 26) time. The visualization caps s at 60 letters.',
+  question: "Find the smallest palindrome that can be made by rearranging a string's letters.",
+  approaches: [
+    { name: "Half-sorted rearrangement", intuition: "Build the first half of the palindrome from sorted letter counts, then mirror it.", time: "O(n + 26)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"s":"z"}' },
     { label: 'Example 2', input: '{"s":"babab"}' },

@@ -20,6 +20,10 @@ const definition = {
   inputLabel: 'Object with prices (product_id, start_date, end_date, price) and units_sold (product_id, purchase_date, units)',
   url: 'https://leetcode.com/problems/average-selling-price/',
   complexity: 'O(P + S) work after matching each sale to its price range, where P and S are the row counts. The visualization caps each list at 12 rows.',
+  question: "Report the average selling price for each product using sales within each price period.",
+  approaches: [
+    { name: "Match each sale to its period", intuition: "Find the price period that contains each sale date, then compute the weighted average per product.", time: "O(P + S)", space: "O(P)" },
+  ],
   examples: [
     { label: 'Two products', input: '{"prices":[{"product_id":1,"start_date":"2020-04-01","end_date":"2020-04-10","price":8},{"product_id":1,"start_date":"2020-04-11","end_date":"2020-04-30","price":12},{"product_id":2,"start_date":"2020-04-01","end_date":"2020-04-20","price":4},{"product_id":3,"start_date":"2020-01-01","end_date":"2020-12-31","price":99}],"units_sold":[{"product_id":1,"purchase_date":"2020-04-03","units":6},{"product_id":1,"purchase_date":"2020-04-15","units":2},{"product_id":2,"purchase_date":"2020-04-09","units":5}]}' },
     { label: 'Boundary days', input: '{"prices":[{"product_id":4,"start_date":"2020-01-01","end_date":"2020-01-01","price":7}],"units_sold":[{"product_id":4,"purchase_date":"2020-01-01","units":3}]}' },

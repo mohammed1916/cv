@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with m, n, and prices as [height, width, price] (JSON)',
   url: 'https://leetcode.com/problems/selling-pieces-of-wood/',
   complexity: 'O(m * n * (m + n)) time and O(m * n) space. The visualization caps the board at 6 by 6 with up to 6 pieces.',
+  question: "A wooden board is cut into rectangles with given prices; find the most money obtainable by cutting the board.",
+  approaches: [
+    { name: "Interval DP over sub-rectangles", intuition: "Try each horizontal and vertical cut of every sub-board and keep the best total.", time: "O(m * n * (m + n))", space: "O(m * n)" },
+  ],
   examples: [
     { label: 'Three piece types', input: '{"m":5,"n":4,"prices":[[2,3,7],[1,4,5],[3,2,9]]}' },
     { label: 'Tight-fit board', input: '{"m":3,"n":3,"prices":[[1,1,2],[3,2,11],[2,3,4]]}' },

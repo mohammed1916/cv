@@ -4,6 +4,10 @@ import { buildTrace, parseInput, code, sql, python, phases, inputLabel, complexi
 import { meta } from './meta'
 
 const definition = {
+  question: "Count users by the platform used for their purchases on each day.",
+  approaches: [
+    { name: "Join and group in SQL", intuition: "Classify each purchase by platform and group the counts by day.", time: "O(n)", space: "O(n)" },
+  ],
   number: meta.number,
   phases,
   parse: parseInput,

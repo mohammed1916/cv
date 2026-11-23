@@ -12,6 +12,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Rectangles [x1,y1,x2,y2] (JSON)',
   url: 'https://leetcode.com/problems/rectangle-area-ii/',
   complexity: 'O(n^2 log n) time (n slabs, each sorting up to n intervals) and O(n) space. Exact BigInt arithmetic avoids overflow before the final modulo.',
+  question: "Find the total area covered by a union of axis-aligned rectangles, modulo 1000000007.",
+  approaches: [
+    { name: "Compressed coordinate sweep", intuition: "Compress the x and y coordinates and mark each covered cell of the compressed grid once.", time: "O(n^3)", space: "O(n^2)" },
+  ],
   examples: [
     { label: 'Two overlapping rectangles', input: '[[0,0,2,2],[1,1,4,3]]' },
     { label: 'Own: two overlapping rectangles', input: '[[0,0,4,3],[2,1,6,5]]' },

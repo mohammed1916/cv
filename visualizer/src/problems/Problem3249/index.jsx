@@ -19,6 +19,10 @@ const definition = {
   inputLabel: 'Tree edges (JSON, e.g. {"edges": [[0,1],[0,2],[1,3]]})',
   url: "https://leetcode.com/problems/count-the-number-of-good-nodes/",
   complexity: "O(n) time and O(n) space with one traversal order. The visualization accepts at most 12 nodes.",
+  question: "In a tree rooted at node 0, count the nodes whose child subtrees all have the same size.",
+  approaches: [
+    { name: "Subtree sizes in one traversal", intuition: "Compute each subtree size bottom-up, then check the sizes of each node's children.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: "Small tree", input: '{"edges": [[0,1],[0,2],[1,3],[1,4]]}' },
     { label: "Path", input: '{"edges": [[0,1],[1,2],[2,3]]}' },

@@ -8,6 +8,11 @@ const definition = {
   inputLabel: 'Object with heroes (strengths) and monsters ([strength, coins] pairs)',
   url: 'https://leetcode.com/problems/maximum-coins-heroes-can-collect/',
   complexity: 'O((m + h) log m) time for m monsters and h heroes after sorting: one sort, one prefix pass and a binary search per hero. The visualization caps heroes at 6 and monsters at 8.',
+  question: "Given monsters with power and coins and heroes with a power limit, find the maximum coins each hero can collect.",
+  approaches: [
+    { name: "Sort and prefix sums with binary search", intuition: "Sort monsters by power, take prefix sums of coins, and binary search each hero's limit.", time: "O((m + h) log m)", space: "O(m)" },
+    { name: "Scan each hero over monsters", intuition: "Sum eligible monsters for each hero directly.", time: "O(m h)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Three monsters', input: '{"heroes":[4,1],"monsters":[[2,10],[5,7],[3,1]]}' },
     { label: 'Equal strength', input: '{"heroes":[5,10],"monsters":[[5,3],[11,9]]}' },

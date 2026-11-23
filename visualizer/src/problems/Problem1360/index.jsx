@@ -3,6 +3,10 @@ import { StackLane } from '../../components/shared/AlgorithmStatePrimitives'
 import { buildTrace, parseInput, code, python, phases, examples } from './algorithm'
 
 const definition = {
+  question: "Count the days between two calendar dates.",
+  approaches: [
+    { name: "Day-number conversion", intuition: "Convert each date to a day count and subtract.", time: "O(1)", space: "O(1)" },
+  ],
   number: '1360', phases, parse: parseInput, build: buildTrace, code, python, examples,
   inputLabel: 'Object with first and second dates (JSON)',
   url: 'https://leetcode.com/problems/number-of-days-between-two-dates/',

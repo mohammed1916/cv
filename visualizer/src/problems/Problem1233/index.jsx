@@ -18,6 +18,10 @@ const definition = {
   inputLabel: 'Folder paths (e.g. {"folder":["/src/app/ui","/src","/src/app","/lib/io","/lib"]})',
   url: "https://leetcode.com/problems/remove-sub-folders-from-the-filesystem/",
   complexity: "O(n log n) time for sorting plus the total path length, and O(n) extra space. The visualization accepts up to 64 paths.",
+  question: "Remove every folder whose path lies inside another folder path in a list.",
+  approaches: [
+    { name: "Sort and prefix check", intuition: "Sort the paths so a parent comes first, then keep only paths with no kept prefix folder.", time: "O(n log n + total length)", space: "O(n)" },
+  ],
   examples: [
     { label: "Nested folders", input: '{"folder": ["/src/app/ui", "/src", "/src/app", "/lib/io", "/src/appx", "/lib/io/tmp/x", "/lib"]}' },
     { label: "Prefix is not a parent", input: '{"folder": ["/app/log", "/app/logs", "/app/log/archive", "/app/cache"]}' },

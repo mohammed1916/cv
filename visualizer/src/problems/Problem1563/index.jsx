@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Stones (JSON object with stones as a list of positive values)',
   url: 'https://leetcode.com/problems/stone-game-v/',
   complexity: 'O(n^3) time and O(n^2) space. The visualization caps input at 8 stones.',
+  question: "Score a row of stones by repeatedly splitting it and keeping the better half.",
+  approaches: [
+    { name: "Interval DP", intuition: "For each segment, try each split and keep the best score for the part Alice keeps.", time: "O(n^3)", space: "O(n^2)" },
+  ],
   examples: [
     { label: 'Six stones', input: '{"stones":[6,2,3,4,5,5]}' },
     { label: 'Seven equal', input: '{"stones":[7,7,7,7,7,7,7]}' },

@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with root (level-order list) and nodes, e.g. {"root":[9,4,12,2,6,10,15],"nodes":[2,6]}',
   url: "https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree-iv/",
   complexity: "O(n) time and O(h) recursion space for n nodes. The visualization caps the tree at 15 nodes and the target list at 6.",
+  question: "Given a binary tree and a list of nodes, find their lowest common ancestor.",
+  approaches: [
+    { name: "Post-order count", intuition: "Recurse and count how many targets sit below each node; the first node covering all of them is the answer.", time: "O(n)", space: "O(h)" },
+  ],
   examples: [
     { label: "Two targets", input: '{"root":[9,4,12,2,6,10,15],"nodes":[2,6]}' },
     { label: "Three targets", input: '{"root":[9,4,12,2,6,10,15],"nodes":[2,6,10]}' },

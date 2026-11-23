@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON with numArrows and aliceArrows (12 counts that sum to numArrows)',
   url: 'https://leetcode.com/problems/maximum-points-in-an-archery-competition/',
   complexity: 'O(12 * numArrows) time with the knapsack table and O(12 * numArrows) space for the choices. The page caps numArrows at 12.',
+  question: "Choose how many arrows Bob fires into each archery section to maximise his points, given Alice's arrow counts and his total arrows.",
+  approaches: [
+    { name: "Bitmask over sections", intuition: "Each section is either won or lost; try every subset of sections, spend the minimum arrows to win them, and keep the best total.", time: "O(2^12 * 12)", space: "O(12)" },
+  ],
   examples: [
     { label: 'Four arrows', input: '{"numArrows":4,"aliceArrows":[0,0,0,0,0,0,0,0,0,1,1,2]}' },
     { label: 'Six arrows', input: '{"numArrows":6,"aliceArrows":[2,0,0,0,0,0,0,0,0,1,0,3]}' },

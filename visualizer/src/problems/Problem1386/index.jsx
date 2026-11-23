@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Cinema (JSON object with n rows and reserved_seats as [row, seat] pairs)',
   url: 'https://leetcode.com/problems/cinema-seat-allocation/',
   complexity: 'O(n + r) time for r reservations, with constant work per row. The visualization caps the cinema at 8 rows.',
+  question: "Seat the most families in a cinema where reserved seats block neighbours.",
+  approaches: [
+    { name: "Row bitmask", intuition: "Each row's reserved seats form a bitmask, and the best block choice is counted per row.", time: "O(n + r)", space: "O(r)" },
+  ],
   examples: [
     { label: 'Official', input: '{"n":3,"reserved_seats":[[1,2],[1,3],[1,8],[2,6],[3,1],[3,10]]}' },
     { label: 'Empty', input: '{"n":2,"reserved_seats":[]}' },

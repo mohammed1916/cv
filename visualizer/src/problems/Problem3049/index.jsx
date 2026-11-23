@@ -9,6 +9,11 @@ const definition = {
   inputLabel: 'Object with nums and changeIndices (entries of changeIndices count from 1)',
   url: 'https://leetcode.com/problems/earliest-second-to-mark-indices-ii/',
   complexity: 'O(m log m log m) time and O(n) space: binary search over the deadline, and each test scans seconds with heap work. The official limit is 5000 on both lengths; the visualization caps nums at 8 and changeIndices at 16.',
+  question: "Find the earliest second by which all indices can be marked, for a larger input.",
+  approaches: [
+    { name: "Binary search with deadlines", intuition: "Binary search the answer and check the deadlines of each index against the scheduled changes.", time: "O(m log m)", space: "O(n + m)" },
+    { name: "Scan every second", intuition: "Test each second in order until a feasible one is found.", time: "O(m^2)", space: "O(n + m)" },
+  ],
   examples: [
     { label: 'Resets pay off', input: '{"nums":[4,1,5],"changeIndices":[3,1,2,3,1,1,2,2]}' },
     { label: 'Heap must give one up', input: '{"nums":[6,2,9],"changeIndices":[2,2,1,3,3,1,3,1,2]}' },

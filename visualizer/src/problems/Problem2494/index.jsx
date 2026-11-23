@@ -52,6 +52,10 @@ const definition = {
   python,
   inputLabel: 'JSON object with a HallEvents table',
   complexity: 'Sorting dominates: O(n log n) for n events, plus one pass to flag groups and one pass to collapse them.',
+  question: "For each hall, merge events whose days overlap into a single event with the earliest start and latest end.",
+  approaches: [
+    { name: "Sort and collapse overlaps", intuition: "Sort events by start day, then extend the current merged event whenever the next one overlaps it.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Teaching sample', input: JSON.stringify(SAMPLE) },
     { label: 'Single day event', input: '{"HallEvents":[{"hall_id":1,"start_day":4,"end_day":4}]}' },

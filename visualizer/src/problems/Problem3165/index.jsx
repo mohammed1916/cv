@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with nums and queries of [position, value] (JSON)',
   url: 'https://leetcode.com/problems/maximum-sum-of-subsequence-with-non-adjacent-elements/',
   complexity: 'O(n * q) time for the scans in this trace, with the total kept modulo 1000000007. The visualization caps nums at 8 values and queries at 5.',
+  question: "For each update, find the largest sum of values chosen so that no two chosen values are adjacent, modulo 1000000007.",
+  approaches: [
+    { name: "Two running values per prefix", intuition: "One running value keeps the best sum with the last value skipped, and another keeps the best with it taken.", time: "O(n * q)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Four numbers, two updates', input: '{"nums":[-5,9,2,0],"queries":[[0,7],[3,-11]]}' },
     { label: 'Three numbers, three updates', input: '{"nums":[12,-12,3],"queries":[[2,-1],[0,-8],[1,4]]}' },

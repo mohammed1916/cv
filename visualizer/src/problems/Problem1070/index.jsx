@@ -5,6 +5,10 @@ import SqlStages from './SqlStages'
 import './SqlStages.css'
 
 const definition = {
+  question: "For each product, report the year of its first sale and the quantity and price of that first sale.",
+  approaches: [
+    { name: "Join and group in SQL", intuition: "Find each product's earliest sale date, then keep the rows that match it.", time: "O(n log n)", space: "O(n)" },
+  ],
   number: meta.number,
   phases, parse: parseInput, build: buildTrace, code, sql, python, inputLabel,
   url: `https://leetcode.com/problems/${meta.slug}/`,

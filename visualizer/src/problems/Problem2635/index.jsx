@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'JSON object with arr (up to 8 whole numbers) and fn ("twicePlusIndex", "square" or "plusIndex")',
   url: 'https://leetcode.com/problems/apply-transform-over-each-element-in-array/',
   complexity: 'O(n) time and O(n) space for the output list.',
+  question: "Given an array and a mapping function, return a new array where each element is replaced by the function result.",
+  approaches: [
+    { name: "Map loop", intuition: "Apply the function to each element and append the result to a new array.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Three', input: '{"arr":[5,0,4]}' },
     { label: 'Squares', input: '{"arr":[-3,6],"fn":"square"}' },

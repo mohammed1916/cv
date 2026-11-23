@@ -14,6 +14,11 @@ const definition = {
   inputLabel: 'JSON object with root1 and root2 (level-order arrays)',
   url: 'https://leetcode.com/problems/all-elements-in-two-binary-search-trees/',
   complexity: 'O(n + m) time and O(n + m) space. The visualization caps each tree at 10 nodes.',
+  question: "Merge the values stored in two binary search trees into one sorted list.",
+  approaches: [
+    { name: "Two in-order walks and merge", intuition: "Each in-order walk yields a sorted list, so merge the two lists like in merge sort.", time: "O(n + m)", space: "O(n + m)" },
+    { name: "Collect and sort", intuition: "Gather every value from both trees and sort the combined list.", time: "O((n + m) log(n + m))", space: "O(n + m)" },
+  ],
   examples: [
     { label: 'Two small trees', input: '{"root1":[7,3,null,1],"root2":[4,null,10]}' },
     { label: 'Single root against branch', input: '{"root1":[6],"root2":[2,null,8]}' },

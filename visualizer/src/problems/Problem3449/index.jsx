@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with points (1 to 4 integers) and m (1 to 6)',
   url: 'https://leetcode.com/problems/maximize-the-minimum-game-score/',
   complexity: 'Exhaustive over walks: about 2^(m-1) walks on a board of at most 4 cells, so the visualization caps the sizes.',
+  question: "Choose a walk on a small board to maximize the smallest score among cells visited.",
+  approaches: [
+    { name: "Enumerate walks", intuition: "List every legal walk on the board and score each one.", time: "O(2^(m-1))", space: "O(m)" },
+  ],
   examples: [
     { label: 'Invented pair', input: '{"points":[1,5],"m":3}' },
     { label: 'Three equal cells', input: '{"points":[2,2,2],"m":3}' },

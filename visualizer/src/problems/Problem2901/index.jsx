@@ -13,6 +13,11 @@ const definition = {
   inputLabel: 'JSON object with words (short lowercase strings) and groups (0 or 1 for each word)',
   url: 'https://leetcode.com/problems/longest-unequal-adjacent-groups-subsequence-ii/',
   complexity: 'O(n^2 * L) time for n words of length L, and O(n) space. The visualization caps input at 10 words.',
+  question: "Find the longest chain of words that differ by one letter at each step, using group labels that must alternate.",
+  approaches: [
+    { name: "Dynamic programming with predecessors", intuition: "Let dp[i] be the longest chain ending at word i, and extend from earlier words that differ by one letter and have a different group.", time: "O(n^2 L)", space: "O(n)" },
+    { name: "Hash of words with one wildcard", intuition: "Use wildcard keys to find words that differ in one position quickly.", time: "O(n L^2)", space: "O(n L)" },
+  ],
   examples: [
     { label: 'Single letters', input: '{"words":["a","b","c","d"],"groups":[1,0,1,0]}' },
     { label: 'One-letter steps', input: '{"words":["ab","ac","bc"],"groups":[0,1,0]}' },

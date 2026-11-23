@@ -11,6 +11,10 @@ const definition = {
   inputLabel: "JSON string of lowercase letters (e.g. \"xfourtwoy\")",
   url: "https://leetcode.com/problems/convert-number-words-to-digits/",
   complexity: "O(n) time for a fixed list of ten digit words, since each position checks at most ten short words, and O(n) output space. The visualization caps the string at 40 letters.",
+  question: "Replace each spelled-out digit word in a string with its digit, leaving other letters unchanged.",
+  approaches: [
+    { name: "Left-to-right scan with jumps", intuition: "When a digit word starts at the current position, output its digit and skip past the whole word.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: "Two words", input: "\"xfourtwoy\"" },
     { label: "Overlap is not revisited", input: "\"oneight\"" },

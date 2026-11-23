@@ -17,6 +17,10 @@ const definition = {
     { id: 'commit', label: 'Commit wave', description: 'Apply each winning color simultaneously.' },
     { id: 'done', label: 'Complete', description: 'Inspect the final grid.' },
   ],
+  question: "Several source cells spread colour in a grid at the same time; where waves compete, the larger colour wins. Report the final grid.",
+  approaches: [
+    { name: "Simultaneous BFS by layer", intuition: "Expand all frontiers together; each cell takes the maximum colour among the neighbours that reach it first.", time: "O(n x m)", space: "O(n x m)" },
+  ],
   examples: authoredExamples0,
 }
 

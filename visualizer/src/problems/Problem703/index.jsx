@@ -12,6 +12,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Stream (JSON object with k, nums and adds)',
   url: 'https://leetcode.com/problems/kth-largest-element-in-a-stream/',
   complexity: 'O(k) per add with this sorted list. A min-heap of size k gives O(log k) per add.',
+  question: "Maintain the kth largest value of a stream of numbers as values are added.",
+  approaches: [
+    { name: "Min-heap of size k", intuition: "Keep only the k largest values; the smallest of them is the kth largest.", time: "O(log k) per add", space: "O(k)" },
+  ],
   examples: [
     { label: 'Two kept', input: '{"k":2,"nums":[6,1],"adds":[4,9,3,7]}' },
     { label: 'Single slot', input: '{"k":1,"nums":[5],"adds":[2,8,-1]}' },

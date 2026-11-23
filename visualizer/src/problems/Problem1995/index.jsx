@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Integer array of length 4 to 30 (JSON)',
   url: 'https://leetcode.com/problems/count-special-quadruplets/',
   complexity: 'O(n^4) in this direct form (n is capped at 30 here); a pair-sum table would reduce it.',
+  question: "Count quadruples of indices with a + b + c = d over the array.",
+  approaches: [
+    { name: "Pair sums with a hash map", intuition: "Count pair sums in a map and combine each pair with the difference of the remaining pair.", time: "O(n^2)", space: "O(n^2)" },
+  ],
   examples: [
     { label: 'Two matches', input: '[2,2,4,8,6]' },
     { label: 'None', input: '[5,1,2,9]' },

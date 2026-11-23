@@ -6,6 +6,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'Object with s (JSON)',
   complexity: 'O(n) time and O(1) extra space for a string of length n.',
+  question: "Split a balanced string of L and R letters into the largest number of balanced pieces.",
+  approaches: [
+    { name: "Greedy balance counter", intuition: "Count the balance and cut whenever it returns to zero.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Mixed nesting', input: '{"s":"LRLLRRLRRRLLLRRL"}' },
     { label: 'One section', input: '{"s":"LLLLRRRR"}' },

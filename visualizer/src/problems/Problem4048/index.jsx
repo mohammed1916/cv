@@ -18,6 +18,10 @@ const definition = {
   inputLabel: 'Array of values (e.g. [1,2,1,1])',
   url: 'https://leetcode.com/problems/count-values-with-equally-spaced-occurrences-i/',
   complexity: 'O(n) time and O(n) space for n values. The visualization caps the array at 20 values; the official limit is 100.',
+  question: "Count the values that occur exactly three times with equal gaps between their positions.",
+  approaches: [
+    { name: "Gather indices per value", intuition: "Collect each value's indices and test the two gaps for values with exactly three hits.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Two matches', input: '[3,1,3,2,3,1,1,4,4,4]' },
     { label: 'Four occurrences', input: '[4,7,4,9,4,7,7,7,1]' },

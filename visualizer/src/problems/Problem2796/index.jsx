@@ -12,6 +12,11 @@ const definition = {
   inputLabel: 'Object with str and a non-negative integer times',
   url: 'https://leetcode.com/problems/repeat-string/',
   complexity: 'O(n * times) with repeated concatenation, where n is the length of the text.',
+  question: "Build a string by repeating the given text a given number of times.",
+  approaches: [
+    { name: "Repeated concatenation", intuition: "Append the text once per repetition.", time: "O(n times)", space: "O(n times)" },
+    { name: "Doubling", intuition: "Build repetitions by doubling the current string, reducing the number of concatenations.", time: "O(n times) with fewer copies", space: "O(n times)" },
+  ],
   examples: [
     { label: 'Three copies', input: '{"str":"ab","times":3}' },
     { label: 'Zero copies', input: '{"str":"xyz","times":0}' },

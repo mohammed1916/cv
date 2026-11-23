@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Input [n, a, b] (JSON)',
   url: 'https://leetcode.com/problems/nth-magical-number/',
   complexity: 'O(log(n * min(a, b))) time and O(1) space.',
+  question: "Find the n-th positive integer divisible by a or b, modulo 1000000007.",
+  approaches: [
+    { name: "Binary search with inclusion-exclusion", intuition: "Binary search the value and count multiples of a or b up to it using the least common multiple.", time: "O(log(n * max(a, b)))", space: "O(1)" },
+  ],
   examples: [
     { label: 'n=3, a=2, b=3', input: '[3,2,3]' },
     { label: 'n=4, a=2, b=3', input: '[4,2,3]' },

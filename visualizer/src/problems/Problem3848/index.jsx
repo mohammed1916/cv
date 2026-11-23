@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with n',
   url: 'https://leetcode.com/problems/check-digitorial-permutation/',
   complexity: 'The digit factorial sum is computed once in O(d) time for d digits. Rearrangements are never enumerated.',
+  question: "Decide whether the digits of n can be rearranged into a number whose digit factorials sum to n itself.",
+  approaches: [
+    { name: "Digit factorial sum", intuition: "The factorial sum depends only on the digits, so compute it once without trying every arrangement.", time: "O(d)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Digitorial', input: '{"n":40585}' },
     { label: 'Not digitorial', input: '{"n":1234}' },

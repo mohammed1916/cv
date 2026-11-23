@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Object with arr (integers) and k',
   url: 'https://leetcode.com/problems/the-k-strongest-values-in-an-array/',
   complexity: 'O(n log n) time for the sort and the ranking. O(n) extra space for the sorted copy and the ranking.',
+  question: "Return the k values that lie furthest from the median of an array.",
+  approaches: [
+    { name: "Sort by distance from median", intuition: "Sort by distance from the median and break ties by value, then take the strongest k.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Spread out', input: '{"arr":[1,2,3,4,5],"k":2}' },
     { label: 'Negative tie', input: '{"arr":[-7,4,4,10,0],"k":3}' },

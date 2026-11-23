@@ -31,6 +31,10 @@ const definition = {
   inputLabel: 'Object with n and buildings ([x, y] pairs, 1 to 30 buildings)',
   url: 'https://leetcode.com/problems/count-covered-buildings/',
   complexity: 'O(b) time and O(b) space for b buildings, using row and column extremes. The visualization caps the grid at 12 and the buildings at 30.',
+  question: "Count buildings that have neighbours on all four sides in a grid of buildings.",
+  approaches: [
+    { name: "Row and column extremes", intuition: "Track the nearest building in each row and column to test coverage.", time: "O(b)", space: "O(b)" },
+  ],
   examples: [
     { label: 'Three buildings on four by four', input: '{"n":4,"buildings":[[1,1],[4,2],[2,4]]}' },
     { label: 'Four buildings on six by six', input: '{"n":6,"buildings":[[3,3],[1,6],[6,1],[5,5]]}' },

@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with nums (2 to 10 values) and k from 1 to 10 (JSON). The tree is not needed.',
   url: 'https://leetcode.com/problems/find-the-maximum-sum-of-node-values/',
   complexity: 'O(n) time and O(1) extra space. The visualization caps input at 10 values.',
+  question: "Find the largest total node value after XOR-ing node values with k and choosing pairs of edges.",
+  approaches: [
+    { name: "Sorted gains with parity", intuition: "Sort the gains from XOR-ing and pick them greedily while keeping the number of selected nodes even.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Zero among values', input: '{"nums":[6,0,6,1],"k":3}' },
     { label: 'Three values, k five', input: '{"nums":[11,7,2],"k":5}' },

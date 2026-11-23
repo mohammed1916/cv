@@ -4,6 +4,11 @@ import { StackLane } from '../../components/shared/AlgorithmStatePrimitives'
 import { buildTrace, parseInput, code, python, phases, examples } from './algorithm'
 
 const definition = {
+  question: "Decode a digit string where two-digit groups marked with a hash map to letters.",
+  approaches: [
+    { name: "Scan from the right", intuition: "Read a hash-marked pair when seen from the right, otherwise decode a single digit.", time: "O(n)", space: "O(n)" },
+    { name: "Forward scan with lookahead", intuition: "Look two characters ahead to decide between a single digit and a hash-marked pair.", time: "O(n)", space: "O(n)" },
+  ],
   number: '1309', phases, parse: parseInput, build: buildTrace, code, python, examples,
   inputLabel: 'Object with a string s (JSON)',
   url: 'https://leetcode.com/problems/decrypt-string-from-alphabet-to-integer-mapping/',

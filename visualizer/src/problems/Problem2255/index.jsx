@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with "words" (list of strings) and "s" (string), JSON',
   url: 'https://leetcode.com/problems/count-prefixes-of-a-given-string/',
   complexity: 'O(total length of the words) time. The visualization caps input at 10 words of 10 letters.',
+  question: "Count the words that are prefixes of a given string.",
+  approaches: [
+    { name: "Check each word with startsWith", intuition: "Test each word against the start of the string.", time: "O(total length)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Four words in a string', input: '{"words":["sea","tea","ten","eat"],"s":"teas"}' },
     { label: 'No prefix', input: '{"words":["x","abcd"],"s":"abc"}' },

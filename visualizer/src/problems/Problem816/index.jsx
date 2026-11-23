@@ -13,6 +13,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'String s (JSON)',
   url: 'https://leetcode.com/problems/ambiguous-coordinates/',
   complexity: 'O(n^3) for the splits, decimal positions and string building; the output itself is the dominant cost.',
+  question: "Given a digit string with one comma inserted and parentheses around it, list every coordinate pair that the string could have come from.",
+  approaches: [
+    { name: "Split and enumerate", intuition: "Try every split point, list the valid number forms for each half (with optional decimal point), then combine them.", time: "O(n^3) for n digits", space: "O(output)" },
+  ],
   examples: [
     { label: 'Four digits with zeros', input: '"(7089)"' },
     { label: 'Five digits with a zero', input: '"(10203)"' },

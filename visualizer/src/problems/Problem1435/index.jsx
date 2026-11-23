@@ -16,6 +16,10 @@ const definition = {
   inputLabel: 'Object with a Sessions list of { session_id, duration } rows; duration is in seconds',
   url: 'https://leetcode.com/problems/create-a-session-bar-chart/',
   complexity: 'O(n * b) for n sessions and b = 4 bins in this visualization; a sorted-bin sweep is O(n log n).',
+  question: "Count sessions in duration bins, keeping bins that have no sessions.",
+  approaches: [
+    { name: "Bin with conditional counts", intuition: "Label each session with its bin and count per bin, including empty bins.", time: "O(n b)", space: "O(b)" },
+  ],
   examples: [
     { label: 'Example', input: '{"Sessions":[{"session_id":1,"duration":100},{"session_id":2,"duration":400},{"session_id":3,"duration":1000},{"session_id":4,"duration":299},{"session_id":5,"duration":900}]}' },
     { label: 'Boundaries', input: '{"Sessions":[{"session_id":1,"duration":299},{"session_id":2,"duration":300},{"session_id":3,"duration":899},{"session_id":4,"duration":900}]}' },

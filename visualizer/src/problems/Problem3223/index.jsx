@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Lowercase string as a JSON string',
   url: 'https://leetcode.com/problems/minimum-length-of-string-after-operations/',
   complexity: 'O(n) time and O(26) space.',
+  question: "Find the minimum length of a string after repeatedly removing a character and its nearest equal neighbours on each side.",
+  approaches: [
+    { name: "Parity of letter counts", intuition: "Each operation removes two copies of a letter, so odd counts leave one copy and even counts leave two.", time: "O(n)", space: "O(26)" },
+  ],
   examples: [
     { label: 'Nine letters, mixed', input: '"qwqwertyu"' },
     { label: 'Two letters, distinct', input: '"xz"' },

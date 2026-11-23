@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Object with colors (string) and neededTime (JSON list)',
   url: 'https://leetcode.com/problems/minimum-time-to-make-rope-colorful/',
   complexity: 'O(n) time and O(1) extra space: one pass that tracks the current group sum and maximum.',
+  question: "Find the minimum time to remove balloons so that no two neighbouring balloons share a colour.",
+  approaches: [
+    { name: "Group sum minus maximum", intuition: "In each run of one colour, keep the most expensive balloon and pay for the rest.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Sample A', input: '{"colors":"aabaa","neededTime":[1,2,3,4,1]}' },
     { label: 'Long run', input: '{"colors":"cccca","neededTime":[5,1,7,2,3]}' },

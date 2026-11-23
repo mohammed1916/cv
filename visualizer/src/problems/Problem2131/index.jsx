@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Two-letter words as a JSON array',
   url: 'https://leetcode.com/problems/longest-palindrome-by-concatenating-two-letter-words/',
   complexity: 'O(n) time with a count per word; O(n) space.',
+  question: "Choose words from a list and place them to build the longest palindrome by concatenation.",
+  approaches: [
+    { name: "Pair matching with counts", intuition: "A word xy pairs with a copy of yx; count matched pairs in a map and add one centre word if one is left over.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Mirror pairs', input: '["ab","ba","ca","ac","zz"]' },
     { label: 'Doubled letters', input: '["qq","qq","qq","rs"]' },

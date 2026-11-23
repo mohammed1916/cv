@@ -8,6 +8,10 @@ const definition = {
   inputLabel: 'Two arrays (JSON object with arr1 and arr2)',
   url: 'https://leetcode.com/problems/relative-sort-array/',
   complexity: 'O(n + m) time for counting and placing, where m is the largest value (30 here).',
+  question: "Sort one array so that its values follow the order of a second array, with remaining values in ascending order at the end.",
+  approaches: [
+    { name: "Counting placement", intuition: "Count occurrences, write the listed values in their order, then append leftovers sorted.", time: "O(n + m)", space: "O(m)" },
+  ],
   examples: [
     { label: 'Mixed', input: '{"arr1":[4,2,9,2,7,4,1],"arr2":[2,4,1]}' },
     { label: 'Every value listed', input: '{"arr1":[5,5,5],"arr2":[5]}' },

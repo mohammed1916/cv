@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'JSON {"nums1": [5, 1, 8], "nums2": [2, 9, 3]}',
   url: 'https://leetcode.com/problems/maximum-score-after-splicing-arrays/',
   complexity: 'O(n) time and O(1) extra space: two Kadane passes over the difference of the arrays.',
+  question: "Swap one contiguous part of two arrays to maximise the sum of the first array.",
+  approaches: [
+    { name: "Kadane on differences", intuition: "The gain from a swap is a subarray sum of the element differences, so run Kadane's algorithm on the differences.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example', input: '{"nums1":[5,1,8],"nums2":[2,9,3]}' },
     { label: 'Ties', input: '{"nums1":[3,3,3],"nums2":[1,9,2]}' },

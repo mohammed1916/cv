@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with n, l and r (JSON), for example {"n":3,"l":1,"r":3}',
   url: 'https://leetcode.com/problems/number-of-zigzag-arrays-ii/',
   complexity: 'O(m^3 log n) time for m = r - l + 1 values, using matrix exponentiation. The visualization runs the step recurrence and caps n and r at 12.',
+  question: "Count zigzag arrays of a given length with values in a range, for larger lengths.",
+  approaches: [
+    { name: "Matrix power", intuition: "Express the step rule as a matrix and raise it to the power n with repeated squaring.", time: "O(m^3 log n)", space: "O(m^2)" },
+  ],
   examples: [
     { label: 'Six nodes, window three to five', input: '{"n":6,"l":3,"r":5}' },
     { label: 'Four nodes, tight window', input: '{"n":4,"l":1,"r":2}' },

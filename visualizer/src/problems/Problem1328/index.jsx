@@ -3,6 +3,10 @@ import IndexedSequence from '../../components/shared/IndexedSequence'
 import { buildTrace, parseInput, code, python, phases, examples } from './algorithm'
 
 const definition = {
+  question: "Change one letter so the word is not a palindrome and is as small as possible.",
+  approaches: [
+    { name: "First non-a in first half", intuition: "Change the first character in the left half that is not a, otherwise change the last to b.", time: "O(n)", space: "O(n)" },
+  ],
   number: '1328', phases, parse: parseInput, build: buildTrace, code, python, examples,
   inputLabel: 'Object with a palindrome text (JSON)',
   url: 'https://leetcode.com/problems/break-a-palindrome/',

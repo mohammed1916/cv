@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Positive integer n (e.g. 9999)',
   url: 'https://leetcode.com/problems/check-good-integer/',
   complexity: 'O(d) time and O(1) space for d decimal digits.',
+  question: "Decide whether the sum of squared digits minus the plain digit sum reaches fifty.",
+  approaches: [
+    { name: "Digit scan", intuition: "Loop over the digits, accumulate squares and the sum, and compare the difference with fifty.", time: "O(d)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Large digits', input: '9999' },
     { label: 'Small digits', input: '123' },

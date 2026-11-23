@@ -12,6 +12,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'String of uppercase letters (JSON)',
   url: 'https://leetcode.com/problems/count-unique-characters-of-all-substrings-of-a-given-string/',
   complexity: 'O(n) time with precomputed neighbours (the shown code uses rfind/find, O(n * 26) in practice); O(1) extra space.',
+  question: "Sum the number of unique characters over all substrings of s, where a unique character occurs exactly once in that substring.",
+  approaches: [
+    { name: "Contribution by neighbours", intuition: "Each position counts in the substrings where it is the only occurrence of its letter, which depends on the previous and next occurrences of that letter.", time: "O(n)", space: "O(26)" },
+  ],
   examples: [{ label: 'ABC', input: '"ABC"' }, { label: 'ABA', input: '"ABA"' }, { label: 'LEETCODE', input: '"LEETCODE"' }, { label: 'Single letter', input: '"A"' }, { label: 'Repeated letter', input: '"AAAA"' }, { label: 'Longest allowed, alphabet repeated', input: '"ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUV"' }, { label: 'Long run: 100 letters', input: '"ADEDDCACCECEDBCACECAAAEDEEDCEACEAAAEBECDABCAEECADECABBBDECCECDCBDBACAAEAAEEBCAECCDBDDACBAEDBDBEBDBCD"' }],
 }
 export default function UniqueCharacterSubstrings() {

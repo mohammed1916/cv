@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'Object with ops: ["addOrder", id, "buy"|"sell", price], ["modifyOrder", id, price], ["cancelOrder", id], ["getOrdersAtPrice", side, price]',
   url: 'https://leetcode.com/problems/design-order-management-system/',
   complexity: 'Each query scans all orders here; a price-indexed map would narrow the scan.',
+  question: "Design an order system that tracks orders by id and answers price queries for active orders on a side.",
+  approaches: [
+    { name: "Scan active orders", intuition: "Check every active order on the requested side and price.", time: "O(orders) per query", space: "O(orders)" },
+  ],
   examples: [
     { label: 'Move and cancel', input: '{"ops":[["addOrder",1,"buy",10],["addOrder",2,"buy",10],["addOrder",3,"sell",10],["getOrdersAtPrice","buy",10],["modifyOrder",2,12],["getOrdersAtPrice","buy",10],["cancelOrder",1],["getOrdersAtPrice","buy",10]]}' },
     { label: 'One order, one query', input: '{"ops":[["addOrder",1,"sell",5],["getOrdersAtPrice","sell",5]]}' },

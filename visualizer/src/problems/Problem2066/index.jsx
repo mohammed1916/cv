@@ -12,6 +12,10 @@ const definition = {
   phases, parse: parseInput, build: buildTrace, code, sql, python, inputLabel,
   url: `https://leetcode.com/problems/${meta.slug}/`,
   complexity, examples,
+  question: "Compute the balance of each account after its transactions, listing accounts in order.",
+  approaches: [
+    { name: "Running sum with window", intuition: "Accumulate the signed amounts per account with a window ordered by time.", time: "O(n log n)", space: "O(n)" },
+  ],
 }
 
 function Rows({ columns = [], rows = [] }) {

@@ -4,6 +4,10 @@ import { StackLane } from '../../components/shared/AlgorithmStatePrimitives'
 import { buildTrace, parseInput, code, python, phases, examples } from './algorithm'
 
 const definition = {
+  question: "Check that the parent links form exactly one binary tree.",
+  approaches: [
+    { name: "Parent counts and walk", intuition: "Each node needs at most one parent, and exactly one root must reach every node.", time: "O(n)", space: "O(n)" },
+  ],
   number: '1361', phases, parse: parseInput, build: buildTrace, code, python, examples,
   inputLabel: 'Object with n, leftChild and rightChild (JSON)',
   url: 'https://leetcode.com/problems/validate-binary-tree-nodes/',

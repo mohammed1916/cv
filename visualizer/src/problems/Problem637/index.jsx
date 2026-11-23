@@ -13,6 +13,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Tree (LeetCode level-order JSON array)',
   url: 'https://leetcode.com/problems/average-of-levels-in-binary-tree/',
   complexity: 'O(n) time for n nodes, and O(w) extra space for the widest level.',
+  question: "Return the average value of the nodes on each level of a binary tree.",
+  approaches: [
+    { name: "Level-order BFS", intuition: "Process one level at a time and average the values gathered for that level.", time: "O(n)", space: "O(w)" },
+  ],
   examples: [
     { label: 'Balanced', input: '[1,2,3,4]' },
     { label: 'Gap', input: '[5,-2,8,null,6]' },

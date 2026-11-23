@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'A JSON string of lowercase letters, for example "bdda"',
   url: 'https://leetcode.com/problems/using-a-robot-to-print-the-lexicographically-smallest-string/',
   complexity: 'O(n) time and O(n) space with a letter count. The visualization caps input at 10 letters.',
+  question: "Using a robot that takes characters from a string and uses a stack, print the lexicographically smallest string.",
+  approaches: [
+    { name: "Stack with remaining letter counts", intuition: "Push each character and pop while the top is no larger than every remaining character.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Eight letters', input: '"daybreak"' },
     { label: 'Descending', input: '"zza"' },

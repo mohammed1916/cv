@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with integer x and y (e.g. {"x":5,"y":5})',
   url: 'https://leetcode.com/problems/minimum-knight-moves/',
   complexity: 'O(W²) time and space for a search window of side W = 2·max(|x|,|y|) + 5. The visualization caps |x| and |y| at 12; the official bounds were not verified.',
+  question: "Find the fewest knight moves needed to reach a target square on an infinite board.",
+  approaches: [
+    { name: "Breadth-first on a window", intuition: "Search outward from the origin on a bounded window that reaches past the target.", time: "O(W^2)", space: "O(W^2)" },
+  ],
   examples: [
     { label: 'One move', input: '{"x":-1,"y":2}' },
     { label: 'Four moves', input: '{"x":6,"y":-4}' },

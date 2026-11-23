@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Array of 3, 6, 9 or 12 integers from 1 to 30, for example [2,1,3,2,1,3]',
   url: 'https://leetcode.com/problems/maximum-median-sum-of-subsequences-of-size-3/',
   complexity: 'O(n log n) time for the sort. The visualization caps the array at 12 numbers.',
+  question: "Pick disjoint triples from an array to maximize the sum of their medians.",
+  approaches: [
+    { name: "Sort into blocks", intuition: "Sort the values and take medians from blocks of three in a fixed pattern.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Six values, two blocks', input: '[6,3,8,12,2,7]' },
     { label: 'Example 2', input: '[1,2,3]' },

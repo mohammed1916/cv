@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'String and letters (JSON object with s, x and y)',
   url: 'https://www.talentd.in/fleetcode/problems/rearrange-string-to-avoid-character-pair',
   complexity: 'O(n) time and O(n) space. The visualization caps s at 16 letters.',
+  question: "Rearrange the letters of a string so that every y appears before every x.",
+  approaches: [
+    { name: "Partition by letter", intuition: "Move every y ahead of the other letters.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"s":"aabc","x":"a","y":"c"}' },
     { label: 'Example 2', input: '{"s":"dcab","x":"d","y":"b"}' },

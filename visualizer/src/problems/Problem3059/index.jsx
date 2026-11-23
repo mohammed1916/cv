@@ -20,7 +20,12 @@ const examples = [
   { label: 'Long run: 16 emails', input: '{"Emails":[{"id":1,"email":"czcbcb@ex.io"},{"id":2,"email":"xybyzc@ex.io"},{"id":3,"email":"azabcz@ex.io"},{"id":4,"email":"byzyza@ex.io"},{"id":5,"email":"yxybcb@ex.io"},{"id":6,"email":"zyxyzy@ex.io"},{"id":7,"email":"cxcbyz@ex.io"},{"id":8,"email":"xybaba@ex.io"},{"id":9,"email":"axaxyx@ex.io"},{"id":10,"email":"byzaby@ex.io"},{"id":11,"email":"yxyxyz@ex.io"},{"id":12,"email":"zyxabc@ex.io"},{"id":13,"email":"cxcxax@ex.io"},{"id":14,"email":"xybaxy@ex.io"},{"id":15,"email":"axazab@ex.io"},{"id":16,"email":"byzcxc@ex.io"}]}' },
 ]
 
-const definition = { number: meta.number, phases, parse: parseInput, build: buildTrace, code, sql, python, inputLabel, complexity, examples }
+const definition = { number: meta.number, phases, parse: parseInput, build: buildTrace, code, sql, python, inputLabel, complexity, examples,
+  question: "Count the emails by their domain when the email ends in .com.",
+  approaches: [
+    { name: "Filter and count domains", intuition: "Keep the addresses that match the .com pattern, split off the domain, and count each domain.", time: "O(n)", space: "O(n)" },
+  ],
+}
 
 function RowTable({ step }) {
   const { columns, rows } = step

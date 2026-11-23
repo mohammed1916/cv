@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with nums (1 to 20 values, 1 to 255) and k (1 to 255), e.g. {"nums":[1,2,4,5],"k":3}',
   url: 'https://leetcode.com/problems/find-subarray-with-bitwise-or-closest-to-k/',
   complexity: 'O(n * log V) time and O(log V) space, since each end index keeps at most log V distinct ORs. The visualization caps the input at 20 values.',
+  question: "Find the subarray whose bitwise OR is closest to k.",
+  approaches: [
+    { name: "Distinct ORs per right end", intuition: "Each right end keeps at most a few distinct OR values as its left end moves, so those are tracked instead of every subarray.", time: "O(n * log V)", space: "O(log V)" },
+  ],
   examples: [
     { label: 'Three values, k ten', input: '{"nums":[9,6,12],"k":10}' },
     { label: 'Four values, k 24', input: '{"nums":[16,8,16,40],"k":24}' },

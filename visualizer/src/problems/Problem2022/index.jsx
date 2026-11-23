@@ -8,6 +8,10 @@ const definition = {
   inputLabel: 'Flat array with m and n (JSON)',
   url: 'https://leetcode.com/problems/convert-1d-array-into-2d-array/',
   complexity: 'O(m * n) time to copy every value once.',
+  question: "Turn a one-dimensional array into a two-dimensional array with a given number of rows and columns, filling row by row.",
+  approaches: [
+    { name: "Index arithmetic", intuition: "Place element i at row floor(i / n) and column i mod n.", time: "O(mn)", space: "O(mn)" },
+  ],
   examples: [
     { label: 'Three by two', input: '{"original":[5,6,7,8,9,10],"m":3,"n":2}' },
     { label: 'One column', input: '{"original":[4,9,2],"m":3,"n":1}' },

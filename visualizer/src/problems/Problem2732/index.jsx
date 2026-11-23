@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON object with grid (up to 6 rows of 0 and 1, up to 5 columns)',
   url: 'https://leetcode.com/problems/find-a-good-subset-of-the-matrix/',
   complexity: 'Exhaustive over subsets of rows: at most 2^6 subsets of up to 6 rows and 5 columns for the visualization cap.',
+  question: "Given a binary matrix, pick a set of rows whose column sums are all zero modulo a target, returning the chosen rows or an empty result when none exists.",
+  approaches: [
+    { name: "Search over row subsets", intuition: "Try subsets of the few rows that could work, checking coverage for each.", time: "exponential in rows", space: "O(2^rows)" },
+  ],
   examples: [
     { label: 'Pair of rows', input: '{"grid": [[1,0,1],[0,1,0],[1,1,0]]}' },
     { label: 'No good subset', input: '{"grid": [[1,1,1],[1,1,1],[1,1,0]]}' },

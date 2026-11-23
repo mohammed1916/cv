@@ -12,6 +12,11 @@ const definition = {
   inputLabel: 'Two non-negative integers as JSON, e.g. [5,4]',
   url: 'https://leetcode.com/problems/count-operations-to-obtain-zero/',
   complexity: 'Each operation removes one copy of the smaller value, so the loop runs as many times as the Euclid-style subtraction chain. The visualization caps values at 60.',
+  question: "Count how many subtract operations it takes to reduce two numbers to zero, where each step subtracts the smaller number from the larger.",
+  approaches: [
+    { name: "Simulation", intuition: "Repeat the subtraction step and count each one until one value is zero.", time: "O(answer)", space: "O(1)" },
+    { name: "Division shortcut", intuition: "Replace the repeated subtraction with one division to skip the repeated steps at once.", time: "O(log min)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Mixed', input: '[5,4]' },
     { label: 'Small pair', input: '[2,3]' },

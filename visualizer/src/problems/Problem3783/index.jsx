@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON object with n from 1 to 100000, for example {"n":25}',
   url: 'https://leetcode.com/problems/mirror-distance-of-an-integer/',
   complexity: 'O(d) time for d digits.',
+  question: "Compute the absolute difference between a number and its digit-reversed value.",
+  approaches: [
+    { name: "Reverse by division", intuition: "Build the reversed number with repeated division and modulus by ten, then take the difference.", time: "O(d)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"n":25}' },
     { label: 'Example 2', input: '{"n":10}' },

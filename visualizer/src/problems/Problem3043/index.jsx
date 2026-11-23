@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with arr1 and arr2 (JSON lists of positive integers)',
   url: 'https://leetcode.com/problems/find-the-length-of-the-longest-common-prefix/',
   complexity: 'O((n + m) * d) time, where d is the number of digits. The visualization caps each array at 8 values.',
+  question: "Find the length of the longest common prefix between a number from one array and a number from the other.",
+  approaches: [
+    { name: "Hash set of prefixes", intuition: "Store every decimal prefix of the first array in a set, then check the prefixes of the second array.", time: "O(total digits)", space: "O(total digits)" },
+  ],
   examples: [
     { label: 'Nested prefixes', input: '{"arr1":[12,123,1234],"arr2":[120,1200]}' },
     { label: 'No match', input: '{"arr1":[1,2,3],"arr2":[4,4,4]}' },

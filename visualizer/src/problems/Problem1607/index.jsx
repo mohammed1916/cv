@@ -12,6 +12,10 @@ const definition = {
   phases, parse: parseInput, build: buildTrace, code, python, sql,
   inputLabel: INPUT_LABEL,
   complexity: COMPLEXITY,
+  question: "List sellers who made no sales in the year 2020.",
+  approaches: [
+    { name: "SQL anti-join", intuition: "Keep sellers with no sales rows in the year, using a left join or a not-exists test.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [{ label: 'Sample', input: EXAMPLE },
     { label: "Single seller, no orders", input: "{\"seller\":[{\"seller_id\":1,\"seller_name\":\"Ada\"}],\"orders\":[]}" },
     { label: "Two sellers, no sales", input: "{\"seller\":[{\"seller_id\":1,\"seller_name\":\"Ada\"},{\"seller_id\":2,\"seller_name\":\"Bo\"}],\"orders\":[]}" },

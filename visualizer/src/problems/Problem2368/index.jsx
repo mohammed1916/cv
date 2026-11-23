@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with n, edges and restricted (JSON)',
   url: 'https://leetcode.com/problems/reachable-nodes-with-restrictions/',
   complexity: 'O(n) time and O(n) space. The visualization caps the tree at 12 nodes.',
+  question: "On a tree with some restricted nodes, count the nodes reachable from a given node without passing through a restricted node.",
+  approaches: [
+    { name: "Traverse avoiding restricted nodes", intuition: "Run a traversal from the start that never enters a restricted node.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Restricted leaves', input: '{"n":6,"edges":[[0,1],[1,2],[1,3],[3,4],[0,5]],"restricted":[2,4]}' },
     { label: 'Path with one restriction', input: '{"n":5,"edges":[[4,0],[0,1],[1,2],[2,3]],"restricted":[3]}' },

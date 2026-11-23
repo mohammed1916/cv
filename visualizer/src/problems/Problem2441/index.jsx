@@ -15,6 +15,11 @@ const definition = {
   inputLabel: 'Distinct nonzero integers as JSON: {"nums": [...]}',
   url: 'https://leetcode.com/problems/largest-positive-integer-that-exists-with-its-negative/',
   complexity: 'O(n) time and O(n) space for the set. The visualization caps input at 30 numbers.',
+  question: "Find the largest positive value k such that both k and -k appear in the array, or return -1.",
+  approaches: [
+    { name: "Hash set lookup", intuition: "Store every value, then check whether each positive value has its negative in the set.", time: "O(n)", space: "O(n)" },
+    { name: "Sort and two pointers", intuition: "After sorting, match the smallest and largest values inward until they cancel.", time: "O(n log n)", space: "O(1) extra" },
+  ],
   examples: [
     { label: 'Own: three signed values', input: '{"nums":[4,-2,7]}' },
     { label: 'Own: four signed values', input: '{"nums":[9,-9,2,-4]}' },

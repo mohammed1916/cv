@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'Object with an emails list of addresses',
   url: 'https://leetcode.com/problems/unique-email-groups/',
   complexity: 'O(total length) time and O(number of distinct keys) space. Each address is normalized once. The visualization caps the list at 12 addresses.',
+  question: "Count the distinct email addresses after normalising each one by its rules.",
+  approaches: [
+    { name: "Normalise and hash", intuition: "Lowercase each address, remove dots from the local part, cut at the first plus, and count distinct results.", time: "O(total length)", space: "O(distinct)" },
+  ],
   examples: [
     { label: 'Dots and plus', input: '{"emails":["Lee.Ann+work@Mail.com","leeann@mail.com","LEE.A.N.N+x@mail.COM","ann@mail.com.au"]}' },
     { label: 'Domain dots matter', input: '{"emails":["x.y.z+1@A.io","xyz@a.IO","xy+z@a.io","x.yz@b.io"]}' },

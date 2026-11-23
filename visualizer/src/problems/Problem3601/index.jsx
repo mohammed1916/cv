@@ -22,6 +22,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'Object with drivers, trips and an ISO split date',
   complexity: 'O(T + D log D) for T trips and D drivers.',
+  question: "Using a table of driver trips, find the drivers whose distance changes between two periods meet the stated rule, and list the results.",
+  approaches: [
+    { name: "Split and compare by date", intuition: "Compute each driver's distance before and after the split date in separate subqueries, then compare.", time: "O(T + D log D)", space: "O(D)" },
+  ],
   examples: [
     { label: 'Sample', input: SAMPLE_TEXT },
     { label: 'Only early trips', input: '{"split":"2024-02-01","drivers":[{"driver_id":1,"name":"Ana"}],"trips":[{"trip_id":1,"driver_id":1,"trip_date":"2024-01-05","distance_km":50,"fuel_used":5}]}' },

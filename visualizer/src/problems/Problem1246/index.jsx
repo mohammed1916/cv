@@ -8,6 +8,10 @@ const definition = {
   inputLabel: 'Array of integers (e.g. [1,2,3,2,1])',
   url: 'https://leetcode.com/problems/palindrome-removal/description/',
   complexity: 'O(n^3) time and O(n^2) space for an n-element array. The visualization caps the array at 10 values; the draft does not state an exact official bound.',
+  question: "Find the fewest moves to delete an array, where each move removes a contiguous palindromic subarray.",
+  approaches: [
+    { name: "Interval DP", intuition: "For each subarray, either remove the first element alone or pair it with an equal later value.", time: "O(n^3)", space: "O(n^2)" },
+  ],
   examples: [
     { label: 'Whole palindrome', input: '[1,2,3,2,1]' },
     { label: 'Pair it up', input: '[1,3,4,1,5]' },

@@ -5,6 +5,10 @@ import SqlStages from './SqlStages'
 import './SqlStages.css'
 
 const definition = {
+  question: "Find the seller with the highest total sales.",
+  approaches: [
+    { name: "Join and group in SQL", intuition: "Sum sales per seller and keep the sellers with the highest total.", time: "O(n + s)", space: "O(s)" },
+  ],
   number: meta.number,
   phases, parse: parseInput, build: buildTrace, code, sql, python, inputLabel,
   url: `https://leetcode.com/problems/${meta.slug}/`,

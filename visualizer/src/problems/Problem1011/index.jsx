@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with weights and days (JSON)',
   url: 'https://leetcode.com/problems/capacity-to-ship-packages-within-d-days/',
   complexity: 'O(n log(sum of weights)) time and O(1) auxiliary space: each probe packs the list once.',
+  question: "Find the smallest ship capacity that ships all packages in their given order within a set number of days.",
+  approaches: [
+    { name: "Binary search on capacity", intuition: "Feasibility is monotone in capacity; test a candidate by packing greedily day by day and narrow the search range.", time: "O(n log(sum of weights))", space: "O(1)" },
+  ],
   examples: authoredExamples,
 }
 

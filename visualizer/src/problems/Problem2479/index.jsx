@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with values (node values) and edges (tree edges, rooted at node 0)',
   url: "https://leetcode.com/problems/maximum-xor-of-two-non-overlapping-subtrees/description/",
   complexity: "O(n^2) pair checks with O(n) ancestor walks for n nodes, O(n) space. The visualization caps the tree at 10 nodes and values at 1 to 50.",
+  question: "Choose two non-overlapping subtrees of a tree so that the XOR of their sums is as large as possible.",
+  approaches: [
+    { name: "Pairwise subtree checks", intuition: "Test each pair of subtrees for overlap by walking ancestors, then take the best XOR.", time: "O(n^2) pairs", space: "O(n)" },
+  ],
   examples: [
     { label: "Star", input: '{"values":[1,2,3,4],"edges":[[0,1],[0,2],[0,3]]}' },
     { label: "Path", input: '{"values":[1,2,3],"edges":[[0,1],[1,2]]}' },

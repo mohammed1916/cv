@@ -11,6 +11,10 @@ const definition = {
   inputLabel: 'JSON array of integers',
   url: 'https://leetcode.com/problems/split-array-with-minimum-difference/',
   complexity: 'O(n^2) in this direct version: each cut rechecks both parts. Precomputed run lengths would make the checks O(1).',
+  question: "Find the split point that minimises the difference between the parts of an array.",
+  approaches: [
+    { name: "Check each cut", intuition: "Try each cut and compare the parts directly.", time: "O(n^2)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example', input: '[2,6,3,1]' },
     { label: 'Short', input: '[1,4,2]' },

@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Game array (JSON object with nums)',
   url: 'https://leetcode.com/problems/final-element-after-subarray-deletions/',
   complexity: 'O(1) time and O(1) extra space. The visualization caps input at 30 values.',
+  question: "Alice and Bob delete subarrays in turns; determine the final element that survives.",
+  approaches: [
+    { name: "Endpoint analysis", intuition: "The two endpoints of the array decide what can survive.", time: "O(1)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"nums":[1,5,2]}' },
     { label: 'Example 2', input: '{"nums":[3,7]}' },

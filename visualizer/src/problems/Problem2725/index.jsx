@@ -2,6 +2,10 @@ import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import * as model from './algorithm'
 
 const definition = {
+  question: "Write a function that runs a callback at a fixed interval and can cancel it after a set delay.",
+  approaches: [
+    { name: "Interval with cancellation", intuition: "Start the repeating timer, then clear it when the delay has passed.", time: "O(1) per tick", space: "O(1)" },
+  ],
   phases: model.PHASES, parse: model.parseInput, build: model.buildTrace, code: model.code, python: model.python,
   inputLabel: model.INPUT_LABEL, url: model.URL, complexity: model.COMPLEXITY, examples: model.EXAMPLES,
 }

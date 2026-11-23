@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'Object with n, edges [[u, v, w]] (weights 0 to 31) and queries [[s, t]]',
   url: 'https://leetcode.com/problems/minimum-cost-walk-in-weighted-graph/',
   complexity: 'O((n + m) * alpha(n)) with union-find, where alpha is the inverse Ackermann function. The visualization caps n at 8 and edges at 12.',
+  question: "For each query, find the cheapest walk cost between two nodes of a weighted undirected graph, where walks may repeat edges and the cost is the bitwise AND of the weights used.",
+  approaches: [
+    { name: "Union-find with AND per component", intuition: "A walk can detour through every edge in its component, so the answer is the AND of all edge weights in that component.", time: "O((n + m) * alpha(n))", space: "O(n + m)" },
+  ],
   examples: [
     { label: 'One component', input: '{"n":5,"edges":[[0,1,14],[1,2,7],[2,3,6],[1,3,13]],"queries":[[0,3],[0,2]]}' },
     { label: 'Two components', input: '{"n":5,"edges":[[0,1,9],[1,2,11],[3,4,12]],"queries":[[0,2],[2,3]]}' },

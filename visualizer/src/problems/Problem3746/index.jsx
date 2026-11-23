@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'String of letters a and b (1 to 40 characters), or a JSON string',
   url: 'https://leetcode.com/problems/minimum-string-length-after-balanced-removals/',
   complexity: 'O(n) time and O(1) extra space.',
+  question: "Repeatedly delete adjacent-free pairs of a and b letters and report the shortest string that remains.",
+  approaches: [
+    { name: "Running balance", intuition: "Track the running a-minus-b balance; the leftover letters are exactly the final imbalance.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Mixed', input: 'aabaa' },
     { label: 'All a', input: 'bbbab' },

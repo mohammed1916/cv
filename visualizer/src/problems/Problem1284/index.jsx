@@ -11,6 +11,10 @@ const definition = {
   inputLabel: 'Matrix rows (JSON array of 1 to 3 arrays of 0 or 1)',
   url: 'https://leetcode.com/problems/minimum-number-of-flips-to-convert-binary-matrix-to-zero-matrix/',
   complexity: 'O(2^(m*n) * m*n) time and space in the worst case. The visualization caps the matrix at 3 by 3.',
+  question: "Find the fewest flips of the cells of a binary matrix that turn every cell to zero, where each flip toggles a cell and its neighbours.",
+  approaches: [
+    { name: "Breadth-first over bitmask states", intuition: "Each matrix state is a bitmask; search from the start state for the fewest flips to zero.", time: "O(2^(m x n))", space: "O(2^(m x n))" },
+  ],
   examples: [
     { label: 'Three by three board', input: '[[1,1,0],[0,1,1],[1,0,0]]' },
     { label: 'Already zero', input: '[[0]]' },

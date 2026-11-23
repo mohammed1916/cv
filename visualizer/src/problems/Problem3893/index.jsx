@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'Object with intervals ([start, end] pairs with integers 0 to 20)',
   url: 'https://leetcode.com/problems/maximum-team-size-with-overlapping-intervals/',
   complexity: 'O(n^2) time and O(1) extra space for n intervals: every interval is tried as the centre against every other. The visualization caps the list at 12 intervals.',
+  question: "Pick a team of overlapping closed intervals so that every member overlaps a centre interval, maximising the team size.",
+  approaches: [
+    { name: "Try each centre", intuition: "Each interval is tried as the centre, and every interval that overlaps it joins the team.", time: "O(n^2)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Chain of overlaps', input: '{"intervals":[[1,4],[2,3],[4,6],[7,9],[5,8]]}' },
     { label: 'Touching endpoints', input: '{"intervals":[[0,0],[0,0],[1,1]]}' },

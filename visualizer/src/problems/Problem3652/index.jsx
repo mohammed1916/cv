@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with prices, strategy (-1, 0, 1 per day) and an even k',
   url: 'https://leetcode.com/problems/best-time-to-buy-and-sell-stock-using-strategy/',
   complexity: 'O(n * k) time here for clarity; a sliding update reaches O(n).',
+  question: "Find the best profit from a stock strategy where a window of prices is replaced by a rule.",
+  approaches: [
+    { name: "Direct window evaluation", intuition: "Evaluate the profit of every window of length k with the strategy applied.", time: "O(n * k)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Dip then rise', input: '{"prices":[6,1,9],"strategy":[1,0,-1],"k":2}' },
     { label: 'Flat', input: '{"prices":[3,7],"strategy":[1,1],"k":2}' },

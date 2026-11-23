@@ -6,6 +6,10 @@ const definition = {
   inputLabel: 'Object with s, t and k (JSON)',
   url: 'https://leetcode.com/problems/can-convert-string-in-k-moves/',
   complexity: 'O(n) time and O(1) extra space: one pass with a counter for each of the 25 possible shifts.',
+  question: "Decide whether a string can be converted into another by at most k cyclic shifts, each used once per shift amount.",
+  approaches: [
+    { name: "Count shift amounts", intuition: "Count how many letters need each shift and check whether every shift amount fits in the budget.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Spread moves', input: '{"s":"abc","t":"bcd","k":60}' },
     { label: 'Budget too small', input: '{"s":"aaaa","t":"bbbb","k":3}' },

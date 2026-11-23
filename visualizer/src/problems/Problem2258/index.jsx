@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with grid (0 grass, 1 fire, 2 wall)',
   url: 'https://leetcode.com/problems/escape-the-spreading-fire/',
   complexity: 'O(m * n * log(m * n)) time: each binary-search check is one breadth-first walk. The visualization caps the grid at 6 by 6.',
+  question: "Find the largest number of minutes you can wait before starting so that you still escape a grid that is spreading fire.",
+  approaches: [
+    { name: "Fire times, then search with binary search on the wait", intuition: "Compute when each cell catches fire, then binary search the wait time and run a breadth-first search for the escape.", time: "O(m * n * log(m * n))", space: "O(m * n)" },
+  ],
   examples: [
     { label: 'Example', input: '{"grid":[[0,0,0,0,0],[0,2,1,0,0],[0,0,2,0,0],[0,0,0,0,0]]}' },
     { label: 'Blocked', input: '{"grid":[[0,0,0,0],[0,1,2,0],[0,2,0,0]]}' },

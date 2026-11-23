@@ -5,6 +5,10 @@ import SqlStages from './SqlStages'
 import './SqlStages.css'
 
 const definition = {
+  question: "Find buyers who bought one target product and never bought another.",
+  approaches: [
+    { name: "Join and group in SQL", intuition: "Collect buyers of each product, then exclude buyers of the second product.", time: "O(n + m)", space: "O(n)" },
+  ],
   number: meta.number,
   phases, parse: parseInput, build: buildTrace, code, sql, python, inputLabel,
   url: `https://leetcode.com/problems/${meta.slug}/`,

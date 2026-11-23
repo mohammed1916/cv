@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with s made of ( and ) (JSON)',
   url: 'https://leetcode.com/problems/minimum-insertions-to-balance-a-parentheses-string/',
   complexity: 'O(n) time and O(1) extra space.',
+  question: "Find the fewest insertions needed to balance a string of brackets, where each open bracket needs two closes.",
+  approaches: [
+    { name: "Scan with a counter", intuition: "Track open brackets and pair close brackets two at a time, adding a missing one when needed.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"s":"(()))"}' },
     { label: 'Example 2', input: '{"s":"())"}' },

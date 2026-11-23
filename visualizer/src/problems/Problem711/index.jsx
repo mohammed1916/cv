@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Grid (JSON array of 0/1 strings)',
   url: 'https://leetcode.com/problems/number-of-distinct-islands-ii/',
   complexity: 'O(rows * columns) cells, with eight symmetric copies of each island. The visualization caps the grid at 10 by 10.',
+  question: "Count island shapes in which rotations and reflections of the same island count as one shape.",
+  approaches: [
+    { name: "Canonical shape signature", intuition: "Normalise each island's cells under all rotations and reflections, then count distinct canonical forms.", time: "O(mn log)", space: "O(mn)" },
+  ],
   examples: [
     { label: 'Rotated L', input: '["11000","10000","00100","00110"]' },
     { label: 'Two shapes', input: '["1110","1000","0000","0011"]' },

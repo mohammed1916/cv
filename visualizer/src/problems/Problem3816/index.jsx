@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Lowercase string (JSON object with s)',
   url: 'https://leetcode.com/problems/lexicographically-smallest-string-after-deleting-duplicate-characters/',
   complexity: 'O(n * 26) time with suffix letter sets. The visualization caps the string at 10 letters.',
+  question: "Remove duplicate letters so that each letter appears once and the result is lexicographically smallest.",
+  approaches: [
+    { name: "Stack with suffix letter sets", intuition: "Drop a larger letter from the stack when a copy of it remains later in the string.", time: "O(n * 26)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"s":"aaccb"}' },
     { label: 'Ends early', input: '{"s":"bcdcbbc"}' },

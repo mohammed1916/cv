@@ -20,6 +20,10 @@ const definition = {
   inputLabel: 'Object with grid and k, e.g. {"grid":[[1,3],[2,4]],"k":1}',
   url: 'https://leetcode.com/problems/minimum-cost-path-with-at-most-k-turns/',
   complexity: 'O(R * C * k log(R * C * k)) time with a priority queue over states; O(R * C * k) space. The visualization caps the grid at 6 by 6 with values up to 9.',
+  question: "Find the cheapest path across a grid that uses at most k turns.",
+  approaches: [
+    { name: "Dijkstra over direction and turn states", intuition: "Run a cheapest-first search whose states remember the direction and the turns spent.", time: "O(R x C x k log(R x C x k))", space: "O(R x C x k)" },
+  ],
   examples: [
     { label: 'Zig-zag', input: '{"grid":[[1,3,1],[1,5,1],[4,2,1]],"k":2}' },
     { label: 'One turn', input: '{"grid":[[1,2,3],[4,5,6]],"k":1}' },

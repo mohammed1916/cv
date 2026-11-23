@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with squares, each [x, y, l] (JSON)',
   url: 'https://leetcode.com/problems/separate-squares-i/',
   complexity: 'O(n * iterations) time with a fixed number of bisection steps. The visualization caps input at 6 squares.',
+  question: "Find the horizontal line that splits the total area of squares into two equal halves.",
+  approaches: [
+    { name: "Bisection on the line", intuition: "Search for the height where the area below equals the area above, halving the interval each step.", time: "O(n * iterations)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Invented two squares', input: '{"squares":[[0,0,3],[4,2,1]]}' },
     { label: 'One large square', input: '{"squares":[[0,0,2]]}' },

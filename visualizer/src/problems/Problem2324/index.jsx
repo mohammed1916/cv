@@ -22,6 +22,10 @@ const examples = [{
 }]
 
 const definition = {
+  question: "Using sales and product tables, find the users with the highest total spending.",
+  approaches: [
+    { name: "Join and total per user", intuition: "Join sales with product prices, total each user's spending, and keep the users with the largest totals.", time: "O(n)", space: "O(n)" },
+  ],
   number: meta.number,
   phases, parse: parseInput, build: buildTrace, code, sql, python, inputLabel,
   url: `https://leetcode.com/problems/${meta.slug}/`,

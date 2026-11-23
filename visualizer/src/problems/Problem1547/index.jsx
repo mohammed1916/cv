@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with n (stick length) and cuts (positions, JSON)',
   url: 'https://leetcode.com/problems/minimum-cost-to-cut-a-stick/',
   complexity: 'O(m^3) time for m cut points including the ends. The visualization caps n at 20 and cuts at 6.',
+  question: "Find the minimum total cost of cutting a stick at the given positions, where a cut costs the current length.",
+  approaches: [
+    { name: "Interval DP", intuition: "For each stretch, try every cut inside it as the first, and store the cheapest total.", time: "O(m^3)", space: "O(m^2)" },
+  ],
   examples: [
     { label: 'Three cuts on nine', input: '{"n":9,"cuts":[3,1,7]}' },
     { label: 'Long stick, late cuts', input: '{"n":12,"cuts":[2,9,10,11]}' },

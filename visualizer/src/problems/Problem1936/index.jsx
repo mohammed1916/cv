@@ -11,6 +11,10 @@ const definition = {
   inputLabel: 'JSON object with rungs (strictly increasing) and dist (e.g. {"rungs":[2,5,9],"dist":3})',
   url: 'https://leetcode.com/problems/add-minimum-number-of-rungs/',
   complexity: 'O(n) time: one pass over the rungs with a constant-time division for each gap.',
+  question: "Find the fewest rungs to add to a ladder so that the climb between any two consecutive rungs does not exceed a given distance.",
+  approaches: [
+    { name: "Greedy gap fill", intuition: "For each gap larger than the maximum climb, add ceiling(gap / climb) minus one rungs.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'One gap too wide', input: '{"rungs":[2,5,9],"dist":3}' },
     { label: 'Already reachable', input: '{"rungs":[3,6,8,10],"dist":3}' },

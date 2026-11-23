@@ -11,6 +11,10 @@ const definition = {
   inputLabel: 'JSON object: startTime, endTime and profit arrays of equal length',
   url: 'https://leetcode.com/problems/maximum-profit-in-job-scheduling/',
   complexity: 'O(n^2) time for this visualization, which counts compatible jobs by scanning. The standard solution is O(n log n). The visualization caps input at 10 jobs.',
+  question: "Choose non-overlapping jobs to maximise profit, where each job has a start, end and profit.",
+  approaches: [
+    { name: "Weighted interval DP", intuition: "Sort jobs by end time, and for each job take the best of skipping it or adding it to the last compatible job.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Four jobs, one long', input: '{"startTime":[1,2,6,8],"endTime":[3,7,10,12],"profit":[20,40,15,60]}' },
     { label: 'Chain', input: '{"startTime":[1,1,1],"endTime":[2,3,4],"profit":[5,6,4]}' },

@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with s, t, and nums (26 integers from 1 to 25) (JSON)',
   url: 'https://leetcode.com/problems/total-characters-in-string-after-transformations-ii/',
   complexity: 'O(26^3 * log t) time and O(26^2) space. The visualization caps s at 12 letters and t at 1000 rounds.',
+  question: "After t transformations of a string using a mapping of letters, count the total length.",
+  approaches: [
+    { name: "Matrix exponentiation", intuition: "Represent one transformation as a 26 by 26 matrix and raise it to the power t.", time: "O(26^3 * log t)", space: "O(26^2)" },
+  ],
   examples: [
     { label: 'Four letters, two rounds', input: '{"s":"bacb","t":2,"nums":[1,8,15,22,4,11,18,25,7,14,21,3,10,17,24,6,13,20,2,9,16,23,5,12,19,1]}' },
     { label: 'Example 2', input: '{"s":"a","t":2,"nums":[2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]}' },

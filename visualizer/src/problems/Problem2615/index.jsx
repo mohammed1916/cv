@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'An object with nums: 1 to 12 integers from 0 to 5',
   url: 'https://leetcode.com/problems/sum-of-distances/',
   complexity: 'O(n) time after grouping, plus O(n) space. The visualization caps nums at 12 entries.',
+  question: "Given an integer array, for each index return the sum of distances to every other index that holds the same value.",
+  approaches: [
+    { name: "Group positions by value", intuition: "Collect the indices for each value, then use prefix sums so each index is answered in constant time.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"nums":[1,3,1,1,2]}' },
     { label: 'Example 2', input: '{"nums":[0,5,3]}' },

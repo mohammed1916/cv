@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with nums and k (JSON)',
   url: 'https://leetcode.com/problems/minimum-cost-to-split-an-array/',
   complexity: 'O(n^3) time for the direct pricing of each piece, O(n) space. The visualization caps n at 10.',
+  question: "Split an array into pieces, paying a fixed cost per piece plus the trimmed penalty of repeated values, and minimise the total.",
+  approaches: [
+    { name: "Dynamic programming over prefixes", intuition: "Let the best cost of each prefix come from every possible last piece.", time: "O(n^3)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Eight digits, k four', input: '{"nums":[6,1,8,8,2,6,3,6],"k":4}' },
     { label: 'Example 2', input: '{"nums":[1,1],"k":1}' },

@@ -13,6 +13,11 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Integer n (JSON)',
   url: 'https://leetcode.com/problems/rotated-digits/',
   complexity: 'O(n log n) time, O(n) for the visualization status array.',
+  question: "Count integers from 1 to n that are good: every digit rotates to a valid digit and the rotated number differs from the original.",
+  approaches: [
+    { name: "Digit status check", intuition: "Classify each digit as rotates-to-itself, rotates-to-another, or invalid, and test every number.", time: "O(n log n)", space: "O(n) status table" },
+    { name: "Digit DP", intuition: "Count valid numbers digit by digit with states for whether a change has happened.", time: "O(log n)", space: "O(log n)" },
+  ],
   examples: [
     { label: 'n = 10', input: '10' },
     { label: 'n = 1', input: '1' },

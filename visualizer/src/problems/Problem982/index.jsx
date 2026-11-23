@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Numbers (JSON array)',
   url: 'https://leetcode.com/problems/triples-with-bitwise-and-equal-to-zero/',
   complexity: 'O(n^2 + n * distinct pair values) time. The visualization caps input at 12 numbers.',
+  question: "Count triples of array indices whose bitwise AND is zero.",
+  approaches: [
+    { name: "Pair AND counts", intuition: "Count how often each AND of two values occurs, then for each value count pairs whose AND with it is zero.", time: "O(n^2 + n * V)", space: "O(V)" },
+  ],
   examples: [
     { label: 'Five small values', input: '[7,3,5,6,2]' },
     { label: 'All zero', input: '[0,0,0]' },

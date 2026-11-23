@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with words (distinct two-letter strings)',
   url: 'https://leetcode.com/problems/frequencies-of-shortest-supersequences/',
   complexity: 'Exhaustive search over strings of the shortest length: exponential in the number of letters, so the visualization caps the input at 4 words and 4 letters.',
+  question: "Find the shortest strings that contain every given word as a subsequence, and count how many such strings exist per letter.",
+  approaches: [
+    { name: "Length first, then enumerate", intuition: "Find the shortest length, then enumerate strings of that length that cover every word.", time: "Exponential in letters", space: "O(length)" },
+  ],
   examples: [
     { label: 'Two swapped words', input: '{"words":["xy","yx"]}' },
     { label: 'Shared first letter', input: '{"words":["mm","mn"]}' },

@@ -12,6 +12,11 @@ const definition = {
   inputLabel: 'Array of positive integers (JSON array, up to 8 entries)',
   url: 'https://leetcode.com/problems/find-maximum-non-decreasing-array-length/',
   complexity: 'O(n^3) time in this direct form and O(n^2) space for the table. The visualization caps input at 8 entries.',
+  question: "Merge adjacent blocks of an array so the resulting block sums are non-decreasing, and find the maximum number of blocks.",
+  approaches: [
+    { name: "Interval DP over boundaries", intuition: "Track the number of ways to end a partition at each boundary with the last block sum, checking the non-decreasing rule.", time: "O(n^2)", space: "O(n^2)" },
+    { name: "Monotonic queue with binary search", intuition: "Keep the best feasible previous boundary in a monotonic structure and binary search prefix sums.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Six values up to six', input: '[4,6,2,6,5,1]' },
     { label: 'Merge the middle', input: '[4,3,2,6]' },

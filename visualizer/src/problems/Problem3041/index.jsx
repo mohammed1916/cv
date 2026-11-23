@@ -18,6 +18,11 @@ const definition = {
   inputLabel: 'JSON {"nums": [...]}',
   url: "https://leetcode.com/problems/maximize-consecutive-elements-in-an-array-after-modification/",
   complexity: "O(n log n) time for the sort and O(n) extra space. The visualization caps nums at 30 values up to 60.",
+  question: "Find the longest run of consecutive values after each element may be increased by at most one.",
+  approaches: [
+    { name: "Sorted DP over values", intuition: "Sort the values and build chains of consecutive values, each element adding at most one.", time: "O(n log n)", space: "O(n)" },
+    { name: "Hash map of chain ends", intuition: "For each value, keep the best chain ending at it and extend from value - 1, value and value + 1.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: "Example 1", input: '{"nums": [5, 1, 2, 2, 8]}' },
     { label: "Example 2", input: '{"nums": [9, 3, 3, 4, 10, 2]}' },

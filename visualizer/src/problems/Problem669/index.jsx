@@ -12,6 +12,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'BST and range (JSON object with root, low and high)',
   url: 'https://leetcode.com/problems/trim-a-binary-search-tree/',
   complexity: 'O(n) time for n nodes and O(h) recursion space.',
+  question: "Trim a binary search tree so every remaining value lies within a given range.",
+  approaches: [
+    { name: "Recursive pruning", intuition: "Discard subtrees outside the range and splice in the trimmed children.", time: "O(n)", space: "O(h)" },
+  ],
   examples: [
     { label: 'Left cut', input: '{"root":[6,2,8,1,4,null,9],"low":3,"high":7}' },
     { label: 'Right cut', input: '{"root":[5,1,9,null,3,8],"low":2,"high":6}' },

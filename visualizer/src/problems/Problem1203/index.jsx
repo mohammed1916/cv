@@ -17,6 +17,10 @@ const definition = {
   inputLabel: 'Object with n, m, group and before_items (JSON)',
   url: 'https://leetcode.com/problems/sort-items-by-groups-respecting-dependencies/',
   complexity: 'O(n + m + d) time for d dependencies, using two topological sorts. The visualization caps n at 8.',
+  question: "Order items so that each item comes after its dependencies, while keeping items of the same group together.",
+  approaches: [
+    { name: "Two-level topological sort", intuition: "Sort groups by their dependencies, then sort items inside each group by their dependencies.", time: "O(n + m + d)", space: "O(n + m + d)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"n":8,"m":2,"group":[-1,-1,1,0,0,1,0,-1],"before_items":[[],[6],[5],[6],[3,6],[],[],[]]}' },
     { label: 'Cycle', input: '{"n":8,"m":2,"group":[-1,-1,1,0,0,1,0,-1],"before_items":[[],[6],[5],[6],[3],[],[4],[]]}' },

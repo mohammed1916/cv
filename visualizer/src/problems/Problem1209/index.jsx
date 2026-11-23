@@ -2,6 +2,10 @@ import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import { buildTrace, parseInput, code, python, phases, inputLabel, complexity, examples } from './algorithm'
 
 const definition = {
+  question: "Remove adjacent duplicate groups of k equal letters repeatedly until none remain.",
+  approaches: [
+    { name: "Stack of letter runs", intuition: "Keep a stack of letters with their run counts, and pop a run when its count reaches k.", time: "O(n)", space: "O(n)" },
+  ],
   phases, parse: parseInput, build: buildTrace, code, python, inputLabel, complexity, examples,
   url: 'https://leetcode.com/problems/remove-all-adjacent-duplicates-in-string-ii/',
 }

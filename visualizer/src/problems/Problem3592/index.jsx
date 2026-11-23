@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with numWays (JSON)',
   url: 'https://leetcode.com/problems/inverse-coin-change/',
   complexity: 'O(n^2) time. The visualization caps the array at 10 entries.',
+  question: "Given the number of ways to make each amount with a set of coins, recover a coin set that produces those counts.",
+  approaches: [
+    { name: "Peel off coins in order", intuition: "Process amounts from small to large; each mismatch against the target count reveals one coin denomination.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 2', input: '{"numWays":[1,2,2,3,4]}' },
     { label: 'Example 3', input: '{"numWays":[1,2,3,4,15]}' },

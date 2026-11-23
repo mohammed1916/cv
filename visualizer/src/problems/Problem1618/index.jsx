@@ -20,6 +20,11 @@ const definition = {
   inputLabel: 'Object with text, sizes, w and h (e.g. {"text":"tiny words","sizes":[6,8],"w":50,"h":18})',
   url: 'https://leetcode.com/problems/maximum-font-to-fit-a-sentence-in-a-screen/',
   complexity: 'O(log k) probes for k font sizes, each probe measuring n characters, so O(n log k) time. The visualization uses a stand-in glyph metric (narrow letters are cheaper) and caps the text at 20 characters and the sizes at 10 entries.',
+  question: "Find the largest font size at which a sentence still fits inside a given width and height.",
+  approaches: [
+    { name: "Binary search on size", intuition: "Fit is monotone in size, so search over sizes and measure the text at each probe.", time: "O(n log k)", space: "O(1)" },
+    { name: "Linear scan of sizes", intuition: "Try sizes from the largest downward until one fits.", time: "O(n k)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Width limit', input: '{"text":"screen fit","sizes":[6,8,10,12,14,18,24],"w":60,"h":40}' },
     { label: 'Height limit', input: '{"text":"tall","sizes":[4,8,12,16,20],"w":200,"h":10}' },

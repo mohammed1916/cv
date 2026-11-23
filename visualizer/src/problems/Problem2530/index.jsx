@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON {"nums": [...], "k": operations}',
   url: 'https://leetcode.com/problems/maximal-score-after-applying-k-operations/',
   complexity: 'O((n + k) log n) time with a max heap. The visualization caps input at 10 numbers and 12 operations.',
+  question: "Each operation removes the largest value and adds its ceiling-divided-by-three; maximise the total after k operations.",
+  approaches: [
+    { name: "Max heap", intuition: "Keep the values in a max heap and repeatedly take the top and push back its reduced value.", time: "O((n + k) log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Six values, k four', input: '{"nums":[8,24,3,17,5,12],"k":4}' },
     { label: 'Three values, k one', input: '{"nums":[30,30,9],"k":1}' },

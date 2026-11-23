@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'JSON {"sentence": "tree eel lab bat"}',
   url: 'https://leetcode.com/problems/circular-sentence/',
   complexity: 'O(n) time and O(n) extra space for a sentence of n characters. The visualization caps sentences at 200 characters.',
+  question: "Check whether each word's last letter matches the next word's first letter, including the wrap from the last word to the first.",
+  approaches: [
+    { name: "Boundary comparison", intuition: "Split the sentence and compare each boundary letter with the next word's first letter.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Circular', input: '{"sentence":"tree eel lab bat"}' },
     { label: 'Broken link', input: '{"sentence":"tree eel lab cat"}' },

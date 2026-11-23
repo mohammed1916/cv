@@ -13,6 +13,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Sentence (JSON string)',
   url: 'https://leetcode.com/problems/goat-latin/',
   complexity: 'O(n^2) time and space in the worst case, because the i-th word receives i trailing a letters.',
+  question: "Convert a sentence to Goat Latin: vowel-initial words get ma appended, consonant-initial words move their first letter to the end, and each word gets a run of a letters by position.",
+  approaches: [
+    { name: "Single pass rewrite", intuition: "Rewrite each word according to its first letter and add the a-suffix for its index.", time: "O(total length)", space: "O(total length)" },
+  ],
   examples: [
     { label: 'Apples and oranges', input: '"Apples and oranges"' },
     { label: 'Consonant-start words', input: '"Quick river ice"' },

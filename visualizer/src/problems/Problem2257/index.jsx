@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON object: {"m": rows, "n": columns, "guards": [[r, c], ...], "walls": [[r, c], ...]}',
   url: 'https://leetcode.com/problems/count-unguarded-cells-in-the-grid/',
   complexity: 'Each guard sweeps at most four rays, so the work is proportional to the grid size. The visualization caps the grid at 6 by 6.',
+  question: "Count the empty cells in a grid that are neither guarded nor occupied by a guard or wall.",
+  approaches: [
+    { name: "Sweep from each guard", intuition: "Mark the guards and walls, then sweep each guard in four directions until a wall or another guard stops it.", time: "O(m * n)", space: "O(m * n)" },
+  ],
   examples: [
     { label: 'Two guards, two walls', input: '{"m":3,"n":5,"guards":[[0,2],[2,4]],"walls":[[1,1],[2,0]]}' },
     { label: 'Walled row', input: '{"m":1,"n":4,"guards":[[0,0]],"walls":[[0,2]]}' },

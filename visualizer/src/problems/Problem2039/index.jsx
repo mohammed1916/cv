@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Edges and patience values (JSON)',
   url: 'https://leetcode.com/problems/the-time-when-the-network-becomes-idle/',
   complexity: 'O(n + m) for the breadth-first search, then O(n) for the per-server formula.',
+  question: "Find the first second at which the network becomes idle once every server has received its replies.",
+  approaches: [
+    { name: "BFS distances then reply times", intuition: "Compute shortest distances with BFS, then the last reply time for each server determines when it goes quiet.", time: "O(V + E)", space: "O(V + E)" },
+  ],
   examples: [
     { label: 'Star', input: '{"edges":[[0,1],[0,2],[0,3]],"patience":[0,1,2,3]}' },
     { label: 'Path of four', input: '{"edges":[[0,1],[1,2],[2,3]],"patience":[0,4,4,4]}' }, { label: "Two servers", input: "{\"edges\":[[0,1]],\"patience\":[0,1]}" }, { label: "Equal patience", input: "{\"edges\":[[0,1],[0,2],[0,3]],\"patience\":[0,2,2,2]}" }, { label: "Longest patience", input: "{\"edges\":[[0,1],[1,2],[2,3],[3,4],[4,5],[5,6],[6,7],[7,8],[8,9],[9,10],[10,11]],\"patience\":[0,10,10,10,10,10,10,10,10,10,10,10]}" }, { label: "Long run: 12 servers", input: "{\"edges\":[[0,1],[0,2],[0,3],[3,4],[1,5],[2,6],[0,7],[6,8],[6,9],[8,10],[8,11]],\"patience\":[0,8,8,4,1,2,5,8,9,4,10,3]}" },

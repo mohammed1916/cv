@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with mountain array and target (JSON)',
   url: 'https://leetcode.com/problems/find-in-mountain-array/',
   complexity: 'O(log n) time and O(1) extra space. The mountain is read through index access only.',
+  question: "Find the smallest index of a target in a mountain array, reading the array only through index queries.",
+  approaches: [
+    { name: "Binary search peak, then both sides", intuition: "Find the peak with binary search, then search the ascending side and the descending side for the target.", time: "O(log n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"mountain":[1,2,3,4,5,3,1],"target":3}' },
     { label: 'Absent', input: '{"mountain":[0,1,2,4,2,1],"target":3}' },

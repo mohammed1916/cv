@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with nums and queries ([l, r, k, v] entries)',
   url: 'https://leetcode.com/problems/xor-after-range-multiplication-queries-ii/',
   complexity: 'Simulates every visited index, so the work is the total number of stride steps across queries. The visualization caps the input size.',
+  question: "Apply range multiplication queries with a stride to an array and return the XOR of the final values.",
+  approaches: [
+    { name: "Simulate each stride", intuition: "Visit each stepped index in each query's range and multiply it.", time: "O(total stride steps)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Stride two', input: '{"nums":[3,5,2,7],"queries":[[0,3,2,2],[1,1,1,3]]}' },
     { label: 'Single query', input: '{"nums":[9,2,9,2],"queries":[[0,3,1,5]]}' },

@@ -19,6 +19,10 @@ const definition = {
   inputLabel: 'JSON object with arr and k (e.g. {"arr": [1, 4, 1, 3], "k": 2})',
   url: "https://leetcode.com/problems/make-k-subarray-sums-equal/",
   complexity: "O(n log n) time and O(n) space for n = arr.length. The visualization caps arr at 200 values.",
+  question: "Given an array and k, make the sums of all subarrays of length k equal to a common value using the fewest changes, where a change adds or subtracts one from an element.",
+  approaches: [
+    { name: "Group by cycle and median", intuition: "Indices in the same cycle share a sum, so each group is set to its median to minimize changes.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: "[1,4,1,3], k=2", input: '{"arr": [1, 4, 1, 3], "k": 2}' },
     { label: "[2,5,5,7], k=3", input: '{"arr": [2, 5, 5, 7], "k": 3}' },

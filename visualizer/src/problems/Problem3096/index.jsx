@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'An object with possible: 2 to 12 entries of 0 (fail) or 1 (pass)',
   url: 'https://leetcode.com/problems/minimum-levels-to-gain-more-points/',
   complexity: 'O(n) time and O(n) space. The visualization caps input at 12 levels.',
+  question: "Find the fewest levels Alice must take so that her points, with each level scoring plus one or minus one, exceed Bob's.",
+  approaches: [
+    { name: "Prefix sums over the split", intuition: "Compare Alice's prefix total with the rest of the total for each split and take the first split where Alice is ahead.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"possible":[1,0,1,0]}' },
     { label: 'Example 2', input: '{"possible":[1,1,1,1,1]}' },

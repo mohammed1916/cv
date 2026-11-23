@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Darts (JSON object with points as [x, y] pairs and radius r)',
   url: 'https://leetcode.com/problems/maximum-number-of-darts-inside-of-a-circular-dartboard/',
   complexity: 'O(n^3) time for n darts, since each pair gives two centres checked against n darts. The visualization caps input at 8 darts.',
+  question: "Find the centre of a circle that covers the most darts, given the dart points and a radius.",
+  approaches: [
+    { name: "Candidate centres from point pairs", intuition: "Try the two circle centres through each pair of points and count the darts covered.", time: "O(n^3)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Four darts', input: '{"points":[[-2,0],[2,0],[0,2],[0,-2]],"r":2}' },
     { label: 'Six darts', input: '{"points":[[-3,0],[3,0],[2,6],[5,4],[0,9],[7,8]],"r":5}' },

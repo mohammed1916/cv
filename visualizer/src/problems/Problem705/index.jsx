@@ -14,6 +14,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Operations (JSON array of [name, key])',
   url: 'https://leetcode.com/problems/design-hashset/',
   complexity: 'O(1) expected per operation with a good hash and a bounded bucket chain.',
+  question: "Implement a hash set of integers without built-in set types.",
+  approaches: [
+    { name: "Chained buckets", intuition: "Hash keys into buckets by remainder and keep distinct keys in each bucket's chain.", time: "O(n / b) per operation", space: "O(n + b)" },
+  ],
   examples: [
     { label: 'Collide in bucket 4', input: '[["add",4],["add",14],["contains",4],["remove",4],["contains",4],["add",24],["contains",24]]' },
     { label: 'Absent key', input: '[["contains",5]]' },

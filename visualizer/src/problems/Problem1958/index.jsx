@@ -11,6 +11,10 @@ const definition = {
   inputLabel: 'JSON object with board (8 strings), rMove, cMove and color (e.g. {"board":["W B......"],"rMove":0,"cMove":2,"color":"W"})',
   url: 'https://leetcode.com/problems/check-if-move-is-legal/',
   complexity: 'O(1): at most eight rays of seven cells each on a fixed 8 by 8 board.',
+  question: "Decide whether a piece can legally move to a cell on a checkers-style board by flanking opposite-colour cells.",
+  approaches: [
+    { name: "Check eight directions", intuition: "From the chosen cell, walk each direction over opposite-colour cells and accept if the walk ends on a same-colour cell after at least one step.", time: "O(1)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Row closes', input: '{"board":["WB......","........","........","........","........","........","........","........"],"rMove":0,"cMove":2,"color":"W"}' },
     { label: 'Diagonal closes', input: '{"board":["W.......",".B......","..B.....","........","........","........","........","........"],"rMove":3,"cMove":3,"color":"W"}' },

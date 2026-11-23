@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Two numbers n and m with the same digit count (JSON)',
   url: 'https://leetcode.com/problems/digit-operations-to-make-two-integers-equal/',
   complexity: 'O(10^d * d log 10^d) time for d-digit numbers. The visualization caps input at 3 digits.',
+  question: "Find the least number of operations that turn one number into another, where each operation changes one digit.",
+  approaches: [
+    { name: "Breadth-first search over numbers", intuition: "Search from the first number, applying digit operations level by level, until the second is reached.", time: "O(10^d * d log 10^d)", space: "O(10^d)" },
+  ],
   examples: [
     { label: 'Two-digit pair, no primes', input: '{"n":25,"m":49}' },
     { label: 'Blocked', input: '{"n":4,"m":8}' },

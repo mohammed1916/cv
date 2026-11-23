@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with capacity and itemSize',
   url: 'https://leetcode.com/problems/minimum-capacity-box/',
   complexity: 'One pass over the boxes, so O(n) time and O(1) extra space. The visual caps the list at 12 boxes.',
+  question: "Find the index of the smallest box that can fit an item, with the lowest index breaking ties.",
+  approaches: [
+    { name: "Single pass for smallest fit", intuition: "Scan the boxes once and keep the smallest one large enough.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example', input: '{"capacity":[9,4,6,4],"itemSize":5}' },
     { label: 'Tie', input: '{"capacity":[7,7,7],"itemSize":7}' },

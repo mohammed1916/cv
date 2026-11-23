@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Array nums with one outlier (JSON object)',
   url: 'https://leetcode.com/problems/identify-the-largest-outlier-in-an-array/',
   complexity: 'O(n log n) time for the sorted candidates, O(n) space for the counts. The visualization caps input at 30 values.',
+  question: "Find the largest outlier value: an element that is neither a sum of two others nor one of the numbers used in the sum.",
+  approaches: [
+    { name: "Sort and count", intuition: "Count the values, then test each candidate outlier against the sums of the others.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Outlier 10', input: '{"nums":[2,3,5,10]}' },
     { label: 'Negative values', input: '{"nums":[-2,-1,-3,-6,4]}' },

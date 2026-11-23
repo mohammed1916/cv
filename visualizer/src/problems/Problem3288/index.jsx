@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with coordinates (1 to 10 distinct [x, y] points) and k',
   url: 'https://leetcode.com/problems/length-of-the-longest-increasing-path/',
   complexity: 'O(n^2) time for the two memoized searches over n points. The visualization caps input at 10 points.',
+  question: "Find the length of the longest increasing path through a set of points, where each step moves to a point that is larger in both coordinates.",
+  approaches: [
+    { name: "Memoised search from each point", intuition: "From each point, search for the longest path with memoisation, then take the largest result.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Invented staircase', input: '{"coordinates":[[1,4],[3,1],[6,2],[2,6],[8,8],[5,5]],"k":5}' },
     { label: 'Invented pair', input: '{"coordinates":[[2,1],[7,0],[5,6]],"k":1}' },

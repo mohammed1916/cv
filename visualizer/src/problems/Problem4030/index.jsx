@@ -11,6 +11,10 @@ const definition = {
   inputLabel: 'String (JSON object with s)',
   url: 'https://leetcode.com/problems/check-ascii-palindromic/',
   complexity: 'O(n) time and O(n) space for n letters. The visualization caps s at 16 letters.',
+  question: "Write each letter as its 8-bit ASCII code, join the bits, and check whether the bit string reads the same backwards.",
+  approaches: [
+    { name: "Bit string palindrome check", intuition: "Build the bit string and compare it with its reverse.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'True', input: '{"s":"ff"}' },
     { label: 'False', input: '{"s":"leet"}' },

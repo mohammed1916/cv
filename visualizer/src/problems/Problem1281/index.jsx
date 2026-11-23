@@ -8,6 +8,10 @@ const definition = {
   inputLabel: 'Object with n (JSON)',
   url: 'https://leetcode.com/problems/subtract-the-product-and-sum-of-digits-of-an-integer/',
   complexity: 'O(d) time and O(1) extra space, where d is the number of decimal digits.',
+  question: "Compute the difference between the product and the sum of the digits of an integer.",
+  approaches: [
+    { name: "Digit loop", intuition: "Peel off digits with division and remainder, updating the product and sum.", time: "O(d)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Four digits', input: '{"n":3945}' },
     { label: 'Contains a zero', input: '{"n":1002}' },

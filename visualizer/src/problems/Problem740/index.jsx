@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'nums (JSON array of integers 1–20)',
   url: 'https://leetcode.com/problems/delete-and-earn/',
   complexity: 'O(V) time after counting, where V is the largest value; O(V) for the points array.',
+  question: "Choose values to earn points, where taking a value forbids taking its immediate neighbours.",
+  approaches: [
+    { name: "Frequency DP over values", intuition: "Aggregate points per value, then apply the house-robber recurrence over the values.", time: "O(n + max)", space: "O(max)" },
+  ],
   examples: [
     { label: 'Pairs', input: '[3,3,5,6,9]' },
     { label: 'Neighbours', input: '[2,4,4,5,7]' },

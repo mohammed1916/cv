@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Array of 1 to 10 integers from 0 to 99 (JSON)',
   url: 'https://leetcode.com/problems/minimum-adjacent-swaps-to-alternate-parity/',
   complexity: 'O(n) time after counting parities. The visualization caps input at 10 values.',
+  question: "Find the fewest adjacent swaps that rearrange an array so even and odd values alternate.",
+  approaches: [
+    { name: "Count the two starts", intuition: "Count the even and odd values, and compute the swap cost for starting with an even value and for starting with an odd value.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '[3,1,2]' },
     { label: 'Example 2', input: '[1,2,4]' },

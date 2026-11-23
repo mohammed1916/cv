@@ -19,6 +19,10 @@ const definition = {
   inputLabel: 'Object with source and target strings',
   url: 'https://leetcode.com/problems/shortest-way-to-form-string/description/',
   complexity: 'O(m * n) time for source length m and target length n, since each piece scans source once; O(n) extra space. The visualization caps each string at 12 characters; the official bounds are not verified.',
+  question: "Find the fewest subsequences of a source string that together spell a target, or -1 if impossible.",
+  approaches: [
+    { name: "Greedy subsequence matching", intuition: "Each piece matches as far as it can through the source; when the source is used up, a new piece starts.", time: "O(m * n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Four pieces', input: '{"source":"abcd","target":"dcba"}' },
     { label: 'Impossible letter', input: '{"source":"xyz","target":"xyq"}' },

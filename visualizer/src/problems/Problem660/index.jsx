@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'n (JSON number)',
   url: 'https://leetcode.com/problems/remove-9/',
   complexity: 'O(log n) time and space. The visualization accepts n up to 1,000,000.',
+  question: "Return the nth positive integer that contains no digit 9.",
+  approaches: [
+    { name: "Base-9 reinterpretation", intuition: "The nth such number has the base-9 digits of n, read back as a base-10 number.", time: "O(log n)", space: "O(log n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"n":9}' },
     { label: 'Larger', input: '{"n":1000}' },

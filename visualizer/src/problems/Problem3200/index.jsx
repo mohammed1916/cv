@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with red and blue ball counts (0 to 100)',
   url: 'https://leetcode.com/problems/maximum-height-of-a-triangle/',
   complexity: 'O(h) time, where h is the height reached, for each starting color.',
+  question: "Find the maximum height of a triangle of coloured balls where each row uses one colour and adjacent rows differ.",
+  approaches: [
+    { name: "Try both starting colours", intuition: "Odd rows take the chosen colour and even rows the other, so each starting colour is grown row by row while the totals fit.", time: "O(h)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Red and blue, uneven', input: '{"red":7,"blue":4}' },
     { label: 'Blue heavy', input: '{"red":1,"blue":9}' },

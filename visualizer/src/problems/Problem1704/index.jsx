@@ -14,6 +14,10 @@ const definition = {
   complexity,
   inputLabel: 'JSON string of letters with even length',
   url: 'https://leetcode.com/problems/determine-if-string-halves-are-alike/',
+  question: "Check whether the two halves of a string contain the same number of vowels.",
+  approaches: [
+    { name: "Count vowels in each half", intuition: "Scan each half and compare the vowel counts.", time: "O(n)", space: "O(1)" },
+  ],
 }
 
 export default function Problem1704Visualizer() {

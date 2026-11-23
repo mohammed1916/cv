@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Object with s (JSON)',
   url: 'https://leetcode.com/problems/minimum-deletions-to-make-character-frequencies-unique/',
   complexity: 'O(n + k log k) time where k is the alphabet size: count letters, sort frequencies, then take the largest free value for each.',
+  question: "Delete the fewest characters so that no two letters end up with the same count.",
+  approaches: [
+    { name: "Sort and lower duplicates", intuition: "Sort counts from largest to smallest, lowering any count that clashes with one already kept.", time: "O(n + k log k)", space: "O(k)" },
+  ],
   examples: [
     { label: 'Sample aaabbbcc', input: '{"s":"aaabbbbcc"}' },
     { label: 'Already unique', input: '{"s":"zzzyyyxx"}' },

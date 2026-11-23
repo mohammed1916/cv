@@ -8,6 +8,10 @@ const definition = {
   inputLabel: 'Object with a content table (content_id, content_text)',
   url: 'https://leetcode.com/problems/first-letter-capitalization/description/',
   complexity: 'Teaching model: one string rebuild per row. Visualization caps the table at 12 rows.',
+  question: "Capitalize the first letter of each word in each text row, leaving the rest as lower case.",
+  approaches: [
+    { name: "Rebuild each row", intuition: "Lower-case each row and capitalize its first letter.", time: "O(total length)", space: "O(total length)" },
+  ],
   examples: [
     { label: 'Example', input: '{"content":[{"content_id":3,"content_text":"SQL is fun"},{"content_id":1,"content_text":"hello WORLD"},{"content_id":2,"content_text":"x2 PLANS"}]}' },
     { label: 'Single letter', input: '{"content":[{"content_id":9,"content_text":"a"}]}' },

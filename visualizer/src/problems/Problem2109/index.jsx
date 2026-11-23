@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON object with s and spaces',
   url: 'https://leetcode.com/problems/adding-spaces-to-a-string/',
   complexity: 'O(n + m) time for a string of length n and m insert positions; the output string is built once.',
+  question: "Insert a space character at each of several given positions in a string.",
+  approaches: [
+    { name: "Copy slices between insertion points", intuition: "Walk the sorted insertion points once, copying each slice of the string followed by a space.", time: "O(n + k)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Two spaces', input: '{"s":"Greenhouse","spaces":[5]}' },
     { label: 'Start and end cuts', input: '{"s":"abcdef","spaces":[0,3]}' },

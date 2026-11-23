@@ -11,6 +11,10 @@ const definition = {
   inputLabel: 'Object with n',
   url: 'https://leetcode.com/problems/count-commas-in-range/',
   complexity: 'Only a handful of thresholds exist, so the count is O(log n) in the number of digits. The visual caps n at 100000.',
+  question: "Count the commas used when writing every integer up to n with standard thousands grouping.",
+  approaches: [
+    { name: "Sum the counts per threshold", intuition: "Add one comma for each number from each power-of-1000 threshold up to n.", time: "O(log n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example', input: '{"n":12345}' },
     { label: 'Upper range', input: '{"n":99999}' },

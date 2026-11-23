@@ -25,6 +25,11 @@ const definition = {
   phases, parse: parseInput, build: buildTrace, code, sql, python, inputLabel,
   url: `https://leetcode.com/problems/${meta.slug}/`,
   complexity, examples,
+  question: "Find users whose third transaction spend is larger than both of their first two spends.",
+  approaches: [
+    { name: "Row numbers then compare", intuition: "Number each user's transactions by date and compare the third spend with the larger of the first two.", time: "O(n log n)", space: "O(n)" },
+    { name: "Self-join by row number", intuition: "Join each user's transactions to their first, second and third rows and compare.", time: "O(n)", space: "O(n)" },
+  ],
 }
 
 function Rows({ columns = [], rows = [] }) {

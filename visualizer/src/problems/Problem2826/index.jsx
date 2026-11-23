@@ -12,6 +12,11 @@ const definition = {
   inputLabel: 'Object with nums, values 1 to 3 (JSON)',
   url: 'https://leetcode.com/problems/sorting-three-groups/',
   complexity: 'O(n) time and O(1) space. The visualization caps n at 12.',
+  question: "Find the fewest deletions so that the array becomes sorted, given values from 1 to 3.",
+  approaches: [
+    { name: "Longest non-decreasing subsequence over three values", intuition: "Keep the longest valid chain that ends in each value, updating it as each element is read.", time: "O(n)", space: "O(1)" },
+    { name: "Try split points", intuition: "Try every pair of boundaries between the 1, 2 and 3 groups.", time: "O(n^2)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"nums":[2,1,3,2,1]}' },
     { label: 'Example 2', input: '{"nums":[1,3,2,1,3,3]}' },

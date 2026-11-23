@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with nums (JSON)',
   url: 'https://leetcode.com/problems/trionic-array-ii/',
   complexity: 'O(n) time and O(n) space for the state arrays.',
+  question: "Find the largest sum of a trionic subarray, which rises, falls, and rises again.",
+  approaches: [
+    { name: "Prefix and suffix states", intuition: "Track the best sums for each phase while scanning, using state arrays.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"nums":[0,-2,-1,-3,0,2,-1]}' },
     { label: 'Example 2', input: '{"nums":[1,4,2,7]}' },

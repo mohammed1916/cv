@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with favorite_companies (list of lists of names, JSON)',
   url: 'https://leetcode.com/problems/people-whose-list-of-favorite-companies-is-not-a-subset-of-another-list/',
   complexity: 'O(n^2) mask checks for n lists. The visualization caps input at 6 lists.',
+  question: "List the people whose favourite companies are not a subset of another person's list.",
+  approaches: [
+    { name: "Bitmask subset check", intuition: "Represent each list as a bitmask and test whether any other list contains it.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"favorite_companies":[["leetcode","google","facebook"],["google","microsoft"],["google","facebook"],["google"],["amazon"]]}' },
     { label: 'Example 2', input: '{"favorite_companies":[["leetcode","google","facebook"],["leetcode","amazon"],["facebook","google"]]}' },

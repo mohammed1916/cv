@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Numbers and k (JSON object with nums and k)',
   url: 'https://leetcode.com/problems/longest-subarray-with-at-most-k-distinct-prime-factors/',
   complexity: 'O(n · √M) time for distinct prime factors, plus O(n) window moves, and O(number of primes) space. The visualization caps input at 12 numbers.',
+  question: "Find the longest subarray that contains at most k distinct prime factors.",
+  approaches: [
+    { name: "Sliding window on prime counts", intuition: "Slide a window, and shrink whenever more than k distinct primes appear.", time: "O(n x sqrt(M)) for factoring", space: "O(number of primes)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"nums":[7,6,10,12,11],"k":3}' },
     { label: 'Example 2', input: '{"nums":[4,6,9,18],"k":4}' },

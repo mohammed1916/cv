@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Grid of digits 0 to 9 (JSON)',
   url: 'https://leetcode.com/problems/largest-magic-square/',
   complexity: 'O(min(m, n)^3 * m * n) time with direct sums. The visualization caps the grid at 5 by 5.',
+  question: "Find the side length of the largest square subgrid whose rows, columns and both diagonals all have the same sum.",
+  approaches: [
+    { name: "Prefix sums and checks", intuition: "Use row, column and diagonal prefix sums to test each square of each size in constant time per line.", time: "O(m n min(m, n)^2)", space: "O(m n)" },
+  ],
   examples: [
     { label: 'Example', input: '{"grid":[[7,1,4,5,6],[2,5,1,6,4],[1,5,4,3,2],[1,2,7,3,4]]}' },
     { label: 'Small', input: '{"grid":[[1,2],[3,4]]}' },

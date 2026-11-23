@@ -14,6 +14,11 @@ const definition = {
   inputLabel: 'Object with nums and k (JSON)',
   url: 'https://leetcode.com/problems/apply-operations-to-make-all-array-elements-equal-to-zero/',
   complexity: 'O(n) time and O(n) space. The visualization caps input at 12 values.',
+  question: "Decide whether every element can be made zero by repeatedly applying operations that subtract 1 from a block of k consecutive values.",
+  approaches: [
+    { name: "Greedy left to right with difference tracking", intuition: "At each position, the required operations must start here; track how many still cover the position using a difference array.", time: "O(n)", space: "O(n)" },
+    { name: "Sliding window count", intuition: "Keep a running count of active operations and drop those that have ended.", time: "O(n)", space: "O(k)" },
+  ],
   examples: [
     { label: 'Zeros among five values', input: '{"nums":[5,0,1,5,1],"k":2}' },
     { label: 'Eight values, larger k', input: '{"nums":[0,7,7,3,10,0,6,2],"k":5}' },

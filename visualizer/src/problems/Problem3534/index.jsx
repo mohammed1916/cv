@@ -18,6 +18,10 @@ const definition = {
   inputLabel: 'Object with nums, maxDiff and queries',
   url: 'https://leetcode.com/problems/path-existence-queries-in-a-graph-ii/',
   complexity: 'O((n + q) log n) time after an O(n log n) sort, and O(n log n) space. The official limits reach 100000 nodes and queries; this page caps them at 12 nodes and 6 queries so the graph stays readable.',
+  question: "Answer queries about whether two nodes in a graph are connected through edges below a weight limit, at a larger size.",
+  approaches: [
+    { name: "Union-find over sorted values", intuition: "Sort and merge components, then answer each query by lookup.", time: "O((n + q) log n)", space: "O(n log n)" },
+  ],
   examples: [
     { label: 'Chain with a blocked node', input: '{"nums":[14,2,9,5,18,11,30],"maxDiff":5,"queries":[[1,4],[0,2],[1,6],[3,3]]}' },
     { label: 'Long chain', input: '{"nums":[0,3,6,9,12,15,18,21,24],"maxDiff":4,"queries":[[0,8],[5,1],[2,3]]}' },

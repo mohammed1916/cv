@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'JSON object with wait (milliseconds) and calls (sorted call times)',
   url: 'https://leetcode.com/problems/debounce/',
   complexity: 'O(k) time for k calls, O(k) space for the run list.',
+  question: "Write a debounced version of a function that runs only after calls stop for a given wait time.",
+  approaches: [
+    { name: "Reset a timer on each call", intuition: "Clear the pending timer each time the function is called, then start a new one that runs the latest arguments.", time: "O(1) per call", space: "O(1)" },
+  ],
   examples: [
     { label: 'Burst', input: '{"wait":100,"calls":[0,50,120,300]}' },
     { label: 'Same time', input: '{"wait":5,"calls":[10,10,10]}' },

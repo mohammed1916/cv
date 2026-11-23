@@ -12,6 +12,11 @@ const definition = {
   inputLabel: 'An object with nums (2 to 12 integers from -10 to 10) and k (1 to 10)',
   url: 'https://leetcode.com/problems/maximum-good-subarray-sum/',
   complexity: 'O(n) time with a map keyed by value. The visualization caps nums at 12 entries.',
+  question: "Find the maximum sum of a subarray whose first and last values differ by k.",
+  approaches: [
+    { name: "Prefix sums with best start per value", intuition: "Keep the smallest prefix sum seen for each value and use it when a later value differs by k.", time: "O(n)", space: "O(n)" },
+    { name: "Brute force subarrays", intuition: "Check every subarray directly.", time: "O(n^2)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Six values with negatives', input: '{"nums":[-3,4,1,-8,6,2],"k":3}' },
     { label: 'Extremes at ten and minus ten', input: '{"nums":[10,-10,0,5],"k":1}' },

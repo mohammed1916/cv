@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with nums and target (JSON)',
   url: 'https://leetcode.com/problems/partition-array-into-two-equal-product-subsets/',
   complexity: 'O(2^n * n) time for n elements. The visualization caps n at 8.',
+  question: "Split an array into two subsets whose products are equal.",
+  approaches: [
+    { name: "Subset enumeration", intuition: "Try each subset assignment and compare the products.", time: "O(2^n n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Three values, target thirty', input: '{"nums":[5,9,2],"target":30}' },
     { label: 'Six values, round target', input: '{"nums":[12,7,20,3,15,4],"target":100}' },

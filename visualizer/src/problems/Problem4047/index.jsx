@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with nums (1 to 4 values from 0 to 7)',
   url: "https://leetcode.com/problems/minimum-operations-to-make-xor-of-all-elements-zero/",
   complexity: "Breadth-first search over sorted arrays: the number of reachable multisets is bounded by the value range raised to the array length, so this is exponential in the worst case. The visualization caps the array at 4 values from 0 to 7; the official bounds are not verified in this draft.",
+  question: "Replace one value with its XOR against a different value, using the fewest operations, until the total XOR is zero.",
+  approaches: [
+    { name: "Level-by-level search over sorted arrays", intuition: "Search the reachable sorted arrays level by level until the total XOR is zero.", time: "Bounded by the value range raised to the array length", space: "Depends on reachable states" },
+  ],
   examples: [
     { label: "Already zero", input: '{"nums":[1,2,3]}' },
     { label: "Unreachable", input: '{"nums":[1,2]}' },

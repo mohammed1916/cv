@@ -9,6 +9,10 @@ const definition = {
   inputLabel: 'Object with TeamStats (team_id, team_name, matches_played, wins, draws, losses); wins + draws + losses must equal matches_played',
   url: 'https://leetcode.com/problems/premier-league-table-ranking/description/',
   complexity: 'O(t log t) for t teams from the sort; the visualization caps the table at 8 teams. Points are 3 * wins + draws.',
+  question: "Rank teams by points, where each win is worth three points and each draw one, with tied teams sharing a rank.",
+  approaches: [
+    { name: "Points then RANK", intuition: "Compute each team's points once, then apply the rank function so tied teams share a position and the next position is skipped.", time: "O(t log t)", space: "O(t)" },
+  ],
   examples: [
     { label: 'Five teams with a tie', input: sample },
     { label: 'Two teams sharing first place', input: allDraws },

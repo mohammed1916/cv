@@ -12,6 +12,11 @@ const definition = {
   inputLabel: 'Integers 1 to 10 as a JSON array',
   url: 'https://leetcode.com/problems/number-of-unequal-triplets-in-array/',
   complexity: 'O(n) time for the grouped form. The visualization caps input at 12 entries.',
+  question: "Count triplets of indices where all three values are different.",
+  approaches: [
+    { name: "Count by value groups", intuition: "Count the values in each group, then subtract the pairs inside each group from the total triples.", time: "O(n)", space: "O(n)" },
+    { name: "Brute force triples", intuition: "Check every triple of indices.", time: "O(n^3)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Mixed values', input: '[7,1,9,4,4,6]' },
     { label: 'Descending run of nine', input: '[9,8,7,6,5,4,3,2,10]' },

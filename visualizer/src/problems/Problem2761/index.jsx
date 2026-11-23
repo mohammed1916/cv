@@ -13,6 +13,11 @@ const definition = {
   inputLabel: 'Object with n (JSON), from 1 to 1000',
   url: 'https://leetcode.com/problems/prime-pairs-with-target-sum/',
   complexity: 'O(n sqrt(n)) time with trial division, and O(n) output. The visualization caps input at 1000.',
+  question: "Find every pair of primes whose sum is n, listing each pair once with the smaller prime first.",
+  approaches: [
+    { name: "Check each smaller candidate x up to n/2", intuition: "Since the partner is n minus x, only x up to half of n needs testing, and both x and n minus x must be prime.", time: "O(n sqrt(n))", space: "O(n) output" },
+    { name: "Sieve of primes, then pair lookups", intuition: "Precompute primality for all values up to n once, so each pair check is constant time.", time: "O(n log log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"n":10}' },
     { label: 'Example 2', input: '{"n":2}' },

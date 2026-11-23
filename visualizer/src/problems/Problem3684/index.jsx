@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON object with nums (positive integers) and k',
   url: 'https://leetcode.com/problems/maximize-sum-of-at-most-k-distinct-elements/',
   complexity: 'O(n log n) time for sorting. The visualization caps input at 20 values.',
+  question: "Choose at most k distinct values from an array to maximize their sum.",
+  approaches: [
+    { name: "Sort then take distinct", intuition: "Sort the values in descending order and take distinct ones until k are chosen.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Four values, k three', input: '{"nums":[6,2,9,4],"k":3}' },
     { label: 'Duplicates', input: '{"nums":[84,93,100,77,93],"k":3}' },

@@ -3,7 +3,12 @@ import ActivationView from './ActivationView'
 import { buildTrace, parseInput, code, python, phases, inputLabel, complexity, examples, url } from './algorithm'
 import { meta } from './meta'
 
-const definition = { number: meta.number, phases, parse: parseInput, build: buildTrace, code, python, inputLabel, complexity, examples, url }
+const definition = {
+  question: "Given a sequence of time steps, count the valid substrings that appear between stars and walls.",
+  approaches: [
+    { name: "Nearest blocker counting", intuition: "Activate positions in the given order, and count substrings using the nearest star or wall on each side.", time: "O(n log n)", space: "O(n)" },
+  ],
+  number: meta.number, phases, parse: parseInput, build: buildTrace, code, python, inputLabel, complexity, examples, url }
 
 export default function MinimumTimeToActivateString() {
   return <AlgorithmWorkspace definition={definition}

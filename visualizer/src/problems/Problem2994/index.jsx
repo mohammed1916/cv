@@ -20,6 +20,10 @@ const definition = {
   phases, parse: parseInput, build: buildTrace, code, sql, python, inputLabel,
   url: `https://leetcode.com/problems/${meta.slug}/`,
   complexity, examples,
+  question: "For November 2023, list every Friday with its total purchases, including Fridays with none.",
+  approaches: [
+    { name: "Generate Fridays then fill totals", intuition: "Generate every Friday in November, then look up each date's total and use zero when there are no purchases.", time: "O(n + 30)", space: "O(n)" },
+  ],
 }
 
 function Rows({ columns = [], rows = [] }) {

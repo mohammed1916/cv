@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with candidates: 1 to 30 positive integers, e.g. {"candidates":[16,17,71]}',
   url: 'https://leetcode.com/problems/largest-combination-with-bitwise-and-greater-than-zero/',
   complexity: 'O(20 * n) time and O(1) extra space. The visualization caps the input at 30 candidates.',
+  question: "Choose the largest group of candidate numbers whose bitwise AND is greater than zero.",
+  approaches: [
+    { name: "Count bits", intuition: "Any non-zero AND needs one bit shared by all chosen numbers, so count how many candidates have each bit set and take the largest count.", time: "O(20 * n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Own: multiples of three', input: '{"candidates":[3,6,9,12,15,18,21]}' },
     { label: 'Own: four distinct candidates', input: '{"candidates":[5,11,22,44]}' },

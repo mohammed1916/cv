@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON object with n, startPos ([row, col]) and s',
   url: 'https://leetcode.com/problems/execution-of-all-suffix-instructions-staying-in-a-grid/',
   complexity: 'O(m^2) time for m instructions in this straightforward simulation (each start walks its own suffix); O(m) extra space.',
+  question: "For each starting instruction in a move string, count how many instructions the robot executes before a move would take it off the grid.",
+  approaches: [
+    { name: "Simulate from each start", intuition: "From each starting index, run the remaining instructions in order until the next move would leave the grid.", time: "O(n^2)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Stops at the edge', input: '{"n":3,"startPos":[2,0],"s":"UULRD"}' },
     { label: 'Stays inside', input: '{"n":2,"startPos":[1,0],"s":"RLRU"}' }, { label: "Single cell", input: "{\"n\":1,\"startPos\":[0,0],\"s\":\"L\"}" }, { label: "Return to start", input: "{\"n\":3,\"startPos\":[1,1],\"s\":\"LR\"}" }, { label: "Longest walk", input: "{\"n\":12,\"startPos\":[11,11],\"s\":\"RDRDRDRDRDRDRDRDRDRDRDRDRDRDRDRDRDRDRDRD\"}" }, { label: "Long run: 40 moves", input: "{\"n\":12,\"startPos\":[5,5],\"s\":\"ULRUUULDULDRUUURDRLULRRRURLLLRUDLDDRLUUR\"}" },

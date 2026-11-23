@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON {"expression": "316+52"}',
   url: 'https://leetcode.com/problems/minimize-result-by-adding-parentheses-to-expression/',
   complexity: 'O(a * b) time and O(a + b) space for left digits a and right digits b. Each candidate is built and evaluated once.',
+  question: "Add one pair of parentheses around the plus sign in an expression of the form a+b with numbers, to make the smallest possible value.",
+  approaches: [
+    { name: "Try every split", intuition: "Each parenthesis placement puts the plus sign between a left part and a right part; try each one and keep the smallest result.", time: "O(n^2)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example', input: '{"expression":"316+52"}' },
     { label: 'Short', input: '{"expression":"8+943"}' },

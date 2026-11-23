@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON {"nums": [...] (1 to 32), "k": 1-5}',
   url: 'https://leetcode.com/problems/longest-increasing-subsequence-ii/',
   complexity: 'O(n log M) time with a segment tree over the values, O(M) space. The visualization caps values at 32.',
+  question: "Find the longest increasing subsequence where each step increases by at most k.",
+  approaches: [
+    { name: "Segment tree over values", intuition: "Store the best length ending at each value in a segment tree and query the range of values within k below.", time: "O(n log M)", space: "O(M)" },
+  ],
   examples: [
     { label: 'Nine values, k 3', input: '{"nums":[7,2,9,4,4,11,6,1,10],"k":3}' },
     { label: 'Gap of 2', input: '{"nums":[1,3],"k":2}' },

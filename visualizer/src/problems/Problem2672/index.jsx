@@ -20,6 +20,10 @@ const definition = {
   inputLabel: 'JSON object with n and queries (e.g. {"n": 4, "queries": [[0, 2], [1, 2]]})',
   url: "https://leetcode.com/problems/number-of-adjacent-elements-with-the-same-color/",
   complexity: "O(q) time and O(n) space for q queries. The visualization caps n and q at 50.",
+  question: "Given a length and a list of colored queries, return the number of adjacent equal-color pairs after each query.",
+  approaches: [
+    { name: "Track changes around each cell", intuition: "Update the count of equal neighbours only at the cells touched by each query.", time: "O(q)", space: "O(n)" },
+  ],
   examples: [
     { label: "n = 5, six queries", input: '{"n": 5, "queries": [[0, 3], [1, 3], [2, 4], [1, 4], [0, 4], [3, 3]]}' },
     { label: "n = 3, repeated color", input: '{"n": 3, "queries": [[1, 7], [1, 7], [0, 7], [2, 7]]}' },

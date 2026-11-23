@@ -4,6 +4,10 @@ import { buildTrace, parseInput, code, python, phases, examples, complexity, inp
 import { Sequence, Vars } from './SeqKit'
 
 const definition = {
+  question: "Given a text and a two-word phrase, return every word that follows the phrase in the text.",
+  approaches: [
+    { name: "Scan consecutive triples", intuition: "Look at each triple of consecutive words and collect the third word when the first two match the phrase.", time: "O(n)", space: "O(n)" },
+  ],
   number: meta.number, phases, parse: parseInput, build: buildTrace, code, python, inputLabel,
   url: `https://leetcode.com/problems/${meta.slug}/`, complexity, examples,
 }

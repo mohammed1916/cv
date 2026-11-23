@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON {"nums": [1, 3, 5, 4, 7]}',
   url: 'https://leetcode.com/problems/count-strictly-increasing-subarrays/',
   complexity: 'O(n) time and O(1) extra space.',
+  question: "Count the strictly increasing subarrays of an array.",
+  approaches: [
+    { name: "Run length accumulation", intuition: "Each run of increasing values of length L contributes L times L plus one over two subarrays.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example', input: '{"nums":[1,3,5,4,7]}' },
     { label: 'Flat', input: '{"nums":[2,2,2]}' },

@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with num, for example {"num":"25??"}',
   url: 'https://leetcode.com/problems/sum-game/',
   complexity: 'O(n) time and O(1) extra space.',
+  question: "In a game with a string of digits and question marks, decide whether Alice or Bob wins under optimal play.",
+  approaches: [
+    { name: "Count question marks and sums", intuition: "Compare the sums of the two halves and the counts of question marks; the winner follows from a simple inequality.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"num":"5023"}' },
     { label: 'Example 2', input: '{"num":"25??"}' },

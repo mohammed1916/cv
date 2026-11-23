@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON object with grid: a square 0/1 matrix up to 8 by 8',
   url: 'https://leetcode.com/problems/minimum-swaps-to-arrange-a-binary-grid/',
   complexity: 'O(n^3) time for an n by n grid in the worst case. The visualization caps the grid at 8 by 8.',
+  question: "Count the adjacent row swaps needed so that every row has enough trailing zeros to sort the grid.",
+  approaches: [
+    { name: "Bubble suitable rows upward", intuition: "For each position, find the nearest row with enough trailing zeros and bubble it up.", time: "O(n^3)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"grid":[[0,0,1],[1,1,0],[1,0,0]]}' },
     { label: 'Impossible', input: '{"grid":[[0,1,1,0],[0,1,1,0],[0,1,1,0],[0,1,1,0]]}' },

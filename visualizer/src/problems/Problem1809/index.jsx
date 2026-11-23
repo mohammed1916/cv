@@ -14,6 +14,10 @@ const definition = {
   url: `https://leetcode.com/problems/${meta.slug}/`,
   complexity,
   examples,
+  question: "Keep each playback session that has no ad from the same customer inside it.",
+  approaches: [
+    { name: "Anti-join", intuition: "Left join the ads to the sessions and keep sessions with no overlapping ad.", time: "O(n * m)", space: "O(n)" },
+  ],
 }
 
 const CELL = { border: '1px solid var(--border)', padding: '3px 8px', color: 'var(--text)', fontFamily: 'monospace' }

@@ -19,6 +19,10 @@ const definition = {
   inputLabel: 'Object with values (list order) and node (position of the given node), e.g. {"values":[5,8,2,6],"node":2}',
   url: "https://leetcode.com/problems/convert-doubly-linked-list-to-array-ii/",
   complexity: "O(n) time and O(n) space: one pass back to the head and one pass forward. The visualization accepts up to 10 nodes.",
+  question: "Convert a doubly linked list into an array, reading the values in order from the head.",
+  approaches: [
+    { name: "Walk to the head, then forward", intuition: "Follow the previous pointers back to the head, then follow the next pointers to collect the values.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: "Middle node", input: '{"values":[5,8,2,6],"node":2}' },
     { label: "Head given", input: '{"values":[1,2,3],"node":0}' },

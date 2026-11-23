@@ -14,6 +14,10 @@ const definition = {
   inputLabel: "Object with workers and stations (lowercase strings), e.g. {\"workers\":\"abb\",\"stations\":\"abacbb\"}",
   url: "https://leetcode.com/problems/maximum-gap-between-stations/",
   complexity: "O(n + m) time for n workers and m stations, using greedy scans.",
+  question: "Place each worker as early and as late as possible at stations, and measure the gap for each pair.",
+  approaches: [
+    { name: "Greedy earliest and latest scans", intuition: "Place each worker at its earliest and latest feasible position and measure the pair gaps.", time: "O(n + m)", space: "O(n + m)" },
+  ],
   examples: [
     { label: "Repeated letter", input: "{\"workers\":\"abb\",\"stations\":\"abacbb\"}" },
     { label: "Offset start", input: "{\"workers\":\"ab\",\"stations\":\"cabab\"}" },

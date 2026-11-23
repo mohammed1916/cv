@@ -21,6 +21,10 @@ const definition = {
   inputLabel: "List of [servers, money, sell, cost] per center",
   url: "https://leetcode.com/problems/maximum-number-of-upgradable-servers/",
   complexity: "O(n) checks per center with n servers, so O(total servers) time and O(1) extra space per center. The visualization accepts up to 6 centers, 20 servers and values up to 200; the bounds shown are this visualization's own limits. A closed-form formula exists but is not traced.",
+  question: "For each data centre, choose how many servers to sell and how many to upgrade so the total money is maximised.",
+  approaches: [
+    { name: "Greedy per data centre", intuition: "Sell or upgrade servers in the order that gives the most money per step while the budget allows.", time: "O(n) per centre", space: "O(1)" },
+  ],
   examples: [
     { label: "Sell to fund", input: "[[6,4,3,4]]" },
     { label: "Empty purse", input: "[[4,0,2,3]]" },

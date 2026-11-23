@@ -12,6 +12,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Permutation nums of 0..n-1 (JSON, up to 300)',
   url: 'https://leetcode.com/problems/global-and-local-inversions/',
   complexity: 'O(n) time and O(1) extra space.',
+  question: "Decide whether the number of local inversions equals the number of global inversions.",
+  approaches: [
+    { name: "Distance check", intuition: "The counts match only when no value is more than one slot from its sorted position.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: '[1,0,2] -> true', input: '[1,0,2]' },
     { label: '[1,2,0] -> false', input: '[1,2,0]' },

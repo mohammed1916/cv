@@ -6,6 +6,10 @@ const definition = {
   number: meta.number,
   phases, parse: parseInput, build: buildTrace, code, python, inputLabel,
   url: `https://leetcode.com/problems/${meta.slug}/`,
+  question: "Find the shortest substring to replace so that every letter appears the same number of times.",
+  approaches: [
+    { name: "Sliding window on excess", intuition: "Keep the substring outside the window balanced, and shrink the window while it stays valid.", time: "O(n)", space: "O(1)" },
+  ],
   complexity, examples,
 }
 

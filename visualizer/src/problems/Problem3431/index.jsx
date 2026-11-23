@@ -9,6 +9,10 @@ const definition = {
   inputLabel: 'Object with nums (values 1 to 3) and locked (0 or 1, same length)',
   url: 'https://leetcode.com/problems/minimum-unlocked-indices-to-sort-nums/',
   complexity: 'O(n) time and O(1) extra space. The official length reaches 100000; the visualization caps nums at 16 entries.',
+  question: "Find the fewest indices that must be unlocked so that swaps between unlocked positions can sort an array.",
+  approaches: [
+    { name: "Greedy with replay", intuition: "Unlock the positions needed for out-of-order values, then replay the allowed swaps to check the result.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Three unlocks', input: '{"nums":[2,1,1,3,2,3,2],"locked":[1,0,1,0,1,1,0]}' },
     { label: 'Locks that do not matter', input: '{"nums":[1,2,2,1,3,3],"locked":[1,0,0,1,1,0]}' },

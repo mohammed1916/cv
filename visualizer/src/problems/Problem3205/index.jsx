@@ -12,6 +12,10 @@ const definition = {
   inputLabel: "Array of non-negative integers (e.g. [4,1,6,2,5])",
   url: "https://leetcode.com/problems/maximum-array-hopping-score-i/",
   complexity: "O(n^2) time and O(n) space: each landing index tries every earlier index. The visualization caps the array at 10 values from 0 to 100.",
+  question: "Find the maximum hopping score from index zero to the last index, where a hop from i to j scores the value at j times the distance.",
+  approaches: [
+    { name: "Dynamic programming over landing index", intuition: "The best score ending at each index is the best of all earlier landing indices plus the hop score.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: "Five values", input: "[4,1,6,2,5]" },
     { label: "Single index", input: "[7]" },

@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Array of integers from 1 to 100000 (JSON, up to 12 values)',
   url: 'https://leetcode.com/problems/number-of-stable-subsequences/',
   complexity: 'O(n) time and O(1) space. The visualization caps the array at 12 values.',
+  question: "Count the stable subsequences of an array.",
+  approaches: [
+    { name: "Single pass count", intuition: "Scan the array once and add each value's contribution to the count of stable subsequences.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Extremes at both ends', input: '[100000,1,50,7]' },
     { label: 'Twelve nines', input: '[9,9,9,9,9,9,9,9,9,9,9,9]' },

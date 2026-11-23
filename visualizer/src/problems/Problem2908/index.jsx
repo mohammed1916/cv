@@ -19,6 +19,11 @@ const definition = {
   inputLabel: 'JSON {"nums":[8,6,1,5,3]}',
   url: "https://leetcode.com/problems/minimum-sum-of-mountain-triplets-i/",
   complexity: "O(n^2) time and O(1) space for this per-peak scan. The visualization caps nums at 50 values.",
+  question: "Find the smallest sum of a mountain triplet, where the middle value is larger than both outer values.",
+  approaches: [
+    { name: "Scan each peak", intuition: "For each middle index, take the smallest value to its left and right that is less than the peak.", time: "O(n^2)", space: "O(1)" },
+    { name: "Prefix and suffix minima", intuition: "Precompute the smallest value on each side and combine with each peak.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: "Example 1", input: '{"nums":[8,6,1,5,3]}' },
     { label: "Example 2", input: '{"nums":[5,4,8,7,10,2]}' },

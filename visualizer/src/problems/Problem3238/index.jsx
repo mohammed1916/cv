@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with "n" and "pick" ([player, color] pairs), JSON',
   url: 'https://leetcode.com/problems/find-the-number-of-winning-players/',
   complexity: 'O(p) time for p picks with a hash map. The visualization caps input at 20 picks.',
+  question: "Count the players who have won a ball game where player i wins by collecting i plus one balls of one colour.",
+  approaches: [
+    { name: "Count per player and colour", intuition: "Each pick is compared with the count needed by its player for its colour, using a hash map.", time: "O(p)", space: "O(p)" },
+  ],
   examples: [
     { label: 'Four players, five picks', input: '{"n":4,"pick":[[0,3],[1,3],[2,1],[3,3],[0,2]]}' },
     { label: 'Three players, same color', input: '{"n":3,"pick":[[1,4],[1,4],[0,4],[2,9]]}' },

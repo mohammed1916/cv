@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON {"nums": [...]} with 2 to 8 values from 1 to 20',
   url: 'https://leetcode.com/problems/minimize-deviation-in-array/',
   complexity: 'O(n log n + n log M) time with a max heap, where M is the largest value. The visualization caps input at 8 values.',
+  question: "Apply doubling to odd values and halving to even values so the spread between largest and smallest is as small as possible.",
+  approaches: [
+    { name: "Max heap of halving", intuition: "Double the odd values first, then repeatedly halve the largest value and track the spread.", time: "O(n log n + n log M)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"nums":[1,2,3,4]}' },
     { label: 'Example 2', input: '{"nums":[4,1,5,20,3]}' },

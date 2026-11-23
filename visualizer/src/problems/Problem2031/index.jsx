@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Binary array (JSON)',
   url: 'https://leetcode.com/problems/count-subarrays-with-more-ones-than-zeros/',
   complexity: 'O(n^2) in this direct form (n capped at 40 here); a Fenwick tree over balances gives O(n log n).',
+  question: "Count subarrays that contain more ones than zeros.",
+  approaches: [
+    { name: "Prefix balance with counts", intuition: "Track the running balance of ones minus zeros and count earlier balances that are smaller.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Mixed', input: '[1,0,1,1,0]' },
     { label: 'Single one', input: '[1]' },

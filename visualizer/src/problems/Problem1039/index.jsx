@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with values (vertex values in order, JSON)',
   url: 'https://leetcode.com/problems/minimum-score-triangulation-of-polygon/',
   complexity: 'O(n^3) time and O(n^2) space. The visualization caps the polygon at 8 vertices.',
+  question: "Triangulate a convex polygon whose vertices carry values, minimising the total of the triangle products.",
+  approaches: [
+    { name: "Interval DP over chords", intuition: "The edge between the first and last vertex belongs to one triangle with some middle vertex, which splits the polygon in two.", time: "O(n^3)", space: "O(n^2)" },
+  ],
   examples: [
     { label: 'Triangle', input: '{"values":[1,2,3]}' },
     { label: 'Square', input: '{"values":[3,7,4,5]}' },

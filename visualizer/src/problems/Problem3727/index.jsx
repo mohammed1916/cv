@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON object with nums, for example {"nums":[1,2,3]}',
   url: 'https://leetcode.com/problems/maximum-alternating-sum-of-squares/',
   complexity: 'O(n log n) time. The visualization caps the array at 8 values.',
+  question: "Find the maximum alternating sum of squares of the array's values.",
+  approaches: [
+    { name: "Sort and alternate", intuition: "Sort the squares and alternate adding and subtracting them from the outside in.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"nums":[1,2,3]}' },
     { label: 'Example 2', input: '{"nums":[1,-1,2,-2,3,-3]}' },

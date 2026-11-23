@@ -14,6 +14,11 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'order and s (JSON)',
   url: 'https://leetcode.com/problems/custom-sort-string/',
   complexity: 'O(|order| + |s|) time, O(26) space for the counts.',
+  question: "Reorder string s so that letters appear in the order given by a custom string, with letters not in that order placed last.",
+  approaches: [
+    { name: "Count and emit", intuition: "Count each letter of s, emit the letters in the custom order with their counts, then append the rest.", time: "O(|order| + |s|)", space: "O(26)" },
+    { name: "Custom comparator sort", intuition: "Sort the letters of s by their position in the custom order.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'cba / abcd', input: '{"order":"cba","s":"abcd"}' },
     { label: 'bcafg / abcd', input: '{"order":"bcafg","s":"abcd"}' },

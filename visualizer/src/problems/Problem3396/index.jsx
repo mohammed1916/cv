@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with nums (integers from 1 to 5)',
   url: 'https://leetcode.com/problems/minimum-number-of-operations-to-make-elements-in-array-distinct/',
   complexity: 'O(n) time and O(n) space for the set of seen values.',
+  question: "Find the fewest operations, each removing the first few values, that leave an array with all distinct values.",
+  approaches: [
+    { name: "Scan from the right", intuition: "Find the longest suffix with distinct values, and remove from the front until the rest is distinct.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"nums":[4,2,5,4,1,3]}' },
     { label: 'Example 2', input: '{"nums":[3,3,3,3,1,2,4,5]}' },

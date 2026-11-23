@@ -13,6 +13,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Word (JSON object with s)',
   url: 'https://leetcode.com/problems/check-if-word-is-valid-after-substitutions/',
   complexity: 'O(n) time and O(n) space. The visualization caps input at 20 letters.',
+  question: "Decide whether a string can be reduced to nothing by repeatedly removing the block abc.",
+  approaches: [
+    { name: "Stack reduction", intuition: "Push characters and pop whenever the top three form abc; the string is valid when the stack ends empty.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Valid', input: '{"s":"aabcbc"}' },
     { label: 'Nested', input: '{"s":"abcabcababcc"}' },

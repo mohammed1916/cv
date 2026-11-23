@@ -27,6 +27,10 @@ const definition = {
   inputLabel: 'JSON object with a 0/1 grid (1 is a server)',
   url: 'https://leetcode.com/problems/count-servers-that-communicate/',
   complexity: 'O(mn) time and O(m + n) auxiliary space.',
+  question: "Count the servers in a grid that share a row or column with another server.",
+  approaches: [
+    { name: "Row and column counts", intuition: "Count servers in each row and column, then count servers whose row or column has another server.", time: "O(m x n)", space: "O(m + n)" },
+  ],
   examples: [
     { label: 'Isolated', input: '{"grid":[[1,0],[0,1]]}' },
     { label: 'Shared column', input: '{"grid":[[1,0],[1,1]]}' },

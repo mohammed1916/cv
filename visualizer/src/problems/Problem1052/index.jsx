@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Minutes (JSON object with customers, grumpy and minutes)',
   url: 'https://leetcode.com/problems/grumpy-bookstore-owner/',
   complexity: 'O(n) time and O(1) extra space after the input is read. The visualization caps input at 40 minutes.',
+  question: "Maximise the customers satisfied when the owner can suppress grumpiness for a fixed number of consecutive minutes.",
+  approaches: [
+    { name: "Fixed-width sliding window", intuition: "Customers who arrive when the owner is not grumpy always count; slide a window of the technique length over the grumpy minutes and keep the best gain.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Competing windows', input: '{"customers":[4,9,2,7,5,8,3,11,6,4,10,2],"grumpy":[0,1,1,0,1,1,0,1,0,1,1,0],"minutes":4}' },
     { label: 'No grumpy minutes', input: '{"customers":[3,7,4,9],"grumpy":[0,0,0,0],"minutes":2}' },

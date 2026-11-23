@@ -8,6 +8,10 @@ const definition = {
   phases, parse: parseInput, build: buildTrace, code, sql, python, inputLabel,
   url: `https://leetcode.com/problems/${meta.slug}/`,
   complexity, examples,
+  question: "Find senior and junior candidates who can join a company when they are admitted in salary order within a budget, with the answer returned as a combined set.",
+  approaches: [
+    { name: "Cumulative sum with window", intuition: "Order candidates by salary and accumulate a running total to determine how many fit the budget.", time: "O(n log n)", space: "O(n)" },
+  ],
 }
 
 export default function SeniorsAndJuniorsToJoinTheCompanyII() {

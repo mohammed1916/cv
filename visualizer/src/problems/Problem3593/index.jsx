@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with n, edges and cost (JSON)',
   url: 'https://leetcode.com/problems/minimum-increments-to-equalize-leaf-paths/',
   complexity: 'O(n) time. The visualization caps n at 8.',
+  question: "In a tree with edge costs, find the fewest cost increments that make every leaf path from the root have equal total cost.",
+  approaches: [
+    { name: "Bottom-up balancing", intuition: "Walk from the leaves upward, raising the cheaper child branches to match the most expensive one at each node.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Star-shaped costs', input: '{"n":4,"edges":[[0,1],[1,2],[1,3]],"cost":[6,2,5,1]}' },
     { label: 'Two nodes, reversed edge', input: '{"n":2,"edges":[[1,0]],"cost":[9,3]}' },

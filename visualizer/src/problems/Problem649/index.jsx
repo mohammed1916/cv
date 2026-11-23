@@ -12,6 +12,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Senate (JSON string of R and D)',
   url: 'https://leetcode.com/problems/dota2-senate/',
   complexity: 'O(n) time and O(n) space: every round removes one senator, so there are at most n − 1 rounds.',
+  question: "Decide which party wins a senate vote in which senators ban opponents in turn.",
+  approaches: [
+    { name: "Two queues of turns", intuition: "Keep queues of radiant and dire turn indices; the earlier turn bans the next opponent and rejoins later.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Short', input: '"RDD"' },
     { label: 'Alternating', input: '"RDRDD"' },

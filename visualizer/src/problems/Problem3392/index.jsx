@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Array (JSON array of 3 to 12 integers from -100 to 100)',
   url: 'https://leetcode.com/problems/count-subarrays-of-length-three-with-a-condition/',
   complexity: 'O(n) time and O(1) extra space.',
+  question: "Count the subarrays of length three where the sum of the outer values equals half the middle value.",
+  approaches: [
+    { name: "Scan every window of three", intuition: "Check every window of three values with the given condition.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Five mixed values', input: '[-7,12,3,-20,5]' },
     { label: 'Pair of equal values', input: '[50,50,-50]' },

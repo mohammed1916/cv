@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON array of 1 to 12 positive integers up to 100',
   url: 'https://leetcode.com/problems/minimize-array-sum-using-divisible-replacements/',
   complexity: 'O(n * d) time for n values and d distinct values, after sorting the distinct values. The visualization caps the array at 12 values.',
+  question: "Replace each array value by the smallest present value that divides it, and return the minimum possible sum.",
+  approaches: [
+    { name: "Smallest present divisor scan", intuition: "Sort the distinct values; for each value pick the smallest present value that divides it.", time: "O(n x d) after sorting", space: "O(d)" },
+  ],
   examples: [
     { label: 'Shared divisors', input: '[6, 9, 4, 3]' },
     { label: 'Chain of multiples', input: '[10, 5, 2, 15]' },

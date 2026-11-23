@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON array of 1 to 100 integers from 1 to 100',
   url: 'https://leetcode.com/problems/special-array-i/',
   complexity: 'O(n) time and O(1) extra space.',
+  question: "Decide whether an array is special, meaning no two neighbouring values share a parity.",
+  approaches: [
+    { name: "Check neighbouring parities", intuition: "Each neighbouring pair must have different parities, so one scan decides the answer.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '[7]' },
     { label: 'Example 2', input: '[2,5,8]' },

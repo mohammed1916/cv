@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Array of 5 to 12 positive integers up to 100 (JSON)',
   url: 'https://leetcode.com/problems/subsequences-with-a-unique-middle-mode-i/',
   complexity: 'O(n^5) time in this visualization, which caps the array at 12 values. The known solution is faster.',
+  question: "Sum the values of subsequences whose middle mode is unique.",
+  approaches: [
+    { name: "Enumerate subsequences", intuition: "Enumerate the subsequences of each size and check the unique middle mode directly.", time: "O(n^5)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Six values, two repeats', input: '[3,8,3,1,8,2]' },
     { label: 'Seven distinct values', input: '[6,1,9,4,2,7,5]' },

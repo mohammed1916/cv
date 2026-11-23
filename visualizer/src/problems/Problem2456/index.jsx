@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Videos as JSON: {"creators": [...], "ids": [...], "views": [...]}',
   url: 'https://leetcode.com/problems/most-popular-video-creator/',
   complexity: 'O(n log n) time for the final sort of creator names, with O(n) space for the maps. The visualization caps input at 20 videos.',
+  question: "Given creators, video ids and view counts, find the creators with the most total views and each one's most viewed video.",
+  approaches: [
+    { name: "Hash maps per creator", intuition: "Accumulate totals and the best video per creator in maps, then sort the creator names.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Own: four videos, three creators', input: '{"creators":["mia","raj","mia","tom"],"ids":["v1","v2","v3","v4"],"views":[7,3,2,8]}' },
     { label: 'Four videos, two creators', input: '{"creators":["ana","ben","ana","cy"],"ids":["v1","a2","x9","q"],"views":[4,7,1,9]}' },

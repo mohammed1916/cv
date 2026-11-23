@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON object with plants, capacityA and capacityB',
   url: 'https://leetcode.com/problems/watering-plants-ii/',
   complexity: 'O(n) time with two pointers and O(1) extra space.',
+  question: "Alice and Bob start at opposite ends of a row of plants, water them on their way, and refill when a can runs short; count the refills.",
+  approaches: [
+    { name: "Two pointers from both ends", intuition: "Walk Alice rightward and Bob leftward, refilling whenever the water in hand is too little, and when they meet let the fuller can water the plant.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Two refills', input: '{"plants":[2,2,3,3],"capacityA":5,"capacityB":5}' },
     { label: 'Meeting plant', input: '{"plants":[2,3,5,4,1],"capacityA":5,"capacityB":6}' },

@@ -17,6 +17,10 @@ const definition = {
   inputLabel: 'word and k (JSON object)',
   url: 'https://leetcode.com/problems/find-the-original-typed-string-ii/',
   complexity: 'O(n * k) time and O(k) space for n runs, using prefix sums over lengths below k. The visualization caps word length at 40 and k at 40.',
+  question: "Count the possible original strings after repeated letters, with a limit on the length of the typed text.",
+  approaches: [
+    { name: "Prefix sums over lengths", intuition: "Use prefix sums over the run lengths that stay below the limit, so each run is counted in constant time.", time: "O(n * k)", space: "O(k)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"word": "mmnnnoop", "k": 6}' },
     { label: 'Example 2', input: '{"word": "mmnnnoop", "k": 8}' },

@@ -6,6 +6,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'Object with n (JSON)',
   complexity: 'O(n) time and O(1) extra space: five counters are rebuilt for each length.',
+  question: "Count the strings of a given length made only of vowels, where each vowel may follow only certain others.",
+  approaches: [
+    { name: "Last-vowel DP", intuition: "Track the count of strings ending in each vowel and extend them by the allowed next vowels.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Several generations', input: '{"n":12}' },
     { label: 'One letter', input: '{"n":1}' },

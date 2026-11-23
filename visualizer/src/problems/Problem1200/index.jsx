@@ -4,6 +4,10 @@ import { buildTrace, parseInput, code, python, pythonLineMap, phases, inputLabel
 
 const definition = {
   number: meta.number, phases, parse: parseInput, build: buildTrace, code, python, pythonLineMap, inputLabel,
+  question: "Find all pairs of values with the smallest absolute difference in a list of distinct integers.",
+  approaches: [
+    { name: "Sort then compare neighbours", intuition: "After sorting, the smallest difference always appears between adjacent values.", time: "O(n log n)", space: "O(n)" },
+  ],
   url: `https://leetcode.com/problems/${meta.slug}/`, complexity, examples,
 }
 

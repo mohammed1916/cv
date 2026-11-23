@@ -16,6 +16,10 @@ const definition = {
   inputLabel: 'Object with points ([x, y] pairs) and k',
   url: 'https://leetcode.com/problems/minimum-time-for-k-virus-variants-to-spread/',
   complexity: 'Each probe scans the cells of the bounding box and counts variants for each cell, so the time is O(W H n log(W + H)) for a box of W by H and n points. The visualization accepts up to 8 points with coordinates from -10 to 10. The official numeric bounds are not verified here.',
+  question: "Find the minimum time after which every one of several virus variants has spread to at least one of the given points.",
+  approaches: [
+    { name: "Binary search over time with a coverage check", intuition: "Binary search the time; at each candidate, check whether the points reached cover every variant.", time: "O(log T * n * k)", space: "O(n * k)" },
+  ],
   examples: [
     { label: 'Scattered four', input: '{"points":[[0,0],[4,1],[1,3],[2,2]],"k":3}' },
     { label: 'Five seeds', input: '{"points":[[1,1],[3,8],[9,2],[4,4],[0,7]],"k":3}' },

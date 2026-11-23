@@ -13,6 +13,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Squares (JSON array of [left, side] pairs)',
   url: 'https://leetcode.com/problems/falling-squares/',
   complexity: 'O(n²) time for n squares with this direct overlap scan, and O(n) space.',
+  question: "Drop squares on a number line and report the height of the tallest stack after each drop.",
+  approaches: [
+    { name: "Coordinate brute force", intuition: "Each square rests on the highest surface beneath its span, and its top becomes that span's new height.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Stacked', input: '[[1,2],[2,3],[6,1]]' },
     { label: 'Side by side', input: '[[4,5],[9,3],[12,2]]' },

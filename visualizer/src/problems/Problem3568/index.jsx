@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Object with classroom (rows of S, L, R, X and dots) and energy',
   url: 'https://leetcode.com/problems/minimum-moves-to-clean-the-classroom/',
   complexity: 'O(m n E 2^L) time and space at worst, for E energy and L litter cells. The official limits are 20 by 20 with 10 litter cells; this view caps at 8 by 8 with 6, and large searches switch to one step per move count.',
+  question: "Walk a grid to collect all litter, with limited energy and walls, using the fewest moves.",
+  approaches: [
+    { name: "Breadth-first search over states", intuition: "Search over position, energy and litter collected.", time: "O(m n E 2^L)", space: "O(m n E 2^L)" },
+  ],
   examples: [
     { label: 'Needs a refill', input: '{"classroom":["S.X","R.L"],"energy":2}' },
     { label: 'Walled off', input: '{"classroom":["S.X","..X","XXL"],"energy":9}' },

@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with nums and target (equal-length lists, values 1 to 4)',
   url: 'https://leetcode.com/problems/minimum-operations-to-reach-target-array/',
   complexity: 'O(n) per operation, and one operation per distinct mismatched value. The visualization stays small (n up to 8).',
+  question: "Make one array equal to a target by overwriting maximal runs, using the fewest operations.",
+  approaches: [
+    { name: "One operation per mismatched value", intuition: "Each distinct mismatched value needs one overwrite of its maximal runs.", time: "O(n) per operation", space: "O(n)" },
+  ],
   examples: [
     { label: 'Two values', input: '{"nums":[2,4,2],"target":[4,2,3]}' },
     { label: 'Repeated value', input: '{"nums":[3,1,3],"target":[4,1,2]}' },

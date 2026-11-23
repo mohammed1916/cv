@@ -30,6 +30,10 @@ const definition = {
   inputLabel: 'Object with landStartTime, landDuration, waterStartTime and waterDuration',
   url: 'https://leetcode.com/problems/earliest-finish-time-for-land-and-water-rides-i/',
   complexity: 'O(n * m) time for n land rides and m water rides, with constant work per pair.',
+  question: "Choose one land ride and one water ride, in either order, to finish the trip as early as possible.",
+  approaches: [
+    { name: "Try every pair", intuition: "Check every pair of land and water rides in both orders and keep the earliest finish.", time: "O(n * m)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Three land rides, two water', input: '{"landStartTime":[2,8,14],"landDuration":[3,5,1],"waterStartTime":[4,10],"waterDuration":[6,2]}' },
     { label: 'One land ride, three water', input: '{"landStartTime":[12],"landDuration":[7],"waterStartTime":[1,20,30],"waterDuration":[4,5,2]}' },

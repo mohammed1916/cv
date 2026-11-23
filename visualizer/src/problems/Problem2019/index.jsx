@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Expression and student answers (JSON)',
   url: 'https://leetcode.com/problems/the-score-of-students-solving-math-expression/',
   complexity: 'Interval DP over the operands: O(m^3) pairings, with value sets that stay small for single digits here.',
+  question: "Compute the total score of students' answers to a math expression, using scoring rules for correct and close answers.",
+  approaches: [
+    { name: "Interval DP over possible values", intuition: "For each sub-expression, collect every value it can evaluate to, then compare with the answers.", time: "O(n^3)", space: "O(n^2)" },
+  ],
   examples: [
     { label: 'Mixed operators', input: '{"s":"4+2*3","answers":[10,14,8,0]}' },
     { label: 'Five plus one times two', input: '{"s":"5+1*2","answers":[7,12,0]}' },

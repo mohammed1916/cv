@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Undirected graph with -1 unknown edges (JSON)',
   url: 'https://leetcode.com/problems/modify-graph-edge-weights/',
   complexity: 'O(E) runs of Dijkstra, so O(E * (V + E) log V) time. The visualization caps input at 5 nodes and 8 edges.',
+  question: "Given a weighted graph where some edges are unknown, assign the unknown weights so the shortest path from source to target equals a target value.",
+  approaches: [
+    { name: "Shortest path adjustments", intuition: "Run Dijkstra's algorithm repeatedly and adjust unknown edge weights until the target distance is reached.", time: "O(E * (V + E) log V)", space: "O(V + E)" },
+  ],
   examples: [
     { label: 'Example', input: '{"n":2,"edges":[[0,1,-1]],"source":0,"destination":1,"target":5}' },
     { label: 'Impossible', input: '{"n":3,"edges":[[0,1,4],[1,2,3],[0,2,-1]],"source":0,"destination":2,"target":3}' },

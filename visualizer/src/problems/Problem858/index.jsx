@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Array [p, q] (JSON, 1 <= q <= p <= 1000)',
   url: 'https://leetcode.com/problems/mirror-reflection/',
   complexity: 'O(log p) for the gcd, O(1) for the parity test.',
+  question: "A light leaves a corner of a square room with mirrored walls; determine which receptor corner it reaches.",
+  approaches: [
+    { name: "Reduce by gcd and parity", intuition: "Reduce the room side and receptor ratio by their gcd, then use the parities of the results to pick the corner.", time: "O(log n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'p=2, q=1', input: '[2,1]' },
     { label: 'p=3, q=1', input: '[3,1]' },

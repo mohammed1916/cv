@@ -17,6 +17,10 @@ const definition = {
   inputLabel: "JSON array of integers (e.g. [1,2,3,2])",
   url: "https://leetcode.com/problems/sum-of-consecutive-subarrays/",
   complexity: "O(n) time and O(1) extra space: each position updates two running runs. The visualization accepts up to 12 values from -100 to 100 so every intermediate sum is exact.",
+  question: "Find the sum of every maximal run of consecutive values, counting each run's total sum once.",
+  approaches: [
+    { name: "Two running runs", intuition: "Track the running sum of the current consecutive run and the best sum of the runs ending at each position.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: "Rising then falling", input: "[1,2,3,2]" },
     { label: "Break in the run", input: "[5,4,9,10]" },

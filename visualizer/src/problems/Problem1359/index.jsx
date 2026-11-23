@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Number of orders (JSON object with n from 1 to 8)',
   url: 'https://leetcode.com/problems/count-all-valid-pickup-and-delivery-options/',
   complexity: 'O(n) time and O(1) extra space. The visualization caps n at 8.',
+  question: "Count valid orders for picking up and delivering n orders, where each pickup precedes its delivery.",
+  approaches: [
+    { name: "Closed-form product", intuition: "Multiply the choices as each order is added.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Two orders', input: '{"n":2}' },
     { label: 'Three orders', input: '{"n":3}' },

@@ -16,6 +16,10 @@ const definition = {
   number: meta.number,
   phases, parse: parseInput, build: buildTrace, code, sql, python, inputLabel,
   url: `https://leetcode.com/problems/${meta.slug}/`,
+  question: "Turn the store price columns of a product table into rows, dropping the entries with no price.",
+  approaches: [
+    { name: "Union of one select per store", intuition: "Select the product and the price from each store column and stack the results with UNION ALL, skipping missing prices.", time: "O(p * s)", space: "O(p * s)" },
+  ],
   complexity, examples,
 }
 

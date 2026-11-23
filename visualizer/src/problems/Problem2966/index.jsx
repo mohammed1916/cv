@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with nums (3, 6, 9 or 12 integers) and k (JSON)',
   url: 'https://leetcode.com/problems/divide-array-into-arrays-with-max-difference/',
   complexity: 'O(n log n) for the sort and one linear pass over the sorted values.',
+  question: "Divide an array of length divisible by three into triples where each triple's range is at most k, or report that it is impossible.",
+  approaches: [
+    { name: "Sort and chunk", intuition: "Sort the values and cut them into consecutive groups of three, checking each group's range.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Nine values, k of four', input: '{"nums":[6,1,9,3,8,2,4,7,5],"k":4}' },
     { label: 'Example 2', input: '{"nums":[1,3,3,2,7,3],"k":3}' },

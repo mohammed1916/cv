@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Grid (JSON object with m, n, introverts, and extroverts)',
   url: 'https://leetcode.com/problems/maximize-grid-happiness/',
   complexity: 'O(m * n * 3^n * (intro * extro)) time. The visualization caps the grid at 3 by 3.',
+  question: "Place introverts and extroverts on a grid to maximise total happiness.",
+  approaches: [
+    { name: "Row profile DP", intuition: "Fill the grid cell by cell, keeping a profile of the last row and the counts placed so far.", time: "O(m * n * 3^n * intro * extro)", space: "O(3^n * intro * extro)" },
+  ],
   examples: [
     { label: 'Two by three', input: '{"m":2,"n":3,"introverts":1,"extroverts":2}' },
     { label: 'Three by one', input: '{"m":3,"n":1,"introverts":2,"extroverts":1}' },

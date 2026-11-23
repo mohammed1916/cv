@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with trees: nested {value, left, right} objects or null (at most three nodes each)',
   url: 'https://leetcode.com/problems/merge-bsts-to-create-single-bst/',
   complexity: 'O(k · n) time for k trees with n nodes in total: each attach is a walk through the tree it enters. The visualization caps the input at four trees.',
+  question: "Merge a set of binary search trees, each joined at a leaf that matches another tree's root, into one valid tree.",
+  approaches: [
+    { name: "Root and leaf maps", intuition: "Map roots and leaves, merge trees at matching leaves, then check that the result is a valid search tree.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Chain of three', input: '{"trees":[{"value":7,"left":{"value":2,"left":null,"right":null},"right":{"value":9,"left":null,"right":null}},{"value":2,"left":{"value":1,"left":null,"right":null},"right":null},{"value":9,"left":{"value":8,"left":null,"right":null},"right":{"value":11,"left":null,"right":null}}]}' },
     { label: 'Stuck', input: '{"trees":[{"value":5,"left":{"value":1,"left":null,"right":null},"right":null},{"value":4,"left":null,"right":null}]}' },

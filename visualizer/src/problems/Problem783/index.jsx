@@ -13,6 +13,11 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Level-order tree (JSON, null for gaps, up to 63 slots)',
   url: 'https://leetcode.com/problems/minimum-distance-between-bst-nodes/',
   complexity: 'O(n) time and O(h) recursion space for a tree of height h.',
+  question: "Given a binary search tree, find the smallest difference between the values of any two different nodes.",
+  approaches: [
+    { name: "In-order walk", intuition: "An in-order walk visits the values in sorted order, so the closest pair must be adjacent; track the previous value.", time: "O(n)", space: "O(h) recursion stack" },
+    { name: "Collect and sort", intuition: "Gather all values, sort them, and compare neighbours.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: '[4,2,6,1,3] -> 1', input: '[4,2,6,1,3]' },
     { label: '[1,0,48,null,null,12,49] -> 1', input: '[1,0,48,null,null,12,49]' },

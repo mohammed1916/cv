@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON object with forbidden, a, b and x',
   url: 'https://leetcode.com/problems/minimum-jumps-to-reach-home/',
   complexity: 'O(limit) time and space over the position and direction states.',
+  question: "Find the fewest forward and backward jumps from the start to home, avoiding forbidden positions and never jumping backward twice in a row.",
+  approaches: [
+    { name: "Breadth-first search", intuition: "Explore positions level by level, with the last jump direction stored in each state.", time: "O(limit)", space: "O(limit)" },
+  ],
   examples: [
     { label: 'Four blocked spots', input: '{"forbidden":[7,12,20,3],"a":5,"b":9,"x":18}' },
     { label: 'Three blocked spots, far target', input: '{"forbidden":[2,6,9],"a":3,"b":8,"x":25}' },

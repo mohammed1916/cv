@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with n and logs of [id, leaveTime] (JSON)',
   url: 'https://leetcode.com/problems/the-employee-that-worked-on-the-longest-task/',
   complexity: 'O(m) time and O(1) extra space for m logs.',
+  question: "Given logs of employees starting and finishing tasks, find the employee who spent the longest on one task.",
+  approaches: [
+    { name: "Scan logs", intuition: "Compute each task's duration from the previous log time and keep the longest, with the smaller id on ties.", time: "O(m)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Clear winner', input: '{"n":3,"logs":[[2,4],[0,7],[1,9],[2,12]]}' },
     { label: 'Tie', input: '{"n":3,"logs":[[1,6],[0,9],[2,12]]}' },

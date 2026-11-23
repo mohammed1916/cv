@@ -14,6 +14,10 @@ const definition = {
   phases, parse: parseInput, build: buildTrace, code, sql, python, inputLabel,
   url: `https://leetcode.com/problems/${meta.slug}/`,
   complexity, examples,
+  question: "Return the primary department for each employee.",
+  approaches: [
+    { name: "Filter the flag", intuition: "Keep rows flagged as primary, or the only row for employees with a single department.", time: "O(n)", space: "O(n)" },
+  ],
 }
 
 const CELL = { border: '1px solid var(--border)', padding: '3px 8px', color: 'var(--text)', fontFamily: 'monospace' }

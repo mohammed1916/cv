@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with s (lowercase letters, up to 8)',
   url: 'https://leetcode.com/problems/minimum-operations-to-sort-a-string/',
   complexity: 'The search visits reachable orders of the letters, so its cost grows fast. The visual caps s at 8 letters.',
+  question: "Find the fewest operations that sort a string, where each operation sorts one substring shorter than the whole string.",
+  approaches: [
+    { name: "Breadth-first search over orders", intuition: "Visit the reachable letter orders in order of operations until the sorted string appears.", time: "Grows with reachable orders", space: "Grows with reachable orders" },
+  ],
   examples: [
     { label: 'One step', input: '{"s":"abdc"}' },
     { label: 'Reversed', input: '{"s":"cba"}' },

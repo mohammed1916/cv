@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Matrix and target (JSON)',
   url: 'https://leetcode.com/problems/number-of-submatrices-that-sum-to-target/',
   complexity: 'O(rows^2 * cols) time and O(cols) extra space. The visualization caps input at 6 by 6 with values from -9 to 9.',
+  question: "Count submatrices whose sum equals a target value.",
+  approaches: [
+    { name: "Row pair compression with prefix counts", intuition: "Fix top and bottom rows, collapse columns to a sum array, and count subarrays hitting the target with a map of prefix sums.", time: "O(rows^2 * cols)", space: "O(cols)" },
+  ],
   examples: [
     { label: 'Mixed signs, target six', input: '{"matrix":[[3,-1,4],[1,0,2],[-2,5,1]],"target":6}' },
     { label: 'Pair', input: '{"matrix":[[1,-1],[-1,1]],"target":0}' },

@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'JSON object with root (level-order array, a valid BST)',
   url: 'https://leetcode.com/problems/balance-a-binary-search-tree/',
   complexity: 'O(n) time and O(n) space. The visualization caps input at 10 nodes.',
+  question: "Rebuild a binary search tree so that it is height-balanced with the same values.",
+  approaches: [
+    { name: "Rebuild from sorted values", intuition: "Read the values in order, then build the tree from the middle outward.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"root":[1,null,2,null,3,null,4]}' },
     { label: 'Already balanced', input: '{"root":[2,1,3]}' },

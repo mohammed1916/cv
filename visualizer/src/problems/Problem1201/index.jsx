@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON object with n, a, b and c',
   url: 'https://leetcode.com/problems/ugly-number-iii/',
   complexity: 'O(log(n * min)) probes, each with constant-time inclusion-exclusion. The visualization caps each value at 20.',
+  question: "Find the n-th positive integer divisible by at least one of three given numbers.",
+  approaches: [
+    { name: "Binary search with inclusion-exclusion", intuition: "Count multiples up to a guess with inclusion-exclusion over pairs and the triple, then binary search.", time: "O(log(n x min))", space: "O(1)" },
+  ],
   examples: [
     { label: 'Seven with steps 2, 5 and 9', input: '{"n":7,"a":2,"b":5,"c":9}' },
     { label: 'Twelve with shared factors', input: '{"n":12,"a":6,"b":8,"c":10}' },

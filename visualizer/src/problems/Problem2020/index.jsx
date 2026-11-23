@@ -19,6 +19,10 @@ const definition = {
   phases, parse: parseInput, build: buildTrace, code, sql, python, inputLabel,
   url: `https://leetcode.com/problems/${meta.slug}/`,
   complexity, examples,
+  question: "Count accounts that never streamed in a given year.",
+  approaches: [
+    { name: "Left join with a year filter", intuition: "Left join accounts to streams restricted to the year and count accounts with no match.", time: "O(n log n)", space: "O(n)" },
+  ],
 }
 
 function Rows({ columns = [], rows = [] }) {

@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON {"n": engineers, "speed": [...], "efficiency": [...], "k": team size}',
   url: 'https://leetcode.com/problems/maximum-performance-of-a-team/',
   complexity: 'O(n log n + n log k) time with a min heap of team speeds. The visualization caps input at 8 engineers.',
+  question: "Pick at most k engineers to maximize speed sum times the lowest efficiency in the team.",
+  approaches: [
+    { name: "Sort by efficiency with min-heap", intuition: "Walk engineers from highest efficiency and keep the k fastest with a min-heap.", time: "O(n log n + n log k)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Five engineers, k two', input: '{"n":5,"speed":[4,9,2,7,6],"efficiency":[3,8,5,1,10],"k":2}' },
     { label: 'Four engineers, k three', input: '{"n":4,"speed":[12,3,6,9],"efficiency":[4,2,8,5],"k":3}' },

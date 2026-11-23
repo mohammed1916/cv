@@ -12,6 +12,10 @@ const definition = {
   inputLabel: "Array of positive integers (e.g. [9,6,7,13])",
   url: "https://leetcode.com/problems/number-of-subarrays-having-even-product/description/",
   complexity: "O(n) time and O(1) extra space. The visualization caps the array at 12 values from 1 to 20 to keep the trace short.",
+  question: "Count subarrays whose product is even, which means they contain at least one even value.",
+  approaches: [
+    { name: "Count from each even", intuition: "Each even value at position i is the right end of i plus one starting positions, so add up those counts.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: "Mixed", input: "[5,8,3,4]" },
     { label: "All odd", input: "[1,3,5]" },

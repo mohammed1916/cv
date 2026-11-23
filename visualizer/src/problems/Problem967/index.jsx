@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'n and k (JSON)',
   url: 'https://leetcode.com/problems/numbers-with-same-consecutive-differences/',
   complexity: 'Proportional to the number of answers times n. The visualization caps n at 5.',
+  question: "List all n-digit numbers without leading zeros whose adjacent digits differ by exactly k.",
+  approaches: [
+    { name: "DFS over digits", intuition: "Choose each next digit as the previous digit plus or minus k when it is in range.", time: "O(output * n)", space: "O(n) plus output" },
+  ],
   examples: [
     { label: 'Three digits, difference two', input: '{"n":3,"k":2}' },
     { label: 'Zero difference', input: '{"n":2,"k":0}' },

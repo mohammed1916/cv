@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'Lowercase string of 1 to 20 letters (JSON string)',
   url: 'https://leetcode.com/problems/lexicographically-smallest-string-after-substring-operation/',
   complexity: 'O(n) time and O(n) space for the output. The visualization caps input at 20 letters.',
+  question: "Given a string, apply one substring operation that moves each letter to the previous letter, and return the lexicographically smallest result.",
+  approaches: [
+    { name: "Find the first non-a run", intuition: "Shift the first run of non-a letters backward and leave the rest unchanged.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Six distinct letters', input: '"hqvaxr"' },
     { label: 'Repeated pairs', input: '"ffkkbb"' },

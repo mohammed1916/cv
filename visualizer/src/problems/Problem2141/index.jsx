@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON object with n and batteries',
   url: 'https://leetcode.com/problems/maximum-running-time-of-n-computers/',
   complexity: 'O(m log S) time for m batteries and total minutes S; O(1) extra space.',
+  question: "Find the longest time that n computers can run together when they share battery packs of given capacities, where packs can be swapped but not split.",
+  approaches: [
+    { name: "Binary search on running time", intuition: "A running time T is achievable when the packs, each capped at T, sum to at least n times T; search for the largest achievable T.", time: "O(m log S)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Even split', input: '{"n":2,"batteries":[5,4,2]}' },
     { label: 'One large battery', input: '{"n":3,"batteries":[10,2,2,1]}' },

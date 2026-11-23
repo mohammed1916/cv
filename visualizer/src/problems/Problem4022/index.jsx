@@ -16,6 +16,10 @@ const definition = {
   inputLabel: "Object with k, the one-based position, e.g. {\"k\":15}",
   url: "https://leetcode.com/problems/k-th-digit-in-infinite-string/",
   complexity: "O(log k) time and O(1) extra space.",
+  question: "Find the digit at a given position in the concatenation of all positive integers.",
+  approaches: [
+    { name: "Skip whole digit-count groups", intuition: "Skip entire groups of numbers by digit count until the position falls inside one number.", time: "O(log k)", space: "O(1)" },
+  ],
   examples: [
     { label: "Inside block one", input: "{\"k\":15}" },
     { label: "Early block", input: "{\"k\":1000}" },

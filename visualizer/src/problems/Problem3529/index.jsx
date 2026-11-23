@@ -9,6 +9,10 @@ const definition = {
   inputLabel: 'Object with grid (rows of single letters) and pattern',
   url: `https://leetcode.com/problems/${meta.slug}/`,
   complexity: 'O(mn + k) time and O(mn + k) space, for k pattern letters. The official limit is 100,000 cells; this page draws up to 64.',
+  question: "Count the grid cells covered by both a horizontal and a vertical match of a letter pattern.",
+  approaches: [
+    { name: "Mark matches then count", intuition: "Mark cells covered by horizontal and vertical matches, then count the overlaps.", time: "O(m n + k)", space: "O(m n + k)" },
+  ],
   examples: [
     { label: 'Crossing', input: '{"grid":[["t","r","e","e"],["r","a","x","p"],["e","q","z","k"],["e","n","v","b"]],"pattern":"tree"}' },
     { label: 'Wrapping', input: '{"grid":[["x","y","a"],["b","a","c"],["d","b","e"]],"pattern":"aba"}' },

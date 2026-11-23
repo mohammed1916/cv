@@ -13,6 +13,11 @@ const definition = {
   inputLabel: 'JSON object: { "nums": IDs, "freq": signed changes }',
   url: 'https://leetcode.com/problems/most-frequent-ids/',
   complexity: 'O(n * log n) with a heap, or O(n) expected with a count map and a count-of-counts table.',
+  question: "After each step that changes the count of an ID, report the count of the most frequent ID.",
+  approaches: [
+    { name: "Count map with count-of-counts", intuition: "Keep a running count per ID and how many IDs hold each count, so the maximum is read without a rescan.", time: "O(n)", space: "O(n)" },
+    { name: "Max-heap of counts", intuition: "Push each updated count into a heap and skip stale entries when reading the top.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Add then remove one ID', input: '{"nums":[2,5,5,2],"freq":[3,2,-2,-1]}' },
     { label: 'Interleaved IDs', input: '{"nums":[1,3,1,3],"freq":[2,4,-1,-4]}' },

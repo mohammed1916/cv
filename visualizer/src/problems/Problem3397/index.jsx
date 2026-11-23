@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with nums (1 to 8 values from 0 to 30) and k (0 to 5) (JSON)',
   url: 'https://leetcode.com/problems/maximum-number-of-distinct-elements-after-operations/',
   complexity: 'O(n log n) for the sort. The visualization caps input at 8 values.',
+  question: "Find the largest number of distinct values an array can hold after each value shifts by at most k.",
+  approaches: [
+    { name: "Sort and fill greedily", intuition: "Sort the values and assign each the smallest distinct value it can reach.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Four values, k two', input: '{"nums":[7,2,11,2],"k":2}' },
     { label: 'Zeros and extremes', input: '{"nums":[0,30,15,0,9],"k":4}' },

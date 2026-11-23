@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Square matrix as rows (JSON)',
   url: 'https://leetcode.com/problems/matrix-diagonal-sum/',
   complexity: 'O(n) time and O(1) extra space: one pass that adds two cells per row.',
+  question: "Sum the matrix diagonals without counting the centre twice.",
+  approaches: [
+    { name: "Two diagonals per row", intuition: "Add the main and anti diagonal cells in each row and remove the centre if it is counted twice.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Two by two', input: '[[2,0],[1,3]]' },
     { label: 'Odd centre', input: '[[5,1,4],[0,9,2],[7,3,6]]' },

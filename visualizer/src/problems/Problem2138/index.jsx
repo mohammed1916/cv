@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON object with s, k and fill',
   url: 'https://leetcode.com/problems/divide-a-string-into-groups-of-size-k/',
   complexity: 'O(n) time and O(n) space for the output groups.',
+  question: "Split a string into consecutive groups of length k, padding the last group with a fill character.",
+  approaches: [
+    { name: "Slice by step", intuition: "Cut the string every k characters and pad the final piece.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Padded last group', input: '{"s":"abcdefghij","k":3,"fill":"x"}' },
     { label: 'Exact fit', input: '{"s":"nolog","k":5,"fill":"q"}' },

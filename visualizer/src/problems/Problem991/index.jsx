@@ -8,6 +8,10 @@ const definition = {
   inputLabel: 'Object with startValue and target: whole numbers from 1 to 1000000000',
   url: 'https://leetcode.com/problems/broken-calculator/',
   complexity: 'O(log target) backward steps, plus one subtraction for the final gap.',
+  question: "Find the fewest operations of doubling or subtracting one that turn a start value into a target.",
+  approaches: [
+    { name: "Work backwards from the target", intuition: "Undo a doubling by halving an even target, and undo a subtraction by adding one to an odd target.", time: "O(log target)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Double, then drop one', input: JSON.stringify({ startValue: 3, target: 7 }) },
     { label: 'Small target', input: JSON.stringify({ startValue: 6, target: 2 }) },

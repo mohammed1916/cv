@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Text (JSON string)',
   url: 'https://leetcode.com/problems/to-lower-case/',
   complexity: 'O(n) time and O(n) space for the output.',
+  question: "Convert every capital letter in a string to lowercase and leave other characters unchanged.",
+  approaches: [
+    { name: "Character shift", intuition: "Shift each uppercase letter's code by the fixed ASCII offset.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Mixed', input: '"Quiet NIGHT, 42!"' },
     { label: 'Symbols', input: '"[ZED]@"' },

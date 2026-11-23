@@ -14,6 +14,10 @@ const definition = {
   complexity,
   inputLabel: 'JSON array of distinct positive integers',
   url: 'https://leetcode.com/problems/tuple-with-same-product/',
+  question: "Count the tuples of four distinct values where a times b equals c times d.",
+  approaches: [
+    { name: "Count products in a map", intuition: "Count pairs by product, then add the ordered combinations for each product with several pairs.", time: "O(n^2)", space: "O(n^2)" },
+  ],
 }
 
 export default function Problem1726Visualizer() {

@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON {"nums": [1, 5, 4, 2, 9, 9, 9], "k": 3}',
   url: 'https://leetcode.com/problems/maximum-sum-of-distinct-subarrays-with-length-k/',
   complexity: 'O(n) time and O(k) extra space for the window counts.',
+  question: "Find the largest sum of a length-k subarray whose values are all distinct.",
+  approaches: [
+    { name: "Sliding window with counts", intuition: "Slide a window of size k, tracking counts so repeated values are detected immediately.", time: "O(n)", space: "O(k)" },
+  ],
   examples: [
     { label: 'Six digits, window 4', input: '{"nums":[2,7,7,3,9,1],"k":4}' },
     { label: 'Repeats', input: '{"nums":[4,4,4],"k":3}' },

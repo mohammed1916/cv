@@ -17,6 +17,10 @@ const definition = {
   inputLabel: 'Level-order array with null for missing nodes (e.g. [4, 8, 5, 0, 1, null, 6])',
   url: 'https://leetcode.com/problems/maximum-average-subtree/',
   complexity: 'O(n) time and O(h) recursion space for n nodes and height h. Each node is visited once, and the answer is accepted within an absolute error of 1e-5. The visualization caps the tree at 30 nodes; the official limit is 5,000 nodes with values up to 10^5. The official bounds and tolerance were not verified against the source page.',
+  question: "Find the largest average value over all subtrees of a binary tree.",
+  approaches: [
+    { name: "Post-order sum and count", intuition: "Return each subtree's sum and size, and track the largest average.", time: "O(n)", space: "O(h)" },
+  ],
   examples: [
     { label: 'Mixed tree', input: '[7, 2, 9, null, 4, 1]' },
     { label: 'Single node', input: '[3]' },

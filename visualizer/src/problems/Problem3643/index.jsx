@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON object with grid, x, y, and k',
   url: 'https://leetcode.com/problems/flip-square-submatrix-vertically/',
   complexity: 'O(k^2) time for the swaps and O(mn) space for the copy. The visualization caps the grid at 8 by 8.',
+  question: "Flip a square submatrix of a grid vertically, starting from a given corner.",
+  approaches: [
+    { name: "Swap rows in the window", intuition: "Swap the rows of the square block from the top and bottom in turn.", time: "O(k^2)", space: "O(mn)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"grid":[[1,2,3],[4,5,6],[7,8,9]],"x":0,"y":0,"k":3}' },
     { label: 'Corner-offset window', input: '{"grid":[[4,9,1],[2,7,6],[8,3,5]],"x":1,"y":0,"k":2}' },

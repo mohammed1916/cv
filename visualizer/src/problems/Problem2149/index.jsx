@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Equal positives and negatives as a JSON array',
   url: 'https://leetcode.com/problems/rearrange-array-elements-by-sign/',
   complexity: 'O(n) time and O(n) space for the output.',
+  question: "Rearrange an array so positive and negative numbers alternate, starting with a positive, keeping each sign's original order.",
+  approaches: [
+    { name: "Two write pointers", intuition: "Write positives into even slots and negatives into odd slots, each in the order they appear.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Positives first', input: '[7,-4,2,-9,5,-1]' },
     { label: 'Negatives first', input: '[-3,6,-8,4]' },

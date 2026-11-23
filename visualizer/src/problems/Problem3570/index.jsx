@@ -42,6 +42,10 @@ const definition = {
   inputLabel: 'Object with library_books and borrowing_records lists (return_date null means still out)',
   url: 'https://leetcode.com/problems/find-books-with-no-available-copies/description/',
   complexity: 'O(b + r) time for b books and r borrowing records in this trace, using one pass to count open loans.',
+  question: "From borrowing records, count the books that are still on loan.",
+  approaches: [
+    { name: "Single pass count", intuition: "Count open loans in one pass over the records.", time: "O(b + r)", space: "O(b)" },
+  ],
   examples: [
     {
       label: 'Sample',

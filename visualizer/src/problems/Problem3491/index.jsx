@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with numbers: a list of digit strings',
   url: 'https://leetcode.com/problems/phone-number-prefix/',
   complexity: 'O(S) time and O(S) space for S total digits: each digit is visited once while inserting into the trie. The visualization caps the input at 8 numbers of up to 10 digits.',
+  question: "Given numbers as strings, find the shortest prefix that is unique to each one.",
+  approaches: [
+    { name: "Trie of digits", intuition: "Insert each number into a trie and find the first node that only one number passes through.", time: "O(S)", space: "O(S)" },
+  ],
   examples: [
     { label: 'Prefix-free', input: '{"numbers":["911","97625","9725","3"]}' },
     { label: 'Prefix found', input: '{"numbers":["1234","12","56"]}' },

@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with x and target (JSON)',
   url: 'https://leetcode.com/problems/least-operators-to-express-number/',
   complexity: 'O(log target) time and O(1) extra space: one step per base-x digit.',
+  question: "Express a target as an expression using x and the operators plus, minus, times and divide, with the fewest copies of x.",
+  approaches: [
+    { name: "Base-x digit DP", intuition: "Write the target in base x and choose each digit's representation either directly or by borrowing from the next power, keeping the cheapest cost.", time: "O(log_x target)", space: "O(log_x target)" },
+  ],
   examples: [
     { label: 'Base five, target thirty-seven', input: '{"x":5,"target":37}' },
     { label: 'Base seven, round target', input: '{"x":7,"target":100}' },

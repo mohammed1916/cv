@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON matrix of integers (rectangular, at most 6 by 6)',
   url: 'https://leetcode.com/problems/maximum-strictly-increasing-cells-in-a-matrix/',
   complexity: 'O(mn log(mn)) to sort the cells. The visualization caps the matrix at 6 by 6.',
+  question: "Given a matrix, find the longest path of strictly increasing values where you can move along a row or column.",
+  approaches: [
+    { name: "Sort cells and DP", intuition: "Process cells from smallest to largest and extend the best run from the same row or column.", time: "O(mn log(mn))", space: "O(mn)" },
+  ],
   examples: [
     { label: 'Mixed', input: '[[3,1,6],[-9,5,7]]' },
     { label: 'Equal neighbours', input: '[[1,1],[1,2]]' },

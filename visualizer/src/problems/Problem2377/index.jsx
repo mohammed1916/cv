@@ -3,6 +3,10 @@ import { meta } from './meta'
 import { buildTrace, parseInput, code, sql, python, phases, examples, complexity, inputLabel } from './algorithm'
 
 const definition = {
+  question: "Using an Olympic medal table, sort countries by gold, silver, and bronze counts, and by name as the last tie-break.",
+  approaches: [
+    { name: "Sort by several columns", intuition: "Sort rows by the medal columns in order, then by name.", time: "O(n log n)", space: "O(n)" },
+  ],
   number: meta.number,
   phases, parse: parseInput, build: buildTrace, code, sql, python, inputLabel,
   url: `https://leetcode.com/problems/${meta.slug}/`,

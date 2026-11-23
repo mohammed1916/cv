@@ -17,6 +17,10 @@ const definition = {
   inputLabel: 'Object {tree, ops} (JSON)',
   url: 'https://leetcode.com/problems/complete-binary-tree-inserter/',
   complexity: 'O(n) constructor, O(1) per insert and get_root. The tree is a level-order list without nulls; at most 63 nodes in total.',
+  question: "Design a complete binary tree that supports inserting a value and returns the parent of the inserted node.",
+  approaches: [
+    { name: "Queue of nodes with open slots", intuition: "Keep a queue of nodes missing a child; the next insert goes to the front node.", time: "O(1) per insert", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"tree":[1,2],"ops":[["insert",3],["insert",4],["get_root"]]}' },
     { label: 'Fill a level', input: '{"tree":[1,2,3,4,5],"ops":[["insert",6],["insert",7],["insert",8],["get_root"]]}' },

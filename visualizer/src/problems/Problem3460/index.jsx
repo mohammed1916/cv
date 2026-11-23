@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with first and second lowercase strings',
   url: 'https://leetcode.com/problems/longest-common-prefix-after-at-most-one-removal/',
   complexity: 'O(n^2) time and O(1) extra space for strings of length n: the removal index scans up to the shared prefix, and each scan can compare up to n letters. The visualization caps each string at 20 letters.',
+  question: "After removing at most one character from one string, find the longest common prefix with the other.",
+  approaches: [
+    { name: "Try each removal", intuition: "Try removing each character and measure the common prefix, stopping at the first match gap.", time: "O(n^2)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Gap closed', input: '{"first":"abxcd","second":"abcd"}' },
     { label: 'No help', input: '{"first":"xyz","second":"abc"}' },

@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with s (lowercase letters)',
   url: 'https://leetcode.com/problems/maximum-substrings-with-distinct-start/',
   complexity: 'O(n) time and O(1) extra space, because at most 26 letters can begin a piece. The visualization caps s at 20 letters.',
+  question: "Cut a string into the largest number of pieces so that each piece starts with a letter not used to start an earlier piece.",
+  approaches: [
+    { name: "Cut at first appearances", intuition: "Each letter may start only one piece, so cut at the first appearance of each letter.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Mixed', input: '{"s":"mellow"}' },
     { label: 'Repeats', input: '{"s":"zzzz"}' },

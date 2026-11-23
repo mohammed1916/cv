@@ -17,6 +17,10 @@ const definition = {
   inputLabel: "Array of non-negative integers (e.g. [1,2,3])",
   url: "https://leetcode.com/problems/number-of-subsequences-with-odd-sum/",
   complexity: "O(n) time and O(1) extra space: each element updates two counters. The visualization accepts up to 16 values from 0 to 1000 so the trace stays readable.",
+  question: "Count the subsets of an array whose element sum is odd.",
+  approaches: [
+    { name: "Track odd and even subset counts", intuition: "Each new element either leaves every subset as it is or pairs with each one; an odd element swaps the odd and even counts, an even element doubles both.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: "Mixed parities", input: "[1,2,3]" },
     { label: "All even", input: "[2,4,6]" },

@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Lowercase text (JSON object with s)',
   url: 'https://leetcode.com/problems/remove-vowels-from-a-string/',
   complexity: 'O(n) time and O(n) space for n letters.',
+  question: "Remove the vowel letters from a string.",
+  approaches: [
+    { name: "Filter each character", intuition: "Keep each character that is not a vowel.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Mixed', input: '{"s":"sketching"}' },
     { label: 'Only vowels', input: '{"s":"aeiou"}' },

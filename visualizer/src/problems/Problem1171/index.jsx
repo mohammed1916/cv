@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with a head array of values (JSON)',
   url: 'https://leetcode.com/problems/remove-zero-sum-consecutive-nodes-from-linked-list/',
   complexity: 'O(n) time and O(n) space with a hash map of running sums.',
+  question: "Remove every run of consecutive nodes in a linked list whose values sum to zero, repeating until none remain.",
+  approaches: [
+    { name: "Prefix sums in a map", intuition: "Record the last node for each running sum, and skip the nodes between equal prefix sums.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"head":[1,2,-3,3,1]}' },
     { label: 'Example 2', input: '{"head":[1,2,3,-3,4]}' },

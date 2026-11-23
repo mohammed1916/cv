@@ -12,6 +12,11 @@ const definition = {
   inputLabel: 'Object with first and second (lowercase words)',
   url: 'https://leetcode.com/problems/find-the-shortest-superstring-ii/',
   complexity: 'O(L^2) character comparisons for words of length up to L, with O(L) candidates of length up to 2L. The visualization caps each word at 8 letters.',
+  question: "Given two lowercase words, build the shortest string that contains both as substrings, breaking ties by the smaller string.",
+  approaches: [
+    { name: "Containment check", intuition: "If one word already sits inside the other, the longer word alone is the answer.", time: "O(L)", space: "O(L)" },
+    { name: "Try every overlap", intuition: "Try each shared end-to-start overlap in both orders and keep the shortest joined string.", time: "O(L^2)", space: "O(L)" },
+  ],
   examples: [
     { label: 'Shared end', input: '{"first":"cabad","second":"adbac"}' },
     { label: 'Contained', input: '{"first":"stone","second":"one"}' },

@@ -37,6 +37,10 @@ const definition = {
   inputLabel: 'Object with Person ({ id, name, phone_number }), Country ({ name, country_code }) and Calls ({ caller_id, callee_id, duration }) lists',
   url: 'https://leetcode.com/problems/countries-you-can-safely-invest-in/',
   complexity: 'O(p + c) to attach countries and average the call sides, plus a scan of the countries.',
+  question: "List the countries whose average call duration is above the overall average.",
+  approaches: [
+    { name: "Join and compare averages", intuition: "Attach each caller's country, average the call sides per country and compare with the overall mean.", time: "O(p + c)", space: "O(c)" },
+  ],
   examples: [
     { label: 'Example', input: '{"Person":[{"id":1,"name":"Ali","phone_number":"212-555-0101"},{"id":2,"name":"Bea","phone_number":"212-555-0199"},{"id":3,"name":"Chen","phone_number":"972-50-1234"},{"id":4,"name":"Dona","phone_number":"51-998-3333"}],"Country":[{"name":"Morocco","country_code":"212"},{"name":"Israel","country_code":"972"},{"name":"Peru","country_code":"51"}],"Calls":[{"caller_id":1,"callee_id":2,"duration":20},{"caller_id":1,"callee_id":3,"duration":30},{"caller_id":3,"callee_id":4,"duration":40}]}' },
     { label: 'Single call', input: '{"Person":[{"id":1,"name":"Ali","phone_number":"212-555-0101"},{"id":2,"name":"Bea","phone_number":"212-555-0199"}],"Country":[{"name":"Morocco","country_code":"212"}],"Calls":[{"caller_id":1,"callee_id":2,"duration":45}]}' },

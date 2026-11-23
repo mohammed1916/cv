@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with edges array; edges[i] is the outgoing node or -1 (JSON)',
   url: 'https://leetcode.com/problems/longest-cycle-in-a-graph/',
   complexity: 'O(n) time and O(n) space, since each node is marked once.',
+  question: "In a graph where each node has at most one outgoing edge, return the length of the longest cycle, or minus one if there is none.",
+  approaches: [
+    { name: "Walk and mark steps", intuition: "Walk from each unvisited node, recording the step number, and measure the cycle when a visited node is reached again.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Own: five nodes, one sink', input: '{"edges":[1,2,-1,4,0]}' },
     { label: 'Own: five nodes, two sinks', input: '{"edges":[4,0,-1,2,1]}' },

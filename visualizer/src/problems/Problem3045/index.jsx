@@ -13,6 +13,11 @@ const definition = {
   inputLabel: 'Object with words (JSON list of lowercase strings)',
   url: 'https://leetcode.com/problems/count-prefix-and-suffix-pairs-ii/',
   complexity: 'O(total length) time and space, because each word is walked once for matching and once for storing. The visualization caps input at 8 words.',
+  question: "Count the pairs where one word is both a prefix and a suffix of another, for a large input.",
+  approaches: [
+    { name: "Trie over paired characters", intuition: "Store each word as a trie of paired prefix and suffix characters so matches are counted in one walk.", time: "O(total length)", space: "O(total length)" },
+    { name: "Pairwise check", intuition: "Test every pair of words directly.", time: "O(n^2\u00b7L)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"words":["x","xy","xyx","xyxy"]}' },
     { label: 'Example 2', input: '{"words":["bo","bobo","ob","bob"]}' },

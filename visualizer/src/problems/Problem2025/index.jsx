@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Integer array and replacement value k (JSON)',
   url: 'https://leetcode.com/problems/maximum-number-of-ways-to-partition-an-array/',
   complexity: 'O(n^2) in this direct form (n capped at 30 here); a difference map gives O(n) per change.',
+  question: "Count the ways to partition an array at an index, allowing one value to change so that the two sums match.",
+  approaches: [
+    { name: "Prefix sums and hash counts", intuition: "Track the differences of prefix sums and count matches while considering the one change.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Change to fix', input: '{"nums":[1,2,3],"k":4}' },
     { label: 'Equal split', input: '{"nums":[1,1,1,1],"k":1}' },

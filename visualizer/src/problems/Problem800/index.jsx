@@ -12,6 +12,11 @@ const definition = {
   inputLabel: 'Color (JSON string "#rrggbb")',
   url: 'https://leetcode.com/problems/similar-rgb-color/',
   complexity: 'O(1) time: each channel has only 16 candidates.',
+  question: "Given a colour #RRGGBB, find the most similar shorthand colour #XYXYXY, minimising the squared distance.",
+  approaches: [
+    { name: "Nearest shorthand per channel", intuition: "Each shorthand channel is a multiple of 17, so round each channel to the nearest multiple of 17 independently.", time: "O(1)", space: "O(1)" },
+    { name: "Try all shorthand values", intuition: "Test all 16 values for each channel and keep the closest.", time: "O(16^3)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '"#09f166"' },
     { label: 'Already short', input: '"#112233"' }, { label: 'All black', input: '"#000000"' }, { label: 'All white', input: '"#ffffff"' }, { label: 'Mid grey', input: '"#7f7f7f"' },

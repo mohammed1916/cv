@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'List of integers (JSON)',
   url: 'https://leetcode.com/problems/counting-elements/',
   complexity: 'O(n) expected time and O(n) space: build one set, then one lookup per occurrence.',
+  question: "Count the values x for which x plus one is also in the array.",
+  approaches: [
+    { name: "Set lookup", intuition: "Build a set and check each value's successor.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Chain with duplicates', input: '[1,1,2]' },
     { label: 'Mixed values', input: '[1,3,2,3,5,0]' },

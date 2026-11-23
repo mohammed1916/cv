@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Array of integers from -10 to 10 (JSON array, up to 10 entries)',
   url: 'https://leetcode.com/problems/maximize-total-cost-of-alternating-subarrays/',
   complexity: 'O(n^3) time in this direct form and O(n) space for the table. The visualization caps input at 10 entries.',
+  question: "Split an array into pieces and maximise the total of alternating sums, where each piece starts with a plus sign.",
+  approaches: [
+    { name: "Dynamic programming over piece ends", intuition: "The best total for the first e values is the best over every start of the best total before it plus that piece's alternating sum.", time: "O(n^3)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Increasing', input: '[1,2,3,4]' },
     { label: 'Alternating', input: '[1,-1,1,-1]' },

@@ -9,6 +9,10 @@ const definition = {
   inputLabel: 'Length n (one integer)',
   url: 'https://leetcode.com/problems/minimum-operations-to-make-array-equal/',
   complexity: 'O(n) time for the loop over the lower half, and O(n) space for the array view.',
+  question: "Find the minimum number of operations to make all values equal in an arithmetic sequence.",
+  approaches: [
+    { name: "Pair symmetric values", intuition: "Each value in the lower half needs the gap to the middle, and those gaps sum to the answer.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Three', input: '3' },
     { label: 'Six', input: '6' },

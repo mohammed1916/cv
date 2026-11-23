@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with s and t',
   url: 'https://leetcode.com/problems/subsequence-with-the-minimum-score/',
   complexity: 'O(n * m) time for the pair scan with prefix and suffix tables. The visualization caps s at 14 and t at 12 characters.',
+  question: "Remove one contiguous part of t so that the rest of t is a subsequence of s, minimising the removal score.",
+  approaches: [
+    { name: "Prefix and suffix tables", intuition: "Record the earliest prefix of t that matches each position of s, and the latest suffix from each side, then try each cut.", time: "O(n * m)", space: "O(n + m)" },
+  ],
   examples: [
     { label: 'Example', input: '{"s":"mississippi","t":"mpsx"}' },
     { label: 'No overlap', input: '{"s":"cde","t":"xyz"}' },

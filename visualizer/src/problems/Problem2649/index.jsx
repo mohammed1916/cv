@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Nested array as JSON: {"arr": [...]}',
   url: 'https://leetcode.com/problems/nested-array-generator/',
   complexity: 'O(m) time for m values, plus the recursion depth. The visualization caps input at 30 values and 5 levels.',
+  question: "Write a generator that walks a nested array and yields each non-array value in order, including nested ones.",
+  approaches: [
+    { name: "Recursive generator", intuition: "Recurse into each nested array and yield each value as it is reached.", time: "O(m)", space: "O(depth)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"arr":[1,2,3]}' },
     { label: 'Nested', input: '{"arr":[[1,2],3,[[4]]]}' },

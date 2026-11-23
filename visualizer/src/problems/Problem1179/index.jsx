@@ -13,6 +13,10 @@ const definition = {
   python,
   inputLabel,
   complexity,
+  question: "Reshape a department table so that each department has one revenue column for every month.",
+  approaches: [
+    { name: "Conditional aggregation", intuition: "For each department, sum the revenue in a month-specific column with a CASE expression.", time: "O(n)", space: "O(d)" },
+  ],
   examples,
 }
 

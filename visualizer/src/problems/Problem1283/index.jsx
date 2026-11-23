@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON object with nums and threshold',
   url: 'https://leetcode.com/problems/find-the-smallest-divisor-given-a-threshold/',
   complexity: 'O(n log max) time. The visualization caps input at 8 values.',
+  question: "Find the smallest divisor so that the sum of rounded-up quotients stays within a threshold.",
+  approaches: [
+    { name: "Binary search on divisor", intuition: "Test a guessed divisor by summing ceilings, and narrow the range by binary search.", time: "O(n log max)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Four values, limit eight', input: '{"nums":[4,9,15,22],"threshold":8}' },
     { label: 'Five values, limit nine', input: '{"nums":[17,40,8,33,26],"threshold":9}' },

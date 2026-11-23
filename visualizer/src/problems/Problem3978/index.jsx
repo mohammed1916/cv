@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Odd-length array of integers (e.g. [5, 2, 8, 3, 9])',
   url: 'https://leetcode.com/problems/unique-middle-element/',
   complexity: 'O(n) time and O(1) extra space. The visualization caps the array at 15 values.',
+  question: "Check whether the centre value of an odd-length list appears exactly once.",
+  approaches: [
+    { name: "Count the middle value", intuition: "Take the centre slot and count how often its value appears.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Unique middle', input: '[5,2,8,3,9]' },
     { label: 'Repeated middle', input: '[6,6,6]' },

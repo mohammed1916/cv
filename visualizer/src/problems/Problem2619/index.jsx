@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON object with items (at most 10 values)',
   url: 'https://leetcode.com/problems/array-prototype-last/',
   complexity: 'O(1) time and O(1) extra space.',
+  question: "Write a function that returns the last element of an array, or -1 if the array is empty, added to the array prototype.",
+  approaches: [
+    { name: "Index the last position", intuition: "Return the element at length minus one, or -1 when the length is zero.", time: "O(1)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Mixed', input: '{"items":["a",2,null]}' },
     { label: 'Empty', input: '{"items":[]}' },

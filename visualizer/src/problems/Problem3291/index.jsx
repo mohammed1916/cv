@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with words and target (JSON)',
   url: 'https://leetcode.com/problems/minimum-number-of-valid-strings-to-form-target-i/',
   complexity: 'O(m * L^2) time for m words and target length m, with substring checks. The visualization caps sizes.',
+  question: "Split a target string into the fewest valid strings, where each piece is a prefix of one of the given words.",
+  approaches: [
+    { name: "Dynamic programming over target prefixes", intuition: "For each prefix of the target, keep the fewest pieces needed, extending from each shorter prefix that matches a word.", time: "O(m * L^2)", space: "O(m)" },
+  ],
   examples: [
     { label: 'Two-word split', input: '{"words":["ab","cad","bc"],"target":"abcad"}' },
     { label: 'Impossible', input: '{"words":["abcdef"],"target":"xyz"}' },

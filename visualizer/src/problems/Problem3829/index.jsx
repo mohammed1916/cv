@@ -16,6 +16,10 @@ const definition = {
   inputLabel: 'Object with ops: ["addRider", id], ["addDriver", id], ["matchDriverWithRider"] or ["cancelRider", id]',
   url: 'https://leetcode.com/problems/design-ride-sharing-system/',
   complexity: 'Each queue operation is O(1) with a deque; a cancellation scans the rider queue here.',
+  question: "Design a ride-sharing system where riders and drivers wait in arrival order and riders can cancel.",
+  approaches: [
+    { name: "Two queues", intuition: "Match the front of the rider and driver queues, and remove a cancelled rider from the queue.", time: "O(1) per match; O(queue) per cancel", space: "O(n)" },
+  ],
   examples: [
     { label: 'Queue order', input: '{"ops":[["addRider",1],["addRider",2],["addDriver",9],["matchDriverWithRider"],["addDriver",8],["matchDriverWithRider"],["matchDriverWithRider"]]}' },
     { label: 'Cancel first', input: '{"ops":[["addRider",1],["addRider",2],["cancelRider",1],["addDriver",5],["matchDriverWithRider"]]}' },

@@ -11,6 +11,10 @@ const definition = {
   inputLabel: 'Array (JSON array of 1 to 12 integers from 0 to 1000)',
   url: 'https://leetcode.com/problems/smallest-index-with-digit-sum-equal-to-index/',
   complexity: 'O(n * d) time, where d is the number of digits per value. O(1) extra space.',
+  question: "Find the smallest index whose digit sum equals that index.",
+  approaches: [
+    { name: "Scan indices", intuition: "Check each index's digit sum in order and return the first match.", time: "O(n d)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Five values with a zero', input: '[9,0,14,6,6]' },
     { label: 'Example 2', input: '[1,10,11,12]' },

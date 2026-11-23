@@ -12,6 +12,10 @@ const definition = {
   phases, parse: parseInput, build: buildTrace, code, python, sql,
   inputLabel: INPUT_LABEL,
   complexity: COMPLEXITY,
+  question: "Count customers who visited without making a transaction, for each customer.",
+  approaches: [
+    { name: "SQL left join", intuition: "Left join visits to transactions and count the visits with no matching transaction.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [{ label: 'Sample', input: EXAMPLE },
     { label: "Single visit, no transactions", input: "{\"visits\":[{\"visit_id\":1,\"customer_id\":5}],\"transactions\":[]}" },
     { label: "Same customer, one silent visit", input: "{\"visits\":[{\"visit_id\":1,\"customer_id\":7},{\"visit_id\":2,\"customer_id\":7}],\"transactions\":[{\"transaction_id\":10,\"visit_id\":1,\"amount\":5}]}" },

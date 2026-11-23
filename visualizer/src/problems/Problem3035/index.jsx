@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'JSON array of 1 to 6 lowercase words, each up to 6 letters',
   url: 'https://leetcode.com/problems/maximum-palindromes-after-operations/',
   complexity: 'O(N + k log k) time, where N is the total number of letters and k is the number of words.',
+  question: "Find the largest number of palindromes that can be formed from words after letter swaps.",
+  approaches: [
+    { name: "Count letters and pair greedily", intuition: "Count all letters, then form the shortest words first using as many pairs as possible.", time: "O(total length + sort)", space: "O(26)" },
+  ],
   examples: [
     { label: 'Example 1', input: '["xxyz","xx","yyy"]' },
     { label: 'Example 2', input: '["pq","rrs","tt"]' },

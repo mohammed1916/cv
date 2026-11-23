@@ -8,6 +8,10 @@ const definition = {
   inputLabel: 'JSON {"celsius": 36.5}',
   url: 'https://leetcode.com/problems/convert-the-temperature/',
   complexity: 'O(1) time and O(1) space.',
+  question: "Convert a temperature in Celsius into Kelvin and Fahrenheit.",
+  approaches: [
+    { name: "Apply the two formulas", intuition: "Add 273.15 for Kelvin and multiply by 1.8 then add 32 for Fahrenheit.", time: "O(1)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Own: 12.25 Celsius', input: '{"celsius":12.25}' },
     { label: 'Freezing', input: '{"celsius":0}' },

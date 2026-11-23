@@ -14,6 +14,10 @@ const definition = {
   complexity,
   inputLabel: 'JSON grid of 1 (moves right) and -1 (moves left) with equal row lengths',
   url: 'https://leetcode.com/problems/where-will-the-ball-fall/',
+  question: "Drop a ball into a grid of diagonal deflectors and report the column where each ball leaves the bottom, or -1 when it is stuck.",
+  approaches: [
+    { name: "Simulate each ball", intuition: "Trace each ball row by row, checking the current cell and the next cell.", time: "O(m * n)", space: "O(m)" },
+  ],
 }
 
 export default function Problem1706Visualizer() {

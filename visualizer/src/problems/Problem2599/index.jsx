@@ -17,6 +17,10 @@ const definition = {
   inputLabel: 'Object with nums (integers from -9 to 9, total nonnegative)',
   url: 'https://leetcode.com/problems/make-the-prefix-sum-non-negative/',
   complexity: 'O(n log n) time and O(n) space for n values, using a min-heap of the values read so far. Each value is pushed once and popped at most once. The visualization caps nums at 10 values from -9 to 9; the official limits are larger.',
+  question: "Given an array, delete the fewest elements so that every prefix sum of what remains is non-negative, and return the minimum number of deletions.",
+  approaches: [
+    { name: "Greedy with a min-heap", intuition: "Scan left to right and keep the sum; when it goes negative, remove the most negative value seen so far.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Early dip', input: '{"nums":[-3,2,-1,4,-2]}' },
     { label: 'Two dips', input: '{"nums":[-4,-2,5,-1,3]}' },

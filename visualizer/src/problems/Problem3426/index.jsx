@@ -18,6 +18,10 @@ const definition = {
   inputLabel: 'Grid JSON with m, n and k',
   url: 'https://leetcode.com/problems/manhattan-distances-of-all-arrangements-of-pieces/',
   complexity: 'O(m + n + log) time with modular arithmetic for the real limits. The visualization caps m * n at 36 cells.',
+  question: "Sum the Manhattan distances between pieces over every arrangement of several pieces on a small board.",
+  approaches: [
+    { name: "Count per distance pair", intuition: "Count arrangements for each pair of cell distances with factorial formulas.", time: "O(m + n)", space: "O(m n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"m":2,"n":3,"k":2}' },
     { label: 'Example 2', input: '{"m":1,"n":3,"k":3}' },

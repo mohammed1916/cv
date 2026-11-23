@@ -14,6 +14,10 @@ const definition = {
   complexity,
   inputLabel: 'Object with strings s and t (lowercase letters)',
   url: 'https://leetcode.com/problems/count-substrings-that-differ-by-one-character/',
+  question: "Count substring pairs of equal length that differ in exactly one character position.",
+  approaches: [
+    { name: "Expand from each mismatch", intuition: "Pick each start pair, mark the single mismatch, and extend while the rest matches.", time: "O(m * n * min(m, n))", space: "O(1)" },
+  ],
 }
 
 export default function Problem1638Visualizer() {

@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with banned, n and maxSum (e.g. {"banned":[1,4,6],"n":6,"maxSum":4})',
   url: "https://leetcode.com/problems/maximum-number-of-integers-to-choose-from-a-range-ii/description/",
   complexity: "O(b log b + b log n) time for b banned values, since each gap is sized by binary search instead of walking the range. The visualization caps n at 100, banned at 20 values and maxSum at 1000;",
+  question: "Choose as many integers from 1 to n as possible, skipping banned values, while keeping the sum at most maxSum, for a large n.",
+  approaches: [
+    { name: "Sorted banned values and binary search", intuition: "Sort the banned values and use binary search to find how many values can fit.", time: "O(b log b + b log n)", space: "O(b)" },
+  ],
   examples: [
     { label: "Example", input: '{"banned":[1,4,6],"n":6,"maxSum":4}' },
     { label: "Budget limits", input: '{"banned":[4,3,5,7],"n":7,"maxSum":18}' },

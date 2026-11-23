@@ -18,6 +18,10 @@ const definition = {
   inputLabel: 'Object with nums and costs lists, e.g. {"nums":[3,1,4],"costs":[2,9,1]}',
   url: 'https://leetcode.com/problems/jump-game-viii/',
   complexity: 'O(n) time and space: each index is pushed onto each stack once and popped at most once. The visualization caps the list at 12 entries with values and costs from 0 to 99; this draft does not state official bounds.',
+  question: "From each index you may jump to a later index within a range, paying a cost; find the minimum total cost to reach the end.",
+  approaches: [
+    { name: "Monotonic stacks for DP", intuition: "Use two monotonic stacks to find the reachable next indices by value, and run a DP over the stack transitions.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Mixed climb', input: '{"nums":[3,1,4,1,5],"costs":[2,9,1,4,6]}' },
     { label: 'Descending', input: '{"nums":[9,7,5,2],"costs":[4,1,8,3]}' },

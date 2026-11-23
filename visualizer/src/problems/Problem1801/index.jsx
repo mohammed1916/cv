@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with orders: [price, amount, type] triples, type 0 for buy and 1 for sell (JSON)',
   url: 'https://leetcode.com/problems/number-of-orders-in-the-backlog/',
   complexity: 'O(n log n) time with two heaps. The visualization caps the input at 8 orders.',
+  question: "Track buy and sell orders and match the best prices; count the orders left in the backlog.",
+  approaches: [
+    { name: "Two heaps", intuition: "Keep the buy and sell backlogs in two heaps and match the best prices from each side.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"orders":[[10,5,0],[15,2,1],[25,1,1],[30,4,0]]}' },
     { label: 'Example 2', input: '{"orders":[[7,1000000000,1],[15,3,0],[5,999999995,0],[5,1,1]]}' },

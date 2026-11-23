@@ -31,6 +31,10 @@ const definition = {
   inputLabel,
   url: 'https://leetcode.com/problems/the-number-of-users-that-are-eligible-for-discount/',
   complexity,
+  question: "Count the users who are eligible for a discount, meaning they have a purchase inside a given time window with at least a minimum amount.",
+  approaches: [
+    { name: "Filter rows then count distinct users", intuition: "Keep the purchases inside the window and above the amount, collect the user ids in a set, and count them.", time: "O(n)", space: "O(n)" },
+  ],
   examples,
 }
 

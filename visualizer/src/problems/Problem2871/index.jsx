@@ -13,6 +13,11 @@ const definition = {
   inputLabel: 'Array of 1 to 14 integers from 0 to 63 (JSON)',
   url: 'https://leetcode.com/problems/split-array-into-maximum-number-of-subarrays/',
   complexity: 'O(n) time and O(1) extra space. The visualization caps input at 14 values.',
+  question: "Split an array into the largest number of subarrays whose combined bitwise AND scores stay at the minimum possible total.",
+  approaches: [
+    { name: "Greedy with running AND", intuition: "If the whole array AND is not zero, one piece is optimal; otherwise cut whenever the running AND reaches zero.", time: "O(n)", space: "O(1)" },
+    { name: "Dynamic programming over prefixes", intuition: "Track the best count for each prefix with each possible AND.", time: "O(n * bits)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Six mixed bits', input: '[7,3,12,0,5,9]' },
     { label: 'Two low-bit values', input: '[31,15]' },

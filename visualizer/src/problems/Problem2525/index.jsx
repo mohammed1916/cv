@@ -17,6 +17,10 @@ const definition = {
   inputLabel: 'Box object (JSON, e.g. {"length": 400, "width": 90, "height": 60, "mass": 120})',
   url: 'https://leetcode.com/problems/categorize-box-according-to-criteria/',
   complexity: 'O(1) time and O(1) space: a fixed number of comparisons.',
+  question: "Classify a box as Bulky, Heavy, Both or Neither based on its dimensions and mass.",
+  approaches: [
+    { name: "Fixed comparisons", intuition: "Test the volume and the mass against fixed thresholds and combine the results.", time: "O(1)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Heavy only', input: '{"length": 400, "width": 90, "height": 60, "mass": 120}' },
     { label: 'Neither', input: '{"length": 300, "width": 20, "height": 40, "mass": 12}' },

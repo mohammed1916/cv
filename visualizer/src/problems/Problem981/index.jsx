@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Operations (JSON array)',
   url: 'https://leetcode.com/problems/time-based-key-value-store/',
   complexity: 'O(1) per set and O(log n) per get. The visualization caps input at 30 operations.',
+  question: "Store values with timestamps and return the value for a key at the latest time not after a query time.",
+  approaches: [
+    { name: "Per-key sorted lists with binary search", intuition: "Append each value to its key's list, since timestamps increase, and binary search the list on lookup.", time: "O(log n) per get", space: "O(total entries)" },
+  ],
   examples: [
     { label: 'Example 1', input: '[["set","foo","bar",1],["get","foo",1],["get","foo",3],["set","foo","baz",4],["get","foo",4],["get","foo",5]]' },
     { label: 'Before first', input: '[["set","a","x",5],["get","a",4]]' },

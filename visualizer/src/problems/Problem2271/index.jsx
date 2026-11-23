@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON object with tiles (pairs) and carpet_length',
   url: 'https://leetcode.com/problems/maximum-white-tiles-covered-by-a-carpet/',
   complexity: 'O(m log m) time for the sort and O(m) for the sweep. The visualization caps input at 6 ranges.',
+  question: "Place a carpet of a fixed length over a set of white tile ranges to cover as many white tiles as possible.",
+  approaches: [
+    { name: "Sort and sliding window", intuition: "Sort the tile ranges, and for each starting tile slide the carpet's end forward while counting the covered white tiles.", time: "O(n log n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Own: three tiles, short carpet', input: '{"tiles":[[2,4],[9,9],[15,20]],"carpet_length":6}' },
     { label: 'Unsorted input', input: '{"tiles":[[10,11],[1,1]],"carpet_length":2}' },

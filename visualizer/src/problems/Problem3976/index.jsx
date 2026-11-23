@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'Object with nums and k (e.g. {"nums":[-2,5,-3,4],"k":3})',
   url: 'https://leetcode.com/problems/maximum-subarray-sum-after-multiplier/',
   complexity: 'O(n) time after the prefix pass. This trace prints the sweep for every position, so it is O(n) on the small visual inputs too.',
+  question: "Scale one nonempty interval by k or divide it by k, then find the best subarray sum.",
+  approaches: [
+    { name: "Prefix and suffix sweep", intuition: "Compute best subarray sums around a scaled interval with one prefix pass.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Mixed signs', input: '{"nums":[-2,5,-3,4],"k":3}' },
     { label: 'Negative run', input: '{"nums":[-4,-1,-6,2],"k":2}' },

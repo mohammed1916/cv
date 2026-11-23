@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Number of rows (integer)',
   url: 'https://leetcode.com/problems/number-of-ways-to-paint-n-3-grid/',
   complexity: 'O(n) time and O(1) space: only two category totals are kept from row to row.',
+  question: "Count the ways to colour a three-column grid with n rows so that no neighbour matches.",
+  approaches: [
+    { name: "Two-category DP", intuition: "Track row patterns as either two-colour or three-colour rows.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'One row', input: '1' },
     { label: 'Two rows', input: '2' },

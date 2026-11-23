@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Lowercase string as a JSON string',
   url: 'https://leetcode.com/problems/minimum-substring-partition-of-equal-character-frequency/',
   complexity: 'O(n^3) with a direct balance check per piece. The visualization caps input at 16 characters.',
+  question: "Partition a string into the fewest substrings where each substring has balanced letter frequencies.",
+  approaches: [
+    { name: "Dynamic programming over prefixes", intuition: "The best partition of a prefix ends with a balanced piece that follows the best partition of an earlier prefix.", time: "O(n^3)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Repeated pair then a new letter', input: '"qwqwrt"' },
     { label: 'Doubled letter pairs', input: '"mmnnoopp"' },

@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with n (array length), l and r (value range); r - l at most 5',
   url: 'https://leetcode.com/problems/number-of-zigzag-arrays-iii/',
   complexity: 'O(n * m^2) time with direct sums, or O(n * m) with running prefix sums, and O(m) space for m = r - l + 1 values. Results are taken modulo 1000000007. The visualization caps n at 8 and m at 6.',
+  question: "Count arrays of length n with values from l to r where neighbouring values differ and the steps alternate up and down.",
+  approaches: [
+    { name: "Last-step DP with prefix sums", intuition: "Track counts per value and last step direction, extending one position at a time with running sums.", time: "O(n x m) with prefix sums", space: "O(m)" },
+  ],
   examples: [
     { label: 'Three values', input: '{"n":3,"l":1,"r":3}' },
     { label: 'Four long', input: '{"n":4,"l":1,"r":4}' },

@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with grid (square, distinct values) and calls ([method, value] pairs)',
   url: 'https://leetcode.com/problems/design-neighbor-sum-service/description/',
   complexity: 'O(n^2) to build the position table, O(1) per query.',
+  question: "Design a service that returns the sum of the values adjacent to a given cell in a grid.",
+  approaches: [
+    { name: "Position table at build time", intuition: "The grid never changes, so a table of positions is built once, and each query checks at most eight cells.", time: "O(n^2) to build, O(1) per query", space: "O(n^2)" },
+  ],
   examples: [
     { label: 'Example', input: '{"grid":[[5,1,6],[2,8,3],[7,0,4]],"calls":[["adjacentSum",8],["diagonalSum",3]]}' },
     { label: 'Corner', input: '{"grid":[[4,0,3,8],[1,6,2,7],[5,9,10,11],[12,13,14,15]],"calls":[["diagonalSum",0],["adjacentSum",15]]}' },

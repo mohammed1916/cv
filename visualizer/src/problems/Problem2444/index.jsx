@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON {"nums": [1, 3, 5, 2, 7, 5], "minK": 1, "maxK": 5}',
   url: 'https://leetcode.com/problems/count-subarrays-with-fixed-bounds/',
   complexity: 'O(n) time and O(1) extra space. Three last-seen positions are enough.',
+  question: "Count subarrays whose minimum equals minK and whose maximum equals maxK.",
+  approaches: [
+    { name: "Last-seen positions", intuition: "Track the last index of the minimum, the maximum and the out-of-bounds value, so each end index adds a count in constant time.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Seven values, range 2 to 4', input: '{"nums":[5,1,4,4,2,3,9],"minK":2,"maxK":4}' },
     { label: 'Repeats', input: '{"nums":[2,2,2],"minK":2,"maxK":2}' },

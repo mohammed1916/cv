@@ -10,6 +10,10 @@ const definition = {
   inputLabel: 'Object with movies, users and ratings (small sample tables)',
   url: 'https://leetcode.com/problems/movie-rating/',
   complexity: 'Each table is scanned a constant number of times; grouping costs O(r) for r ratings.',
+  question: "Find the user with the most ratings and the best-rated movie of February.",
+  approaches: [
+    { name: "Group averages with ranked union", intuition: "Average the ratings per movie and user, sort, and take the top of each list.", time: "O(r log r)", space: "O(r)" },
+  ],
   examples: [
     { label: 'Tie on count', input: '{"movies":[{"movie_id":1,"title":"Alpha"},{"movie_id":2,"title":"Beta"},{"movie_id":3,"title":"Gamma"}],"users":[{"user_id":1,"name":"Ann"},{"user_id":2,"name":"Bob"},{"user_id":3,"name":"Cy"}],"ratings":[{"movie_id":1,"user_id":1,"rating":4,"created_at":"2020-02-05"},{"movie_id":2,"user_id":1,"rating":3,"created_at":"2020-02-10"},{"movie_id":3,"user_id":1,"rating":5,"created_at":"2020-03-01"},{"movie_id":1,"user_id":2,"rating":2,"created_at":"2020-02-20"},{"movie_id":2,"user_id":2,"rating":4,"created_at":"2020-02-22"},{"movie_id":1,"user_id":3,"rating":5,"created_at":"2020-02-01"},{"movie_id":2,"user_id":3,"rating":5,"created_at":"2020-01-15"},{"movie_id":3,"user_id":3,"rating":1,"created_at":"2020-02-18"}]}' },
     { label: 'No February rating', input: '{"movies":[{"movie_id":1,"title":"Solo"}],"users":[{"user_id":1,"name":"Eve"}],"ratings":[{"movie_id":1,"user_id":1,"rating":4,"created_at":"2020-03-02"}]}' },

@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with arrays a, b and c (e.g. {"a":[1,2],"b":[3],"c":[0,4]})',
   url: "https://leetcode.com/problems/count-triplets-with-even-xor-set-bits-ii/",
   complexity: "O(|a| + |b| + |c|) time and O(1) extra space: each array is tallied once by set-bit parity, then the pair counts combine. The visualization caps each array at 40 values from 0 to 1023.",
+  question: "Count triplets, one value from each of three arrays, whose XOR has an even number of set bits, for larger arrays.",
+  approaches: [
+    { name: "Count by set-bit parity", intuition: "The parity of an XOR of three values is the XOR of their parities, so each array is tallied once by parity.", time: "O(|a| + |b| + |c|)", space: "O(1)" },
+  ],
   examples: [
     { label: "Mixed small arrays", input: '{"a":[1,2],"b":[3],"c":[0,4]}' },
     { label: "Parity split", input: '{"a":[0,5,6],"b":[7],"c":[1,2]}' },

@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON: {"parent": [...], "nums": [...], "k": k}',
   url: 'https://leetcode.com/problems/count-non-adjacent-subsets-in-a-rooted-tree/',
   complexity: 'O(n * k^2) time with the remainder tables, and O(n * k) space. The visualization caps n at 8.',
+  question: "Count subsets of tree nodes with no chosen node adjacent to another, grouped by their sum modulo k.",
+  approaches: [
+    { name: "Bottom-up remainder tables", intuition: "For each node keep counts by sum modulo k with and without the node chosen, merging children bottom-up.", time: "O(n x k^2)", space: "O(n x k)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"parent":[-1,0,1],"nums":[1,2,3],"k":3}' },
     { label: 'Example 2', input: '{"parent":[-1,0,0,0],"nums":[2,1,2,1],"k":3}' },

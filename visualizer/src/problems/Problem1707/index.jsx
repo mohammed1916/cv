@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON object with nums and queries, for example {"nums":[0,1,2],"queries":[[3,1]]}',
   url: 'https://leetcode.com/problems/maximum-xor-with-an-element-from-array/',
   complexity: 'O((n + q) * B) time for B = 5 bits in the visualization. The visualization caps nums at 10 and queries at 6.',
+  question: "For each query, find the largest bitwise xor between its value and any array element that does not exceed a limit.",
+  approaches: [
+    { name: "Offline sort with a binary trie", intuition: "Sort numbers and queries by limit, and insert numbers into a binary trie as they qualify.", time: "O((n + q) * B)", space: "O(n * B)" },
+  ],
   examples: [
     { label: 'Five numbers, two queries', input: '{"nums":[9,4,1,17,6],"queries":[[7,3],[12,8]]}' },
     { label: 'Three numbers, three queries', input: '{"nums":[11,20,2],"queries":[[0,10],[30,5],[5,2]]}' },

@@ -12,6 +12,11 @@ const definition = {
   inputLabel: 'Array of integers from -10 to 10 (JSON)',
   url: 'https://leetcode.com/problems/maximum-balanced-subsequence-sum/',
   complexity: 'O(n^2) time and O(n) space for this direct version. The visualization caps input at 10 numbers.',
+  question: "Find the largest sum of a subsequence whose adjacent picks satisfy a balance rule on values shifted by their index.",
+  approaches: [
+    { name: "Pairwise DP", intuition: "Rewrite the rule as a non-decreasing key nums[i] - i and extend the best earlier compatible subsequence.", time: "O(n^2)", space: "O(n)" },
+    { name: "Fenwick tree over keys", intuition: "Compress the keys and query the best prefix sum with a Fenwick tree while scanning left to right.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Mixed signs, six values', input: '[8,-3,5,-5,0,-9]' },
     { label: 'All negative values', input: '[-7,-2,-6,-1]' },

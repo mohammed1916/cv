@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with an activities list of sell_date and product',
   url: 'https://leetcode.com/problems/group-sold-products-by-the-date/',
   complexity: 'O(n log n) time for sorting the rows; n is the number of activity rows.',
+  question: "Group sales by date, listing the distinct products sold on each date and how many there are.",
+  approaches: [
+    { name: "Distinct grouping", intuition: "Group by sale date, count distinct products and join their names in date order.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example', input: '{"activities":[{"sell_date":"2021-03-04","product":"Lamp"},{"sell_date":"2021-03-04","product":"Kettle"},{"sell_date":"2021-03-04","product":"Lamp"},{"sell_date":"2021-03-07","product":"Rope"},{"sell_date":"2021-03-07","product":"Canvas"},{"sell_date":"2021-03-09","product":"Tent"},{"sell_date":"2021-03-09","product":"Tent"}]}' },
     { label: 'Single sale', input: '{"activities":[{"sell_date":"2022-01-05","product":"Pen"}]}' },

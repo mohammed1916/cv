@@ -19,6 +19,11 @@ const definition = {
   inputLabel: "Numbers (JSON object, e.g. {\"nums\": [4,1,2,1,2]})",
   url: "https://leetcode.com/problems/single-number/",
   complexity: "O(n) time and O(1) space for n numbers. The visualization caps the input at 3001 values.",
+  question: "Find the one number that appears once while every other number appears twice.",
+  approaches: [
+    { name: "XOR all values", intuition: "Equal values cancel in pairs, so XOR leaves the single value.", time: "O(n)", space: "O(1)" },
+    { name: "Hash count", intuition: "Count each value and return the one with count one.", time: "O(n)", space: "O(n)" },
+  ],
   examples: getExamples("single-number").map(({ label, nums }) => ({ label, input: JSON.stringify({ nums }) })),
 };
 

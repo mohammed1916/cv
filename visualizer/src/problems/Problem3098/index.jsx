@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Values and size (JSON object with nums and k)',
   url: 'https://leetcode.com/problems/find-the-sum-of-subsequence-powers/',
   complexity: 'O(D * k * n^2) time, where D is the number of distinct gaps. The visualization caps n at 10.',
+  question: "Sum the power of every subsequence of length k, where the power of a subsequence is its smallest adjacent gap in sorted order, modulo 1000000007.",
+  approaches: [
+    { name: "Threshold counting by gap", intuition: "The power equals the sum of counts over every threshold up to the smallest gap, so each threshold is counted with dynamic programming.", time: "O(D * k * n^2)", space: "O(n * k)" },
+  ],
   examples: [
     { label: 'Mixed signs, k three', input: '{"nums":[-7,12,3,-9,20],"k":3}' },
     { label: 'Eight values, k two', input: '{"nums":[8,-8,8,-1,0,6,-6,4],"k":2}' },

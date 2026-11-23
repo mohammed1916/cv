@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Permutation size and queries (JSON object)',
   url: 'https://leetcode.com/problems/queries-on-a-permutation-with-key/',
   complexity: 'O(m * q) time for q queries over m values, because each query searches and reshuffles the list.',
+  question: "Process queries that move each value to the front and report its position.",
+  approaches: [
+    { name: "Simulate the list", intuition: "Find, record and move each value in a list for every query.", time: "O(m q)", space: "O(m)" },
+  ],
   examples: [
     { label: 'Move-to-front', input: '{"m":5,"queries":[3,1,2,1]}' },
     { label: 'Repeat one', input: '{"m":4,"queries":[4,4,4]}' },

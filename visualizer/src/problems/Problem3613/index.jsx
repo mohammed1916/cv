@@ -6,6 +6,10 @@ import { meta } from './meta'
 import { buildTrace, parseInput, code, python, phases, examples, complexity, inputLabel } from './algorithm'
 
 const definition = {
+  question: "Find the smallest weight for which the graph has at most k connected components, when edges are added in order of weight.",
+  approaches: [
+    { name: "Kruskal-style merge", intuition: "Sort edges by weight and merge components with union-find, stopping once k or fewer components remain.", time: "O(m log m)", space: "O(n)" },
+  ],
   number: meta.number,
   phases, parse: parseInput, build: buildTrace, code, python, inputLabel, complexity, examples,
   url: `https://leetcode.com/problems/${meta.slug}/`,

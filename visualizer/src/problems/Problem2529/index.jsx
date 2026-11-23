@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON object: {"nums": [...]} sorted non-decreasing',
   url: 'https://leetcode.com/problems/maximum-count-of-positive-integer-and-negative-integer/',
   complexity: 'Two binary searches on a sorted array: O(log n). The visualization caps input at 10 numbers.',
+  question: "Return the larger of the count of positive numbers and the count of negative numbers in a sorted array.",
+  approaches: [
+    { name: "Two binary searches", intuition: "Find the boundary of the negatives and of the positives, then count each side.", time: "O(log n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"nums":[-2,-1,-1,1,2,3]}' },
     { label: 'Example 2', input: '{"nums":[-3,-2,-1,0,0,1,2]}' },

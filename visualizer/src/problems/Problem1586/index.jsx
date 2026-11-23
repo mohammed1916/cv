@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'Object with values (strictly increasing, in-order) and ops: next, prev, hasNext, hasPrevious',
   url: 'https://leetcode.com/problems/binary-search-tree-iterator-ii/',
   complexity: 'O(1) per call in this array model, where the in-order values stand in for the tree walk.',
+  question: "Implement a binary search tree iterator that can move both forwards and backwards.",
+  approaches: [
+    { name: "In-order cursor", intuition: "Store the in-order values and move a cursor forward or back through them.", time: "O(1) per call", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example', input: '{"values":[2,5,9,12,20],"ops":["next","hasNext","next","next","prev","hasPrevious","next","next","hasNext"]}' },
     { label: "Single value", input: "{\"values\":[7],\"ops\":[\"hasNext\",\"next\",\"hasNext\",\"prev\",\"hasPrevious\"]}" },

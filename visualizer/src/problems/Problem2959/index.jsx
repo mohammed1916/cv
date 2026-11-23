@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON {"n": 4, "maxDistance": 4, "roads": [[0,1,3],[1,2,2]]}',
   url: 'https://leetcode.com/problems/number-of-possible-sets-of-closing-branches/',
   complexity: 'O(2^n * n^3) time with Floyd-Warshall per subset. The visualization caps n at 6 and roads at 15.',
+  question: "Count the subsets of branch cities that keep every pair of selected branches within a maximum distance.",
+  approaches: [
+    { name: "Subset enumeration with Floyd-Warshall", intuition: "For each subset, run Floyd-Warshall on the chosen branches and check the largest shortest path.", time: "O(2^n \u00b7 n^3)", space: "O(n^2)" },
+  ],
   examples: [
     { label: 'Four branches', input: '{"n":4,"maxDistance":4,"roads":[[0,1,3],[1,2,2],[2,3,4],[0,3,9]]}' },
     { label: 'Chain of three', input: '{"n":3,"maxDistance":6,"roads":[[0,1,2],[1,2,3]]}' },

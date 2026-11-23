@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Array (JSON array of 3 to 12 integers from -1000 to 1000)',
   url: 'https://leetcode.com/problems/trionic-array-i/',
   complexity: 'O(n) time and O(1) extra space.',
+  question: "Check whether an array rises, falls, and then rises again, with the required strict steps.",
+  approaches: [
+    { name: "One pass with states", intuition: "Walk the array once, tracking which of the three phases is active.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Negatives and repeats', input: '[-3,8,8,-1,2]' },
     { label: 'Too short', input: '[2,1,3]' },

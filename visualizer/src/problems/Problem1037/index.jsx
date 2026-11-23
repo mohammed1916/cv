@@ -10,6 +10,10 @@ const definition = {
   inputLabel: 'Three points as JSON, such as [[0,0],[1,2],[2,5]]',
   url: 'https://leetcode.com/problems/valid-boomerang/',
   complexity: 'O(1) time and O(1) space: one cross product of two edge vectors.',
+  question: "Decide whether three points are not all on one straight line.",
+  approaches: [
+    { name: "Cross product of edge vectors", intuition: "Three points are collinear exactly when the cross product of two edge vectors is zero.", time: "O(1)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Triangle', input: '[[0,0],[1,2],[2,5]]' },
     { label: 'Horizontal line', input: '[[0,1],[3,1],[7,1]]' },

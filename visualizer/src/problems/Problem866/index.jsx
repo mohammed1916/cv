@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'Integer n (JSON, 1 to 100,000,000)',
   url: 'https://leetcode.com/problems/prime-palindrome/',
   complexity: 'About 10^4 odd-length palindromes to scan, each tested in O(sqrt p) time.',
+  question: "Find the smallest prime palindrome that is at least n.",
+  approaches: [
+    { name: "Generate palindromes and test primes", intuition: "Build palindromes from their first half in increasing order and test each for primality, skipping even-length ones.", time: "O(sqrt(M)) per candidate", space: "O(1)" },
+  ],
   examples: [
     { label: 'n = 6', input: '6' },
     { label: 'n = 8', input: '8' },

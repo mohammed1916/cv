@@ -19,6 +19,11 @@ const definition = {
   inputLabel: "JSON object with key nums, positive integers (e.g. {\"nums\": [1, 2, 1, 3]})",
   url: "https://leetcode.com/problems/count-the-number-of-good-partitions/",
   complexity: "O(n^2) in this visualization for n up to 50; the standard solution counts segments k and returns 2^(k-1) in O(n).",
+  question: "Count the ways to split an array into contiguous parts so no value appears in two different parts.",
+  approaches: [
+    { name: "Merged intervals and powers of two", intuition: "Merge values whose first and last occurrences overlap into blocks; each boundary between blocks can be cut or not, giving 2^(blocks - 1).", time: "O(n)", space: "O(n)" },
+    { name: "Prefix DP over cuts", intuition: "Let ways[i] count valid partitions of a prefix, checking each earlier cut against first and last occurrences.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: "Example 1", input: "{\"nums\": [1, 2, 3, 4]}" },
     { label: "Example 2", input: "{\"nums\": [1, 1, 1, 1]}" },

@@ -8,6 +8,10 @@ const definition = {
   inputLabel: 'Nonnegative integer num (e.g. 5)',
   url: 'https://leetcode.com/problems/encode-number/description/',
   complexity: 'O(log num) time and O(log num) space for the binary digits. The visualization caps num at 1023; the draft does not state an exact official bound.',
+  question: "Encode a non-negative integer as a binary code that skips the leading one of num plus one.",
+  approaches: [
+    { name: "Binary of num plus one", intuition: "Take the binary form of num plus one and remove its leading digit.", time: "O(log num)", space: "O(log num)" },
+  ],
   examples: [
     { label: 'Five', input: '5' },
     { label: 'Three', input: '3' },

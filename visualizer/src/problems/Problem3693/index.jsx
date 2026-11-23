@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with n and costs (JSON), for example {"n":4,"costs":[1,2,3,4]}',
   url: 'https://leetcode.com/problems/climbing-stairs-ii/',
   complexity: 'O(n) time and O(n) space. The visualization caps n at 12.',
+  question: "Find the minimum cost to climb to step n, where each step has a cost and you can move by one or two steps.",
+  approaches: [
+    { name: "Forward DP", intuition: "Fill each step's minimum cost from the previous one or two steps.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Four costs, one cheap', input: '{"n":4,"costs":[3,9,2,6]}' },
     { label: 'Single heavy cost', input: '{"n":1,"costs":[10000]}' },

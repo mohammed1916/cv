@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Four-digit number (1000 to 9999)',
   url: 'https://leetcode.com/problems/minimum-sum-of-four-digit-number-after-splitting-digits/',
   complexity: 'O(1) time for four digits; the sort is constant-sized.',
+  question: "Split the four digits of a number into two new numbers using each digit once, so that the sum of the two numbers is as small as possible.",
+  approaches: [
+    { name: "Sort and interleave", intuition: "Sort the four digits and alternate them between the two numbers, so the two smallest digits become the tens digits.", time: "O(1)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Repeated digit', input: '4441' },
     { label: 'Zero present', input: '7306' },

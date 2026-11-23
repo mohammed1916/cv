@@ -20,6 +20,10 @@ const definition = {
   number: meta.number,
   phases, parse: parseInput, build: buildTrace, code, sql, python, inputLabel,
   url: `https://leetcode.com/problems/${meta.slug}/`,
+  question: "For each passenger, work out how many passengers board each bus, where a bus takes passengers up to its capacity.",
+  approaches: [
+    { name: "Nearest later bus lookup", intuition: "Give each passenger the first bus that arrives at or after their arrival time, then count the passengers per bus within its capacity.", time: "O(p log b)", space: "O(p + b)" },
+  ],
   complexity, examples,
 }
 

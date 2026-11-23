@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'JSON array of small nonnegative integers (e.g. [1,0,2,0])',
   url: 'https://leetcode.com/problems/lexicographically-maximum-mex-array/',
   complexity: 'This trace rescans the suffix for each cut, so it is O(n^2) on the small visual inputs. The official limit is 100000 values.',
+  question: "Cut an array into consecutive segments, record each segment's mex, and make the resulting sequence lexicographically maximum.",
+  approaches: [
+    { name: "Greedy cut with suffix reach", intuition: "From each cut, take the largest mex the remaining suffix can reach, using the shortest segment that achieves it.", time: "O(n^2) on small visual inputs", space: "O(n)" },
+  ],
   examples: [
     { label: 'Mixed', input: '[1,0,2,0]' },
     { label: 'Repeated zeros', input: '[0,1,0,0]' },

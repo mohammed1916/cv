@@ -12,6 +12,11 @@ const definition = {
   inputLabel: 'JSON {"start": "2024-02-27", "end": "2024-03-02", "step": 2}',
   url: 'https://leetcode.com/problems/date-range-generator/',
   complexity: 'O(days / step) yields. Each next() call does constant work.',
+  question: "Generate the dates from a start date to an end date, moving forward by a fixed number of days at each step.",
+  approaches: [
+    { name: "Lazy generator", intuition: "Yield the current date, add the step, and stop once the date passes the end; values are produced on demand.", time: "O(days / step)", space: "O(1)" },
+    { name: "Precompute an array of dates", intuition: "Build every date in advance and return the list.", time: "O(days / step)", space: "O(days / step)" },
+  ],
   examples: [
     { label: 'Summer days', input: '{"start":"2023-07-28","end":"2023-08-06","step":4}' },
     { label: 'Leap day', input: '{"start":"2024-02-27","end":"2024-03-02","step":2}' },

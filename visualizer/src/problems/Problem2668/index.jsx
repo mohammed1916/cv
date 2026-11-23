@@ -42,6 +42,10 @@ const definition = {
   python,
   inputLabel: 'JSON object with a Salary table',
   complexity: 'Linear in the salary records: one pass for each employee maximum and one pass to keep the matching rows.',
+  question: "Given an employee salary table, find the latest salary for each employee, the most recent record by date.",
+  approaches: [
+    { name: "Group and maximum", intuition: "Group the rows by employee, pick the maximum date per employee, and join back to the salary.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Teaching sample', input: JSON.stringify(SAMPLE) },
     { label: 'Single row', input: '{"Salary":[{"employee_id":1,"name":"Ada","salary":5000}]}' },

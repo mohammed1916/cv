@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with nums (JSON array of integers)',
   url: 'https://leetcode.com/problems/longest-subsequence-with-decreasing-adjacent-difference/',
   complexity: 'O(n^3) time and O(n^2) space. The visualization caps nums at 7 values.',
+  question: "Find the longest subsequence whose adjacent difference strictly decreases.",
+  approaches: [
+    { name: "Dynamic programming over last two values", intuition: "Track the longest subsequence ending in each pair of positions, extending the best valid earlier pair.", time: "O(n^3)", space: "O(n^2)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"nums":[16,6,3]}' },
     { label: 'Example 2', input: '{"nums":[5,1,4,2]}' },

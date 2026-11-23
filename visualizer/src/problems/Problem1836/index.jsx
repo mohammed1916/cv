@@ -12,6 +12,11 @@ const definition = {
   inputLabel: "A JSON array of integers, e.g. [1,2,3,2]",
   url: "https://leetcode.com/problems/remove-duplicates-from-an-unsorted-linked-list/",
   complexity: "O(n) expected time and O(n) space for n nodes (a hash map of counts). The visualization shows at most 12 nodes so every count stays visible.",
+  question: "Delete every node whose value appears more than once in the list, keeping only values that are unique in the whole list and their original order.",
+  approaches: [
+    { name: "Count then copy", intuition: "Count every value in a hash map, then copy only the nodes whose count is one.", time: "O(n)", space: "O(n)" },
+    { name: "Sort and compare neighbours", intuition: "Sort a copy of the values so equal values sit together, then keep the ones with no equal neighbour.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: "Value 2 repeats", input: "[1,2,3,2]" },
     { label: "Mixed repeats", input: "[1,1,1,2,3]" },

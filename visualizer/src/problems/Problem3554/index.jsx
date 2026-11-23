@@ -42,6 +42,10 @@ const definition = {
   inputLabel: 'Object with product_info and product_purchases lists',
   url: 'https://leetcode.com/problems/find-category-recommendation-pairs/description/',
   complexity: 'O(c^2 * u) time for c categories and u users in this small trace. Each user contributes distinct categories only once.',
+  question: "From purchase records, list pairs of categories that users often buy together.",
+  approaches: [
+    { name: "Group then pair", intuition: "Group purchases by user and count category pairs.", time: "O(c^2 u)", space: "O(c^2)" },
+  ],
   examples: [
     {
       label: 'Sample',

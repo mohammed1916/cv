@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'Grid rows (JSON array of strings, up to 8 x 8)',
   url: 'https://leetcode.com/problems/shortest-path-to-get-all-keys/',
   complexity: 'O(m * n * 2^k) states, each with 4 moves; k up to 6 keys.',
+  question: "On a grid with keys and locked doors, find the fewest steps to collect all keys.",
+  approaches: [
+    { name: "BFS over position and key set", intuition: "Each state is a cell plus the bitmask of keys held; the first state holding all keys gives the answer.", time: "O(m * n * 2^k)", space: "O(m * n * 2^k)" },
+  ],
   examples: [
     { label: 'Two keys, two locks', input: '["@.a.#","###.#","b.A.B"]' },
     { label: 'Single key behind lock', input: '["@..a","#.#.","..A."]' },

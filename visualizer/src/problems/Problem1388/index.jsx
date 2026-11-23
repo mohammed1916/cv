@@ -8,6 +8,10 @@ const definition = {
   inputLabel: 'Slices (JSON object with slices)',
   url: 'https://leetcode.com/problems/pizza-with-3n-slices/',
   complexity: 'O(n²) time and O(n) space for n = length / 3 chosen slices, using two line passes. The visualization accepts up to 30 slices.',
+  question: "Pick n non-adjacent slices from a circular pizza of 3n slices to maximize the total.",
+  approaches: [
+    { name: "Two linear DP runs", intuition: "Run the same DP on the array without its first and without its last slice.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Six slices', input: '{"slices":[5,1,9,2,7,4]}' },
     { label: 'Three', input: '{"slices":[1,2,3]}' },

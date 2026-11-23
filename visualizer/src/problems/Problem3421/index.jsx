@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with a scores table (student_id, subject, score, exam_date)',
   url: 'https://leetcode.com/problems/find-students-who-improved/description/',
   complexity: 'Teaching model: one grouping pass, then one comparison per student and subject pair. Visualization caps the table at 16 rows.',
+  question: "For each student and subject, compare the first and latest exam scores and list the pairs where the score rose.",
+  approaches: [
+    { name: "Group then compare", intuition: "Group rows by student and subject, then compare the earliest and latest score in each group.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example', input: '{"scores":[{"student_id":1,"subject":"Math","score":60,"exam_date":"2024-01-01"},{"student_id":1,"subject":"Math","score":80,"exam_date":"2024-02-01"},{"student_id":1,"subject":"Math","score":70,"exam_date":"2024-03-01"},{"student_id":2,"subject":"Art","score":90,"exam_date":"2024-01-10"},{"student_id":2,"subject":"Art","score":85,"exam_date":"2024-02-10"},{"student_id":3,"subject":"Math","score":50,"exam_date":"2024-01-05"},{"student_id":3,"subject":"Art","score":40,"exam_date":"2024-01-03"},{"student_id":3,"subject":"Art","score":40,"exam_date":"2024-04-03"},{"student_id":4,"subject":"Math","score":30,"exam_date":"2024-01-05"},{"student_id":4,"subject":"Math","score":65,"exam_date":"2024-06-01"}]}' },
     { label: 'One exam only', input: '{"scores":[{"student_id":5,"subject":"Bio","score":99,"exam_date":"2024-05-05"}]}' },

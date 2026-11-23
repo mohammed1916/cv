@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Grid (JSON object with grid rows of integers from -4 to 4)',
   url: 'https://leetcode.com/problems/maximum-non-negative-product-in-a-matrix/',
   complexity: 'O(m * n) time with two products per cell. The visualization caps the grid at 6 by 6.',
+  question: "Find the maximum non-negative product along a path from the top-left to the bottom-right of a grid.",
+  approaches: [
+    { name: "Max and min product DP", intuition: "Track both the largest and smallest product that reach each cell, since a negative can flip the sign.", time: "O(m * n)", space: "O(m * n)" },
+  ],
   examples: [
     { label: 'Two negatives', input: '{"grid":[[1,-2,1],[1,-2,1],[3,-4,1]]}' },
     { label: 'Always negative', input: '{"grid":[[-1,-2,-3],[-2,-3,-3],[-3,-3,-2]]}' },

@@ -14,6 +14,11 @@ const definition = {
   inputLabel: 'JSON list of words, each "prev" or an integer from 1 to 100 as a string',
   url: 'https://leetcode.com/problems/last-visited-integers/',
   complexity: 'O(n * n) time in the worst case for a run of prev words, O(n) space. The visualization caps the list at 20 words.',
+  question: "Process words where a string of the form -1 means look back at the previous integers, and return the answers for each lookback.",
+  approaches: [
+    { name: "Stack of integers with a streak counter", intuition: "Keep the integers seen so far; each -1 reads the integer from a count of consecutive -1 words back.", time: "O(n^2) worst case", space: "O(n)" },
+    { name: "Index by streak length", intuition: "Store integers in a list and index into it using the current streak.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Growing record', input: '["5","8","prev","9","prev","prev","prev"]' },
     { label: 'Too far back', input: '["4","prev","prev","7","prev"]' },

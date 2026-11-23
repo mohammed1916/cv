@@ -14,6 +14,11 @@ const definition = {
   inputLabel: 'Object with word (lowercase, 1 to 40 letters in this trace) and k',
   url: 'https://leetcode.com/problems/minimum-time-to-revert-word-to-initial-state-ii/',
   complexity: 'O(n) time for the Z-array and O(n / k) checks, each a constant-time lookup. The trace caps the word at 40 letters.',
+  question: "Find the smallest number of steps after which removing a fixed count from the front returns the word to its start, for a long word.",
+  approaches: [
+    { name: "Z-function", intuition: "Build the Z-function of the word to find all valid step counts in linear time.", time: "O(n)", space: "O(n)" },
+    { name: "Compare shifted strings", intuition: "Try each step count and compare directly.", time: "O(n^2 / k)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"word":"abcab","k":2}' },
     { label: 'Example 2', input: '{"word":"aabaa","k":4}' },

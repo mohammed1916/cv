@@ -13,6 +13,11 @@ const definition = {
   inputLabel: 'JSON {"barcodes": [...]} with values 1 to 6',
   url: 'https://leetcode.com/problems/distant-barcodes/',
   complexity: 'O(n log k) time for n barcodes and k distinct values. The visualization caps input at 12 barcodes.',
+  question: "Rearrange barcodes so that no two adjacent barcodes are equal.",
+  approaches: [
+    { name: "Max heap by frequency", intuition: "Always place the most frequent remaining code that differs from the last one placed.", time: "O(n log k)", space: "O(n)" },
+    { name: "Sort by frequency then interleave", intuition: "Sort codes by frequency and fill even positions first, then odd positions.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"barcodes":[1,1,1,2,2,2]}' },
     { label: 'Example 2', input: '{"barcodes":[1,1,1,1,2,2,3,3]}' },

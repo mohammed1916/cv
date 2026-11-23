@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'Object with k, span and requests ([user, time] pairs)',
   url: 'https://leetcode.com/problems/maximum-requests-without-violating-the-limit/',
   complexity: 'O(n log n) time for sorting the requests, O(n) extra space. Users are independent, so each timeline is handled alone. The visualization caps the input at 14 requests.',
+  question: "Keep as many requests as possible so that no user has more than k kept requests in any window.",
+  approaches: [
+    { name: "Sort and greedily keep", intuition: "Users are independent, so sort each timeline and keep requests while the window limit holds.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Two users', input: '{"k":2,"span":5,"requests":[["ana",1],["ana",3],["ana",4],["ben",2],["ana",9],["ben",3],["ben",4],["ben",5]]}' },
     { label: 'Tight limit', input: '{"k":1,"span":3,"requests":[["max",0],["max",2],["max",4],["max",9],["max",10]]}' },

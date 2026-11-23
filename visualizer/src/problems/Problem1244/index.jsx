@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with ops: ["add", id, score], ["top", k] or ["reset", id]',
   url: 'https://leetcode.com/problems/design-a-leaderboard/',
   complexity: 'O(1) per add or reset, and O(p log p) per top query for p players. The visualization caps the input at 20 operations.',
+  question: "Design a leaderboard that adds points, resets players, and returns the top K total scores.",
+  approaches: [
+    { name: "Score map and sort", intuition: "Keep each player's score in a map and sort the scores when the top K is requested.", time: "O(p log p) per top query", space: "O(p)" },
+  ],
   examples: [
     { label: 'Example', input: '{"ops":[["add",1,30],["add",2,50],["add",3,10],["top",2],["add",3,60],["top",2],["reset",2],["top",1]]}' },
     { label: 'Top query on an empty board', input: '{\"ops\":[[\"top\",1]]}' },

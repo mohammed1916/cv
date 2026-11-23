@@ -14,6 +14,10 @@ const definition = {
   complexity,
   inputLabel: 'Object with nums and the query arrays l and r (inclusive indices)',
   url: 'https://leetcode.com/problems/arithmetic-subarrays/',
+  question: "For several ranges of an array, decide whether the values in each range can be rearranged into an arithmetic sequence.",
+  approaches: [
+    { name: "Sort each range", intuition: "Copy each range, sort it, and check that all neighbouring gaps are equal.", time: "O(m * k log k)", space: "O(k)" },
+  ],
 }
 
 export default function Problem1630Visualizer() {

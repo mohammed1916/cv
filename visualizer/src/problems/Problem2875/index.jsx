@@ -14,6 +14,11 @@ const definition = {
   inputLabel: 'JSON object with nums (1 to 30 values from 1 to 100) and target, for example {"nums":[1,2,3],"target":5}',
   url: 'https://leetcode.com/problems/minimum-size-subarray-in-infinite-array/',
   complexity: 'O(n) time on the two-copy array. The visualization caps nums at 30 values.',
+  question: "In an infinitely repeated array, find the shortest contiguous piece whose sum equals a target, or -1 if none exists.",
+  approaches: [
+    { name: "Whole copies plus two-copy sliding window", intuition: "Strip full copies of the total, then find the shortest window in the doubled array for the remainder.", time: "O(n)", space: "O(n)" },
+    { name: "Prefix sums with map lookup", intuition: "Store prefix sums of the repeated array and look up the needed earlier sum.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Five values, target eleven', input: '{"nums":[4,9,2,6,5],"target":11}' },
     { label: 'Whole copies', input: '{"nums":[3,1],"target":8}' },

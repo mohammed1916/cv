@@ -12,6 +12,11 @@ const definition = {
   inputLabel: 'Object with nums and k (e.g. {"nums":[2,4,5,7],"k":2})',
   url: "https://leetcode.com/problems/count-the-number-of-k-free-subsets/",
   complexity: "O(n log n) time for n values, from the sort; the chain walk visits each value once after that, and the set gives constant-time membership. O(n) extra space. The visualization caps nums at 12 values from 1 to 40 and k at 10. The official modulo and integer-range rules are not restated here, so this trace returns the exact count.",
+  question: "Given an array of positive integers and a value k, count the subsets in which no two elements differ by exactly k.",
+  approaches: [
+    { name: "Sort and grouped chains", intuition: "Group numbers into chains differing by k, then count valid subsets in each chain with a small DP.", time: "O(n log n)", space: "O(n)" },
+    { name: "Backtracking", intuition: "Try including or excluding each element while checking conflicts with chosen elements.", time: "O(2^n)", space: "O(n)" },
+  ],
   examples: [
     { label: "Two chains of two", input: '{"nums":[2,4,5,7],"k":2}' },
     { label: "Three pairs", input: '{"nums":[1,2,3,4,5,6],"k":3}' },

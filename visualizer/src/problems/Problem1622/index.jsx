@@ -8,6 +8,10 @@ const definition = {
   inputLabel: 'Object with ops, a list of [name, value] pairs (JSON)',
   url: 'https://leetcode.com/problems/fancy-sequence/',
   complexity: 'O(1) time for addAll and multAll, and O(log p) for append and getIndex because of one modular inverse or product. O(n) space for n appends.',
+  question: "Design a sequence that supports appending values, adding to all values, multiplying all values, and reading one index modulo a prime.",
+  approaches: [
+    { name: "Lazy affine transform", intuition: "Store each value with the global add and multiply removed, and undo them on read with a modular inverse.", time: "O(log p) per append or read", space: "O(n)" },
+  ],
   examples: [
     { label: 'Mixed calls', input: JSON.stringify({ ops: [['append', 2], ['addAll', 3], ['append', 7], ['multAll', 2], ['getIndex', 0], ['addAll', 3], ['append', 10], ['multAll', 2], ['getIndex', 2], ['getIndex', 9]] }) },
     { label: 'Empty read', input: JSON.stringify({ ops: [['getIndex', 0], ['append', 5], ['getIndex', 0]] }) },

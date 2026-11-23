@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'A JSON string of I and D, for example "IIIDIDDD"',
   url: 'https://leetcode.com/problems/construct-smallest-number-from-di-string/',
   complexity: 'O(n) time and O(n) space. The visualization caps the pattern at 8 characters.',
+  question: "Build the smallest permutation of digits that matches a pattern of increases and decreases.",
+  approaches: [
+    { name: "Stack for decreasing runs", intuition: "Push indices onto a stack while the pattern decreases, and pop them when it increases.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Own: six-step zigzag', input: '"DDIIDI"' },
     { label: 'All decreasing', input: '"DDD"' },

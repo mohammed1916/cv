@@ -10,6 +10,10 @@ const definition = {
   code,
   python,
   pythonLineMap,
+  question: "Count triples of indices where two arrays built from the XORs of ranges are equal.",
+  approaches: [
+    { name: "Prefix XOR pairs", intuition: "Equal range XORs mean the prefix values match, which gives every valid triple.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Pairs', input: '[1,1]' },
     { label: 'Mixed', input: '[2,3,3,2,1]' },

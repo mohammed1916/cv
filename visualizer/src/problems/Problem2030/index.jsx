@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 's, k, letter and repetition (JSON)',
   url: 'https://leetcode.com/problems/smallest-k-length-subsequence-with-occurrences-of-a-letter/',
   complexity: 'O(k * n * 26) time in this greedy: for each answer position, try letters in order.',
+  question: "Find the lexicographically smallest subsequence of a given length that contains a given letter at least a certain number of times.",
+  approaches: [
+    { name: "Monotonic stack greedy", intuition: "Pop larger letters while enough characters remain to fill the length and the required letter count.", time: "O(n)", space: "O(k)" },
+  ],
   examples: [
     { label: 'Two copies', input: '{"s":"hello","k":3,"letter":"l","repetition":2}' },
     { label: 'Second letter', input: '{"s":"banana","k":3,"letter":"a","repetition":1}' },

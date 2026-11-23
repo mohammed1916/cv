@@ -11,6 +11,10 @@ const definition = {
   inputLabel: 'String length n (integer 1 to 40)',
   url: 'https://leetcode.com/problems/number-of-strings-which-can-be-rearranged-to-contain-substring/',
   complexity: 'O(n * 12) time for the 12 capped states, and O(1) space. The visualization caps n at 40.',
+  question: "Count the length-n strings over lowercase letters that can be rearranged to contain a fixed multiset of letters.",
+  approaches: [
+    { name: "Capped-count DP", intuition: "Track whether an l is present, how many e's are seen up to two, and whether a t is present: 12 states updated once per position.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Length 4', input: '4' },
     { label: 'Length 10', input: '10' },

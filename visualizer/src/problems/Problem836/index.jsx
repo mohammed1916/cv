@@ -11,6 +11,10 @@ const definition = {
   inputLabel: 'rec1 and rec2 (JSON object of [x1, y1, x2, y2])',
   url: 'https://leetcode.com/problems/rectangle-overlap/',
   complexity: 'O(1) time and O(1) space.',
+  question: "Decide whether two axis-aligned rectangles overlap with positive area, so touching edges do not count.",
+  approaches: [
+    { name: "Strict interval checks", intuition: "Two rectangles overlap when their x ranges and y ranges each overlap strictly.", time: "O(1)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Corner', input: '{"rec1":[0,0,4,3],"rec2":[2,1,6,5]}' },
     { label: 'Touching', input: '{"rec1":[0,0,2,2],"rec2":[2,0,4,2]}' },

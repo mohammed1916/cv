@@ -14,6 +14,11 @@ const definition = {
   inputLabel: 'JSON object with nums and k',
   url: 'https://leetcode.com/problems/find-the-longest-equal-subarray/',
   complexity: 'O(n) time after grouping positions, with two pointers per value. The visualization caps input at 12 values.',
+  question: "Find the longest subarray where, after deleting at most k elements, all remaining values are equal.",
+  approaches: [
+    { name: "Two pointers per value", intuition: "For each value, slide a window across its positions while the gaps removed stay within k.", time: "O(n)", space: "O(n)" },
+    { name: "Sliding window over the whole array", intuition: "Keep a window and count the most frequent value inside it.", time: "O(n) expected with counts", space: "O(n)" },
+  ],
   examples: [
     { label: 'Ten values, k of two', input: '{"nums":[1,3,3,2,4,1,3,3,4,2],"k":2}' },
     { label: 'k of zero, repeated runs', input: '{"nums":[4,4,4,4,1,1,2],"k":0}' },

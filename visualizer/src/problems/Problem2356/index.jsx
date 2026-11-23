@@ -58,6 +58,10 @@ const definition = {
   inputLabel: 'Object with Teacher: list of [teacher_id, subject_id, dept_id] rows',
   url: 'https://leetcode.com/problems/number-of-unique-subjects-taught-by-each-teacher/',
   complexity: 'One pass over the rows with a set per teacher. Repeated (teacher, subject) rows collapse inside the set.',
+  question: "Using a teacher assignments table, count the distinct subjects each teacher teaches.",
+  approaches: [
+    { name: "Group with distinct count", intuition: "Group by teacher and count the distinct subjects.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example', input: '{"Teacher":[[7,3,2],[7,5,2],[7,3,6],[8,4,1],[8,9,1],[9,2,5],[9,2,5]]}' },
   ],

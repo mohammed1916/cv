@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with lowercase s and t (JSON)',
   url: 'https://leetcode.com/problems/append-characters-to-string-to-make-subsequence/',
   complexity: 'O(|s|) time and O(1) extra space.',
+  question: "Find the fewest characters to append to s so that t becomes a subsequence of s plus those characters.",
+  approaches: [
+    { name: "Greedy two-pointer match", intuition: "Walk through s matching the characters of t in order, then append the unmatched tail of t.", time: "O(|s|)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Target already inside s', input: '{"s":"lantern","t":"tern"}' },
     { label: 'Only the final letter matches', input: '{"s":"zebra","t":"quiz"}' },

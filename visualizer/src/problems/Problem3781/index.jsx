@@ -11,6 +11,10 @@ const definition = {
   inputLabel: 'Values and bits (JSON object with nums and s)',
   url: 'https://leetcode.com/problems/maximum-score-after-binary-swaps/',
   complexity: 'O(n^2) time in this visualization. The visualization caps n at 12.',
+  question: "Maximise the score of a binary string after swaps that move ones to the left.",
+  approaches: [
+    { name: "Table of best scores by target position", intuition: "Ones move only left in order, so a table of best scores over reachable target positions finds the maximum.", time: "O(n^2)", space: "O(n^2)" },
+  ],
   examples: [
     { label: 'Four weights, mixed bits', input: '{"nums":[4,1,7,2],"s":"0110"}' },
     { label: 'No ones', input: '{"nums":[4,7,2,9],"s":"0000"}' },

@@ -16,6 +16,10 @@ const definition = {
   inputLabel: 'Digit string JSON with s',
   url: 'https://leetcode.com/problems/count-substrings-divisible-by-last-digit/',
   complexity: 'O(n) time and O(1) extra space for n digits, using residue counters. The visualization caps s at 20 digits.',
+  question: "Count substrings of a digit string that are divisible by their last digit.",
+  approaches: [
+    { name: "Residue counters", intuition: "Track counts of prefix residues modulo each digit so each substring test is a lookup.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"s":"12936"}' },
     { label: 'Example 2', input: '{"s":"5701283"}' },

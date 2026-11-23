@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'String of letters and ? marks (JSON string)',
   url: 'https://leetcode.com/problems/replace-all-s-to-avoid-consecutive-repeating-characters/',
   complexity: 'O(n) time: one left-to-right pass, and each ? checks at most two neighbours.',
+  question: "Replace question marks so that no two neighbouring letters are equal.",
+  approaches: [
+    { name: "Greedy left to right", intuition: "Replace each question mark with a letter that differs from its two neighbours.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Mixed', input: '"a?b??c"' },
     { label: 'All marks', input: '"???"' },

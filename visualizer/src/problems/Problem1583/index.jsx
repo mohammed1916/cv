@@ -32,6 +32,10 @@ const definition = {
   inputLabel: 'Input JSON: {"n", "preferences", "pairs"}',
   url: "https://leetcode.com/problems/count-unhappy-friends/",
   complexity: "O(n^2) time and O(n^2) space for n friends. The visualization caps n at 40.",
+  question: "Count friends who are unhappy with the pairing that was made for them.",
+  approaches: [
+    { name: "Preference rank lookup", intuition: "Convert preferences to ranks, then test each friend against each friend they like more.", time: "O(n^2)", space: "O(n^2)" },
+  ],
   examples: [
     { label: "Sample A", input: JSON.stringify({ n: 4, preferences: [[2, 1, 3], [2, 0, 3], [0, 1, 3], [0, 1, 2]], pairs: [[0, 1], [2, 3]] }) },
     { label: "Four friends, crossed", input: JSON.stringify({ n: 4, preferences: [[1, 3, 2], [0, 2, 3], [1, 3, 0], [0, 1, 2]], pairs: [[0, 2], [1, 3]] }) },

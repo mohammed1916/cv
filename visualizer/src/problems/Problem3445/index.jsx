@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'An object with s (digits 0 to 4) and k, for example {"s": "1122211", "k": 3}',
   url: 'https://leetcode.com/problems/maximum-difference-between-even-and-odd-frequency-ii/',
   complexity: 'O(25 * n) time with prefix counts. The visualization caps s at 16 digits.',
+  question: "Find the largest difference between two letter counts in a substring, subject to parity and length rules.",
+  approaches: [
+    { name: "Prefix counts", intuition: "Use prefix counts of each letter pair so each window's parity and difference are read in constant time.", time: "O(25 n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Repeating 1 and 2, k two', input: '{"s":"12122","k":2}' },
     { label: 'Seven digits, k three', input: '{"s":"4031204","k":3}' },

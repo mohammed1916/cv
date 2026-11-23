@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'List values as JSON, starting and ending with 0, e.g. [0,3,1,0,4,5,2,0]',
   url: 'https://leetcode.com/problems/merge-nodes-in-between-zeros/',
   complexity: 'O(n) time and O(n) space for the merged list. The visualization caps the list at 14 values, each from 0 to 9.',
+  question: "Merge the nodes between each pair of zero nodes in a linked list into one node holding their sum.",
+  approaches: [
+    { name: "Accumulate until the next zero", intuition: "Walk the list and add each value into a running total that becomes a new node at each zero.", time: "O(n)", space: "O(1) extra" },
+  ],
   examples: [
     { label: 'Two runs', input: '[0,3,1,0,4,5,2,0]' },
     { label: 'Three runs', input: '[0,1,0,3,0,2,2,0]' },

@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Matrix of 0 and 1 as a JSON array of rows',
   url: 'https://leetcode.com/problems/flip-columns-for-maximum-number-of-equal-rows/',
   complexity: 'O(m^2 * n) time for an m by n matrix. The visualization caps the matrix at 6 by 6.',
+  question: "Flip some columns of a binary matrix to make as many rows equal as possible, and return that count.",
+  approaches: [
+    { name: "Group rows by pattern", intuition: "Rows that are equal or complementary can be made identical by one column choice; count the largest group.", time: "O(m^2 * n)", space: "O(m * n)" },
+  ],
   examples: [
     { label: 'Two rows, complement pair', input: '[[0,1,1,0],[1,0,0,1]]' },
     { label: 'Three rows, shared pattern', input: '[[1,1,0],[1,1,0],[0,0,1]]' },

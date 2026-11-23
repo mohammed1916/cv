@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'Object with s, t (equal-length binary strings), flipCost, swapCost and crossCost',
   url: 'https://leetcode.com/problems/minimum-cost-to-make-two-binary-strings-equal/',
   complexity: 'O(n) time to classify mismatches, then O(min(a, b)) candidates. The visualization caps the strings at 40 characters.',
+  question: "Make two binary strings equal at the lowest cost, using flips, swaps inside a string, or cross swaps.",
+  approaches: [
+    { name: "Classify mismatches and pair them", intuition: "Count the mismatches of each kind and try each number of mixed pairs.", time: "O(n + min(a, b))", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"s":"0110","t":"1001","flipCost":4,"swapCost":3,"crossCost":1}' },
     { label: 'Example 2', input: '{"s":"11","t":"00","flipCost":1,"swapCost":9,"crossCost":2}' },

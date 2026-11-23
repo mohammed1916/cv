@@ -14,6 +14,10 @@ const definition = {
   complexity,
   inputLabel: 'JSON matrix of 0s and 1s (1 to 6 by 1 to 6 in this visual)',
   url: 'https://leetcode.com/problems/largest-submatrix-with-rearrangements/',
+  question: "Columns may be rearranged; find the largest submatrix made entirely of ones.",
+  approaches: [
+    { name: "Sort column heights per row", intuition: "For each row, treat the column heights as bars sorted from tallest, and find the largest rectangle.", time: "O(m * n log n)", space: "O(n)" },
+  ],
 }
 
 export default function Problem1727Visualizer() {

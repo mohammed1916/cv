@@ -3,6 +3,10 @@ import { meta } from './meta'
 import { buildTrace, parseInput, code, sql, python, phases, examples, complexity, inputLabel } from './algorithm'
 
 const definition = {
+  question: "Using a teams table of team names, list every ordered pair of different teams as a match.",
+  approaches: [
+    { name: "Cross join excluding self pairs", intuition: "Pair every team with every other team and drop the pairs where a team meets itself.", time: "O(t^2)", space: "O(t^2)" },
+  ],
   number: meta.number,
   phases, parse: parseInput, build: buildTrace, code, sql, python, inputLabel,
   url: `https://leetcode.com/problems/${meta.slug}/`,

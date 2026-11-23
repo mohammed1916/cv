@@ -11,6 +11,10 @@ const definition = {
   inputLabel: 'JSON object with s and words (e.g. {"s":"catdog","words":["cat","dog","bird"]})',
   url: 'https://leetcode.com/problems/check-if-string-is-a-prefix-of-array/',
   complexity: 'O(total characters) time. Each word is appended once and the build is compared with s.',
+  question: "Check whether a string can be built by concatenating a prefix of the given words in order.",
+  approaches: [
+    { name: "Build and compare", intuition: "Concatenate words one at a time and stop when the build matches the string or becomes longer.", time: "O(total length)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Matches after two words', input: '{"s":"catdog","words":["cat","dog","bird"]}' },
     { label: 'Overshoots', input: '{"s":"catdo","words":["cat","dog"]}' },

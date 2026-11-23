@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with num1, num2 and num3 (integers from 1 to 9999)',
   url: 'https://leetcode.com/problems/find-the-key-of-the-numbers/',
   complexity: 'O(1) time and space, since every number has at most four digits.',
+  question: "Combine three numbers digit by digit into a key, keeping the smallest digit at each position.",
+  approaches: [
+    { name: "Digit-by-digit minimum", intuition: "Pad the numbers to four digits, take the minimum of each digit column, and read the key back.", time: "O(1)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example', input: '{"num1":452,"num2":61,"num3":7}' },
     { label: 'Leading zeros', input: '{"num1":9,"num2":999,"num3":42}' },

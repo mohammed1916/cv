@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with s (binary string, up to 16 characters) and queries ([l, r] pairs, up to 4)',
   url: 'https://leetcode.com/problems/maximize-active-section-with-trade-ii/description/',
   complexity: 'Teaching simulation: each query checks every block of ones, so O(n^2) per query. The official constraints need a far faster method.',
+  question: "For a set of substring queries, find the longest run of active sections after the best single trade.",
+  approaches: [
+    { name: "Try every trade", intuition: "For each query, check every block of ones between two zeros and fill the longest zero run.", time: "O(n^2) per query", space: "O(n)" },
+  ],
   examples: [
     { label: 'Invented example', input: '{"s":"1010001","queries":[[0,6],[1,3]]}' },
     { label: 'All ones', input: '{"s":"1111","queries":[[0,3]]}' },

@@ -15,6 +15,11 @@ const definition = {
   inputLabel: 'Object with watchedVideos, friends, id and level (JSON)',
   url: 'https://leetcode.com/problems/get-watched-videos-by-your-friends/',
   complexity: 'O(n + E + V log V) time for n people, E friendships and V videos. The visualization caps people at 8.',
+  question: "List the videos watched by friends exactly k steps away, ranked by frequency then name.",
+  approaches: [
+    { name: "BFS by level, then count", intuition: "Find the people exactly k edges away with BFS, then count and sort their videos.", time: "O(n + E + V log V)", space: "O(n + E + V)" },
+    { name: "Set expansion per level", intuition: "Grow the frontier one level at a time with sets and count the videos of the final frontier.", time: "O(n + E + V log V)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Level 1', input: `{${base},"level":1}` },
     { label: 'Level 2', input: `{${base},"level":2}` },

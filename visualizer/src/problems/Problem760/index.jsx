@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'nums1 and nums2 (JSON)',
   url: 'https://leetcode.com/problems/find-anagram-mappings/',
   complexity: 'O(n) time and space with a hash map. The visualization caps input at 20 values.',
+  question: "Map each value of one array to its index in another array that is an anagram of it.",
+  approaches: [
+    { name: "Value to position map", intuition: "Record where each value sits in the second array, then look up each value of the first.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"nums1":[12,28,46,32,50],"nums2":[50,12,32,46,28]}' },
     { label: 'Repeated', input: '{"nums1":[1,1,2],"nums2":[2,1,1]}' }, { label: 'Single value', input: '{"nums1":[7],"nums2":[7]}' }, { label: 'Extremes', input: '{"nums1":[-100,100,0],"nums2":[0,100,-100]}' }, { label: 'Long run: 20 values', input: '{"nums1":[-96,13,35,-88,-67,50,93,-54,96,14,81,81,-40,31,-14,86,-74,10,-51,75],"nums2":[-54,-14,35,81,-40,-88,31,75,-51,-74,-96,-67,81,50,86,10,96,14,13,93]}' },

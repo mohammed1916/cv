@@ -14,6 +14,11 @@ const definition = {
   inputLabel: 'JSON array of integers from 1 to 30, for example [1,2,3,4,5]',
   url: 'https://leetcode.com/problems/maximum-strong-pair-xor-ii/',
   complexity: 'O(n log n + n * B) time for B = 5 bits. The visualization caps the array at 12 values.',
+  question: "Find the maximum XOR over strong pairs, where the array may be large.",
+  approaches: [
+    { name: "Sorted window with binary trie", intuition: "Slide a window over the sorted values and keep the window in a binary trie, deleting values as the left pointer moves.", time: "O(n log n + n\u00b7B)", space: "O(n\u00b7B)" },
+    { name: "Brute force pairs", intuition: "Test every pair against the strong-pair rule and keep the largest XOR.", time: "O(n^2)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Six values, unsorted', input: '[9,4,7,1,3,8]' },
     { label: 'Pair', input: '[10,20]' },

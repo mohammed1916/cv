@@ -5,6 +5,10 @@ import { shelfTutorial } from './tutorial'
 import {shelfVisuals} from './visuals'
 
 const definition = {
+  question: "Place books in order onto shelves of a fixed width so that the total height of the shelves is as small as possible.",
+  approaches: [
+    { name: "DP over prefixes", intuition: "For each prefix, try placing the last shelf with a range of books and keep the smallest total height.", time: "O(n^2)", space: "O(n)" },
+  ],
   number: meta.number, phases, parse: parseInput, build: buildTrace, code, python, inputLabel,
   url: `https://leetcode.com/problems/${meta.slug}/`, complexity, examples,
 }

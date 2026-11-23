@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Rank and bit count (JSON object with n and k)',
   url: 'https://leetcode.com/problems/find-nth-smallest-integer-with-k-one-bits/',
   complexity: 'O(k * positions) time using binomial coefficients. The visualization caps n at 20 and k at 6.',
+  question: "Find the nth smallest integer that has exactly k one bits.",
+  approaches: [
+    { name: "Binomial counts by bit", intuition: "Place each set bit of the answer from the highest position down using binomial counts.", time: "O(k * positions)", space: "O(positions^2)" },
+  ],
   examples: [
     { label: 'Twelve, three rounds', input: '{"n":12,"k":3}' },
     { label: 'Seven, one round', input: '{"n":7,"k":1}' },

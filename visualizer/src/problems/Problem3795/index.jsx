@@ -12,6 +12,11 @@ const definition = {
   inputLabel: 'Array and target (JSON object with nums and k)',
   url: 'https://leetcode.com/problems/minimum-subarray-length-with-distinct-sum-at-least-k/',
   complexity: 'O(n) time with a hash map of counts. The visualization caps n at 30.',
+  question: "Find the shortest subarray whose distinct values add up to at least k.",
+  approaches: [
+    { name: "Sliding window with distinct counts", intuition: "Grow a window, counting each distinct value once, and shrink it while the distinct sum stays at least k.", time: "O(n)", space: "O(n)" },
+    { name: "Check every subarray", intuition: "Compute each subarray's distinct sum directly.", time: "O(n^2)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Five values, k two', input: '{"nums":[3,1,4,1,5],"k":2}' },
     { label: 'Single value, large k', input: '{"nums":[20],"k":60}' },

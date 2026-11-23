@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON {"sticks": [positive integers]}',
   url: 'https://leetcode.com/problems/minimum-cost-to-connect-sticks/description/',
   complexity: 'O(n log n) time and O(n) space for n sticks. The visualization caps the input at 24 sticks.',
+  question: "Connect sticks of given lengths into one stick, paying the sum of the two lengths at each join, and minimise the total cost.",
+  approaches: [
+    { name: "Min-heap of two smallest", intuition: "Repeatedly join the two shortest sticks using a min-heap, which is the optimal merge order.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Four sticks', input: '{"sticks":[4,2,7,3]}' },
     { label: 'One stick', input: '{"sticks":[5]}' },

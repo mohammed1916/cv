@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with start and target as [row, column] (e.g. {"start":[0,0],"target":[1,1]})',
   url: 'https://leetcode.com/problems/even-number-of-knight-moves/',
   complexity: 'O(1) time and O(1) space: two parity computations.',
+  question: "Decide whether a knight can reach a target square in an even number of moves.",
+  approaches: [
+    { name: "Colour parity", intuition: "Each knight move switches square colour, so the parity of the move count is fixed by the two squares.", time: "O(1)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Different colours', input: '{"start":[0,0],"target":[2,1]}' },
     { label: 'Same colour', input: '{"start":[0,0],"target":[1,1]}' },

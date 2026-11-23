@@ -12,6 +12,11 @@ const definition = {
   inputLabel: 'Integer array as JSON (e.g. [3,1,2])',
   url: 'https://leetcode.com/problems/make-array-non-decreasing-or-non-increasing/',
   complexity: 'O(n * m^2) time with the direct prefix and suffix minimum scans, where m is the number of distinct values (O(n * m) with running minima). The visualization caps the array at 12 values with magnitude up to 50; the draft does not verify the official bounds.',
+  question: "Find the fewest total changes so the array becomes non-decreasing or non-increasing, where each change of one unit costs one.",
+  approaches: [
+    { name: "Dynamic programming over candidate values", intuition: "Use the array's values as candidate targets and keep the best cost for each target as the prefix grows.", time: "O(n^2)", space: "O(n)" },
+    { name: "Slope trick with heaps", intuition: "Track the breakpoints of the cost function with a max-heap so each element updates the cost in logarithmic time.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Reverse pair', input: '[3,1,2]' },
     { label: 'Already sorted', input: '[1,2,3]' },

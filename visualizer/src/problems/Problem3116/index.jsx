@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with coins (1 to 8 values, 1 to 25) and k (1 to 60) (JSON)',
   url: 'https://leetcode.com/problems/kth-smallest-amount-with-single-denomination-combination/',
   complexity: 'O(log(min coin * k) * 2^c) time for c coins. The visualization caps c at 8.',
+  question: "Find the k-th smallest positive amount that can be made from multiples of a set of coin values, with each amount counted once.",
+  approaches: [
+    { name: "Binary search with inclusion-exclusion", intuition: "Count amounts up to a bound by adding multiples of coin groups with alternating signs, then binary search the bound.", time: "O(log(min coin * k) * 2^c)", space: "O(c)" },
+  ],
   examples: [
     { label: 'Two coin types, k 11', input: '{"coins":[2,9],"k":11}' },
     { label: 'Three coin types, k 16', input: '{"coins":[5,12,7],"k":16}' },

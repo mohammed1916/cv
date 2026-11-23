@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with n (4 to 2000 in this visualization)',
   url: 'https://leetcode.com/problems/strictly-palindromic-number/',
   complexity: 'O(n^2 log n) time in the worst case, but the first failing base usually ends the check at once.',
+  question: "Decide whether a number is strictly palindromic, meaning it is a palindrome in every base from two to n minus two.",
+  approaches: [
+    { name: "Check each base", intuition: "Convert the number to each base and stop at the first base where it is not a palindrome.", time: "O(n^2 log n)", space: "O(log n)" },
+  ],
   examples: [
     { label: 'Six', input: '{"n":6}' },
     { label: 'Twelve', input: '{"n":12}' },

@@ -18,6 +18,10 @@ const definition = {
   phases, parse: parseInput, build: buildTrace, code, sql, python, inputLabel,
   url: `https://leetcode.com/problems/${meta.slug}/`,
   complexity, examples,
+  question: "Group employees who share a salary and number those groups so that only salaries shared by at least two employees form groups.",
+  approaches: [
+    { name: "Window count and rank", intuition: "Count employees per salary with a window, keep salaries seen more than once, and rank them.", time: "O(n log n)", space: "O(n)" },
+  ],
 }
 
 function Rows({ columns = [], rows = [] }) {

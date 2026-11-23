@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with lanes: two equal-length arrays of integers',
   url: 'https://leetcode.com/problems/maximum-coin-collection/',
   complexity: 'O(n^2) time and O(1) extra space for n miles: each entry mile runs a six-state table forward to the end of the road. Reading the statement as written, a route may exit only after at least one mile and may switch lanes at most twice.',
+  question: "Walk along a road of miles, collecting coins while choosing when to switch lanes, and find the maximum total.",
+  approaches: [
+    { name: "Six-state DP", intuition: "Store the best total for each mile and lane state, moving forward one mile at a time.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Out and back', input: '{"lanes":[[3,-2,4,-1],[1,5,-3,2]]}' },
     { label: 'Switch at entry', input: '{"lanes":[[-4,6,1],[2,-9,-5]]}' },

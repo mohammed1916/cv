@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON object with arr (paint order) and mat (grid)',
   url: 'https://leetcode.com/problems/first-completely-painted-row-or-column/',
   complexity: 'O(mn) time and O(m + n) extra space for the counts. The visualization caps the grid at 6 by 6.',
+  question: "Given an array and a grid, find the first index at which a whole row or column is fully painted.",
+  approaches: [
+    { name: "Count cells per row and column", intuition: "Record each painted cell's row and column, and report the first step where one of their counts reaches its size.", time: "O(mn)", space: "O(m + n)" },
+  ],
   examples: [
     { label: 'Two-row grid', input: '{"arr":[2,6,5,1,4,3],"mat":[[6,1,4],[3,2,5]]}' },
     { label: 'Three-row grid', input: '{"arr":[4,1,6,2,5,3],"mat":[[1,2],[4,3],[5,6]]}' },

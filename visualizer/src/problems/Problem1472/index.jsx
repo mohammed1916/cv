@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'History calls (JSON with homepage, methods, args)',
   url: 'https://leetcode.com/problems/design-browser-history/',
   complexity: 'O(steps) time per back or forward call and O(1) time per visit in a stack-style history, with O(n) space for n stored pages. The visualization caps input at 50 calls.',
+  question: "Simulate a browser history with visit, back and forward actions.",
+  approaches: [
+    { name: "Array stack with a cursor", intuition: "Keep pages in an array and a current index; a visit drops the forward pages and appends.", time: "O(steps) per back or forward", space: "O(n)" },
+  ],
   examples: [
     {
       label: 'LeetCode example',

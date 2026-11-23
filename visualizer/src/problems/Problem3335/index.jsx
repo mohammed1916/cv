@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with s (lowercase letters) and t (JSON)',
   url: 'https://leetcode.com/problems/total-characters-in-string-after-transformations-i/',
   complexity: 'O(t * 26) time and O(26) space. The visualization caps s at 20 letters and t at 20 rounds.',
+  question: "After t rounds of replacing each letter with the letters it expands to, count the total number of characters.",
+  approaches: [
+    { name: "Count letters per round", intuition: "Keep the counts of each letter, and apply the expansion rule once per round.", time: "O(t * 26)", space: "O(26)" },
+  ],
   examples: [
     { label: 'Three letters, two rounds', input: '{"s":"qzk","t":2}' },
     { label: 'Two pairs, five rounds', input: '{"s":"yyzz","t":5}' },

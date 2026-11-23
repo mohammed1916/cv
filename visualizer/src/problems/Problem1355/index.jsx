@@ -10,6 +10,10 @@ const definition = {
   inputLabel: 'Object with activities and friends (small sample tables)',
   url: 'https://leetcode.com/problems/activity-participants/',
   complexity: 'One pass to count participants, then one pass to compare each count with the extremes: O(f + a).',
+  question: "List the people whose friend count is either the most or the least across all activities.",
+  approaches: [
+    { name: "Count then compare", intuition: "Count participants per activity, then exclude the activities at the minimum and maximum.", time: "O(f + a)", space: "O(a)" },
+  ],
   examples: [
     { label: 'Example', input: '{"activities":[{"id":1,"name":"Chess"},{"id":2,"name":"Tennis"},{"id":3,"name":"Golf"},{"id":4,"name":"Rowing"},{"id":5,"name":"Swim"},{"id":6,"name":"Yoga"}],"friends":[{"id":1,"name":"Ann","activity":1},{"id":2,"name":"Bo","activity":1},{"id":3,"name":"Cy","activity":1},{"id":4,"name":"Di","activity":2},{"id":5,"name":"Ed","activity":2},{"id":6,"name":"Fay","activity":3},{"id":7,"name":"Gus","activity":3},{"id":8,"name":"Hal","activity":3},{"id":9,"name":"Ira","activity":5},{"id":10,"name":"Jo","activity":5},{"id":11,"name":"Kim","activity":6}]}' },
     { label: 'All tied', input: '{"activities":[{"id":1,"name":"Chess"},{"id":2,"name":"Golf"}],"friends":[{"id":1,"name":"Ann","activity":1},{"id":2,"name":"Bo","activity":2}]}' },

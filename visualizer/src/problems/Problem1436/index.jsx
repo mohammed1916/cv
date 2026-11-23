@@ -10,6 +10,10 @@ const definition = {
   code,
   python,
   pythonLineMap,
+  question: "Find the city that has no outgoing trip.",
+  approaches: [
+    { name: "Set difference", intuition: "Collect the departure cities and find the arrival city that is absent from that set.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Chain', input: '[["Lima","Oslo"],["Oslo","Quito"],["Quito","Rome"]]' },
     { label: 'Shuffled', input: '[["A","B"],["C","A"],["B","D"]]' },

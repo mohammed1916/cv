@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Squares (JSON object with squares as [x, y, side] triples, up to 6 squares)',
   url: 'https://leetcode.com/problems/separate-squares-ii/',
   complexity: 'O(n^2 log n) time for n squares with a strip per pair of edges. The visualization caps input at 6 squares.',
+  question: "Find the horizontal line that splits the union area of squares into two equal halves.",
+  approaches: [
+    { name: "Strip sweep", intuition: "Sweep the squares' edges in height order and sum the covered width in each strip.", time: "O(n^2 log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Invented two squares', input: '{"squares":[[0,0,2],[3,1,1]]}' },
     { label: 'Invented overlap', input: '{"squares":[[1,0,3],[2,2,2],[0,4,1]]}' },

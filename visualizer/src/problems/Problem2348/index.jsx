@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON {"nums": [0, 0, 1, 0, 0, 0]}',
   url: 'https://leetcode.com/problems/number-of-zero-filled-subarrays/',
   complexity: 'O(n) time and O(1) extra space.',
+  question: "Count the subarrays of an array made only of zeros.",
+  approaches: [
+    { name: "Run length accumulation", intuition: "Each zero adds to the count of new zero-only subarrays ending at it, equal to the length of the current run.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example', input: '{"nums":[0,0,1,0,0,0]}' },
     { label: 'Mixed', input: '{"nums":[-1,0,0,-2]}' },

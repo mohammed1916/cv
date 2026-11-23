@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with nums',
   url: 'https://leetcode.com/problems/jump-game-ix/',
   complexity: 'O(n^2) time for this breadth-first search per start; the visualization caps n at 10.',
+  question: "Find the maximum reachable value in an array of jumps from each start index.",
+  approaches: [
+    { name: "Breadth-first search per start", intuition: "Search forward from each start, following the allowed jumps, and record the best reachable value.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example', input: '{"nums":[2,7,3,5]}' },
     { label: 'Peak', input: '{"nums":[6,1,4]}' },

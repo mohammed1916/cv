@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Key and message as JSON: {"key": "...", "message": "..."}',
   url: 'https://leetcode.com/problems/decode-the-message/',
   complexity: 'O(k + m) time for a key of length k and message of length m. The visualization caps the message at 40 characters.',
+  question: "Decode a message by building a substitution alphabet from a key and mapping each message letter through it.",
+  approaches: [
+    { name: "Build alphabet from key", intuition: "Take the distinct letters of the key in order to form the cipher alphabet, then map each letter by position.", time: "O(k + m)", space: "O(26)" },
+  ],
   examples: [
     { label: 'Keyboard-order key', input: '{"key":"qwertyuiop asdfghjkl zxcvbnm","message":"hello world"}' },
     { label: 'Reversed alphabet key', input: '{"key":"zyxwvutsrqponmlkjihgfedcba","message":"ab cd"}' },

@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with n (an integer from 100 to 999)',
   url: 'https://leetcode.com/problems/check-if-the-number-is-fascinating/',
   complexity: 'O(1) for three-digit numbers. The check touches nine digit slots at most.',
+  question: "Given a three-digit number, decide whether concatenating it with its double and triple produces each digit from 1 to 9 exactly once.",
+  approaches: [
+    { name: "Concatenate and check digits", intuition: "Build the concatenated string and check that every digit from 1 to 9 appears once.", time: "O(1)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Three-digit check', input: '{"n":192}' },
     { label: 'Not fascinating', input: '{"n":100}' },

@@ -6,6 +6,10 @@ const definition = {
   phases, parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'Object with asOf, window, minOrders, customers and transactions',
   complexity: 'O(c + t) time for c customers and t transactions, using one count per customer. The visualization caps the data at 8 customers and 20 transactions.',
+  question: "Count loyal customers, meaning those with at least a minimum number of purchases inside a time window.",
+  approaches: [
+    { name: "Count per customer", intuition: "Count each customer's transactions inside the window and keep those meeting the minimum.", time: "O(c + t)", space: "O(c)" },
+  ],
   examples: [
     { label: 'Minimum of three', input: '{"asOf":20,"window":10,"minOrders":3,"customers":[{"id":1,"name":"Ana"},{"id":2,"name":"Ben"},{"id":3,"name":"Cy"},{"id":4,"name":"Dee"}],"transactions":[{"customer":1,"day":5},{"customer":1,"day":12},{"customer":2,"day":11},{"customer":3,"day":13},{"customer":1,"day":15},{"customer":2,"day":20},{"customer":3,"day":14},{"customer":4,"day":2},{"customer":1,"day":19},{"customer":3,"day":18},{"customer":3,"day":20},{"customer":4,"day":3}]}' },
     { label: 'Minimum of two', input: '{"asOf":20,"window":10,"minOrders":2,"customers":[{"id":1,"name":"Ana"},{"id":2,"name":"Ben"},{"id":3,"name":"Cy"},{"id":4,"name":"Dee"}],"transactions":[{"customer":1,"day":5},{"customer":1,"day":12},{"customer":2,"day":11},{"customer":3,"day":13},{"customer":1,"day":15},{"customer":2,"day":20},{"customer":3,"day":14},{"customer":4,"day":2},{"customer":1,"day":19},{"customer":3,"day":18},{"customer":3,"day":20},{"customer":4,"day":3}]}' },

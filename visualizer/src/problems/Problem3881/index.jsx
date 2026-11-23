@@ -11,6 +11,10 @@ const definition = {
   inputLabel: 'Object with n, pos and k',
   url: 'https://leetcode.com/problems/direction-assignments-with-exactly-k-visible-people/',
   complexity: 'O(k) binomial terms once the coefficients are known. The visual caps n at 30.',
+  question: "Count the direction assignments for a line of people so that a chosen position sees exactly k others.",
+  approaches: [
+    { name: "Binomial sum over sides", intuition: "Pick the visible people on each side with binomial coefficients and add the valid combinations.", time: "O(k)", space: "O(k)" },
+  ],
   examples: [
     { label: 'Example A', input: '{"n":4,"pos":1,"k":1}' },
     { label: 'Example B', input: '{"n":4,"pos":3,"k":2}' },

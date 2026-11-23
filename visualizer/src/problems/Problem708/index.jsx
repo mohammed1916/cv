@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Sorted circular list values (from the head) and insert (JSON)',
   url: 'https://leetcode.com/problems/insert-into-a-sorted-circular-linked-list/',
   complexity: 'O(n) time and O(1) extra space. The visualization caps the list at 15 values.',
+  question: "Insert a value into a sorted circular linked list while keeping it sorted.",
+  approaches: [
+    { name: "Walk the cycle to the gap", intuition: "Walk the cycle to the position where the value fits, handling the wrap from largest back to smallest.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Mid gap', input: '{"values":[5,7,2],"insert":6}' },
     { label: 'Empty', input: '{"values":[],"insert":1}' },

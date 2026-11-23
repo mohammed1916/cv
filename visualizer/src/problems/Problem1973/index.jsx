@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Level-order JSON array with null for missing children (e.g. [10,4,6,2,2,null,null])',
   url: 'https://leetcode.com/problems/count-nodes-equal-to-sum-of-descendants/',
   complexity: 'O(n) time: each node is visited once in post-order. Space is the height of the tree.',
+  question: "Count nodes whose value equals the sum of all values in their subtree below them.",
+  approaches: [
+    { name: "Post-order subtree sums", intuition: "Return each subtree sum from the children first, and compare it with the node's value.", time: "O(n)", space: "O(h)" },
+  ],
   examples: [
     { label: 'One match', input: '[10,4,6]' },
     { label: 'Deeper tree', input: '[10,4,6,2,2,null,null]' },

@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with grid (rows of 0 and 1) and health',
   url: 'https://leetcode.com/problems/find-a-safe-walk-through-a-grid/',
   complexity: 'O(m * n) time and space, since every edge costs 0 or 1 and a deque handles both.',
+  question: "Find out whether a walk from the top-left to the bottom-right cell is possible while keeping health above zero, where some cells cost health.",
+  approaches: [
+    { name: "0-1 breadth-first search", intuition: "Every move costs 0 or 1 health, so a deque-based breadth-first search finds the least health cost to each cell.", time: "O(m * n)", space: "O(m * n)" },
+  ],
   examples: [
     { label: 'Example', input: '{"grid":[[0,0,1],[1,0,0],[1,1,0]],"health":2}' },
     { label: 'Too costly', input: '{"grid":[[0,1,0],[0,1,0],[0,0,0]],"health":2}' },

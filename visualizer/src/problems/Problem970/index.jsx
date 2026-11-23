@@ -8,6 +8,10 @@ const definition = {
   inputLabel: 'Object with x, y and bound: whole numbers, with x and y from 1 to 20 and bound up to 500',
   url: 'https://leetcode.com/problems/powerful-integers/',
   complexity: 'O(log_x(bound) * log_y(bound)) pairs, plus a sort of the distinct sums.',
+  question: "Find all integers of the form x^i + y^j that do not exceed a bound.",
+  approaches: [
+    { name: "Double loop over powers", intuition: "Enumerate the powers of x and y up to the bound and collect the sums that stay within it.", time: "O(log^2 bound)", space: "O(log^2 bound)" },
+  ],
   examples: [
     { label: 'Bases 2 and 3', input: JSON.stringify({ x: 2, y: 3, bound: 12 }) },
     { label: 'Base 1 on one side', input: JSON.stringify({ x: 1, y: 4, bound: 20 }) },

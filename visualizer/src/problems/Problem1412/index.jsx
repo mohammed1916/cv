@@ -12,6 +12,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'Object with students ({student_id, student_name}) and exams ({exam_id, student_id, score})',
   complexity: 'Per-exam extremes are computed once per exam in this trace.',
+  question: "Find the students who are the lowest or highest scorers in every exam they took.",
+  approaches: [
+    { name: "Window extremes", intuition: "Compute the min and max per exam with window functions and flag rows at either extreme.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Sample', input: '{"students":[{"student_id":1,"student_name":"Ann"},{"student_id":2,"student_name":"Ben"},{"student_id":3,"student_name":"Cal"},{"student_id":4,"student_name":"Dee"},{"student_id":5,"student_name":"Eve"}],"exams":[{"exam_id":1,"student_id":1,"score":50},{"exam_id":1,"student_id":2,"score":70},{"exam_id":1,"student_id":3,"score":90},{"exam_id":2,"student_id":1,"score":60},{"exam_id":2,"student_id":2,"score":55},{"exam_id":2,"student_id":4,"score":40}]}' },
     { label: 'Tie at the low', input: '{"students":[{"student_id":1,"student_name":"Ann"},{"student_id":2,"student_name":"Ben"},{"student_id":3,"student_name":"Cal"},{"student_id":4,"student_name":"Dee"}],"exams":[{"exam_id":1,"student_id":1,"score":50},{"exam_id":1,"student_id":2,"score":50},{"exam_id":1,"student_id":3,"score":60},{"exam_id":1,"student_id":4,"score":90}]}' },

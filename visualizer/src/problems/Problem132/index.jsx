@@ -23,6 +23,11 @@ const definition = {
   inputLabel: "String (JSON object, e.g. {\"s\": \"aab\"})",
   url: "https://leetcode.com/problems/palindrome-partitioning-ii/",
   complexity: "O(n^2) time and space for n characters. The visualization caps the string at 40 characters.",
+  question: "Find the fewest cuts that split a string into palindromic pieces.",
+  approaches: [
+    { name: "Palindrome table with cut DP", intuition: "Check every substring once, then use the table to take the minimum cut per prefix.", time: "O(n^2)", space: "O(n^2)" },
+    { name: "Expand around centers", intuition: "Grow palindromes from each center and update the cut count as each one is found.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: getExamples("palindrome-partitioning-ii").map(({ label, s }) => ({ label, input: JSON.stringify({ s }) })),
 };
 

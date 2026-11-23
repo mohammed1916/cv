@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Digit string of 5 to 40 characters (JSON string)',
   url: 'https://leetcode.com/problems/count-palindromic-subsequences/',
   complexity: 'O(n^3) time here for a simple pair count, and O(1) extra space per middle position. The visualization caps input at 40 digits.',
+  question: "Count palindromic subsequences of length five in a digit string, modulo a prime.",
+  approaches: [
+    { name: "Outer pair count per middle", intuition: "For each middle position, count matching outer pairs on the left and right.", time: "O(n^3) in this visual", space: "O(1)" },
+  ],
   examples: [
     { label: 'Seven digits, mixed', input: '"7305932"' },
     { label: 'All zeros', input: '"0000000"' },

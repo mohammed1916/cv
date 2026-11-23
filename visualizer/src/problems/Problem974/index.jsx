@@ -9,6 +9,10 @@ const definition = {
   inputLabel: 'Object with nums: a list of integers, and k: the divisor from 2 to 12',
   url: 'https://leetcode.com/problems/subarray-sums-divisible-by-k/',
   complexity: 'O(n) time: one pass over the values, with one bucket per remainder. O(k) space.',
+  question: "Count the non-empty subarrays whose sum is divisible by k.",
+  approaches: [
+    { name: "Prefix remainder counts", intuition: "Two prefix sums give a divisible subarray when they have the same remainder mod k, so count the remainders seen so far.", time: "O(n)", space: "O(k)" },
+  ],
   examples: [
     { label: 'Mixed signs', input: JSON.stringify({ nums: [2, 3, 5, -4, 1], k: 5 }) },
     { label: 'Single value', input: JSON.stringify({ nums: [7], k: 9 }) },

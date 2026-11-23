@@ -17,6 +17,10 @@ const definition = {
     { id: 'select', label: 'Keep / reject', description: 'Keep values that beat at least one side.' },
     { id: 'done', label: 'Complete', description: 'Return values in original order.' },
   ],
+  question: "Keep the elements that pass a comparison against the largest value on their left side and the largest value on their right side.",
+  approaches: [
+    { name: "Exclusive left and right maxima", intuition: "Precompute the maximum before and after each index, excluding the index itself, then filter in order.", time: "O(n)", space: "O(n)" },
+  ],
   examples: authoredExamples0,
 }
 

@@ -4,6 +4,10 @@ import { buildTrace, parseInput, code, python, phases, examples, complexity, inp
 import DisjointSetView from '../../components/shared/DisjointSetView'
 
 const definition = {
+  question: "Find the earliest time at which everyone is connected through friendship logs.",
+  approaches: [
+    { name: "Sort logs and union-find", intuition: "Process logs in time order and merge groups; the time of the last merge is the answer.", time: "O(m log m)", space: "O(n)" },
+  ],
   number: meta.number, phases, parse: parseInput, build: buildTrace, code, python, inputLabel,
   url: `https://leetcode.com/problems/${meta.slug}/`, complexity, examples,
 }

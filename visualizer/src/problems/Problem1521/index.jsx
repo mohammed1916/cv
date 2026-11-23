@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'JSON object with "arr" (0 to 1023, up to 12 values) and "target"',
   url: 'https://leetcode.com/problems/find-a-value-of-a-mysterious-function-closest-to-target/',
   complexity: 'O(n log n) to build the sparse table and O(n log n) binary-search queries; each AND range query is O(1).',
+  question: "Find the subarray whose bitwise AND is closest to a target value.",
+  approaches: [
+    { name: "Sparse table with binary search", intuition: "Build AND ranges of doubling length, then binary search the closest end for each start.", time: "O(n log n) to build, O(n log n) queries", space: "O(n log n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"arr":[9,12,3,7,1],"target":5}' },
     { label: 'Powers of two', input: '{"arr":[1,2,4,8,16],"target":0}' },

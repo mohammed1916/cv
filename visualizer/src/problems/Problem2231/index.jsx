@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON {"num": 2736}',
   url: 'https://leetcode.com/problems/largest-number-after-digit-swaps-by-parity/',
   complexity: 'O(d log d) time and O(d) space for d digits. Swaps keep every digit in its parity class, so the pools decide the answer.',
+  question: "Swap digits that share the same parity to make the largest possible number.",
+  approaches: [
+    { name: "Sort each parity class", intuition: "Sort the odd digits and the even digits separately from largest to smallest, then fill the positions by their parity.", time: "O(d log d)", space: "O(d)" },
+  ],
   examples: [
     { label: 'Mixed', input: '{"num":2736}' },
     { label: 'Zero digit', input: '{"num":9083}' },

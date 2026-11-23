@@ -13,6 +13,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Object {n, k} (JSON, n up to 30)',
   url: 'https://leetcode.com/problems/k-th-symbol-in-grammar/',
   complexity: 'O(n) time and O(n) recursion depth.',
+  question: "Find the kth symbol in row n of a grammar where each row is built from the previous row.",
+  approaches: [
+    { name: "Walk up to the parent", intuition: "Follow the kth symbol up to its parent in the previous row, flipping when it is the second child.", time: "O(log k)", space: "O(1)" },
+  ],
   examples: [
     { label: 'n=1, k=1 -> 0', input: '{"n":1,"k":1}' },
     { label: 'n=2, k=1 -> 0', input: '{"n":2,"k":1}' },

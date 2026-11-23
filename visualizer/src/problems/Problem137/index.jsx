@@ -22,6 +22,11 @@ const definition = {
   inputLabel: "Numbers (JSON object, e.g. {\"nums\": [2,2,3,2]})",
   url: "https://leetcode.com/problems/single-number-ii/",
   complexity: "O(n) time and O(1) space for n numbers. The visualization caps the input at 3001 values.",
+  question: "Find the one number that appears once while every other number appears three times.",
+  approaches: [
+    { name: "Bit counts modulo three", intuition: "Count each bit position modulo three to reveal the single value's bits.", time: "O(n)", space: "O(1)" },
+    { name: "Hash count", intuition: "Count occurrences and return the value with count one.", time: "O(n)", space: "O(n)" },
+  ],
   examples: getExamples("single-number-ii").map(({ label, input }) => ({ label, input: JSON.stringify({ nums: JSON.parse(input) }) })),
 };
 

@@ -23,6 +23,10 @@ const definition = {
   inputLabel: 'JSON {"grid": [[1,2,4],[3,3,1]]}',
   url: "https://leetcode.com/problems/delete-greatest-value-in-each-row/",
   complexity: "O(m * n * log n) time and O(m * n) space for m rows and n columns. The visualization caps the grid at 10 by 10 with values up to 100.",
+  question: "Repeatedly remove the largest value from each row, adding the column maximum of the removed values to the answer.",
+  approaches: [
+    { name: "Sort each row", intuition: "Sort each row, then sum the largest value of each column across all rows.", time: "O(m * n log n)", space: "O(m * n)" },
+  ],
   examples: [
     { label: "Two rows", input: '{"grid":[[5,1,4],[2,6,3]]}' },
     { label: "One row", input: '{"grid":[[7,2,9]]}' },

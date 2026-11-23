@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'Object with grid (n by n), limits (per row) and k',
   url: 'https://leetcode.com/problems/maximum-sum-with-at-most-k-elements/',
   complexity: 'O(n^2 log n) time for sorting each row and the candidates, and O(n^2) space.',
+  question: "From a grid with per-row limits, pick at most k cells to maximize the total sum.",
+  approaches: [
+    { name: "Top values per row", intuition: "Keep only the top limit values of each row, then take the best k overall.", time: "O(n^2 log n)", space: "O(n^2)" },
+  ],
   examples: [
     { label: 'Two by two grid, k four', input: '{"grid":[[1,4],[7,2]],"limits":[1,2],"k":4}' },
     { label: 'Tight k', input: '{"grid":[[5,3],[1,9]],"limits":[1,1],"k":1}' },

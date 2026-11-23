@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with power, damage and health (equal-length arrays)',
   url: 'https://leetcode.com/problems/minimum-amount-of-damage-dealt-to-bob/',
   complexity: 'O(n log n) time for the sort. The visualization caps input at 6 enemies.',
+  question: "Each enemy has health and deals damage per second; with a limited number of attacks per second, find the least total damage Bob takes before all enemies are defeated.",
+  approaches: [
+    { name: "Greedy by damage over time", intuition: "Sort enemies by their time to defeat weighted by damage, and defeat the highest ratio first.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Three monsters, mixed damage', input: '{"power":3,"damage":[4,1,6],"health":[9,5,12]}' },
     { label: 'One tough monster', input: '{"power":7,"damage":[10],"health":[30]}' },

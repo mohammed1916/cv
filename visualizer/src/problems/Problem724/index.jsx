@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'nums (JSON object with a nums array)',
   url: 'https://leetcode.com/problems/find-pivot-index/',
   complexity: 'O(n) time and O(1) extra space.',
+  question: "Find the index whose sum to the left equals the sum to the right.",
+  approaches: [
+    { name: "Prefix sums", intuition: "Keep a running left sum and compare it with the total minus the left sum minus the value.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Balanced', input: '{"nums":[1,2,3,3]}' },
     { label: 'None', input: '{"nums":[1,2,3,4]}' },

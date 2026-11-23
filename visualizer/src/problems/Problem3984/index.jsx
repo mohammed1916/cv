@@ -21,6 +21,10 @@ const definition = {
   inputLabel: 'JSON array of values (for example [6, 4, 9])',
   url: 'https://leetcode.com/problems/divisible-game/',
   complexity: 'O(K * n) time for K candidate divisors and n values, using a running best interval per divisor. The visualization caps the array at 30 values from 1 to 30; the official limits are larger and this route is not sized for them.',
+  question: "For each candidate divisor, choose a contiguous slice whose multiples earn value and whose other values cost it; maximise the result.",
+  approaches: [
+    { name: "Running best interval per divisor", intuition: "For each divisor, track the best interval sum with a running maximum.", time: "O(K x n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Mixed', input: '[6, 4, 9, 10]' },
     { label: 'Single', input: '[7]' },

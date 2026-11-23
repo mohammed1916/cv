@@ -11,6 +11,11 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Target count n (JSON integer)',
   url: 'https://leetcode.com/problems/2-keys-keyboard/',
   complexity: 'O(n) time for this simple divisor scan, with O(1) extra space. Trial division up to √n would be faster for large n.',
+  question: "Reach exactly n letters using the fewest copy-all and paste operations.",
+  approaches: [
+    { name: "Prime factor sum", intuition: "The answer is the sum of the prime factors of n, since each factor is one multiplication step.", time: "O(sqrt n)", space: "O(1)" },
+    { name: "Dynamic programming", intuition: "Try every divisor as the last paste block.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Prime', input: '7' },
     { label: 'Square', input: '16' },

@@ -12,6 +12,10 @@ const definition = {
   inputLabel: "Binary grid (e.g. [[0,1,0,0],[0,1,0,0],[1,0,1,0]])",
   url: "https://leetcode.com/problems/check-if-there-is-a-path-with-equal-number-of-0s-and-1s/description/",
   complexity: "O(m * n * B) time for B possible balances, O(m * n * B) space. The visualization caps the grid at 6 x 6;",
+  question: "Check whether a path from the top-left to the bottom-right of a grid has equal numbers of zeros and ones.",
+  approaches: [
+    { name: "Reachable balance sets", intuition: "Track the set of reachable balances of zeros minus ones at each cell.", time: "O(m * n * B)", space: "O(m * n * B)" },
+  ],
   examples: [
     { label: "Example", input: "[[0,1,0,0],[0,1,0,0],[1,0,1,0]]" },
     { label: "No balance", input: "[[0,0,0],[0,0,0]]" },

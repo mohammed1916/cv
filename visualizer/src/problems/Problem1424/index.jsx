@@ -11,6 +11,10 @@ const definition = {
   inputLabel: 'JSON array of rows, each row an array of integers (e.g. [[1, 2, 3], [4], [5, 6]])',
   url: 'https://leetcode.com/problems/diagonal-traverse-ii/',
   complexity: 'O(N) time and O(N) space for N values in total, from one pass into diagonal buckets and one read of each bucket.',
+  question: "Return the values of a jagged matrix read in diagonal order.",
+  approaches: [
+    { name: "Bucket by diagonal index", intuition: "Group each value by row plus column, then read the buckets in order.", time: "O(N)", space: "O(N)" },
+  ],
   examples: [
     { label: 'Ragged rows', input: '[[1, 2, 3], [4], [5, 6]]' },
     { label: 'Tall', input: '[[1], [2], [3], [4]]' },

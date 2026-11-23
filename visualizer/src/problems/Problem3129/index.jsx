@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with zero, one, and limit (JSON)',
   url: 'https://leetcode.com/problems/find-all-possible-stable-binary-arrays-i/',
   complexity: 'O(zero * one * limit) time and O(zero * one) space. The visualization caps each input at 8.',
+  question: "Count stable binary arrays with a given number of zeros and ones, where no run may be longer than a limit.",
+  approaches: [
+    { name: "Dynamic programming on the last run", intuition: "Each state adds the arrays that end in the other symbol, with run lengths from one up to the limit.", time: "O(zero * one * limit)", space: "O(zero * one)" },
+  ],
   examples: [
     { label: 'Uneven counts, limit four', input: '{"zero":3,"one":5,"limit":4}' },
     { label: 'Limit one, many zeros', input: '{"zero":6,"one":3,"limit":1}' },

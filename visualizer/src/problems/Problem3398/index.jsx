@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with s (a binary string of 1 to 10 characters) and numOps (JSON)',
   url: 'https://leetcode.com/problems/smallest-substring-with-identical-characters-i/',
   complexity: 'O(n * L) time for each candidate length L, with binary search over L. The visualization caps the input at 10 characters.',
+  question: "Find the shortest substring whose adjacent characters are all identical after the allowed number of flips.",
+  approaches: [
+    { name: "Binary search with dynamic programming", intuition: "Binary search the length; for each length, check with a dynamic program over the flips.", time: "O(n * L)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Own: 10110, two ops', input: '{"s":"10110","numOps":2}' },
     { label: 'Seven digits, four ops', input: '{"s":"0110100","numOps":4}' },

@@ -21,6 +21,10 @@ const definition = {
   inputLabel: 'Object with baseTime (per node) and edges (pairs of node indices)',
   url: 'https://leetcode.com/problems/finish-time-of-tasks-ii/',
   complexity: 'O(n^2) time for the visualization, which tries each root with a full traversal; O(n) space per traversal. The visualization caps the tree at 8 nodes and base times at 9.',
+  question: "For a tree of tasks, choose the root that gives the earliest finish time.",
+  approaches: [
+    { name: "Try every root", intuition: "Recompute the finish times for each root with a full traversal and keep the earliest.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Path', input: '{"baseTime":[1,1,1],"edges":[[0,1],[1,2]]}' },
     { label: 'Branch', input: '{"baseTime":[2,4,1,3],"edges":[[0,1],[1,2],[1,3]]}' },

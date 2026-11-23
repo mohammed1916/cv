@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with nums1 and nums2, equal even lengths from 2 to 10 (JSON)',
   url: 'https://leetcode.com/problems/maximum-size-of-a-set-after-removals/',
   complexity: 'O(n) time with hash sets. The visualization caps each array at 10 values.',
+  question: "Find the largest set size after removing half of each array, keeping distinct values.",
+  approaches: [
+    { name: "Greedy distinct counts", intuition: "Count values unique to each array and shared values, then keep as many distinct values as the halves allow.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Four pairs, small values', input: '{"nums1":[4,1,7,2],"nums2":[1,5,2,3]}' },
     { label: 'Six pairs, mixed order', input: '{"nums1":[9,8,1,2,3,3],"nums2":[1,4,6,7,9,2]}' },

@@ -12,6 +12,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Tree (LeetCode level-order JSON array)',
   url: 'https://leetcode.com/problems/maximum-width-of-binary-tree/',
   complexity: 'O(n) time and O(w) extra space for the widest level. Positions are shifted per level, so they never overflow.',
+  question: "Find the maximum width of any level of a binary tree, counting absent nodes between the outermost present nodes.",
+  approaches: [
+    { name: "Heap indices per level", intuition: "Number nodes as a complete tree; a level's width is the gap between its outermost indices.", time: "O(n)", space: "O(w)" },
+  ],
   examples: [
     { label: 'Gap', input: '[1,3,2,5,3,null,9]' },
     { label: 'Sparse', input: '[1,3,2,5,null,null,9,6,null,7]' },

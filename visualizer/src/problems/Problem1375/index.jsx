@@ -4,6 +4,10 @@ import RecordStateTable from '../../components/shared/RecordStateTable'
 import { buildTrace, parseInput, code, python, pythonLineMap, examples } from './algorithm'
 
 const definition = {
+  question: "Count the steps where the flipped bits form a prefix of ones.",
+  approaches: [
+    { name: "Track running maximum", intuition: "A step is aligned when the highest flipped position equals the step number.", time: "O(n)", space: "O(n)" },
+  ],
   phases: [
     { id: 'scan', label: 'Scan steps', description: 'Flip one bit per step and track the highest flipped position.' },
     { id: 'done', label: 'Result', description: 'Report how many steps leave a prefix of ones.' },

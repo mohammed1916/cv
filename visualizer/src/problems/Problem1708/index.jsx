@@ -14,6 +14,10 @@ const definition = {
   complexity,
   inputLabel: 'Object with nums (distinct integers) and k (window length)',
   url: 'https://leetcode.com/problems/largest-subarray-length-k/',
+  question: "Find the lexicographically largest subarray of a fixed length k.",
+  approaches: [
+    { name: "Largest start wins", intuition: "The best window starts at the largest value that still leaves room for k elements.", time: "O(n)", space: "O(1)" },
+  ],
 }
 
 export default function Problem1708Visualizer() {

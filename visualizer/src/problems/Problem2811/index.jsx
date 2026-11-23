@@ -12,6 +12,11 @@ const definition = {
   inputLabel: 'JSON object with nums (values 1 to 10) and integer m',
   url: 'https://leetcode.com/problems/check-if-it-is-possible-to-split-array/',
   complexity: 'O(n) time and O(1) extra space. The visualization caps the array at eight values.',
+  question: "Decide whether the array can be split into pieces so that each piece is either a single value or has sum at least m, and each split keeps that rule.",
+  approaches: [
+    { name: "Adjacent pair check", intuition: "If the array has at most two values, or some adjacent pair already reaches m, the split can be done.", time: "O(n)", space: "O(1)" },
+    { name: "Interval dynamic programming", intuition: "Check each sub-range for a valid split recursively.", time: "O(n^3)", space: "O(n^2)" },
+  ],
   examples: [
     { label: 'Four values, m of nine', input: '{"nums":[4,1,7,2],"m":9}' },
     { label: 'Eight equal values, small m', input: '{"nums":[5,5,5,5,5,5,5,5],"m":3}' },

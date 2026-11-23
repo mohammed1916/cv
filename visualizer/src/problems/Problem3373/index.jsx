@@ -18,6 +18,10 @@ const definition = {
   inputLabel: 'JSON object: {"edges1": [[0,1]], "edges2": [[0,1]]}',
   url: "https://leetcode.com/problems/maximize-the-number-of-target-nodes-after-connecting-trees-ii/",
   complexity: "O(n + m) time and O(n + m) space for tree sizes n and m. The visualization accepts at most 40 nodes per tree.",
+  question: "For each node in the first tree, count the nodes that can be reached within k steps after connecting to the second tree, for larger trees.",
+  approaches: [
+    { name: "Largest reachable count from the second tree", intuition: "Find the best count of nodes in the second tree, then add the first tree's count for each node.", time: "O(n + m)", space: "O(n + m)" },
+  ],
   examples: [
     { label: "Two small trees", input: '{"edges1": [[0,1],[0,2],[2,3]], "edges2": [[0,1],[0,2]]}' },
     { label: "Single node in tree 2", input: '{"edges1": [[0,1]], "edges2": []}' },

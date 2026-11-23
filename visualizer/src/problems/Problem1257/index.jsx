@@ -16,6 +16,10 @@ const definition = {
   inputLabel: 'Object with regions (rows of parent then children), region1 and region2',
   url: 'https://leetcode.com/problems/smallest-common-region/',
   complexity: 'O(n) time and space for n region names. The visualization caps the tree at 14 names.',
+  question: "Find the smallest region that contains two given regions in a tree of regions.",
+  approaches: [
+    { name: "Ancestor chain intersection", intuition: "Record the ancestor chain of one region and walk up from the other until a shared ancestor appears.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Cousins in the coast', input: '{"regions":[["Continent","Coast","Inland"],["Coast","Harbour","Dockyard"],["Inland","Valley","Plateau","Mesa"]],"region1":"Dockyard","region2":"Mesa"}' },
     { label: 'Siblings', input: '{"regions":[["Continent","Coast","Inland"],["Inland","Valley","Plateau","Mesa"]],"region1":"Valley","region2":"Plateau"}' },

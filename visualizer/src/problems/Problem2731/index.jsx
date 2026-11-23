@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with nums, s (L or R per robot) and d',
   url: 'https://leetcode.com/problems/movement-of-robots/',
   complexity: 'O(n log n) time for the sort, then a linear pass over sorted positions. The visualization caps n at 12.',
+  question: "Given robot positions and directions, compute the sum of distances between all pairs after the robots move for a given time.",
+  approaches: [
+    { name: "Sort positions and prefix sums", intuition: "Sort the final positions, then sum the distances using prefix sums.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Three robots', input: '{"nums":[-3,1,4],"s":"LRR","d":2}' },
     { label: 'Two robots', input: '{"nums":[5,2],"s":"RL","d":1}' },

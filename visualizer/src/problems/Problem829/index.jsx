@@ -13,6 +13,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'n (JSON integer)',
   url: 'https://leetcode.com/problems/consecutive-numbers-sum/',
   complexity: 'O(sqrt(n)) time since k(k+1)/2 <= n; O(1) extra space (this view stores the valid runs).',
+  question: "Count the ways to write n as a sum of one or more consecutive positive integers.",
+  approaches: [
+    { name: "Try each run length", intuition: "A run of k integers starting at a has sum k*a + k(k-1)/2, so test each k while that sum fits in n and check divisibility.", time: "O(sqrt n)", space: "O(1)" },
+  ],
   examples: [{ label: 'n = 5', input: '5' }, { label: 'n = 9', input: '9' }, { label: 'n = 15', input: '15' }, { label: 'Smallest n', input: '1' }, { label: 'Power of two', input: '8' }, { label: 'Largest allowed n', input: '10000000' }, { label: 'Long run: n = 9999991', input: '9999991' }],
 }
 export default function ConsecutiveNumbersSum() {

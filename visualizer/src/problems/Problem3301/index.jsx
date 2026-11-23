@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Array of 1 to 8 height limits from 1 to 15 (JSON)',
   url: 'https://leetcode.com/problems/maximize-the-total-height-of-unique-towers/',
   complexity: 'O(n log n) for the sort. The visualization caps input at 8 towers.',
+  question: "Assign each tower a height at most its limit, with all heights distinct and as large as possible in total.",
+  approaches: [
+    { name: "Sort and cap from the top", intuition: "Sort the limits in decreasing order, and give each tower the largest unused height that is at most its limit.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Five towers, mixed limits', input: '[9,2,7,12,5]' },
     { label: 'Descending limits', input: '[6,4,2,1]' },

@@ -3,6 +3,10 @@ import BraceExpansionView from "./BraceExpansionView";
 import { code, python, parseInput, buildTrace, phases, inputLabel, complexity, examples } from "./algorithm.js";
 
 const definition = {
+  question: "Expand a string containing brace groups of options into every combination, sorted.",
+  approaches: [
+    { name: "Sequential product with sort", intuition: "Expand each group in turn, build the combinations, and sort the final list.", time: "O(k * n log k)", space: "O(k * n)" },
+  ],
   phases,
   parse: parseInput,
   build: buildTrace,

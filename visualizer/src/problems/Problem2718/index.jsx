@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with "n", "m" and "queries" ([type, index, value] rows), JSON',
   url: 'https://leetcode.com/problems/sum-of-matrix-after-queries/',
   complexity: 'O(q) time for q queries with hash sets. The visualization caps the grid at 6 by 6 and 10 queries.',
+  question: "Given a matrix size and queries that set rows or columns, return the sum of all values after the queries.",
+  approaches: [
+    { name: "Track distinct rows and columns", intuition: "Only the first set of each row or column adds to the total, so keep hash sets of seen rows and columns.", time: "O(q)", space: "O(q)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"n":3,"m":3,"queries":[[0,0,1],[1,2,2],[0,2,3],[1,0,4]]}' },
     { label: 'Small', input: '{"n":2,"m":2,"queries":[[0,0,5],[1,1,1]]}' },

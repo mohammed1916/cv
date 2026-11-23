@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with nums (3 to 10 integers from 0 to 3)',
   url: 'https://leetcode.com/problems/count-beautiful-splits-in-an-array/',
   complexity: 'O(n^3) time in this direct version, O(n) extra space. The visualization caps nums at 10 values.',
+  question: "Count the beautiful splits of an array, where each split compares the values before and after it.",
+  approaches: [
+    { name: "Check every split", intuition: "For each split point, check the required condition on both sides.", time: "O(n^3)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example', input: '{"nums":[1,1,2,1]}' },
     { label: 'None', input: '{"nums":[1,2,3,0]}' },

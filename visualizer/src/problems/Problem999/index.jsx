@@ -8,6 +8,10 @@ const definition = {
   inputLabel: 'Object with board: eight strings of eight characters, using R (rook), B (bishop), p (pawn) and . (empty)',
   url: 'https://leetcode.com/problems/available-captures-for-rook/',
   complexity: 'O(1) for an 8 x 8 board: at most 28 squares are looked at in four rays.',
+  question: "Count the black pawns a rook can capture in one move on a chessboard.",
+  approaches: [
+    { name: "Ray casting in four directions", intuition: "Walk each direction from the rook until a piece blocks it, counting a black pawn only at the first piece.", time: "O(1) on an 8 by 8 board", space: "O(1)" },
+  ],
   examples: [
     {
       label: 'Pawns in two directions',

@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with a and b (JSON)',
   url: 'https://leetcode.com/problems/number-of-common-factors/',
   complexity: 'O(min(a, b)) time and O(1) space. The visualization caps a and b at 60.',
+  question: "Count the positive integers that divide both of two given numbers.",
+  approaches: [
+    { name: "Loop over the smaller number", intuition: "Test each candidate up to the smaller number and count the common divisors.", time: "O(min(a, b))", space: "O(1)" },
+  ],
   examples: [
     { label: 'Shared factors', input: '{"a":18,"b":24}' },
     { label: 'Sevens', input: '{"a":35,"b":14}' },

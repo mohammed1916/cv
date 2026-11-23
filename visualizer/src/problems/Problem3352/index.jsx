@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON object with s (binary N) and k, for example {"s":"111","k":1}',
   url: 'https://leetcode.com/problems/count-k-reducible-numbers-less-than-n/',
   complexity: 'O(L^2) time for L binary digits of N, plus a constant number of popcount steps. The visualization caps s at 12 bits.',
+  question: "Count the numbers below n that become 1 after at most k steps of a digit operation.",
+  approaches: [
+    { name: "Digit-count dynamic programming", intuition: "Count binary numbers below N by their number of set bits, reducing each step to a popcount.", time: "O(L^2)", space: "O(L^2)" },
+  ],
   examples: [
     { label: 'Own: 1011001, k 2', input: '{"s":"1011001","k":2}' },
     { label: 'Four bits', input: '{"s":"1000","k":2}' },

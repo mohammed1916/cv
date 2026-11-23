@@ -18,6 +18,10 @@ const definition = {
   inputLabel: 'JSON object: {"events": [[1,2],[2,5],[3,9],[1,15]]}',
   url: "https://leetcode.com/problems/button-with-longest-push-time/",
   complexity: "O(n) time and O(1) extra space for n events. The visualization accepts at most 40 events.",
+  question: "Find the button that was held down the longest, using the press and release events.",
+  approaches: [
+    { name: "Single pass with running maximum", intuition: "Track the duration of each press and keep the button with the longest time, breaking ties by the smaller button.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: "Four presses", input: '{"events": [[4,3],[2,8],[4,12],[1,14]]}' },
     { label: "Tie on time", input: '{"events": [[5,4],[2,6],[3,8]]}' },

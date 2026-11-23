@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'Object with parent array and queries [node, k] (JSON)',
   url: 'https://leetcode.com/problems/kth-ancestor-of-a-tree-node/',
   complexity: 'O(n log n) preprocessing and O(log k) per query. The visualization caps input at 12 nodes.',
+  question: "Answer queries for the k-th ancestor of a node in a tree.",
+  approaches: [
+    { name: "Binary lifting", intuition: "Store jump tables of powers of two and apply one jump for each set bit of k.", time: "O(n log n) preprocessing, O(log k) per query", space: "O(n log n)" },
+  ],
   examples: [
     { label: 'Example', input: '{"parent":[-1,0,0,1,1,2,2],"queries":[[3,1],[5,2],[6,3]]}' },
     { label: 'Single node', input: '{"parent":[-1],"queries":[[0,1]]}' },

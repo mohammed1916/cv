@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with n (JSON), from 2 to 1000',
   url: 'https://leetcode.com/problems/smallest-value-after-replacing-with-sum-of-prime-factors/',
   complexity: 'O(sqrt(n)) per step, and the number of steps is small for n up to 10^5. The visualization caps input at 1000.',
+  question: "Replace n with the sum of its prime factors until the value stops changing, and return the final value.",
+  approaches: [
+    { name: "Trial division each step", intuition: "Factor the current value by trial division, replace it with the sum, and repeat.", time: "O(sqrt(n)) per step", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"n":15}' },
     { label: 'Example 2', input: '{"n":3}' },

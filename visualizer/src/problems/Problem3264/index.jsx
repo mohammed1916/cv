@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON {"nums": [...], "k": operations, "multiplier": factor}',
   url: 'https://leetcode.com/problems/final-array-state-after-k-multiplication-operations-i/',
   complexity: 'O(k * n) time with a linear scan per operation. The visualization caps input at 8 numbers and 10 operations.',
+  question: "Apply k multiplication operations to an array, each on the smallest value, and report the final array.",
+  approaches: [
+    { name: "Linear scan per operation", intuition: "For each operation, find the smallest value by scanning the array and multiply it.", time: "O(k * n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Mixed values, small k', input: '{"nums":[5,1,9,4],"k":2,"multiplier":4}' },
     { label: 'Pair with large step', input: '{"nums":[12,7],"k":3,"multiplier":2}' },

@@ -14,6 +14,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Directed edges (JSON array of [u, v] pairs)',
   url: 'https://leetcode.com/problems/redundant-connection-ii/',
   complexity: 'O(n α(n)) time with union-find, where α is the inverse Ackermann function.',
+  question: "Remove one directed edge so the remaining graph is a rooted tree.",
+  approaches: [
+    { name: "Union find with parent check", intuition: "Find the node with two parents and use union find to detect the cycle that the removal must break.", time: "O(n α(n))", space: "O(n)" },
+  ],
   examples: [
     { label: 'Two parents', input: '[[1,2],[1,3],[2,3]]' },
     { label: 'Cycle', input: '[[1,2],[2,3],[3,1],[1,4]]' },

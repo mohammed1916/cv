@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with nums (unique integers)',
   url: 'https://leetcode.com/problems/find-missing-elements/description/',
   complexity: 'O(range) time after building a set; the range is at most the largest value minus the smallest.',
+  question: "Find the values missing from an array within its range.",
+  approaches: [
+    { name: "Scan the range", intuition: "Build a set of values, then scan the range for the missing ones.", time: "O(range)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example', input: '{"nums":[6,2,9,3]}' },
     { label: 'Gap at the start', input: '{"nums":[7,4]}' },

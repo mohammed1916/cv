@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON {"strength": [1, 3, 1, 2]}',
   url: 'https://leetcode.com/problems/sum-of-total-strength-of-wizards/',
   complexity: 'O(n) time with a monotonic stack and prefix sums of prefix sums, and O(n) space.',
+  question: "For every subarray, multiply its minimum by its sum, and return the total over all subarrays modulo a prime.",
+  approaches: [
+    { name: "Monotonic stack with prefix sums of prefix sums", intuition: "Use a monotonic stack to find how far each value is the minimum, and prefix sums of prefix sums to add subarray sums in constant time.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Own: five wizards', input: '{"strength":[5,2,9,4,7]}' },
     { label: 'Three', input: '{"strength":[5,4,6]}' },

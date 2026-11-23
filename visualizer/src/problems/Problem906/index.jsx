@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object {left, right} (JSON)',
   url: 'https://leetcode.com/problems/super-palindromes/',
   complexity: 'About 2000 candidate roots, each checked in O(digits). The visualization caps right at 10^12 (LeetCode allows 10^18) and shows the latest 60 candidates.',
+  question: "Count the palindromes in a range whose squares are also palindromes.",
+  approaches: [
+    { name: "Generate palindromic roots", intuition: "Generate palindromes up to the square root of the upper bound, square them and test for palindromes.", time: "O(10^(d/2))", space: "O(1)" },
+  ],
   examples: [
     { label: 'Two-digit lower bound', input: '{"left":"12","right":"500"}' },
     { label: 'Ninety to a thousand', input: '{"left":"90","right":"1000"}' },

@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Lowercase string as a JSON string',
   url: 'https://leetcode.com/problems/minimum-length-of-anagram-concatenation/',
   complexity: 'O(n * d * log k) time for d divisors of n, with sorting per block. The visualization caps input at 16 characters.',
+  question: "Find the shortest length of a block such that the whole string is a concatenation of anagrams of that block.",
+  approaches: [
+    { name: "Try divisor lengths", intuition: "Only divisors of the string length can work, so check each one from shortest to longest that every block matches the first.", time: "O(n * d * log k)", space: "O(k)" },
+  ],
   examples: [
     { label: 'Six letters, one repeat', input: '"xyzyxz"' },
     { label: 'Eight distinct letters', input: '"hijklmno"' },

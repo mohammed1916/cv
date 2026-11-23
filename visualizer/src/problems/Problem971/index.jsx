@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Tree and voyage (JSON)',
   url: 'https://leetcode.com/problems/flip-binary-tree-to-match-preorder-traversal/',
   complexity: 'O(n) time and O(h) stack space. The visualization caps input at 15 nodes.',
+  question: "Flip nodes in a binary tree so that its preorder traversal matches a given sequence, reporting the flipped nodes.",
+  approaches: [
+    { name: "Preorder comparison with flips", intuition: "Walk in preorder; if a child's value does not match the next expected value, swap the children and record the flip.", time: "O(n)", space: "O(h)" },
+  ],
   examples: [
     { label: 'Impossible', input: '{"arr":[1,2],"voyage":[2,1]}' },
     { label: 'One flip', input: '{"arr":[1,2,3],"voyage":[1,3,2]}' },

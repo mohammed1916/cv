@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with start (2 to 8 integers, 0 to 30) and d (0 to 10) (JSON)',
   url: 'https://leetcode.com/problems/maximize-score-of-numbers-in-ranges/',
   complexity: 'O(n log(range)) time for n ranges. The visualization caps the input at 8 ranges.',
+  question: "Choose one value from each range so that the smallest gap between chosen values is as large as possible.",
+  approaches: [
+    { name: "Binary search on the gap", intuition: "Binary search the gap; for each candidate, pick values greedily from left to right inside each range.", time: "O(n log(range))", space: "O(n)" },
+  ],
   examples: [
     { label: 'Five starts, spread five', input: '{"start":[12,4,9,20,1],"d":5}' },
     { label: 'Widest pair, zero step', input: '{"start":[0,30],"d":0}' },

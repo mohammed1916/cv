@@ -18,6 +18,10 @@ const definition = {
   inputLabel: 'JSON: {"word": "leetcodeleet", "k": 4}',
   url: "https://leetcode.com/problems/minimum-number-of-operations-to-make-word-k-periodic/",
   complexity: "O(n) time and O(n) space, where n is the word length. The visualization caps the word at 60 letters.",
+  question: "Find the fewest operations that make a word k-periodic, where each operation swaps letters within a block.",
+  approaches: [
+    { name: "Count each residue group", intuition: "Group letters by their position modulo k and keep the most common letter in each group.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [{ label: 'Eight letters in pairs', input: '{"word":"qwertyui","k":2}' },
     { label: "Single block", input: "{\"word\":\"abc\",\"k\":3}" },
     { label: "Every letter its own block", input: "{\"word\":\"aab\",\"k\":1}" },

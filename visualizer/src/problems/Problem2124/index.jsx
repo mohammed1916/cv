@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'String of a and b letters',
   url: 'https://leetcode.com/problems/check-if-all-as-appears-before-all-bs/',
   complexity: 'O(n) time and O(1) extra space.',
+  question: "Check that every letter 'a' in a string appears before every letter 'b'.",
+  approaches: [
+    { name: "Single left-to-right scan", intuition: "Once a 'b' has been seen, any later 'a' breaks the order, so stop at the first such violation.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Ordered', input: 'aaabbb' },
     { label: 'Out of order', input: 'abab' },

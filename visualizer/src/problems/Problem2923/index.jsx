@@ -17,6 +17,11 @@ const definition = {
   inputLabel: 'JSON object with key grid (e.g. {"grid": [[0,1],[0,0]]})',
   url: "https://leetcode.com/problems/find-champion-i/",
   complexity: "O(n^2) time and O(n) space for n teams. The visualization caps the grid at 10 teams.",
+  question: "Given a win matrix for n teams, find the team that beats every other team.",
+  approaches: [
+    { name: "Row win count", intuition: "Count the wins in each row and stop at the row whose count is n - 1.", time: "O(n^2)", space: "O(1)" },
+    { name: "Candidate elimination", intuition: "Keep one candidate and replace it whenever it loses to the next team; the survivor is the only possible champion.", time: "O(n^2)", space: "O(1)" },
+  ],
   examples: [
     { label: "Example 1", input: '{"grid": [[0,1],[0,0]]}' },
     { label: "Example 2", input: '{"grid": [[0,0,1],[1,0,1],[0,0,0]]}' },

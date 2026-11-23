@@ -12,6 +12,11 @@ const definition = {
   inputLabel: 'Object with nums and k (JSON)',
   url: 'https://leetcode.com/problems/adjacent-increasing-subarrays-detection-i/',
   complexity: 'O(n * k) time and O(1) extra space. Checking each run once gives O(n) with prefix run lengths.',
+  question: "Decide whether the array has two adjacent strictly increasing subarrays of length k.",
+  approaches: [
+    { name: "Check every start", intuition: "For each start, check that the next k values rise, then check the adjacent block.", time: "O(n * k)", space: "O(1)" },
+    { name: "Prefix run lengths", intuition: "Record the length of each increasing run, then compare neighbouring runs.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Six values, k two', input: '{"nums":[4,-2,9,-7,3,1],"k":2}' },
     { label: 'Zeros and mirrored pair', input: '{"nums":[0,0,-5,5],"k":2}' },

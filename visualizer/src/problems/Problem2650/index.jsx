@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with steps (durations in ms) and cancelAt',
   url: 'https://leetcode.com/problems/design-cancellable-function/',
   complexity: 'O(steps) time. The visualization models timing only, not the user callback.',
+  question: "Build a function that can be cancelled after it starts, with a cancel callback that stops future invocations.",
+  approaches: [
+    { name: "Timer with a cancel flag", intuition: "Schedule the calls with a timer and clear the timer when the cancel function is called.", time: "O(steps)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Cancelled midway', input: '{"steps":[20,30,50,10],"cancelAt":60}' },
     { label: 'Finishes first', input: '{"steps":[20,30],"cancelAt":80}' },

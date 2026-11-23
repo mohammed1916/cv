@@ -11,6 +11,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Encoded message (JSON string of digits and *)',
   url: 'https://leetcode.com/problems/decode-ways-ii/',
   complexity: 'O(n) time and O(1) extra space for the recurrence; the trace keeps the whole table for display.',
+  question: "Count the ways to decode a digit string whose asterisks may stand for any digit, with the result taken modulo a prime.",
+  approaches: [
+    { name: "Linear DP over positions", intuition: "Extend the count from the previous one or two positions, handling each star's possible values.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Star alone', input: '"*"' },
     { label: 'Star after one', input: '"1*"' },

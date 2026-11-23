@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Questions as a JSON array of [points, brainpower]',
   url: 'https://leetcode.com/problems/solving-questions-with-brainpower/',
   complexity: 'O(n) time and O(n) space for the best-from-here table.',
+  question: "Choose questions to maximise points, where solving a question forces you to skip a fixed number of following questions.",
+  approaches: [
+    { name: "Suffix dynamic programming", intuition: "The best score from question i is the larger of skipping it or taking its points and jumping past the skipped questions.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Skip to save a big one', input: '[[5,1],[1,1],[9,2]]' },
     { label: 'Chain of small ones', input: '[[1,1],[2,0],[3,1],[4,0]]' },

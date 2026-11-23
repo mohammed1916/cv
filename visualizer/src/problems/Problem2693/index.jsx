@@ -9,6 +9,10 @@ const definition = {
   inputLabel: `Object with fn (${Object.keys(FUNCTIONS).join(', ')}) and args, whose first entry is the context`,
   url: `https://leetcode.com/problems/${meta.slug}/`,
   complexity: 'O(1) work beyond the function itself. The input picks from sample functions rather than running typed code; the context is capped at 12 keys here.',
+  question: "Write a function that calls a given function with a custom context object and the provided arguments.",
+  approaches: [
+    { name: "Use call with arguments", intuition: "Forward the context and the arguments to the function's call method.", time: "O(1)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Read a field', input: '{"fn":"discount","args":[{"price":80},0.25]}' },
     { label: 'Two parameters', input: '{"fn":"badge","args":[{"name":"Mira"},"<",">"]}' },

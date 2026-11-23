@@ -25,6 +25,10 @@ const definition = {
   phases, parse: parseInput, build: buildTrace, code, sql, python, inputLabel,
   url: `https://leetcode.com/problems/${meta.slug}/`,
   complexity, examples,
+  question: "Find users who have both a mortgage loan and a refinance loan.",
+  approaches: [
+    { name: "Count distinct types per user", intuition: "Count the distinct wanted loan types for each user and keep those with both.", time: "O(n)", space: "O(n)" },
+  ],
 }
 
 function Rows({ columns = [], rows = [] }) {

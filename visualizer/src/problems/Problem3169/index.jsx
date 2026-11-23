@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON {"days": 1-30, "meetings": [[start, end], ...]}',
   url: 'https://leetcode.com/problems/count-days-without-meetings/',
   complexity: 'O(m log m) time for m meetings, O(days) for the day strip in this visualization.',
+  question: "Count the days in a range that are free of meetings, where meetings may overlap or touch.",
+  approaches: [
+    { name: "Merge meeting intervals", intuition: "Merge overlapping or touching meetings into blocks, then subtract the busy days from the total.", time: "O(m log m)", space: "O(m)" },
+  ],
   examples: [
     { label: 'Overlapping', input: '{"days":10,"meetings":[[5,7],[1,3],[3,6]]}' },
     { label: 'Covered', input: '{"days":5,"meetings":[[2,4],[1,5]]}' },

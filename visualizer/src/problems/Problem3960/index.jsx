@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'JSON array of integers (e.g. [1,1,2,2,2])',
   url: 'https://leetcode.com/problems/frequency-balance-subarray/',
   complexity: 'O(n^2) for the visual scan. The frequency check is O(distinct values) per window.',
+  question: "Find the longest subarray that either repeats one value, or whose distinct values come in exactly two frequency levels, one double the other.",
+  approaches: [
+    { name: "Window frequency check", intuition: "Check each window and test its frequency pattern.", time: "O(n^2)", space: "O(distinct values)" },
+  ],
   examples: [
     { label: 'Levels one and two', input: '[1,1,2,2,2]' },
     { label: 'Single value', input: '[7,7,7,3]' },

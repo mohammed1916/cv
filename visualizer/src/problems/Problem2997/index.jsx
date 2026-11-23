@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'JSON object with nums (up to 20 values from 0 to 15) and k (0 to 15)',
   url: 'https://leetcode.com/problems/minimum-number-of-operations-to-make-array-xor-equal-to-k/',
   complexity: 'O(n) time and O(1) space.',
+  question: "Find the fewest bit flips needed in an array so that the XOR of all values equals k.",
+  approaches: [
+    { name: "XOR difference and bit count", intuition: "XOR all values, compare with k, and count the set bits of the difference.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"nums": [7,4,1], "k": 5}' },
     { label: 'Example 2', input: '{"nums": [9,9,6], "k": 0}' },

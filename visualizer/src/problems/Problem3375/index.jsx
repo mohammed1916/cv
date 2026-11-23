@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with nums (1 to 12 integers from 1 to 10) and k, for example {"nums":[5,2,5,4,5],"k":2}',
   url: 'https://leetcode.com/problems/minimum-operations-to-make-array-values-equal-to-k/',
   complexity: 'O(n) time for the checks and the distinct count. The visualization caps the array at 12 numbers.',
+  question: "Find the fewest operations that make every value in an array equal to k, where each operation removes the values in a chosen range.",
+  approaches: [
+    { name: "Check values and count distinct", intuition: "Check that every value is at least k, then count the distinct values above k.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Five values, k five', input: '{"nums":[4,9,2,7,3],"k":5}' },
     { label: 'Example 2', input: '{"nums":[3,1],"k":2}' },

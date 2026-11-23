@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'Object with n (levels, 2 to 4) and queries [a, b] (JSON)',
   url: 'https://leetcode.com/problems/cycle-length-queries-in-a-tree/',
   complexity: 'O(log n) per query. The visualization caps the tree at 4 levels.',
+  question: "Add an edge between two nodes of a complete binary tree and report the length of the cycle it forms, for each query.",
+  approaches: [
+    { name: "Climb to the common ancestor", intuition: "Walk both nodes up until they meet, and the cycle length is the path length plus one.", time: "O(log n) per query", space: "O(1)" },
+  ],
   examples: [
     { label: 'Two queries in a height-3 tree', input: '{"n":3,"queries":[[7,5],[2,6]]}' },
     { label: 'Root to a far leaf', input: '{"n":4,"queries":[[1,15],[9,10],[11,12],[4,13]]}' },

@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Caption (JSON object with caption)',
   url: 'https://leetcode.com/problems/generate-tag-for-video-caption/',
   complexity: 'O(n) time and O(n) space. The visualization caps the caption at 150 characters.',
+  question: "Turn a video caption into a hashtag: take its words, capitalize each one after the first, and join them with a leading hash.",
+  approaches: [
+    { name: "Single pass build", intuition: "Split the caption into words and append each one with its first letter capitalized when it is not the first word.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Two words', input: '{"caption":"Keep Going"}' },
     { label: 'Empty', input: '{"caption":""}' },

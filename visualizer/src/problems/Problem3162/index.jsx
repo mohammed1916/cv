@@ -19,6 +19,10 @@ const definition = {
   inputLabel: 'JSON: {"nums1": [1,3,4], "nums2": [1,3,4], "k": 1}',
   url: "https://leetcode.com/problems/find-the-number-of-good-pairs-i/",
   complexity: "O(m * n) time and O(1) space for arrays of length m and n. The visualization caps each array at 20 values.",
+  question: "Count the good pairs between two arrays, where a pair is good when one value is divisible by the other value times k.",
+  approaches: [
+    { name: "Check every pair", intuition: "Test each pair of indices against the divisibility rule.", time: "O(m * n)", space: "O(1)" },
+  ],
   examples: [{ label: "Illustrative input", input: '{"nums1":[1,3,4],"nums2":[1,3,4],"k":1}' },
     { label: "Single value each", input: "{\"nums1\":[7],\"nums2\":[7],\"k\":1}" },
     { label: "Largest k", input: "{\"nums1\":[50,1],\"nums2\":[1,50],\"k\":50}" },

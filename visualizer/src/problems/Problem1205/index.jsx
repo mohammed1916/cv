@@ -6,6 +6,10 @@ const definition = {
   inputLabel: 'Transactions and chargebacks as JSON',
   url: 'https://leetcode.com/problems/monthly-transactions-ii/',
   complexity: 'One pass per stream, then a keyed merge of the month and country groups.',
+  question: "Report monthly approved and charged-back totals per country, joined by month and country.",
+  approaches: [
+    { name: "Keyed merge of two groups", intuition: "Group approvals and chargebacks by month and country, then combine the two groups on their keys.", time: "O(n)", space: "O(groups)" },
+  ],
   examples: [
     { label: 'Sample tables', input: JSON.stringify(sample) },
     { label: 'Single approved sale, no chargebacks', input: '{\"transactions\":[{\"id\":1,\"country\":\"US\",\"state\":\"approved\",\"amount\":100,\"trans_date\":\"2020-01-01\"}],\"chargebacks\":[]}' },

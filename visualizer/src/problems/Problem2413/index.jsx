@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON object with n from 1 to 150, for example {"n":5}',
   url: 'https://leetcode.com/problems/smallest-even-multiple/',
   complexity: 'O(1) time. At most one addition is needed.',
+  question: "Return the smallest positive number that is a multiple of both 2 and a given n.",
+  approaches: [
+    { name: "Check parity", intuition: "If n is even the answer is n, otherwise it is 2 times n.", time: "O(1)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Odd n', input: '{"n":7}' },
     { label: 'Even n', input: '{"n":12}' },

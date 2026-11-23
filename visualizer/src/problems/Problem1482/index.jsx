@@ -4,6 +4,10 @@ import IndexedSequence from '../../components/shared/IndexedSequence'
 import { buildTrace, parseInput, code, python, phases, examples } from './algorithm'
 
 const definition = {
+  question: "Find the earliest day on which m bouquets of k adjacent flowers can be made.",
+  approaches: [
+    { name: "Binary search on the answer", intuition: "Search over days; for a day, a greedy scan checks whether enough bouquets fit.", time: "O(n log(max day - min day))", space: "O(1)" },
+  ],
   number: '1482', phases, parse: parseInput, build: buildTrace, code, python, examples,
   inputLabel: 'Garden (JSON object with bloomDay, m and k)',
   url: 'https://leetcode.com/problems/minimum-number-of-days-to-make-m-bouquets/',

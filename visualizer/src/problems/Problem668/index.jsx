@@ -13,6 +13,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Table (JSON object with m, n and k)',
   url: 'https://leetcode.com/problems/kth-smallest-number-in-multiplication-table/',
   complexity: 'O(m · log(m·n)) time and O(1) extra space.',
+  question: "Find the kth smallest value in an m by n multiplication table.",
+  approaches: [
+    { name: "Binary search with row counting", intuition: "Binary search the value and count products no larger than it using one division per row.", time: "O(m log(mn))", space: "O(1)" },
+  ],
   examples: [
     { label: '3×3 fifth', input: '{"m":3,"n":3,"k":5}' },
     { label: '2×3 sixth', input: '{"m":2,"n":3,"k":6}' },

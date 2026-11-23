@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Object with calls: ["addNumber", value], ["removeFirstAddedNumber"], ["getMean"], ["getMedian"] or ["getMode"]',
   url: 'https://leetcode.com/problems/design-an-array-statistics-tracker/',
   complexity: 'Add and remove take O(log c) with balanced sorted lists; queries take O(1) or O(log c) for c stored numbers. The official limit is 100000 calls; the visualization caps at 30.',
+  question: "Design a structure that adds and removes numbers and answers statistics queries about the numbers stored.",
+  approaches: [
+    { name: "Sorted lists for order statistics", intuition: "Keep the numbers in sorted order with a balanced structure, so the median and the mode are read quickly.", time: "O(log c)", space: "O(c)" },
+  ],
   examples: [
     { label: 'Add and remove', input: '{"calls":[["addNumber",8],["addNumber",3],["addNumber",8],["addNumber",5],["getMean"],["getMedian"],["getMode"],["removeFirstAddedNumber"],["getMode"],["getMedian"]]}' },
     { label: 'Tied mode', input: '{"calls":[["addNumber",9],["addNumber",6],["addNumber",9],["addNumber",6],["getMode"],["removeFirstAddedNumber"],["getMode"]]}' },

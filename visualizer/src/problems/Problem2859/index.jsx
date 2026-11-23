@@ -13,6 +13,11 @@ const definition = {
   inputLabel: 'Object with nums and k, for example {"nums":[5,10,1,5,2],"k":1}',
   url: 'https://leetcode.com/problems/sum-of-values-at-indices-with-k-set-bits/',
   complexity: 'O(n log n) time for counting bits, and O(1) extra space.',
+  question: "Sum the values at indices whose binary representation has exactly k set bits.",
+  approaches: [
+    { name: "Count bits per index", intuition: "Count set bits of each index and add the value when the count matches.", time: "O(n log n)", space: "O(1)" },
+    { name: "Bit counting by table", intuition: "Precompute the bit count for indices up to the array length to avoid repeated work.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Six values, k of two', input: '{"nums":[8,3,12,3,6,1],"k":2}' },
     { label: 'Equal values, k of zero', input: '{"nums":[7,7,7,0],"k":0}' },

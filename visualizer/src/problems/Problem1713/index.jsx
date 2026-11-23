@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON object: {"target": [...distinct], "arr": [...]}',
   url: 'https://leetcode.com/problems/minimum-operations-to-make-a-subsequence/',
   complexity: 'Longest increasing subsequence over target positions with binary search: O(n log m). The visualization caps target at 8 and arr at 10.',
+  question: "Find the fewest insertions that make a target array, with distinct values, a subsequence of another array.",
+  approaches: [
+    { name: "Longest increasing subsequence", intuition: "Map values to target positions, then find the longest increasing run with binary search.", time: "O(n log m)", space: "O(m)" },
+  ],
   examples: [
     { label: 'Three targets, six arr', input: '{"target":[9,1,7],"arr":[2,9,4,6,1,7]}' },
     { label: 'Four targets, five arr', input: '{"target":[10,8,1,6],"arr":[1,6,3,10,8]}' },

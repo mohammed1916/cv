@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with par, vals and queries (JSON)',
   url: 'https://leetcode.com/problems/kth-smallest-path-xor-sum/',
   complexity: 'O(q * n log n) with this direct form. The visualization caps n at 8 and q at 6.',
+  question: "For a tree with node values and several queries, find the k-th smallest XOR value among root-to-node paths.",
+  approaches: [
+    { name: "Collect path XORs", intuition: "For each query, gather the XOR of every root path and sort them to read off the k-th value.", time: "O(q * n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Own: four nodes, two queries', input: '{"par":[-1,0,1,1],"vals":[3,0,5,2],"queries":[[3,1],[2,2]]}' },
     { label: 'Own: four nodes, k up to n', input: '{"par":[-1,0,0,2],"vals":[4,9,1,6],"queries":[[3,2],[0,4]]}' },

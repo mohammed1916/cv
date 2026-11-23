@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'Object with nums (positive integers up to 200)',
   url: 'https://leetcode.com/problems/minimum-operations-to-make-binary-palindrome/',
   complexity: 'The search for each value stops at its nearest binary palindrome, so the cost is the gap to that palindrome.',
+  question: "For each element, find the fewest moves to reach the nearest positive integer whose binary form is a palindrome.",
+  approaches: [
+    { name: "Search outward for a binary palindrome", intuition: "Check values around each element in increasing distance until one reads the same in binary both ways.", time: "O(gap * log V) per value", space: "O(1)" },
+  ],
   examples: [
     { label: 'Mixed', input: '{"nums":[1,2,3,4]}' },
     { label: 'Single', input: '{"nums":[10]}' },

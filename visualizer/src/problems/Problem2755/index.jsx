@@ -3,6 +3,10 @@ import RecordStateTable from '../../components/shared/RecordStateTable'
 import * as model from './algorithm'
 
 const definition = {
+  question: "Given two objects, return a deep merge where nested objects are merged and other values from the second object win.",
+  approaches: [
+    { name: "Recursive merge", intuition: "Walk both objects by key, merging nested objects and taking the second value otherwise.", time: "O(keys)", space: "O(depth)" },
+  ],
   phases: model.PHASES, parse: model.parseInput, build: model.buildTrace, code: model.code, python: model.python,
   inputLabel: model.INPUT_LABEL, url: model.URL, complexity: model.COMPLEXITY, examples: model.EXAMPLES,
 }

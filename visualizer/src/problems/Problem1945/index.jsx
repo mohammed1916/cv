@@ -11,6 +11,10 @@ const definition = {
   inputLabel: 'JSON object with s and k (e.g. {"s":"hello","k":2})',
   url: 'https://leetcode.com/problems/sum-of-digits-of-string-after-convert/',
   complexity: 'O(n + d k) time where n is the string length and d the digit count of the intermediate values.',
+  question: "Convert a string of letters to digits, sum the digits, and repeat the digit sum a given number of times.",
+  approaches: [
+    { name: "Convert and repeat", intuition: "Turn letters into their alphabet positions, sum digits once, then sum again k minus one times.", time: "O(n + k * digits)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Two transforms', input: '{"s":"hello","k":2}' },
     { label: 'One transform', input: '{"s":"abc","k":1}' },

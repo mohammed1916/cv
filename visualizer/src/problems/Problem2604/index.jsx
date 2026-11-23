@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Hens and grains (e.g. {"hens":[3,8],"grains":[0,1,5,10,12]})',
   url: "https://leetcode.com/problems/minimum-time-to-eat-all-grains/description/",
   complexity: "O((H + G) log M) time, where H hens, G grains and M twice the largest position, using a linear greedy check inside a binary search on time; O(H + G) extra space. The visualization caps the input at 6 hens, 8 grains and positions 0 to 30.",
+  question: "Given grains with eating times and a budget of energy per time unit, find the minimum time needed to eat all grains.",
+  approaches: [
+    { name: "Binary search on time with greedy check", intuition: "Guess a total time and check greedily whether every grain can be finished within it.", time: "O(n log(max))", space: "O(1)" },
+  ],
   examples: [
     { label: "One hen, grains on both sides", input: '{"hens":[3],"grains":[1,2,3]}' },
     { label: "Two hens split the grains", input: '{"hens":[3,8],"grains":[0,1,5,10,12]}' },

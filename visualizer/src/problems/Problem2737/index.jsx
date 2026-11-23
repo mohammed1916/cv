@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Graph JSON, e.g. {"n":4,"edges":[[0,1,2],[1,2,3]],"s":0,"marked":[2]}',
   url: "https://leetcode.com/problems/find-the-closest-marked-node/",
   complexity: "Dijkstra: O((V + E) log V) with a heap in the Python solution; the trace uses a scan for the smallest open vertex, so it runs in O(V^2 + E). The visualization caps the graph at 12 vertices and 30 edges, and it requires non-negative integer weights (Dijkstra's requirement).",
+  question: "Given a graph and marked nodes, find the marked node closest to a source node.",
+  approaches: [
+    { name: "Breadth-first search", intuition: "Search outward from the source and return the first marked node reached.", time: "O(n + e)", space: "O(n)" },
+  ],
   examples: [
     { label: "Two marked targets", input: JSON.stringify({ n: 4, edges: [[0, 1, 2], [1, 2, 3], [0, 2, 9], [2, 3, 1]], s: 0, marked: [2, 3] }) },
     { label: "Start is marked", input: JSON.stringify({ n: 3, edges: [[0, 1, 4]], s: 1, marked: [1] }) },

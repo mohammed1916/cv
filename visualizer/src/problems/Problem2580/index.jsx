@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Ranges as JSON [[left, right], ...] (0 to 20)',
   url: 'https://leetcode.com/problems/count-ways-to-group-overlapping-ranges/',
   complexity: 'O(n log n) time from the sort, O(n) space. The visualization caps input at 10 ranges.',
+  question: "Count the ways to split ranges into two groups so that overlapping ranges always share a group.",
+  approaches: [
+    { name: "Sort and count components", intuition: "Sort the ranges, merge overlapping ones into components, then the answer is two to the power of the component count.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Two ranges', input: '[[6,10],[5,15]]' },
     { label: 'Touching', input: '[[1,3],[3,5]]' },

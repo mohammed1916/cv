@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with derived (0 and 1), for example {"derived":[1,1,0]}',
   url: 'https://leetcode.com/problems/neighboring-bitwise-xor/',
   complexity: 'O(n) time and O(1) extra space.',
+  question: "Given a derived array from XOR of neighbours in a circular array, decide whether a valid original binary array exists.",
+  approaches: [
+    { name: "XOR of all values", intuition: "The answer exists exactly when the XOR of the derived array is zero.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"derived":[1,1]}' },
     { label: 'Example 2', input: '{"derived":[1,0]}' },

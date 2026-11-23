@@ -19,6 +19,10 @@ const definition = {
   inputLabel: 'Array of integers from 1 to 100 (JSON), at least one prime',
   url: 'https://leetcode.com/problems/maximum-prime-difference/',
   complexity: 'O(n sqrt(V)) time and O(1) extra space. The visualization caps input at 15 values.',
+  question: "Find the largest distance between the indices of two prime numbers in an array.",
+  approaches: [
+    { name: "First and last prime", intuition: "The widest pair of primes always uses the first prime from the left and the last prime from the right.", time: "O(n sqrt(V))", space: "O(1)" },
+  ],
   examples: [
     { label: 'Prime hidden among composites', input: '[9,12,7,15]' },
     { label: 'Only prime is two', input: '[8,25,49,2]' },

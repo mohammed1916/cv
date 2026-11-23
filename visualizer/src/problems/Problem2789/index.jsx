@@ -12,6 +12,11 @@ const definition = {
   inputLabel: 'JSON object with an integer array nums (values 1 to 1000)',
   url: 'https://leetcode.com/problems/largest-element-in-an-array-after-merge-operations/',
   complexity: 'O(n) time and O(1) extra space. The visualization caps the array at twenty values.',
+  question: "Repeatedly merge each element into a larger neighbour on its right, and return the largest value that can be formed.",
+  approaches: [
+    { name: "Right-to-left greedy merge", intuition: "Scan from the end keeping a running sum; merge an element into it whenever it is not larger.", time: "O(n)", space: "O(1)" },
+    { name: "Stack of merged values", intuition: "Keep merged blocks on a stack and combine them as the rule allows.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"nums":[2,3,7,9,3]}' },
     { label: 'Example 2', input: '{"nums":[5,3,3]}' },

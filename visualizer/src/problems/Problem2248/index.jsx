@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Arrays (JSON array of arrays of distinct integers)',
   url: 'https://leetcode.com/problems/intersection-of-multiple-arrays/',
   complexity: 'O(total elements + V log V) time, where V is the number of distinct kept values. The visualization caps input at 6 arrays.',
+  question: "Return the sorted values that appear in every array.",
+  approaches: [
+    { name: "Count occurrences across arrays", intuition: "Count in how many arrays each value appears, then keep the values whose count equals the number of arrays.", time: "O(total + k log k)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Three overlapping lists', input: '[[8,6,1],[6,2,30,9],[1,30,4]]' },
     { label: 'Empty', input: '[[1,2],[3,4]]' },

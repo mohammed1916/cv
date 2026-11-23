@@ -9,6 +9,10 @@ const definition = {
   inputLabel: 'Object with nums and n (JSON)',
   url: 'https://leetcode.com/problems/shuffle-the-array/',
   complexity: 'O(n) time and O(n) space for the output list.',
+  question: "Given an array of 2n values laid out as x1..xn, y1..yn, return the interleaved order x1, y1, x2, y2.",
+  approaches: [
+    { name: "Index interleave", intuition: "Write the values into a new list alternately from the two halves.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Sample', input: '{"nums":[10,20,30,40],"n":2}' },
     { label: 'Six values', input: '{"nums":[9,1,8,2,7,3],"n":3}' },

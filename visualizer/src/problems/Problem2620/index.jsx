@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'JSON object with init (integer) and calls (how many calls to make)',
   url: 'https://leetcode.com/problems/counter/',
   complexity: 'O(k) time for k calls and O(k) space for the recorded answers.',
+  question: "Write a counter factory that returns a function giving the starting value on the first call and one more on each following call.",
+  approaches: [
+    { name: "Closure over a count", intuition: "Keep one number in a closure and return its current value, then increase it after each call.", time: "O(1) per call", space: "O(1)" },
+  ],
   examples: [
     { label: 'Positive', input: '{"init":7,"calls":4}' },
     { label: 'Negative', input: '{"init":-5,"calls":3}' },

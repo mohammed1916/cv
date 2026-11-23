@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'JSON object with login_time and logout_time in HH:MM, for example {"login_time":"21:30","logout_time":"03:00"}',
   url: 'https://leetcode.com/problems/the-number-of-full-rounds-you-have-played/',
   complexity: 'O(rounds) time, at most 96 per day. The visualization shows all 96 quarter-hour starts.',
+  question: "Count how many complete fifteen-minute rounds a player finished between a login time and a logout time, where a logout earlier than the login wraps past midnight.",
+  approaches: [
+    { name: "Convert to minutes and count", intuition: "Convert both times to minutes, adjust for midnight wrap, and count whole rounds with integer division.", time: "O(1)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"login_time":"12:01","logout_time":"12:44"}' },
     { label: 'Overnight', input: '{"login_time":"21:30","logout_time":"03:00"}' },

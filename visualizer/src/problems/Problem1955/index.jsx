@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON array of 0, 1 and 2 (e.g. [0,1,2,2])',
   url: 'https://leetcode.com/problems/count-number-of-special-subsequences/',
   complexity: 'O(n) time and O(1) extra space: three running counts, one per stage.',
+  question: "Count special subsequences that consist of zeros followed by ones followed by twos, of any length.",
+  approaches: [
+    { name: "Three-stage DP", intuition: "Track how many subsequences end in each stage, and extend the stage before each new value.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Two trailing 2s', input: '[0,1,2,2]' },
     { label: 'Mixed', input: '[0,1,2,0,1,2]' },

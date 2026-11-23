@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Lamps as [position, range] pairs (JSON)',
   url: 'https://leetcode.com/problems/brightest-position-on-street/',
   complexity: 'O(k log k) time for k event positions (at most twice the number of lamps).',
+  question: "Find the brightest position on a street given lights with ranges and brightness.",
+  approaches: [
+    { name: "Difference array sweep", intuition: "Add each light's brightness as an event at its start and end, then sweep positions in order.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Brightest at zero', input: '[[0,1],[4,2],[2,0]]' },
     { label: 'Tie breaks left', input: '[[1,1],[5,1]]' },

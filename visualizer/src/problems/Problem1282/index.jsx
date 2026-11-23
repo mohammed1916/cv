@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Array of group sizes (JSON)',
   url: 'https://leetcode.com/problems/group-the-people-given-the-group-size-they-belong-to/',
   complexity: 'O(n) time and O(n) space: each person is placed once into a bucket keyed by size.',
+  question: "Group people into groups so that each group has the size each person asked for.",
+  approaches: [
+    { name: "Bucket by group size", intuition: "Collect people by their requested size and cut each bucket into groups of that size.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Mixed sizes', input: '[1,3,2,2,3,3,1]' },
     { label: 'Two full blocks', input: '[4,4,4,4,2,2]' },

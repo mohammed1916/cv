@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Queries as JSON [[1, x] obstacle or [2, x, size] check], x from 0 to 15',
   url: 'https://leetcode.com/problems/block-placement-queries/',
   complexity: 'O(log M) per query with the segment tree over M cells. The visualization fixes M at 16.',
+  question: "Answer block placement queries on a line of cells, deciding whether a block of a given size fits before a position.",
+  approaches: [
+    { name: "Segment tree of free runs", intuition: "Each node keeps its free prefix, free suffix and longest free run, so a check combines the covering nodes.", time: "O(log M) per query", space: "O(M)" },
+  ],
   examples: [
     { label: 'Block after a late obstacle', input: '[[1,6],[2,6,3],[2,9,2],[1,9],[2,2,1]]' },
     { label: 'Example 2', input: '[[2,0,1],[2,1,2]]' },

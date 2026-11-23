@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON object with score (rows of exam scores) and k (column index)',
   url: 'https://leetcode.com/problems/sort-the-students-by-their-kth-score/',
   complexity: 'O(m^2) time for this selection walk over m students, O(m * n) space. The visualization caps input at 8 by 5.',
+  question: "Sort a table of student scores by the score in column k, from highest to lowest.",
+  approaches: [
+    { name: "Selection of the best row", intuition: "Repeatedly find the row with the highest score in column k and place it next.", time: "O(m^2)", space: "O(m * n)" },
+  ],
   examples: [
     { label: 'Four students, first exam', input: '{"score":[[9,4,12],[3,15,6],[7,8,1],[11,2,10]],"k":0}' },
     { label: 'Last exam of three students', input: '{"score":[[30,2],[21,50],[7,44]],"k":1}' },

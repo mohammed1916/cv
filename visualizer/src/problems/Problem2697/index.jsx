@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with s (JSON)',
   url: 'https://leetcode.com/problems/lexicographically-smallest-palindrome/',
   complexity: 'O(n) time and O(n) space. The visualization caps input at 30 letters.',
+  question: "Given a string, make it a palindrome with the fewest character changes while preferring the lexicographically smallest result.",
+  approaches: [
+    { name: "Two pointers from both ends", intuition: "Compare the characters at the two ends and set both to the smaller letter.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example', input: '{"s":"egcfe"}' },
     { label: 'Alphabet', input: '{"s":"abcd"}' },

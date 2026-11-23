@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON with nums, key and k, e.g. {"nums":[3,4,9,1,3,9,5],"key":9,"k":1}',
   url: 'https://leetcode.com/problems/find-all-k-distant-indices-in-an-array/',
   complexity: 'O(n * k) time in this window walk, or O(n) with a sweep. The page caps the length at 14 and values at 9.',
+  question: "Return every index within distance k of some index that holds a given key value, in increasing order.",
+  approaches: [
+    { name: "Mark neighbourhoods around keys", intuition: "For each key position, mark every index within distance k, then collect the marked indices in order.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Two keys', input: '{"nums":[3,4,9,1,3,9,5],"key":9,"k":1}' },
     { label: 'All equal', input: '{"nums":[2,2,2,2,2],"key":2,"k":0}' },

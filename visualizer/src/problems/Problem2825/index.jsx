@@ -13,6 +13,11 @@ const definition = {
   inputLabel: 'Object with lowercase str1 and str2 (JSON)',
   url: 'https://leetcode.com/problems/make-string-a-subsequence-using-cyclic-increments/',
   complexity: 'O(|str1|) time and O(1) extra space.',
+  question: "Decide whether the second string becomes a subsequence of the first after increasing some letters in the first string by one, at most once per position.",
+  approaches: [
+    { name: "Greedy two-pointer match", intuition: "Scan the first string once and match each target letter as soon as either the letter or its successor matches.", time: "O(n)", space: "O(1)" },
+    { name: "Dynamic programming over prefixes", intuition: "Track which prefix of the target can be matched so far.", time: "O(n m)", space: "O(m)" },
+  ],
   examples: [
     { label: 'Four letters, shared start', input: '{"str1":"adxz","str2":"ayzb"}' },
     { label: 'Repeated letters, one-letter target', input: '{"str1":"zz","str2":"z"}' },

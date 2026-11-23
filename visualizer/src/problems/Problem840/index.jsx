@@ -13,6 +13,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Grid (JSON 2-D array)',
   url: 'https://leetcode.com/problems/magic-squares-in-grid/',
   complexity: 'O(R*C) time (each window costs a constant 9 cells) and O(1) extra space.',
+  question: "Count the 3 by 3 subgrids that form a magic square with distinct values 1 to 9.",
+  approaches: [
+    { name: "Check each window", intuition: "For each 3 by 3 window, check distinct values and equal row, column and diagonal sums.", time: "O(9 * m * n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Three by four grid', input: '[[4,3,8,4],[9,5,1,9],[2,7,6,2]]' },
     { label: 'Two by two, high values', input: '[[2,9],[14,5]]' },

@@ -19,6 +19,10 @@ const definition = {
   inputLabel: 'Object with nums (strictly increasing integers) and k (positive)',
   url: 'https://leetcode.com/problems/missing-element-in-sorted-array/description/',
   complexity: 'O(log n) time for n array elements and O(1) extra space, from a binary search. The visualization caps nums at 10 values from 0 to 100 and k at 50; the official bounds are not verified.',
+  question: "Return the k-th missing number after the first element of a sorted array of distinct numbers.",
+  approaches: [
+    { name: "Binary search on missing counts", intuition: "The number of missing values before index i is nums[i] - nums[0] - i; binary search for the boundary that holds k missing values.", time: "O(log n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'First missing', input: '{"nums":[2,5,6,11,14],"k":1}' },
     { label: 'Middle missing', input: '{"nums":[2,5,6,11,14],"k":4}' },

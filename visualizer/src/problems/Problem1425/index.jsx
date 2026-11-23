@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Object with nums and k (JSON)',
   url: 'https://leetcode.com/problems/constrained-subsequence-sum/',
   complexity: 'O(n) time and O(n) space: each index enters and leaves the monotonic window at most once.',
+  question: "Find the largest sum of a subsequence where neighbours in the subsequence are at most k apart.",
+  approaches: [
+    { name: "Monotonic deque DP", intuition: "Keep a deque of the best recent sums so the window maximum is read in constant time.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Mixed signs', input: '{"nums":[10,-2,-10,-5,20],"k":2}' },
     { label: 'All negative', input: '{"nums":[-1,-2,-3],"k":1}' },

@@ -13,6 +13,11 @@ const definition = {
   inputLabel: 'JSON object with s (lowercase letters)',
   url: 'https://leetcode.com/problems/faulty-keyboard/',
   complexity: 'O(n^2) time with string reversals, or O(n) with a flag. The visualization caps s at 100 letters.',
+  question: "Type characters into a faulty keyboard where the letter i reverses the text typed so far, and return the final text.",
+  approaches: [
+    { name: "Reverse on each i", intuition: "Keep the text as a string and reverse it whenever the faulty letter appears.", time: "O(n^2) worst case", space: "O(n)" },
+    { name: "Deque with a direction flag", intuition: "Track whether writes go to the front or back, flipping the flag on each i instead of reversing.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"s":"string"}' },
     { label: 'Example 2', input: '{"s":"poiinter"}' },

@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON {"points": [[x, y], ...], "angle": 0-360, "location": [x, y]}',
   url: 'https://leetcode.com/problems/maximum-number-of-visible-points/',
   complexity: 'O(n log n) time for n points, from the sort. The visualization caps input at 12 points.',
+  question: "Find the most points visible from a viewer position within a fixed viewing angle.",
+  approaches: [
+    { name: "Sliding window over sorted angles", intuition: "Sort the angles and slide a window of the view width around the circle.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Angle of forty-five', input: '{"points":[[1,4],[-2,3],[5,-1]],"angle":45,"location":[0,2]}' },
     { label: 'On the viewer', input: '{"points":[[1,1],[2,2],[1,1]],"angle":0,"location":[1,1]}' },

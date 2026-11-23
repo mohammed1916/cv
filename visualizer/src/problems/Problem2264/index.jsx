@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Digits (JSON object with num)',
   url: 'https://leetcode.com/problems/largest-3-same-digit-number-in-string/',
   complexity: 'O(n) time and O(1) extra space. The visualization caps input at 30 digits.',
+  question: "Return the largest three-digit string made of one repeated digit that appears in a string, or an empty string if none.",
+  approaches: [
+    { name: "Scan the triples", intuition: "Check every run of three equal characters and keep the largest.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Own: seven digits, no nines', input: '{"num":"5084120"}' },
     { label: 'Zeros', input: '{"num":"2300019"}' },

@@ -16,6 +16,10 @@ const definition = {
   inputLabel: 'JSON {"nums": [2,2,4,4,0]}',
   url: 'https://leetcode.com/problems/apply-operations-to-an-array/',
   complexity: 'O(n) time and O(n) extra space for the output. The visualization caps nums at 30 values.',
+  question: "For each adjacent equal pair, double the first and zero the second, then move all zeros to the end.",
+  approaches: [
+    { name: "Two passes", intuition: "Apply the pair operations left to right, then shift the non-zero values forward.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"nums":[2,2,4,4,0]}' },
     { label: 'Example 2', input: '{"nums":[3,3,1]}' },

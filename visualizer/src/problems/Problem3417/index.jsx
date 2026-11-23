@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON object: {"grid": [[...], ...]}',
   url: 'https://leetcode.com/problems/zigzag-grid-traversal-with-skip/',
   complexity: 'One pass over the cells: O(m n) time. The visualization caps the grid at 6 by 6.',
+  question: "Traverse a grid in a zigzag order, skipping some cells along the way, and report the visited values.",
+  approaches: [
+    { name: "Row sweep with alternating direction", intuition: "Walk rows left to right then right to left, skipping cells the rule excludes.", time: "O(m n)", space: "O(m n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"grid":[[1,2],[3,4]]}' },
     { label: 'Example 2', input: '{"grid":[[2,1],[2,1],[2,1]]}' },

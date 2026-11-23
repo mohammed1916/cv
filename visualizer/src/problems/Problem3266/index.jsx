@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON {"nums": [...], "k": operations, "multiplier": factor}',
   url: 'https://leetcode.com/problems/final-array-state-after-k-multiplication-operations-ii/',
   complexity: 'O(n log n + n log k) time for the real limits, using a heap and one round-robin pass. The visualization simulates up to 30 operations exactly.',
+  question: "Apply k operations that each multiply the smallest value, then report the final array modulo a bound.",
+  approaches: [
+    { name: "Heap with round-robin pass", intuition: "Use a min-heap to pick the smallest value, and once every value is large enough, finish with one round-robin pass.", time: "O(n log n + n log k)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Mixed values, k eleven', input: '{"nums":[6,14,3,9,2],"k":11,"multiplier":2}' },
     { label: 'Example 2', input: '{"nums":[1,2],"k":3,"multiplier":4}' },

@@ -14,6 +14,10 @@ const definition = {
   phases, parse: parseInput, build: buildTrace, code, sql, python, inputLabel,
   url: `https://leetcode.com/problems/${meta.slug}/`,
   complexity, examples,
+  question: "Turn one row per product and store into one row per product with a column for each store's price.",
+  approaches: [
+    { name: "Pivot with conditional sums", intuition: "Give each store its own column using a conditional aggregate, one row per product.", time: "O(n)", space: "O(products)" },
+  ],
 }
 
 const CELL = { border: '1px solid var(--border)', padding: '3px 8px', color: 'var(--text)', fontFamily: 'monospace' }

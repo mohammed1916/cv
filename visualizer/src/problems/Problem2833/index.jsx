@@ -15,6 +15,11 @@ const definition = {
   inputLabel: "moves (e.g. {\"moves\": \"L_RL__R\"})",
   url: "https://leetcode.com/problems/furthest-point-from-origin/",
   complexity: "O(n) time and O(1) extra space for moves length n. The visualization caps length at 50.",
+  question: "Given moves that are left, right or wildcard, find the furthest distance from the origin achievable.",
+  approaches: [
+    { name: "Count moves and add wildcards", intuition: "The best direction takes all wildcards in the same direction as the bias, so the answer is the absolute imbalance plus wildcards.", time: "O(n)", space: "O(1)" },
+    { name: "Simulate both choices", intuition: "Track the best reachable position while trying each wildcard direction.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: "Example 1", input: "{\"moves\": \"L_RL__R\"}" },
     { label: "Example 2", input: "{\"moves\": \"_R__LL_\"}" },

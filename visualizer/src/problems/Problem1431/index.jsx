@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Object with candies and extraCandies (JSON)',
   url: 'https://leetcode.com/problems/kids-with-the-greatest-number-of-candies/',
   complexity: 'O(n) time and O(n) output: one maximum scan, then one comparison per child.',
+  question: "For each child, check whether adding the extra candies makes them have the most.",
+  approaches: [
+    { name: "Compare with the maximum", intuition: "Find the maximum once and compare each child to it after adding the extras.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Clear leader', input: '{"candies":[2,3,5,1,3],"extraCandies":3}' },
     { label: 'Tie at the top', input: '{"candies":[5,5,3],"extraCandies":0}' },

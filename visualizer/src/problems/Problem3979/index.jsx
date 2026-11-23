@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'Object with nums and k (e.g. {"nums":[4,1,9,2,7],"k":2})',
   url: 'https://leetcode.com/problems/maximum-valid-pair-sum/',
   complexity: 'O(n) time and O(1) extra space. The visualization caps nums at 12 values; the official limit is 100,000.',
+  question: "Pick two positions at least k apart to maximise the sum of their values.",
+  approaches: [
+    { name: "Sweep with best eligible partner", intuition: "Walk the right end forward while tracking the best left value allowed to pair with it.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Gap of two', input: '{"nums":[4,1,9,2,7],"k":2}' },
     { label: 'Adjacent allowed', input: '{"nums":[3,8,1],"k":1}' },

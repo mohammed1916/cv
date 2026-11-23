@@ -11,6 +11,10 @@ const definition = {
   inputLabel: 'Object with s (letters U D L R) and k',
   url: 'https://leetcode.com/problems/distinct-points-reachable-after-substring-removal/',
   complexity: 'O(n) prefix work plus O(n) set operations on the window endpoints.',
+  question: "Count the distinct endpoints reached after removing a substring of a given length.",
+  approaches: [
+    { name: "Prefix and suffix windows", intuition: "Combine prefix and suffix endpoints for each window and collect the distinct results.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example', input: '{"s":"RRUDL","k":2}' },
     { label: 'Repeats', input: '{"s":"UUDD","k":2}' },

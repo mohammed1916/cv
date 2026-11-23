@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'String s and k (JSON)',
   url: 'https://leetcode.com/problems/longest-subsequence-repeated-k-times/',
   complexity: 'Level-by-level search: each level checks every candidate with a greedy scan of s k times.',
+  question: "Find the longest string that can be formed as a subsequence of a string and appears k times in a row in it.",
+  approaches: [
+    { name: "Greedy build with pruning", intuition: "Build the answer one letter at a time, checking each candidate subsequence with greedy matching and discarding candidates that cannot appear k times.", time: "O(exp, pruned)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Three repeats', input: '{"s":"abcabcabc","k":3}' },
     { label: 'Doubled letters', input: '{"s":"aabbcc","k":2}' },

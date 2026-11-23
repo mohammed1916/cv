@@ -26,6 +26,10 @@ const definition = {
   inputLabel: 'Object with root and target_sum (e.g. {"root":[5,4,8,11,null,13,4],"target_sum":22})',
   url: "https://leetcode.com/problems/path-sum-ii/",
   complexity: "O(n^2) time in the worst case for copying saved routes, and O(h) recursion depth for n nodes. The visualization accepts up to 15 entries.",
+  question: "List every root-to-leaf path in a binary tree whose node values add up to a target sum.",
+  approaches: [
+    { name: "DFS with path backtracking", intuition: "Push values as you go down, record a copy when a leaf hits the target, and pop on the way back up.", time: "O(n^2)", space: "O(h)" },
+  ],
   examples: getExamples("path-sum-ii").map(example => ({ label: example.label, input: JSON.stringify({ root: example.root, target_sum: example.targetSum }) })),
 };
 

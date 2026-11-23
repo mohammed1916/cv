@@ -19,6 +19,10 @@ const definition = {
   phases, parse: parseInput, build: buildTrace, code, sql, python, inputLabel,
   url: `https://leetcode.com/problems/${meta.slug}/`,
   complexity, examples,
+  question: "For each combination of three toppings, compute the pizza cost and report the results ranked by cost.",
+  approaches: [
+    { name: "Enumerate topping triples", intuition: "Generate every combination of three toppings, add the base cost, and sort the results.", time: "O(t^3)", space: "O(t^3)" },
+  ],
 }
 
 function Rows({ columns = [], rows = [] }) {

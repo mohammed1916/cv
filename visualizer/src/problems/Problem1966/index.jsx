@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON array of distinct integers (e.g. [1,3,2])',
   url: 'https://leetcode.com/problems/binary-searchable-numbers-in-an-unsorted-array/',
   complexity: 'O(n) time and O(n) space for the prefix maxima and suffix minima.',
+  question: "Count the numbers in an unsorted array whose value would be found by a binary search from any starting pivot.",
+  approaches: [
+    { name: "Prefix maximum and suffix minimum", intuition: "A value is searchable when everything to its left is smaller and everything to its right is larger.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Sorted', input: '[1,2,3,4,5]' },
     { label: 'One survivor', input: '[1,3,2]' },

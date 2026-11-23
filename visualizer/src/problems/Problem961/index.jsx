@@ -10,6 +10,10 @@ const definition = {
   inputLabel: 'Object with nums: an even-length list where one value fills exactly half the slots',
   url: 'https://leetcode.com/problems/n-repeated-element-in-size-2n-array/',
   complexity: 'O(n) time for the scan and O(n) space for the tally.',
+  question: "In an array of length 2n that contains n + 1 distinct values, one value repeats n times; return it.",
+  approaches: [
+    { name: "Count until a repeat", intuition: "Scan with a set and return the first value seen twice.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Repeat at the end', input: JSON.stringify({ nums: [7, 3, 9, 7, 2, 7, 1, 7] }) },
     { label: 'Adjacent repeats', input: JSON.stringify({ nums: [4, 4, 1, 6, 4, 5] }) },

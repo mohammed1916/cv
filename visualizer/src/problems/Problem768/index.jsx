@@ -13,6 +13,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Array arr (JSON, 1-200 integers)',
   url: 'https://leetcode.com/problems/max-chunks-to-make-sorted-ii/',
   complexity: 'O(n) time and O(n) space with the monotonic stack.',
+  question: "Split an array into the most chunks that can each be sorted and concatenated into a sorted array.",
+  approaches: [
+    { name: "Monotonic stack of chunk maxima", intuition: "Keep a stack of chunk maxima and merge chunks when a smaller value arrives.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: '[5,4,3,2,1]', input: '[5,4,3,2,1]' },
     { label: '[2,1,3,4,4]', input: '[2,1,3,4,4]' },

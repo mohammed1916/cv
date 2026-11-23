@@ -11,6 +11,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Sorted lists (JSON array of arrays)',
   url: 'https://leetcode.com/problems/smallest-range-covering-elements-from-k-lists/',
   complexity: 'O(N·k) for this visualization, which scans k pointers per step; a min-heap gives O(N log k) for N total elements across k lists.',
+  question: "Find the smallest range that includes at least one number from each of k sorted lists.",
+  approaches: [
+    { name: "Min-heap of list pointers", intuition: "Advance the list that holds the smallest value; every window must still touch every list.", time: "O(N log k)", space: "O(k)" },
+  ],
   examples: [
     { label: 'Classic', input: '[[4,10,15,24,26],[0,9,12,20],[5,18,22,30]]' },
     { label: 'Equal', input: '[[1,2,3],[1,2,3],[1,2,3]]' },

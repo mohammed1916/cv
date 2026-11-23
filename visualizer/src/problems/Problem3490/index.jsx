@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON object with l and r, for example {"l":10,"r":20}',
   url: 'https://leetcode.com/problems/count-beautiful-numbers/',
   complexity: 'O(d * S * P) states per bound for d digits, digit sum S and digit product P, memoized. The visualization caps r at 10000.',
+  question: "Count the beautiful numbers up to a limit, where a number is beautiful when its digit sum and digit product satisfy a rule.",
+  approaches: [
+    { name: "Digit DP", intuition: "Walk the digits with memoized states for digit sum, product, tightness and started flag.", time: "O(d S P)", space: "O(d S P)" },
+  ],
   examples: [
     { label: 'Fourteen to twenty-nine', input: '{"l":14,"r":29}' },
     { label: 'Single digits', input: '{"l":1,"r":15}' },

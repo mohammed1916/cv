@@ -12,6 +12,11 @@ const definition = {
   inputLabel: 'JSON {"wells": [costs per house], "pipes": [[house, house, cost], ...]}',
   url: 'https://leetcode.com/problems/optimize-water-distribution-in-a-village/description/',
   complexity: 'O(E log E) time and O(n) space for n houses and E candidate edges (n wells plus the pipes). The visualization caps n at 20 houses and 40 pipes.',
+  question: "Supply water to all houses by building wells or laying pipes, and minimise the total cost.",
+  approaches: [
+    { name: "Kruskal with a virtual source", intuition: "Treat a well as an edge to a virtual source, sort the candidate edges by cost, and join components with union-find.", time: "O(E log E)", space: "O(n)" },
+    { name: "Prim from the source", intuition: "Grow the tree from the virtual source by always taking the cheapest edge to a new house.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Pipes help', input: '{"wells":[5,4,6],"pipes":[[1,2,1],[2,3,2]]}' },
     { label: 'Wells only', input: '{"wells":[3,9,2],"pipes":[]}' },

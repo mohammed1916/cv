@@ -12,6 +12,11 @@ const definition = {
   inputLabel: 'JSON object with a binary string s containing at least one 1',
   url: 'https://leetcode.com/problems/maximum-odd-binary-number/',
   complexity: 'O(n) time for the count and build. The visualization caps s at twenty digits.',
+  question: "Rearrange the binary digits to form the largest odd number possible.",
+  approaches: [
+    { name: "Put all ones first except the last one", intuition: "Place every 1 except one at the front, then all zeros, then a final 1 so the number is odd and as large as possible.", time: "O(n)", space: "O(n)" },
+    { name: "Sort the digits", intuition: "Sort the digits descending, then move one 1 to the end.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"s":"010"}' },
     { label: 'Example 2', input: '{"s":"0101"}' },

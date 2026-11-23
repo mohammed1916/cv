@@ -8,6 +8,11 @@ const definition = {
   inputLabel: 'Positive integer n (e.g. 360)',
   url: 'https://leetcode.com/problems/smallest-number-with-given-digit-product/',
   complexity: 'O(log n) time and O(log n) space: each division removes at least one factor of 2, and the digits are at most about log2(n) long. The visualization caps n at 100000; the official bounds are not verified here. The -1 sentinel is an assumption.',
+  question: "Find the smallest positive integer whose digits multiply to a given product.",
+  approaches: [
+    { name: "Greedy division from nine down to two", intuition: "Divide out the largest digits first and then sort the digits to form the smallest number.", time: "O(log n)", space: "O(log n)" },
+    { name: "Search digit combinations", intuition: "Try digit combinations and compare the resulting numbers.", time: "exponential in digits", space: "O(log n)" },
+  ],
   examples: [
     { label: 'Mixed factors', input: '360' },
     { label: 'Prime seven', input: '7' },

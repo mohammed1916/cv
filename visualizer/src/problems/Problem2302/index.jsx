@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'JSON {"nums": [1, 2, 3], "k": 6}',
   url: 'https://leetcode.com/problems/count-subarrays-with-score-less-than-k/',
   complexity: 'O(n) time and O(1) extra space. Each pointer moves right at most n times, since all values are positive.',
+  question: "Count non-empty subarrays whose score, defined as the sum times the length, is strictly less than k.",
+  approaches: [
+    { name: "Sliding window", intuition: "Since all values are positive, the score grows as the window grows, so move the left pointer when the score reaches k.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example', input: '{"nums":[1,2,3],"k":6}' },
     { label: 'Wider', input: '{"nums":[4,2,1,6],"k":13}' },

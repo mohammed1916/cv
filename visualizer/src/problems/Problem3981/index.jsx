@@ -11,6 +11,10 @@ const definition = {
   inputLabel: 'JSON: {"word1": "...", "word2": "...", "target": "..."}',
   url: 'https://leetcode.com/problems/count-distinct-ways-to-form-target-from-two-strings/',
   complexity: 'O(|target| * |word1| * |word2|) states and transitions with a table of next-free index pairs. The visualization caps each string at 6 characters.',
+  question: "Count the ways to form a target string by taking characters from two words in order.",
+  approaches: [
+    { name: "DP over next-free index pairs", intuition: "Track the number of ways to reach each pair of next-free indices, one target character at a time.", time: "O(|target| x |word1| x |word2|)", space: "O(|word1| x |word2|)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"word1":"abc","word2":"bac","target":"abc"}' },
     { label: 'Example 4', input: '{"word1":"ab","word2":"cde","target":"ace"}' },

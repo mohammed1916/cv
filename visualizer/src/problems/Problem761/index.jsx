@@ -18,6 +18,10 @@ const definition = {
   inputLabel: 'Special binary string (JSON)',
   url: 'https://leetcode.com/problems/special-binary-string/',
   complexity: 'O(n^2) worst case time from nested recursion and sorting; the visualization caps n at 60.',
+  question: "Rearrange special binary strings to get the lexicographically largest result.",
+  approaches: [
+    { name: "Recursive sorting of pieces", intuition: "Split into primitive special strings, recurse on each interior, and sort the pieces in descending order.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: [{ label: 'Own: 10 then 1100', input: '"101100"' }, { label: 'Own: three ones, three zeros', input: '"111000"' }, { label: 'Several pieces', input: '"1010110100"' }, { label: 'Nested pair', input: '"1100"' }, { label: 'Three deep', input: '"111000"' }, { label: 'Long run: 58 characters', input: '"1101010101010101010101010101010101010101010101010101010100"' }],
 }
 

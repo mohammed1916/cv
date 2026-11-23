@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Lowercase word as a JSON string',
   url: 'https://leetcode.com/problems/remove-letter-to-equalize-frequency/',
   complexity: 'O(n * 26) time and O(26) space.',
+  question: "Decide whether removing exactly one letter can make the letter counts of a string equal.",
+  approaches: [
+    { name: "Try removing each letter", intuition: "Remove one occurrence of each letter in turn and test whether all remaining counts match.", time: "O(n * 26)", space: "O(26)" },
+  ],
   examples: [
     { label: 'Seven letters', input: '"moonlit"' },
     { label: 'Five letters', input: '"ziggy"' },

@@ -16,6 +16,10 @@ const definition = {
   inputLabel: 'Object with k, row_conditions and col_conditions (JSON)',
   url: 'https://leetcode.com/problems/build-a-matrix-with-conditions/',
   complexity: 'O(k^2 + conditions) time with two topological sorts. The visualization caps k at 6.',
+  question: "Place numbers in a k by k matrix so that each row and column obeys the given ordering conditions, using each number once.",
+  approaches: [
+    { name: "Two topological sorts", intuition: "Sort the row conditions and the column conditions topologically, then place each number at its row and column positions.", time: "O(k^2 + conditions)", space: "O(k^2)" },
+  ],
   examples: [
     { label: 'Two chains', input: '{"k":3,"row_conditions":[[2,1],[3,1]],"col_conditions":[[1,3]]}' },
     { label: 'Cycle', input: '{"k":3,"row_conditions":[[1,2],[2,3],[3,1]],"col_conditions":[[2,1]]}' },

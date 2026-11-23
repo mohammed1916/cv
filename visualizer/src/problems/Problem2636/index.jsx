@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON object with limit (1 to 4) and durations (whole milliseconds, up to 8 tasks)',
   url: 'https://leetcode.com/problems/promise-pool/',
   complexity: 'O(n^2) time with this simple list (a heap would give O(n log n)), O(n) space.',
+  question: "Run a list of asynchronous tasks with at most a fixed number of them active at once and return the results.",
+  approaches: [
+    { name: "Pool with a pending queue", intuition: "Start up to the limit, and start the next task each time one settles.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Pool of two', input: '{"limit":2,"durations":[300,100,200,50]}' },
     { label: 'Pool of one', input: '{"limit":1,"durations":[10,20]}' },

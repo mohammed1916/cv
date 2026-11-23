@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Length n and rank k, separated by a space',
   url: 'https://leetcode.com/problems/the-k-th-lexicographical-string-of-all-happy-strings-of-length-n/',
   complexity: 'O(n) time and O(n) space: the answer is built letter by letter, with no enumeration of earlier strings.',
+  question: "Return the k-th string in sorted order among all valid strings of a given length.",
+  approaches: [
+    { name: "Count by prefix", intuition: "Count how many strings start with each letter to pick the letter at each position.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Rank 4 of 3', input: '3 4' },
     { label: 'Last of 3', input: '3 12' },

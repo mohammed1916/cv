@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Array (JSON object with nums)',
   url: 'https://leetcode.doocs.org/en/lc/3867/',
   complexity: 'O(n log n) time and O(n) space. The visualization caps input at 30 values.',
+  question: "Pair up the prefix GCDs of an array to maximise the sum of the pair GCDs.",
+  approaches: [
+    { name: "Sort prefix GCDs and pair ends", intuition: "Build prefix GCDs against the running maximum, sort them, and pair the two ends inward.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"nums":[2,6,4]}' },
     { label: 'Example 2', input: '{"nums":[3,6,2,8]}' },

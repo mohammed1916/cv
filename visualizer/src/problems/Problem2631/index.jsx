@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'JSON object with items (objects with an integer id) and key (the property to group by)',
   url: 'https://leetcode.com/problems/group-by/',
   complexity: 'O(n) time for n items, O(n) extra space for the buckets.',
+  question: "Given an array and a function that returns a key, group the items into an object with one array per key.",
+  approaches: [
+    { name: "Object buckets", intuition: "Compute each item's key and append the item to that key's array.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Two groups', input: '{"items":[{"id":1,"g":"a"},{"id":2,"g":"b"},{"id":3,"g":"a"}],"key":"g"}' },
     { label: 'Single item', input: '{"items":[{"id":1,"g":"x"}],"key":"g"}' },

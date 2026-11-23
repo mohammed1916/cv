@@ -7,6 +7,10 @@ const definition = {
   phases, parse: parseInput, build: buildTrace, code, sql, python, inputLabel,
   url: `https://leetcode.com/problems/${meta.slug}/`,
   complexity, examples,
+  question: "Return the ids of tweets whose content is longer than fifteen characters.",
+  approaches: [
+    { name: "Filter each row", intuition: "Scan the rows and keep those whose content is over fifteen characters.", time: "O(n)", space: "O(1)" },
+  ],
 }
 
 // The query as clauses: the clause that is running at this step is highlighted.

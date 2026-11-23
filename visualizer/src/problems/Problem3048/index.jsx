@@ -13,6 +13,11 @@ const definition = {
   inputLabel: 'Object with nums (1 to 4 values, 0 to 3) and changeIndices (1 to 8 one-based indices) (JSON)',
   url: 'https://leetcode.com/problems/earliest-second-to-mark-indices-i/',
   complexity: 'O(log m * (n + m)) time for the check. The visualization caps n at 4 and m at 8.',
+  question: "Find the earliest second by which all indices can be marked, given that each index needs a scheduled change.",
+  approaches: [
+    { name: "Binary search with feasibility check", intuition: "Binary search the answer and check greedily whether the required marks fit before that second.", time: "O(m log m)", space: "O(n + m)" },
+    { name: "Scan every second", intuition: "Test each second in order until a feasible one is found.", time: "O(m^2)", space: "O(n + m)" },
+  ],
   examples: [
     { label: 'Three indices, late marks', input: '{"nums":[1,0,3],"changeIndices":[3,1,2,2,3,1,2,3]}' },
     { label: 'One index, three marks', input: '{"nums":[2],"changeIndices":[1,1,1]}' },

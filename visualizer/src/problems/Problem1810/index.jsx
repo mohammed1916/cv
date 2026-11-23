@@ -167,6 +167,10 @@ const definition = {
   inputLabel: 'Object with grid (digits, 0 is blocked) and target [row, col]',
   url: 'https://leetcode.com/problems/minimum-path-cost-in-a-hidden-grid/',
   complexity: 'Exploration visits each reachable cell a constant number of times; the cost search is Dijkstra on the recorded cells. The sample is capped at 6 by 6.',
+  question: "Find the minimum path cost to a target on a hidden grid where each cell's cost is revealed by a sensor.",
+  approaches: [
+    { name: "Explore, then Dijkstra", intuition: "Map the hidden grid, then run Dijkstra with the sensor costs.", time: "O(cells log cells)", space: "O(cells)" },
+  ],
   examples: [
     { label: 'Example', input: '{"grid":[[1,3,1],[0,2,9],[4,1,1]],"target":[2,2]}' },
     { label: 'Walled', input: '{"grid":[[1,0],[0,5]],"target":[1,1]}' },

@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Array of spell powers from 1 to 10 (JSON)',
   url: 'https://leetcode.com/problems/maximum-total-damage-with-spell-casting/',
   complexity: 'O(m^2) time for the direct scan over m distinct powers, and O(m) space. The visualization caps input at 10 spells.',
+  question: "Choose spells to cast so the total damage is maximised, where casting a power blocks powers close to it.",
+  approaches: [
+    { name: "Dynamic programming over sorted powers", intuition: "Spells with equal power are cast together, and each power only looks back at powers far enough below it.", time: "O(m^2)", space: "O(m)" },
+  ],
   examples: [
     { label: 'Four spells, two equal', input: '[5,5,2,9]' },
     { label: 'Five spells, mixed', input: '[6,1,9,3,2]' },

@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'nums and k (JSON)',
   url: 'https://leetcode.com/problems/count-number-of-pairs-with-absolute-difference-k/',
   complexity: 'O(n) expected time with a hash map of counts.',
+  question: "Count pairs of values in an array whose absolute difference equals k.",
+  approaches: [
+    { name: "Frequency map", intuition: "Count values and, for each value, add the count of value plus k.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Small gap', input: '{"nums":[3,1,4,1,5],"k":2}' },
     { label: 'Repeated values', input: '{"nums":[2,2,2],"k":1}' },

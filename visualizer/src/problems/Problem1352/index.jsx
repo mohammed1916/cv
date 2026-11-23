@@ -20,6 +20,11 @@ const definition = {
   inputLabel: 'An object with operations: up to 12 entries of ["add", 0-9] or ["getProduct", k]',
   url: 'https://leetcode.com/problems/product-of-the-last-k-numbers/',
   complexity: 'O(k) time per getProduct, because the solution multiplies the last k numbers each time, and O(n) space for the stored numbers. The visualization caps input at 12 operations.',
+  question: "Answer queries for the product of the last k numbers added so far.",
+  approaches: [
+    { name: "Multiply the last k values each query", intuition: "Keep the numbers in a list and multiply the last k entries on each query.", time: "O(k) per query", space: "O(n)" },
+    { name: "Prefix products since the last zero", intuition: "Keep running products that restart at each zero. A query becomes one division, or 0 if the window reaches back past a zero.", time: "O(1) per operation", space: "O(n)" },
+  ],
   goal: {
     summary: 'Answer each query for the product of the last k added numbers, as the stream grows.',
     requirement: [

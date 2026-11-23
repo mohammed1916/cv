@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON object with energy_drink_a and energy_drink_b (equal-length arrays of 1 to 10)',
   url: 'https://leetcode.com/problems/maximum-energy-boost-from-two-drinks/',
   complexity: 'O(n) time and O(n) space. The visualization caps input at 8 hours.',
+  question: "Two energy drinks give boosts per hour; a drink that is switched off costs one hour of boost, and the task is to maximise total energy over the available hours.",
+  approaches: [
+    { name: "Dynamic programming over hours", intuition: "At each hour, keep the best energy for each drink being in use, and add the next hour's boost to whichever drink is active.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Stay on B', input: '{"energy_drink_a":[1,3,1],"energy_drink_b":[3,1,1]}' },
     { label: 'Switch once', input: '{"energy_drink_a":[4,1,1],"energy_drink_b":[1,1,3]}' },

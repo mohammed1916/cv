@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'n (JSON integer)',
   url: 'https://leetcode.com/problems/monotone-increasing-digits/',
   complexity: 'O(d) time and O(d) space for d digits.',
+  question: "Find the largest number not above a given value whose digits never decrease.",
+  approaches: [
+    { name: "Greedy from the right", intuition: "Find the first decrease, reduce that digit and set all later digits to nine.", time: "O(d)", space: "O(d)" },
+  ],
   examples: [
     { label: 'Descent', input: '5423' },
     { label: 'Cascade', input: '1332' },

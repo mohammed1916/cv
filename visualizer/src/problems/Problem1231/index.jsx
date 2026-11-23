@@ -8,6 +8,10 @@ const definition = {
   inputLabel: 'Object with sweetness (nonnegative integers) and k',
   url: 'https://leetcode.com/problems/divide-chocolate/description/',
   complexity: 'O(n log S) time and O(1) extra space, where S is the total sweetness. The visualization caps the bar count at 12 and accepts only nonnegative integers, because the greedy check relies on that; the draft does not state an exact official bound.',
+  question: "Divide a chocolate bar into pieces so that the least sweet piece is as sweet as possible.",
+  approaches: [
+    { name: "Binary search on answer", intuition: "Test a guessed minimum by greedily cutting pieces that reach it.", time: "O(n log S)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Nine bars', input: '{"sweetness":[1,2,3,4,5,6,7,8,9],"k":5}' },
     { label: 'Four bars', input: '{"sweetness":[5,6,7,8],"k":2}' },

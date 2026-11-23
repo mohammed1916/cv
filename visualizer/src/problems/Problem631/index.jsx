@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Sheet and operations (JSON)',
   url: 'https://leetcode.com/problems/design-excel-sum-formula/',
   complexity: 'Reading a cell costs time proportional to the cells its formula expands to. The visualization caps the sheet at 10 rows and 10 columns and 30 operations.',
+  question: "Implement a spreadsheet whose sum formulas stay linked to the cells they reference.",
+  approaches: [
+    { name: "Dependency graph recalculation", intuition: "Store each formula as its cell list and recompute dependents when a value changes.", time: "O(cells) per update", space: "O(cells)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"h":3,"w":"C","ops":[["set",1,"A",2],["sum",3,"C",["A1","A1:B2"]],["set",2,"B",2],["get",3,"C"]]}' },
     { label: 'Chained sums', input: '{"h":3,"w":"B","ops":[["set",1,"A",4],["sum",2,"A",["A1"]],["sum",3,"B",["A2","A1"]],["set",1,"A",1],["get",3,"B"]]}' },

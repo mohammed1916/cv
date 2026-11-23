@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON {"nums": [-6, 5, -2, 9]}',
   url: 'https://leetcode.com/problems/find-closest-number-to-zero/',
   complexity: 'O(n) time and O(1) extra space.',
+  question: "Return the integer closest to zero in an array, choosing the larger value on a tie.",
+  approaches: [
+    { name: "Linear scan with tie rule", intuition: "Track the best value, replacing it when a value is closer to zero or equally close and larger.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example', input: '{"nums":[-6,5,-2,9]}' },
     { label: 'Tie', input: '{"nums":[4,-4,7]}' },

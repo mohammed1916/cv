@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Binary grid as a JSON array of rows',
   url: 'https://leetcode.com/problems/count-submatrices-with-all-ones/',
   complexity: 'O(rows × columns²) time with this scan, and O(columns) extra space for the heights.',
+  question: "Count the submatrices that consist only of ones.",
+  approaches: [
+    { name: "Histogram per row", intuition: "Build the column heights of ones ending at each row, then count rectangles under each bar of the histogram.", time: "O(rows * cols^2)", space: "O(cols)" },
+  ],
   examples: [
     { label: 'Sample', input: '[[1,1,0,1],[1,1,1,1],[0,1,1,1]]' },
     { label: '2 by 2 block', input: '[[1,1],[1,1]]' },

@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'JSON object: {"ops": [["record", name, time], ["query", freq, name, start, end]]}',
   url: 'https://leetcode.com/problems/tweet-counts-per-frequency/',
   complexity: 'Each record is a sorted insert and each bucket is two binary searches. The visualization caps times at 200 and operations at 12.',
+  question: "Record tweets with times and count them in fixed-size time buckets.",
+  approaches: [
+    { name: "Sorted list with binary search", intuition: "Keep times in sorted order and binary search each bucket range.", time: "O(log n) per query", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"ops":[["record","tweet",0],["record","tweet",60],["record","tweet",10],["query","minute","tweet",0,59],["query","minute","tweet",0,60]]}' },
     { label: "Single record", input: "{\"ops\":[[\"record\",\"a\",0]]}" },

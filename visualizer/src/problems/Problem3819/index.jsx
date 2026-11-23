@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Array and shift (JSON object with nums and k)',
   url: 'https://leetcode.com/problems/rotate-non-negative-elements/',
   complexity: 'O(n) time and O(n) space. The visualization caps n at 12.',
+  question: "Rotate only the non-negative values among their own positions while negative values stay in place.",
+  approaches: [
+    { name: "Collect, rotate and place", intuition: "Collect the non-negative values, rotate them by one step, and write them back into their slots.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Mixed signs, k four', input: '{"nums":[-3,5,0,2,-1],"k":4}' },
     { label: 'Single value, k zero', input: '{"nums":[9],"k":0}' },

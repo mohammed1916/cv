@@ -10,6 +10,10 @@ const definition = {
   code,
   python,
   pythonLineMap,
+  question: "Find the longest subarray whose maximum and minimum differ by at most a limit.",
+  approaches: [
+    { name: "Sliding window with monotonic deques", intuition: "Track the window maximum and minimum with two deques.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Spread', input: '{"nums":[4,2,5,3],"limit":4}' },
     { label: 'Spike', input: '{"nums":[10,1,2,9,3],"limit":2}' },

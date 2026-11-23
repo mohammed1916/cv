@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON array of 3 to 50 distinct integers from 1 to 50',
   url: 'https://leetcode.com/problems/distribute-elements-into-two-arrays-i/',
   complexity: 'O(n) time and O(n) space for the two arrays.',
+  question: "Distribute values into two arrays by comparing their last elements.",
+  approaches: [
+    { name: "Greedy comparison", intuition: "Append each value to the array whose last element is larger than the other array's last element.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '[4,9,2,7]' },
     { label: 'Example 2', input: '[10,3,8,6,1]' },

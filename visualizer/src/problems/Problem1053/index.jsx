@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Arrangement (JSON object with arr)',
   url: 'https://leetcode.com/problems/previous-permutation-with-one-swap/',
   complexity: 'O(n) time and O(n) space for the copy used by the trace. The visualization caps input at 40 values.',
+  question: "Make the lexicographically largest permutation smaller using exactly one swap.",
+  approaches: [
+    { name: "Find pivot and swap", intuition: "Scan from the right for the first descent; swap that value with the largest smaller value to its right, taking the leftmost copy.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Late descent', input: '{"arr":[7,4,9,6,8,5,3,3,4]}' },
     { label: 'Leftmost duplicate', input: '{"arr":[8,3,3,6,6]}' },

@@ -6,6 +6,10 @@ import { uniqueOccurrencesTutorial } from './tutorial'
 
 const definition = {
   number: meta.number, phases, parse: parseInput, build: buildTrace, code, python, pythonLineMap, inputLabel,
+  question: "Decide whether every count of occurrences in an array is unique.",
+  approaches: [
+    { name: "Count map and set", intuition: "Count occurrences in a map, then check that the set of counts is the same size as the map.", time: "O(n)", space: "O(n)" },
+  ],
   url: `https://leetcode.com/problems/${meta.slug}/`, complexity, examples,
 }
 

@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Integer (may be negative, up to 12 digits)',
   url: 'https://leetcode.com/problems/smallest-value-of-the-rearranged-number/',
   complexity: 'O(d log d) time for d digits (a sort of the digits); O(d) space.',
+  question: "Rearrange the digits of an integer into the smallest value, without leading zeros.",
+  approaches: [
+    { name: "Sort with the zero placed first non-zero", intuition: "For a positive number, put the smallest non-zero digit first and the rest ascending; for a negative number, sort descending.", time: "O(d log d)", space: "O(d)" },
+  ],
   examples: [
     { label: 'Positive with zeros', input: '3091' },
     { label: 'Negative', input: '-4520' },

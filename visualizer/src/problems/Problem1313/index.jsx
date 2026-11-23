@@ -4,6 +4,10 @@ import { StackLane } from '../../components/shared/AlgorithmStatePrimitives'
 import { buildTrace, parseInput, code, python, phases, examples } from './algorithm'
 
 const definition = {
+  question: "Expand a list of frequency and value pairs into one flat list.",
+  approaches: [
+    { name: "Direct expansion", intuition: "Append each value as many times as its paired frequency.", time: "O(output)", space: "O(output)" },
+  ],
   number: '1313', phases, parse: parseInput, build: buildTrace, code, python, examples,
   inputLabel: 'Encoded list as a JSON array of frequency, value pairs',
   url: 'https://leetcode.com/problems/decompress-run-length-encoded-list/',

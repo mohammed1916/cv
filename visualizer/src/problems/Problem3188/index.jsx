@@ -42,6 +42,10 @@ const definition = {
   inputLabel: 'Object with students [id, name, major], courses [id, name, credits, major, Yes or No], enrollments [student, course, semester, grade, GPA]',
   url: 'https://leetcode.com/problems/find-top-scoring-students-ii/',
   complexity: 'One grouping pass over the enrollments, then a join on the courses of each major: about O(e + s × c) without indexes. This page caps the tables at 8 students, 12 courses and 40 enrollments.',
+  question: "From students, courses and enrollments tables, list top scoring students who took every mandatory course of their major.",
+  approaches: [
+    { name: "Average first, then join on major", intuition: "Compute each student's average over all courses taken, then left join from the major's courses so missing mandatory courses appear.", time: "O(e + s * c)", space: "O(e)" },
+  ],
   examples: [
     { label: 'Seven students', input: JSON.stringify(mixed) },
     { label: 'Retakes, no one qualifies', input: JSON.stringify(retakes) },

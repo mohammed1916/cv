@@ -12,6 +12,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Object {sx, sy, tx, ty} (JSON)',
   url: 'https://leetcode.com/problems/reaching-points/',
   complexity: 'O(log(max(tx, ty))) time like Euclid\'s algorithm, O(1) space.',
+  question: "Decide whether a start point can reach a target by repeatedly adding one coordinate to the other.",
+  approaches: [
+    { name: "Reverse Euclid steps", intuition: "Walk backwards from the target with modulo steps until it reaches the start or can no longer shrink.", time: "O(log max)", space: "O(1)" },
+  ],
   examples: [
     { label: '(1,1) -> (3,5) true', input: '{"sx":1,"sy":1,"tx":3,"ty":5}' },
     { label: '(1,1) -> (2,2) false', input: '{"sx":1,"sy":1,"tx":2,"ty":2}' },

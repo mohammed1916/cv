@@ -20,6 +20,10 @@ const definition = {
   inputLabel: 'Object with submissions (sub_id, parent_id); parent_id null marks a post',
   url: 'https://leetcode.com/problems/number-of-comments-per-post/',
   complexity: 'O(n) after removing duplicates for n rows. The visualization caps the table at 12 rows.',
+  question: "Report the number of distinct comments on each post in a table.",
+  approaches: [
+    { name: "Count distinct replies", intuition: "Keep each distinct reply once and count it against its post, with zero for posts with no replies.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Posts and replies', input: '{"submissions":[{"sub_id":21,"parent_id":null},{"sub_id":22,"parent_id":null},{"sub_id":23,"parent_id":21},{"sub_id":24,"parent_id":21},{"sub_id":23,"parent_id":21},{"sub_id":25,"parent_id":22},{"sub_id":26,"parent_id":null}]}' },
     { label: 'Single post', input: '{"submissions":[{"sub_id":9,"parent_id":null}]}' },

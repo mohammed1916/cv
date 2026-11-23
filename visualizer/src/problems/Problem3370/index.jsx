@@ -11,6 +11,10 @@ const definition = {
   inputLabel: 'Object with n (1 to 1000), for example {"n":5}',
   url: 'https://leetcode.com/problems/smallest-number-with-all-set-bits/',
   complexity: 'O(log n) time and O(1) extra space.',
+  question: "Find the smallest number that is at least n and whose binary form has every bit set.",
+  approaches: [
+    { name: "Grow by bit length", intuition: "Start from the smallest all-ones value with enough bits to reach n.", time: "O(log n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Invented twenty', input: '{"n":20}' },
     { label: 'Invented three', input: '{"n":3}' },

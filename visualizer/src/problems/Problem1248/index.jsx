@@ -6,6 +6,10 @@ const definition = {
   number: meta.number,
   phases, parse: parseInput, build: buildTrace, code, python, inputLabel,
   url: `https://leetcode.com/problems/${meta.slug}/`,
+  question: "Count the subarrays that contain exactly a given number of odd values.",
+  approaches: [
+    { name: "Prefix counts of odd values", intuition: "Count prefixes by their odd count and match each prefix with earlier ones.", time: "O(n)", space: "O(n)" },
+  ],
   complexity, examples,
 }
 

@@ -6,6 +6,10 @@ const definition = {
   inputLabel: 'Object with equal-length lists a and b (JSON)',
   url: 'https://leetcode.com/problems/maximum-of-absolute-value-expression/',
   complexity: 'O(n) time for each of the four sign pairs, so O(n) overall, and O(1) extra space. The visualization caps each list at 10 entries.',
+  question: "Maximise a sum of absolute differences over pairs of indices, using four sign combinations.",
+  approaches: [
+    { name: "Four sign patterns with min and max", intuition: "Expand the absolute values into four linear forms; for each, track the maximum and minimum while scanning.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Two points', input: '{"a":[0,10],"b":[0,0]}' },
     { label: 'Only index distance', input: '{"a":[5,5,5],"b":[2,2,2]}' },

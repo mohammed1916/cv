@@ -21,6 +21,10 @@ const definition = {
   inputLabel: 'JSON object with s (letters, *, # and %) and k',
   url: 'https://leetcode.com/problems/process-string-with-special-operations-ii/',
   complexity: 'O(length of s) time, with no string built. The visualization caps the final string at 5000 characters.',
+  question: "Apply a sequence of special operations to a string, then return the k-th character of the result.",
+  approaches: [
+    { name: "Track lengths, walk back", intuition: "Record how long the string is after each step, then walk backward from k to find the source character without building the string.", time: "O(length of s)", space: "O(length of s)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"s":"cd%*#","k":2}' },
     { label: 'Example 2', input: '{"s":"ab#","k":3}' },

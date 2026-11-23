@@ -8,6 +8,11 @@ const definition = {
   inputLabel: 'Object with prices and queries ([k, m] pairs)',
   url: 'https://leetcode.com/problems/minimum-relative-loss-after-buying-chocolates/',
   complexity: 'O(q * n log n) time and O(n) extra space for q queries over n prices, since each query sorts its per-chocolate values. The visualization caps prices at 10 and queries at 5; the official bounds are not verified here.',
+  question: "Given chocolate prices and a set of queries, find the smallest relative loss from buying the chocolates for each query value.",
+  approaches: [
+    { name: "Sort per query", intuition: "For each query, compute the adjusted values and sort them to choose the cheapest ones.", time: "O(q n log n)", space: "O(n)" },
+    { name: "Sorted prefix with incremental updates", intuition: "Keep the chocolates sorted and update the adjusted values as queries change.", time: "O((n + q) log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Mixed prices', input: '{"prices":[2,5,9],"queries":[[4,2]]}' },
     { label: 'Two budgets', input: '{"prices":[10,2,7],"queries":[[3,1],[8,2]]}' },

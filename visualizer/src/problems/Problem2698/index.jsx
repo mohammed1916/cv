@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON object: {"n": value}',
   url: 'https://leetcode.com/problems/find-the-punishment-number-of-an-integer/',
   complexity: 'Each square has at most 2^(digits-1) cut patterns, so the search is small for n up to 1000. The visualization caps n at 100.',
+  question: "Given a positive integer n, return the sum of squares of all numbers up to n that can be split into contiguous parts whose sums add up to the number itself.",
+  approaches: [
+    { name: "Search over splits", intuition: "For each square, try every way to split its digits into parts and check whether they sum to the number.", time: "exponential in digits", space: "O(digits)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"n":10}' },
     { label: 'Example 2', input: '{"n":37}' },

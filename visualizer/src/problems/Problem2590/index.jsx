@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON {"ops": [["add", 1, "Write", 20, []], ["list", 1]]}',
   url: 'https://leetcode.com/problems/design-a-todo-list/',
   complexity: 'Adding is O(1). A listing sorts that user\'s unfinished tasks, so it costs O(t log t) for t tasks. The visualization caps ops at 20.',
+  question: "Design a todo list per user that adds tasks and lists unfinished tasks by due date.",
+  approaches: [
+    { name: "Lists per user, sort on read", intuition: "Add tasks in O(1) and sort the unfinished tasks only when listing.", time: "O(1) add, O(k log k) list", space: "O(n)" },
+  ],
   examples: [
     { label: 'Tags and completion', input: '{"ops":[["add",2,"Plan",40,["work"]],["add",2,"Shop",15,[]],["add",2,"Review",40,["work"]],["tag",2,"work"],["complete",2,1],["list",2]]}' },
     { label: 'Other user', input: '{"ops":[["add",1,"Call",9,[]],["complete",2,1],["list",1]]}' },

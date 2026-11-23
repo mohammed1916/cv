@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'String and k (JSON object with s and k)',
   url: 'https://leetcode.com/problems/find-special-substring-of-length-k/',
   complexity: 'O(n * k) time and O(1) extra space. The visualization caps input at 40 letters.',
+  question: "Find a substring of length k made of one repeated letter that is surrounded by different letters.",
+  approaches: [
+    { name: "Window scan", intuition: "Check every window of length k for a repeated letter with different neighbours.", time: "O(n k)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Eight letters, k three', input: '{"s":"abcabcdd","k":3}' },
     { label: 'No block', input: '{"s":"abc","k":2}' },

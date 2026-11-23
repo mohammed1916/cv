@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with boxes (heights) and warehouse (room ceilings; boxes may enter from either end)',
   url: 'https://leetcode.com/problems/put-boxes-into-the-warehouse-ii/description/',
   complexity: 'O(n log n) time for sorting and O(n) space for n rooms and m boxes. The visualization caps both at 10 and heights at 1 to 9. Unlike Problem 1564, a room is reachable from either end.',
+  question: "Place boxes into rooms of a warehouse, where a box can enter from either end.",
+  approaches: [
+    { name: "Sort and prefix minima", intuition: "Sort the rooms, take prefix minima from both ends, and place boxes greedily.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Two ends', input: '{"boxes":[2,6,3,4],"warehouse":[5,4,6,1]}' },
     { label: 'Mixed ceilings', input: '{"boxes":[1,2,5,6],"warehouse":[6,2,3,7]}' },

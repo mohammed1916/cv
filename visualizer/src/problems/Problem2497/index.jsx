@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON object with vals, edges (pairs of node numbers) and k',
   url: 'https://leetcode.com/problems/maximum-star-sum-of-a-graph/',
   complexity: 'O(m log m) time for m edges. The visualization caps the graph at ten nodes.',
+  question: "Choose a center node and up to k neighbouring edges to maximise the star sum of values.",
+  approaches: [
+    { name: "Sort neighbours by value", intuition: "For each center, sort its positive neighbour values and add the largest ones up to k.", time: "O(m log m)", space: "O(m)" },
+  ],
   examples: [
     { label: 'Chain with one cut', input: '{"vals":[5,-2,7,1],"edges":[[0,1],[1,2],[2,3]],"k":1}' },
     { label: 'Branching tree with two cuts', input: '{"vals":[-30,15,-7,4,9,-11],"edges":[[0,1],[0,2],[2,3],[2,4],[4,5]],"k":2}' },

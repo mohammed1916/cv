@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with nums (2 to 12 integers, absolute values up to 50)',
   url: 'https://leetcode.com/problems/number-of-perfect-pairs/description/',
   complexity: 'O(n^2) index pairs in the visualization; each check is constant time.',
+  question: "Count the distinct value pairs that qualify under the stated rule.",
+  approaches: [
+    { name: "Check every index pair", intuition: "Check each pair of indices and count distinct qualifying value pairs.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Invented example', input: '{"nums":[5,2,-7,4]}' },
     { label: 'Repeated values', input: '{"nums":[3,-3,6,3]}' },

@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON object with nums (1 to 40 values from 1 to 50) and k, for example {"nums":[1,2,3,4,3,2,5],"k":3}',
   url: 'https://leetcode.com/problems/find-the-power-of-k-size-subarrays-i/',
   complexity: 'O(n * k) time by checking every window. The visualization caps nums at 40 values.',
+  question: "For each window of k consecutive values, report its maximum if the values rise by exactly one each step, otherwise -1.",
+  approaches: [
+    { name: "Check every window", intuition: "For each window, test whether each value is one more than the previous one.", time: "O(n * k)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Seven values, k five', input: '{"nums":[9,1,8,2,7,3,6],"k":5}' },
     { label: 'Five values, k two', input: '{"nums":[12,30,5,30,12],"k":2}' },

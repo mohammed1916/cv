@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'JSON {"s": "1234567", "k": 3}',
   url: 'https://leetcode.com/problems/calculate-digit-sum-of-a-string/',
   complexity: 'O(L * rounds) time for a string of length L. Each round shrinks the string by a factor of about k.',
+  question: "Repeatedly replace a digit string by the digit sums of consecutive groups until it is no longer than k.",
+  approaches: [
+    { name: "Simulate the grouping", intuition: "Each round splits the string into groups of k digits and replaces each group with its digit sum.", time: "O(n^2 / k)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example', input: '{"s":"1234567","k":3}' },
     { label: 'Two digits', input: '{"s":"8745","k":2}' },

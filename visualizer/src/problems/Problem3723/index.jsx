@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with num and sum',
   url: 'https://leetcode.com/problems/maximize-sum-of-squares-of-digits/',
   complexity: 'O(num) time to write the digits.',
+  question: "Find the largest number whose digits sum to a given total and whose sum of squares is maximal.",
+  approaches: [
+    { name: "Greedy fill", intuition: "Fill digits from the largest, keeping the remaining sum feasible.", time: "O(num)", space: "O(num)" },
+  ],
   examples: [
     { label: 'Example', input: '{"num":3,"sum":20}' },
     { label: 'Too large', input: '{"num":2,"sum":19}' },

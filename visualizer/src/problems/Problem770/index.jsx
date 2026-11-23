@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object {expression, evalvars, evalints} (JSON, expression up to 80 chars)',
   url: 'https://leetcode.com/problems/basic-calculator-iv/',
   complexity: 'Polynomial multiplication dominates: roughly O(t1 * t2) per product for polynomials with t1 and t2 terms.',
+  question: "Evaluate an expression with variables into a simplified polynomial in the remaining variables.",
+  approaches: [
+    { name: "Sparse polynomial arithmetic", intuition: "Parse into sparse polynomials, substitute known variables and combine like terms.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: 'e + 8 - a + 5', input: '{"expression":"e + 8 - a + 5","evalvars":["e"],"evalints":[1]}' },
     { label: 'e - 8 + temperature - pressure', input: '{"expression":"e - 8 + temperature - pressure","evalvars":["e","temperature"],"evalints":[1,12]}' },

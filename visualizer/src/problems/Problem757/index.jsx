@@ -17,6 +17,10 @@ const definition = {
   inputLabel: 'Intervals (JSON)',
   url: 'https://leetcode.com/problems/set-intersection-size-at-least-two/',
   complexity: 'O(n log n) time for sorting plus one pass; capped at 40 intervals.',
+  question: "Find the smallest set of integer points so that every interval contains at least two of them.",
+  approaches: [
+    { name: "Greedy by right end", intuition: "Sort by right end and keep the two latest chosen points, adding the rightmost points needed.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Overlapping chain', input: '[[1,6],[5,9],[8,11]]' },
     { label: 'Nested and separate', input: '[[10,20],[12,14],[15,18],[30,40]]' },

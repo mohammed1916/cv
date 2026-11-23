@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'JSON object with an integer num from 1 to 99999999',
   url: 'https://leetcode.com/problems/max-difference-you-can-get-from-changing-an-integer/',
   complexity: 'O(d) time for d digits. The visualization caps num at eight digits.',
+  question: "Find the largest possible difference between two results from one digit replacement.",
+  approaches: [
+    { name: "Try the best and worst replacements", intuition: "Replace one digit with 9 for the largest and with a suitable digit for the smallest.", time: "O(d)", space: "O(d)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"num":555}' },
     { label: 'Example 2', input: '{"num":9}' },

@@ -14,6 +14,10 @@ const definition = {
   complexity,
   inputLabel: 'JSON array of [arrival, time] pairs in arrival order',
   url: 'https://leetcode.com/problems/average-waiting-time/',
+  question: "Compute the average waiting time for customers who arrive and wait for a chef to cook their order.",
+  approaches: [
+    { name: "Simulation of the chef", intuition: "Track when the chef is free; each customer starts at the later of their arrival and the chef's free time.", time: "O(n)", space: "O(1)" },
+  ],
 }
 
 export default function Problem1701Visualizer() {

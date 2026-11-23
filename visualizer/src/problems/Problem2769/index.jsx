@@ -12,6 +12,11 @@ const definition = {
   inputLabel: 'JSON object with num and t, each from 1 to 50, for example {"num":4,"t":1}',
   url: 'https://leetcode.com/problems/find-the-maximum-achievable-number/',
   complexity: 'O(1) time with the closed form num + 2t. The visualization runs t steps.',
+  question: "Find the largest number reachable from num after at most t steps, where each step raises num by 1 and lowers x by 1 or the reverse rule applies.",
+  approaches: [
+    { name: "Closed form", intuition: "Each operation can add 2 to the target, so the answer is num plus twice t.", time: "O(1)", space: "O(1)" },
+    { name: "Simulate the steps", intuition: "Apply the increment step t times to show the growth directly.", time: "O(t)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Target above the start', input: '{"num":7,"t":9}' },
     { label: 'Large start, small target', input: '{"num":30,"t":2}' },

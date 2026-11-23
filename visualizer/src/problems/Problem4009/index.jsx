@@ -8,6 +8,10 @@ const definition = {
   inputLabel: 'Object with demand (1 to 8 cars here) and fuel (two amounts)',
   url: 'https://leetcode.com/problems/minimum-possible-maximum-waiting-time/',
   complexity: 'O(n × F × D) time and space, where n is the number of cars, F the fuel values of one dispenser and D the largest demand: the other dispenser’s fuel follows from the total used, and one busy time always equals the last demand. The official length is up to 50 cars; the visualization caps demand at 8.',
+  question: "Cars take turns choosing one of two fuel dispensers that have enough fuel; minimise the maximum waiting time.",
+  approaches: [
+    { name: "Dynamic programming over dispenser states", intuition: "Track the dispenser states by car index and demand, and choose the better dispenser for each car.", time: "O(n x F x D)", space: "O(n x F x D)" },
+  ],
   examples: [
     { label: 'Fuel forces a wait', input: '{"demand":[7,3,5,4],"fuel":[12,7]}' },
     { label: 'Second car stuck', input: '{"demand":[5,9,2],"fuel":[6,6]}' },

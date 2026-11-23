@@ -6,6 +6,10 @@ const definition = {
   number: meta.number,
   phases, parse: parseInput, build: buildTrace, code, python, inputLabel,
   url: `https://leetcode.com/problems/${meta.slug}/`,
+  question: "Decide whether an array is good, meaning some combination of its values with integer weights equals one.",
+  approaches: [
+    { name: "GCD of all values", intuition: "The array is good when the gcd of all its values is one.", time: "O(n log M)", space: "O(1)" },
+  ],
   complexity, examples,
 }
 

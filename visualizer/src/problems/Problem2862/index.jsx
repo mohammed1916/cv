@@ -17,6 +17,11 @@ const definition = {
   inputLabel: "nums (JSON object with nums, 1 to 30 positive integers)",
   url: "https://leetcode.com/problems/maximum-element-sum-of-a-complete-subset-of-indices/",
   complexity: "O(n * sqrt(n)) time and O(n) space for n values. The visualization caps the array at 30 elements.",
+  question: "Choose a complete subset of indices, where every pair multiplies to a perfect square, and maximize the sum of the chosen values.",
+  approaches: [
+    { name: "Group indices by square-free part", intuition: "Two indices form a complete pair exactly when they share the same square-free part, so sum each group.", time: "O(n sqrt(n))", space: "O(n)" },
+    { name: "Check every subset", intuition: "Try subsets and check each pair.", time: "exponential", space: "O(n)" },
+  ],
   examples: [
     { label: "Example", input: '{"nums":[8,7,3,5,7,2,4,9]}' },
     { label: "Single element", input: "{\"nums\":[5]}" },

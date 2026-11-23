@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Array of 2 to 40 integers from 1 to 50 with an even count, for example [7,8,3,4,15,13,4,1]',
   url: 'https://leetcode.com/problems/minimum-average-of-smallest-and-largest-elements/',
   complexity: 'O(n log n) time for the sort. The visualization caps the array at 40 numbers.',
+  question: "Pair up an array's values by repeatedly removing the smallest and largest, and find the smallest of the resulting averages.",
+  approaches: [
+    { name: "Sort and pair mirror positions", intuition: "The pairs are the mirror positions of the sorted list, so the answer is the smallest mirror average.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Eight values, mixed', input: '[12,3,7,20,9,9,30,4]' },
     { label: 'Four values, two equal', input: '[3,8,8,1]' },

@@ -22,6 +22,10 @@ const definition = {
   inputLabel: 'Input string (e.g. "   -042")',
   url: "https://leetcode.com/problems/string-to-integer-atoi/",
   complexity: "O(n) time and O(1) extra space for string length n. The visualization accepts strings up to 200 characters.",
+  question: "Convert a string to a 32-bit signed integer by skipping leading spaces, reading an optional sign and digits, and clamping to the integer range.",
+  approaches: [
+    { name: "Phase-by-phase scan", intuition: "Read the string in order through the whitespace, sign, digit and stop phases, clamping as digits accumulate.", time: "O(n)", space: "O(1)" },
+  ],
   examples: getExamples("string-to-integer-atoi").map(example => ({ label: example.label, input: example.s ?? example.value })),
 };
 

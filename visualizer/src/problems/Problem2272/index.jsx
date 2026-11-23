@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON object {"s": lowercase string, up to 20 letters}',
   url: 'https://leetcode.com/problems/substring-with-largest-variance/',
   complexity: 'O(26 * 26 * n) time. The visualization caps input at 20 letters.',
+  question: "Find the largest difference between the counts of two letters in any substring.",
+  approaches: [
+    { name: "Kadane's algorithm for each letter pair", intuition: "For each ordered pair of letters, run Kadane's method that restarts whenever the running difference drops below zero.", time: "O(26^2 * n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Own: banana', input: '{"s": "banana"}' },
     { label: 'No variance', input: '{"s": "abcde"}' },

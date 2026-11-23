@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Array of digits (JSON)',
   url: 'https://leetcode.com/problems/shortest-subarray-to-be-removed-to-make-array-sorted/',
   complexity: 'O(n) time and O(1) extra space: two pointers move only forward over the array.',
+  question: "Find the shortest subarray to remove so that the rest is non-decreasing.",
+  approaches: [
+    { name: "Two pointers from both ends", intuition: "Find the sorted prefix and suffix, then join them with the smallest valid gap.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Two breaks', input: '[4,3,1,2,6,5,1,9]' },
     { label: 'One gap', input: '[1,2,8,3,5]' },

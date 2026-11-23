@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with rows (list of row objects)',
   url: 'https://leetcode.com/problems/display-the-first-three-rows/',
   complexity: 'O(1) for three rows; the cost does not grow with the table.',
+  question: "Return the first three rows of a table.",
+  approaches: [
+    { name: "Take the head", intuition: "Select the first three rows directly.", time: "O(1)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Five rows', input: '{"rows":[{"id":1},{"id":2},{"id":3},{"id":4},{"id":5}]}' },
     { label: 'Two rows', input: '{"rows":[{"id":"a"},{"id":"b"}]}' },

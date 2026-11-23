@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Integers from 1 to 100 (JSON object with nums)',
   url: 'https://leetcode.com/problems/bitwise-or-of-even-numbers-in-an-array/',
   complexity: 'O(n) time and O(1) extra space. The visualization caps the list at 12 numbers.',
+  question: "Return the bitwise OR of all even numbers in an array.",
+  approaches: [
+    { name: "Single pass OR", intuition: "Scan the array once and OR together the even values.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Mixed', input: '{"nums":[1,2,4,5,6]}' },
     { label: 'All odd', input: '{"nums":[1,3,5]}' },

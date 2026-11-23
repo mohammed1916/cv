@@ -12,6 +12,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Object with s, indices, sources, targets (JSON)',
   url: 'https://leetcode.com/problems/find-and-replace-in-string/',
   complexity: 'O(k log k + k * L) time for k operations and string length L; O(L) space.',
+  question: "Apply a list of replacements to a string, where each replacement happens only if its source text appears at the given index in the original string.",
+  approaches: [
+    { name: "Sort and rebuild", intuition: "Sort the replacements by index and rebuild the string, checking each source against the original.", time: "O(n + k log k)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Both match', input: '{"s":"abcd","indices":[0,2],"sources":["a","cd"],"targets":["eee","ffff"]}' },
     { label: 'One mismatch', input: '{"s":"abcd","indices":[0,2],"sources":["ab","ec"],"targets":["eee","ffff"]}' },

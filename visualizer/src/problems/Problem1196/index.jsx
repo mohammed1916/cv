@@ -4,6 +4,10 @@ import { buildTrace, parseInput, code, python, pythonLineMap, phases, inputLabel
 
 const definition = {
   number: meta.number, phases, parse: parseInput, build: buildTrace, code, python, pythonLineMap, inputLabel,
+  question: "Find how many apples can be placed into a basket with a weight limit, taking the lightest apples first.",
+  approaches: [
+    { name: "Greedy by weight", intuition: "Sort the apples by weight and add them while the running weight stays within the limit.", time: "O(n log n)", space: "O(1) extra" },
+  ],
   url: `https://leetcode.com/problems/${meta.slug}/`, complexity, examples,
 }
 

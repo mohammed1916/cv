@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with nums1, nums2 and k',
   url: 'https://leetcode.com/problems/choose-k-elements-with-maximum-sum/',
   complexity: 'O(n log n) time for the sort and the top-k inserts, with at most 12 items in this visualization.',
+  question: "Choose k elements to maximize the sum of values that are compatible with the chosen ones.",
+  approaches: [
+    { name: "Sort and top-k insert", intuition: "Sort the values and insert the best candidates into a top-k list.", time: "O(n log n)", space: "O(k)" },
+  ],
   examples: [
     { label: 'Example', input: '{"nums1":[2,6,4,1],"nums2":[3,8,5,9],"k":2}' },
     { label: 'Ties', input: '{"nums1":[4,4,1],"nums2":[9,3,6],"k":1}' },

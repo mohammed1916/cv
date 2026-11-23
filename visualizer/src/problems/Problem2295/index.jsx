@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Array and operations as JSON: {"nums": [...], "operations": [[old, new], ...]}',
   url: 'https://leetcode.com/problems/replace-elements-in-an-array/',
   complexity: 'O(n + m) time for m operations, with O(n) space for the position table. The visualization caps input at 12 numbers and 10 operations.',
+  question: "Apply a series of operations that each replace one value in an array with another value.",
+  approaches: [
+    { name: "Position table", intuition: "Keep a map from each value to its index, so each replacement updates two entries directly.", time: "O(n + m)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Three chained replacements', input: '{"nums":[4,9,13,20],"operations":[[9,30],[4,9],[13,4]]}' },
     { label: 'Shift a pair', input: '{"nums":[11,12],"operations":[[12,13],[11,12]]}' },

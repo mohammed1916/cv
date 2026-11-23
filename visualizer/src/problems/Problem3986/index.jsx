@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with start and end in HH:MM:SS (e.g. {"start":"08:15:30","end":"09:45:10"})',
   url: 'https://leetcode.com/problems/number-of-elapsed-seconds-between-two-times/',
   complexity: 'O(1) time and space. Each clock is parsed once into seconds past midnight.',
+  question: "Turn two HH:MM:SS clock readings from the same day into the number of seconds between them.",
+  approaches: [
+    { name: "Convert to seconds, then subtract", intuition: "Parse each reading into seconds past midnight and subtract.", time: "O(1)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Morning span', input: '{"start":"08:15:30","end":"09:45:10"}' },
     { label: 'One second', input: '{"start":"23:59:58","end":"23:59:59"}' },

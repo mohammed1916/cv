@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'Object with queries: triples [from, to, mod] with 0 <= from <= to <= 300 and 1 <= mod <= 1000, e.g. {"queries":[[1,3,7]]}',
   url: 'https://leetcode.com/problems/find-products-of-elements-of-big-array/',
   complexity: 'O(q * log^2 N) time, where N is the largest index. The visualization caps indices at 300.',
+  question: "Answer range product queries over a big array formed by concatenating powerful arrays of powers of two.",
+  approaches: [
+    { name: "Exponent sums from block formulas", intuition: "Each element is a power of two, so a range product is two raised to the sum of exponents, and that sum comes from block formulas.", time: "O(q * log^2 N)", space: "O(log N)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"queries":[[1,3,7]]}' },
     { label: 'Example 2', input: '{"queries":[[2,5,3],[7,7,4]]}' },

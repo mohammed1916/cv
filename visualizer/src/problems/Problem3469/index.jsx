@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'An object with nums, for example {"nums": [6,2,8,4]}',
   url: 'https://leetcode.com/problems/find-minimum-cost-to-remove-array-elements/',
   complexity: 'O(n^2) states with O(1) work each. The visualization caps n at 60.',
+  question: "Remove elements from an array in pairs with a cost rule, and find the minimum total cost.",
+  approaches: [
+    { name: "Memoized state search", intuition: "Store the best cost for each pair of next index and leftover front element.", time: "O(n^2)", space: "O(n^2)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"nums":[6,2,8,4]}' },
     { label: 'Example 2', input: '{"nums":[2,1,3,3]}' },

@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'JSON object with n (2 to 8) and restrictions: [building, maxHeight] pairs, building from 2 to n',
   url: 'https://leetcode.com/problems/maximum-building-height/',
   complexity: 'O(n log n) time for n buildings. The visualization caps n at 8.',
+  question: "Given buildings with height caps and a fixed first building of height zero, find the tallest height any building can reach while every rule holds.",
+  approaches: [
+    { name: "Propagate caps then scan peaks", intuition: "Sort the restrictions, cap each height from both neighbours, then take the best peak between each pair of neighbouring caps.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Three caps on six buildings', input: '{"n":6,"restrictions":[[4,1],[2,0],[6,3]]}' },
     { label: 'No caps', input: '{"n":6,"restrictions":[]}' },

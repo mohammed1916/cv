@@ -15,6 +15,11 @@ const definition = {
   inputLabel: 'Object with nums and target (JSON)',
   url: 'https://leetcode.com/problems/count-pairs-whose-sum-is-less-than-target/',
   complexity: 'O(n log n) time for sorting and O(n) for the scan. The visualization caps input at 30 values.',
+  question: "Count the pairs of indexes whose values sum to less than a target.",
+  approaches: [
+    { name: "Sort and two pointers", intuition: "After sorting, if the left and right values are small enough, every index between them also pairs with the right one.", time: "O(n log n)", space: "O(1) extra" },
+    { name: "Check all pairs", intuition: "Test each pair of indexes directly.", time: "O(n^2)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Negative and positive mix', input: '{"nums":[4,-2,-5,8,1,-6,3,0],"target":2}' },
     { label: 'Small', input: '{"nums":[-1,1,2,3,1],"target":3}' },

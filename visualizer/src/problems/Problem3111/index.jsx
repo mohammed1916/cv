@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with points ([x, y] pairs) and w',
   url: 'https://leetcode.com/problems/minimum-rectangles-to-cover-points/description/',
   complexity: 'O(n log n) time for the sort, O(n) extra space for the distinct x values.',
+  question: "Cover all given points with the fewest rectangles of a fixed width, where each rectangle has unlimited height.",
+  approaches: [
+    { name: "Greedy from the leftmost uncovered x", intuition: "Start a rectangle at the leftmost uncovered x so it reaches as far right as possible, then repeat.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Invented cluster', input: '{"points":[[3,2],[7,0],[7,5],[11,9],[12,4],[20,6]],"w":4}' },
     { label: 'Wide reach', input: '{"points":[[1,3],[2,2],[5,9],[6,1],[9,4]],"w":2}' },

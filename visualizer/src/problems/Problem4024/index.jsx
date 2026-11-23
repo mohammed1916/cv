@@ -14,6 +14,10 @@ const definition = {
   inputLabel: "Object with target [x, y] and drones ([x, y, range] entries), e.g. {\"target\":[1,2],\"drones\":[[0,0,5],[4,4,1]]}",
   url: "https://leetcode.com/problems/nearest-available-drone/",
   complexity: "O(d) time and O(1) extra space for d drones.",
+  question: "Choose the drone nearest to a target, reporting ties that are reachable but not closer.",
+  approaches: [
+    { name: "Nearest-so-far scan", intuition: "Scan the drones, keeping the one nearest to the target so far and noting ties.", time: "O(d)", space: "O(1)" },
+  ],
   examples: [
     { label: "Tie at distance three", input: "{\"target\":[1,2],\"drones\":[[0,0,5],[4,4,1],[1,5,3]]}" },
     { label: "Nobody reaches", input: "{\"target\":[0,0],\"drones\":[[9,9,4]]}" },

@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON object {"s": binary string, "k": integer}',
   url: 'https://leetcode.com/problems/longest-binary-subsequence-less-than-or-equal-to-k/',
   complexity: 'O(n) time for the scan plus O(n) to count zeros. The visualization caps input at 20 bits.',
+  question: "Find the length of the longest subsequence of a binary string whose value is at most k.",
+  approaches: [
+    { name: "Greedy from the right", intuition: "Keep every zero, and keep a one only while the value formed still fits within k.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Seven bits, k 3', input: '{"s":"0110100","k":3}' },
     { label: 'Four bits, k 2', input: '{"s":"1100","k":2}' },

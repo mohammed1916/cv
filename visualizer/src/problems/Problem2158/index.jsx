@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Days as a JSON array of [start, end) pairs',
   url: 'https://leetcode.com/problems/amount-of-new-area-painted-each-day/',
   complexity: 'Near O(n alpha) time with union-find skip pointers over the painted cells; O(n) space.',
+  question: "Each day paints a range of positions; report how many new positions get painted on each day.",
+  approaches: [
+    { name: "Next unpainted pointer", intuition: "Keep a pointer from each cell to the next unpainted cell, so each day skips over areas already painted.", time: "O(n log n)", space: "O(max position)" },
+  ],
   examples: [
     { label: 'Overlap on day two', input: '[[1,4],[2,6],[0,3]]' },
     { label: 'Disjoint days', input: '[[5,7],[0,2],[9,10]]' },

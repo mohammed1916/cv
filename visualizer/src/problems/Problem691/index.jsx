@@ -11,6 +11,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Stickers and target (JSON object)',
   url: 'https://leetcode.com/problems/stickers-to-spell-word/',
   complexity: 'O(S · ∏(cᵢ + 1)) time for S stickers and letter counts cᵢ of the target, since each state is a vector of remaining counts.',
+  question: "Find the fewest stickers needed to spell a target word, where each sticker supplies many letters.",
+  approaches: [
+    { name: "Memoised subset search", intuition: "Search over subsets of the target letters already covered, applying one sticker per step.", time: "O(2^t * stickers)", space: "O(2^t)" },
+  ],
   examples: [
     { label: 'Two stickers', input: '{"stickers":["with","example","science"],"target":"thehat"}' },
     { label: 'Impossible', input: '{"stickers":["notice","possible"],"target":"basic"}' },

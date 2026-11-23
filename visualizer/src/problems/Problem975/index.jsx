@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Array (JSON)',
   url: 'https://leetcode.com/problems/odd-even-jump/',
   complexity: 'O(n^2) time with the scan in this visualization (O(n log n) with sorting). The visualization caps input at 20 values.',
+  question: "Starting from each index, odd-numbered jumps go to the smallest larger or equal value and even ones to the largest smaller or equal value; count starts that reach the end.",
+  approaches: [
+    { name: "Next jumps with stacks and backward DP", intuition: "Find each index's odd and even jump targets with sorted stacks, then compute from the right which starts reach the end.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Five values, alternating', input: '[6,2,9,4,1]' },
     { label: 'Ties in value', input: '[3,3,1,2,3]' },

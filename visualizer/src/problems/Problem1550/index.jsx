@@ -8,6 +8,10 @@ const definition = {
   inputLabel: 'Array of integers (JSON)',
   url: 'https://leetcode.com/problems/three-consecutive-odds/',
   complexity: 'O(n) time and O(1) extra space.',
+  question: "Decide whether an array contains three odd values in a row.",
+  approaches: [
+    { name: "Scan run length", intuition: "Count consecutive odd values and stop at three.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Late run', input: '[2,6,4,1,3,5,7]' },
     { label: 'Broken run', input: '[1,2,3,4,5]' },

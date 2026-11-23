@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with nums1 and nums2 (nums2 has one more value)',
   url: 'https://leetcode.com/problems/minimum-operations-to-transform-array/description/',
   complexity: 'O(n^2) for the visualization; sorting plus prefix sums would make it O(n log n).',
+  question: "Find the fewest operations that transform one array into another.",
+  approaches: [
+    { name: "Sort and prefix sums", intuition: "Sort the values and use prefix sums to evaluate candidate targets.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example', input: '{"nums1":[4,9],"nums2":[1,6,12]}' },
     { label: 'Single value', input: '{"nums1":[5],"nums2":[5,5]}' },

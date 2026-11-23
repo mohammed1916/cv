@@ -11,6 +11,10 @@ const definition = {
   inputLabel: 'Circles (JSON object with circles as [x, y, r] entries)',
   url: 'https://leetcode.com/problems/count-lattice-points-inside-a-circle/',
   complexity: 'O(W * H * n) time for a box of W by H points and n circles. The visualization caps input at 6 circles.',
+  question: "Count the integer points that lie inside or on the boundary of at least one circle.",
+  approaches: [
+    { name: "Scan the bounding box", intuition: "Walk each integer point in the box around the circles and test it against each circle.", time: "O(W * H * c)", space: "O(1)" },
+  ],
   examples: [
     { label: 'One circle', input: '{"circles":[[2,2,1]]}' },
     { label: 'Two circles', input: '{"circles":[[2,2,2],[3,4,1]]}' },

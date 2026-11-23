@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with distinct stones positions (JSON)',
   url: 'https://leetcode.com/problems/moving-stones-until-consecutive-ii/',
   complexity: 'O(n log n) time for sorting and O(n) for the window. The visualization caps input at 10 stones.',
+  question: "Given distinct stone positions, find the minimum and maximum moves until the stones occupy consecutive positions, where each move takes an end stone to an empty spot.",
+  approaches: [
+    { name: "Sorted sliding window", intuition: "After sorting, each window of stones that fits a block of the right size needs only the missing spots counted; the minimum is the best window.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"stones":[7,4,9]}' },
     { label: 'Example 2', input: '{"stones":[6,5,4,3,10]}' },

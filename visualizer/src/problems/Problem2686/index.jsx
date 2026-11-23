@@ -20,6 +20,10 @@ const examples = [{
 const reasoning = 'An order is immediate when its preferred delivery date equals its order date. Every order on a date stays in the denominator, so each date gets immediate orders divided by all orders on that date, shown as a percentage rounded to two decimals.'
 
 const definition = {
+  question: "Given a table of deliveries, find the percentage of first orders that are delivered on the customer's preferred date.",
+  approaches: [
+    { name: "Filter and ratio", intuition: "Keep the first delivery per customer, check whether its date matches the preference, and report the percentage.", time: "O(n)", space: "O(n)" },
+  ],
   number: meta.number,
   phases, parse: parseInput, build: buildTrace, code, sql, python, inputLabel,
   url: `https://leetcode.com/problems/${meta.slug}/`,

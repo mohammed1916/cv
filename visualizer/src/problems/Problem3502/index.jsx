@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'An object with cost, for example {"cost": [5,3,4,1,3,2]}',
   url: 'https://leetcode.com/problems/minimum-cost-to-reach-every-position/',
   complexity: 'O(n) time and O(n) output. The visualization caps n at 100.',
+  question: "Find the cheapest way to reach every position of an array, where each position has a cost.",
+  approaches: [
+    { name: "Running minimum", intuition: "Track the cheapest cost to reach each position from the left.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"cost":[5,3,4,1,3,2]}' },
     { label: 'Example 2', input: '{"cost":[1,2,4,6,7]}' },

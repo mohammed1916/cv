@@ -13,6 +13,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Object {start, end} (JSON, up to 60 characters each)',
   url: 'https://leetcode.com/problems/swap-adjacent-in-lr-string/',
   complexity: 'O(n) time and O(1) extra space.',
+  question: "Decide whether one string can be turned into another by swapping adjacent L-R pairs, with L moving left and R moving right.",
+  approaches: [
+    { name: "Two pointers over L and R", intuition: "Match the L and R letters in order while checking they only move in their legal direction.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'RXXLRXRXL -> XRLXXRRLX', input: '{"start":"RXXLRXRXL","end":"XRLXXRRLX"}' },
     { label: 'X -> L (false)', input: '{"start":"X","end":"L"}' },

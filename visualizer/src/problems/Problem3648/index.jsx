@@ -25,6 +25,10 @@ const definition = {
   inputLabel: 'JSON object with n, m and k',
   url: 'https://leetcode.doocs.org/en/lc/3648/',
   complexity: 'O(1) time: two ceiling divisions.',
+  question: "Find the fewest sensors needed to cover a grid, where each sensor covers a square block of a given size.",
+  approaches: [
+    { name: "Ceiling division", intuition: "Divide each side by the sensor block size and round up.", time: "O(1)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Seven by four, three steps', input: '{"n":7,"m":4,"k":3}' },
     { label: 'Single cell, no steps', input: '{"n":1,"m":1,"k":0}' },

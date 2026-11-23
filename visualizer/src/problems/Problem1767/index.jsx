@@ -14,6 +14,10 @@ const definition = {
   phases, parse: parseInput, build: buildTrace, code, sql, python, inputLabel,
   url: `https://leetcode.com/problems/${meta.slug}/`,
   complexity, examples,
+  question: "Find the subtasks that did not run, given tasks split into numbered subtasks and execution records.",
+  approaches: [
+    { name: "Recursive expansion", intuition: "Expand each task into its subtasks with a recursive query, then exclude those that ran.", time: "O(n)", space: "O(n)" },
+  ],
 }
 
 const CELL = { border: '1px solid var(--border)', padding: '3px 8px', color: 'var(--text)', fontFamily: 'monospace' }

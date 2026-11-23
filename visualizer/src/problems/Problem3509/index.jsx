@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'An object with nums, k and limit, for example {"nums": [1,2,3], "k": 2, "limit": 10}',
   url: 'https://leetcode.com/problems/maximum-product-of-subsequences-with-an-alternating-sum-equal-to-k/',
   complexity: 'Pairs of alternating sum and product per step. The visualization caps nums at 16 values.',
+  question: "Choose a subsequence whose alternating sum equals k and maximize the product of its values.",
+  approaches: [
+    { name: "DP over sign and sum", intuition: "Track the best product for each alternating sum and sign, capping products over the limit.", time: "polynomial in n and k", space: "O(n k)" },
+  ],
   examples: [
     { label: 'Five values, limit twelve', input: '{"nums":[5,0,3,9,2],"k":4,"limit":12}' },
     { label: 'Negative k with repeats', input: '{"nums":[1,1,2,8,0,6],"k":-2,"limit":7}' },

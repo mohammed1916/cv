@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Object with m, n and k',
   url: 'https://leetcode.com/problems/create-grid-with-exactly-k-paths-i/',
   complexity: 'O(m n) time and space to carve the grid and count its routes.',
+  question: "Build an m by n grid of free and blocked cells with exactly k right-and-down routes, or report that it is impossible.",
+  approaches: [
+    { name: "Carve and count routes", intuition: "Carve the grid and count its routes with a DP table.", time: "O(m x n)", space: "O(m x n)" },
+  ],
   examples: [
     { label: 'Strip of three', input: '{"m":4,"n":5,"k":3}' },
     { label: 'Two diamonds', input: '{"m":5,"n":4,"k":4}' },

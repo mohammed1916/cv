@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with nums (values 0 to 4) and edges [u,v,w] (tree)',
   url: 'https://leetcode.com/problems/longest-special-path/',
   complexity: 'O(n^2) time for walks from every node, O(n) space per walk. The visualization caps n at 8.',
+  question: "In a tree with values, find the longest path that never repeats a value and track its length.",
+  approaches: [
+    { name: "Walk from every node", intuition: "Run a depth-first walk from each node and keep the longest valid path found.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Distinct', input: '{"nums":[1,2,3],"edges":[[0,1,2],[1,2,3]]}' },
     { label: 'Repeat', input: '{"nums":[1,2,1],"edges":[[0,1,2],[1,2,3]]}' },

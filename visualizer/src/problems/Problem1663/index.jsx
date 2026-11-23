@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Object with n and k (JSON)',
   url: 'https://leetcode.com/problems/smallest-string-with-a-given-numeric-value/',
   complexity: 'O(n) time and O(n) space: one backward pass places the largest letter each position can take.',
+  question: "Build the lexicographically smallest string of a given length whose letter values sum to a target.",
+  approaches: [
+    { name: "Fill from the back", intuition: "Place the largest letter that still leaves room for the rest, scanning from the end.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Small budget', input: '{"n":2,"k":2}' },
     { label: 'Mixed letters', input: '{"n":4,"k":30}' },

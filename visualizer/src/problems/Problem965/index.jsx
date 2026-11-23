@@ -8,6 +8,10 @@ const definition = {
   inputLabel: 'Object with tree: a level-order list of values, with null for a missing node',
   url: 'https://leetcode.com/problems/univalued-binary-tree/',
   complexity: 'O(n) time: each node is visited at most once. O(h) space for the stack, where h is the height.',
+  question: "Decide whether every node in a binary tree has the same value.",
+  approaches: [
+    { name: "Tree walk comparing to the root", intuition: "Walk the tree and compare each value with the root's value, stopping at the first difference.", time: "O(n)", space: "O(h)" },
+  ],
   examples: [
     { label: 'Every node matches', input: JSON.stringify({ tree: [3, 3, 3, 3, null, 3, 3] }) },
     { label: 'One outlier deep down', input: JSON.stringify({ tree: [7, 7, 7, 7, 7, 7, 8] }) },

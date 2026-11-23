@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Words (JSON array of lowercase words)',
   url: 'https://leetcode.com/problems/unique-morse-code-words/',
   complexity: 'O(total letters) time and O(total length) space.',
+  question: "Count the distinct Morse code transformations among a list of words.",
+  approaches: [
+    { name: "Set of encoded strings", intuition: "Replace each letter with its Morse code, join the codes, and count distinct results with a set.", time: "O(total length)", space: "O(total length)" },
+  ],
   examples: [
     { label: 'Pair', input: '["gin","zen","gig","msg"]' },
     { label: 'Repeats', input: '["ab","ba","aab","ab"]' }, { label: 'Single word', input: '["a"]' }, { label: 'Identical words', input: '["a","a","a"]' }, { label: 'Long run: 100 words', input: '["gmr","mcisdiuzdwj","v","uplls","nch","uhvzlqrvlq","fqobywyh","dixacvrtko","sthrs","guizshwq","vnkyuuikvbv","lmqsyg","hwj","tqzoydezytq","sa","qbxu","ruxd","s","sfuibprsmg","lbmkb","uuo","xynwhqeo","j","xxpur","fmly","usqyukulz","dowmmcxeabz","yvt","h","judwnbycdvjb","wtfnfsp","vlgacsfuvpmw","rdcpv","dnxl","hlxk","o","eonmzbgujj","cjtj","rojhukhqzk","zmwwfhadcala","ywz","syx","ozfelhnyyen","p","sakzzjviwavi","vpsj","lfhiinz","fxzqas","ifjfrpjej","f","fsb","oref","ladxqxosd","kla","tryhmvxgaiv","hlqo","tidbplyeho","apjr","mdsk","h","mglyj","tnfdbfdk","bqhtnfzqd","igbjogjwwydc","wgrxamqstlmm","cliwmazlp","mdyitrbiqhuw","icg","oayshzxixhc","ketzgs","jugmwsfcqzh","zoz","clbfwcpuxvc","jplyxzdu","tiwvsyyfxd","fgwbrhq","ysfxxur","omp","nyiqv","eucuoa","bb","dygaucolkrsp","vsu","klkdmn","qvkzd","vdqllmsjqnk","brvoe","qjrimlwig","tjuxshmkgkd","dbr","dtlgh","eugcqoq","fhyngqyse","isbtuipbcv","janepdistp","fumnbh","szddzwseab","ddooizpezjt","fbxrjzje","olqidyn"]' },

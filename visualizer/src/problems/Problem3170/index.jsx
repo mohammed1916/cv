@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with s, lowercase letters and stars, for example {"s":"aaba*"}',
   url: 'https://leetcode.com/problems/lexicographically-minimum-string-after-removing-stars/',
   complexity: 'O(n * 26) time with the scan shown. The visualization caps the string at 14 characters.',
+  question: "Remove the stars from a string, where each star deletes the closest letter to its left, and return the lexicographically smallest result.",
+  approaches: [
+    { name: "Remove the smallest letter before each star", intuition: "Each star removes the smallest letter to its left, choosing the rightmost copy on a tie.", time: "O(n * 26)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"s":"aaba*"}' },
     { label: 'Example 2', input: '{"s":"abc"}' },

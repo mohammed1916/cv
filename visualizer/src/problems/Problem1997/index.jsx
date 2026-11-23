@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'nextVisit array (JSON), where nextVisit[i] is at most i',
   url: 'https://leetcode.com/problems/first-day-where-you-have-been-in-all-the-rooms/',
   complexity: 'O(n) time with prefix sums and O(n) space.',
+  question: "Find the first day on which every room has been visited an even number of times under a fixed visiting rule.",
+  approaches: [
+    { name: "DP over visit days", intuition: "Compute the days needed to visit each room from the previous one with prefix sums.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Two rooms', input: '[0,0]' },
     { label: 'Four rooms', input: '[0,0,0,3]' },

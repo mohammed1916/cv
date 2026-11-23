@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with s (lowercase letters)',
   url: "https://leetcode.com/problems/minimum-operations-to-make-a-rotated-palindrome-ii/",
   complexity: "O(n^2) time and O(n) extra space: each of the n rotations is priced over n/2 mirror pairs. Letter steps on one position never need to be split, because the cost of matching a pair is the smaller of the two forward distances around the alphabet.",
+  question: "For each rotation, price every mirrored letter pair by the shorter walk around the alphabet and keep the cheapest total.",
+  approaches: [
+    { name: "Try each rotation with alphabet distance", intuition: "Price each mirror pair by the shorter alphabet walk, for every rotation.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: "Three letters", input: '{"s":"abc"}' },
     { label: "Two letters", input: '{"s":"ab"}' },

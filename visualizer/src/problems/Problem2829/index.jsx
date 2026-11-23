@@ -13,6 +13,11 @@ const definition = {
   inputLabel: 'Object with n and k (JSON), n from 1 to 20, k from 1 to 40',
   url: 'https://leetcode.com/problems/determine-the-minimum-sum-of-a-k-avoiding-array/',
   complexity: 'O(n * k) with the simple membership test. The visualization caps n at 20.',
+  question: "Build a sorted array of distinct positive numbers of a given length where no two values add up to k, and return the smallest possible sum.",
+  approaches: [
+    { name: "Greedy with membership test", intuition: "Take the smallest candidate whose partner is not already chosen, repeating until the length is reached.", time: "O(n k)", space: "O(n)" },
+    { name: "Closed-form pairing", intuition: "The smallest values form pairs around half of k, so the sum has a direct formula.", time: "O(1)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Eight, k of three', input: '{"n":8,"k":3}' },
     { label: 'Single position', input: '{"n":1,"k":1}' },

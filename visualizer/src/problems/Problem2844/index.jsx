@@ -14,6 +14,11 @@ const definition = {
   inputLabel: 'Object with num (a string of digits)',
   url: 'https://leetcode.com/problems/minimum-operations-to-make-a-special-number/',
   complexity: 'O(n) time for four endings, each with two backward scans, and O(1) extra space.',
+  question: "Find the fewest deletions or additions needed to make a digit string divisible by 25 by removing digits.",
+  approaches: [
+    { name: "Check the four valid endings", intuition: "A number is divisible by 25 when it ends in 00, 25, 50 or 75; find the cheapest way to form each ending.", time: "O(n)", space: "O(1)" },
+    { name: "Try all removal subsets", intuition: "Try removing each subset of digits and test divisibility.", time: "O(2^n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Ends in 75', input: '{"num":"7315"}' },
     { label: 'Zero and no pair', input: '{"num":"9045"}' },

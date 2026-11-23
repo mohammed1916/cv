@@ -23,6 +23,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'Object with employees, meetings and a threshold',
   complexity: 'O(M^2) pair checks per employee with M meetings.',
+  question: "Find employees whose meeting schedules overlap with too many other meetings, and report those employees.",
+  approaches: [
+    { name: "Pairwise overlap count", intuition: "Compare every pair of meetings for each employee and count how many overlap them.", time: "O(M^2) per employee", space: "O(M)" },
+  ],
   examples: [
     { label: 'Sample', input: SAMPLE_TEXT },
     { label: 'One meeting', input: '{"threshold":1,"employees":[{"employee_id":1,"name":"Ana"}],"meetings":[{"meeting_id":1,"employee_id":1,"start_hour":9,"end_hour":10}]}' },

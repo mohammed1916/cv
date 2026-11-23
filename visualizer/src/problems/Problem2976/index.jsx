@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON object with source, target, original, changed and cost',
   url: 'https://leetcode.com/problems/minimum-cost-to-convert-string-i/',
   complexity: 'O(26^3) time for the letter graph, plus O(n) to sum positions. The visualization caps the strings at 8 letters.',
+  question: "Find the minimum cost to convert one lowercase string into another using letter conversion rules.",
+  approaches: [
+    { name: "Floyd-Warshall on letters", intuition: "Compute the cheapest conversion between each pair of letters, then add the cheapest cost for each position.", time: "O(26^3 + n)", space: "O(26^2)" },
+  ],
   examples: [
     { label: 'Single letter change, cost three', input: '{"source":"mnop","target":"mqop","original":["n","q","m"],"changed":["q","n","m"],"cost":[3,6,2]}' },
     { label: 'Small', input: '{"source":"aaaa","target":"bbbb","original":["a","c"],"changed":["c","b"],"cost":[1,2]}' },

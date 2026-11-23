@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'A positive integer total, e.g. 28',
   url: 'https://leetcode.com/problems/maximum-split-of-positive-even-integers/',
   complexity: 'O(sqrt(total)) time for the parts taken and O(sqrt(total)) space for the result. The visualization caps the total at 400.',
+  question: "Split a positive integer into the largest number of distinct positive even integers.",
+  approaches: [
+    { name: "Greedy 2, 4, 6, ...", intuition: "Take the smallest even numbers in order while the rest still allows the next part; add any leftover to the last part.", time: "O(sqrt n)", space: "O(sqrt n)" },
+  ],
   examples: [
     { label: 'Even total', input: '28' },
     { label: 'Small even', input: '12' },

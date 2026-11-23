@@ -17,6 +17,10 @@ const definition = {
   inputLabel: 'Grid JSON (e.g. {"grid": [[-15,1,3],[15,7,12],[5,6,-2]]})',
   url: "https://leetcode.com/problems/find-the-width-of-columns-of-a-grid/",
   complexity: "O(m * n) time and O(n) space for an m x n grid. Both dimensions are at most 100.",
+  question: "Given a grid of integers, find the width of each column, where the width is the longest string representation of a value in that column.",
+  approaches: [
+    { name: "Track the maximum length per column", intuition: "Convert each cell to text and keep the longest length seen in each column.", time: "O(mn)", space: "O(n)" },
+  ],
   examples: [
     { label: "Example 1", input: '{"grid": [[1],[22],[333]]}' },
     { label: "Example 2", input: '{"grid": [[-15,1,3],[15,7,12],[5,6,-2]]}' },

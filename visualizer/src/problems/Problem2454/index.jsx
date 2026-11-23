@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON {"nums": [3, 1, 4, 1, 5]}',
   url: 'https://leetcode.com/problems/next-greater-element-iv/',
   complexity: 'O(n) time and O(n) space with two monotonic stacks. Each index moves between stacks at most once.',
+  question: "For each element, find the second strictly greater value to its right, or -1 if there is none.",
+  approaches: [
+    { name: "Two monotonic stacks", intuition: "One stack waits for a first greater value, and a second stack waits for the second; each index moves between them at most once.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example', input: '{"nums":[3,1,4,1,5]}' },
     { label: 'Ascending', input: '{"nums":[1,2,3,4]}' },

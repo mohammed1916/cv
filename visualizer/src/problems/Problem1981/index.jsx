@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Matrix and target (JSON)',
   url: 'https://leetcode.com/problems/minimize-the-difference-between-target-and-chosen-elements/',
   complexity: 'O(m * s * n) time, where s is the number of distinct reachable sums (at most 4900 here); O(s) space.',
+  question: "Choose one element from each row of a matrix so that the sum is as close as possible to a target.",
+  approaches: [
+    { name: "Bitset of reachable sums", intuition: "Track every reachable sum in a bitset, updating it row by row.", time: "O(rows * T)", space: "O(T)" },
+  ],
   examples: [
     { label: 'Two rows', input: '{"mat":[[2,4],[3,1]],"target":6}' },
     { label: 'Three rows', input: '{"mat":[[5,7],[1,2],[4,6]],"target":9}' },

@@ -19,6 +19,10 @@ const definition = {
   inputLabel: 'Object with min_length, max_length, zero_group and one_group',
   url: 'https://leetcode.com/problems/number-of-good-binary-strings/',
   complexity: 'O(maxLength) time and space: each length is built from at most two shorter lengths, then the counted lengths are summed. Results are reduced modulo 1000000007. The visualization caps maxLength at 30 and the blocks at 10; the official limits are larger. The parameter names are used as the statement names them.',
+  question: "Count the binary strings with lengths in a range that can be built from blocks of zeros and ones, modulo a prime.",
+  approaches: [
+    { name: "Dynamic programming on length", intuition: "Each length is built from the two shorter lengths that end in a block, so sum the counts over the range.", time: "O(maxLength)", space: "O(maxLength)" },
+  ],
   examples: [
     { label: 'Short range', input: '{"min_length":3,"max_length":5,"zero_group":1,"one_group":2}' },
     { label: 'Longer blocks', input: '{"min_length":4,"max_length":6,"zero_group":2,"one_group":3}' },

@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON {"scores":[5,1,3,2,4],"edges":[[0,1],[0,2],[0,3],[3,4]]}',
   url: 'https://leetcode.com/problems/maximum-score-of-a-node-sequence/',
   complexity: 'O(m * 9) time after sorting neighbours, and O(n + m) space. Keeping three neighbours per node is enough to find the best pair.',
+  question: "Find the largest score of a four-node path, where the score is the sum of the node scores along the path, and the path uses a given edge.",
+  approaches: [
+    { name: "Keep the best three neighbours per node", intuition: "For each edge, combine the best three neighbours of each endpoint that avoid repeats.", time: "O(E)", space: "O(V + E)" },
+  ],
   examples: [
     { label: 'Star', input: '{"scores":[5,1,3,2,4],"edges":[[0,1],[0,2],[0,3],[3,4]]}' },
     { label: 'Too short', input: '{"scores":[1,2,3,4],"edges":[[0,1],[1,2]]}' },

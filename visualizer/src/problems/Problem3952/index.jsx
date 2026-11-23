@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with values and tokens (binary string, e.g. {"values":[3,1,4],"tokens":"101"})',
   url: 'https://leetcode.com/problems/maximum-total-value-of-covered-indices/',
   complexity: 'O(n) time and O(1) extra space for the two running totals. The visual caps the row at 12 indices.',
+  question: "Each token either stays put or steps one place left; choose moves that maximise the total value of occupied indices.",
+  approaches: [
+    { name: "Two-state scan", intuition: "Keep the best running total for the state where the token stays and for the state where it steps left.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Stay or move', input: '{"values":[4,2,7,1],"tokens":"0110"}' },
     { label: 'Crowded tokens', input: '{"values":[5,1,3,8,2],"tokens":"11011"}' },

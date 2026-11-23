@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Grid (JSON object with grid)',
   url: 'https://leetcode.com/problems/minimum-xor-path-in-a-grid/',
   complexity: 'O(m * n * V) time where V is the number of distinct XOR values. The visualization caps the grid at 30 cells.',
+  question: "Find the smallest XOR of a path across a grid that moves right or down.",
+  approaches: [
+    { name: "Track every XOR value per cell", intuition: "Keep all XOR values that reach each cell, since a smaller partial XOR may not give the smallest total.", time: "O(m * n * V)", space: "O(m * n * V)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"grid":[[1,2],[3,4]]}' },
     { label: 'Example 2', input: '{"grid":[[6,7],[5,8]]}' },

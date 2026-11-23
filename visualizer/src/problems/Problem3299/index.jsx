@@ -17,6 +17,10 @@ const definition = {
   inputLabel: "JSON array of integers (e.g. [4,5,3,4])",
   url: "https://leetcode.com/problems/sum-of-consecutive-subsequences/",
   complexity: "O(n) expected time and O(n) space with hash maps keyed by value. The visualization accepts up to 12 values from -20 to 20 so the sums stay exact.",
+  question: "Sum the values of every consecutive subsequence in an array, following the rules of the statement.",
+  approaches: [
+    { name: "Running hash maps by value", intuition: "Track, for each value, the total of consecutive subsequences ending at it, using hash maps.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: "Rising then falling", input: "[1,2,3,2]" },
     { label: "Mixed steps", input: "[4,5,3,4]" },

@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Reward values as JSON array (1 to 50, up to 10 values)',
   url: 'https://leetcode.com/problems/maximum-total-reward-using-operations-ii/',
   complexity: 'O(n * S) time, where S is the sum of the rewards. The visualization caps the input at 10 values.',
+  question: "Find the maximum total reward from taking rewards in increasing order, for larger inputs.",
+  approaches: [
+    { name: "Knapsack over reachable sums", intuition: "Each reward can be taken once and only when the running total is below it, so the reachable sums are extended once per reward.", time: "O(n * S)", space: "O(S)" },
+  ],
   examples: [
     { label: 'Four rewards, two pairs', input: '[7,7,3,30]' },
     { label: 'Six rewards, mixed', input: '[50,12,9,1,40,2]' },

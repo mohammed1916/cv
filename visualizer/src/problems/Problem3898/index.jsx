@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Adjacency matrix (JSON): {"matrix": [[...]]}',
   url: 'https://leetcode.com/problems/find-the-degree-of-each-vertex/',
   complexity: 'O(n^2) time and O(n) extra space for the answer. The visualization caps the matrix at 8 rows.',
+  question: "Given an undirected graph as an adjacency matrix, report how many neighbours each vertex has.",
+  approaches: [
+    { name: "Row sums", intuition: "Count the ones in each row of the matrix; that count is the vertex degree.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Triangle', input: '{"matrix":[[0,1,1],[1,0,1],[1,1,0]]}' },
     { label: 'Linked pair', input: '{"matrix":[[0,1,0],[1,0,0],[0,0,0]]}' },

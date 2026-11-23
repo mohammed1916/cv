@@ -14,6 +14,11 @@ const definition = {
   inputLabel: 'JSON object with values: level-order array (null = missing)',
   url: 'https://leetcode.com/problems/sum-of-nodes-with-even-valued-grandparent/',
   complexity: 'O(n) time and O(h) stack space. The visualization caps input at 15 entries.',
+  question: "Add the values of nodes whose grandparent has an even value.",
+  approaches: [
+    { name: "Depth-first with parent links", intuition: "Carry the parent and grandparent values down the recursion and add matching nodes.", time: "O(n)", space: "O(h)" },
+    { name: "Breadth-first with level state", intuition: "Queue each node with its parent and grandparent values and add as you go.", time: "O(n)", space: "O(w)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"values":[6,7,8,2,7,1,3,9,null,1,4,null,null,null,5]}' },
     { label: 'Small tree', input: '{"values":[2,3,4,5,6,7,8]}' },

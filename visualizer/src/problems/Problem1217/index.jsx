@@ -2,6 +2,10 @@ import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import { buildTrace, parseInput, code, python, phases, inputLabel, complexity, examples } from './algorithm'
 
 const definition = {
+  question: "Find the minimum cost to move all chips to one position, where moving two steps is free.",
+  approaches: [
+    { name: "Parity counts", intuition: "Chips on even and odd positions can each merge for free, so the cost is the smaller parity group.", time: "O(n)", space: "O(1)" },
+  ],
   phases, parse: parseInput, build: buildTrace, code, python, inputLabel, complexity, examples,
   url: 'https://leetcode.com/problems/minimum-cost-to-move-chips-to-the-same-position/',
 }

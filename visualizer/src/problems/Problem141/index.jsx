@@ -21,6 +21,11 @@ const definition = {
   inputLabel: 'Values | pos (e.g. "[3, 2, 0, -4] | pos = 1")',
   url: "https://leetcode.com/problems/linked-list-cycle/",
   complexity: "O(n) time and O(1) extra space for n nodes. The visualization caps the list at 500 nodes; the official limit is 10,000.",
+  question: "Decide whether a linked list contains a cycle.",
+  approaches: [
+    { name: "Fast and slow pointers", intuition: "Move one pointer by one and another by two; they meet only when there is a cycle.", time: "O(n)", space: "O(1)" },
+    { name: "Visited set", intuition: "Remember visited nodes and stop when one repeats.", time: "O(n)", space: "O(n)" },
+  ],
   examples: getExamplesOr("linked-list-cycle", []).map((example) => ({
     label: example.label,
     input: example.input ?? JSON.stringify(example.values ?? { nodes: example.nodes, pos: example.pos }),

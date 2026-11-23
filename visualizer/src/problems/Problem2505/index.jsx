@@ -19,6 +19,10 @@ const definition = {
   inputLabel: 'Object with nums (whole numbers from 0 to 9)',
   url: 'https://leetcode.com/problems/bitwise-or-of-all-subsequence-sums/',
   complexity: 'O(n * S) time and O(S) space, where S is the total of nums: each number updates a table of reachable sums. The visualization caps S at 54; the official limits need a different method than this table.',
+  question: "Find the bitwise OR of the sums of all subsequences of nums.",
+  approaches: [
+    { name: "Reachable-sum table", intuition: "Track which subsums can be formed, then OR together every reachable sum.", time: "O(n * S)", space: "O(S)" },
+  ],
   examples: [
     { label: 'Consecutive', input: '{"nums":[1,2,3]}' },
     { label: 'Duplicates', input: '{"nums":[4,4,1]}' },

@@ -13,6 +13,11 @@ const definition = {
   inputLabel: 'JSON object with num1 and num2, for example {"num1":120,"num2":130}',
   url: 'https://leetcode.com/problems/total-waviness-of-numbers-in-range-ii/',
   complexity: 'O(d * 10 * 2 * 2 * 11) states for d digits. The visualization caps the bound at 10^6.',
+  question: "Compute the total waviness of all integers in a range given by two bounds.",
+  approaches: [
+    { name: "Digit DP with subtraction", intuition: "Count completions and their waviness digit by digit, then subtract the prefix before the lower bound.", time: "O(d * 10 * 2 * 2 * 11)", space: "O(d * 10)" },
+    { name: "Brute force over the range", intuition: "Check every number in the range directly.", time: "O(range * d)", space: "O(d)" },
+  ],
   examples: [
     { label: 'Range three to fifteen', input: '{"num1":3,"num2":15}' },
     { label: 'Range far from one', input: '{"num1":500000,"num2":500020}' },

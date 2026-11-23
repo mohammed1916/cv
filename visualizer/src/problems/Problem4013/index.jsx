@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Numbers and ratio (JSON object with nums, a and b)',
   url: 'https://leetcode.doocs.org/en/lc/4013/',
   complexity: 'O(n log n) time with the sorted list shown here, using a list insert. The visualization caps input at 12 numbers.',
+  question: "Count subarrays that satisfy an even-to-odd ratio test using running scores.",
+  approaches: [
+    { name: "Sorted prefix scores", intuition: "Keep the prefix scores in sorted order and count the earlier ones that are large enough.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"nums":[1,2,1,2],"a":3,"b":2}' },
     { label: 'Example 2', input: '{"nums":[2,2,1],"a":2,"b":1}' },

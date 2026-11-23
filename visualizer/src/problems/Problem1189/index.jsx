@@ -10,6 +10,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, pythonLineMap, phases,
   inputLabel: 'Text (JSON object)',
   complexity: 'O(n) time and O(1) extra space for the fixed five-letter pattern.',
+  question: "Count how many copies of the word balloon can be formed from the letters of a string.",
+  approaches: [
+    { name: "Limiting letter", intuition: "Count the letters, divide the l and o counts by two, and take the minimum over the required letters.", time: "O(n)", space: "O(1)" },
+  ],
   examples: authoredExamples0,
 };
 

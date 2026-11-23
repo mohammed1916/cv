@@ -16,6 +16,11 @@ const definition = {
   inputLabel: 'JSON object with key nums (e.g. {"nums": [2,5,2,5]})',
   url: "https://leetcode.com/problems/subarrays-distinct-element-sum-of-squares-i/",
   complexity: "O(n^2) time and O(n) space for array length n. The visualization caps nums at 50 elements.",
+  question: "Sum the squares of the distinct-value counts over all subarrays of an array.",
+  approaches: [
+    { name: "Fix the left end and extend", intuition: "For each left end, extend the right end and track distinct values, adding the square of the distinct count.", time: "O(n^2)", space: "O(n)" },
+    { name: "Check each subarray", intuition: "Count distinct values for each subarray directly.", time: "O(n^3)", space: "O(n)" },
+  ],
   examples: [
     { label: "Example 1", input: '{"nums": [2,5,2,5]}' },
     { label: "Example 2", input: '{"nums": [7,7,3]}' },

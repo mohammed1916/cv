@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Tree with unique values 0-99 (JSON level order)',
   url: 'https://leetcode.com/problems/lowest-common-ancestor-of-deepest-leaves/',
   complexity: 'O(n) time and O(h) space. The visualization caps input at 15 nodes.',
+  question: "Return the lowest common ancestor of all deepest leaves of a binary tree.",
+  approaches: [
+    { name: "Post-order depth comparison", intuition: "Return each subtree's depth and node; when both sides reach equal depth, the current node is the answer.", time: "O(n)", space: "O(h)" },
+  ],
   examples: [
     { label: 'Deepest leaves on two sides', input: '[14,8,21,3,11,null,30,null,null,6,17]' },
     { label: 'Single node', input: '[42]' },

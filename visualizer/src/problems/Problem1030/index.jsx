@@ -8,6 +8,11 @@ const definition = {
   inputLabel: '[rows, cols, centreRow, centreCol] (JSON)',
   url: 'https://leetcode.com/problems/matrix-cells-in-distance-order/',
   complexity: 'O(rows × cols) time and space: each cell is queued once.',
+  question: "List all cells of a grid in order of their Manhattan distance from a given cell.",
+  approaches: [
+    { name: "BFS from the centre", intuition: "Expand outward one layer at a time; each layer is one distance, so the BFS order is the answer.", time: "O(R * C)", space: "O(R * C)" },
+    { name: "Sort by distance", intuition: "Generate every cell and sort by distance, breaking ties by position.", time: "O(R * C log(R * C))", space: "O(R * C)" },
+  ],
   examples: [
     { label: '3 × 3 centre', input: '[3,3,1,1]' },
     { label: '2 × 4 corner', input: '[2,4,0,0]' },

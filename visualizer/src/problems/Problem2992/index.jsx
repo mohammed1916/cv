@@ -23,6 +23,10 @@ const definition = {
   inputLabel: "Integer n from 1 to 6 (e.g. 4)",
   url: "https://leetcode.com/problems/number-of-self-divisible-permutations/",
   complexity: "Backtracking visits at most n! complete arrangements, so it runs in O(n! * n) time with O(n) space for the recursion. The visualization caps n at 6; the trace checks each value against the position with gcd.",
+  question: "Count the permutations of 1 to n where each position is divisible by its value or by the value at that position.",
+  approaches: [
+    { name: "Backtracking with pruning", intuition: "Place values position by position and reject any value that breaks the divisibility rule.", time: "O(n!) pruned", space: "O(n)" },
+  ],
   examples: [
     { label: "Small", input: "3" },
     { label: "Five positions", input: "5" },

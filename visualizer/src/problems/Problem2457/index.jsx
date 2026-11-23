@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with n (1 to 1000) and target (1 to 30)',
   url: 'https://leetcode.com/problems/minimum-addition-to-make-integer-beautiful/',
   complexity: 'O(log n) candidates, each with O(digits) work. The visualization caps n at 1000.',
+  question: "Find the smallest non-negative addend that makes the digit sum of n plus addend at most target.",
+  approaches: [
+    { name: "Round up at digit positions", intuition: "Each candidate rounds n up at one position so the trailing digits become zero; test the candidates in order.", time: "O(log n) candidates", space: "O(digits)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"n":999,"target":1}' },
     { label: 'Example 2', input: '{"n":1999,"target":1}' },

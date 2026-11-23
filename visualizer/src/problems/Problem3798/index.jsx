@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with s (characters 1 and 2)',
   url: 'https://leetcode.com/problems/largest-even-number/',
   complexity: 'O(n) time and O(1) extra space: one scan from the right.',
+  question: "Find the largest even number that can be formed from a string of digits by keeping a prefix.",
+  approaches: [
+    { name: "Keep the prefix ending at the last 2", intuition: "Only a final 2 makes the number even, so keep the longest prefix that ends at the last 2.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Mixed digits', input: '{"s":"12121"}' },
     { label: 'No 2', input: '{"s":"111"}' },

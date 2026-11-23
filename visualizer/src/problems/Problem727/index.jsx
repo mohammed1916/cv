@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 's1 and s2 (JSON object)',
   url: 'https://leetcode.com/problems/minimum-window-subsequence/',
   complexity: 'O(n * m) time and O(m) extra space.',
+  question: "Find the shortest substring of one string that contains the second string as a subsequence.",
+  approaches: [
+    { name: "DP over subsequence matches", intuition: "Track the start of the best match for each position of the second string.", time: "O(mn)", space: "O(mn)" },
+  ],
   examples: [
     { label: 'Scattered', input: '{"s1":"xaybzcx","s2":"abc"}' },
     { label: 'Order matters', input: '{"s1":"cbaxbca","s2":"ba"}' },

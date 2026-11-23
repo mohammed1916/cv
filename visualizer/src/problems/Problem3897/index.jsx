@@ -11,6 +11,10 @@ const definition = {
   inputLabel: 'Object with nums1 (ones per segment) and nums0 (zeros per segment)',
   url: 'https://leetcode.com/problems/maximum-value-of-concatenated-binary-segments/',
   complexity: 'O(n log n) comparisons with big-integer arithmetic. The visual caps each count at 8 and n at 8.',
+  question: "Reorder binary segments, each a block of ones followed by zeros, and join them so the resulting binary number is as large as possible.",
+  approaches: [
+    { name: "Comparator sort on concatenations", intuition: "Put segment a before b when a+b gives a larger binary value than b+a, then concatenate.", time: "O(n log n) comparisons", space: "O(total length)" },
+  ],
   examples: [
     { label: 'Example', input: '{"nums1":[2,0,1],"nums0":[1,3,0]}' },
     { label: 'Three segments', input: '{"nums1":[0,3,1],"nums0":[2,0,1]}' },

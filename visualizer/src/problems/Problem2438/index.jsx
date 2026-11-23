@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'n and queries as JSON, e.g. {"n": 15, "queries": [[0,1],[2,2],[0,3]]}',
   url: 'https://leetcode.com/problems/range-product-queries-of-powers/',
   complexity: 'O(log n + q * log n) time for q queries, since at most 30 powers exist.',
+  question: "Build the product of the powers of two that sum to n, then answer range-product queries over that list modulo 1000000007.",
+  approaches: [
+    { name: "Power list and per-query product", intuition: "Write n in binary to get the powers, then multiply the powers inside each query range.", time: "O(log n + q log n)", space: "O(log n)" },
+  ],
   examples: [
     { label: 'Five-bit value, count 3', input: '{"n":21,"queries":[[0,2],[1,1]]}' },
     { label: 'Single bit', input: '{"n":1,"queries":[[0,0]]}' },

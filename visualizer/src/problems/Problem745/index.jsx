@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Words and queries (JSON)',
   url: 'https://leetcode.com/problems/prefix-and-suffix-search/',
   complexity: 'Constructor O(sum of len^3) time and O(sum of len^2) keys; each query O(len). Capped at 12 words of 7 letters and 20 queries.',
+  question: "Find the largest index of a word that has a given prefix and suffix.",
+  approaches: [
+    { name: "Hash of suffix#prefix keys", intuition: "Precompute every suffix#prefix key per word so each query is one hash lookup.", time: "O(L^2) per word", space: "O(n L^2)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"words": ["apple"], "queries": [["a", "e"], ["b", ""]]}' },
     { label: 'Later index wins', input: '{"words": ["apple", "ape", "apple"], "queries": [["ap", "e"], ["ap", "pe"], ["", "le"], ["x", "x"]]}' },

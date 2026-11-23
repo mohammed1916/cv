@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with n and edges (JSON)',
   url: 'https://leetcode.com/problems/maximum-sum-of-edge-values-in-a-graph/',
   complexity: 'O(n + m) time after sorting the zigzag values, which are built directly. The visualization caps n at 12.',
+  question: "Assign values to the edges of a graph to maximize the sum of values on adjacent edges.",
+  approaches: [
+    { name: "Degree-based path or cycle", intuition: "A connected graph of degree at most two is a path or a cycle, so sort the values and assign them.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Path', input: '{"n":4,"edges":[[0,1],[1,2],[2,3]]}' },
     { label: 'Cycle', input: '{"n":6,"edges":[[0,3],[4,5],[2,0],[1,3],[2,4],[1,5]]}' },

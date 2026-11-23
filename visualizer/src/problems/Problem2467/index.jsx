@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with edges, bob and amount (JSON)',
   url: 'https://leetcode.com/problems/most-profitable-path-in-a-tree/',
   complexity: 'O(n) time and O(n) space. The visualization caps input at 12 nodes.',
+  question: "In a tree, Alice starts at the root and Bob at a given node; find Alice's best income on a path to a leaf.",
+  approaches: [
+    { name: "Bob's timing, then Alice's search", intuition: "Record when Bob reaches each node, then search Alice's paths and pay or receive gates by who arrives first.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Bob starts at a leaf', input: '{"edges":[[0,2],[2,4],[2,5],[5,1],[1,3]],"bob":4,"amount":[-8,6,10,-4,12,2]}' },
     { label: 'Bob at the end of a chain', input: '{"edges":[[1,0],[0,2]],"bob":2,"amount":[-6,-12,8]}' },

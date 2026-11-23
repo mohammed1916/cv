@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Node values head (JSON array)',
   url: 'https://leetcode.com/problems/middle-of-the-linked-list/',
   complexity: 'O(n) time and O(1) extra space: fast reaches the end after about n/2 loop iterations.',
+  question: "Return the middle node of a linked list, or the second middle node when there are two.",
+  approaches: [
+    { name: "Fast and slow pointers", intuition: "A pointer moving two steps for each step of another reaches the middle when the fast one reaches the end.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Odd length', input: '[1,2,3,4,5]' },
     { label: 'Even length', input: '[1,2,3,4,5,6]' },

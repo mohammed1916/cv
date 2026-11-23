@@ -18,6 +18,11 @@ const definition = {
   phases, parse: parseInput, build: buildTrace, code, sql, python, inputLabel,
   url: `https://leetcode.com/problems/${meta.slug}/`,
   complexity, examples,
+  question: "Find candidates who have every one of the three required skills.",
+  approaches: [
+    { name: "Count distinct required skills", intuition: "Filter to the required skills, count the distinct ones per candidate, and keep those that match all three.", time: "O(n)", space: "O(n)" },
+    { name: "Self-join per skill", intuition: "Join the candidate rows for each required skill and intersect them.", time: "O(n)", space: "O(n)" },
+  ],
 }
 
 function Rows({ columns = [], rows = [] }) {

@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with nums and queries (JSON)',
   url: 'https://leetcode.com/problems/maximize-count-of-distinct-primes-after-split/',
   complexity: 'O(q * n * m) time with a set per split. The visualization caps n at 10 and queries at 6.',
+  question: "Split an array into two parts and count the distinct primes in each part, maximizing the total for queries.",
+  approaches: [
+    { name: "Set per split", intuition: "Keep a set of distinct primes for each split and track the best count.", time: "O(q n m)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Repeated values, two updates', input: '{"nums":[6,6,6],"queries":[[0,1],[2,50]]}' },
     { label: 'Single update at the end', input: '{"nums":[10,20,30,40,50,1,2,3],"queries":[[7,9]]}' },

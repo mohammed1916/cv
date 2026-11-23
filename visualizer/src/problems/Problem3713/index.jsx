@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'Object with s (lowercase letters)',
   url: 'https://leetcode.com/problems/longest-balanced-substring-i/',
   complexity: 'O(n^2) substrings, each checked from running counts. The visualization caps s at 20 characters.',
+  question: "Find the length of the longest substring whose letters appear equally often.",
+  approaches: [
+    { name: "Check every substring", intuition: "Check each substring from running counts and keep the longest balanced one.", time: "O(n^2)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Whole string', input: '{"s":"abba"}' },
     { label: 'Prefix wins', input: '{"s":"abbac"}' },

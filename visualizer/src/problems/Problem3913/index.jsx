@@ -17,6 +17,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, pythonLineMap, inputLabel: 'String s (JSON)',
   url: 'https://leetcode.com/problems/sort-vowels-by-frequency/',
   complexity: 'O(n) time and O(n) space. Only five vowel kinds need ranking. Every execution step is retained; long sequences are paged.',
+  question: "Reorder only the vowels of a string so that more frequent vowels come first, breaking ties by first occurrence, while consonants stay put.",
+  approaches: [
+    { name: "Count, rank, then refill", intuition: "Count each vowel kind, rank by frequency and first position, and place the vowels into the original vowel slots.", time: "O(n)", space: "O(n)" },
+  ],
   examples: authoredExamples0,
 }
 function SortVowelsByFrequency() {

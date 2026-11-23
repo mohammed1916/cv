@@ -18,7 +18,7 @@ const examples = [
   { label: 'Table at the 12-row limit', input: '{"Cities":[{"state":"Iowa","city":"Town 01"},{"state":"Maine","city":"Town 02"},{"state":"Ohio","city":"Town 03"},{"state":"Iowa","city":"Town 04"},{"state":"Maine","city":"Town 05"},{"state":"Ohio","city":"Town 06"},{"state":"Iowa","city":"Town 07"},{"state":"Maine","city":"Town 08"},{"state":"Ohio","city":"Town 09"},{"state":"Iowa","city":"Town 10"},{"state":"Maine","city":"Town 11"},{"state":"Ohio","city":"Town 12"}]}' },
 ]
 
-const definition = { number: meta.number, phases, parse: parseInput, build: buildTrace, code, sql, python, inputLabel, complexity, examples }
+const definition = { question: "From a cities table, group the city names under each state in sorted order.", approaches: [{ name: "Sort and group", intuition: "Sort the rows by state and then city, so each state's cities appear together.", time: "O(n log n)", space: "O(n)" }], number: meta.number, phases, parse: parseInput, build: buildTrace, code, sql, python, inputLabel, complexity, examples }
 
 const tableStyle = { borderCollapse: 'collapse', width: '100%', fontSize: '0.9rem' }
 const cellStyle = { border: '1px solid currentColor', padding: '0.3rem 0.5rem', textAlign: 'left' }

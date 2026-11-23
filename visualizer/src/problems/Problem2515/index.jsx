@@ -17,6 +17,10 @@ const definition = {
   inputLabel: 'Words object (JSON, e.g. {"words": ["a", "b"], "target": "a", "startIndex": 0})',
   url: 'https://leetcode.com/problems/shortest-distance-to-target-string-in-a-circular-array/',
   complexity: 'O(n) time and O(1) extra space for n words. The visualization caps the array at 100 words.',
+  question: "Find the shortest circular distance from a start index to any occurrence of the target word.",
+  approaches: [
+    { name: "Scan both directions", intuition: "Walk outward from the start in both directions and stop at the first match each way.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Wraps the other way', input: '{"words": ["p","q","r","s","t","u","v","w"], "target": "p", "startIndex": 7}' },
     { label: 'Halfway round', input: '{"words": ["one","two","three","four","five","six"], "target": "four", "startIndex": 0}' },

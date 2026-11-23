@@ -18,6 +18,10 @@ const definition = {
   inputLabel: "JSON object with keys s, chars, vals (e.g. {\"s\": \"adaa\", \"chars\": \"d\", \"vals\": [-1000]})",
   url: "https://leetcode.com/problems/find-the-substring-with-maximum-cost/",
   complexity: "O(n) time and O(1) extra space beyond the table, for string length n. The visualization caps s at 50 characters.",
+  question: "Given a string, values for letters, and a set of substring costs, find the substring with the maximum total value.",
+  approaches: [
+    { name: "Kadane-style running maximum", intuition: "Track the best sum of a substring ending at each position, restarting when it becomes negative.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: "Example 1", input: "{\"s\": \"adaa\", \"chars\": \"d\", \"vals\": [-1000]}" },
     { label: "Example 2", input: "{\"s\": \"abc\", \"chars\": \"abc\", \"vals\": [-1, -1, -1]}" },

@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object {target, position, speed} (JSON)',
   url: 'https://leetcode.com/problems/car-fleet/',
   complexity: 'O(n log n) time for sorting, O(n) space. The visualization caps n at 30.',
+  question: "Cars drive toward a target at fixed speeds; a faster car that catches a slower one joins its fleet; count the fleets that reach the target.",
+  approaches: [
+    { name: "Sort and compare arrival times", intuition: "Sort by position from the front; a car forms a new fleet only if it arrives later than the fleet ahead.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Three cars, one fleet', input: '{"target":12,"position":[0,3,7],"speed":[4,2,1]}' },
     { label: 'Slow car first', input: '{"target":20,"position":[5,11,2],"speed":[1,3,2]}' },

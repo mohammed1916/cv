@@ -12,6 +12,11 @@ const definition = {
   inputLabel: 'JSON object: {"nums": [...], "x": distance}',
   url: 'https://leetcode.com/problems/minimum-absolute-difference-between-elements-with-constraint/',
   complexity: 'Sorted-set insertions and binary searches: O(n log n). The visualization caps input at 8 numbers.',
+  question: "Find the smallest absolute difference between two values whose positions are at least x apart.",
+  approaches: [
+    { name: "Sorted set with predecessor and successor lookup", intuition: "As the right side slides, insert the value that just became eligible and look up its nearest neighbours in sorted order.", time: "O(n log n)", space: "O(n)" },
+    { name: "Check all pairs", intuition: "Compare every eligible pair of values directly.", time: "O(n^2)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Five values, x of two', input: '{"nums":[7,2,9,4,8],"x":2}' },
     { label: 'Repeated maximum 20', input: '{"nums":[1,20,3,20,5,20,7],"x":5}' },

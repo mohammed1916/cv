@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Hierarchy as JSON: n, present, future, hierarchy, budget',
   url: 'https://leetcode.com/problems/maximum-profit-from-trading-stocks-with-discounts/',
   complexity: 'O(n * budget^2) time for the tree knapsack merges. The visualization caps the company at 10 employees.',
+  question: "Choose employees to trade stocks with discounts under a budget to maximize profit.",
+  approaches: [
+    { name: "Tree knapsack", intuition: "Merge the best tables from each child, splitting the budget between groups.", time: "O(n budget^2)", space: "O(n budget)" },
+  ],
   examples: [
     { label: 'Chain of three bosses', input: '{"n":3,"present":[4,6,2],"future":[9,3,5],"hierarchy":[[1,2],[2,3]],"budget":7}' },
     { label: 'Branching hierarchy', input: '{"n":4,"present":[5,1,3,8],"future":[6,12,4,2],"hierarchy":[[1,4],[1,2],[4,3]],"budget":9}' },

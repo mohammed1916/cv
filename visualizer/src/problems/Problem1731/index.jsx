@@ -44,6 +44,10 @@ const definition = {
   inputLabel: 'Object with an Employees list of { employee_id, name, reports_to (id or null), age } rows',
   url: 'https://leetcode.com/problems/the-number-of-employees-which-report-to-each-employee/',
   complexity: 'O(n * m) in this teaching trace for clarity; SQL groups the self-join in one pass.',
+  question: "For each employee, count the direct reports and the average age of those reports.",
+  approaches: [
+    { name: "Self join and group", intuition: "Join each employee to the rows that report to them and group by manager.", time: "O(n * m)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example', input: '{"Employees":[{"employee_id":1,"name":"Ava","reports_to":null,"age":40},{"employee_id":2,"name":"Ben","reports_to":1,"age":20},{"employee_id":3,"name":"Cy","reports_to":1,"age":21},{"employee_id":4,"name":"Dee","reports_to":2,"age":30},{"employee_id":5,"name":"Eli","reports_to":2,"age":33},{"employee_id":6,"name":"Fay","reports_to":null,"age":25}]}' },
   { label: 'No employees', input: '{"Employees":[]}' },

@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'Object with positive_feedback, negative_feedback, report, student_id and k (JSON)',
   url: 'https://leetcode.com/problems/reward-top-k-students/',
   complexity: 'O(n * w * log k) time for n reports with w words each. The visualization caps the input at 6 students.',
+  question: "Score students by counting positive and negative words in their reports, then return the top k by score and id.",
+  approaches: [
+    { name: "Score then sort", intuition: "Score every report, then sort the students by score and id and keep the first k.", time: "O(n * w log k)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Three students, top two', input: '{"positive_feedback":["bright","careful"],"negative_feedback":["late","messy"],"report":["a careful plan","very messy work","bright and kind team"],"student_id":[7,31,12],"k":2}' },
     { label: 'Negative word', input: '{"positive_feedback":["smart","brilliant","studious"],"negative_feedback":["not"],"report":["this student is not studious","the student is smart"],"student_id":[1,2],"k":2}' },

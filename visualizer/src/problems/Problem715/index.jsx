@@ -16,6 +16,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Operations (JSON array of [name, left, right))',
   url: 'https://leetcode.com/problems/range-module/',
   complexity: 'O(n) per operation for this list version; a balanced ordered set gives O(log n) plus interval work.',
+  question: "Maintain a set of ranges that supports adding, removing and querying half-open intervals.",
+  approaches: [
+    { name: "Disjoint interval list", intuition: "Keep disjoint half-open intervals; adding merges neighbours, removing splits them, and queries check one interval.", time: "O(n) per operation", space: "O(n)" },
+  ],
   examples: [
     { label: 'Merge and split', input: '[["addRange",3,9],["removeRange",5,6],["queryRange",3,5],["queryRange",4,7],["queryRange",6,9]]' },
     { label: 'Single range', input: '[["addRange",0,1],["queryRange",0,1]]' },

@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON object with nums (integers 1 to 4) and k (0 to 3)',
   url: 'https://leetcode.com/problems/find-the-maximum-length-of-a-good-subsequence-i/',
   complexity: 'O(n^2 * k) time and O(n * k) space. The visualization caps input at 10 entries.',
+  question: "Find the longest good subsequence where at most a limited number of value changes are allowed between neighbours.",
+  approaches: [
+    { name: "Dynamic programming on changes used", intuition: "Each position can follow any earlier position, and the change count goes up only when the value differs.", time: "O(n^2 * k)", space: "O(n * k)" },
+  ],
   examples: [
     { label: 'Six values, k one', input: '{"nums":[4,1,1,3,2,4],"k":1}' },
     { label: 'No changes', input: '{"nums":[1,2,3,4,1],"k":0}' },

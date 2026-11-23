@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Circular array (JSON array of 1 to 12 integers from -100 to 100)',
   url: 'https://leetcode.com/problems/transformed-array/',
   complexity: 'O(n) time and O(n) space. Each move uses one modulo operation.',
+  question: "Build a transformed array by moving each value a set number of steps around the circle.",
+  approaches: [
+    { name: "Index arithmetic per element", intuition: "For each index, compute the target index with a modulo and copy the value found there.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Mixed signs', input: '[-30,14,0,-8,55]' },
     { label: 'Extremes and one', input: '[100,-100,1]' },

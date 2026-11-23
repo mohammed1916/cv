@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON object with nums, an array of 1 to 20 integers from 1 to 10000, for example {"nums":[21,4,7]}',
   url: 'https://leetcode.com/problems/four-divisors/',
   complexity: 'O(n * sqrt(max)) time for n numbers.',
+  question: "Sum the divisors of each number that has exactly four divisors.",
+  approaches: [
+    { name: "Divisor search", intuition: "Find the divisors up to the square root and stop when there are more than four.", time: "O(n sqrt(max))", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"nums":[21,4,7]}' },
     { label: 'Example 2', input: '{"nums":[21,21]}' },

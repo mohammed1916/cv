@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with a level-order tree and x, for example {"tree":[1,2,3],"x":1}',
   url: 'https://leetcode.com/problems/binary-tree-coloring-game/',
   complexity: 'O(n) time and O(h) stack space. The visualization caps input at 15 nodes.',
+  question: "Decide whether the second player can choose a node that guarantees a win in a tree-colouring game.",
+  approaches: [
+    { name: "Subtree size counts", intuition: "Compute the sizes of the subtrees around the first player's node; the second player wins when one part exceeds half the nodes.", time: "O(n)", space: "O(h)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"tree":[1,2,3,4,5,6,7,8,9,10,11],"x":3}' },
     { label: 'Small tree', input: '{"tree":[1,2,3],"x":1}' },

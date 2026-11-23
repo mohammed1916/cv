@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'Object with n and conflictingPairs',
   url: 'https://leetcode.com/problems/maximize-subarrays-after-removing-one-conflicting-pair/',
   complexity: 'O(m * (n + m)) time for m pairs and n elements; the visualization caps n at 10.',
+  question: "Remove one conflicting pair from a set of pairs, then count the subarrays that avoid all remaining conflicts.",
+  approaches: [
+    { name: "Try each removal", intuition: "For each pair removed, count subarrays using a sweep over the remaining conflicts.", time: "O(m (n + m))", space: "O(n + m)" },
+  ],
   examples: [
     { label: 'Example', input: '{"n":4,"conflictingPairs":[[1,3],[2,4]]}' },
     { label: 'Three pairs', input: '{"n":5,"conflictingPairs":[[1,3],[2,4],[3,5]]}' },

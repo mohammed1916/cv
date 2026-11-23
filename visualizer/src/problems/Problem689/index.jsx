@@ -11,6 +11,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Input (JSON object with nums and k)',
   url: 'https://leetcode.com/problems/maximum-sum-of-3-non-overlapping-subarrays/',
   complexity: 'O(n) time after prefix sums, and O(n) space for the side tables.',
+  question: "Find three non-overlapping subarrays of length k with the largest total sum and return their start indices.",
+  approaches: [
+    { name: "Best window to each side", intuition: "Precompute the best window starting at or before and at or after each position, then combine the middle window.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Classic', input: '{"nums":[1,2,1,2,6,7,5,1],"k":2}' },
     { label: 'Ties', input: '{"nums":[1,2,1,2,1,2,1,2,1],"k":2}' },

@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON object with a lowercase string s of 3 to 30 letters, for example {"s":"abcbdd"}',
   url: 'https://leetcode.com/problems/palindrome-partitioning-iv/',
   complexity: 'O(n^2) time for the table and the cut pairs. The visualization caps s at 30 characters.',
+  question: "Decide whether a string can be cut into three palindromic pieces.",
+  approaches: [
+    { name: "Palindrome table then cut pairs", intuition: "Precompute a palindrome table, then test each pair of cut points.", time: "O(n^2)", space: "O(n^2)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"s":"abcbdd"}' },
     { label: 'No split', input: '{"s":"leetcode"}' },

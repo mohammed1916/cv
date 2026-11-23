@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with args; null stands for an explicit undefined (e.g. {"args":[1,null,"x"]})',
   url: "https://leetcode.com/problems/return-length-of-arguments-passed/",
   complexity: "O(k) time for k arguments and O(1) extra space for the count. The visualization caps args at 10 entries; the page keeps args short for teaching.",
+  question: "Write a function that returns how many arguments were passed to it.",
+  approaches: [
+    { name: "Count the arguments", intuition: "Use the rest parameter or the arguments length to count the inputs.", time: "O(1)", space: "O(1)" },
+  ],
   examples: [
     { label: "Example", input: '{"args":[1,null,"x"]}' },
     { label: "No arguments", input: '{"args":[]}' },

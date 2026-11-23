@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON {"nums": [1, 2, 1, 2]}',
   url: 'https://leetcode.com/problems/find-subarrays-with-equal-sum/',
   complexity: 'O(n) expected time and O(n) space with a hash map of pair sums.',
+  question: "Find whether an array has two different adjacent pairs with the same sum.",
+  approaches: [
+    { name: "Hash set of pair sums", intuition: "Store each adjacent pair sum in a set and report a repeat.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Match', input: '{"nums":[1,2,1,2]}' },
     { label: 'No match', input: '{"nums":[1,2,4,8,16]}' },

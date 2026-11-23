@@ -13,6 +13,11 @@ const definition = {
   inputLabel: 'Object with nums (JSON)',
   url: 'https://leetcode.com/problems/longest-alternating-subarray/',
   complexity: 'O(n^2) time and O(1) space for this scan. The visualization caps n at 12.',
+  question: "Find the length of the longest subarray whose consecutive differences alternate between +1 and -1, starting with +1.",
+  approaches: [
+    { name: "Extend from each valid start", intuition: "Start only where the first step is +1, then keep extending while the difference flips sign as expected.", time: "O(n^2)", space: "O(1)" },
+    { name: "Single pass with a running length", intuition: "Carry the current alternating run forward and reset it whenever the next difference breaks the pattern.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"nums":[2,3,4,3,4]}' },
     { label: 'Example 2', input: '{"nums":[4,5,6]}' },

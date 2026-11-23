@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with n, limitA and limitB (integers, 2 to 14 sheets)',
   url: 'https://leetcode.com/problems/number-of-ways-to-paint-sheets/',
   complexity: 'O(n) time and O(1) space: each split point is tested once in each colour order.',
+  question: "Count the ways to paint sheets with two colours under two limits, using a single split point and colour order.",
+  approaches: [
+    { name: "Test each split point", intuition: "Each painting is one split plus one colour order; test each split against both limits.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Six sheets', input: '{"n":6,"limitA":4,"limitB":3}' },
     { label: 'Seven sheets', input: '{"n":7,"limitA":2,"limitB":5}' },

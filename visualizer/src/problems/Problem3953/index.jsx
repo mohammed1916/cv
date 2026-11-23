@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON: {"nums": [...], "maxVal": m}',
   url: 'https://leetcode.com/problems/maximum-score-with-co-prime-element/',
   complexity: 'O(n^2 * maxVal) time with gcd checks, and O(1) extra space. The visualization caps the array at 4 entries.',
+  question: "Choose one index and a final value; pay one change for each neighbour sharing a factor, and maximise value minus cost.",
+  approaches: [
+    { name: "Brute force over index and value", intuition: "Try each index and each final value, count neighbours sharing a factor, and keep the best value minus cost.", time: "O(n^2 x maxVal)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"nums":[3,4,6],"maxVal":5}' },
     { label: 'Example 2', input: '{"nums":[1,2,3],"maxVal":4}' },

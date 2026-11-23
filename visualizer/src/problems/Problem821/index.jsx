@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 's and c (JSON object)',
   url: 'https://leetcode.com/problems/shortest-distance-to-a-character/',
   complexity: 'O(n) time and O(n) space for the answer.',
+  question: "For each position in a string, find the distance to the nearest occurrence of a given character.",
+  approaches: [
+    { name: "Two sweeps", intuition: "Sweep left to right to record the distance to the last occurrence, then right to left to keep the smaller distance.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Between', input: '{"s":"mississippi","c":"p"}' },
     { label: 'Ends', input: '{"s":"banana","c":"n"}' },

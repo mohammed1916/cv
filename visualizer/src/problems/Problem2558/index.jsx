@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON {"gifts": [...], "k": seconds}',
   url: 'https://leetcode.com/problems/take-gifts-from-the-richest-pile/',
   complexity: 'O(k log n) time with a max heap. The visualization caps input at 6 piles and 8 seconds.',
+  question: "Each second, take the largest pile and leave the floor of its square root; find the total left after k seconds.",
+  approaches: [
+    { name: "Max heap", intuition: "Keep the piles in a max heap and replace the top with its reduced value each second.", time: "O(k log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Four piles, two rounds', input: '{"gifts":[36,81,16,49],"k":2}' },
     { label: 'Two piles, six rounds', input: '{"gifts":[1,9],"k":6}' },

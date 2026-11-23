@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Number (JSON object with num)',
   url: 'https://leetcode.com/problems/complete-prime-number/',
   complexity: 'O(d * sqrt(num)) time for d digits. The visualization caps the value at 10^9.',
+  question: "Decide whether every digit prefix and every digit suffix of a number is prime.",
+  approaches: [
+    { name: "Test each piece for primality", intuition: "Split the digits into every prefix and suffix and test each piece with trial division.", time: "O(d * sqrt(num))", space: "O(d)" },
+  ],
   examples: [
     { label: 'Complete', input: '{"num":23}' },
     { label: 'Not complete', input: '{"num":39}' },

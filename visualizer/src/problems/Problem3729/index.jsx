@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON object with a sorted nums and k, for example {"nums":[1,2,3],"k":3}',
   url: 'https://leetcode.com/problems/count-distinct-subarrays-divisible-by-k-in-sorted-array/',
   complexity: 'O(d^2 * c^2) time for d runs of counts up to c. The visualization caps the array at 12 values.',
+  question: "Count distinct subarrays of a sorted array whose sums are divisible by k.",
+  approaches: [
+    { name: "Runs of equal values", intuition: "Group the sorted array into runs and count subarrays across pairs of runs.", time: "O(d^2 * c^2)", space: "O(d)" },
+  ],
   examples: [
     { label: 'Five sorted values, k two', input: '{"nums":[1,4,4,9,12],"k":2}' },
     { label: 'Equal values, k six', input: '{"nums":[6,6,6],"k":6}' },

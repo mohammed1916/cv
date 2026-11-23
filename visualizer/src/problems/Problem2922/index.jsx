@@ -28,6 +28,11 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'Object with items ({item_id, item_brand}) and orders ({order_id, item_id, seller_id})',
   complexity: 'O(n + m) time for n orders and m items, plus a sort of the sellers. The visualization caps the tables at 10 orders and 8 items.',
+  question: "Find the sellers whose orders contain items of every brand, and report the qualifying sellers in order.",
+  approaches: [
+    { name: "Map brands per seller", intuition: "Map each item to its brand and collect the brands each seller ordered; keep sellers whose brand set covers the required brands.", time: "O(n + m + s log s)", space: "O(n + m)" },
+    { name: "Nested check per seller", intuition: "For each seller, check each brand separately against their orders.", time: "O(s b n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Two brands', input: '{"items":[{"item_id":1,"item_brand":"Acme"},{"item_id":2,"item_brand":"Bolt"},{"item_id":3,"item_brand":"Acme"},{"item_id":4,"item_brand":"Cora"}],"orders":[{"order_id":10,"item_id":1,"seller_id":7},{"order_id":11,"item_id":3,"seller_id":7},{"order_id":12,"item_id":2,"seller_id":8},{"order_id":13,"item_id":4,"seller_id":8},{"order_id":14,"item_id":2,"seller_id":9}]}' },
     { label: 'Single brand', input: '{"items":[{"item_id":1,"item_brand":"Acme"},{"item_id":2,"item_brand":"Bolt"}],"orders":[{"order_id":20,"item_id":1,"seller_id":5},{"order_id":21,"item_id":2,"seller_id":6}]}' },

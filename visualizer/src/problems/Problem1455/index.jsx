@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Object with sentence and searchWord (JSON)',
   url: 'https://leetcode.com/problems/check-if-a-word-occurs-as-a-prefix-of-any-word-in-a-sentence/',
   complexity: 'O(n) time for n characters: each word is compared once, and the scan stops at the first match.',
+  question: "Return the 1-based position of the first word that starts with a given prefix, or -1.",
+  approaches: [
+    { name: "Word-by-word prefix test", intuition: "Split the sentence and test each word with a prefix check, stopping at the first hit.", time: "O(n) for n characters", space: "O(n)" },
+  ],
   examples: [
     { label: 'Third word', input: '{"sentence":"keep the lantern lit tonight","searchWord":"lan"}' },
     { label: 'Late match', input: '{"sentence":"plain cake and tea","searchWord":"te"}' },

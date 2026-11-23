@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Array of 1 to 40 integers from 1 to 50, for example [1,2,3,4]',
   url: 'https://leetcode.com/problems/find-minimum-operations-to-make-all-elements-divisible-by-three/',
   complexity: 'O(n) time and O(1) extra space. The visualization caps the array at 40 numbers.',
+  question: "Find the fewest operations, each adding or subtracting one, to make every number divisible by three.",
+  approaches: [
+    { name: "Count numbers not divisible by three", intuition: "Each number needs exactly one step when its remainder is 1 or 2, and numbers are independent.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Four numbers, mixed', input: '[11,14,21,6]' },
     { label: 'Three numbers, large', input: '[48,49,30]' },

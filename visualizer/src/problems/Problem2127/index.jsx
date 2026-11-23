@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with favorite (one favorite per employee, JSON)',
   url: 'https://leetcode.com/problems/maximum-employees-to-be-invited-to-a-meeting/',
   complexity: 'O(n) time and space. The visualization caps n at 8.',
+  question: "Seat as many people as possible at a round table, where each person can only sit next to their chosen favourite person.",
+  approaches: [
+    { name: "Cycles and chains of a functional graph", intuition: "A cycle of length two combines with the longest chains into its two members; a longer cycle can seat only itself plus its own chains.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"favorite":[2,2,1,2]}' },
     { label: 'Two pairs', input: '{"favorite":[1,0,3,2,0,2]}' }, { label: "Two employees", input: "{\"favorite\":[1,0]}" }, { label: "Three-cycle", input: "{\"favorite\":[1,2,0]}" }, { label: "Long chain", input: "{\"favorite\":[1,2,3,4,5,6,7,0]}" }, { label: "Long run: 8 employees", input: "{\"favorite\":[5,3,0,4,7,7,7,3]}" },

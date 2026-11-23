@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'Object {tree, target, k} (JSON, level-order tree with null, up to 30 nodes)',
   url: 'https://leetcode.com/problems/all-nodes-distance-k-in-binary-tree/',
   complexity: 'O(n) time and space: one DFS for parents and one BFS over at most n nodes.',
+  question: "Given a binary tree, a target node and k, return the values of all nodes exactly k edges away from the target.",
+  approaches: [
+    { name: "Parent map and BFS", intuition: "Record each node's parent, then run a breadth-first search from the target over the undirected tree.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Official example', input: '{"tree":[3,5,1,6,2,0,8,null,null,7,4],"target":5,"k":2}' },
     { label: 'Single node, k=0', input: '{"tree":[1],"target":1,"k":0}' },

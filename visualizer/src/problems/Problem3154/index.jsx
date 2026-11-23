@@ -11,6 +11,10 @@ const definition = {
   inputLabel: 'Object with k (JSON)',
   url: 'https://leetcode.com/problems/find-number-of-ways-to-reach-the-k-th-stair/',
   complexity: 'O(log k) distinct jump values with memoised states. The visualization caps k at 30.',
+  question: "Count the ways to reach a target stair using up and down jumps with rules that limit consecutive down moves.",
+  approaches: [
+    { name: "Memoised search over states", intuition: "The state of stair, jump size and whether a down move is allowed fully determines the future, so memoisation avoids repeats.", time: "O(log k) distinct states", space: "O(log k)" },
+  ],
   examples: [
     { label: 'k = 0', input: '{"k":0}' },
     { label: 'k = 1', input: '{"k":1}' },

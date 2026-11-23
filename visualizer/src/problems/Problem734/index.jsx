@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Sentences and similar pairs (JSON)',
   url: 'https://leetcode.com/problems/sentence-similarity/',
   complexity: 'O(n + p) time for n words and p pairs. The visualization caps input at 20 words and 20 pairs.',
+  question: "Decide whether two sentences are similar when word pairs may be listed as similar.",
+  approaches: [
+    { name: "Pair set lookup", intuition: "Store the similar pairs in a set; similarity does not chain.", time: "O(n)", space: "O(p)" },
+  ],
   examples: [
     { label: 'Similar', input: '{"s1":["great","acting","skills"],"s2":["fine","drama","talent"],"pairs":[["great","fine"],["acting","drama"],["skills","talent"]]}' },
     { label: 'Not similar', input: '{"s1":["an","unusual","meal"],"s2":["one","good","dinner"],"pairs":[["great","good"],["any","one"],["some","one"]]}' },

@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with root (level-order list), p and q, e.g. {"root":[3,5,1,6,2,0,8,null,null,7,4],"p":7,"q":1}',
   url: "https://leetcode.com/problems/find-distance-in-a-binary-tree/",
   complexity: "O(n) time and O(n) space for n nodes. The visualization caps the tree at 15 nodes.",
+  question: "Return the number of edges between two values in a binary tree.",
+  approaches: [
+    { name: "Depth and lowest common ancestor", intuition: "Find the lowest common ancestor, then use depth(p) + depth(q) - 2 * depth(lca).", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: "Siblings", input: '{"root":[3,5,1,6,2,0,8,null,null,7,4],"p":7,"q":4}' },
     { label: "Across the root", input: '{"root":[3,5,1,6,2,0,8,null,null,7,4],"p":7,"q":1}' },

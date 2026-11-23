@@ -13,7 +13,13 @@ const examples = [
   { label: 'Long run: 15 nodes', input: '{"Tree":[{"N":1,"P":null},{"N":2,"P":1},{"N":3,"P":2},{"N":4,"P":2},{"N":5,"P":2},{"N":6,"P":5},{"N":7,"P":2},{"N":8,"P":3},{"N":9,"P":6},{"N":10,"P":5},{"N":11,"P":8},{"N":12,"P":5},{"N":13,"P":6},{"N":14,"P":9},{"N":15,"P":14}]}' },
 ]
 
-const definition = { number: meta.number, phases, parse: parseInput, build: buildTrace, code, sql, python, inputLabel, complexity, examples }
+const definition = { number: meta.number, phases, parse: parseInput, build: buildTrace, code, sql, python, inputLabel, complexity, examples,
+  question: "Classify each node of a tree as root, leaf, or inner node from parent references.",
+  approaches: [
+    { name: "Parent set lookup", intuition: "Collect the set of parents, then classify each node by whether it has no parent, is a parent, or neither.", time: "O(n)", space: "O(n)" },
+    { name: "Self-join", intuition: "Join each node with the children that reference it.", time: "O(n^2)", space: "O(n)" },
+  ],
+}
 
 function RowTable({ step }) {
   const { columns, rows } = step

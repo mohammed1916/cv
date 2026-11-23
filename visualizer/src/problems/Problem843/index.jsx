@@ -12,6 +12,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Words, secret and guess budget (JSON)',
   url: 'https://leetcode.com/problems/guess-the-word/',
   complexity: 'Each round costs O(W^2 * L) to score all candidates and the candidate list shrinks every round. Reduced version: the hidden master is simulated by supplying the secret in the input.',
+  question: "Find a secret word from a list using a guess oracle that reports how many letters match, within a limited number of guesses.",
+  approaches: [
+    { name: "Minimise the worst bucket", intuition: "Guess the candidate whose worst-case group of remaining words is smallest, then keep only words that match the reply.", time: "O(w^2 * L) for w words", space: "O(w)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"words":["acckzz","ccbazz","eiowzz","abcczz"],"secret":"acckzz","allowedGuesses":10}' },
     { label: 'Larger list', input: '{"words":["gaxckt","trlccr","jxwtrh","xzsxuw","xjzcrf","pzvnqn","brnrbz","ydcmxe","wyqwck","edfrch"],"secret":"xjzcrf","allowedGuesses":10}' },

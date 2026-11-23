@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with nums (integers from -20 to 20) and k',
   url: 'https://leetcode.com/problems/maximum-strength-of-k-disjoint-subarrays/',
   complexity: 'O(n * k) time and O(k) space. The visualization caps input at 8 numbers.',
+  question: "Find the maximum strength when selecting k disjoint subarrays with alternating weights.",
+  approaches: [
+    { name: "DP over open and closed states", intuition: "Track the best strength for each number of subarrays while a subarray is open or closed.", time: "O(n\u00b7k)", space: "O(k)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"nums":[4,-1,3,2],"k":2}' },
     { label: 'Example 2', input: '{"nums":[-3,5,-2,6],"k":3}' },

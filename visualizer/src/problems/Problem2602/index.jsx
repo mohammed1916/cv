@@ -12,6 +12,11 @@ const definition = {
   inputLabel: 'JSON object: {"nums": [...], "queries": [...]}',
   url: 'https://leetcode.com/problems/minimum-operations-to-make-all-array-elements-equal/',
   complexity: 'Sorting once, then one binary search and two prefix-sum lookups per query. The visualization caps input at 8 numbers and 5 queries.',
+  question: "Given an array and queries, for each query find the minimum number of increment or decrement operations needed to make every element equal to that query value.",
+  approaches: [
+    { name: "Sort and prefix sums", intuition: "Sort the array once; split at the query value with binary search and use prefix sums to cost each side in constant time.", time: "O(n log n + q log n)", space: "O(n)" },
+    { name: "Brute force per query", intuition: "Scan the whole array for every query and sum the distances.", time: "O(n * q)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Six values, three queries', input: '{"nums":[5,12,3,8,14,2],"queries":[9,1,20]}' },
     { label: 'Repeated values, four queries', input: '{"nums":[6,6,6],"queries":[1,6,15,18]}' },

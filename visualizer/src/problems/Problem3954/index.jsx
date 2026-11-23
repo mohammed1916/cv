@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON: {"n": n, "k": k}',
   url: 'https://leetcode.com/problems/sum-of-compatible-numbers-in-range-i/',
   complexity: 'O(k) time and O(1) extra space.',
+  question: "Sum the numbers within k of n that share no set bit with n.",
+  approaches: [
+    { name: "Window scan with bitwise AND", intuition: "Scan the window of numbers near n and add those whose bitwise AND with n is zero.", time: "O(k)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"n":2,"k":3}' },
     { label: 'Example 2', input: '{"n":5,"k":1}' },

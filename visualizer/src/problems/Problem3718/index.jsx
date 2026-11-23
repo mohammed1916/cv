@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with nums (integers) and k',
   url: 'https://leetcode.com/problems/smallest-missing-multiple-of-k/',
   complexity: 'O(n + m) where m is the answer divided by k. The visualization caps nums at 20 values.',
+  question: "Find the smallest positive multiple of k that is missing from an array.",
+  approaches: [
+    { name: "Scan upward by k", intuition: "Scan multiples of k in order and return the first one not present in the array.", time: "O(n + m)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Gap at 2', input: '{"nums":[3,4,6,8],"k":2}' },
     { label: 'Skip to 6', input: '{"nums":[2,4,3],"k":2}' },

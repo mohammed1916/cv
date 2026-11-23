@@ -12,6 +12,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Object with paragraph and banned (JSON)',
   url: 'https://leetcode.com/problems/most-common-word/',
   complexity: 'O(n + b) time for n characters and b banned words; O(n) space for the counts.',
+  question: "Find the most frequent word in a paragraph that is not banned, ignoring case and punctuation.",
+  approaches: [
+    { name: "Normalise and count", intuition: "Lowercase the paragraph, split it into words on non-letters, and count words that are not banned.", time: "O(n + m)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Ball example', input: '{"paragraph": "Bob hit a ball, the hit BALL flew far after it was hit.", "banned": ["hit"]}' },
     { label: 'Single word', input: '{"paragraph": "a.", "banned": []}' },

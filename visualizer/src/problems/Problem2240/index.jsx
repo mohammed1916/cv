@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON {"total": 12, "cost1": 4, "cost2": 3}',
   url: 'https://leetcode.com/problems/number-of-ways-to-buy-pens-and-pencils/',
   complexity: 'O(total / cost1) time and O(1) extra space. Each pen count contributes one closed-form pencil count.',
+  question: "Count the ways to spend at most a total amount on pens and pencils at given prices.",
+  approaches: [
+    { name: "Loop over the number of pens", intuition: "For each possible number of pens, count the pencils that fit in the remaining money.", time: "O(total / cost1)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example', input: '{"total":12,"cost1":4,"cost2":3}' },
     { label: 'Small', input: '{"total":7,"cost1":2,"cost2":5}' },

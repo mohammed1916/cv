@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON object with s (1 to 12 lowercase letters) and k (1 to 20)',
   url: 'https://leetcode.com/problems/find-the-encrypted-string/',
   complexity: 'O(n) time for a string of length n. The visualization caps s at 12 characters.',
+  question: "Encrypt a string by shifting each character to the one k positions ahead in a cyclic order.",
+  approaches: [
+    { name: "Read the cyclic shift", intuition: "Each output position reads the original string at position i plus k modulo n, so a single pass is enough.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Seven letters, k two', input: '{"s":"qwertyu","k":2}' },
     { label: 'Repeats', input: '{"s":"aaa","k":1}' },

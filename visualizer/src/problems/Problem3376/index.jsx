@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with strength (array) and x',
   url: 'https://leetcode.com/problems/minimum-time-to-break-locks-i/',
   complexity: 'O(2^n * n) time and O(2^n) space, with n at most 8 locks.',
+  question: "Find the minimum time to break all locks, where each lock needs a given strength and the energy grows each minute.",
+  approaches: [
+    { name: "Bitmask dynamic programming", intuition: "Track the set of broken locks and the cheapest time for each set, adding one lock at a time.", time: "O(2^n * n)", space: "O(2^n)" },
+  ],
   examples: [
     { label: 'Invented spread', input: '{"strength":[2,6,5],"x":2}' },
     { label: 'Invented equal locks', input: '{"strength":[1,1,1],"x":1}' },

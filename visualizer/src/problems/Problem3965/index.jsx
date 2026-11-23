@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with durations and edges ([parent, child] pairs, root 0)',
   url: 'https://leetcode.com/problems/finish-time-of-tasks-i/',
   complexity: 'O(n) time and space for n tasks after the child lists are built.',
+  question: "Given a tree of tasks with durations, compute the finish time of each task when a task starts only after its children finish.",
+  approaches: [
+    { name: "Bottom-up finish times", intuition: "Finish leaves after their own duration; each parent finishes from the earliest and latest child finish plus its own duration.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Branching', input: '{"durations":[5,3,4,2],"edges":[[0,1],[0,2],[2,3]]}' },
     { label: 'Chain', input: '{"durations":[1,1,1,1,1],"edges":[[0,1],[1,2],[2,3],[3,4]]}' },

@@ -20,6 +20,10 @@ const definition = {
   inputLabel: "JSON object: {\"edges\": [[a,b],...], \"cost\": [...]} (2 to 50 nodes for this view)",
   url: "https://leetcode.com/problems/find-number-of-coins-to-place-in-tree-nodes/",
   complexity: "O(n^2 log n) for this teaching version (sorts each subtree); a keep-top-3 and bottom-2 DFS is O(n). The visualization caps the tree at 50 nodes.",
+  question: "Given a tree and node costs, find for each node the number of coins to place, based on the best three products of costs in its subtree.",
+  approaches: [
+    { name: "DFS with top three values", intuition: "Collect the subtree costs with a DFS and keep the three largest products among them.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: "star [1..6]", input: "{\"edges\": [[0,1],[0,2],[0,3],[0,4],[0,5]], \"cost\": [1, 2, 3, 4, 5, 6]}" },
     { label: "branching", input: "{\"edges\": [[0,1],[0,2],[1,3],[1,4],[1,5],[2,6],[2,7],[2,8]], \"cost\": [1, 4, 2, 3, 5, 7, 8, -4, 2]}" },

@@ -8,6 +8,10 @@ const definition = {
   inputLabel: 'Integer array (JSON)',
   url: 'https://leetcode.com/problems/find-the-middle-index-in-array/',
   complexity: 'O(n) time and O(1) extra space: one total and one running left sum.',
+  question: "Find the leftmost index where the sum of values to its left equals the sum to its right.",
+  approaches: [
+    { name: "Prefix sums", intuition: "Compare the running left sum with total minus left minus the current value at each index.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Middle found', input: '[6,1,2,3,0,4,3]' },
     { label: 'Zero balance', input: '[0,0,0]' },

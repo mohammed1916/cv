@@ -15,6 +15,10 @@ const definition = {
   complexity,
   inputLabel: 'JSON array of DailySales rows: date_id, make_name, lead_id, partner_id',
   url: 'https://leetcode.com/problems/daily-leads-and-partners/',
+  question: "For each date, count the distinct leads and partners in a sales log.",
+  approaches: [
+    { name: "Group by date", intuition: "Group the rows by date and count distinct lead and partner ids.", time: "O(n)", space: "O(groups)" },
+  ],
 }
 
 export default function Problem1693Visualizer() {

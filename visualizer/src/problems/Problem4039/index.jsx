@@ -13,6 +13,10 @@ const definition = {
   inputLabel: "Encoded array JSON, e.g. [421]",
   url: "https://leetcode.com/problems/sum-of-decoded-numbers/",
   complexity: "O(n * log y) time and O(1) extra space: each value needs about log2(y) squaring steps, with BigInt arithmetic so products stay exact. The note's bounds (n up to 100000, values below 10^15, x and y below 10^9) are checked on parse; the visualization caps the array at 8 values.",
+  question: "Split each code by its width digit into x and y, then add x raised to the power y, modulo 1000000007.",
+  approaches: [
+    { name: "Repeated squaring", intuition: "Compute the modular power by binary exponentiation, with BigInt arithmetic.", time: "O(n log y)", space: "O(1)" },
+  ],
   examples: [
     { label: "One value", input: "[4831]" },
     { label: "Two values", input: "[52401, 9362]" },

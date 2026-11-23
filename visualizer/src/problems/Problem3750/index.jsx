@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Positive whole number n (1 to 1023 for this visualization)',
   url: 'https://leetcode.com/problems/minimum-number-of-flips-to-reverse-binary-string/',
   complexity: 'O(log n) time and O(log n) space for the binary string.',
+  question: "Find the fewest bit flips that reverse a binary string of a given number.",
+  approaches: [
+    { name: "Compare mirror pairs", intuition: "Each mismatched mirror pair needs both of its bits flipped; matching pairs cost nothing.", time: "O(log n)", space: "O(log n)" },
+  ],
   examples: [
     { label: 'Palindrome', input: '6' },
     { label: 'Alternating', input: '13' },

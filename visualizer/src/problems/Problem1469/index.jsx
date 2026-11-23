@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with tree (LeetCode level-order array, null for missing children)',
   url: 'https://leetcode.com/problems/find-all-the-lonely-nodes/description/',
   complexity: 'O(n) time and O(n) space for n tree nodes. The visualization caps the tree at 15 positions with values from 0 to 9. Output order is not fixed.',
+  question: "Return the values of lonely nodes: nodes that are the only child of their parent.",
+  approaches: [
+    { name: "DFS with child count", intuition: "Visit every node and collect a child value whenever its parent has exactly one child.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Chain of single children', input: '{"tree":[5,3,null,1]}' },
     { label: 'Two lonely nodes', input: '{"tree":[6,2,7,null,4,null,null,9]}' },

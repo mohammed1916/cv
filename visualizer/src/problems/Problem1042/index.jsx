@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'Gardens and paths as JSON, e.g. {"n": 3, "paths": [[1,2],[2,3]]}',
   url: 'https://leetcode.com/problems/flower-planting-with-no-adjacent/',
   complexity: 'O(n + p) time for p paths, since each garden checks at most three neighbours.',
+  question: "Assign one of four flower types to each garden so that no two connected gardens share a type.",
+  approaches: [
+    { name: "Greedy colouring", intuition: "Each garden has at most three neighbours, so the first unused type among four always works.", time: "O(n + p)", space: "O(n + p)" },
+  ],
   examples: [
     { label: 'Five-garden ring', input: '{"n":5,"paths":[[1,2],[2,3],[3,4],[4,5],[5,1]]}' },
     { label: 'Two paths and a bridge', input: '{"n":6,"paths":[[1,4],[2,5],[3,6],[1,2]]}' },

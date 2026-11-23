@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Integers from 1 to 30 (JSON)',
   url: 'https://leetcode.com/problems/the-number-of-good-subsets/',
   complexity: 'O(n + V * 2^P) time for the subset-of-primes DP, with V = 30 and P = 10 primes.',
+  question: "Count the subsets of an array whose product has distinct prime factors, excluding the empty subset.",
+  approaches: [
+    { name: "Bitmask DP over primes", intuition: "Track which small primes are used as a bitmask, multiplying in each value that does not repeat a prime.", time: "O(n * 2^10)", space: "O(2^10)" },
+  ],
   examples: [
     { label: 'Mixed values', input: '[2,3,6,7]' },
     { label: 'Repeated primes', input: '[4,6,10,15,1]' },

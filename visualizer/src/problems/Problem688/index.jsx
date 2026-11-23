@@ -11,6 +11,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Board (JSON object with n, k, row and column)',
   url: 'https://leetcode.com/problems/knight-probability-in-chessboard/',
   complexity: 'O(k · n²) time and O(n²) space for the probability boards.',
+  question: "Find the chance that a knight stays on the board after a given number of random moves.",
+  approaches: [
+    { name: "DP over board probabilities", intuition: "Propagate probability mass one move at a time across the board.", time: "O(k n^2)", space: "O(n^2)" },
+  ],
   examples: [
     { label: 'One move', input: '{"n":3,"k":1,"row":1,"column":1}' },
     { label: 'Corner, two moves', input: '{"n":4,"k":2,"row":0,"column":0}' },

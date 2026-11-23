@@ -12,6 +12,11 @@ const definition = {
   inputLabel: 'JSON object: nums (0-9 each), l and r',
   url: 'https://leetcode.com/problems/count-of-sub-multisets-with-bounded-sum/',
   complexity: 'O(distinct * total * maxCount) time. The visualization caps input at 8 numbers.',
+  question: "Count the multisets drawn from the numbers whose sum lies between a lower and upper bound.",
+  approaches: [
+    { name: "Grouped knapsack over distinct values", intuition: "Count ways to reach each sum using each distinct value up to its multiplicity, treating zeros separately.", time: "O(distinct * total * maxCount)", space: "O(total)" },
+    { name: "Enumerate all sub-multisets", intuition: "Enumerate every combination of counts and check the sum.", time: "exponential", space: "O(n)" },
+  ],
   examples: [
     { label: 'Range from five to nine', input: '{"nums":[1,4,4,2],"l":5,"r":9}' },
     { label: 'Zeros', input: '{"nums":[0,0,2],"l":0,"r":2}' },

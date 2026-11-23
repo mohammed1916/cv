@@ -16,6 +16,10 @@ const definition = {
   inputLabel: 'Array of lowercase words (e.g. ["abcd","cdab","abdc"])',
   url: 'https://leetcode.com/problems/minimum-number-of-string-groups-through-transformations/',
   complexity: 'O(L) time per word with the two-pointer minimum rotation, so O(total length) overall. The visualization caps the list at 8 words of 8 letters.',
+  question: "Group words that are equivalent after splitting them into even- and odd-position letters and rotating each part, then count the groups.",
+  approaches: [
+    { name: "Canonical rotations", intuition: "Map each word to a canonical pair of smallest rotations using a two-pointer minimum rotation.", time: "O(total length)", space: "O(total length)" },
+  ],
   examples: [
     { label: 'Two classes', input: '["abcd","cdab","abdc"]' },
     { label: 'Length one and two', input: '["a","z","ab","ba"]' },

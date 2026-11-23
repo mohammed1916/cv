@@ -3,6 +3,10 @@ import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import { buildTrace, parseInput, code, python, phases, inputLabel, complexity, examples } from './algorithm'
 
 const definition = {
+  question: "Decide whether a string can become a palindrome after removing at most a given number of characters.",
+  approaches: [
+    { name: "Interval DP", intuition: "Use dp over substrings to find the fewest removals that make each substring a palindrome.", time: "O(n^2)", space: "O(n^2)" },
+  ],
   phases, parse: parseInput, build: buildTrace, code, python, inputLabel, complexity, examples,
   url: 'https://leetcode.com/problems/valid-palindrome-iii/',
 }

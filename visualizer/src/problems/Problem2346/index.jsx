@@ -3,6 +3,10 @@ import { meta } from './meta'
 import { buildTrace, parseInput, code, sql, python, phases, examples, complexity, inputLabel } from './algorithm'
 
 const definition = {
+  question: "Using a scores table, compute each person's rank as a percentage within their group.",
+  approaches: [
+    { name: "Rank within groups", intuition: "Rank the scores in each group and convert the rank into a percentage.", time: "O(n log n)", space: "O(n)" },
+  ],
   number: meta.number,
   phases, parse: parseInput, build: buildTrace, code, sql, python, inputLabel,
   url: `https://leetcode.com/problems/${meta.slug}/`,

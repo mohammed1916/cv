@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with zero, one, and limit (JSON)',
   url: 'https://leetcode.com/problems/find-all-possible-stable-binary-arrays-ii/',
   complexity: 'O(zero * one * limit) time and O(zero * one) space in this trace; the Python version uses prefix sums. The visualization caps each input at 8.',
+  question: "Count stable binary arrays with a given number of zeros and ones, where no run may be longer than a limit, reported modulo 1000000007.",
+  approaches: [
+    { name: "Dynamic programming with modular sums", intuition: "Each state adds the arrays ending in the other symbol, reduced modulo 1000000007 as it grows.", time: "O(zero * one * limit)", space: "O(zero * one)" },
+  ],
   examples: [
     { label: 'Five zeros, one one', input: '{"zero":5,"one":1,"limit":2}' },
     { label: 'Three zeros, six ones', input: '{"zero":3,"one":6,"limit":4}' },

@@ -18,6 +18,10 @@ const definition = {
   inputLabel: 'Graph JSON with n, edges [[from, to, weight]] and threshold',
   url: 'https://leetcode.com/problems/minimize-the-maximum-edge-weight-of-graph/',
   complexity: 'O(E log W + (n + E) log W) time for n nodes, E edges and W distinct weights. The visualization caps n at 8 and weights at 20.',
+  question: "Build a graph with edge weights and find the smallest possible largest edge weight that still keeps the graph connected to a target.",
+  approaches: [
+    { name: "Binary search on the threshold", intuition: "Search for the smallest limit where a breadth-first search from the target reaches every node.", time: "O(E log W)", space: "O(n + E)" },
+  ],
   examples: [
     { label: 'Chain to zero', input: '{"n":4,"edges":[[3,2,4],[2,1,2],[1,0,3],[0,3,1]],"threshold":2}' },
     { label: 'Fan into zero', input: '{"n":5,"edges":[[1,0,5],[2,0,2],[3,0,7],[4,0,1],[2,1,3]],"threshold":1}' },

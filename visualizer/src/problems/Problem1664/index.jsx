@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Array of positive integers (JSON)',
   url: 'https://leetcode.com/problems/ways-to-make-a-fair-array/',
   complexity: 'O(n) time and O(1) extra space: two prefix sums per parity, updated while scanning once.',
+  question: "Count the indices where removing one element leaves equal sums on the odd and even positions.",
+  approaches: [
+    { name: "Prefix sums by parity", intuition: "Track running sums for even and odd positions and compare them after removing each index.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'One fair deletion', input: '[2,1,6,4]' },
     { label: 'Every deletion', input: '[1,1,1]' },

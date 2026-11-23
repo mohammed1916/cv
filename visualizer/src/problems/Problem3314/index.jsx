@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Primes from 2 to 1000 (JSON object with nums)',
   url: 'https://leetcode.com/problems/construct-the-minimum-bitwise-array-i/',
   complexity: 'O(n * sqrt(p)) time including the prime check, O(n) space. The visualization caps the list at 12 primes.',
+  question: "Construct the smallest bitwise value for each prime in a list so that it meets the stated relationship.",
+  approaches: [
+    { name: "Prime check and bit trick", intuition: "Check primality with trial division, then build each answer from the lowest zero bit of the prime.", time: "O(n * sqrt(p))", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example', input: '{"nums":[2,3,5,7]}' },
     { label: 'Single', input: '{"nums":[11]}' },

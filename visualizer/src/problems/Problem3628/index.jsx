@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON string of uppercase letters',
   url: 'https://leetcode.com/problems/maximum-number-of-subsequences-after-one-inserting/',
   complexity: 'O(n) time and O(1) extra space. The visualization caps input at 30 letters.',
+  question: "Find the largest number of LCT subsequences after inserting one letter into a string.",
+  approaches: [
+    { name: "Scan with gain tracking", intuition: "Scan once, tracking the counts that an inserted letter would add.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Six distinct letters', input: '"QWERTY"' },
     { label: 'Two repeated letters', input: '"ZZYX"' },

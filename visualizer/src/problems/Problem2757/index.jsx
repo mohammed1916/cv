@@ -9,6 +9,10 @@ const definition = {
   inputLabel: 'Object with arr, steps (the jumps) and startIndex',
   url: `https://leetcode.com/problems/${meta.slug}/`,
   complexity: 'O(1) time per call and O(1) extra space: no call walks the ring, it only does arithmetic. The official limits allow 10,000 values and 100 jumps; this page draws up to 24 values and 30 jumps.',
+  question: "Write a generator that cycles through an array of values with a given step, looping back to the start forever.",
+  approaches: [
+    { name: "Modular index arithmetic", intuition: "Keep the index and move it by the step, wrapping with the length.", time: "O(1) per call", space: "O(1)" },
+  ],
   examples: [
     { label: 'Both directions', input: '{"arr":[7,3,9,1,6,4,8],"steps":[2,-4,10,-1],"startIndex":2}' },
     { label: 'Whole laps', input: '{"arr":[5,10,15,20],"steps":[8,-12,0,3],"startIndex":1}' },

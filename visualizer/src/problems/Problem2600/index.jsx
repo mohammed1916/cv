@@ -17,6 +17,10 @@ const definition = {
   inputLabel: 'Bag object (JSON, e.g. {"numOnes": 3, "numZeros": 2, "numNegOnes": 0, "k": 2})',
   url: 'https://leetcode.com/problems/k-items-with-the-maximum-sum/',
   complexity: 'O(1) time and O(1) space. The bag is drawn item by item for visibility, with at most 150 items.',
+  question: "Given counts of ones, zeros, and negative ones in a bag and a number k, pick k items to get the largest possible sum.",
+  approaches: [
+    { name: "Take greedily by value", intuition: "Take ones first, then zeros, then negative ones only if they are forced; the sum is the count of ones taken minus the negatives taken.", time: "O(1)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Only ones', input: '{"numOnes": 3, "numZeros": 2, "numNegOnes": 0, "k": 2}' },
     { label: 'Negatives forced', input: '{"numOnes": 3, "numZeros": 2, "numNegOnes": 3, "k": 4}' },

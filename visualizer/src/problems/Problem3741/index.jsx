@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with nums (integers 1 to 9)',
   url: 'https://leetcode.com/problems/minimum-distance-between-three-equal-elements-ii/',
   complexity: 'O(n) to group indices, then one pass over consecutive triples per value.',
+  question: "Choose three equal values at increasing indices so that the sum of their pairwise index gaps is as small as possible, or return -1.",
+  approaches: [
+    { name: "Consecutive triples per value", intuition: "Group indices by value; within one group the cheapest triple is three consecutive positions.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example', input: '{"nums":[1,2,1,1,3]}' },
     { label: 'No triple', input: '{"nums":[1,2,3]}' },

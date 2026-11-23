@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'Object with demands and k (e.g. {"demands":[3,5,2],"k":4})',
   url: 'https://leetcode.com/problems/minimum-total-cost-to-process-all-elements/',
   complexity: 'O(n + r) time where r is the number of refills bought; a closed form uses the count of refills directly. The visualization caps demands at 10 values of at most 40 and k at 10.',
+  question: "A tank starts with k free units and each demand drains it; refills cost more each time. Find the minimum total cost.",
+  approaches: [
+    { name: "Buy only when needed", intuition: "Refill only when a demand cannot be covered, and add up the costs of the refills bought.", time: "O(n + r)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Three demands', input: '{"demands":[3,5,2],"k":4}' },
     { label: 'Large first demand', input: '{"demands":[10,1],"k":3}' },

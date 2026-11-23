@@ -15,6 +15,11 @@ const definition = {
   inputLabel: 'Object with s (A and B only) and queries ([1, j] flips, [2, l, r] asks)',
   url: 'https://leetcode.com/problems/minimum-deletions-to-make-alternating-substring/',
   complexity: 'O(n) per query in this visualization. Keeping a prefix count of equal neighbours with a Fenwick tree gives O(log n) per query and update.',
+  question: "Process updates and queries on a string of A and B, reporting the deletions needed to make a range alternate.",
+  approaches: [
+    { name: "Scan each query range", intuition: "Count the adjacent equal pairs inside the range for each query.", time: "O(n) per query", space: "O(n)" },
+    { name: "Fenwick tree of equal neighbours", intuition: "Keep prefix counts of equal neighbours in a Fenwick tree.", time: "O(log n) per query", space: "O(n)" },
+  ],
   examples: [
     { label: 'Flip then ask', input: '{"s":"ABAB","queries":[[2,0,3],[1,1],[2,0,3]]}' },
     { label: 'Run of A', input: '{"s":"AAAB","queries":[[2,0,3]]}' },

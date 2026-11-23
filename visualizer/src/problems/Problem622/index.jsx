@@ -13,6 +13,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Queue and operations (JSON object with k and ops)',
   url: 'https://leetcode.com/problems/design-circular-queue/',
   complexity: 'O(1) time per operation and O(k) space for the fixed ring.',
+  question: "Implement a fixed-size circular queue with enqueue, dequeue, front, rear and empty/full checks.",
+  approaches: [
+    { name: "Ring buffer with head and size", intuition: "Store values in a fixed ring; the tail is always (head + size) mod k, so dequeue only moves the head.", time: "O(1) per operation", space: "O(k)" },
+  ],
   examples: [
     { label: 'Basic', input: '{"k":3,"ops":[["enQueue",1],["enQueue",2],["enQueue",3],["enQueue",4],["Rear"],["isFull"],["deQueue"],["enQueue",4],["Rear"]]}' },
     { label: 'Empty checks', input: '{"k":1,"ops":[["isEmpty"],["Front"],["enQueue",9],["isFull"],["Rear"]]}' },

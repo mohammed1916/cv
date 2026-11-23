@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with nums and queries (JSON)',
   url: 'https://leetcode.com/problems/zero-array-transformation-ii/',
   complexity: 'O(q * n * m) time for this direct scan, and O(n) space. The visualization caps input at 8 values and 8 queries.',
+  question: "Find the fewest queries, applied in order, that make an array reducible to all zeros.",
+  approaches: [
+    { name: "Difference array per prefix", intuition: "Apply queries one at a time with a difference array until every value is zero.", time: "O(q * n * m)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Four values, two queries', input: '{"nums":[2,6,0,3],"queries":[[0,3,2],[1,2,4]]}' },
     { label: 'Six values, one query', input: '{"nums":[5,1,1,6,0,2],"queries":[[2,5,1]]}' },

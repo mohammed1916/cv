@@ -8,6 +8,10 @@ const definition = {
   inputLabel: 'Object with as_of (YYYY-MM-DD) and logins (customer_id, login_date)',
   url: 'https://leetcode.com/problems/find-churn-risk-customers/',
   complexity: 'O(r) to scan r login rows, plus a sort of the at-risk customers.',
+  question: "Using login rows and an as-of date, find customers who are at risk of churning because they have been idle too long.",
+  approaches: [
+    { name: "Last login per customer", intuition: "Find each customer's last login with an aggregate, then keep customers whose idle time exceeds the threshold.", time: "O(r + c log c)", space: "O(c)" },
+  ],
   examples: [
     {
       label: 'Teaching sample',

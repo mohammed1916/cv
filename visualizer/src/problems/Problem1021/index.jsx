@@ -3,6 +3,10 @@ import { meta } from './meta'
 import { buildTrace, parseInput, code, python, phases, examples, complexity, inputLabel } from './algorithm'
 
 const definition = {
+  question: "Remove the outer pair of parentheses from each top-level group of a valid parentheses string and join the results.",
+  approaches: [
+    { name: "Depth counter", intuition: "Track nesting depth; skip a bracket that opens or closes at depth zero and keep the rest.", time: "O(n)", space: "O(n)" },
+  ],
   number: meta.number,
   phases, parse: parseInput, build: buildTrace, code, python, inputLabel,
   url: `https://leetcode.com/problems/${meta.slug}/`,

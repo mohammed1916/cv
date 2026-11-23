@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with nums and k',
   url: 'https://leetcode.com/problems/minimum-threshold-for-inversion-pairs-count/',
   complexity: 'O(n^2 log V) time for n values with value range V: the threshold is binary searched and each probe scans all pairs. O(1) extra space. The visualization caps nums at 8 values.',
+  question: "Find the smallest threshold for which the number of value pairs within a gap limit reaches a target.",
+  approaches: [
+    { name: "Binary search over the threshold", intuition: "Binary search the threshold and count qualifying pairs at each step.", time: "O(n^2 log V)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Two thresholds', input: '{"nums":[5,1,4,2],"k":3}' },
     { label: 'Not enough pairs', input: '{"nums":[1,2,3],"k":1}' },

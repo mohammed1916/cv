@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with nums and nums_divide (JSON)',
   url: 'https://leetcode.com/problems/minimum-deletions-to-make-array-divisible/',
   complexity: 'O(n log n) time for n values in nums, dominated by the sort. The visualization caps the sizes.',
+  question: "Find the fewest deletions from one array so that the smallest remaining value divides a second array's values.",
+  approaches: [
+    { name: "GCD of the second array", intuition: "The smallest value that can remain must divide the GCD of the second array, so sort the first array and find the first value dividing that GCD.", time: "O(n log n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Own: three and two divisors', input: '{"nums":[4,8,5],"nums_divide":[12,20]}' },
     { label: 'Impossible', input: '{"nums":[4,3,6],"nums_divide":[8,2,6,10]}' },

@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON object with num from 1 to 1000000000, for example {"num":8}',
   url: 'https://leetcode.com/problems/closest-divisors/',
   complexity: 'O(sqrt(num)) time for each of the two targets.',
+  question: "Find two integers whose product is closest to num plus one or plus two.",
+  approaches: [
+    { name: "Divisor search up to square root", intuition: "Try divisors up to the square root of each target and keep the closest pair.", time: "O(sqrt(num))", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"num":8}' },
     { label: 'Example 2', input: '{"num":123}' },

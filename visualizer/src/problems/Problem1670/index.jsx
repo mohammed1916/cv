@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Operations as JSON, for example [["pushBack",2],["popMiddle"]]',
   url: 'https://leetcode.com/problems/design-front-middle-back-queue/',
   complexity: 'O(1) per operation: each one moves at most one item between the halves. The visualization caps input at 40 operations.',
+  question: "Design a queue that supports adding and removing at the front, middle and back.",
+  approaches: [
+    { name: "Two deques", intuition: "Keep the front half and back half in two deques, moving one item at a time to rebalance.", time: "O(1) per operation", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example', input: '[["pushFront",1],["pushBack",2],["pushMiddle",3],["pushMiddle",4],["popFront"],["popMiddle"],["popMiddle"],["popBack"],["popFront"]]' },
     { label: 'Empty pops', input: '[["popFront"],["popMiddle"]]' },

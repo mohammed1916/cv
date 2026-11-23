@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'List as JSON: {"nums": [...]}',
   url: 'https://leetcode.com/problems/the-two-sneaky-numbers-of-digitville/',
   complexity: 'O(n) time and O(n) space for the set. The visualization caps the list at 30 entries.',
+  question: "Find the two values that appear exactly twice in a list that otherwise holds each value from 0 to n minus 3.",
+  approaches: [
+    { name: "Hash set of seen values", intuition: "Scan the list and record values seen twice, using a set for constant-time membership.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"nums":[0,1,1,0]}' },
     { label: 'Example 2', input: '{"nums":[0,3,2,1,3,2]}' },

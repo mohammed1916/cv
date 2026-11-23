@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Weighted tree with n nodes and the limit k (JSON object)',
   url: 'https://leetcode.com/problems/maximize-sum-of-weights-after-edge-removals/',
   complexity: 'O(n log n) time for the sorts and O(n) space. The visualization caps the tree at 10 nodes.',
+  question: "In a tree, remove k edges to maximise the sum of the weights of the remaining edges.",
+  approaches: [
+    { name: "Sorted edges and tree dynamic programming", intuition: "Sort edges by weight, keep the largest that fit the degree limit, and combine the results over subtrees.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Path', input: '{"n":3,"edges":[[0,1,5],[1,2,3]],"k":1}' },
     { label: 'Star', input: '{"n":4,"edges":[[0,1,4],[0,2,9],[0,3,6]],"k":2}' },

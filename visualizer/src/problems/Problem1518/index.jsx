@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Object with numBottles and numExchange (JSON)',
   url: 'https://leetcode.com/problems/water-bottles/',
   complexity: 'Each round removes at least one bottle from the empty count, so the simulation runs in O(numBottles) time with O(1) extra space.',
+  question: "Count how many water bottles can be drunk when empty bottles can be exchanged for full ones.",
+  approaches: [
+    { name: "Exchange simulation", intuition: "Drink, count the empties and trade them in until fewer than the exchange rate remain.", time: "O(numBottles)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Sample A', input: '{"numBottles":9,"numExchange":3}' },
     { label: 'Larger trade', input: '{"numBottles":15,"numExchange":4}' },

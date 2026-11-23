@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with values (distinct integers, in insertion order) and level',
   url: 'https://leetcode.com/problems/median-of-a-binary-search-tree-level/',
   complexity: 'O(n * h) time to build the tree with h its height, plus O(n log n) to sort one level. The visualization caps the tree at 15 values.',
+  question: "Find the upper middle value of one depth of a binary search tree.",
+  approaches: [
+    { name: "Level-order walk and sort", intuition: "Collect the nodes of one depth with a level-order walk, sort them, and take the upper middle.", time: "O(n log n) for the sort", space: "O(n)" },
+  ],
   examples: [
     { label: 'Level two of a seven-value tree', input: '{"values":[9,4,15,2,6,12,20,1,3],"level":2}' },
     { label: 'Level one of a four-value tree', input: '{"values":[8,3,10,1],"level":1}' },

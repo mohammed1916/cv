@@ -39,6 +39,11 @@ const definition = {
   inputLabel: "Object with nums (JSON), e.g. {\"nums\":[3,1,2,4]}",
   url: "https://leetcode.com/problems/sum-of-imbalance-numbers-of-all-subarrays/",
   complexity: "O(n^2) distinct-count enumeration with set lookups. The visualization caps input at 20 values; the official limit is 1000.",
+  question: "Add up the imbalance number of every subarray, where the imbalance counts adjacent sorted values in the subarray that differ by more than 1.",
+  approaches: [
+    { name: "Fix the start and grow the end", intuition: "For each start, extend the end one element at a time, tracking which values have been seen and how many adjacent gaps exist.", time: "O(n^2)", space: "O(n)" },
+    { name: "Contribution counting per value", intuition: "Count how many subarrays each adjacent-gap pair contributes to, instead of recomputing each subarray.", time: "O(n^2) or better with care", space: "O(n)" },
+  ],
   examples: [
   {
     "label": "Four values",

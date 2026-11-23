@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'JSON array of integers (1 to 12 entries)',
   url: 'https://leetcode.com/problems/minimum-pair-removal-to-sort-array-ii/',
   complexity: 'O(n^2) time with this direct simulation and O(n) extra space. The official limit is larger, so the visualization caps the input at 12 values.',
+  question: "Find the fewest pair removals that make an array non-decreasing, with a larger input size.",
+  approaches: [
+    { name: "Simulate removals", intuition: "Repeatedly remove the adjacent pair with the smallest sum until the array is sorted.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Descending start', input: '[6,1,4,2]' },
     { label: 'Already sorted', input: '[1,2,2]' },

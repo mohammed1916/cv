@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Integer n from 1 to 100',
   url: 'https://leetcode.com/problems/three-divisors/',
   complexity: 'O(n) trial division for the visualization. A square-root bound works for larger n.',
+  question: "Decide whether an integer has exactly three positive divisors.",
+  approaches: [
+    { name: "Square of a prime", intuition: "Count divisors up to the square root; exactly three divisors happens only for the square of a prime.", time: "O(sqrt n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Square of a prime (9)', input: '9' },
     { label: 'Not three divisors (12)', input: '12' },

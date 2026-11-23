@@ -15,6 +15,11 @@ const definition = {
   inputLabel: 'JSON array of integers',
   url: 'https://leetcode.com/problems/maximum-score-of-a-split/',
   complexity: 'O(n) time and O(n) space for the solver. The trace stores a copy of the suffix row in every frame, so trace memory is O(n²); the visualization caps the array at 20 values.',
+  question: "Split an array into a nonempty prefix and suffix to maximise the prefix sum minus the smallest suffix value.",
+  approaches: [
+    { name: "Precomputed suffix minimum", intuition: "Store the smallest value at or after each index, then score every split in constant time.", time: "O(n)", space: "O(n)" },
+    { name: "Try every split", intuition: "Compute each split's suffix minimum directly.", time: "O(n^2)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '[6,-2,4,-3,-1]' },
     { label: 'Example 2', input: '[-5,2,-4]' },

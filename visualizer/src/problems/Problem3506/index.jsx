@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with splitTime and strains (elimination times)',
   url: 'https://leetcode.com/problems/find-time-required-to-eliminate-bacterial-strains/',
   complexity: 'O(k log k) time and O(k) space for k strains: a min-heap holds the pool and each merge removes two entries and adds one. The visualization caps the input at 8 strains; this trace re-sorts a short list at each merge for clarity.',
+  question: "Given bacterial strains with eliminate times, find how long it takes to remove all of them when strains merge in pairs.",
+  approaches: [
+    { name: "Min-heap merges", intuition: "Repeatedly take the two smallest times from a min-heap, merge them, and push the result back.", time: "O(k log k)", space: "O(k)" },
+  ],
   examples: [
     { label: 'Split pays off', input: '{"splitTime":2,"strains":[3,4,9]}' },
     { label: 'Single strain', input: '{"splitTime":5,"strains":[7]}' },

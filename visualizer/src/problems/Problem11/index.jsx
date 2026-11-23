@@ -20,6 +20,10 @@ const definition = {
   inputLabel: "Heights array (e.g. [1,8,6,2,5,4,8,3,7])",
   url: "https://leetcode.com/problems/container-with-most-water/",
   complexity: "O(n) time and O(1) extra space for n heights. The visualization accepts 2 to 50 heights.",
+  question: "Choose two vertical lines that, with the x-axis, hold the most water.",
+  approaches: [
+    { name: "Two pointers from both ends", intuition: "Move the pointer on the shorter side inward, since only a taller side can raise the limit.", time: "O(n)", space: "O(1)" },
+  ],
   examples: getExamples("container-with-most-water").map(example => ({ label: example.label, input: JSON.stringify(example.height) })),
 };
 

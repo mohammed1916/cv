@@ -34,6 +34,11 @@ const definition = {
   inputLabel: "Object with nums (JSON), e.g. {\"nums\":[5,4,9,2,6,1]}",
   url: "https://leetcode.com/problems/sum-of-squares-of-special-elements/",
   complexity: "O(n) time and O(1) extra space. The visualization caps input at 30 values.",
+  question: "Add up the squares of the array values whose 1-based position divides the array length.",
+  approaches: [
+    { name: "Single pass over divisors", intuition: "Check each 1-based position against the length and add the square when it divides evenly.", time: "O(n)", space: "O(1)" },
+    { name: "Enumerate divisors directly", intuition: "Only divisors of n matter, so iterate divisors up to the square root of n.", time: "O(sqrt(n))", space: "O(1)" },
+  ],
   examples: [
   {
     "label": "Six values",

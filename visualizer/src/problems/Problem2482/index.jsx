@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON object with a 0/1 grid',
   url: 'https://leetcode.com/problems/difference-between-ones-and-zeros-in-row-and-column/',
   complexity: 'O(mn) time: one pass to tally and one pass to fill. The visualization caps the grid at 6 by 6.',
+  question: "For each cell, compute the number of ones minus the number of zeros in its row plus its column.",
+  approaches: [
+    { name: "Row and column tallies", intuition: "Count ones and zeros per row and per column, then combine the two tallies for each cell.", time: "O(m * n)", space: "O(m + n)" },
+  ],
   examples: [
     { label: 'Own: three by two grid', input: '{"grid":[[1,0],[0,0],[1,1]]}' },
     { label: 'All ones', input: '{"grid":[[1,1,1],[1,1,1]]}' },

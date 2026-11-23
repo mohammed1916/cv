@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Tree (JSON object with n, edges, group)',
   url: 'https://leetcode.com/problems/total-sum-of-interaction-cost-in-tree-groups/',
   complexity: 'O(n^2) time with a breadth-first search from every node. The visualization caps n at 12.',
+  question: "Add up the path lengths between every pair of tree nodes that share a group label.",
+  approaches: [
+    { name: "Breadth-first search from every node", intuition: "Run a breadth-first search from each node and add the distances to nodes with the same label.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: 'One group', input: '{"n":3,"edges":[[0,1],[1,2]],"group":[1,1,1]}' },
     { label: 'Split groups', input: '{"n":4,"edges":[[0,1],[0,2],[0,3]],"group":[1,1,4,4]}' },

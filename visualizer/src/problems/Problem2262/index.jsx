@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON object {"s": lowercase string, up to 20 letters}',
   url: 'https://leetcode.com/problems/total-appeal-of-a-string/',
   complexity: 'O(n) time and O(1) extra space for the 26 letters. The visualization caps input at 20 letters.',
+  question: "Sum the appeal of every substring, where the appeal of a substring is the number of distinct letters in it.",
+  approaches: [
+    { name: "Contribution by last occurrence", intuition: "Each letter adds to the appeal of every substring that ends at a position after its last occurrence, so add the contributions as you scan.", time: "O(n)", space: "O(26)" },
+  ],
   examples: [
     { label: 'Own: tatoo', input: '{"s": "tatoo"}' },
     { label: 'Own: quiz', input: '{"s": "quiz"}' },

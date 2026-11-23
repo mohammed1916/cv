@@ -18,6 +18,10 @@ const definition = {
   inputLabel: 'Array JSON with nums and k',
   url: 'https://leetcode.com/problems/maximum-and-minimum-sums-of-at-most-size-k-subsequences/',
   complexity: 'O(n log n + n k) time and O(n + k) extra space for the sort and the binomial prefix sums. The visualization caps nums at 8 values.',
+  question: "For subsequences of length up to k, add up each subsequence's largest value and smallest value across all choices.",
+  approaches: [
+    { name: "Sort and binomial counts", intuition: "Sort the values, then count how many subsequences use each value as the min or max with binomial coefficients.", time: "O(n log n + n k)", space: "O(n + k)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"nums":[4,1,7,2],"k":2}' },
     { label: 'Example 2', input: '{"nums":[0,9,3],"k":1}' },

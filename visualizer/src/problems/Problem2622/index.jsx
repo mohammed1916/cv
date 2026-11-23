@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'JSON object with ops: [time, "set", key, value, duration], [time, "get", key] or [time, "count"]',
   url: 'https://leetcode.com/problems/cache-with-time-limit/',
   complexity: 'O(1) per get and set, O(n) for a count over n stored keys.',
+  question: "Build a cache whose entries expire after a time limit, supporting set, get, and a count of unexpired keys.",
+  approaches: [
+    { name: "Map with expiry timestamps", intuition: "Store each key with its expiry time; check the time on get and count only keys that are still live.", time: "O(1) per get and set", space: "O(n)" },
+  ],
   examples: [
     { label: 'Overwrite', input: '{"ops":[[0,"set","a",1,100],[40,"set","a",5,100],[60,"get","a"],[100,"get","a"],[100,"count"]]}' },
     { label: 'Expiry', input: '{"ops":[[0,"set","k",1,10],[10,"get","k"],[10,"count"]]}' },

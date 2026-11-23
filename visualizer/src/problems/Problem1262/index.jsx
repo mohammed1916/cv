@@ -8,6 +8,10 @@ const definition = {
   inputLabel: 'Array of positive integers (JSON)',
   url: 'https://leetcode.com/problems/greatest-sum-divisible-by-three/',
   complexity: 'O(n) time for n numbers, because each number updates three remainder slots. O(1) extra space.',
+  question: "Find the largest sum of elements that is divisible by three.",
+  approaches: [
+    { name: "Remainder DP", intuition: "Track the best sum for each remainder modulo three as elements are added.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Mixed', input: '[3,6,5,1,8]' },
     { label: 'Single', input: '[4]' },

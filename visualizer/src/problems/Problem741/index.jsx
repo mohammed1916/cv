@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Grid (JSON array of rows with 1, 0 or -1)',
   url: 'https://leetcode.com/problems/cherry-pickup/',
   complexity: 'O(n^3) time and O(n^2) space for the two-walker table.',
+  question: "Collect the most cherries on a round trip through a grid where cells may be blocked.",
+  approaches: [
+    { name: "Two simultaneous walkers", intuition: "Move two walkers together step by step, sharing cells when they meet.", time: "O(n^3)", space: "O(n^2)" },
+  ],
   examples: [
     { label: 'Corridor', input: '[[0,1,0],[1,-1,1],[1,1,1]]' },
     { label: 'Blocked', input: '[[1,-1],[-1,1]]' },

@@ -11,6 +11,10 @@ const definition = {
   inputLabel: 'Object with events [[start, end, value], ...] and k',
   url: 'https://leetcode.com/problems/maximum-number-of-events-that-can-be-attended-ii/',
   complexity: 'O(n * k) table cells after an O(n log n) sort. The visualization caps input at 8 events.',
+  question: "Attend at most k non-overlapping events to maximise the total value.",
+  approaches: [
+    { name: "Sort and DP over k", intuition: "Sort events by end day, then DP with binary search for the last compatible event.", time: "O(n k)", space: "O(n k)" },
+  ],
   examples: [
     { label: 'Three overlapping offers', input: '{"events":[[4,9,30],[9,12,15],[2,6,22]],"k":2}' },
     { label: 'Single-day offers', input: '{"events":[[10,10,7],[1,3,5],[3,8,9],[12,20,11]],"k":3}' },

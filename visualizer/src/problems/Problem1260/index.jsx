@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Grid and shift amount (JSON)',
   url: 'https://leetcode.com/problems/shift-2d-grid/',
   complexity: 'O(m * n) time to move every cell once, and O(m * n) space for the shifted table.',
+  question: "Shift the values of a grid by a number of steps, moving each cell to the next position in row-major order.",
+  approaches: [
+    { name: "Flatten and shift", intuition: "Flatten the grid, rotate each index by the step count, and rebuild the rows.", time: "O(m x n)", space: "O(m x n)" },
+  ],
   examples: [
     { label: 'Three by two', input: '{"grid":[[1,2],[3,4],[5,6]],"k":2}' },
     { label: 'Full wrap', input: '{"grid":[[7,8],[9,1]],"k":4}' },

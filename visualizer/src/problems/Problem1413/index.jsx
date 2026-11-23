@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Step values (JSON array of integers)',
   url: 'https://leetcode.com/problems/minimum-value-to-get-positive-step-by-step-sum/',
   complexity: 'O(n) time and O(1) extra space: one pass keeps the running total and the lowest point.',
+  question: "Find the smallest positive starting value so that the running total never falls below one.",
+  approaches: [
+    { name: "Track the lowest prefix", intuition: "Find the lowest running total and start from one minus it.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Dip to -4', input: '[-3,2,-3,4,2]' },
     { label: 'All positive', input: '[1,2,3]' },

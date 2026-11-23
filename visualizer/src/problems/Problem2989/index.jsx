@@ -25,6 +25,10 @@ const definition = {
   phases, parse: parseInput, build: buildTrace, code, sql, python, inputLabel,
   url: `https://leetcode.com/problems/${meta.slug}/`,
   complexity, examples,
+  question: "Find the spread between the highest and lowest total score for students with three assignments.",
+  approaches: [
+    { name: "Row sums then spread", intuition: "Sum each student's three scores and report the difference between the maximum and minimum totals.", time: "O(n)", space: "O(n)" },
+  ],
 }
 
 function Rows({ columns = [], rows = [] }) {

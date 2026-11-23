@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with n and edges (undirected pairs of node ids)',
   url: 'https://leetcode.com/problems/construct-2d-grid-matching-graph-layout/description/',
   complexity: 'Teaching model: O(n * (n + m)) with a BFS per walk. The visualization caps n at 16 nodes.',
+  question: "Build a grid layout whose walks match a given graph's connections.",
+  approaches: [
+    { name: "Breadth-first search per walk", intuition: "For each candidate walk, run a breadth-first search to confirm the layout matches the connections.", time: "O(n * (n + m))", space: "O(n)" },
+  ],
   examples: [
     { label: 'Two by three', input: '{"n":6,"edges":[[0,1],[1,2],[3,4],[4,5],[0,3],[1,4],[2,5]]}' },
     { label: 'Single line', input: '{"n":4,"edges":[[2,0],[0,3],[3,1]]}' },

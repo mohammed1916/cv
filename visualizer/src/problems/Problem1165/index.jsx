@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON {"keyboard": "26 distinct letters", "word": "lowercase letters"}',
   url: 'https://leetcode.com/problems/single-row-keyboard/description/',
   complexity: 'O(26 + n) time and O(26) space for a word of n letters. The visualization caps the word at 200 letters.',
+  question: "Given a keyboard layout where each letter sits at a position, compute the total finger travel for typing a word.",
+  approaches: [
+    { name: "Position lookup", intuition: "Map each letter to its index, then add the distance between consecutive letters.", time: "O(26 + n)", space: "O(26)" },
+  ],
   examples: [
     { label: 'Reversed alphabet', input: '{"keyboard":"zyxwvutsrqponmlkjihgfedcba","word":"abca"}' },
     { label: 'Repeats', input: '{"keyboard":"zyxwvutsrqponmlkjihgfedcba","word":"aaa"}' },

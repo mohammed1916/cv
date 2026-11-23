@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Courses (JSON object with n, relations as [before, after] pairs, and k)',
   url: 'https://leetcode.com/problems/parallel-courses-ii/',
   complexity: 'O(2^n * n) states with subset enumeration per state. The visualization caps input at 8 courses.',
+  question: "Find the minimum number of semesters to finish all courses when at most k can be taken per semester.",
+  approaches: [
+    { name: "Bitmask DP over finished courses", intuition: "Each state is the set of finished courses; take up to k ready courses from it each semester.", time: "O(2^n * n)", space: "O(2^n)" },
+  ],
   examples: [
     { label: 'Diamond of prerequisites', input: '{"n":5,"relations":[[1,3],[2,3],[3,5],[4,5]],"k":2}' },
     { label: 'Two independent chains', input: '{"n":6,"relations":[[1,2],[1,4],[6,5]],"k":2}' },

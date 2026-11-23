@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'JSON square grid of odd size (3 to 7) with values 0, 1 or 2',
   url: 'https://leetcode.com/problems/minimum-operations-to-write-the-letter-y-on-a-grid/',
   complexity: 'O(n^2) time to count the cells and O(1) to try the six value pairs.',
+  question: "Find the fewest changes needed to write the letter Y on a grid with a given value for the Y cells and another for the rest.",
+  approaches: [
+    { name: "Region counts and pair choice", intuition: "Count the Y and non-Y cells in each region, then choose two different values with the cheapest total.", time: "O(n^2)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '[[2,2,0],[2,1,0],[1,0,1]]' },
     { label: 'Example 2', input: '[[0,1,0],[1,0,1],[2,2,2]]' },

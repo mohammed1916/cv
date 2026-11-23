@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with prices (integers) and money',
   url: 'https://leetcode.com/problems/buy-two-chocolates/',
   complexity: 'O(n) time and O(1) extra space: one pass keeps the two smallest prices.',
+  question: "Given an array of prices and money, buy exactly two chocolates to leave the most money, or return the original money if not possible.",
+  approaches: [
+    { name: "Two smallest prices", intuition: "Find the two smallest prices in one pass, and check whether they fit the budget.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Cheap pair fits', input: '{"prices":[4,1,3,6],"money":7}' },
     { label: 'Pair too costly', input: '{"prices":[5,9],"money":12}' },

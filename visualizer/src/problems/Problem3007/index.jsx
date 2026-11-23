@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with k (1 to 200) and x (1 to 8), e.g. {"k":9,"x":1}',
   url: 'https://leetcode.com/problems/maximum-number-that-sum-of-the-prices-is-less-than-or-equal-to-k/',
   complexity: 'O(x log^2 N) time for the binary search with a per-bit closed formula. The visualization caps k at 200.',
+  question: "Find the largest number whose cumulative count of set bits at positions x, 2x, 3x and so on has total at most k.",
+  approaches: [
+    { name: "Binary search with bit counting", intuition: "Binary search on the answer and count the set bits at the selected positions in closed form.", time: "O(log^2 K)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"k":12,"x":2}' },
     { label: 'Example 2', input: '{"k":20,"x":3}' },

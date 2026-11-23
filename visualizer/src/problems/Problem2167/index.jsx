@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Car string of 0 and 1, e.g. 1100101',
   url: 'https://leetcode.com/problems/minimum-time-to-remove-all-cars-containing-illegal-goods/',
   complexity: 'O(n) time and O(n) space for the two cost tables. The visualization caps the string at 16 cars.',
+  question: "Find the minimum time to remove every car carrying illegal goods from a train, where removing from either end or a middle position has different costs.",
+  approaches: [
+    { name: "Prefix and suffix dynamic programming", intuition: "Illegal cars leave by a left prefix (1 each), a right suffix (1 each), or one at a time (2 each); try each split between the two.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Mixed', input: '1100101' },
     { label: 'Trailing clean cars', input: '0010' },

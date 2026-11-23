@@ -12,6 +12,10 @@ const definition = {
   phases, parse: parseInput, build: buildTrace, code, python, sql,
   inputLabel: INPUT_LABEL,
   complexity: COMPLEXITY,
+  question: "Find the customer IDs that are missing from a sorted list of IDs.",
+  approaches: [
+    { name: "SQL gap detection", intuition: "Build the range of IDs and keep those with no matching row.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [{ label: 'Sample', input: EXAMPLE },
     { label: "Single customer", input: "{\"customers\":[{\"customer_id\":5,\"name\":\"Ivo\"}]}" },
     { label: "Gap at the start", input: "{\"customers\":[{\"customer_id\":2,\"name\":\"Bo\"},{\"customer_id\":3,\"name\":\"Cy\"},{\"customer_id\":4,\"name\":\"Di\"}]}" },

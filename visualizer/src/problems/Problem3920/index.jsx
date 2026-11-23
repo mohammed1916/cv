@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON array of 1 to 12 integers from 0 to 12',
   url: 'https://leetcode.com/problems/maximize-fixed-points-after-deletions/',
   complexity: 'O(n^2) time and O(n) space for n values. The visualization caps the array at 12 values; the table keeps one cell per survivor count.',
+  question: "Delete some array values so that as many survivors as possible sit at the index equal to their value, and report that maximum.",
+  approaches: [
+    { name: "Best count per survivor count", intuition: "Process values in order and keep the best fixed-point count for each number of kept survivors.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Shifted start', input: '[3, 0, 4, 1]' },
     { label: 'Mixed run', input: '[5, 2, 6, 2, 1]' },

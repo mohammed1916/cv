@@ -14,6 +14,10 @@ const definition = {
   complexity,
   inputLabel: 'JSON array of integers (exactly one element is squared)',
   url: 'https://leetcode.com/problems/maximum-subarray-sum-after-one-operation/',
+  question: "Replace one element with its square to maximise the sum of a subarray.",
+  approaches: [
+    { name: "DP with one squared element", intuition: "Track the best subarray sums with and without the operation used.", time: "O(n)", space: "O(1)" },
+  ],
 }
 
 export default function Problem1746Visualizer() {

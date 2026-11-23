@@ -8,6 +8,10 @@ const definition = {
   inputLabel: 'Object with nums and k (JSON)',
   url: `https://leetcode.com/problems/${meta.slug}/`,
   complexity: 'O(n) expected time and O(n) space: one pass with counts of numbers still waiting for a partner.',
+  question: "Pair up numbers whose sum equals k, using each number at most once, to maximise the number of pairs.",
+  approaches: [
+    { name: "Waiting counts", intuition: "Keep a count of numbers still waiting for their partner and pair each new number when its partner is waiting.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Mixed', input: '{"nums":[1,1,2,4,5,7],"k":8}' },
     { label: 'Repeated pairs', input: '{"nums":[3,1,3,1,3,1],"k":4}' },

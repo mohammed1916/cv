@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Array of [op, value] commands (op: add, deleteOne or hasFrequency; values 1 to 5)',
   url: 'https://leetcode.com/problems/frequency-tracker/',
   complexity: 'O(1) per operation with a count map and a count-of-counts map. The visualization caps input at 12 commands.',
+  question: "Design a frequency tracker that adds and removes values and reports whether any value occurs a given number of times.",
+  approaches: [
+    { name: "Two maps", intuition: "Keep count per value and the number of values with each count, so checks are constant time.", time: "O(1)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '[["add",3],["add",3],["hasFrequency",2],["hasFrequency",1],["deleteOne",3],["hasFrequency",2]]' },
     { label: 'Absent delete', input: '[["deleteOne",4],["hasFrequency",1]]' },

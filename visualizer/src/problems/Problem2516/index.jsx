@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'JSON object with s (letters a, b, c) and k, for example {"s":"abc","k":1}',
   url: 'https://leetcode.com/problems/take-k-of-each-character-from-left-and-right/',
   complexity: 'O(n) time and O(1) extra space. The visualization caps s at 40 characters.',
+  question: "Take characters from both ends of s so that each of a, b and c is taken at least k times, using the fewest characters.",
+  approaches: [
+    { name: "Sliding window over the middle", intuition: "Keep the middle part that is left behind as a window, growing it while the counts still allow it.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Own: seven letters, k 3', input: '{"s":"abcabca","k":3}' },
     { label: 'Impossible', input: '{"s":"a","k":1}' },

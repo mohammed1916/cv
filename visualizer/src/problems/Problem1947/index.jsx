@@ -11,6 +11,10 @@ const definition = {
   inputLabel: 'JSON object with students and mentors, each row 0/1 answers (e.g. {"students":[[1,0],[0,1]],"mentors":[[1,1],[0,0]]})',
   url: 'https://leetcode.com/problems/maximum-compatibility-score-sum/',
   complexity: 'O(m! · m · n) for this depth-first search over complete pairings with m students and n questions. The visualization caps m at 4 and n at 6.',
+  question: "Pair every student with a distinct mentor to maximise the total number of matching answers.",
+  approaches: [
+    { name: "Backtracking over assignments", intuition: "Try each unused mentor for the next student, prune by the best possible remaining score, and keep the best total.", time: "O(n!)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Two pairs', input: '{"students":[[1,1,0],[1,0,1]],"mentors":[[1,0,0],[0,1,1]]}' },
     { label: 'Single pair', input: '{"students":[[0]],"mentors":[[0]]}' },

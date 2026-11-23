@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with lowercase string s (JSON)',
   url: 'https://leetcode.com/problems/maximum-length-substring-with-two-occurrences/',
   complexity: 'O(n) time and O(1) extra space for 26 letters. The visualization caps input at 30 letters.',
+  question: "Find the longest substring in which every letter appears at most twice.",
+  approaches: [
+    { name: "Sliding window with letter counts", intuition: "Grow the window to the right and move the left edge only until the letter that hit three is back to two.", time: "O(n)", space: "O(1) for 26 letters" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"s":"bcbbbcba"}' },
     { label: 'Repeat', input: '{"s":"aaaa"}' },

@@ -7,6 +7,10 @@ const definition = {
   phases, parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'String of a, b and c (JSON object with s)',
   complexity: 'O(n) time and O(1) space. The window of latest positions only tracks three letters.',
+  question: "Count substrings that contain at least one of each of the letters a, b and c.",
+  approaches: [
+    { name: "Latest positions", intuition: "Track the last seen index of each letter and count valid starts from the minimum of the three.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Sample', input: '{"s":"abcabc"}' },
     { label: 'Repeated a', input: '{"s":"aaacb"}' },

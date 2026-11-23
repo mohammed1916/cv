@@ -19,6 +19,10 @@ const definition = {
   inputLabel: 'Array of even length (e.g. [2,5,1,4])',
   url: 'https://leetcode.com/problems/count-good-cyclic-rotations/',
   complexity: 'O(n) time and O(1) extra space for n values, using one sliding window sum. The visualization caps the array at 20 values; the official limit is 100000.',
+  question: "Count the shifts of a ring where a half-length window holds more than the rest.",
+  approaches: [
+    { name: "Sliding window sum", intuition: "Slide a half-length window around the ring with one running sum.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'One good shift', input: '[2,5,1,4]' },
     { label: 'Six values', input: '[3,3,1,1,6,2]' },

@@ -13,6 +13,10 @@ const definition = {
   python,
   inputLabel,
   complexity,
+  question: "Report the percentage of first orders that are scheduled for immediate delivery.",
+  approaches: [
+    { name: "Count matching dates", intuition: "Count orders whose order date equals the preferred delivery date, then divide by the total.", time: "O(n)", space: "O(1)" },
+  ],
   examples,
 }
 

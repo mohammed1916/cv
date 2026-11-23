@@ -14,6 +14,11 @@ const definition = {
   inputLabel: 'Object with n (1 to 10) and edges (tree, labels 1 to n)',
   url: 'https://leetcode.com/problems/count-valid-paths-in-a-tree/',
   complexity: 'O(n^2) time in this walk-per-node version. The visualization caps n at 10.',
+  question: "In a tree, count the pairs of nodes whose path contains exactly one node with a prime label.",
+  approaches: [
+    { name: "Walk from each node counting primes", intuition: "From each start, walk outward while tracking how many prime-labeled nodes are on the path.", time: "O(n^2)", space: "O(n)" },
+    { name: "Prime-aware component sizes", intuition: "Remove prime nodes; the non-prime components then give the count of valid pairs.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example', input: '{"n":6,"edges":[[2,1],[2,3],[2,4],[4,5],[4,6]]}' },
     { label: 'Path', input: '{"n":3,"edges":[[1,2],[2,3]]}' },

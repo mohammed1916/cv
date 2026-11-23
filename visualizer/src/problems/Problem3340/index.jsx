@@ -17,6 +17,10 @@ const definition = {
   inputLabel: 'JSON object: {"num": "1234"}',
   url: "https://leetcode.com/problems/check-balanced-string/",
   complexity: "O(n) time and O(1) extra space for a digit string of length n. The visualization accepts lengths up to 100.",
+  question: "Decide whether a string of digits is balanced, meaning the sum of digits at even positions equals the sum at odd positions.",
+  approaches: [
+    { name: "Single pass with two sums", intuition: "Add the digits at even and odd positions in one pass and compare the totals.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: "Invented balanced", input: '{"num": "4411"}' },
     { label: "Invented unbalanced", input: '{"num": "2468"}' },

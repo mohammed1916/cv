@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with nums (positive integers) and k',
   url: 'https://leetcode.com/problems/minimum-removals-to-balance-array/',
   complexity: 'O(n log n) time for the sort, then O(n) for the two pointers. The visualization caps nums at 20 values.',
+  question: "Find the fewest removals from an array so that the remaining values fall within a spread of k.",
+  approaches: [
+    { name: "Sort and two pointers", intuition: "Sort the values and slide a window whose spread stays within k.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Spread out', input: '{"nums":[1,3,6,9],"k":2}' },
     { label: 'Tight limit', input: '{"nums":[4,4,9,10,30],"k":1}' },

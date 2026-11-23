@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON object with root (level-order array, a valid BST)',
   url: 'https://leetcode.com/problems/binary-search-tree-to-greater-sum-tree/',
   complexity: 'O(n) time and O(h) recursion space. The visualization caps input at 10 nodes.',
+  question: "Replace each node value in a binary search tree with the sum of all values greater than or equal to it.",
+  approaches: [
+    { name: "Reverse in-order running sum", intuition: "Visit nodes from largest to smallest, keep a running total, and write it into each node.", time: "O(n)", space: "O(h)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"root":[4,1,6,0,2,5,7,null,null,null,3,null,null,null,8]}' },
     { label: 'Small tree', input: '{"root":[2,1,3]}' },

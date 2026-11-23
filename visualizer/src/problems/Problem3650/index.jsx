@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Directed graph {"n", "edges": [[u, v, w], ...]} (JSON)',
   url: 'https://leetcode.com/problems/minimum-cost-path-with-edge-reversals/',
   complexity: 'O((V + E) log V) time over 2E arcs. The visualization caps input at 6 nodes and 8 edges.',
+  question: "Find the cheapest path from the first node to the last, where any edge may be reversed once at double its weight.",
+  approaches: [
+    { name: "Dijkstra with reversals", intuition: "Settle nodes by cost, adding each edge forward and, as a reversal, at twice its weight.", time: "O((V + E) log V)", space: "O(V + E)" },
+  ],
   examples: [
     { label: 'Example', input: '{"n":4,"edges":[[0,1,3],[3,1,1],[2,3,4],[0,2,1]]}' },
     { label: 'Reversal', input: '{"n":2,"edges":[[1,0,2]]}' },

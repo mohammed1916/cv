@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Edges and two start nodes as JSON, e.g. {"edges": [2,2,3,-1], "first": 0, "second": 1}',
   url: 'https://leetcode.com/problems/find-closest-node-to-given-two-nodes/',
   complexity: 'O(n) time and O(n) space, since each node has one outgoing edge.',
+  question: "In a graph where each node has at most one outgoing edge, find the node reachable from two given nodes with the smallest maximum distance.",
+  approaches: [
+    { name: "Follow edges from both nodes", intuition: "Compute the distance from each start node along its edges, then pick the common node with the smallest maximum.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Own: four nodes, starts 2 and 3', input: '{"edges": [1,3,0,-1], "first": 2, "second": 3}' },
     { label: 'Own: four nodes, starts 1 and 3', input: '{"edges": [3,-1,1,2], "first": 1, "second": 3}' },

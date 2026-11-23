@@ -15,6 +15,11 @@ const definition = {
   inputLabel: 'Object with Accounts ({ id, name }) and Logins ({ id, login_date }) lists; dates are YYYY-MM-DD',
   url: 'https://leetcode.com/problems/active-users/',
   complexity: 'O(L log L) to sort the logins, then one pass per account.',
+  question: "Find the accounts that log in on at least five consecutive calendar days.",
+  approaches: [
+    { name: "Consecutive-day islands", intuition: "Subtract each row position from its date; equal results mark one unbroken run of days.", time: "O(L log L) for the sort", space: "O(L)" },
+    { name: "Sort then scan", intuition: "Sort each account's login dates and count the streak length while walking forward.", time: "O(L log L)", space: "O(L)" },
+  ],
   examples: [
     { label: 'Example', input: '{"Accounts":[{"id":1,"name":"Alice"},{"id":2,"name":"Bob"},{"id":3,"name":"Carl"}],"Logins":[{"id":1,"login_date":"2020-01-01"},{"id":1,"login_date":"2020-01-02"},{"id":1,"login_date":"2020-01-03"},{"id":1,"login_date":"2020-01-03"},{"id":1,"login_date":"2020-01-04"},{"id":1,"login_date":"2020-01-05"},{"id":2,"login_date":"2020-01-01"},{"id":2,"login_date":"2020-01-02"},{"id":2,"login_date":"2020-01-03"},{"id":2,"login_date":"2020-01-05"},{"id":2,"login_date":"2020-01-06"},{"id":3,"login_date":"2020-02-27"},{"id":3,"login_date":"2020-02-28"},{"id":3,"login_date":"2020-02-29"},{"id":3,"login_date":"2020-03-01"},{"id":3,"login_date":"2020-03-02"}]}' },
     { label: 'One account, one login', input: '{"Accounts":[{"id":1,"name":"Ada"}],"Logins":[{"id":1,"login_date":"2020-01-01"}]}' },

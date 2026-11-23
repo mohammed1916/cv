@@ -9,6 +9,10 @@ const definition = {
   inputLabel: 'Object with nums and maxC',
   url: 'https://leetcode.com/problems/minimum-stability-factor-of-array/',
   complexity: 'O(n log n log V) to build the table with gcds up to V, then O(n log V) per limit across O(log n) limits. The official length is up to 100000; the visualization caps nums at 14 entries.',
+  question: "Find the smallest stability factor for an array: the largest possible length of a stable subarray after at most a given number of edits.",
+  approaches: [
+    { name: "Binary search the answer", intuition: "Binary search the length, and for each limit count the fewest edits needed to create a stable run.", time: "O(n log n log V)", space: "O(n log V)" },
+  ],
   examples: [
     { label: 'Two long runs', input: '{"nums":[12,18,24,30,5,14,21,7,9],"maxC":2}' },
     { label: 'Budget too small', input: '{"nums":[6,10,15,4,8,3,9],"maxC":1}' },

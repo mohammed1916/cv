@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON object with "cards" and "k" (e.g. {"cards": [3, 1, 6, 8, 2, 9], "k": 3})',
   url: 'https://leetcode.com/problems/maximum-points-you-can-obtain-from-cards/',
   complexity: 'O(k) time and O(1) extra space: the window of left and right cards is updated by one swap per step.',
+  question: "Take k cards from either end of a row to maximize the total points.",
+  approaches: [
+    { name: "Sliding window of the middle", intuition: "Taking k from the ends is the same as leaving one window in the middle.", time: "O(k)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Sample', input: '{"cards": [3, 1, 6, 8, 2, 9], "k": 3}' },
     { label: 'Four cards', input: '{"cards": [5, 7, 1, 9], "k": 2}' },

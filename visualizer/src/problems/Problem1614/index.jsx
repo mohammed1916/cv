@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Expression text',
   url: 'https://leetcode.com/problems/maximum-nesting-depth-of-the-parentheses/',
   complexity: 'O(n) time and O(1) space: one scan with a single depth counter.',
+  question: "Find the maximum nesting depth of a parentheses string.",
+  approaches: [
+    { name: "Depth counter", intuition: "Add one at each open bracket and subtract at each close bracket, tracking the peak.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Nested product', input: '2*(3+(4-1)*(5))' },
     { label: 'Deep chain', input: '((((1))))+(2)' },

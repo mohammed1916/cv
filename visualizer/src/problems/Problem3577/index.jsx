@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with complexity (JSON)',
   url: 'https://leetcode.com/problems/count-the-number-of-computer-unlocking-permutations/',
   complexity: 'O(n) time and O(1) extra space. The visualization caps n at 7.',
+  question: "Count the orders in which n computers can be unlocked, where computer 0 goes first and each other computer must be stronger than it.",
+  approaches: [
+    { name: "Check the first computer", intuition: "If any other computer is not stronger than computer 0 the count is 0; otherwise multiply the choices for the rest.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"complexity":[1,2,3]}' },
     { label: 'Example 2', input: '{"complexity":[3,3,3,4,4,4]}' },

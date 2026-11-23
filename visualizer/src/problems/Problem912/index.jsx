@@ -13,6 +13,11 @@ const definition = {
   inputLabel: 'Array nums (JSON)',
   url: 'https://leetcode.com/problems/sort-an-array/',
   complexity: 'O(n log n) time, O(n) extra space, stable. The visualization caps the array at 64 values.',
+  question: "Sort an array of integers in ascending order.",
+  approaches: [
+    { name: "Merge sort", intuition: "Split the array in halves, sort each half, and merge them.", time: "O(n log n)", space: "O(n)" },
+    { name: "Quick sort", intuition: "Partition around a pivot and sort each side.", time: "O(n log n) average", space: "O(log n) recursion" },
+  ],
   examples: [
     { label: 'Mixed signs', input: '[5,-2,9,0,3]' },
     { label: 'Duplicates and negatives', input: '[7,7,1,-4,7,2]' },

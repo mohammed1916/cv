@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON object with a 0/1 grid',
   url: 'https://leetcode.com/problems/minimum-number-of-flips-to-make-binary-grid-palindromic-i/',
   complexity: 'O(mn) time and O(1) extra space. The visualization caps the grid at 6 by 6.',
+  question: "Find the fewest cell flips that make a binary grid palindromic by rows or by columns.",
+  approaches: [
+    { name: "Count mismatched mirror pairs", intuition: "Each mismatched mirror pair in a row costs one flip, and the same count down the columns gives the other cost.", time: "O(m * n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"grid":[[1,0,0],[0,0,0],[0,0,1]]}' },
     { label: 'Example 2', input: '{"grid":[[0,1],[0,1],[0,0]]}' },

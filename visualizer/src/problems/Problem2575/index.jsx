@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with a digit string word and an integer m (JSON)',
   url: 'https://leetcode.com/problems/find-the-divisibility-array-of-a-string/',
   complexity: 'O(n) time and O(n) space. The visualization caps the string at 30 digits.',
+  question: "For each prefix of a digit string, mark 1 if that prefix is divisible by m, else 0.",
+  approaches: [
+    { name: "Running remainder", intuition: "Carry the remainder forward digit by digit and test whether it is zero.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Seven digits, m nine', input: '{"word":"7710045","m":9}' },
     { label: 'Largest modulus', input: '{"word":"3141592","m":1000}' },

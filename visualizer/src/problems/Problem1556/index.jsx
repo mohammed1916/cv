@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Whole number (no leading zeros)',
   url: 'https://leetcode.com/problems/thousand-separator/',
   complexity: 'O(d) time and O(d) space, where d is the number of digits.',
+  question: "Insert a dot between each group of three digits in a number.",
+  approaches: [
+    { name: "Digit grouping", intuition: "Walk the digits from the right and insert a separator after every third digit.", time: "O(d)", space: "O(d)" },
+  ],
   examples: [
     { label: 'Four digits', input: '1000' },
     { label: 'Nine digits', input: '123456789' },

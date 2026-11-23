@@ -22,6 +22,10 @@ const definition = {
   inputLabel: 'Infix string in double quotes (e.g. "12+3*4")',
   url: 'https://leetcode.com/problems/build-binary-expression-tree-from-infix-expression/',
   complexity: 'O(n) time and O(n) space for n tokens, using two stacks. Each token is read once and each node is combined once. The visualization caps the string at 21 characters with no spaces; the tree is drawn with the operators and numbers as written.',
+  question: "Build an expression tree from an infix arithmetic expression.",
+  approaches: [
+    { name: "Two-stack shunting-yard", intuition: "Push numbers as leaves and combine operators by precedence, using a stack for operators and a stack for subtrees.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Precedence', input: '"12+3*4"' },
     { label: 'Left associativity', input: '"100/7/2"' },

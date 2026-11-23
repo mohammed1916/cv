@@ -13,6 +13,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Board (JSON array of 3 strings)',
   url: 'https://leetcode.com/problems/valid-tic-tac-toe-state/',
   complexity: 'O(1): the board has 9 cells and 8 lines.',
+  question: "Decide whether a 3 by 3 board can be reached in a legal tic-tac-toe game where X moves first.",
+  approaches: [
+    { name: "Count and line check", intuition: "Count the X and O marks to test turn order, then check that winning lines are consistent with who moved last.", time: "O(1)", space: "O(1)" },
+  ],
   examples: [
     { label: 'O first (false)', input: '["O  ","   ","   "]' },
     { label: 'Both win (false)', input: '["XXX","   ","OOO"]' },

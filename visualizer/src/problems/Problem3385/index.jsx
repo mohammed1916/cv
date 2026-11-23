@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Object with strength (the energy each lock needs)',
   url: 'https://leetcode.com/problems/minimum-time-to-break-locks-ii/',
   complexity: 'O(n^3) time and O(n^2) space, which handles the official limit of 80 locks. This view caps n at 8 so the matrix stays readable.',
+  question: "Find the fewest minutes needed to break all locks, where the locks can be assigned to workers in pairs.",
+  approaches: [
+    { name: "Assignment dynamic programming", intuition: "Use a matrix of costs and compute the best assignment with dynamic programming over subsets.", time: "O(n^3)", space: "O(n^2)" },
+  ],
   examples: [
     { label: 'Sorting loses', input: '{"strength":[3,7,2,4,5]}' },
     { label: 'Six locks', input: '{"strength":[8,25,5,4,9,18]}' },

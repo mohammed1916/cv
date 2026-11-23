@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Characters as [attack, defense] pairs (JSON)',
   url: 'https://leetcode.com/problems/the-number-of-weak-characters-in-the-game/',
   complexity: 'O(n log n) time for the sort and O(n) for the scan.',
+  question: "Count characters that are weaker than another character on both attack and defence.",
+  approaches: [
+    { name: "Sort and track maximum defence", intuition: "Sort by attack descending and defence ascending, and track the largest defence seen so far.", time: "O(n log n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Dominated pair', input: '[[4,9],[2,3],[7,1]]' },
     { label: 'Equal attack', input: '[[6,4],[6,7],[5,5]]' },

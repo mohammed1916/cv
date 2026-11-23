@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'JSON object with a binary string s and k, for example {"s":"10101","k":1}',
   url: 'https://leetcode.com/problems/count-substrings-that-satisfy-k-constraint-i/',
   complexity: 'O(n) time and O(1) extra space. The visualization caps s at 40 characters.',
+  question: "Count substrings where the count of zeros is at most k or the count of ones is at most k.",
+  approaches: [
+    { name: "Sliding window", intuition: "Grow the right end and move the left end while both counts are above k; each left end adds every valid right end at once.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Own: six bits, k 2', input: '{"s":"110010","k":2}' },
     { label: 'Own: seven bits, k 3', input: '{"s":"0110111","k":3}' },

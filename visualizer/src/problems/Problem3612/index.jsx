@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'JSON object with s (letters, *, # and %)',
   url: 'https://leetcode.com/problems/process-string-with-special-operations-i/',
   complexity: 'O(length) per operation. The visualization caps the final string at 5000 characters.',
+  question: "Apply a string of special operations (letter, star, hash, percent) to build a final string.",
+  approaches: [
+    { name: "Simulate with a buffer", intuition: "Keep a growing buffer and apply each operation in order, including reversal and deletion.", time: "O(length)", space: "O(length)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"s":"a#b%*"}' },
     { label: 'Example 2', input: '{"s":"z*#"}' },

@@ -19,6 +19,10 @@ const definition = {
   phases, parse: parseInput, build: buildTrace, code, sql, python, inputLabel,
   url: `https://leetcode.com/problems/${meta.slug}/`,
   complexity, examples,
+  question: "Count senior and junior candidates who can join a company when they are admitted in salary order within a budget.",
+  approaches: [
+    { name: "Cumulative sum by salary", intuition: "Order candidates by salary and accumulate salaries until the budget is exceeded.", time: "O(n log n)", space: "O(n)" },
+  ],
 }
 
 function Rows({ columns = [], rows = [] }) {

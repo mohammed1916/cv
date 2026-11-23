@@ -27,6 +27,11 @@ const definition = {
   inputLabel: 'Object with width, height, food ([row, col] list, in order) and moves (U, D, L or R)',
   url: 'https://leetcode.com/problems/design-snake-game/',
   complexity: 'Each move is O(1) on average with a set for the body and a deque for the order, and O(L) space for a snake of length L. The visualization caps the grid at 4 by 4.',
+  question: "Simulate a snake on a grid that grows when it eats food, and report the score after each move, or -1 when the game ends.",
+  approaches: [
+    { name: "Queue for the body and a set for occupied cells", intuition: "The head is added to the front of a queue and the tail leaves from the back unless the snake eats. A set answers collision checks quickly.", time: "O(1) average per move", space: "O(L) for a snake of length L" },
+    { name: "Rebuild the body on every move", intuition: "Keep the body as a list, and check for collisions by scanning it on each move.", time: "O(L) per move", space: "O(L)" },
+  ],
   goal: {
     summary: 'Simulate a snake on a grid that grows when it eats food, and report the score after every move, or -1 when the game ends.',
     requirement: [

@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with nums and k (e.g. {"nums":[1,2,2,3,3,3],"k":2})',
   url: 'https://leetcode.com/problems/sum-of-weighted-modes-in-subarrays/',
   complexity: 'O(n × k) time and O(k) space for n values and window length k, recounting each window. The visualization caps nums at 12 values from 1 to 9; the official bounds are not verified here.',
+  question: "For every window of a given length, find the sum of the weighted modes.",
+  approaches: [
+    { name: "Recount each window", intuition: "Recount values in each window and read off the weighted modes.", time: "O(n * k)", space: "O(k)" },
+  ],
   examples: [
     { label: 'Mixed windows', input: '{"nums":[1,2,2,3,3,3],"k":2}' },
     { label: 'Single window', input: '{"nums":[4,4,4],"k":3}' },

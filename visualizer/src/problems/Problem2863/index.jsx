@@ -13,6 +13,11 @@ const definition = {
   inputLabel: "Array JSON, e.g. [2,4,1,3]",
   url: "https://leetcode.com/problems/maximum-length-of-semi-decreasing-subarrays/",
   complexity: "O(n^2) time and O(1) extra space in the trace, which scans each left end's right ends until the first smaller value. The visualization caps the array at 20 values.",
+  question: "Find the longest subarray whose first value is greater than its last value.",
+  approaches: [
+    { name: "Compare each pair of ends", intuition: "For each left end, look for the farthest right end with a smaller value.", time: "O(n^2)", space: "O(1)" },
+    { name: "Monotonic stack candidates", intuition: "Keep only useful left ends on a decreasing stack and search for the farthest matching right end.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: "[2,4,1,3] gives 3", input: "[2,4,1,3]" },
     { label: "[7,6,1,5] gives 4", input: "[7,6,1,5]" },

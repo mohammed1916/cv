@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with arr and size (e.g. {"arr":[1,2,3,4,5],"size":2})',
   url: "https://leetcode.com/problems/chunk-array/",
   complexity: "O(n) time and O(n) space for n values, since the chunks hold every value once. The visualization caps arr at 12 integers from -99 to 99 and size at 12; the page caps arr and size for teaching.",
+  question: "Given an array and a chunk size, split it into sub-arrays of that size, with the last one possibly shorter.",
+  approaches: [
+    { name: "Slice in steps", intuition: "Take a slice of the chunk size, advance by that size, and repeat until the array ends.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: "Example", input: '{"arr":[1,2,3,4,5],"size":2}' },
     { label: "Size larger than the array", input: '{"arr":[7,8,9],"size":5}' },

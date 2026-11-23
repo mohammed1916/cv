@@ -17,6 +17,11 @@ const definition = {
   inputLabel: 'JSON object with s and c (e.g. {"s":"abada","c":"a"})',
   url: "https://leetcode.com/problems/count-substrings-starting-and-ending-with-given-character/",
   complexity: "O(n) time and O(1) extra space. The visualization caps s at 50 characters.",
+  question: "Count the substrings that start and end with a given character.",
+  approaches: [
+    { name: "Count occurrences", intuition: "Count occurrences of the character c, then add c(c+1)/2 to account for all start and end pairs.", time: "O(n)", space: "O(1)" },
+    { name: "Enumerate pairs", intuition: "Check every pair of positions directly.", time: "O(n^2)", space: "O(1)" },
+  ],
   examples: [
     { label: "Example", input: '{"s":"banana","c":"n"}' },
     { label: "Example", input: '{"s":"kkkk","c":"k"}' },

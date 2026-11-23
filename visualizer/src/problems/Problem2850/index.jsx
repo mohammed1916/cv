@@ -18,6 +18,11 @@ const definition = {
   inputLabel: 'Grid (JSON object with grid, 3 rows of 3 cells summing to 9)',
   url: "https://leetcode.com/problems/minimum-moves-to-spread-stones-over-grid/",
   complexity: "Backtracking over surplus stones and empty cells, pruned by the best cost so far. The visualization fixes the grid at 3 by 3 with nine stones.",
+  question: "Find the fewest moves to move stones so that every cell of a 3 by 3 grid holds exactly one stone.",
+  approaches: [
+    { name: "Backtracking with cost pruning", intuition: "Match each surplus stone to an empty cell, pruning any branch whose cost already exceeds the best found.", time: "exponential, pruned", space: "O(9)" },
+    { name: "Minimum-cost matching", intuition: "Treat surplus stones and empty cells as a bipartite assignment and minimize total Manhattan distance.", time: "O(n^3) for n cells", space: "O(n^2)" },
+  ],
   examples: [
     { label: "Example 1", input: '{"grid":[[1,1,0],[1,1,1],[1,2,1]]}' },
     { label: "Example 2", input: '{"grid":[[1,3,0],[1,0,0],[1,0,3]]}' },

@@ -12,6 +12,11 @@ const definition = {
   inputLabel: 'Object with n (JSON)',
   url: 'https://leetcode.com/problems/gcd-of-odd-and-even-sums/',
   complexity: 'O(n) time with the sums built directly. The closed form n^2 and n(n+1) gives the same answer in O(1).',
+  question: "Find the GCD of the sum of odd-indexed values and the sum of even-indexed values.",
+  approaches: [
+    { name: "Build the sums", intuition: "Add the odd and even terms directly, then take the GCD.", time: "O(n)", space: "O(1)" },
+    { name: "Closed form", intuition: "Use the closed forms n squared and n times n plus one for the two sums.", time: "O(1)", space: "O(1)" },
+  ],
   examples: [
     { label: 'n = 4', input: '{"n":4}' },
     { label: 'n = 1', input: '{"n":1}' },

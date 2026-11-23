@@ -4,6 +4,10 @@ import { meta } from './meta'
 import { buildTrace, parseInput, code, python, phases, examples, complexity, inputLabel } from './algorithm'
 
 const definition = {
+  question: "Find the cheapest walk across a grid from the top-left to the bottom-right cell, where entering each cell costs something and waiting on cells adds cost.",
+  approaches: [
+    { name: "Row-order DP", intuition: "Process cells in row order, keeping the cheaper of the two incoming moves plus the cell's entry cost.", time: "O(m * n)", space: "O(m * n)" },
+  ],
   number: meta.number,
   phases, parse: parseInput, build: buildTrace, code, python, inputLabel,
   url: `https://leetcode.com/problems/${meta.slug}/`,

@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with value, k and stream (list of integers)',
   url: 'https://leetcode.com/problems/find-consecutive-integers-from-a-data-stream/',
   complexity: 'Each number is added and removed from the window once, so every answer costs constant time and the window holds at most k numbers.',
+  question: "For a stream of integers, report the consecutive-run answer for the last k values as each new one arrives.",
+  approaches: [
+    { name: "Sliding window of the stream", intuition: "Each arriving value joins the window and the oldest one leaves, so every answer is a constant-time check.", time: "O(1) per value", space: "O(k)" },
+  ],
   examples: [
     { label: 'Example', input: '{"value":7,"k":2,"stream":[7,3,7,7,7,2,7]}' },
     { label: 'Longer run', input: '{"value":4,"k":3,"stream":[4,4,4,1,4,4,4,4]}' },

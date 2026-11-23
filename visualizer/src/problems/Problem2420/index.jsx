@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'An object with nums (2 to 12 integers from 1 to 10) and k (1 to half the length)',
   url: 'https://leetcode.com/problems/find-all-good-indices/',
   complexity: 'O(n) time and O(n) space. The visualization caps nums at 12 entries.',
+  question: "Find the indices with at least k values before them that are non-increasing and k values after them that are non-decreasing.",
+  approaches: [
+    { name: "Prefix and suffix run lengths", intuition: "Compute how long each prefix is non-increasing and each suffix is non-decreasing, then test each index.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Two valleys', input: '{"nums":[9,7,4,4,6,8,8,3,5],"k":2}' },
     { label: 'Short', input: '{"nums":[3,3,1,5],"k":1}' },

@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with nums (2 to 9 positive integers)',
   url: "https://leetcode.com/problems/maximum-valid-split-positions-ii/",
   complexity: "The straightforward version scores each of the n + 1 candidate arrays with prefix and suffix gcd tables, for O(n^2 log V) time and O(n) extra space per candidate. The visualization caps the array at 9 values; the official bounds are not verified in this draft.",
+  question: "Remove one element, then count the cut points where the gcd of the left part equals the gcd of the right part.",
+  approaches: [
+    { name: "Prefix and suffix gcd tables", intuition: "Score each candidate removal with prefix and suffix gcd tables.", time: "O(n^2 log V)", space: "O(n)" },
+  ],
   examples: [
     { label: "Repeated pairs", input: '{"nums":[5,5,5]}' },
     { label: "Removal helps", input: '{"nums":[2,4,6]}' },

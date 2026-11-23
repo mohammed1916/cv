@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Observed rolls, mean and n (JSON)',
   url: 'https://leetcode.com/problems/find-missing-observations/',
   complexity: 'O(n) time to build the missing rolls.',
+  question: "Given the mean of rolls of a die and the rolls seen, find the values of the missing rolls.",
+  approaches: [
+    { name: "Distribute the remainder evenly", intuition: "Compute the total the missing rolls must add up to, then split it evenly with a remainder.", time: "O(n + m)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Even split', input: '{"rolls":[1,6,1],"mean":3,"n":2}' },
     { label: 'Remainder', input: '{"rolls":[2,3],"mean":2,"n":3}' },

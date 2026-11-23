@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Experiment rows [id, platform, name] (JSON)',
   url: 'https://leetcode.com/problems/count-the-number-of-experiments/',
   complexity: 'SQL: a 9-row cross join, one left join on two columns, then a grouped count.',
+  question: "Count the experiments on each platform for each combination of experiment type and platform.",
+  approaches: [
+    { name: "Group and pivot", intuition: "Group experiments by platform and type, counting each combination.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Two platforms used', input: '[[4,"IOS","Programming"],[7,"Web","Reading"],[9,"IOS","Programming"]]' },
     { label: 'One experiment', input: '[[1,"Android","Sports"]]' },

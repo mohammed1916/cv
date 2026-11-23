@@ -16,6 +16,10 @@ const definition = {
   inputLabel: 'Object with n (teams, 2 to 4 in this visual)',
   url: 'https://leetcode.com/problems/generate-schedule/',
   complexity: 'Backtracking over n(n-1) ordered pairs. The visualization caps n at 4.',
+  question: "Generate a schedule that pairs every ordered pair of distinct teams exactly once.",
+  approaches: [
+    { name: "Backtracking over pairs", intuition: "Place pairs one at a time and undo choices that lead to dead ends.", time: "exponential", space: "O(n^2)" },
+  ],
   examples: [
     { label: 'Three teams', input: '{"n":3}' },
     { label: 'Four teams', input: '{"n":4}' },

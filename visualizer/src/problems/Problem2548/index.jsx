@@ -18,6 +18,10 @@ const definition = {
   inputLabel: 'Object with items ([price, weight] pairs) and capacity',
   url: 'https://leetcode.com/problems/maximum-price-to-fill-a-bag/',
   complexity: 'O(n log n) time for n items to sort by price per unit weight, and O(n) space. Fractional items are allowed, so the greedy choice is exact. The statement is read as filling the bag to exactly capacity, returning -1 when the total weight is too small. The visualization caps n at 8.',
+  question: "Fill a bag with capacity using fractions of items, each with a price and weight, to maximise the total price.",
+  approaches: [
+    { name: "Greedy by price per unit", intuition: "Sort items by price per unit weight and take as much of each as the capacity allows.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Mixed ratios', input: '{"items":[[30,4],[50,10],[10,2],[24,6]],"capacity":9}' },
     { label: 'Exact pair', input: '{"items":[[7,2],[6,3]],"capacity":5}' },

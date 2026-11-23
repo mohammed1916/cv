@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON with nums1 and nums2 permutations, e.g. {"nums1":[0,1,2,3],"nums2":[0,2,1,3]}',
   url: 'https://leetcode.com/problems/count-good-triplets-in-an-array/',
   complexity: 'O(n^2) time in this visualization by checking each middle value against every value; the efficient solution uses a Fenwick tree in O(n log n). The page caps n at 8.',
+  question: "Count good triplets, where three values appear in the same relative order in both arrays.",
+  approaches: [
+    { name: "Fix the middle value with Fenwick trees", intuition: "For each middle value, count the smaller values before it in both arrays and the larger values after it, then multiply the two counts.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Four values', input: '{"nums1":[2,0,1,3],"nums2":[0,1,2,3]}' },
     { label: 'Shuffled', input: '{"nums1":[4,0,1,3,2],"nums2":[4,1,0,2,3]}' },

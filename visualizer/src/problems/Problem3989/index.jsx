@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'Object with grid and limit (e.g. {"grid":[[1,5,9,2],[2,4,8,3]],"limit":2})',
   url: 'https://leetcode.com/problems/maximum-consistent-columns-in-a-grid/',
   complexity: 'O(c^2 * r) time and O(c) extra space for r rows and c columns. The visualization caps the grid at 5 by 8.',
+  question: "Keep the longest subsequence of grid columns so that, in every row, neighbouring kept columns stay within a fixed limit.",
+  approaches: [
+    { name: "Chain DP over column pairs", intuition: "For each pair of columns, check every row and extend the longest valid chain.", time: "O(c^2 x r)", space: "O(c)" },
+  ],
   examples: [
     { label: 'Chain of two', input: '{"grid":[[1,5,9,2],[2,4,8,3]],"limit":2}' },
     { label: 'Everything fits', input: '{"grid":[[3,3,3],[0,1,2]],"limit":3}' },

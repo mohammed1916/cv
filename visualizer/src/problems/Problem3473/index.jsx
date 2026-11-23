@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON object with nums, k and m',
   url: 'https://leetcode.com/problems/sum-of-k-subarrays-with-length-at-least-m/',
   complexity: 'O(k * n^2) time with this direct DP. The visualization caps nums at 12 elements.',
+  question: "Split an array into k subarrays of length at least m and maximize their total.",
+  approaches: [
+    { name: "Layered DP", intuition: "Build the best total for j subarrays inside each prefix.", time: "O(k n^2)", space: "O(k n)" },
+  ],
   examples: [
     { label: 'Five values, m two', input: '{"nums":[120,-40,75,-9,300],"k":2,"m":2}' },
     { label: 'Six values, m three', input: '{"nums":[-500,-250,1000,40,-7,88],"k":2,"m":3}' },

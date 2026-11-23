@@ -4,6 +4,10 @@ import { StackLane } from '../../components/shared/AlgorithmStatePrimitives'
 import { buildTrace, parseInput, code, python, phases, examples } from './algorithm'
 
 const definition = {
+  question: "Return the running sum of an array.",
+  approaches: [
+    { name: "Prefix sum", intuition: "Add each value to the running total and store it.", time: "O(n)", space: "O(n)" },
+  ],
   number: '1480', phases, parse: parseInput, build: buildTrace, code, python, examples,
   inputLabel: 'Array of integers (JSON)',
   url: 'https://leetcode.com/problems/running-sum-of-1d-array/',

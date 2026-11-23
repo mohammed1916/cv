@@ -19,6 +19,10 @@ const definition = {
     { id: 'fall', label: 'Query larger ↓', description: 'Extend a rising state with a strictly larger endpoint.' },
     { id: 'done', label: 'Complete', description: 'Reconstruct an optimal alternating path.' },
   ],
+  question: "Choose a subsequence whose values alternate up and down, with consecutive picks at least k positions apart, to maximise its sum.",
+  approaches: [
+    { name: "Two Fenwick trees with delayed insertion", intuition: "Activate predecessors once they are k positions back, and query the best opposite-direction state by value.", time: "O(n log U + U)", space: "O(n + U)" },
+  ],
   examples: authoredExamples0,
 }
 

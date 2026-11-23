@@ -8,6 +8,10 @@ const definition = {
   inputLabel: 'Object with equations: strings such as "a==b" or "c!=d" using lowercase letters',
   url: 'https://leetcode.com/problems/satisfiability-of-equality-equations/',
   complexity: 'O(n) union-find work over the equations, with an almost-constant cost per merge and lookup.',
+  question: "Decide whether a list of equality and inequality equations between single-letter variables can all hold.",
+  approaches: [
+    { name: "Union-find then check", intuition: "Merge variables in equalities, then check that no inequality joins two variables in the same group.", time: "O(E alpha)", space: "O(26)" },
+  ],
   examples: [
     { label: 'Chain of equalities', input: JSON.stringify({ equations: ['p==q', 'q==r', 'p!=s'] }) },
     { label: 'Conflict through a chain', input: JSON.stringify({ equations: ['m==n', 'n==o', 'm!=o'] }) },

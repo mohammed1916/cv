@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Names as JSON: {"ideas": [...]}',
   url: 'https://leetcode.com/problems/naming-a-company/',
   complexity: 'O(n * L + k^2 * n) time for n names of length L and k distinct first letters. The visualization caps input at 30 names.',
+  question: "Given startup ideas as pairs of words, count valid name pairs where swapping the first letters gives two names that are not already ideas.",
+  approaches: [
+    { name: "Group by first letter", intuition: "Group the ideas by first letter and count pairs of groups whose suffixes do not overlap.", time: "O(n * L + k^2 * n)", space: "O(n * L)" },
+  ],
   examples: [
     { label: 'Own: three drinks', input: '{"ideas":["tea","latte","mocha"]}' },
     { label: 'Own: four short names', input: '{"ideas":["ox","box","fox","cox"]}' },

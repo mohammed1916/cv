@@ -13,6 +13,11 @@ const definition = {
   inputLabel: "k, a positive integer (e.g. 5)",
   url: "https://leetcode.com/problems/find-the-k-th-lucky-number/",
   complexity: "O(log k) time and O(log k) space: the answer has about log2(k) digits, returned as a digit string so it stays exact. The visualization caps k at 126 so every lucky number it shows fits on the page.",
+  question: "Return the k-th positive integer whose decimal digits are only 4 and 7, in increasing order.",
+  approaches: [
+    { name: "Binary mapping", intuition: "Lucky numbers of length d correspond to binary patterns of length d, so k plus one in binary, minus its leading bit, gives the digits.", time: "O(log k)", space: "O(log k)" },
+    { name: "Generate in order", intuition: "Build lucky numbers level by level and count until reaching k.", time: "O(k)", space: "O(k)" },
+  ],
   examples: [
     { label: "k = 5 gives 74", input: "5" },
     { label: "k = 4 gives 47", input: "4" },

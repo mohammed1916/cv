@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON object with recipes, ingredients (one list per recipe) and supplies',
   url: 'https://leetcode.com/problems/find-all-possible-recipes-from-given-supplies/',
   complexity: 'O(V + E) for V names and E ingredient links, using a queue of items in stock.',
+  question: "Given recipes that need other recipes or starting supplies as ingredients, list every recipe that can eventually be made.",
+  approaches: [
+    { name: "Topological processing", intuition: "Treat each recipe as a node that waits for its ingredients; repeatedly make any recipe whose ingredients are all available.", time: "O(V + E)", space: "O(V + E)" },
+  ],
   examples: [
     { label: 'Chain of recipes', input: '{"recipes":["bread","toast"],"ingredients":[["flour","water"],["bread","jam"]],"supplies":["flour","water","jam"]}' },
     { label: 'Missing item blocks', input: '{"recipes":["soup","stock"],"ingredients":[["stock","salt"],["bone"]],"supplies":["salt","water"]}' },

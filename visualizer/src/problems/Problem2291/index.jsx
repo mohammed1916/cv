@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with present, future and budget (e.g. {"present":[1,2,3],"future":[4,3,2],"budget":3})',
   url: 'https://leetcode.com/problems/maximum-profit-from-trading-stocks/',
   complexity: 'O(n * budget) time and O(budget) space for n stocks. The visualization caps the input at 6 stocks, budget 20 and prices 1 to 20; the draft does not verify the official bounds. Profit is read as future minus present per chosen stock; that reading is flagged for source verification.',
+  question: "Given present and future prices of stocks and a budget, choose which stocks to buy and sell to maximise profit.",
+  approaches: [
+    { name: "Knapsack over budget", intuition: "Treat each stock as an item with cost equal to its present price and value equal to its future minus present price, then run a 0/1 knapsack.", time: "O(n * budget)", space: "O(budget)" },
+  ],
   examples: [
     { label: 'Three stocks', input: '{"present":[2,3,4],"future":[5,4,9],"budget":6}' },
     { label: 'Nothing worth buying', input: '{"present":[5],"future":[1],"budget":5}' },

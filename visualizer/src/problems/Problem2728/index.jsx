@@ -2,6 +2,10 @@ import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import * as model from './algorithm'
 
 const definition = {
+  question: "Given a circular street of houses with pointers to the next house, count how many houses are on the street.",
+  approaches: [
+    { name: "Walk the ring", intuition: "Follow the next pointer from a house until you return to the starting house, counting steps.", time: "O(k)", space: "O(1)" },
+  ],
   phases: model.PHASES, parse: model.parseInput, build: model.buildTrace, code: model.code, python: model.python,
   inputLabel: model.INPUT_LABEL, url: model.URL, complexity: model.COMPLEXITY, examples: model.EXAMPLES,
 }

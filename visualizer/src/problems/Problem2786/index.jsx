@@ -12,6 +12,11 @@ const definition = {
   inputLabel: 'Object with nums and x (JSON)',
   url: 'https://leetcode.com/problems/visit-array-positions-to-maximize-score/',
   complexity: 'O(n^2) time and O(n) space. The visualization caps n at 10.',
+  question: "Start at position 0 and visit later positions, earning each value minus a penalty when parity changes; maximize the total score.",
+  approaches: [
+    { name: "Dynamic programming over positions", intuition: "Let best[i] be the highest score ending at i, and combine the best earlier state with the parity penalty.", time: "O(n^2)", space: "O(n)" },
+    { name: "Two running best values by parity", intuition: "Only the best even-parity and odd-parity states matter, so keep two running maxima.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Six values, x of seven', input: '{"nums":[4,8,1,6,2,9],"x":7}' },
     { label: 'Example 2', input: '{"nums":[2,4,6],"x":1}' },

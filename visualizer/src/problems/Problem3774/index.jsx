@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Numbers (JSON object with nums and k)',
   url: 'https://leetcode.com/problems/absolute-difference-between-maximum-and-minimum-k-elements/',
   complexity: 'O(n log n) time for sorting. The visualization caps n at 20.',
+  question: "Find the absolute difference between the sum of the k largest values and the sum of the k smallest values.",
+  approaches: [
+    { name: "Sort and compare sums", intuition: "Sort the values and compare the sums of the two ends.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Five values, k two', input: '{"nums":[15,2,8,30,5],"k":2}' },
     { label: 'Single', input: '{"nums":[100],"k":1}' },

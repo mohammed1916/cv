@@ -12,6 +12,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Object with difficulty, profit, worker (JSON)',
   url: 'https://leetcode.com/problems/most-profit-assigning-work/',
   complexity: 'O(n log n + m log m) time for sorting; the two-pointer sweep is O(n + m).',
+  question: "Assign each worker to at most one job they can do to maximise total profit, where a job can be done by any worker whose ability meets its difficulty.",
+  approaches: [
+    { name: "Sort and sweep", intuition: "Sort jobs by difficulty and workers by ability; for each worker, carry the best profit among jobs they can do.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Three jobs, three workers', input: '{"difficulty":[3,6,8],"profit":[5,9,4],"worker":[7,2,9]}' },
     { label: 'Too hard', input: '{"difficulty":[85,47,57],"profit":[24,66,99],"worker":[40,25,25]}' },

@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Input {preorder, postorder} (JSON, n ≤ 30)',
   url: 'https://leetcode.com/problems/construct-binary-tree-from-preorder-and-postorder-traversal/',
   complexity: 'O(n) time and space with a postorder index map (a node with one child is attached as the left child, so any valid tree is accepted).',
+  question: "Build a binary tree from its preorder and postorder traversals.",
+  approaches: [
+    { name: "Recursive split with postorder index", intuition: "The first preorder value is the root; the next preorder value is the left child, found in postorder to split the ranges.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Five-node tree', input: '{"preorder":[4,2,1,3,6],"postorder":[1,3,2,6,4]}' },
     { label: 'Single node', input: '{"preorder":[1],"postorder":[1]}' },

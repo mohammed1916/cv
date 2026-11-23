@@ -12,6 +12,11 @@ const definition = {
   inputLabel: 'JSON {"delay": 50, "period": 20, "cancelTime": 225}',
   url: 'https://leetcode.com/problems/custom-interval/',
   complexity: 'O(k) for k calls before the cancel time. The visualization caps the cancel time at 1000 ms.',
+  question: "Build an interval timer whose waits grow by a fixed period each time, and provide a way to cancel it.",
+  approaches: [
+    { name: "Chained timeouts", intuition: "Schedule each call with the next wait computed from the count, and schedule the next one after the call.", time: "O(k) calls", space: "O(1)" },
+    { name: "Precomputed schedule", intuition: "Compute all the call times up front and schedule each one.", time: "O(k)", space: "O(k)" },
+  ],
   examples: [
     { label: 'Growing waits', input: '{"delay":50,"period":20,"cancelTime":225}' },
     { label: 'Cancel early', input: '{"delay":30,"period":40,"cancelTime":60}' },

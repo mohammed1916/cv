@@ -12,6 +12,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'String and shifts (JSON)',
   url: 'https://leetcode.com/problems/shifting-letters/',
   complexity: 'O(n) time and O(n) space, instead of the O(n^2) cost of applying every shift to its prefix.',
+  question: "Each shift value shifts every letter up to its index; apply all shifts cyclically to the string.",
+  approaches: [
+    { name: "Suffix sums of shifts", intuition: "The total shift for each position is a suffix sum, taken mod 26.", time: "O(n)", space: "O(1) besides output" },
+  ],
   examples: [
     { label: 'Five letters, varied shifts', input: '{"s":"hello","shifts":[1,0,4,1,2]}' },
     { label: 'Wrap-around letters', input: '{"s":"zzz","shifts":[1,1,1000000000]}' },

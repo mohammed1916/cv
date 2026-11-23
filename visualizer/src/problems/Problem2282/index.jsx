@@ -20,6 +20,10 @@ const definition = {
   inputLabel: 'Heights grid as rows of integers, e.g. [[3,1,4],[1,5,9]]',
   url: 'https://leetcode.com/problems/number-of-people-that-can-be-seen-in-a-grid/',
   complexity: 'O(m * n) time and space for an m by n grid, since each cell is pushed and popped at most once per pass. The visualization caps the grid at 8 by 8 with heights from 1 to 99; this draft does not state official bounds.',
+  question: "Count, for each cell of a grid, how many cells it can see to the right and downward, where the view stops at a taller person.",
+  approaches: [
+    { name: "Monotonic stacks along rows and columns", intuition: "Walk each row and column with a monotonic stack, so each cell is pushed and popped at most once per pass.", time: "O(m * n)", space: "O(m * n)" },
+  ],
   examples: [
     { label: 'Mixed heights', input: '[[6,2,8,3],[4,9,1,5],[7,3,2,6]]' },
     { label: 'Equal heights', input: '[[4,4,4],[4,1,4]]' },

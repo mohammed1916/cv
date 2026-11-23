@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Object with arr, m and k (JSON)',
   url: 'https://leetcode.com/problems/detect-pattern-of-length-m-repeated-k-or-more-times/',
   complexity: 'O(n) time and O(1) extra space: one pass that counts consecutive positions where a value equals the one m places later.',
+  question: "Decide whether an array has a pattern of length m repeated at least k times in a row.",
+  approaches: [
+    { name: "Scan run of matching positions", intuition: "Count consecutive positions where a value equals the one m places later.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Pattern of two, twice', input: '{"arr":[5,1,3,1,3,9,1,3,2],"m":2,"k":2}' },
     { label: 'Not three times', input: '{"arr":[5,1,3,1,3,9,1,3,2],"m":2,"k":3}' },

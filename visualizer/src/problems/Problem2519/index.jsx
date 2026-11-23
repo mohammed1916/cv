@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with nums and k (e.g. {"nums":[2,3,6,5,2,3],"k":2})',
   url: "https://leetcode.com/problems/count-the-number-of-k-big-indices/description/",
   complexity: "O(n^2) time and O(n) space for n values, counting each side by scanning. The visualization caps the array at 12 values of 1 to 20 and k at 12;",
+  question: "Count indices that have at least k smaller values on both sides.",
+  approaches: [
+    { name: "Count smaller values on each side", intuition: "For each index, count the smaller values to its left and to its right and compare them with k.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: "Example", input: '{"nums":[2,3,6,5,2,3],"k":2}' },
     { label: "k zero", input: '{"nums":[1,1,1],"k":0}' },

@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'JSON object with day, month and year, for example {"day":31,"month":8,"year":2019}',
   url: 'https://leetcode.com/problems/day-of-the-week/',
   complexity: 'O(years + 12) time for the visualization. The closed form runs in O(1).',
+  question: "Given a date, return the day of the week it falls on.",
+  approaches: [
+    { name: "Count days from a reference", intuition: "Count days from a known reference date and take the remainder modulo seven.", time: "O(years + 12)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Own: 14 Feb 2024', input: '{"day":14,"month":2,"year":2024}' },
     { label: 'Spring date in 1999', input: '{"day":12,"month":3,"year":1999}' },

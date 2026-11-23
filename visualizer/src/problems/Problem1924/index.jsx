@@ -23,6 +23,10 @@ const definition = {
   inputLabel: 'JSON list of [x, y] points',
   url: 'https://leetcode.com/problems/erect-the-fence-ii/',
   complexity: 'O(n^3) time and O(1) extra space for n points, using the incremental boundary rule. The visualization caps the input at 8 points with integer coordinates from -100 to 100; results are shown to 3 decimals.',
+  question: "Compute the smallest circle that encloses every point, to be used as a fence boundary.",
+  approaches: [
+    { name: "Randomised incremental circle", intuition: "Shuffle the points, then grow the circle when a new point falls outside, rebuilding through pairs and triples.", time: "O(n) expected", space: "O(n)" },
+  ],
   examples: [
     { label: 'Acute triangle', input: '[[0,0],[4,0],[2,3]]' },
     { label: 'Obtuse triangle', input: '[[0,0],[6,0],[1,1]]' },

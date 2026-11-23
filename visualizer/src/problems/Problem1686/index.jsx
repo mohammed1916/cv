@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Object with alice and bob value lists (JSON)',
   url: 'https://leetcode.com/problems/stone-game-vi/',
   complexity: 'O(n log n) time for the ranking and O(n) for the turns. Space is O(n).',
+  question: "Two players take stones that carry a value for each of them; each picks to maximise their own score difference.",
+  approaches: [
+    { name: "Sort by combined value", intuition: "Sort stones by the sum of both players' values, then alternate taking the top stone.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Alice ahead', input: '{"alice":[1,5,9,2],"bob":[4,3,2,8]}' },
     { label: 'Tie', input: '{"alice":[2,2],"bob":[2,2]}' },

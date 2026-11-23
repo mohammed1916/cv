@@ -9,6 +9,10 @@ const definition = {
   inputLabel: 'Object with Cities (state, city), up to 14 rows',
   url: 'https://leetcode.com/problems/find-cities-in-each-state/',
   complexity: 'O(c log c) for c city rows: group by state, sort each group, then sort the kept states.',
+  question: "For each state, list the cities that match a condition, sorted by a score and then by name.",
+  approaches: [
+    { name: "Group, sort, then sort groups", intuition: "Group the cities by state, sort each group, then sort the kept states.", time: "O(c log c)", space: "O(c)" },
+  ],
   examples: [
     { label: 'Three states', input: sample },
     { label: 'Too few cities', input: fewCities },

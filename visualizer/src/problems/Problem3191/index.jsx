@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Binary array of 1 to 12 entries, for example [0,1,1,1,0,0]',
   url: 'https://leetcode.com/problems/minimum-operations-to-make-binary-array-elements-equal-to-one-i/',
   complexity: 'O(n) time and O(1) extra space. The visualization caps the array at 12 entries.',
+  question: "Find the fewest flips of three consecutive values needed to make every value in a binary array equal to one.",
+  approaches: [
+    { name: "Forced left-to-right flips", intuition: "A zero at the start of the scan forces a flip of the window starting there, so the scan proceeds greedily.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Four entries, mixed', input: '[1,0,0,1]' },
     { label: 'Seven entries, mixed', input: '[0,1,1,0,1,0,0]' },

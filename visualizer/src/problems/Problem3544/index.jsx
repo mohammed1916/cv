@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with edges, nums and k (JSON)',
   url: 'https://leetcode.com/problems/subtree-inversion-sum/',
   complexity: 'O(n * k) time and space. The visualization caps the tree at 12 nodes and k at 6.',
+  question: "On a tree, choose nodes to invert so that the subtree sum is as large as possible.",
+  approaches: [
+    { name: "Tree DP", intuition: "Store the best sum for each node, distance to a chosen ancestor and parity.", time: "O(n k)", space: "O(n k)" },
+  ],
   examples: [
     { label: 'Path with a branch', input: '{"edges":[[0,1],[1,2],[1,3],[3,4]],"nums":[2,-3,5,1,-4],"k":2}' },
     { label: 'Middle node negative', input: '{"edges":[[1,0],[1,2]],"nums":[1,-5,3],"k":2}' },

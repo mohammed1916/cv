@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'Object with start url and links: { url: [urls] }',
   url: 'https://leetcode.com/problems/web-crawler-multithreaded/',
   complexity: 'O(V + E) for the pages and links reached. The concurrent version uses the same visited rule under a lock.',
+  question: "Crawl the web concurrently from a start page with a hostname filter.",
+  approaches: [
+    { name: "Concurrent breadth-first with locks", intuition: "Share one visited set under a lock and fetch links from several workers.", time: "O(V + E)", space: "O(V)" },
+  ],
   examples: [
     { label: 'Example', input: '{"start":"http://ex.com/a","links":{"http://ex.com/a":["http://ex.com/b","http://other.org/c"],"http://ex.com/b":["http://ex.com/a","http://ex.com/d"]}}' },
     { label: 'Start page with no links', input: '{\"start\":\"https://site.test/\",\"links\":{\"https://site.test/\":[]}}' },

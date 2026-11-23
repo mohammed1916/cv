@@ -4,6 +4,11 @@ import { StackLane } from '../../components/shared/AlgorithmStatePrimitives'
 import { buildTrace, parseInput, code, python, phases, examples } from './algorithm'
 
 const definition = {
+  question: "Find the fewest cable moves needed to connect every computer in a network.",
+  approaches: [
+    { name: "Union-find component count", intuition: "Join the connected computers, then the moves needed equal the extra components minus one.", time: "O(n + m a(n))", space: "O(n)" },
+    { name: "Depth-first component count", intuition: "Count the connected components with a traversal and compare with the cable count.", time: "O(n + m)", space: "O(n + m)" },
+  ],
   number: '1319', phases, parse: parseInput, build: buildTrace, code, python, examples,
   inputLabel: 'Object with n and links (JSON)',
   url: 'https://leetcode.com/problems/number-of-operations-to-make-network-connected/',

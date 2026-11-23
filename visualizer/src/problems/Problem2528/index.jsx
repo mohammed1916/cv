@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'JSON object with stations, r and k',
   url: 'https://leetcode.com/problems/maximize-the-minimum-powered-city/',
   complexity: 'O(n log(sum + k)) time. The visualization caps input at 6 cities.',
+  question: "Place k new power stations to maximise the minimum power across all cities.",
+  approaches: [
+    { name: "Binary search with greedy placement", intuition: "Test whether a target power is achievable by placing stations as far right as needed.", time: "O(n log(sum + k))", space: "O(n)" },
+  ],
   examples: [
     { label: 'Six cities, one range step', input: '{"stations":[3,0,2,4,1,5],"r":1,"k":3}' },
     { label: 'No range (r = 0)', input: '{"stations":[1,2,0,3],"r":0,"k":2}' },

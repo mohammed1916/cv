@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON object with grid (0 empty, 1 obstacle) and k (removal budget)',
   url: 'https://leetcode.com/problems/shortest-path-in-a-grid-with-obstacles-elimination/',
   complexity: 'O(m * n * k) time and space for the state graph. The visualization caps the grid at 6 by 6.',
+  question: "Find the shortest path through a grid from top-left to bottom-right, allowing a limited number of obstacle removals.",
+  approaches: [
+    { name: "Breadth-first on (cell, removals)", intuition: "Each state tracks the cell and the removals left, and the search is level by level.", time: "O(m x n x k)", space: "O(m x n x k)" },
+  ],
   examples: [
     { label: 'Two removals open a path', input: '{"grid":[[0,1,0,0],[0,1,1,0],[0,0,0,1],[1,0,0,0],[0,0,0,0]],"k":2}' },
     { label: 'No removals allowed', input: '{"grid":[[0,1,1,0],[0,0,1,1],[1,0,0,0]],"k":0}' },

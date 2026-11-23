@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON object with word1 and word2',
   url: 'https://leetcode.com/problems/count-substrings-that-can-be-rearranged-to-contain-a-string-i/',
   complexity: 'O(n^2 * 26) time in the worst case. The visualization caps word1 at 12 letters and word2 at 5.',
+  question: "Count substrings of word1 that contain every letter of word2 at least as often as word2 does, after rearrangement.",
+  approaches: [
+    { name: "Check every start and end", intuition: "For each start, extend the end and check the letter counts against word2.", time: "O(n^2 * 26)", space: "O(26)" },
+  ],
   examples: [
     { label: 'Pattern at the end', input: '{"word1":"zpqz","word2":"qz"}' },
     { label: 'Second word is a prefix', input: '{"word1":"mnopq","word2":"mnop"}' },

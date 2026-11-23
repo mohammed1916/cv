@@ -9,6 +9,10 @@ const definition = {
   inputLabel: 'People as [costA, costB] pairs (JSON)',
   url: 'https://leetcode.com/problems/two-city-scheduling/',
   complexity: 'O(n log n) time for the sort and O(n) for the assignment.',
+  question: "Send exactly half of 2n people to city A and half to city B so that the total travel cost is as small as possible.",
+  approaches: [
+    { name: "Sort by cost difference", intuition: "Start with everyone sent to city A, then move the people whose cost to B is least larger than their cost to A.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Sample', input: '[[10,30],[400,50],[30,200],[90,20]]' },
     { label: 'Ties', input: '[[5,5],[5,5],[5,5],[5,5]]' },

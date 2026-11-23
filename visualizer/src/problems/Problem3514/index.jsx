@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Integers from 1 to 31 (JSON object with nums)',
   url: 'https://leetcode.com/problems/number-of-unique-xor-triplets-ii/',
   complexity: 'O(d^2 * d) time for d distinct values, with d at most 32 here. The visualization caps the list at 12 entries.',
+  question: "Count the distinct XOR values of triplets from a list of distinct values.",
+  approaches: [
+    { name: "Subset counting", intuition: "Track reachable XOR values over the list, one value at a time.", time: "O(d^3)", space: "O(d)" },
+  ],
   examples: [
     { label: 'Three', input: '{"nums":[1,2,3]}' },
     { label: 'Repeats', input: '{"nums":[4,4,7,2]}' },

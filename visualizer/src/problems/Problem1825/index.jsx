@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON object with m, k and operations such as ["add", 3] or ["calc"], for example {"m":3,"k":1,"operations":[["add",3],["add",1],["calc"]]}',
   url: 'https://leetcode.com/problems/finding-mk-average/',
   complexity: 'The visualization sorts the last m values on each calculation, so it costs O(m log m) per calc. The statement is solved with ordered sets in O(log m) per operation. Input is capped at 60 operations.',
+  question: "Maintain a stream of values and report the average of the middle values among the last m.",
+  approaches: [
+    { name: "Re-sort the window", intuition: "Keep the last m values, and on each query sort them and average the middle part.", time: "O(m log m) per query", space: "O(m)" },
+  ],
   examples: [
     { label: 'Example', input: '{"m":3,"k":1,"operations":[["add",3],["add",1],["calc"],["add",10],["calc"],["add",5],["add",5],["add",5],["calc"]]}' },
     { label: 'Too short', input: '{"m":4,"k":1,"operations":[["add",2],["calc"]]}' },

@@ -16,6 +16,10 @@ const definition = {
     { id: 'apply', label: 'Pay increments', description: 'Apply the exact value difference to this position.' },
     { id: 'done', label: 'Return minimum', description: 'Sum the independent minimum costs.' },
   ],
+  question: "Raise array values as little as possible so each position meets its required prime or non-prime condition, and report the total increments.",
+  approaches: [
+    { name: "Nearest allowed value per position", intuition: "Sieve primes, then move each position to the nearest value of its required kind and add that cost.", time: "O(U log log U + n)", space: "O(U + n)" },
+  ],
   examples: authoredExamples0,
 }
 function AlternatingPrime() {

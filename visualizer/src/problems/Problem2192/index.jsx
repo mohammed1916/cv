@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON with n and edges, e.g. {"n":4,"edges":[[0,1],[0,2],[1,3],[2,3]]}',
   url: 'https://leetcode.com/problems/all-ancestors-of-a-node-in-a-directed-acyclic-graph/',
   complexity: 'O(n * (n + m)) time in the worst case for ancestor sets, and O(n^2) space. The page caps the graph at 8 nodes.',
+  question: "For each node in a directed acyclic graph, list all of its ancestors in sorted order.",
+  approaches: [
+    { name: "Topological propagation of ancestor sets", intuition: "Process nodes in topological order; each child inherits its parent's ancestors plus the parent itself.", time: "O(V * E)", space: "O(V^2)" },
+  ],
   examples: [
     { label: 'Diamond', input: '{"n":4,"edges":[[0,1],[0,2],[1,3],[2,3]]}' },
     { label: 'Chain', input: '{"n":3,"edges":[[0,1],[1,2]]}' },

@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'An object with nums (1 to 12 integers from -10 to 10) and k (1 to the length of nums)',
   url: 'https://leetcode.com/problems/maximum-subarray-sum-with-length-divisible-by-k/',
   complexity: 'O(n + k) time and O(k) space. The visualization caps nums at 12 entries.',
+  question: "Find the largest sum of a subarray whose length is divisible by k.",
+  approaches: [
+    { name: "Prefix sums grouped by remainder", intuition: "Keep the smallest prefix sum for each remainder modulo k, then scan for the largest difference.", time: "O(n + k)", space: "O(k)" },
+  ],
   examples: [
     { label: 'Six values, k three', input: '{"nums":[4,-6,9,-1,0,2],"k":3}' },
     { label: 'Extremes, k two', input: '{"nums":[-10,10,-3],"k":2}' },

@@ -12,6 +12,11 @@ const definition = {
   inputLabel: 'JSON object with nums (1 to 20 values from 0 to 20) and k (1 to 20)',
   url: 'https://leetcode.doocs.org/en/lc/2919/',
   complexity: 'O(n) time and O(n) space for the DP table.',
+  question: "Find the fewest increment operations needed so that every window of three consecutive values has a large enough maximum.",
+  approaches: [
+    { name: "Dynamic programming over windows", intuition: "Track the best cost for each state of the last three elements, using increments only where a window fails.", time: "O(n)", space: "O(1)" },
+    { name: "Greedy increments", intuition: "Raise values that break the condition by the minimum needed.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Spread raises', input: '{"nums": [1,4,0,2,1], "k": 3}' },
     { label: 'All small', input: '{"nums": [0,0,0,0,0], "k": 2}' },

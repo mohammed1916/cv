@@ -18,6 +18,11 @@ const definition = {
   inputLabel: "JSON object: {\"s\": \"...\", \"queries\": [[a,b,c,d],...]}",
   url: "https://leetcode.com/problems/palindrome-rearrangement-queries/",
   complexity: "This view checks each query in O(n + 26) with plain counting, so O(n * q) time overall. The visualization caps s at 50 characters and 20 queries.",
+  question: "For each query, decide whether the string can become a palindrome by rearranging two substrings.",
+  approaches: [
+    { name: "Prefix letter counts per query", intuition: "Use prefix counts for each letter to check whether the mismatched parts of each half can be matched.", time: "O(26\u00b7(n + q))", space: "O(26\u00b7n)" },
+    { name: "Brute force per query", intuition: "Rebuild and check the affected parts for each query.", time: "O(n\u00b7q)", space: "O(n)" },
+  ],
   examples: [
     { label: "Already a palindrome", input: "{\"s\": \"abccba\", \"queries\": [[0, 0, 5, 5], [1, 1, 4, 4]]}" },
     { label: "One letter moves", input: "{\"s\": \"abcabc\", \"queries\": [[0, 0, 3, 5]]}" },

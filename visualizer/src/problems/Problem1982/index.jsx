@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Length n and all 2^n subset sums (JSON)',
   url: 'https://leetcode.com/problems/find-array-given-subset-sums/',
   complexity: 'Worst case exponential in n through the guesses; each guess splits 2^n sums in O(2^n log 2^n) time.',
+  question: "Recover an original array of integers from the multiset of all subset sums.",
+  approaches: [
+    { name: "Split sums by the smallest difference", intuition: "Repeatedly pick the element from the smallest unassigned gap and split the sums into those with and without it.", time: "O(n 2^n)", space: "O(2^n)" },
+  ],
   examples: [
     { label: 'Positive pair', input: '{"n":2,"sums":[-2,0,3,5]}' },
     { label: 'Three elements', input: '{"n":3,"sums":[-1,0,3,4,6,7,10,11]}' },

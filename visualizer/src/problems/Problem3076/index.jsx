@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Strings (JSON object with arr)',
   url: 'https://leetcode.com/problems/shortest-uncommon-substring-in-an-array/',
   complexity: 'O(n * L^3) for small inputs, where n is the array size and L the string length. The visualization caps arr at 8 strings of 6 letters.',
+  question: "For each string, find the shortest substring that appears in no other string, breaking ties lexicographically.",
+  approaches: [
+    { name: "Length-first substring check", intuition: "Try substring lengths in order, and for each length check whether the substring appears in any other string.", time: "O(n\u00b7L^3)", space: "O(n\u00b7L^2)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"arr":["cab","ad","bad","c"]}' },
     { label: 'Single word', input: '{"arr":["a"]}' },

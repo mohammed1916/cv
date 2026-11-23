@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'Object with size (grid side) and ships: [[x, y], ...]',
   url: 'https://leetcode.com/problems/number-of-ships-in-a-rectangle/',
   complexity: 'Each ship causes at most O(log size) splits along each path, so the oracle is called a small number of times per ship. The visualization caps the grid at 8 by 8.',
+  question: "Count the ships inside a rectangle using only a point-query oracle.",
+  approaches: [
+    { name: "Divide and conquer with the oracle", intuition: "Split the rectangle in half and recurse only where the oracle reports a ship.", time: "O(ships x log size)", space: "O(log size)" },
+  ],
   examples: [
     { label: 'Example', input: '{"size":4,"ships":[[0,0],[2,3],[3,1]]}' },
     { label: 'Empty grid', input: '{"size":3,"ships":[]}' },

@@ -13,6 +13,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Target (JSON integer)',
   url: 'https://leetcode.com/problems/race-car/',
   complexity: 'O(target log target) time, O(target) space. Each target tries O(log target) turn-around points.',
+  question: "Starting at position 0 with speed 1, the car can accelerate or reverse; find the fewest instructions to reach a target position.",
+  approaches: [
+    { name: "DP over positions", intuition: "Compute the fewest steps to reach each position exactly, and also by overshooting and reversing back, using the best back-off choice.", time: "O(t log t)", space: "O(t)" },
+  ],
   examples: [{ label: 'Target 3', input: '3' }, { label: 'Target 6', input: '6' }, { label: 'Target 100', input: '100' }, { label: 'Smallest target', input: '1' }, { label: 'Power of two', input: '16' }, { label: 'Largest target', input: '2000' }, { label: 'Long run: target 1999', input: '1999' }],
 }
 export default function RaceCar() {

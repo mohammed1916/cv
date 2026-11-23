@@ -10,6 +10,10 @@ const definition = {
   number: meta.number,
   phases, parse: parseInput, build: buildTrace, code, sql, python, inputLabel,
   url: `https://leetcode.com/problems/${meta.slug}/`,
+  question: "Find the airport with the most total traffic, counting both departures and arrivals from a flights table.",
+  approaches: [
+    { name: "Union of departures and arrivals, then group", intuition: "Stack the departure counts and the arrival counts into one list, sum the flights per airport, and return the top airport.", time: "O(n log n)", space: "O(n)" },
+  ],
   complexity, examples,
 }
 

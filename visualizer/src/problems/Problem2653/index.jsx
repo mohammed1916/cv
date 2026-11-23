@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON object with nums (1 to 40 values from -50 to 50), k and x, for example {"nums":[1,-1,-3,-2,3],"k":3,"x":2}',
   url: 'https://leetcode.com/problems/sliding-subarray-beauty/',
   complexity: 'O(n * (k + 50)) time with a fixed-size tally of negative values. The visualization caps nums at 40 values.',
+  question: "Given an array, a window size k, and a percentile x, return the beauty of each window, where beauty is the x-th smallest negative value or zero.",
+  approaches: [
+    { name: "Fixed-size tally of negatives", intuition: "Slide a window and keep counts of negative values in a fixed range to read off the x-th smallest.", time: "O(n * (k + 50))", space: "O(50)" },
+  ],
   examples: [
     { label: 'Window of four, x two', input: '{"nums":[7,-1,3,-5,8,2],"k":4,"x":2}' },
     { label: 'Ones and negatives, x one', input: '{"nums":[1,1,-3,6,2,-4,5],"k":3,"x":1}' },

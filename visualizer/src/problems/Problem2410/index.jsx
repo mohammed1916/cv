@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON object with players and trainers (1 to 8 abilities each, 1 to 20)',
   url: 'https://leetcode.com/problems/maximum-matching-of-players-with-trainers/',
   complexity: 'O(n log n + m log m) time for n players and m trainers. The visualization caps each list at 8.',
+  question: "Match players to trainers so that each player's ability is at most the trainer's, and count the most matches.",
+  approaches: [
+    { name: "Sort and greedy match", intuition: "Sort both lists and match each player with the smallest trainer that can handle them.", time: "O(n log n + m log m)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Mixed', input: '{"players":[5,2,9,3],"trainers":[4,10,1,6]}' },
     { label: 'Weak trainers', input: '{"players":[6,6],"trainers":[2,3]}' },

@@ -21,6 +21,10 @@ const definition = {
   phases, parse: parseInput, build: buildTrace, code, sql, python, inputLabel,
   url: `https://leetcode.com/problems/${meta.slug}/`,
   complexity, examples,
+  question: "Find the university that wins a competition by comparing its number of winners against other universities.",
+  approaches: [
+    { name: "Group and compare", intuition: "Group winners by university and pick the one with the most results.", time: "O(n log n)", space: "O(n)" },
+  ],
 }
 
 function Rows({ columns = [], rows = [] }) {

@@ -3,6 +3,10 @@ import View from './View'
 import { buildTrace, parseInput, code, python, pythonLineMap, phases, examples, complexity } from './algorithm.js'
 
 const definition = {
+  question: "Find the depth of the current folder after a list of crawler log operations.",
+  approaches: [
+    { name: "Depth counter", intuition: "Move down for a child folder, up for the parent, and stay for the root.", time: "O(n)", space: "O(1)" },
+  ],
   number: '1598',
   parse: parseInput,
   build: buildTrace,

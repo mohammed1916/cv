@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Boxes as [length, width, height] (JSON array)',
   url: 'https://leetcode.com/problems/maximum-height-by-stacking-cuboids/',
   complexity: 'O(n^2) time after sorting the boxes, and O(n) extra space.',
+  question: "Stack cuboids, rotating each freely, to maximise the total height where each box sits on a larger one.",
+  approaches: [
+    { name: "Sort then longest chain DP", intuition: "Sort the dimensions of each box, sort the boxes, and run a longest-chain DP for fits.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Four boxes', input: '[[3,2,1],[2,4,5],[4,1,2],[6,3,3]]' },
     { label: 'Equal boxes', input: '[[2,2,2],[2,2,2]]' },

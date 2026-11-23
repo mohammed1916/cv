@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Values and budget (JSON object with nums, k, m)',
   url: 'https://leetcode.com/problems/maximum-bitwise-and-after-increment-operations/',
   complexity: 'O(bits * n log n) time. The visualization caps n at 5 and values at 15.',
+  question: "Find the largest possible bitwise AND of an array after a limited number of increments.",
+  approaches: [
+    { name: "Decide bits from the top down", intuition: "Keep each bit of the answer only if enough numbers can be raised to contain all chosen bits.", time: "O(bits * n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Three values, m two', input: '{"nums":[3,7,2],"k":4,"m":2}' },
     { label: 'Single value, m one', input: '{"nums":[9],"k":1,"m":1}' },

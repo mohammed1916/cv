@@ -20,6 +20,10 @@ const definition = {
   inputLabel: "Target amount n (e.g. 10)",
   url: "https://leetcode.com/problems/the-number-of-ways-to-make-the-sum/",
   complexity: "O(n) time and O(n) space for amount n: one pass per unlimited coin type, then three lookups for the 4-coins. The visualization accepts amounts from 0 to 200; the bounds shown are this visualization's own limits.",
+  question: "Count the ways to make an amount from unlimited coins of value 1, 2 and 6, plus at most two coins of value 4.",
+  approaches: [
+    { name: "Coin dynamic programming", intuition: "Add each unlimited coin type to a table of ways, then add the three cases for the 4 coins.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: "Mixed sum", input: "10" },
     { label: "Single big coin", input: "6" },

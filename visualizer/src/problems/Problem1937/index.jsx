@@ -11,6 +11,10 @@ const definition = {
   inputLabel: 'JSON matrix of points (e.g. [[1,2,3],[1,5,1],[3,1,1]])',
   url: 'https://leetcode.com/problems/maximum-number-of-points-with-cost/',
   complexity: 'O(m·n) time with two sweeps per row instead of a quadratic comparison of every pair of columns.',
+  question: "Pick one cell per row of a grid to maximise total points, paying a penalty for each column step between consecutive rows.",
+  approaches: [
+    { name: "Row DP with two sweeps", intuition: "For each row, the best score for a cell is its points plus the best previous cell minus the distance, computed with left and right sweeps.", time: "O(m n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Three rows', input: '[[1,2,3],[1,5,1],[3,1,1]]' },
     { label: 'Two rows', input: '[[1,0,3],[0,0,0]]' },

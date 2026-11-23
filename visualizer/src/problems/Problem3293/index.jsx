@@ -9,6 +9,10 @@ const definition = {
   inputLabel: 'Object with Products (product_id, category, price in whole units) and Discounts (category, discount 0 to 100)',
   url: 'https://leetcode.com/problems/calculate-product-final-price/description/',
   complexity: 'O(p + d) with a map of discounts. Each product is one multiplication and one division, with no rounding.',
+  question: "Compute the final price of each product after its discount is applied.",
+  approaches: [
+    { name: "Join and compute", intuition: "Join each product to its discount, then compute the final price with one multiplication per row.", time: "O(p + d)", space: "O(d)" },
+  ],
   examples: [
     { label: 'Four products', input: sample },
     { label: 'Half unit', input: halfUp },

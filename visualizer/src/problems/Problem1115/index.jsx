@@ -19,6 +19,10 @@ const definition = {
   inputLabel: 'JSON object with n, 1 to 1000 (e.g. {"n":2})',
   url: "https://leetcode.com/problems/print-foobar-alternately/",
   complexity: "O(n) time and O(1) extra space beyond the printed output: each thread prints n times.",
+  question: "Make two threads print foo and bar alternately, n times each.",
+  approaches: [
+    { name: "Alternating locks", intuition: "Two signals hand control back and forth so each print waits for the other thread.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: "n = 3", input: '{"n":3}' },
     { label: "n = 4", input: '{"n":4}' },

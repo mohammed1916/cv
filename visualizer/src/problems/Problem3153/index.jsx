@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with nums of equal digit length (JSON)',
   url: 'https://leetcode.com/problems/sum-of-digit-differences-of-all-pairs/',
   complexity: 'O(n * d) time for n numbers with d digits, plus constant space per column. The visualization caps input at 30 numbers.',
+  question: "Sum the digit differences over all pairs of numbers that have the same number of digits.",
+  approaches: [
+    { name: "Count differing pairs per column", intuition: "Each column contributes the pairs whose digits differ there, which is all pairs minus the pairs with equal digits.", time: "O(n * d)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Three numbers', input: '{"nums":[13,23,12]}' },
     { label: 'All equal', input: '{"nums":[10,10,10,10]}' },

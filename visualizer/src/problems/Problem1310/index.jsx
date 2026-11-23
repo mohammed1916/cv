@@ -3,6 +3,10 @@ import IndexedSequence from '../../components/shared/IndexedSequence'
 import { buildTrace, parseInput, code, python, phases, examples } from './algorithm'
 
 const definition = {
+  question: "Answer many queries for the XOR of a range of an array.",
+  approaches: [
+    { name: "Prefix XOR", intuition: "Each range XOR equals the prefix XOR at the end combined with the prefix XOR before the start.", time: "O(n + q)", space: "O(n)" },
+  ],
   number: '1310', phases, parse: parseInput, build: buildTrace, code, python, examples,
   inputLabel: 'Array and queries (JSON object)',
   url: 'https://leetcode.com/problems/xor-queries-of-a-subarray/',

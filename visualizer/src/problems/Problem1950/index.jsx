@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON array of integers (e.g. [3,1,2])',
   url: 'https://leetcode.com/problems/maximum-of-minimum-values-in-all-subarrays/',
   complexity: 'O(n) time with two monotonic stacks and one spread pass. The visualization caps n at 12.',
+  question: "For every subarray length, find the largest value among the minimums of all subarrays of that length.",
+  approaches: [
+    { name: "Monotonic stack per element", intuition: "For each element, find the widest range where it is the minimum, then record the best value for each length.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Small mix', input: '[3,1,2]' },
     { label: 'Equal values', input: '[2,2,2]' },

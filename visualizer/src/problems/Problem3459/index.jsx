@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON object with a grid of 0, 1, 2 rows (up to 7 by 7)',
   url: 'https://leetcode.com/problems/length-of-longest-v-shaped-diagonal-segment/',
   complexity: 'With memoization on (cell, direction, turn used, next value) the walk is polynomial in the grid size. The visualization caps the grid at 7 by 7.',
+  question: "Find the longest V-shaped walk along diagonals of a grid that turns at most once and follows a value pattern.",
+  approaches: [
+    { name: "Memoized walk", intuition: "Memoize the walk on cell, direction, turn used and next expected value.", time: "polynomial in grid size", space: "O(m n 8)" },
+  ],
   examples: [
     { label: 'Single 1', input: '{"grid":[[1]]}' },
     { label: 'Diagonal', input: '{"grid":[[1,0],[0,2]]}' },

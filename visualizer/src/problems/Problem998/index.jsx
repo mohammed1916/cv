@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'Object with arr (maximum tree, level order) and val (JSON)',
   url: 'https://leetcode.com/problems/maximum-binary-tree-ii/',
   complexity: 'O(h) time, where h is the height of the tree. Only the right spine is walked. The visualization caps the tree at 12 entries.',
+  question: "Insert a value into a maximum binary tree built from an earlier array, where the new value is appended as the last element of that array.",
+  approaches: [
+    { name: "Walk the right spine", intuition: "The new value either becomes the root or is inserted on the right spine, pushing the smaller subtree down.", time: "O(n)", space: "O(h)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"arr":[4,1,3,null,null,2],"val":5}' },
     { label: 'Example 2', input: '{"arr":[5,2,4,null,1],"val":3}' },

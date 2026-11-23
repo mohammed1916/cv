@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'JSON array of digits (3 to 12 entries)',
   url: 'https://leetcode.com/problems/unique-3-digit-even-numbers/',
   complexity: 'O(n^3) time and O(n^3) space in the worst case for n digits. The visualization caps the input at 12 digits.',
+  question: "Count the distinct three-digit even numbers that can be formed from the digits of a list.",
+  approaches: [
+    { name: "Enumerate digit triples", intuition: "Try every ordered choice of three digits and keep the distinct even results.", time: "O(n^3)", space: "O(n^3)" },
+  ],
   examples: [
     { label: 'Zero present', input: '[4,1,6,0]' },
     { label: 'Repeats', input: '[5,2,2,8]' },

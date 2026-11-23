@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Grid and k (JSON object with grid of integers from 0 to 15, up to 5 by 5, and k from 0 to 15)',
   url: 'https://leetcode.com/problems/count-paths-with-the-given-xor-value/',
   complexity: 'O(m * n * 16) time, since every XOR value stays within 0 to 15. The visualization caps the grid at 5 by 5.',
+  question: "Count the paths in a grid whose XOR value equals a given value, moving only right or down.",
+  approaches: [
+    { name: "Dynamic programming over XOR values", intuition: "Track the number of paths to each cell for each possible XOR value from 0 to 15.", time: "O(m * n * 16)", space: "O(n * 16)" },
+  ],
   examples: [
     { label: 'Two by two grid, k five', input: '{"grid":[[2,9],[4,1]],"k":5}' },
     { label: 'Single cell', input: '{"grid":[[7]],"k":7}' },

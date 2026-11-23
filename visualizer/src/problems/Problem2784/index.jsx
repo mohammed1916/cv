@@ -34,6 +34,11 @@ const definition = {
   inputLabel: "Object with nums (JSON), e.g. {\"nums\":[2,2,3,1]}",
   url: "https://leetcode.com/problems/check-if-array-is-good/",
   complexity: "O(n) time and O(n) space for the count array. The visualization caps input at 30 values.",
+  question: "Decide whether the array contains each number from 1 to its maximum exactly once, plus the maximum twice.",
+  approaches: [
+    { name: "Count array", intuition: "Count occurrences of every value and check the required pattern.", time: "O(n)", space: "O(n)" },
+    { name: "Sort and compare", intuition: "Sort the array and compare it with the expected sequence.", time: "O(n log n)", space: "O(1) extra with in-place sort" },
+  ],
   examples: [
   {
     "label": "Good array",

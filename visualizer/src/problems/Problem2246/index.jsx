@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with parent and s (lowercase letters), for example {"parent":[-1,0,0,1],"s":"abac"}',
   url: 'https://leetcode.com/problems/longest-path-with-different-adjacent-characters/',
   complexity: 'O(n) time and O(n) space for the child lists and recursion. The visualization caps input at 12 nodes.',
+  question: "Find the longest path in a tree where no two adjacent nodes share the same character.",
+  approaches: [
+    { name: "Depth-first search with the top two child chains", intuition: "For each node, combine the two longest valid chains from its children and keep the best total.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Own: chain with two branches', input: '{"parent":[-1,0,1,1,3],"s":"zyxwq"}' },
     { label: 'Own: six nodes, repeated letters', input: '{"parent":[-1,0,1,2,2,3],"s":"qpqrsq"}' },

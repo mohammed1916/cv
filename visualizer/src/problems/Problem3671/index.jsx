@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON array of 1 to 12 integers from 1 to 70000',
   url: 'https://leetcode.doocs.org/en/lc/3671/',
   complexity: 'Each index merges GCD states from earlier smaller indices. The visualization caps the input at 12 values.',
+  question: "Sum the GCD-based scores of beautiful subsequences over an array.",
+  approaches: [
+    { name: "GCD state merging", intuition: "For each index, merge the GCD states from earlier smaller indices.", time: "O(n^2 * states)", space: "O(n * states)" },
+  ],
   examples: [
     { label: 'Middle-sized large value', input: '[3,70000,1]' },
     { label: 'Four equal values', input: '[2,2,2,2]' },

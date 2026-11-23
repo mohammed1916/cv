@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with nums, queries (1 to 20 integers each) and x',
   url: 'https://leetcode.com/problems/find-occurrences-of-an-element-in-an-array/',
   complexity: 'O(n + q) time: one scan of nums, then one lookup per query.',
+  question: "For each query, find the index of the k-th occurrence of a value in an array, or -1 if it does not occur that many times.",
+  approaches: [
+    { name: "Index list lookup", intuition: "Collect the indices of the value once in order, then each query reads one position from that list.", time: "O(n + q)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"nums":[4,2,4,9,4],"queries":[2,1,5],"x":4}' },
     { label: 'Example 2', input: '{"nums":[5,6,7],"queries":[1,4],"x":6}' },

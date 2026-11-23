@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'An object with nums: 1 to 12 integers from 1 to 20',
   url: 'https://leetcode.com/problems/left-and-right-sum-differences/',
   complexity: 'O(n) time and O(n) space. The visualization caps the array at 12 entries.',
+  question: "For each index, compute the absolute difference between the sum of the values left of it and the sum right of it.",
+  approaches: [
+    { name: "Prefix and total sums", intuition: "Use a running left sum and subtract it from the total to get the right sum.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"nums":[10,4,8,3]}' },
     { label: 'Single', input: '{"nums":[1]}' },

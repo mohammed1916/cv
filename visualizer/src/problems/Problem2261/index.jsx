@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with nums, k and p (JSON)',
   url: 'https://leetcode.com/problems/k-divisible-elements-subarrays/',
   complexity: 'O(n^2 * n) time with a set of subarray keys. The visualization caps nums at 8 entries.',
+  question: "Count the distinct subarrays that contain at most k elements divisible by p.",
+  approaches: [
+    { name: "Enumerate subarrays with a signature set", intuition: "Scan each start and end, build the subarray's sequence of values, and count the distinct ones using a set.", time: "O(n^3)", space: "O(n^2)" },
+  ],
   examples: [
     { label: 'Frequent value', input: '{"nums":[6,1,6,2,6],"k":2,"p":2}' },
     { label: 'Duplicate heavy', input: '{"nums":[9,9,3,3],"k":3,"p":1}' },

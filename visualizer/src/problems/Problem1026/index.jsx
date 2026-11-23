@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Tree values 0-99 (JSON level order)',
   url: 'https://leetcode.com/problems/maximum-difference-between-node-and-ancestor/',
   complexity: 'O(n) time and O(h) space. The visualization caps input at 15 nodes.',
+  question: "Find the largest absolute difference between a node and any of its descendants in a binary tree.",
+  approaches: [
+    { name: "DFS carrying min and max", intuition: "Pass the smallest and largest values seen on the path; at each node compare with them and update the answer.", time: "O(n)", space: "O(h)" },
+  ],
   examples: [
     { label: 'Sparse right spine', input: '[20,8,25,null,12,null,30,4]' },
     { label: 'Left-leaning chain', input: '[50,10,40,6,null,null,null,1]' },

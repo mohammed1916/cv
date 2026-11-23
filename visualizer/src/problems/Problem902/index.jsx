@@ -16,6 +16,10 @@ const definition = {
   inputLabel: 'Object {digits, n} (JSON)',
   url: 'https://leetcode.com/problems/numbers-at-most-n-given-digit-set/',
   complexity: 'O(k * d) time for k digits in n and d set digits, O(k) space.',
+  question: "Count the positive integers up to n that can be written using only a given set of digits.",
+  approaches: [
+    { name: "Digit counting by prefix", intuition: "Count all shorter numbers, then count same-length numbers digit by digit by choosing smaller digits at each position.", time: "O(d log n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Three digits, bound 200', input: '{"digits":["2","5","8"],"n":200}' },
     { label: 'Own: digits 2, 5, 7 up to 500', input: '{"digits":["2","5","7"],"n":500}' },

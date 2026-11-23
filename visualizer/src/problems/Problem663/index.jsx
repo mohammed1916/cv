@@ -12,6 +12,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Tree (LeetCode level-order JSON array)',
   url: 'https://leetcode.com/problems/equal-tree-partition/',
   complexity: 'O(n) time and O(n) space for the subtree sums and the recursion.',
+  question: "Decide whether one edge can be removed so that the two resulting trees have equal sums.",
+  approaches: [
+    { name: "Subtree sums", intuition: "A cut is valid when a non-root subtree sums to half the total.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Split', input: '[6,3,3,null,null,2,4]' },
     { label: 'Odd total', input: '[3,1,1]' },

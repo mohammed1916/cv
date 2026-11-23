@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Grid of integers, rows as lists (e.g. [[5,4,5],[1,2,6],[7,4,6]])',
   url: 'https://leetcode.com/problems/path-with-maximum-minimum-value/',
   complexity: 'O(R·C·log(R·C)) time with a priority queue, and O(R·C) space for an R x C grid. The visualization caps the grid at 8 x 8 with values from 0 to 1000; the official bounds were not verified.',
+  question: "Find a path from the top-left to the bottom-right of a grid that maximises the smallest value along it.",
+  approaches: [
+    { name: "Max-heap best-first search", intuition: "Expand the cell with the highest minimum so far first, like Dijkstra with a max-heap, and stop at the target.", time: "O(R * C log(R * C))", space: "O(R * C)" },
+  ],
   examples: [
     { label: 'Example grid', input: '[[4,8,3],[6,1,7],[9,2,5]]' },
     { label: 'Second grid', input: '[[3,1,2,6],[5,4,1,3],[2,6,4,5]]' },

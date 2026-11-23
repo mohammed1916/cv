@@ -19,6 +19,10 @@ const definition = {
   inputLabel: 'Network: {"n": nodes 0..n-1, "connections": [[u, v], ...]}',
   url: 'https://leetcode.com/problems/critical-connections-in-a-network/',
   complexity: 'O(V + E) time and O(V + E) space. The visualization caps the network at 12 nodes.',
+  question: "Find every connection whose removal would disconnect the network.",
+  approaches: [
+    { name: "Tarjan low-link DFS", intuition: "Track discovery times and the lowest reachable time; an edge with no back link to an ancestor is critical.", time: "O(V + E)", space: "O(V + E)" },
+  ],
   examples: [
     { label: 'Cycle with a tail', input: '{"n":4,"connections":[[0,1],[1,2],[2,0],[1,3]]}' },
     { label: 'Two cycles joined by a bridge', input: '{"n":6,"connections":[[0,1],[1,2],[2,0],[1,3],[3,4],[4,5],[5,3]]}' },

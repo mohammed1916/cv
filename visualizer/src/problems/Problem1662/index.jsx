@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Object with word1 and word2 as arrays of chunks (JSON)',
   url: 'https://leetcode.com/problems/check-if-two-string-arrays-are-equivalent/',
   complexity: 'O(n) time and O(1) extra space: walk both chunk lists with two cursors, or join and compare once.',
+  question: "Decide whether two arrays of strings spell the same text.",
+  approaches: [
+    { name: "Two cursors", intuition: "Walk both arrays with two pointers, comparing one character at a time.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Same text, different chunks', input: '{"word1":["xy","z"],"word2":["x","yz"]}' },
     { label: 'Same length, different letter', input: '{"word1":["ab","c"],"word2":["ac","b"]}' },

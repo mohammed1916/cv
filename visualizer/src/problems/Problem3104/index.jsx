@@ -19,6 +19,10 @@ const definition = {
   inputLabel: "Lowercase string",
   url: "https://leetcode.com/problems/find-longest-self-contained-substring/",
   complexity: "O(n^2) time and O(1) extra space for the alphabet, for a string of n letters. The visualization caps the string at 24 lowercase letters.",
+  question: "Find the longest substring whose letters appear nowhere outside it.",
+  approaches: [
+    { name: "Check each substring with first and last positions", intuition: "For each substring, confirm that every letter inside it has all its occurrences inside the same range.", time: "O(n^2)", space: "O(1) for the alphabet" },
+  ],
   examples: [
     { label: "Repeated block", input: "abcabc" },
     { label: "Two sections", input: "abacaba" },

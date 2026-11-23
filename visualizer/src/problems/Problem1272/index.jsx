@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with intervals ([start, end] pairs, sorted and disjoint) and toBeRemoved ([start, end])',
   url: 'https://leetcode.com/problems/remove-interval/description/',
   complexity: 'O(n) time and O(n) output for n intervals. The visualization caps n at 12 intervals and coordinates at 0 to 30; the draft does not verify the official bounds.',
+  question: "Remove a range from a set of intervals and return what remains.",
+  approaches: [
+    { name: "Split overlapping intervals", intuition: "Keep the parts of each interval left and right of the removed range.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Split one interval', input: '{"intervals":[[0,2],[3,5],[6,9]],"toBeRemoved":[1,4]}' },
     { label: 'Fully removed', input: '{"intervals":[[0,5]],"toBeRemoved":[0,5]}' },

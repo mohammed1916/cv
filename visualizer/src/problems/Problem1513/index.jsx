@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Binary string of 0 and 1 characters',
   url: 'https://leetcode.com/problems/number-of-substrings-with-only-1s/',
   complexity: 'O(n) time and O(1) extra space: one pass keeps the current block length and the running total.',
+  question: "Count substrings that contain only ones, modulo a large prime.",
+  approaches: [
+    { name: "Block lengths", intuition: "Each run of ones of length L contributes L times L plus 1 over 2 substrings.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Two blocks', input: '0110111' },
     { label: 'Single block', input: '111' },

@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Two words as JSON: word1, word2',
   url: 'https://leetcode.com/problems/maximize-palindrome-length-from-subsequences/',
   complexity: 'O(L^2) time and space for L = |word1| + |word2|. The visualization caps each word at 6 letters.',
+  question: "Build the longest palindrome by taking subsequences from two words and combining them.",
+  approaches: [
+    { name: "Interval DP", intuition: "Use dynamic programming over the substrings of the combined string.", time: "O(L^2)", space: "O(L^2)" },
+  ],
   examples: [
     { label: 'Different lengths', input: '{"word1":"tiger","word2":"owl"}' },
     { label: 'Identical words', input: '{"word1":"ray","word2":"ray"}' },

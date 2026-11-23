@@ -20,6 +20,10 @@ const definition = {
   inputLabel: 'JSON {"nums": [...], "pattern": [...]}',
   url: "https://leetcode.com/problems/number-of-subarrays-that-match-a-pattern-i/",
   complexity: "O(n * m) time and O(1) extra space. The visualization caps n at 100.",
+  question: "Count subarrays that match a pattern of up, down, and equal steps.",
+  approaches: [
+    { name: "Window compare", intuition: "Compare each window of differences with the pattern.", time: "O(n\u00b7m)", space: "O(1)" },
+  ],
   examples: sampleInputs.map(({ label, input }) => ({ label, input: JSON.stringify(input) })),
 };
 

@@ -22,6 +22,10 @@ const definition = {
   inputLabel: 'Digit count n and divisor k (JSON, e.g. {"n": 3, "k": 5})',
   url: "",
   complexity: "Enumerates about 9 * 10^(ceil(n/2)-1) palindromes, then counts arrangements per distinct digit multiset. The visualization accepts n up to 6 and k up to 9. Official constraints were not obtained.",
+  question: "Count n-digit integers whose digits can be rearranged into a palindrome divisible by k, with no leading zero.",
+  approaches: [
+    { name: "Enumerate palindromes, count arrangements", intuition: "Generate each palindrome of the required length, group the palindromes by their digit multiset, then count valid arrangements per multiset.", time: "O(9 * 10^(n/2) * n)", space: "O(10^(n/2))" },
+  ],
   examples: [
     { label: "n 3, k 5 (search summary, not official)", input: '{"n": 3, "k": 5}' },
     { label: "n 1, k 4 (search summary, not official)", input: '{"n": 1, "k": 4}' },

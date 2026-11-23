@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Target value k (integer)',
   url: 'https://leetcode.com/problems/find-the-minimum-number-of-fibonacci-numbers-whose-sum-is-k/',
   complexity: 'O(log k) time for the greedy picks and Fibonacci list, since the values grow exponentially.',
+  question: "Find the fewest Fibonacci numbers whose sum is k.",
+  approaches: [
+    { name: "Greedy largest first", intuition: "Repeatedly take the largest Fibonacci number that does not exceed what is left.", time: "O(log k)", space: "O(log k)" },
+  ],
   examples: [
     { label: 'Target 7', input: '7' },
     { label: 'Target 19', input: '19' },

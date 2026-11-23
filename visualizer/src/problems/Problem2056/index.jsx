@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'JSON object: {"pieces": ["rook" | "queen" | "bishop", ...], "positions": [[row, column], ...]}',
   url: 'https://leetcode.com/problems/number-of-valid-move-combinations-on-chessboard/',
   complexity: 'Backtracking over each piece\'s reachable squares with pairwise clash checks. The visualization caps input at 3 pieces.',
+  question: "Count the valid combinations of moves of chess pieces on a board, where pieces move one square per second and may not collide.",
+  approaches: [
+    { name: "Enumerate paths with collision checks", intuition: "For each piece, enumerate its reachable paths, then combine them and reject any combination where two pieces share a square at the same second.", time: "O(8^k * steps)", space: "O(k)" },
+  ],
   examples: [
     { label: 'Rook', input: '{"pieces":["rook"],"positions":[[1,1]]}' },
     { label: 'Two pieces', input: '{"pieces":["rook","bishop"],"positions":[[1,1],[8,8]]}' }, { label: "Single queen", input: "{\"pieces\":[\"queen\"],\"positions\":[[8,8]]}" }, { label: "Rooks share a row", input: "{\"pieces\":[\"rook\",\"rook\"],\"positions\":[[4,1],[4,8]]}" }, { label: "Long run: three pieces", input: "{\"pieces\":[\"queen\",\"bishop\",\"rook\"],\"positions\":[[1,1],[8,1],[1,8]]}" },

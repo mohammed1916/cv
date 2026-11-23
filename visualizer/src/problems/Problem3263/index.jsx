@@ -18,6 +18,10 @@ const definition = {
   inputLabel: "JSON array of values in list order (e.g. [4,1,7,3])",
   url: "https://leetcode.com/problems/convert-doubly-linked-list-to-array-i/",
   complexity: "O(n) time and O(n) space for the output array. The visualization accepts up to 10 nodes.",
+  question: "Convert a doubly linked list into an array, reading the values in order from the head.",
+  approaches: [
+    { name: "Walk to the head, then forward", intuition: "Follow the previous pointers back to the head, then follow the next pointers to collect the values.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: "Four nodes", input: "[4,1,7,3]" },
     { label: "Negative values", input: "[-2,0,5]" },

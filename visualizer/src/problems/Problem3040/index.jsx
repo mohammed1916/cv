@@ -17,6 +17,10 @@ const definition = {
   inputLabel: 'JSON array of 2 to 10 integers from 1 to 20',
   url: 'https://leetcode.com/problems/maximum-number-of-operations-with-the-same-score-ii/',
   complexity: 'O(n^2) states for each of three target scores, each with three moves. The trace caps n at 10.',
+  question: "Find the largest number of operations that remove pairs with the same score target from the ends of an array.",
+  approaches: [
+    { name: "Memoized interval recursion per target", intuition: "Try each possible target sum and memoize the best count for each remaining interval.", time: "O(n^2\u00b7c)", space: "O(n^2)" },
+  ],
   examples: [
     { label: 'Example 1', input: '[5,1,4,2,5,3]' },
     { label: 'Example 2', input: '[2,2,2,2]' },

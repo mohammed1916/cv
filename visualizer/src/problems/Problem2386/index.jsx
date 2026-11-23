@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON {"nums": [...], "k": rank}',
   url: 'https://leetcode.com/problems/find-the-k-sum-of-an-array/',
   complexity: 'O(n log n + k log k) time with a min heap. The visualization caps input at 8 numbers.',
+  question: "Find the k-th largest subsequence sum of an array.",
+  approaches: [
+    { name: "Sort and heap expansion", intuition: "Sort the absolute values, then expand subsets from the largest sum with a min heap.", time: "O(n log n + k log k)", space: "O(k)" },
+  ],
   examples: [
     { label: 'Three numbers, k 5', input: '{"nums":[4,-1,2],"k":5}' },
     { label: 'Five numbers, k 9', input: '{"nums":[-2,3,6,-4,1],"k":9}' },

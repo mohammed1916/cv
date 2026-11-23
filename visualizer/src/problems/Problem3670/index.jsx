@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON array of integers from 1 to 1000000',
   url: 'https://leetcode.com/problems/maximum-product-of-two-integers-with-no-common-bits/',
   complexity: 'O(n^2) time in this visualization. The official limit is 10^5 values, so an efficient solution uses bit DP.',
+  question: "Find the largest product of two values from an array that share no set bits.",
+  approaches: [
+    { name: "Try every pair", intuition: "Check every pair and keep the largest product where the bitwise AND is zero.", time: "O(n^2)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Scrambled five values', input: '[4,1,9,2,7]' },
     { label: 'Large start, short tail', input: '[1000000,2,500]' },

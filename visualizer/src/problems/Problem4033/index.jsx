@@ -19,6 +19,10 @@ const definition = {
   inputLabel: 'Object with nums, k and queries ([l, r] pairs), e.g. {"nums":[1,1],"k":1,"queries":[[0,1]]}',
   url: 'https://leetcode.com/problems/valid-k-unique-subarrays-i/',
   complexity: 'O(q * n) time for q queries over an array of length n, with a fresh count table per query. The visualization caps nums at 20 values and queries at 10; the official limits are larger.',
+  question: "For each query range, decide whether it is valid: exactly k distinct values, and every value appears an even number of times.",
+  approaches: [
+    { name: "Recount per query", intuition: "Build a fresh count table for each query range.", time: "O(q x n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Mixed ranges', input: '{"nums":[2,2,5,5,2,2,8,8],"k":2,"queries":[[0,3],[0,5],[4,7],[1,7]]}' },
     { label: 'Three values', input: '{"nums":[1,2,2,3,1,3],"k":3,"queries":[[0,5],[1,2],[0,3]]}' },

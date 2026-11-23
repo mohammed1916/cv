@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON array of positive integers, e.g. [6,4,3,2,7,6,2]',
   url: 'https://leetcode.com/problems/replace-non-coprime-numbers-in-array/',
   complexity: 'O(n log V) time with the gcd step and O(n) space for the stack. The page caps the length at 10 and values at 60.',
+  question: "Repeatedly replace adjacent numbers that share a factor with their least common multiple until no such pair remains.",
+  approaches: [
+    { name: "Stack with gcd merge", intuition: "Scan left to right; the incoming value merges with the stack top while their gcd is greater than one, then pushes the merged value.", time: "O(n log V)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Mixed factors', input: '[6,4,3,2,7,6,2]' },
     { label: 'Runs', input: '[2,2,1,1,3,3,3]' },

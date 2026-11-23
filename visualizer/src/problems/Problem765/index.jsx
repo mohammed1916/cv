@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Row (JSON array: person sitting in each seat)',
   url: 'https://leetcode.com/problems/couples-holding-hands/',
   complexity: 'O(n) time and O(n) space for the position table.',
+  question: "Find the fewest swaps of seated people so each couple sits side by side.",
+  approaches: [
+    { name: "Union find on couple cycles", intuition: "Link the couples that share seats; each cycle of k couples needs k minus one swaps.", time: "O(n α(n))", space: "O(n)" },
+  ],
   examples: [
     { label: 'Crossed', input: '[2,3,0,1]' },
     { label: 'Mixed', input: '[5,4,2,6,3,1,0,7]' },

@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with nums and k',
   url: 'https://leetcode.com/problems/partition-array-into-k-distinct-groups/',
   complexity: 'O(n) time and O(n) space for the counts.',
+  question: "Decide whether an array can be partitioned into k groups of distinct values, each of equal size.",
+  approaches: [
+    { name: "Count and check groups", intuition: "Count each value and check that every value fits into the groups without repeats.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example', input: '{"nums":[4,1,4,3],"k":2}' },
     { label: 'Too many copies', input: '{"nums":[2,2,2,1],"k":2}' },

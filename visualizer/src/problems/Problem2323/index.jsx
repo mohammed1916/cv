@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with jobs and workers (e.g. {"jobs":[5,7,9],"workers":[2,3,4]})',
   url: 'https://leetcode.com/problems/find-minimum-time-to-finish-all-jobs-ii/',
   complexity: 'O(n log n) time for sorting and O(n) pairing, O(n) space for the sorted copies. The visualization caps the input at 6 jobs with values from 1 to 100; the draft does not verify the official bounds.',
+  question: "Assign jobs to workers so that the time of the slowest worker is as small as possible.",
+  approaches: [
+    { name: "Pair sorted jobs with sorted workers", intuition: "Sort both lists and pair the largest job with the smallest worker, then take the largest total.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Three jobs', input: '{"jobs":[5,7,9],"workers":[2,3,4]}' },
     { label: 'Equal times', input: '{"jobs":[10,20,30],"workers":[1,2,3]}' },

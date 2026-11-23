@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with n from 0 to 1023, e.g. {"n":3}',
   url: 'https://leetcode.com/problems/minimum-one-bit-operations-to-make-integers-zero/',
   complexity: 'O(log n) time and O(1) space. The visualization caps n at 1023.',
+  question: "Find the minimum number of bit operations needed to reduce an integer to zero.",
+  approaches: [
+    { name: "Gray code inversion", intuition: "Fold the bits as a running XOR from the top, which gives the count of operations.", time: "O(log n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Five', input: '{"n":5}' },
     { label: 'Nine', input: '{"n":9}' },

@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with spells, potions and success (JSON)',
   url: 'https://leetcode.com/problems/successful-pairs-of-spells-and-potions/',
   complexity: 'O((n + m) log m) time and O(m) extra space for n spells and m potions.',
+  question: "For each spell, count how many potions make its product with the spell at least a success threshold.",
+  approaches: [
+    { name: "Sort potions and binary search", intuition: "Sort the potions, then for each spell find the first potion strength that reaches the threshold by binary search.", time: "O((n + m) log m)", space: "O(m)" },
+  ],
   examples: [
     { label: 'Three spells, four potions', input: '{"spells":[3,8,5],"potions":[2,9,4,7],"success":20}' },
     { label: 'Weak spells', input: '{"spells":[10,1],"potions":[5,6,2],"success":30}' },

@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'JSON {"n": 5, "roads": [[1,2,8],[2,3,4]]}',
   url: 'https://leetcode.com/problems/minimum-score-of-a-path-between-two-cities/',
   complexity: 'O(n + m) time for a breadth-first walk over m roads. The visualization caps the city count at 8.',
+  question: "Find the smallest road distance on any path between city 1 and city n.",
+  approaches: [
+    { name: "Breadth-first walk", intuition: "Walk the roads from city 1 and keep the smallest road weight seen on a component that reaches city n.", time: "O(n + m)", space: "O(n + m)" },
+  ],
   examples: [
     { label: 'Light road off the path', input: '{"n":5,"roads":[[1,2,8],[2,3,4],[3,5,6],[2,4,3],[4,5,9]]}' },
     { label: 'Detour to a light road', input: '{"n":3,"roads":[[1,2,12],[2,3,5],[1,3,11]]}' },

@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with price (array of 2 to 12 integers, 1 to 50) and k (JSON)',
   url: 'https://leetcode.com/problems/maximum-tastiness-of-candy-basket/',
   complexity: 'O(n log n + n log(max price)) time. The visualization caps the input at 12 prices.',
+  question: "Pick k candies to maximise the smallest price gap between any two chosen candies.",
+  approaches: [
+    { name: "Binary search on the gap", intuition: "Test whether k candies can be chosen with every gap at least a candidate value.", time: "O(n log n + n log(max price))", space: "O(n)" },
+  ],
   examples: [
     { label: 'Five prices, k three', input: '{"price":[10,30,5,40,8],"k":3}' },
     { label: 'Four equal prices', input: '{"price":[7,7,7,7],"k":2}' },

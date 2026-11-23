@@ -9,6 +9,10 @@ const definition = {
   inputLabel: 'Object with nums, k (1 to 5) and queries ([index, value, start, x])',
   url: `https://leetcode.com/problems/${meta.slug}/`,
   complexity: 'O(k log n) per query after an O(k n) build, with O(k n) space. The official limits allow 100000 values and 20000 queries; the visualization caps these at 12 values and 6 queries.',
+  question: "Answer queries about the product of values in a range modulo k.",
+  approaches: [
+    { name: "Prefix products with tree", intuition: "Build products for each range end and answer queries with a tree search.", time: "O(k log n) per query", space: "O(k n)" },
+  ],
   examples: [
     { label: 'Two queries', input: '{"nums":[6,7,2,5,3],"k":4,"queries":[[1,3,0,2],[4,6,2,1]]}' },
     { label: 'Start past the middle', input: '{"nums":[2,3,4,5,6,7],"k":5,"queries":[[5,9,3,4]]}' },

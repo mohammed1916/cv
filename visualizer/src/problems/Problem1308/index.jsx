@@ -6,6 +6,11 @@ const definition = {
   inputLabel: 'Score rows as JSON',
   url: 'https://leetcode.com/problems/running-total-for-different-genders/',
   complexity: 'Walkthrough: one pass to group by gender and day, then one running sum per gender.',
+  question: "For each gender, show the running total of scores ordered by day.",
+  approaches: [
+    { name: "Window running sum", intuition: "A cumulative sum window ordered by day gives the running total for each row.", time: "O(n log n)", space: "O(n)" },
+    { name: "Self-join sum", intuition: "Sum all earlier rows of the same gender for each row.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: [{ label: 'Sample scores', input: JSON.stringify(sample) },
     { label: "Single row", input: "{\"scores\":[{\"player_name\":\"Ann\",\"gender\":\"female\",\"day\":\"2019-05-01\",\"score_points\":3}]}" },
     { label: "Equal daily totals", input: "{\"scores\":[{\"player_name\":\"Bo\",\"gender\":\"male\",\"day\":\"2019-05-01\",\"score_points\":5},{\"player_name\":\"Cy\",\"gender\":\"male\",\"day\":\"2019-05-01\",\"score_points\":5}]}" },

@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Integers 0 to 100 as a JSON array',
   url: 'https://leetcode.com/problems/most-frequent-even-element/',
   complexity: 'O(n) time and O(n) space.',
+  question: "Return the even value that appears most often in an array, choosing the smallest on ties.",
+  approaches: [
+    { name: "Frequency count", intuition: "Count each even value and pick the most frequent.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Repeated maximum', input: '[5,11,2,11,9]' },
     { label: 'Example 2', input: '[1,3,5]' },

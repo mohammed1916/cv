@@ -39,6 +39,10 @@ const definition = {
   inputLabel: 'Object with ops: ["create", "/path", value] or ["get", "/path"]',
   url: 'https://leetcode.com/problems/design-file-system/',
   complexity: 'O(L) per operation, where L is the path length. The visualization caps the input at 20 operations.',
+  question: "Design a file system that creates paths and sets values only when the parent path already exists.",
+  approaches: [
+    { name: "Path map", intuition: "Store each full path in a map and check that its parent path is present before creating it.", time: "O(L) per operation", space: "O(total path length)" },
+  ],
   examples: [
     { label: 'Example', input: '{"ops":[["create","/a",1],["create","/a/b",2],["get","/a/b"],["create","/x/y",3],["create","/a",4],["get","/q"]]}' },
     { label: 'Get before any create', input: '{"ops":[["get","/a"]]}' },

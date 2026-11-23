@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with nums (integers from -9 to 9)',
   url: 'https://leetcode.com/problems/count-smaller-elements-with-opposite-parity/',
   complexity: 'O(n^2) time in the simple shelf version used here, with O(n) space. Each index is inserted into a sorted shelf and counted with one binary search. The visualization caps the array at 12 values.',
+  question: "For each index, count later values with the opposite parity that are strictly smaller than it.",
+  approaches: [
+    { name: "Right-to-left sorted shelves", intuition: "Scan right to left, insert each value into a sorted shelf of its parity, and binary-search the count.", time: "O(n^2) in this version", space: "O(n)" },
+  ],
   examples: [
     { label: 'Mixed parities', input: '{"nums":[4,3,2,7,1]}' },
     { label: 'Negatives', input: '{"nums":[-3,-2,5,0,-7,8]}' },

@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with nums and swaps (JSON), for example {"nums":[1,2,3],"swaps":[[0,2],[1,2]]}',
   url: 'https://leetcode.com/problems/maximize-alternating-sum-using-swaps/',
   complexity: 'O(n log n) time for sorting the groups. The visualization caps nums at 10 values and swaps at 12 pairs.',
+  question: "Rearrange an array using allowed swaps to maximize its alternating sum.",
+  approaches: [
+    { name: "Group and sort", intuition: "Group the positions joined by swaps, sort each group, and assign values to maximise the alternating sum.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Two disjoint swaps', input: '{"nums":[5,3,8,1],"swaps":[[0,2],[1,3]]}' },
     { label: 'No swaps allowed', input: '{"nums":[7,7,2],"swaps":[]}' },

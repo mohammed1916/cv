@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Square (JSON object with side, points on its boundary as [x, y], and k)',
   url: 'https://leetcode.com/problems/maximize-the-distance-between-points-on-a-square/',
   complexity: 'O(log m) feasibility checks over m candidate distances, each a search over the points. The visualization caps input at 8 points.',
+  question: "Place points on the boundary of a square and maximize the smallest distance between any two chosen points.",
+  approaches: [
+    { name: "Binary search on distance", intuition: "Check whether k points with at least distance d exist, and search over d.", time: "O(log m) checks", space: "O(n)" },
+  ],
   examples: [
     { label: 'Two corners', input: '{"side":2,"points":[[0,0],[2,2]],"k":2}' },
     { label: 'Four corners', input: '{"side":2,"points":[[0,0],[0,2],[2,0],[2,2]],"k":4}' },

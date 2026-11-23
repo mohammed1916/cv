@@ -8,6 +8,10 @@ const definition = {
   inputLabel: 'Object with width, height, sideLength and maxOnes',
   url: 'https://leetcode.com/problems/maximum-number-of-ones/',
   complexity: 'O(S * S + W * H) time and O(S * S + W * H) space for a W by H board with window side S. The visualization caps the board at 12 by 12 and the window at 6. If no full window fits, the board is treated as unconstrained; the official feasibility guarantee is not verified here.',
+  question: "On a grid, place a given number of ones in a repeating square window and maximise the ones in any window.",
+  approaches: [
+    { name: "Residue classes", intuition: "Each cell in a window's residue class is hit once per window, so keep the most frequent classes.", time: "O(S^2 + W x H)", space: "O(S^2 + W x H)" },
+  ],
   examples: [
     { label: 'Tiled 7 by 5', input: '{"width":7,"height":5,"sideLength":3,"maxOnes":4}' },
     { label: 'Square board', input: '{"width":6,"height":6,"sideLength":4,"maxOnes":5}' },

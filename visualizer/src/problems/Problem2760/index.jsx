@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'JSON object with nums and threshold',
   url: 'https://leetcode.com/problems/longest-even-odd-subarray-with-threshold/',
   complexity: 'O(n) time and O(1) extra space. The visualization caps input at 12 values.',
+  question: "Given an array of integers and a threshold, find the longest subarray that alternates between even and odd, with every value at most the threshold.",
+  approaches: [
+    { name: "Sliding window", intuition: "Extend the subarray while it alternates parity and stays under the threshold, restarting otherwise.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Split at a value above threshold', input: '{"nums":[2,5,4,9,6,3],"threshold":6}' },
     { label: 'Only odd values: no run', input: '{"nums":[1,3,5,7,9],"threshold":9}' },

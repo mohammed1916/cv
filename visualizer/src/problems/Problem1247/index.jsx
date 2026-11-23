@@ -6,6 +6,10 @@ const definition = {
   number: meta.number,
   phases, parse: parseInput, build: buildTrace, code, python, inputLabel,
   url: `https://leetcode.com/problems/${meta.slug}/`,
+  question: "Find the fewest swaps needed to make two strings made of x and y letters equal.",
+  approaches: [
+    { name: "Count mismatch pairs", intuition: "Count the mismatches of each kind, pair them, and handle a leftover pair with two swaps.", time: "O(n)", space: "O(1)" },
+  ],
   complexity, examples,
 }
 

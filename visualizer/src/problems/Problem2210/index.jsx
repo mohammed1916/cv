@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON array of integers, e.g. [2,4,1,1,6,5]',
   url: 'https://leetcode.com/problems/count-hills-and-valleys-in-an-array/',
   complexity: 'O(n) time and O(n) space for the compressed array. The page caps the array at 14 values from 0 to 9.',
+  question: "Count the hills and valleys in an array, where runs of equal neighbours count as a single position.",
+  approaches: [
+    { name: "Compress runs then compare neighbours", intuition: "Drop repeated neighbours, then count each index whose value is greater or smaller than both of its neighbours.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Repeats collapse', input: '[2,4,1,1,6,5]' },
     { label: 'Monotone runs', input: '[6,6,5,5,4,1]' },

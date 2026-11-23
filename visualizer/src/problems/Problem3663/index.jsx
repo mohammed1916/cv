@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Integer n from 1 to 1000000000 (JSON object)',
   url: 'https://leetcode.com/problems/find-the-least-frequent-digit/',
   complexity: 'O(d) time, where d is the number of decimal digits of n.',
+  question: "Find the least frequent digit of a number, breaking ties by the smaller digit.",
+  approaches: [
+    { name: "Count digits", intuition: "Count each digit in the number and pick the least frequent one, using the smaller digit to break ties.", time: "O(d)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Mixed digits', input: '{"n":1553322}' },
     { label: 'Tie', input: '{"n":1223}' },

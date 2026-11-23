@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON object with integer money and children',
   url: 'https://leetcode.com/problems/distribute-money-to-maximum-children/',
   complexity: 'O(children) time. The visualization caps children at twenty.',
+  question: "Give each child at least one dollar with eight dollars each to spend, avoiding a child with exactly four, and maximise the children with eight.",
+  approaches: [
+    { name: "One each, then top up", intuition: "Give each child one dollar, then top up as many children as the money allows to eight, avoiding the forbidden amount.", time: "O(children)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Fifty money, six children', input: '{"money":50,"children":6}' },
     { label: 'Fewer coins than children', input: '{"money":4,"children":9}' },

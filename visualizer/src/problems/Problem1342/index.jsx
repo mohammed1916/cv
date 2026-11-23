@@ -3,6 +3,10 @@ import { StackLane } from '../../components/shared/AlgorithmStatePrimitives'
 import { buildTrace, parseInput, code, python, phases, examples } from './algorithm'
 
 const definition = {
+  question: "Count the steps to reduce a number to zero, halving if even and subtracting one otherwise.",
+  approaches: [
+    { name: "Simulation", intuition: "Apply the rule directly, one step at a time.", time: "O(log num)", space: "O(1)" },
+  ],
   number: '1342', phases, parse: parseInput, build: buildTrace, code, python, examples,
   inputLabel: 'Whole number (for example 14)',
   url: 'https://leetcode.com/problems/number-of-steps-to-reduce-a-number-to-zero/',

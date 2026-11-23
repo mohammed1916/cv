@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with s (1 to 12 lowercase letters)',
   url: 'https://leetcode.com/problems/maximum-number-of-non-overlapping-substrings/',
   complexity: 'O(n * 26) time for the span checks. The visualization caps input at 12 letters.',
+  question: "Pick the largest set of non-overlapping substrings that each contain every copy of their letters.",
+  approaches: [
+    { name: "Minimal span per letter, then greedy", intuition: "Grow each letter's span until all its copies are inside, then take non-overlapping spans greedily.", time: "O(n * 26)", space: "O(26)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"s":"adefaddaccc"}' },
     { label: 'Example 2', input: '{"s":"abab"}' },

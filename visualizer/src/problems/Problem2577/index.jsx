@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Opening times grid (JSON)',
   url: 'https://leetcode.com/problems/minimum-time-to-visit-a-cell-in-a-grid/',
   complexity: 'O(m n log(m n)) time. The visualization caps input at 5 by 5 with values up to 12.',
+  question: "Find the earliest time to reach the bottom-right cell where each cell can only be entered at or after a set time.",
+  approaches: [
+    { name: "Dijkstra with waiting", intuition: "Run Dijkstra on arrival times, letting you wait on a cell when the arrival parity is wrong.", time: "O(mn log(mn))", space: "O(mn)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"grid":[[0,1,3,2],[5,1,2,5],[4,3,8,6]]}' },
     { label: 'Blocked', input: '{"grid":[[0,2,4],[3,2,1],[1,0,4]]}' },

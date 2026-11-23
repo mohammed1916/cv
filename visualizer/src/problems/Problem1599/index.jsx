@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON object with customers, boardingCost and runningCost',
   url: 'https://leetcode.com/problems/maximum-profit-of-operating-a-centennial-wheel/',
   complexity: 'O(customers + rotations) time. The visualization caps the group list at 20.',
+  question: "Find the number of rotations of a Ferris wheel that gives the maximum profit.",
+  approaches: [
+    { name: "Simulate rotations", intuition: "Board up to four groups per rotation, keep a running profit, and remember the best rotation.", time: "O(customers + rotations)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Four rounds with a gap', input: '{"customers":[12,8,0,5],"boardingCost":9,"runningCost":11}' },
     { label: 'Late crowd, cheap running', input: '{"customers":[3,25,18],"boardingCost":8,"runningCost":6}' },

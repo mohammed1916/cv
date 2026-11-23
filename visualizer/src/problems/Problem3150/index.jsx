@@ -13,6 +13,10 @@ const examples = [
   ]
 
 const definition = {
+  question: "From a tweets table, flag tweets that break a length limit or have too many hashtags or mentions.",
+  approaches: [
+    { name: "Count marks by length difference", intuition: "Count each mark by comparing the text length with the length after removing that mark, then test the three rules.", time: "O(n * L)", space: "O(n)" },
+  ],
   number: meta.number,
   phases, parse: parseInput, build: buildTrace, code, sql, python, inputLabel,
   url: `https://leetcode.com/problems/${meta.slug}/`,

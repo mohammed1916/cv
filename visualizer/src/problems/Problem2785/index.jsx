@@ -13,6 +13,11 @@ const definition = {
   inputLabel: 'JSON object with s (English letters)',
   url: 'https://leetcode.com/problems/sort-vowels-in-a-string/',
   complexity: 'O(n log n) time for sorting the vowels, O(n) space for the output.',
+  question: "Sort only the vowels inside a string, keeping every other character in its original place.",
+  approaches: [
+    { name: "Collect and sort vowels", intuition: "Record vowel positions, sort the vowel letters, and write them back in order.", time: "O(n log n)", space: "O(n)" },
+    { name: "Counting by vowel", intuition: "Count each vowel letter and refill positions in a fixed vowel order; avoids a general sort.", time: "O(n)", space: "O(1) for ten vowels" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"s":"lEetcOde"}' },
     { label: 'Example 2', input: '{"s":"lYmpH"}' },

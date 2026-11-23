@@ -28,6 +28,10 @@ const definition = {
   inputLabel: 'JSON array [sx, sy, tx, ty]',
   url: 'https://leetcode.com/problems/minimum-moves-to-reach-target-in-grid/',
   complexity: 'Each backward step shrinks the larger coordinate, so the search depth is O(log max(tx, ty)).',
+  question: "Find the fewest moves to reach a target point from a start point when each move adds one coordinate to the other.",
+  approaches: [
+    { name: "Undo from the target", intuition: "From the target, undo the larger coordinate step by step until the start is reached or the path is impossible.", time: "O(log max(tx, ty))", space: "O(log max(tx, ty))" },
+  ],
   examples: [
     { label: 'Example 1', input: '[1,2,5,4]' },
     { label: 'Example 2', input: '[0,1,2,3]' },

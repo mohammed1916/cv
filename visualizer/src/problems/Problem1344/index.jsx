@@ -3,6 +3,10 @@ import { StackLane } from '../../components/shared/AlgorithmStatePrimitives'
 import { buildTrace, parseInput, code, python, phases, examples } from './algorithm'
 
 const definition = {
+  question: "Find the smaller angle between the hour and minute hands at a given time.",
+  approaches: [
+    { name: "Angle formula", intuition: "Convert each hand to degrees and take the absolute difference, folded below 180.", time: "O(1)", space: "O(1)" },
+  ],
   number: '1344', phases, parse: parseInput, build: buildTrace, code, python, examples,
   inputLabel: 'Time as h:mm',
   url: 'https://leetcode.com/problems/angle-between-hands-of-a-clock/',

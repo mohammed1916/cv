@@ -19,6 +19,10 @@ const definition = {
   inputLabel: 'JSON object with n, 1 to 1000 (e.g. {"n":5})',
   url: "https://leetcode.com/problems/print-zero-even-odd/",
   complexity: "O(n) time and O(1) extra space beyond the output: each number is printed once, with one permit handoff.",
+  question: "Make three threads print zero, then alternate odd and even numbers up to n.",
+  approaches: [
+    { name: "Zero handoff with semaphores", intuition: "The zero thread signals odd or even by parity, and each number thread prints when its turn comes.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: "n = 2", input: '{"n":2}' },
     { label: "n = 5", input: '{"n":5}' },

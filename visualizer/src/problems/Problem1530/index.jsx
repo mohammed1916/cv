@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with a level-order tree and distance, for example {"tree":[1,2,3],"distance":3}',
   url: 'https://leetcode.com/problems/number-of-good-leaf-nodes-pairs/',
   complexity: 'O(n * d^2) time, where d is the distance limit. The visualization caps input at 15 nodes.',
+  question: "Count pairs of leaves whose distance in the tree is at most a limit.",
+  approaches: [
+    { name: "Post-order depth counts", intuition: "Each subtree returns counts of leaves at each depth; pair depths from the left and right sides.", time: "O(n * d^2)", space: "O(n * d)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"tree":[1,2,3,null,4],"distance":3}' },
     { label: 'Example 2', input: '{"tree":[1,2,3,4,5,6,7],"distance":3}' },

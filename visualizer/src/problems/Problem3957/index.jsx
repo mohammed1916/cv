@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON: {"nums": [...], "m": m, "l": l, "r": r}',
   url: 'https://leetcode.com/problems/maximum-sum-of-m-non-overlapping-subarrays-ii/',
   complexity: 'O(n * m * (r - l)) time and O(n * m) space. The visualization caps n at 8.',
+  question: "Choose m non-overlapping subarrays, each with length in an allowed range, to maximise the total sum.",
+  approaches: [
+    { name: "Prefix DP table", intuition: "Fill best totals by prefix length and number of chosen subarrays, extending by one allowed length at a time.", time: "O(n x m x (r - l))", space: "O(n x m)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"nums":[6,-2,3,-1,5],"m":2,"l":2,"r":3}' },
     { label: 'Example 3', input: '{"nums":[-4,9,-2],"m":1,"l":1,"r":2}' },

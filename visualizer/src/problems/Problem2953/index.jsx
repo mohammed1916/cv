@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with word (lowercase letters) and k (integer from 1 to 20)',
   url: 'https://leetcode.com/problems/count-complete-substrings/',
   complexity: 'O(26 * n) time after splitting, O(1) extra space. The visualization caps word at 20 letters.',
+  question: "Count the substrings made of complete blocks where each letter appears exactly k times and neighbouring letters are close in alphabet.",
+  approaches: [
+    { name: "Split then count", intuition: "Split the word where adjacent letters differ by more than two, then count valid substrings in each segment by distinct letter count.", time: "O(26\u00b7n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Pairs in a row', input: '{"word":"aabbcc","k":2}' },
     { label: 'Wrapped alphabet', input: '{"word":"abcabc","k":2}' },

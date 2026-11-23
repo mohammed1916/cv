@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON {"grid": [[2, 5], [10, 1]]}',
   url: 'https://leetcode.com/problems/maximum-trailing-zeros-in-a-cornered-path/',
   complexity: 'O(m * n) time and O(m * n) space after the factor counts. Each cell is a corner tried with at most nine arm pairs.',
+  question: "Find the most trailing zeros in the product along a path in a grid that turns at most once, moving in a corner shape.",
+  approaches: [
+    { name: "Prefix counts of factors along rows and columns", intuition: "Precompute the factors of 2 and 5 from each cell in each direction, then combine them at every corner.", time: "O(m * n)", space: "O(m * n)" },
+  ],
   examples: [
     { label: 'Small', input: '{"grid":[[2,5],[10,1]]}' },
     { label: 'Row', input: '{"grid":[[5,10,25,50]]}' },

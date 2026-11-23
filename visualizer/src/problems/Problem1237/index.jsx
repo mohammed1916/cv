@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with z and operation "sum" or "product" (JSON)',
   url: 'https://leetcode.com/problems/find-positive-integer-solution-for-a-given-equation/',
   complexity: 'O(z) time with two pointers, one call per step. The hidden function is fixed to sum or product here.',
+  question: "Find all pairs of positive integers that satisfy a hidden equation, using only a comparison oracle.",
+  approaches: [
+    { name: "Two pointers on the oracle", intuition: "Start from one corner and move the pointers based on the oracle's comparison.", time: "O(z)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Sum, z = 5', input: '{"z":5,"operation":"sum"}' },
     { label: 'Product, z = 5', input: '{"z":5,"operation":"product"}' },

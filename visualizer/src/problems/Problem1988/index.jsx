@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Schools as [id, capacity] and exam rows as [score, student_count] (JSON)',
   url: 'https://leetcode.com/problems/find-cutoff-score-for-each-school/',
   complexity: 'SQL: one join on the capacity condition and one grouping per school; O(schools * exam rows) in this stage model.',
+  question: "For each school, find the lowest score that a student needs to be admitted, using the minimum score that still fits the school's seat limit.",
+  approaches: [
+    { name: "Join and group", intuition: "Join schools to scores, sort by score, and take the cutoff at the seat limit per school.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Two schools', input: '{"schools":[[5,40],[8,0]],"exam":[[700,10],[650,25],[600,60]]}' },
     { label: 'Capacity covers all', input: '{"schools":[[1,100]],"exam":[[9,10],[5,100]]}' },

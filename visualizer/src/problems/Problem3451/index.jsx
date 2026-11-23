@@ -17,6 +17,10 @@ const definition = {
   inputLabel: 'JSON object with a logs list (log_id, ip, status_code)',
   url: 'https://leetcode.com/problems/find-invalid-ip-addresses/description/',
   complexity: 'O(n) checks for n rows, then a count per distinct invalid ip. The octet rules are a knowledge-derived teaching version.',
+  question: "Find the invalid IPv4 address strings in a table, with a count of how many rows each one appears in.",
+  approaches: [
+    { name: "Check then count", intuition: "Test each string against the octet rules, then group the invalid ones and count them.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example', input: '{"logs":[{"log_id":1,"ip":"192.168.1.1","status_code":200},{"log_id":2,"ip":"256.1.1.1","status_code":404},{"log_id":3,"ip":"1.2.3","status_code":500},{"log_id":4,"ip":"01.2.3.4","status_code":200},{"log_id":5,"ip":"256.1.1.1","status_code":500},{"log_id":6,"ip":"a.b.c.d","status_code":200}]}' },
     { label: 'All valid', input: '{"logs":[{"log_id":1,"ip":"8.8.8.8","status_code":200}]}' },

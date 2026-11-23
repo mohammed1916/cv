@@ -13,6 +13,11 @@ const definition = {
   inputLabel: 'Object with parent (parent[0] = -1, parents come earlier) and s (letters a to e)',
   url: 'https://leetcode.com/problems/count-paths-that-can-form-a-palindrome-in-a-tree/',
   complexity: 'O(n^3) time in this pair-by-pair version. The visualization caps the tree at 10 nodes.',
+  question: "Count the pairs of tree nodes whose connecting path, read as letters, can be rearranged into a palindrome.",
+  approaches: [
+    { name: "Check each pair path with letter parity", intuition: "A string can form a palindrome when at most one letter has an odd count, so tally letter parity along each path.", time: "O(n^3) in the pair-by-pair version", space: "O(n)" },
+    { name: "Root-to-node parity masks", intuition: "Store a 26-bit parity mask per node; a path is valid when the masks of its endpoints differ by at most one bit.", time: "O(n 2^26) worst case, O(n 26) with a counter", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example', input: '{"parent":[-1,0,0],"s":"aba"}' },
     { label: 'Two nodes', input: '{"parent":[-1,0],"s":"ab"}' },

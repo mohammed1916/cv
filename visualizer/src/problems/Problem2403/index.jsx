@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'List of monster powers (e.g. [7,3,9,5])',
   url: 'https://leetcode.com/problems/minimum-time-to-kill-all-monsters/',
   complexity: 'O(2^n * n) time and O(2^n) space for n monsters, using the kill-count growth rate. The visualization caps the input at 6 monsters with powers up to 60.',
+  question: "Find the fewest days to defeat all monsters when each day's energy gain grows with the number of monsters killed.",
+  approaches: [
+    { name: "Bitmask DP over killed monsters", intuition: "Track the subset of monsters defeated, and extend it with each remaining monster.", time: "O(2^n * n)", space: "O(2^n)" },
+  ],
   examples: [
     { label: 'Staircase', input: '[7,3,9,5]' },
     { label: 'Flat powers', input: '[1,1,1]' },

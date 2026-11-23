@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'Object with nums (integers 1 to 50, JSON)',
   url: 'https://leetcode.com/problems/prime-subtraction-operation/',
   complexity: 'O(n * sqrt(V)) time, O(1) extra space. The visualization caps the array at 8 values.',
+  question: "Given an array, you may subtract a prime from each element in increasing index order, keeping the array strictly increasing; decide whether this is possible.",
+  approaches: [
+    { name: "Greedy largest prime below the gap", intuition: "For each element, subtract the largest prime that keeps it greater than the previous value, then check the result.", time: "O(n * sqrt(V))", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"nums":[4,9,6,10]}' },
     { label: 'Example 3', input: '{"nums":[5,8,3]}' },

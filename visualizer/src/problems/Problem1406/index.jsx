@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Stone values (JSON array)',
   url: 'https://leetcode.com/problems/stone-game-iii/',
   complexity: 'O(n) time: each start position tries at most three takes. O(n) extra space for the best-advantage table.',
+  question: "Two players take stones from the front of a row, and find the best score difference.",
+  approaches: [
+    { name: "Memoized best difference", intuition: "Store the best advantage from each start position over the three possible takes.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Alice wins', input: '[4, -1, 6]' },
     { label: 'Single stone', input: '[0]' },

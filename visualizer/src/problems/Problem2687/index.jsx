@@ -20,6 +20,10 @@ const examples = [{
 const reasoning = 'Each bike keeps the largest end time among its rides. The rows are then listed with the newest last-use time first, so the bike used most recently appears at the top.'
 
 const definition = {
+  question: "Given a table of bike rides, find the last time each bike was used, ordered by most recent use.",
+  approaches: [
+    { name: "Group and maximum time", intuition: "Group the rides by bike, take the latest end time, and sort the bikes by it.", time: "O(n log n)", space: "O(n)" },
+  ],
   number: meta.number,
   phases, parse: parseInput, build: buildTrace, code, sql, python, inputLabel,
   url: `https://leetcode.com/problems/${meta.slug}/`,

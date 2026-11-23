@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Project (JSON object with n, k and invocations)',
   url: 'https://leetcode.com/problems/remove-methods-from-project/',
   complexity: 'O(n + m * n) time in this trace, where m is the number of invocations. The visualization caps n at 10.',
+  question: "Remove a set of methods from a project, given that removing one method also requires removing every method that calls it.",
+  approaches: [
+    { name: "Traverse invocations from the target", intuition: "Mark every method reachable through the invocation edges from the removed method, then keep the rest.", time: "O(n + m * n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Blocked', input: '{"n":4,"k":1,"invocations":[[1,2],[0,1],[3,2]]}' },
     { label: 'Removed', input: '{"n":5,"k":0,"invocations":[[1,2],[0,2],[0,1],[3,4]]}' },

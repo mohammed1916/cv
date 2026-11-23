@@ -9,6 +9,10 @@ const definition = {
   inputLabel: 'Object with responses (a list of days, each a list of lowercase answers)',
   url: 'https://leetcode.com/problems/find-the-most-common-response/',
   complexity: 'O(L) time and space up to the final scan, where L is the total number of letters across all answers. The official limits are 1000 days of 1000 answers; the visualization caps these at 8 days of 10 answers.',
+  question: "Find the most common response across days, where responses are short answer strings.",
+  approaches: [
+    { name: "Count map", intuition: "Count each response and return the most common.", time: "O(L)", space: "O(L)" },
+  ],
   examples: [
     { label: 'Three-way tie', input: '{"responses":[["mint","lime","mint"],["lime","kiwi"],["kiwi","mint","kiwi"],["plum"]]}' },
     { label: 'Repeats cannot win', input: '{"responses":[["tea","tea","tea","tea"],["milk"],["milk","soda"],["soda","milk"]]}' },

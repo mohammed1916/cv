@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Object with n (JSON)',
   url: 'https://leetcode.com/problems/get-maximum-in-generated-array/',
   complexity: 'O(n) time and O(n) space: each index is computed once from smaller half indices.',
+  question: "Build a generated array from a fixed rule and return its largest element.",
+  approaches: [
+    { name: "Direct fill", intuition: "Compute each index from its smaller half and track the maximum as you go.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Sample n=9', input: '{"n":9}' },
     { label: 'Sample n=7', input: '{"n":7}' },

@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'JSON: {"chunks": [...], "queries": [...]}',
   url: 'https://leetcode.com/problems/count-valid-word-occurrences/',
   complexity: 'O(total length + total query length) with hash lookups. The visualization caps the joined text at 24 characters.',
+  question: "Join text chunks, split them into words at separators, and count how many times each query appears as a whole word.",
+  approaches: [
+    { name: "Join, split, and hash count", intuition: "Concatenate the chunks, split on separators, and count query matches in a hash table.", time: "O(total length + total query length)", space: "O(words)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"chunks":["hello wor","ld hello"],"queries":["hello","world","wor"]}' },
     { label: 'Example 2', input: '{"chunks":["a-b a--b ","a-","b"],"queries":["a-b","a","b"]}' },

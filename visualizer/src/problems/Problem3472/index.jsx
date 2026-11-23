@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON object with s and k',
   url: 'https://leetcode.com/problems/longest-palindromic-subsequence-after-at-most-k-operations/',
   complexity: 'O(n^2 * k) time and space for the interval table. The visualization caps s at 12 letters and k at 30.',
+  question: "Find the longest palindromic subsequence of a string after at most k letter changes.",
+  approaches: [
+    { name: "Interval DP", intuition: "Store the longest palindrome for each substring and operation budget.", time: "O(n^2 k)", space: "O(n^2 k)" },
+  ],
   examples: [
     { label: 'Five letters, budget seven', input: '{"s":"bcdbe","k":7}' },
     { label: 'Mixed letters, budget one', input: '{"s":"zzxyq","k":1}' },

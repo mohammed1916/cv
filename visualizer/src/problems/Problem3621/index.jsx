@@ -22,6 +22,10 @@ const definition = {
   inputLabel: 'JSON object with n and k',
   url: 'https://leetcode.com/problems/number-of-integers-with-popcount-depth-equal-to-k-i/',
   complexity: 'O(log^2 n) time with binomial coefficients, independent of the size of n.',
+  question: "Count integers from 1 to n whose popcount-depth equals k.",
+  approaches: [
+    { name: "Binomial counting by popcount", intuition: "Group integers by popcount class and count them with binomial coefficients, since each popcount-depth step shrinks the value.", time: "O(log^2 n)", space: "O(log n)" },
+  ],
   examples: [
     { label: 'Twenty, two rounds', input: '{"n":20,"k":2}' },
     { label: 'Smallest n, no rounds', input: '{"n":1,"k":0}' },

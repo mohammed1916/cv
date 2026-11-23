@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON object with n and k',
   url: 'https://leetcode.com/problems/find-the-losers-of-the-circular-game/',
   complexity: 'O(n) time for the passes until a repeat. The visualization caps n at 30.',
+  question: "Given n friends in a circle and a step rule, return the friends who never receive the ball, in increasing order.",
+  approaches: [
+    { name: "Simulate until a repeat", intuition: "Pass the ball, multiplying the step each round, and stop when a friend is reached twice.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Nine friends, k four', input: '{"n":9,"k":4}' },
     { label: 'Twelve friends, k one', input: '{"n":12,"k":1}' },

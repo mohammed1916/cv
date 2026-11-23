@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Digit string (e.g. 11122)',
   url: 'https://leetcode.com/problems/check-if-string-is-decomposable-into-value-equal-substrings/',
   complexity: 'O(n) time and O(n) space with a fixed two-column reach table. The visualization caps the string at 20 digits;',
+  question: "Decide whether a digit string splits into substrings of equal digits where exactly one substring has length two and the rest have length three.",
+  approaches: [
+    { name: "Run scanning", intuition: "Scan maximal runs of equal digits and check that each run length can be covered by three-length pieces with one two-length piece.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Decomposable', input: '77788' },
     { label: 'Two 2-blocks', input: '2222' },

@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'Object with req_skills and people (lists of skills, JSON)',
   url: 'https://leetcode.com/problems/smallest-sufficient-team/',
   complexity: 'O(people * 2^skills) time. The visualization caps input at 6 skills and 8 people.',
+  question: "Pick the smallest group of people whose skills together cover every required skill.",
+  approaches: [
+    { name: "Bitmask DP over skills", intuition: "Represent each person's skills as a mask and track the smallest group for each covered mask.", time: "O(people * 2^skills)", space: "O(2^skills)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"req_skills":["go","rust","sql"],"people":[["go"],["rust","sql"],["sql"]]}' },
     { label: 'Single expert', input: '{"req_skills":["a","b"],"people":[["a"],["a","b"],["b"]]}' },

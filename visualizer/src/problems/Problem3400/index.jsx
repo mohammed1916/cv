@@ -19,6 +19,10 @@ const definition = {
   inputLabel: 'Object with nums1 and nums2 (equal-length digit arrays, e.g. {"nums1":[1,2],"nums2":[2,2]})',
   url: "https://leetcode.com/problems/maximum-number-of-matching-indices-after-right-shifts/",
   complexity: "O(n^2) time and O(n) extra space for arrays of length n: every shift is compared index by index. The visualization caps each array at 12 digits, so it is a teaching view rather than the full limit.",
+  question: "Find the largest number of matching positions after applying any right rotation to one array.",
+  approaches: [
+    { name: "Compare every shift", intuition: "For each shift, compare the two arrays index by index and keep the largest count.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: "Mixed matches", input: '{"nums1":[2,7,1,8,2],"nums2":[8,2,7,1,2]}' },
     { label: "No matches", input: '{"nums1":[4,4,4],"nums2":[1,2,3]}' },

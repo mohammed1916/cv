@@ -13,6 +13,11 @@ const definition = {
   inputLabel: 'Distinct integers as JSON array (1 to 50, 3 to 12 values)',
   url: 'https://leetcode.com/problems/distribute-elements-into-two-arrays-ii/',
   complexity: 'O(n log n) time with two Fenwick trees over the value ranks. The visualization caps input at 12 values.',
+  question: "Distribute values into two arrays by comparing counts of greater elements, for a large input.",
+  approaches: [
+    { name: "Two Fenwick trees", intuition: "Use a Fenwick tree for each array to count how many values are greater than the current value.", time: "O(n log n)", space: "O(n)" },
+    { name: "Brute force counts", intuition: "Count greater values by scanning each array.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '[2,1,4,5]' },
     { label: 'Five spread values', input: '[8,21,3,40,13]' },

@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 's (JSON string of lowercase letters)',
   url: 'https://leetcode.com/problems/positions-of-large-groups/',
   complexity: 'O(n) time and O(1) extra space besides the output.',
+  question: "Find the intervals of runs of identical letters that are at least three characters long.",
+  approaches: [
+    { name: "Single scan of runs", intuition: "Track where the current run starts and emit an interval whenever a run of length three or more ends.", time: "O(n)", space: "O(1) besides output" },
+  ],
   examples: [
     { label: 'Two groups', input: '"aaabbbbcc"' },
     { label: 'Edge run', input: '"xyzzzzw"' },

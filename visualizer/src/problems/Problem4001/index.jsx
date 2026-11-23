@@ -11,6 +11,10 @@ const definition = {
   inputLabel: 'Two series (JSON object with series1 and series2)',
   url: 'https://leetcode.com/problems/aggregate-two-time-series/',
   complexity: 'O(n + m) after sorting the timestamps. The visualization caps each series at 8 entries.',
+  question: "Merge two timestamped series, filling each missing value from the next later timestamp.",
+  approaches: [
+    { name: "Two-pointer merge", intuition: "Walk both series with two pointers and borrow each missing value from the next later timestamp.", time: "O(n + m) after sorting", space: "O(n + m)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"series1":[[3,2],[6,4]],"series2":[[1,1],[6,3]]}' },
     { label: 'Example 3', input: '{"series1":[[2,5],[7,1]],"series2":[[7,4]]}' },

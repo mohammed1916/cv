@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Lowercase letters a to z',
   url: 'https://leetcode.com/problems/number-of-good-ways-to-split-a-string/',
   complexity: 'O(n) time and O(n) space: distinct-letter counts for every prefix and suffix are computed once.',
+  question: "Count split points where the left and right parts have the same number of distinct letters.",
+  approaches: [
+    { name: "Prefix and suffix distinct counts", intuition: "Precompute distinct letters for each prefix and suffix, then compare at each split.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Mixed', input: 'abcabc' },
     { label: 'Repeated', input: 'aaaa' },

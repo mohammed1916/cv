@@ -9,6 +9,10 @@ const definition = {
   build: buildTrace,
   code,
   python,
+  question: "For each query, find the k-th smallest palindrome of a given length, or report that it does not exist.",
+  approaches: [
+    { name: "Build from the first half", intuition: "A palindrome of length L is fixed by its first ceil(L / 2) digits, so construct the k-th increasing prefix and mirror it.", time: "O(q * L)", space: "O(q)" },
+  ],
   examples: [
     { label: 'Odd lengths with an overflow', input: '{"queries":[1,7,28,90,900,901],"intLength":5}' },
     { label: 'Even length mirrors the half', input: '{"queries":[1,12,47,90,91],"intLength":4}' },

@@ -5,6 +5,10 @@ import { Sequence, Vars } from './SeqKit'
 
 const definition = {
   number: meta.number, phases, parse: parseInput, build: buildTrace, code, python, inputLabel,
+  question: "Compute a score for a diet plan from the calories of consecutive days in a window of length k.",
+  approaches: [
+    { name: "Sliding window sum", intuition: "Keep the running total of the last k days and compare it with the lower and upper bounds.", time: "O(n)", space: "O(1)" },
+  ],
   url: `https://leetcode.com/problems/${meta.slug}/`, complexity, examples,
 }
 

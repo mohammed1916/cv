@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Two strictly increasing lists as JSON, e.g. {"nums1": [2,4,5], "nums2": [4,6]}',
   url: 'https://leetcode.com/problems/get-the-maximum-score/',
   complexity: 'O(m + n) time and O(1) extra space for the two pointers.',
+  question: "Find the maximum score from two sorted lists that can switch at shared values.",
+  approaches: [
+    { name: "Two pointers with switching", intuition: "Walk both lists, take the smaller value, and switch to the other list at each shared value.", time: "O(m + n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Shared values at 4 and 8', input: '{"nums1":[2,4,8,13],"nums2":[4,8,20,21]}' },
     { label: 'Matching pair at 20', input: '{"nums1":[10,20,30],"nums2":[15,20,40,50]}' },

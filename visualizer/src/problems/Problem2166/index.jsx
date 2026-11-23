@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Bitset calls as JSON, e.g. {"size":4,"ops":[["fix",2],["flip"],["count"]]}',
   url: 'https://leetcode.com/problems/design-bitset/',
   complexity: 'Each call is O(1) time and the bit array uses O(size) space. The visualization caps size at 16 and the operation list at 24.',
+  question: "Implement a bitset with set, unset, flip, and query operations for all bits, any bit, and the count of ones.",
+  approaches: [
+    { name: "Stored bits with a global flip flag", intuition: "Store each bit with a global flip flag so that flip is a single toggle; the logical bit is the stored bit XOR the flag.", time: "O(1) per op, O(n) for toString", space: "O(n)" },
+  ],
   examples: [
     { label: 'Fix, flip, count', input: '{"size":4,"ops":[["fix",2],["flip"],["count"],["toString"]]}' },
     { label: 'Single bit', input: '{"size":1,"ops":[["all"],["fix",0],["all"],["flip"],["one"]]}' },

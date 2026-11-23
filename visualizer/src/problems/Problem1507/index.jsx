@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Date (JSON object with date, e.g. {"date":"11th Mar 1987"})',
   url: 'https://leetcode.com/problems/reformat-date/',
   complexity: 'O(1) time and O(1) space because the date has three fixed parts.',
+  question: "Convert a date written like 20th Oct 2052 into the form 2052-10-20.",
+  approaches: [
+    { name: "Split and map", intuition: "Split the text into day, month and year, strip the suffix, pad the day and map the month name.", time: "O(1)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Mar 11 (teen ordinal)', input: '{"date":"11th Mar 1987"}' },
     { label: 'Sep 23 (rd ordinal)', input: '{"date":"23rd Sep 2041"}' },

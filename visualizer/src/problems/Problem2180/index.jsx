@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'A positive integer, e.g. 30',
   url: 'https://leetcode.com/problems/count-integers-with-even-digit-sum/',
   complexity: 'O(num log num) time for the digit sums. The visualization caps num at 80.',
+  question: "Count the integers from 1 to a given number whose digit sum is even.",
+  approaches: [
+    { name: "Direct count", intuition: "Walk every integer, add its digits, and count the even sums.", time: "O(num * log num)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Two digit range', input: '30' },
     { label: 'Small', input: '4' },

@@ -11,6 +11,10 @@ const definition = {
   inputLabel: 'One positive integer',
   url: 'https://leetcode.com/problems/compute-decimal-representation/',
   complexity: 'O(d) time where d is the number of decimal digits, so at most 10 steps here.',
+  question: "Split a number into its decimal place components and return them.",
+  approaches: [
+    { name: "Digit by digit", intuition: "Repeatedly divide by ten and record each place value.", time: "O(d)", space: "O(d)" },
+  ],
   examples: [
     { label: 'Example', input: '4087' },
     { label: 'Two digits', input: '90' },

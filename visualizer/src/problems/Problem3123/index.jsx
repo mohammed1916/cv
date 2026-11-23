@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'Undirected weighted graph {"n", "edges": [[a, b, w], ...]} (JSON)',
   url: 'https://leetcode.com/problems/find-edges-in-shortest-paths/',
   complexity: 'O((V + E) log V) time for two Dijkstra runs. The visualization caps input at 6 nodes and 9 edges.',
+  question: "Find which edges lie on at least one shortest path from node 0 to node n minus 1 in a weighted undirected graph.",
+  approaches: [
+    { name: "Two Dijkstra runs and an edge test", intuition: "An edge is on a shortest path when its distances from both ends add up to the shortest total.", time: "O((V + E) log V)", space: "O(V + E)" },
+  ],
   examples: [
     { label: 'Five nodes in a ring', input: '{"n":5,"edges":[[0,4,3],[4,2,1],[2,1,6],[1,3,2],[3,0,4]]}' },
     { label: 'Example 2', input: '{"n":4,"edges":[[2,0,1],[0,1,1],[1,3,5],[2,3,1]]}' },

@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Target heights (JSON array of integers)',
   url: 'https://leetcode.com/problems/minimum-number-of-increments-on-subarrays-to-form-a-target-array/',
   complexity: 'O(n) time and O(1) extra space: one pass comparing each height with the one before it.',
+  question: "Find the fewest increments of subarrays needed to build a target array from zeros.",
+  approaches: [
+    { name: "Sum of rises", intuition: "The answer is the first value plus every positive step up between neighbours.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Mixed rises', input: '[3,1,2,5,1]' },
     { label: 'Plateau', input: '[0,4,4,0,2]' },

@@ -11,6 +11,10 @@ const definition = {
   inputLabel: "List of signed integers (e.g. [-3,5,-4])",
   url: "https://leetcode.com/problems/maximum-transactions-without-negative-balance/",
   complexity: "O(n log n) time with a min-heap of kept negatives and O(n) space. The visualization caps the list at 14 transactions with amounts from -50 to 50.",
+  question: "Find the largest number of transactions that can be kept without the running balance going negative.",
+  approaches: [
+    { name: "Greedy with a min-heap", intuition: "Keep transactions in order and drop the most negative ones with a heap when the balance drops below zero.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: "Dip and recover", input: "[-3,5,-4,2,-6]" },
     { label: "Mixed run", input: "[4,-2,-5,3,-1,-4]" },

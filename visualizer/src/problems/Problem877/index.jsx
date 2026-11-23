@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Piles (JSON, even length ≤ 20, odd total)',
   url: 'https://leetcode.com/problems/stone-game/',
   complexity: 'O(n^2) time and space for interval DP. (Alex in fact always wins, but the DP proves it.)',
+  question: "Two players take piles from either end of a row; with optimal play, decide whether the first player wins.",
+  approaches: [
+    { name: "Interval DP", intuition: "Let dp[i][j] be the best score difference on piles i to j, choosing the end that leaves the opponent the worse range.", time: "O(n^2)", space: "O(n^2)" },
+  ],
   examples: [
     { label: 'Six piles, odd total', input: '[4,9,2,7,5,6]' },
     { label: 'Six piles', input: '[3,7,2,3,8,1]' },

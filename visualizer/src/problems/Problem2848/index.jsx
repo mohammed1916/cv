@@ -13,6 +13,11 @@ const definition = {
   inputLabel: 'Object with nums as [start, end] pairs (1 to 100)',
   url: 'https://leetcode.com/problems/points-that-intersect-with-cars/',
   complexity: 'O(n + 100) time and O(100) space for n cars.',
+  question: "Count the integer points covered by at least one interval among the given car intervals.",
+  approaches: [
+    { name: "Difference array", intuition: "Add one at each start and subtract after each end, then count points with a positive running total.", time: "O(n + C)", space: "O(C)" },
+    { name: "Mark each covered point", intuition: "Mark every point covered by each interval in a set.", time: "O(n C)", space: "O(C)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"nums":[[3,6],[1,5],[4,7]]}' },
     { label: 'Example 2', input: '{"nums":[[1,3],[5,8]]}' },

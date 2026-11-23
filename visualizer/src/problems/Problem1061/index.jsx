@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON {"s1": "...", "s2": "...", "baseStr": "..."} (lowercase letters)',
   url: 'https://leetcode.com/problems/lexicographically-smallest-equivalent-string/',
   complexity: 'O((|s1| + |baseStr|) * alpha) time with a union-find over 26 letters.',
+  question: "Use letter equivalences to replace each letter of a string with the smallest letter equivalent to it.",
+  approaches: [
+    { name: "Union-find keeping smallest root", intuition: "Union paired letters, always keeping the smaller letter as the root, then map each letter to its root.", time: "O((m + n) * alpha)", space: "O(26)" },
+  ],
   examples: [
     { label: 'Chain of equivalences', input: '{"s1":"hxab","s2":"zxcd","baseStr":"yzbq"}' },
     { label: 'Shared target letter', input: '{"s1":"kl","s2":"ml","baseStr":"lkn"}' },

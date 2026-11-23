@@ -9,6 +9,10 @@ const definition = {
   inputLabel: 'Object with street (1 open, 0 closed, walker starts at the first entry) and k',
   url: 'https://leetcode.com/problems/count-houses-in-a-circular-street-ii/',
   complexity: 'O(k) time and O(1) extra space, since the walker makes at most n + k moves and n is at most k. The official limit on n and k is 100000; the visualization caps street at 24 houses and k at 60.',
+  question: "Given a circular street of houses with pointers, count the houses that a walker visits, given a limit on the number of steps.",
+  approaches: [
+    { name: "Walk and count steps", intuition: "Follow pointers from the start, counting houses until a limit or a repeat is reached.", time: "O(k)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Loose bound', input: '{"street":[0,1,0,0,1,1],"k":9}' },
     { label: 'One open door, tight bound', input: '{"street":[0,0,1,0],"k":4}' },

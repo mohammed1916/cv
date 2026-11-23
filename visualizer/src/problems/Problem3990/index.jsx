@@ -8,6 +8,10 @@ const definition = {
   inputLabel: 'Object with k from 1 to 1000',
   url: 'https://leetcode.com/problems/create-grid-with-exactly-k-paths-ii/',
   complexity: 'O(log k) construction steps on a fixed grid of at most 25 by 25. A test checks all k from 1 to 1000: the size limit holds and the path count is exact.',
+  question: "Design a grid of at most 25 by 25 in which exactly k routes lead from top-left to bottom-right using only right and down moves.",
+  approaches: [
+    { name: "Binary construction", intuition: "Use the binary expansion of k to add route-doubling structures to a fixed grid.", time: "O(log k) construction steps", space: "O(1) on the fixed grid" },
+  ],
   examples: [
     { label: 'k = 13', input: '{"k":13}' },
     { label: 'One path', input: '{"k":1}' },

@@ -4,6 +4,10 @@ import { buildTrace, parseInput, code, python, phases, examples, complexity, inp
 import { Sequence, Vars } from './SeqKit'
 
 const definition = {
+  question: "Find the largest string that divides both given strings evenly.",
+  approaches: [
+    { name: "Concatenation equality with Euclid", intuition: "Two strings share a base exactly when a+b equals b+a; the base length is the gcd of the two lengths.", time: "O(n + m)", space: "O(n + m)" },
+  ],
   number: meta.number, phases, parse: parseInput, build: buildTrace, code, python, inputLabel,
   url: `https://leetcode.com/problems/${meta.slug}/`, complexity, examples,
 }

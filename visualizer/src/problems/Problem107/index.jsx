@@ -22,6 +22,10 @@ const definition = {
   inputLabel: "Level-order array (e.g. [3,9,20,null,null,15,7])",
   url: "https://leetcode.com/problems/binary-tree-level-order-traversal-ii/",
   complexity: "O(n) time and O(n) space for n nodes. The visualization accepts up to 15 entries.",
+  question: "Return the values of a binary tree grouped by depth, from the deepest level up to the root.",
+  approaches: [
+    { name: "Level-order then reverse", intuition: "Collect each level in a queue traversal and reverse the list of levels.", time: "O(n)", space: "O(n)" },
+  ],
   examples: getExamples("binary-tree-level-order-traversal-ii").map(example => ({ label: example.label, input: JSON.stringify(example.arr ?? example.root) })),
 };
 

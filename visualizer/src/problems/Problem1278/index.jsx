@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'String (JSON object with lowercase s and k)',
   url: 'https://leetcode.com/problems/palindrome-partitioning-iii/',
   complexity: 'O(n^3 + k * n^2) time and O(n^2) space. The visualization caps input at 8 letters.',
+  question: "Split a string into a given number of parts with the fewest letter changes needed to make each part a palindrome.",
+  approaches: [
+    { name: "Cost table and layered DP", intuition: "Compute the change cost of every substring, then build the best split over the number of parts.", time: "O(n^3 + k x n^2)", space: "O(n^2)" },
+  ],
   examples: [
     { label: 'Three parts', input: '{"s":"abc","k":2}' },
     { label: 'Already split', input: '{"s":"aabbc","k":3}' },

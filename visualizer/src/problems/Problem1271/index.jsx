@@ -8,6 +8,10 @@ const definition = {
   inputLabel: 'Positive decimal number as a string (e.g. "257")',
   url: 'https://leetcode.com/problems/hexspeak/description/',
   complexity: 'O(log num) time and O(log num) space for the hex digits. The visualization caps the input at 15 decimal digits so the number stays exact; the draft does not state an exact official bound.',
+  question: "Convert a decimal number to Hexspeak, where its hexadecimal form uses only O, I and letters A to F.",
+  approaches: [
+    { name: "Hex conversion and check", intuition: "Convert to hexadecimal, map 0 to O and 1 to I, and reject any other digit.", time: "O(log num)", space: "O(log num)" },
+  ],
   examples: [
     { label: 'Hexspeak', input: '"257"' },
     { label: 'Error', input: '"3"' },

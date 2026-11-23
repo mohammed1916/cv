@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON object with employees [id, name or null] and salaries [id, salary]',
   url: 'https://leetcode.com/problems/employees-with-missing-information/',
   complexity: 'O(e + s) with hash sets for the lookups. A database runs the two outer joins and a union.',
+  question: "List employee ids that are missing either a name or a salary.",
+  approaches: [
+    { name: "Union then filter", intuition: "Union the id lists from both tables, then keep ids that appear in only one table.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Missing name and salary', input: '{"employees":[[2,"Ann"],[3,null],[4,"Bo"]],"salaries":[[2,5000],[4,700]]}' },
     { label: 'Salary without employee', input: '{"employees":[[1,"Cy"]],"salaries":[[9,300]]}' },

@@ -18,6 +18,10 @@ const definition = {
   inputLabel: 'JSON {"flowers":[3,1,6],"newFlowers":9,"target":7,"full":4,"partial":2}',
   url: 'https://leetcode.com/problems/maximum-total-beauty-of-the-gardens/',
   complexity: 'O(n log n + n * n * log target) time with the simple inner loop shown here. The visualization caps gardens at 8 and values at 20.',
+  question: "Plant k extra flowers in gardens to maximise total beauty, where beauty depends on how many gardens reach a full threshold and the weakest partial garden.",
+  approaches: [
+    { name: "Sort and try each count of full gardens", intuition: "Sort the gardens, fill the most incomplete ones first, and compare the beauty for each number of full gardens.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Mixed', input: '{"flowers":[3,1,6],"newFlowers":9,"target":7,"full":4,"partial":2}' },
     { label: 'Few flowers', input: '{"flowers":[5,5,2],"newFlowers":4,"target":6,"full":3,"partial":1}' },

@@ -16,6 +16,10 @@ const definition = {
   inputLabel: 'Array arr of 0/1 (JSON)',
   url: 'https://leetcode.com/problems/three-equal-parts/',
   complexity: 'O(n) time and O(n) space for the index list. arr is capped at 100 values here.',
+  question: "Split a binary array into three non-empty parts with equal value; return their starting and ending indices.",
+  approaches: [
+    { name: "Ones split and match", intuition: "Ones must divide evenly among the parts; the first part's start is fixed by its first one, and the trailing zeros must match.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Own: seven values, three ones', input: '[1,0,0,1,0,0,1]' },
     { label: 'Own: alternating eight', input: '[0,1,0,1,0,1,0,1]' },

@@ -13,6 +13,11 @@ const definition = {
   inputLabel: 'JSON {"maxHeights": [5, 3, 4, 1, 1]}',
   url: 'https://leetcode.com/problems/beautiful-towers-i/',
   complexity: 'O(n) time and O(n) space with monotonic stacks. The visualization caps the array at 12 towers.',
+  question: "Choose a mountain-shaped sequence of tower heights under given maximums, and maximize the sum of heights.",
+  approaches: [
+    { name: "Monotonic stacks from both sides", intuition: "For each peak, compute the best prefix and suffix sums that rise to the peak using stacks.", time: "O(n)", space: "O(n)" },
+    { name: "Try each peak with a linear scan", intuition: "For each peak, scan outward greedily to build the sums.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Peak in the middle', input: '{"maxHeights":[4,2,6,3,1]}' },
     { label: 'Two equal tops', input: '{"maxHeights":[7,2,5,5]}' },

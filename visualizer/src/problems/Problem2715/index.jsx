@@ -11,6 +11,10 @@ const definition = {
   inputLabel: 'Object with delay (ms) and cancelAt (ms or null for no cancel)',
   url: 'https://leetcode.com/problems/timeout-cancellation/',
   complexity: 'O(1). One timer is set and at most one event decides the outcome.',
+  question: "Write a function that rejects a promise if it does not settle within a given time.",
+  approaches: [
+    { name: "Race with a timeout", intuition: "Race the promise against a timer that cancels it when the limit is reached.", time: "O(1)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Cancelled first', input: '{"delay":40,"cancelAt":15}' },
     { label: 'No cancel', input: '{"delay":25,"cancelAt":null}' },

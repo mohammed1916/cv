@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with workers (skill numbers) and tasks ([skill, profit] pairs)',
   url: 'https://leetcode.com/problems/maximize-profit-from-task-assignment/',
   complexity: 'O(t^2 * s log t) time for t tasks and s distinct skills, using a full greedy re-match for each task given to the extra worker. Space is O(t). The visualization caps the input at 6 workers and 6 tasks.',
+  question: "Assign tasks to workers with given skills to maximize total profit, with one extra worker allowed.",
+  approaches: [
+    { name: "Greedy per skill", intuition: "Match the most profitable tasks to matching workers, then re-match when an extra worker is added.", time: "O(t^2 s log t)", space: "O(t)" },
+  ],
   examples: [
     { label: 'Extra worker helps', input: '{"workers":[1,2],"tasks":[[1,4],[2,3],[3,9]]}' },
     { label: 'Skill matching is enough', input: '{"workers":[1,1,2],"tasks":[[1,5],[1,2],[2,6]]}' },

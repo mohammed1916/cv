@@ -9,6 +9,10 @@ const definition = {
   inputLabel: 'Object with nums and target (JSON)',
   url: 'https://leetcode.com/problems/maximum-number-of-non-overlapping-subarrays-with-sum-equals-target/',
   complexity: 'O(n) time with a set of remembered prefix sums, and O(n) space in the worst case.',
+  question: "Find the maximum number of non-overlapping subarrays whose sums equal a target.",
+  approaches: [
+    { name: "Greedy with remembered prefix sums", intuition: "Scan forward and cut as soon as a window reaches the target, using a set of seen prefix sums.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Mixed signs', input: '{"nums":[1,-1,2,2,-2,2,2],"target":2}' },
     { label: 'All zeros', input: '{"nums":[0,0,0],"target":0}' },

@@ -6,6 +6,10 @@ const definition = {
   inputLabel: 'Object with n and k (JSON)',
   url: 'https://leetcode.com/problems/find-kth-bit-in-nth-binary-string/',
   complexity: 'O(n) time and O(1) space: one step per level, descending from S(n) to S(1).',
+  question: "Find the k-th bit of the n-th string built by repeatedly inverting and reversing.",
+  approaches: [
+    { name: "Descend the recursive structure", intuition: "Each level halves the position; mirror it when the position is in the right half and invert the bit.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Left half', input: '{"n":3,"k":6}' },
     { label: 'Center bit', input: '{"n":5,"k":16}' },

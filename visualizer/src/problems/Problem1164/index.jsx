@@ -13,6 +13,10 @@ const definition = {
   python,
   inputLabel,
   complexity,
+  question: "Report the price of each product on a given date when prices change over time, with a default price before any change.",
+  approaches: [
+    { name: "Latest change on or before the date", intuition: "For each product, take the most recent price change on or before the target date, or the default.", time: "O(P + C) with grouping", space: "O(P + C)" },
+  ],
   examples,
 }
 

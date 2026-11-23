@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Cities, threshold and queries (JSON)',
   url: 'https://leetcode.com/problems/graph-connectivity-with-threshold/',
   complexity: 'Union-find over divisor multiples. Near O(n log n) joins, with path walks in this teaching version. The visualization accepts n up to 30.',
+  question: "Connect cities whose numbers share a common divisor above a threshold, and answer whether pairs of cities are connected.",
+  approaches: [
+    { name: "Union over multiples", intuition: "For each divisor above the threshold, union its multiples, then answer queries with union-find.", time: "O(n log n) with union-find", space: "O(n)" },
+  ],
   examples: [
     { label: 'Threshold 2', input: '{"n":10,"threshold":2,"queries":[[3,9],[4,6],[5,7],[8,10],[2,5]]}' },
     { label: 'Threshold 3', input: '{"n":12,"threshold":3,"queries":[[4,8],[5,10],[6,9],[7,11],[2,12]]}' },

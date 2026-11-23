@@ -16,6 +16,10 @@ const definition = {
   inputLabel: 'JSON object with nums (values 0 to 5)',
   url: 'https://leetcode.com/problems/make-array-elements-equal-to-zero/',
   complexity: 'O(n * (n + sum)) time for the trials. The visualization caps the array at 10 values.',
+  question: "Count the starting choices in an array that become all zeros when zeros are removed by the stated moves.",
+  approaches: [
+    { name: "Simulate each start", intuition: "For each start and direction, simulate the moves and check whether every value becomes zero.", time: "O(n * (n + sum))", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"nums":[1,0,2,0,3]}' },
     { label: 'Example 2', input: '{"nums":[0]}' },

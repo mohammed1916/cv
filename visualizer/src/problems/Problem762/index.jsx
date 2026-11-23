@@ -13,6 +13,10 @@ const definition = {
   inputLabel: '[left, right] (JSON)',
   url: 'https://leetcode.com/problems/prime-number-of-set-bits-in-binary-representation/',
   complexity: 'O(right - left) numbers, each with a popcount; the visualization caps the range width at 200.',
+  question: "Count numbers in a range whose binary representation has a prime number of set bits.",
+  approaches: [
+    { name: "Popcount and primality check", intuition: "Count the one bits of each number and test whether that count is prime.", time: "O(R log R)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '[6, 10]' },
     { label: 'Example 2', input: '[10, 15]' },

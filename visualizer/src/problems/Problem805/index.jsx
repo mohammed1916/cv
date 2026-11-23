@@ -14,6 +14,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Array nums (JSON)',
   url: 'https://leetcode.com/problems/split-array-with-same-average/',
   complexity: 'Roughly O(n * n/2 * S) set work where S is the number of distinct sums; the early divisibility filter prunes most sizes.',
+  question: "Decide whether an array can be split into two non-empty parts with equal averages.",
+  approaches: [
+    { name: "Subset sums by size", intuition: "Equal averages mean one part has k elements with a fixed target sum. Track reachable sums for each subset size and check the target for each k.", time: "Pseudo-polynomial in the sums; O(n^2 * S)", space: "O(n * S) sets" },
+  ],
   examples: [
     { label: 'Six mixed values', input: '[7,1,5,3,9,11]' },
     { label: 'Two values', input: '[6,10]' },

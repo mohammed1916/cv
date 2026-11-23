@@ -8,6 +8,10 @@ const definition = {
   inputLabel: 'Object with positions and m (JSON)',
   url: 'https://leetcode.com/problems/magnetic-force-between-two-balls/',
   complexity: 'O(n log n) for sorting and O(n log D) for the search over gaps D, with O(n) space.',
+  question: "Place m balls in n positions so the smallest distance between any two balls is as large as possible.",
+  approaches: [
+    { name: "Binary search on distance", intuition: "Search over distances; for each one, a greedy scan checks whether m balls fit.", time: "O(n log n + n log D)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Five slots', input: '{"positions":[1,2,3,4,7],"m":3}' },
     { label: 'Two balls', input: '{"positions":[5,4,3,2,1,9],"m":2}' },

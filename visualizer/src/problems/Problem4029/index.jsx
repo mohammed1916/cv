@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with start (floor) and requests ([arrival, floor] pairs)',
   url: "https://leetcode.com/problems/elevator-requests-iv/",
   complexity: "O(2^m * m^2) time and O(2^m * m) space for m requests. The visualization caps m at 6. Each request is served the first time the elevator reaches its floor at or after its arrival, so the search only needs to order the requests.",
+  question: "Find the earliest finish time for every subset of requests and every last request served.",
+  approaches: [
+    { name: "Subset DP with earliest finish", intuition: "Track the earliest finish for each subset and last request, extending one request at a time.", time: "O(2^m x m^2)", space: "O(2^m x m)" },
+  ],
   examples: [
     { label: "Two requests out of order", input: '{"start":0,"requests":[[0,3],[2,1]]}' },
     { label: "Late arrivals", input: '{"start":5,"requests":[[10,5],[3,8],[12,2]]}' },

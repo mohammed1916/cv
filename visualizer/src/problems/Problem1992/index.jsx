@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Grid of 0 (forest) and 1 (farmland) as JSON rows',
   url: 'https://leetcode.com/problems/find-all-groups-of-farmland/',
   complexity: 'O(m * n) time for the scan; each group is walked once along its top row and left column.',
+  question: "Find the rectangular groups of farmland in a grid, each given by its top-left and bottom-right corners.",
+  approaches: [
+    { name: "Corner scan and extend", intuition: "Scan for top-left corners and extend each group down and right to its bottom-right corner.", time: "O(m n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Two groups', input: '[[1,1,0],[0,0,1],[0,0,1]]' },
     { label: 'Long strip', input: '[[0,1,1,0],[0,1,1,0]]' },

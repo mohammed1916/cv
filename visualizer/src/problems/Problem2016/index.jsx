@@ -8,6 +8,10 @@ const definition = {
   inputLabel: 'Integer array (JSON)',
   url: 'https://leetcode.com/problems/maximum-difference-between-increasing-elements/',
   complexity: 'O(n) time and O(1) extra space: one running minimum.',
+  question: "Find the largest difference between two values where the later value is larger than the earlier one.",
+  approaches: [
+    { name: "Track prefix minimum", intuition: "Scan once while keeping the smallest value so far, and record each increasing difference.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Late rise', input: '[6,2,9,4]' },
     { label: 'Steady fall', input: '[8,6,4,2]' },

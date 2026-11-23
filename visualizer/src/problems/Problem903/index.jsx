@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'DI string s (JSON)',
   url: 'https://leetcode.com/problems/valid-permutations-for-di-sequence/',
   complexity: 'O(n^2) time and O(n) space (the visualization keeps each row; s is capped at 100 characters).',
+  question: "Count the permutations of 0 to n that match a string of D (decrease) and I (increase) relations.",
+  approaches: [
+    { name: "Interval DP with prefix sums", intuition: "dp[i][j] counts arrangements of the first i+1 values ending with rank j; prefix sums give each transition.", time: "O(n^2)", space: "O(n^2)" },
+  ],
   examples: [
     { label: 'Own: six steps', input: '"IDIIDD"' },
     { label: 'Own: two downs then up', input: '"DDI"' },

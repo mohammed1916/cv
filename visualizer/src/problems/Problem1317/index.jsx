@@ -3,6 +3,10 @@ import { StackLane } from '../../components/shared/AlgorithmStatePrimitives'
 import { buildTrace, parseInput, code, python, phases, examples } from './algorithm'
 
 const definition = {
+  question: "Find two positive integers that add to n and neither contains the digit zero.",
+  approaches: [
+    { name: "Try candidates in order", intuition: "Start with one and check both the candidate and its complement for zero digits.", time: "O(n log n)", space: "O(1)" },
+  ],
   number: '1317', phases, parse: parseInput, build: buildTrace, code, python, examples,
   inputLabel: 'Integer n (JSON object)',
   url: 'https://leetcode.com/problems/convert-integer-to-the-sum-of-two-no-zero-integers/',

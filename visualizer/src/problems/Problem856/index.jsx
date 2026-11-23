@@ -14,6 +14,11 @@ const definition = {
   inputLabel: 'Balanced parentheses (JSON string)',
   url: 'https://leetcode.com/problems/score-of-parentheses/',
   complexity: 'O(n) time and O(n) space for the stack.',
+  question: "Compute the score of a balanced parentheses string where () scores 1, AB adds the scores, and (A) doubles the score of A.",
+  approaches: [
+    { name: "Stack of running scores", intuition: "Push a zero when a pair opens; on close, combine the inner score into the outer one.", time: "O(n)", space: "O(n)" },
+    { name: "Depth counting", intuition: "Each () adds 2 to the power of its depth.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Nested', input: '"(()(()))"' },
     { label: 'Pairs', input: '"()()()"' },

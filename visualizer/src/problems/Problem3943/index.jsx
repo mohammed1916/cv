@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON: {"nums1": [...], "nums2": [...], "queries": [[1, x, y, val] | [2, tot], ...]}',
   url: 'https://leetcode.doocs.org/en/lc/3943/',
   complexity: 'O(n2 + n1) per type 2 query plus O(length) per type 1 query. The visualization caps the sizes at 4 and 8.',
+  question: "Handle range increments on one array and sum-count queries on another, answering each query with matching values.",
+  approaches: [
+    { name: "Direct updates with a frequency table", intuition: "Apply each range increment directly, and answer each sum query by counting matches in a frequency table.", time: "O(n2 + n1) per sum query, O(length) per update", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"nums1":[1,2],"nums2":[3,4],"queries":[[2,5],[1,0,0,2],[2,5]]}' },
     { label: 'Example 3', input: '{"nums1":[2,5,8,4],"nums2":[1,3,8],"queries":[[2,9],[1,1,2,1],[2,10]]}' },

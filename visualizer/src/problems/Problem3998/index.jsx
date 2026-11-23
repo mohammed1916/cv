@@ -18,6 +18,10 @@ const definition = {
   inputLabel: 'Object with s and patterns (e.g. {"s":"1010","patterns":["0?1?","11??"]})',
   url: 'https://leetcode.com/problems/transform-binary-string-using-subsequence-sort/',
   complexity: 'O(n) time per pattern, so O(n * p) overall for p patterns. The visualization caps s at 12 characters and patterns at 5.',
+  question: "Decide whether a binary pattern with question marks can match a string after sorting a chosen subsequence.",
+  approaches: [
+    { name: "Zero-order feasibility check", intuition: "Check whether some filling of the question marks keeps the zeros of the candidate in order.", time: "O(n) per pattern", space: "O(n)" },
+  ],
   examples: [
     { label: 'Three patterns', input: '{"s":"1010","patterns":["0?1?","11??","??0?"]}' },
     { label: 'Zero counts', input: '{"s":"0000","patterns":["1111","0?0?"]}' },

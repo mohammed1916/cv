@@ -14,6 +14,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Operations (JSON array of strings)',
   url: 'https://leetcode.com/problems/baseball-game/',
   complexity: 'O(n) time and O(n) space for the record.',
+  question: "Total the scores of a record after applying number, cancel, double and sum operations.",
+  approaches: [
+    { name: "Stack simulation", intuition: "Push each score, pop on cancel, and push derived scores from the top values.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Cancel', input: '["4","7","C","D","+"]' },
     { label: 'Mixed signs', input: '["3","-1","+","D","C","6"]' },

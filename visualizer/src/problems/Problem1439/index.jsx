@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON {"mat": [[sorted row], ...] (values 1 to 20), "k": rank}',
   url: 'https://leetcode.com/problems/find-the-kth-smallest-sum-of-a-matrix-with-sorted-rows/',
   complexity: 'O(m * k * log k) time for m rows and k kept sums. The visualization caps the matrix at 4 by 4.',
+  question: "Find the kth smallest sum you can build by choosing one value from each row.",
+  approaches: [
+    { name: "Merge rows with a heap", intuition: "Merge the best sums from each row, keeping only the k smallest.", time: "O(m k log k)", space: "O(k)" },
+  ],
   examples: [
     { label: 'Two rows, fifth smallest', input: '{"mat":[[1,6,9],[2,4,8]],"k":5}' },
     { label: 'Three rows of two', input: '{"mat":[[3,5],[1,9],[4,4]],"k":6}' },

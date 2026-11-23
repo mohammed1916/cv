@@ -21,6 +21,10 @@ const definition = {
   inputLabel: 'Object with prices (decimal strings) and an integer target',
   url: 'https://leetcode.com/problems/minimize-rounding-error-to-meet-target/description/',
   complexity: 'O(n log n) time for n prices, from sorting the round-up costs; O(n) space. Calculations use integer micro-units. The visualization caps input at 8 prices with up to 3 integer digits and 6 decimals; the official bounds are not verified.',
+  question: "Round each price down or up so the total reaches a target, minimising the total rounding error.",
+  approaches: [
+    { name: "Greedy by round-up cost", intuition: "Round every price down first, then round up the prices whose round-up cost is smallest until the target count is reached.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Pick two round-ups', input: '{"prices":["0.400","3.250","1.600","0.000"],"target":6}' },
     { label: 'Impossible', input: '{"prices":["1.200","2.300"],"target":6}' },

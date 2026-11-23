@@ -13,6 +13,11 @@ const definition = {
   inputLabel: 'Array nums with a dominant value (JSON object)',
   url: 'https://leetcode.com/problems/minimum-index-of-a-valid-split/',
   complexity: 'O(n) time and O(n) space for the value counts. The visualization caps the array at 30 values.',
+  question: "Find the smallest split index where both sides have the same dominant value, meaning it appears more than half the time in each part.",
+  approaches: [
+    { name: "Count once, then prefix counts", intuition: "The only candidate for dominance is the overall majority value; track its prefix count and check each split.", time: "O(n)", space: "O(n)" },
+    { name: "Recount each side", intuition: "For each split, count the candidate value on both sides directly.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Split at 2', input: '{"nums":[1,2,2,2]}' },
     { label: 'Split at 4', input: '{"nums":[2,1,3,1,1,1,7,1,2,1]}' },

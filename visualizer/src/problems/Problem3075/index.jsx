@@ -12,6 +12,11 @@ const definition = {
   inputLabel: 'Object with happiness (array of positive integers) and k',
   url: 'https://leetcode.com/problems/maximize-happiness-of-selected-children/',
   complexity: 'O(n log n) time for the sort, then O(k) for the picks. The visualization caps input at 8 children.',
+  question: "Select k children to maximise happiness, where each pick reduces the value of later picks.",
+  approaches: [
+    { name: "Sort then subtract turn index", intuition: "Sort the happiness values descending and subtract the turn index from each pick, keeping only positive gains.", time: "O(n log n)", space: "O(1)" },
+    { name: "Max-heap selection", intuition: "Repeatedly take the largest remaining value and decrease the rest.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Four children, pick two', input: '{"happiness":[9,2,7,5],"k":2}' },
     { label: 'Three children, pick all', input: '{"happiness":[12,40,8],"k":3}' },

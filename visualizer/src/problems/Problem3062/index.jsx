@@ -16,6 +16,10 @@ const definition = {
   inputLabel: "JSON array of an even number of integers",
   url: "https://leetcode.com/problems/winner-of-the-linked-list-game/",
   complexity: "O(n) time and O(1) extra space for n nodes. The result is returned as Even, Odd or Tie. The visualization caps the list at 12 nodes with values from 1 to 100; the algorithm itself is a single pass over the pairs.",
+  question: "Determine the winner of the linked list game from the pair scores.",
+  approaches: [
+    { name: "Pairwise scan", intuition: "Walk the list in pairs, record the winners, and compare the counts.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: "Odd team wins", input: "[4, 9, 2, 7, 6, 5]" },
     { label: "Even team wins", input: "[8, 1, 4, 3, 6, 5, 2, 7]" },

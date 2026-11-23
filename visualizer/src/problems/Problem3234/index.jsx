@@ -18,6 +18,10 @@ const definition = {
   inputLabel: 'Binary string s (JSON, e.g. {"s": "101101"})',
   url: "https://leetcode.com/problems/count-the-number-of-substrings-with-dominant-ones/",
   complexity: "O(n * sqrt(n)) time and O(1) extra space. The visualization accepts strings up to 60 characters.",
+  question: "Count the substrings of a binary string in which the ones outnumber the square of the zeros.",
+  approaches: [
+    { name: "Count ones and zeros in blocks", intuition: "Each start and a bounded number of zero counts is checked, so the scan stays near square-root cost per start.", time: "O(n * sqrt(n))", space: "O(1)" },
+  ],
   examples: [
     { label: "Mixed (illustrative)", input: '{"s": "101101"}' },
     { label: "Zeros heavy (illustrative)", input: '{"s": "00011"}' },

@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with lo, hi (at most 60 integers apart), and k',
   url: 'https://leetcode.com/problems/sort-integers-by-the-power-value/',
   complexity: 'Each power is memoized, so the work is close to linear in the number of values computed, plus a sort of the range.',
+  question: "Sort a range of integers by the number of steps their Collatz sequence takes.",
+  approaches: [
+    { name: "Memoized step count then sort", intuition: "Compute each step count once and sort by count, then value.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Eight integers, rank five', input: '{"lo":40,"hi":47,"k":5}' },
     { label: 'Six integers from 200', input: '{"lo":200,"hi":205,"k":2}' },

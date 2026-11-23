@@ -15,6 +15,11 @@ const definition = {
   inputLabel: 'JSON list of hidden category labels (e.g. [0,1,0,2])',
   url: 'https://leetcode.com/problems/number-of-unique-categories/',
   complexity: 'O(n * k) same-category queries for n elements and k categories, so O(n^2) queries at worst; O(n) extra space for the representatives. The visualization caps the list at 12 elements and reveals the group membership only as the scan finds it. The official query-call limit is not restated here.',
+  question: "Count how many distinct categories exist among the elements, when the only allowed question is whether two elements share a category.",
+  approaches: [
+    { name: "Representative list", intuition: "Keep one representative per category; each new element is compared against the representatives until a match is found.", time: "O(n k) queries", space: "O(k)" },
+    { name: "Compare every pair", intuition: "Ask about each pair and union matches; simpler but more queries.", time: "O(n^2) queries", space: "O(n)" },
+  ],
   examples: [
     { label: 'Mixed groups', input: '[0,1,0,2,1,2,3]' },
     { label: 'One group', input: '[5,5,5,5]' },

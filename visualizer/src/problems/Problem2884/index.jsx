@@ -4,6 +4,11 @@ import SalaryColumnView from './SalaryColumnView'
 import { buildTrace, parseInput, code, python, phases, inputLabel, complexity, examples } from './algorithm'
 
 const definition = {
+  question: "Double every salary in a table while keeping the other columns and rows unchanged.",
+  approaches: [
+    { name: "Assign a doubled column", intuition: "Replace the salary column with twice its values in place.", time: "O(n)", space: "O(n)" },
+    { name: "Row-by-row update", intuition: "Update each row's salary as it is visited.", time: "O(n)", space: "O(1) extra" },
+  ],
   number: meta.number,
   phases, parse: parseInput, build: buildTrace, code, python, inputLabel, complexity, examples,
   url: `https://leetcode.com/problems/${meta.slug}/`,

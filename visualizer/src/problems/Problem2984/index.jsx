@@ -7,6 +7,10 @@ const definition = {
   number: meta.number,
   phases, parse: parseInput, build: buildTrace, code, sql, python, inputLabel, complexity, examples,
   url: `https://leetcode.com/problems/${meta.slug}/`,
+  question: "For each city, find the hour or hours with the most calls.",
+  approaches: [
+    { name: "Group by city and hour", intuition: "Count calls per city and hour, then keep the hours with the maximum count for each city.", time: "O(n)", space: "O(n)" },
+  ],
 }
 
 export default function FindPeakCallingHours() {

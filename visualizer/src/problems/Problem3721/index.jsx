@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'Object with nums (integers)',
   url: 'https://leetcode.com/problems/longest-balanced-subarray-ii/',
   complexity: 'O(n^2) subarrays with set updates. This trace scans every subarray directly, so it is a teaching model rather than the large-input solution.',
+  question: "Find the longest balanced subarray of an array, for a larger input size.",
+  approaches: [
+    { name: "Check every subarray", intuition: "Scan every subarray directly and keep the longest balanced one.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Whole array', input: '{"nums":[1,2,3,4]}' },
     { label: 'Mixed run', input: '{"nums":[2,5,4,3,8]}' },

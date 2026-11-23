@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON object with plantTime and growTime',
   url: 'https://leetcode.com/problems/earliest-possible-day-of-full-bloom/',
   complexity: 'O(n log n) time for sorting by growth time; O(n) space.',
+  question: "Find the earliest day on which every plant has bloomed, given how long each seed takes to plant and how long it takes to grow.",
+  approaches: [
+    { name: "Plant the longest-growing seeds first", intuition: "Sort the seeds by growth time, largest first, and plant them in that order so growth overlaps with planting.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Long growth goes first', input: '{"plantTime":[3,1,6],"growTime":[4,2,1]}' },
     { label: 'Equal growth', input: '{"plantTime":[2,2],"growTime":[5,5]}' },

@@ -21,6 +21,10 @@ const definition = {
   inputLabel: "Level-order list with null for missing children (e.g. [4,1,9,-6,2,null,3])",
   url: "https://leetcode.com/problems/find-the-level-of-tree-with-minimum-sum/",
   complexity: "O(n) time and O(w) extra space for n nodes and maximum width w. The visualization accepts up to 31 entries and values from -100000 to 100000; the limits shown are this visualization's own.",
+  question: "In a binary tree, find the level whose node values sum to the smallest total, with ties going to the smaller level.",
+  approaches: [
+    { name: "Level by level traversal", intuition: "Visit the tree one level at a time, sum each level, and keep the first level with the smallest sum.", time: "O(n)", space: "O(w)" },
+  ],
   examples: [
     { label: "Dip at depth three", input: "[4,1,9,-6,2,null,3]" },
     { label: "Tie at the top", input: "[0,1,-1]" },

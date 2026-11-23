@@ -11,6 +11,10 @@ const definition = {
   inputLabel: 'Object with a Wineries table (rows of id, country, points, winery)',
   url: `https://leetcode.com/problems/${meta.slug}/`,
   complexity: 'O(n log n) over the source rows, for grouping and sorting within each country. The visualization caps the table at 24 rows.',
+  question: "For each country, report the top three wineries by total points.",
+  approaches: [
+    { name: "Sum then rank per country", intuition: "Total the points per winery, sort within each country, and keep the top three with the tie rule.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     {
       label: 'Repeat rows and a tie',

@@ -17,6 +17,10 @@ const definition = {
   inputLabel: 'Object with n (rune count), initial (rune ids) and edges ([from, to] pairs)',
   url: 'https://leetcode.com/problems/minimum-runes-to-add-to-cast-spell/',
   complexity: 'O(n^3) time for the transitive closure and O(n^2) space for the table; the visualization caps n at 8. Reading used here: an edge is followed only in its direction, and the answer is the number of groups with no incoming arrow and no initial rune.',
+  question: "Find the fewest runes to add so that every rune can be reached in a directed graph of spells.",
+  approaches: [
+    { name: "Transitive closure", intuition: "Compute which spells can reach which, then choose the runes that make each unreachable one reachable.", time: "O(n^3)", space: "O(n^2)" },
+  ],
   examples: [
     { label: 'One source', input: '{"n":6,"initial":[0],"edges":[[0,1],[1,2],[3,2],[4,5],[5,4]]}' },
     { label: 'No initial rune', input: '{"n":4,"initial":[],"edges":[[0,1],[1,0],[2,3]]}' },

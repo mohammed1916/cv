@@ -14,6 +14,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Hand and group size (JSON)',
   url: 'https://leetcode.com/problems/hand-of-straights/',
   complexity: 'O(n log n + n) time for sorting the distinct cards then at most n * groupSize card removals bounded by the hand; O(n) space for the counts.',
+  question: "Decide whether a hand of cards can be split into groups of consecutive values of a given size.",
+  approaches: [
+    { name: "Greedy from the smallest card", intuition: "Repeatedly take the smallest remaining card and remove one run of consecutive values starting there.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Two consecutive groups', input: '{"hand":[9,4,2,8,5,3,7,6],"groupSize":4}' },
     { label: 'Gap breaks a group', input: '{"hand":[2,8,4,6,10,3],"groupSize":3}' },

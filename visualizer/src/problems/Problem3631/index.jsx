@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Threats as [id, severity, exploitability] (e.g. [[1,2,3],[2,3,1]])',
   url: 'https://leetcode.com/problems/sort-threats-by-severity-and-exploitability/',
   complexity: 'O(k²) time and O(k) space for k threats, using insertion sort. The visualization caps the list at 8 threats; the official bounds are not verified here.',
+  question: "Sort threats by severity score and exploitability score, breaking ties by id.",
+  approaches: [
+    { name: "Insertion sort", intuition: "Insert each threat into a sorted prefix using the two scores and the id tie-break.", time: "O(k^2)", space: "O(k)" },
+  ],
   examples: [
     { label: 'Tie on score', input: '[[1, 2, 3], [2, 3, 1], [3, 2, 3], [4, 1, 9]]' },
     { label: 'Single threat', input: '[[7, 0, 0]]' },

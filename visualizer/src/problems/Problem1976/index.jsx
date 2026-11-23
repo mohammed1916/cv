@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON object with n and roads [u, v, time] (e.g. {"n":4,"roads":[[0,1,2],[1,3,2],[0,2,3],[2,3,1]]})',
   url: 'https://leetcode.com/problems/number-of-ways-to-arrive-at-destination/',
   complexity: 'O(n²) time with this selection loop (O((n + m) log n) with a heap), and O(n + m) space.',
+  question: "Count the number of shortest routes from an intersection to another one on a weighted road network.",
+  approaches: [
+    { name: "Dijkstra with path counts", intuition: "Run Dijkstra, resetting the count on a shorter route and adding to it on an equal one.", time: "O(E log V)", space: "O(V + E)" },
+  ],
   examples: [
     { label: 'Two routes tie', input: '{"n":4,"roads":[[0,1,2],[1,3,2],[0,2,3],[2,3,1]]}' },
     { label: 'Triangle', input: '{"n":3,"roads":[[0,1,1],[1,2,1],[0,2,2]]}' },

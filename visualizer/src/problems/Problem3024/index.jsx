@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON array of three side lengths from 1 to 100',
   url: 'https://leetcode.com/problems/type-of-triangle/',
   complexity: 'O(1) time and space for three sides.',
+  question: "Classify a triangle from three side lengths as equilateral, isosceles, scalene, or none.",
+  approaches: [
+    { name: "Sort then compare", intuition: "Sort the sides, check the triangle inequality, then compare equal sides.", time: "O(1)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Equilateral', input: '[6,6,6]' },
     { label: 'Scalene', input: '[5,7,9]' },

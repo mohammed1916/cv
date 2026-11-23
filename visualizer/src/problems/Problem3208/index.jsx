@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON object with colors (0 and 1 values in a circle, up to 40) and k, for example {"colors":[0,1,0,1,0],"k":3}',
   url: 'https://leetcode.com/problems/alternating-groups-ii/',
   complexity: 'O(n + k) time by reading the circle once around, with the run kept as a single number. The visualization caps colors at 40 entries.',
+  question: "Count alternating groups of length k on a circle of coloured tiles.",
+  approaches: [
+    { name: "Run count on the circle", intuition: "Read the circle once around plus k minus two extra tiles so every wrapping block becomes an ordinary run.", time: "O(n + k)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Own: seven tiles, k 4', input: '{"colors":[1,1,0,1,1,0,0],"k":4}' },
     { label: 'Eight colors, k four', input: '{"colors":[1,0,1,1,0,1,0,0],"k":4}' },

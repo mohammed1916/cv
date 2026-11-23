@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Word (JSON object with word)',
   url: 'https://leetcode.com/problems/string-compression-iii/',
   complexity: 'O(n) time and O(n) output space. The visualization caps input at 40 letters.',
+  question: "Compress a string by writing each run of a letter as the letter and its count, cutting runs longer than nine.",
+  approaches: [
+    { name: "Run-length scan", intuition: "Read runs left to right, write each letter with its count, and cut the run at nine.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"word":"abcde"}' },
     { label: 'Long run', input: '{"word":"aaaaaaaaaaaaaaabc"}' },

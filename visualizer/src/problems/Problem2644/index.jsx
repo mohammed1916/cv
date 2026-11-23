@@ -18,6 +18,10 @@ const definition = {
   inputLabel: 'JSON object (e.g. {"nums": [4,7,9,3,9], "divisors": [5,2,3]})',
   url: "https://leetcode.com/problems/find-the-maximum-divisibility-score/",
   complexity: "O(|nums| * |divisors|) time and O(|divisors|) space for the score list shown. Both arrays are at most 1000 elements.",
+  question: "Given integers and divisors, return the divisor with the largest score, where the score is the count of numbers it divides; ties go to the smallest divisor.",
+  approaches: [
+    { name: "Check every divisor against every number", intuition: "Count divisibility for each divisor and keep the best score with the smallest value on ties.", time: "O(n * d)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Three divisors', input: '{"nums":[18,24,35,9,50],"divisors":[5,4,3]}' },
     { label: 'Prime divisors', input: '{"nums":[13,26,39,7],"divisors":[13,2,7]}' },

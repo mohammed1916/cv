@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Object with n and rounds (JSON)',
   url: 'https://leetcode.com/problems/most-visited-sector-in-a-circular-track/',
   complexity: 'O(n + m) time for the simulation view, O(1) for the formula; the answer needs only the first and last rounds.',
+  question: "Find the sectors visited most often by a marathon on a circular track.",
+  approaches: [
+    { name: "Start and end sector formula", intuition: "Only the first and last sectors matter, so compare where the run starts and ends.", time: "O(1)", space: "O(1)" },
+  ],
   examples: [
     { label: 'No wrap', input: '{"n":6,"rounds":[2,4,5,6,1,3]}' },
     { label: 'Wrap past the end', input: '{"n":8,"rounds":[7,1,2,3]}' },

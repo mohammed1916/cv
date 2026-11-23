@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Numbers (JSON object with nums as values from 1 to 30)',
   url: 'https://leetcode.com/problems/count-the-number-of-square-free-subsets/',
   complexity: 'O(n * 2^10) time with a bitmask of the ten primes up to 29. The visualization caps input at 8 numbers.',
+  question: "Count the square-free subsets of nums, including the empty subset, modulo a prime.",
+  approaches: [
+    { name: "Bitmask over primes", intuition: "Track which of the ten small primes are already used in the product as a bitmask.", time: "O(n * 2^10)", space: "O(2^10)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"nums":[3,4,4,5]}' },
     { label: 'Ones', input: '{"nums":[1,1,1]}' },

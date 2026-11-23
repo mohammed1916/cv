@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with rows, cols and start (e.g. {"rows":5,"cols":5,"start":[0,0]})',
   url: "https://leetcode.com/problems/the-knights-tour/",
   complexity: "Backtracking with the fewest-onward-moves ordering (Warnsdorff). Worst case is exponential in the number of squares, so this visualization caps the board at 5 by 5 and stops a search that exceeds 20000 frames. Each placement checks eight moves, so one branch costs O(rows * cols). The statement guarantees a tour, so the empty grid shown for a board with no tour is a teaching case only.",
+  question: "Given a board size, find a knight's tour that visits every square exactly once.",
+  approaches: [
+    { name: "Backtracking with Warnsdorff ordering", intuition: "Try moves to the square with the fewest onward moves first, and back up when stuck.", time: "exponential worst case", space: "O(n^2)" },
+  ],
   examples: [
     { label: "Open tour from a corner", input: '{"rows":5,"cols":5,"start":[0,0]}' },
     { label: "Open tour from the centre", input: '{"rows":5,"cols":5,"start":[2,2]}' },

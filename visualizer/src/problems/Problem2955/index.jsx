@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with s and queries (zero-based inclusive [l, r]), e.g. {"s":"abcabca","queries":[[0,6],[1,3],[2,2]]}',
   url: 'https://leetcode.com/problems/number-of-same-end-substrings/',
   complexity: 'O(26 n + 26 q) time with prefix counts, where q is the number of queries; the visualization caps s at 30 letters and the queries at 6. Ranges are zero-based inclusive in this visualization.',
+  question: "For each query range, count substrings whose first and last letters are equal.",
+  approaches: [
+    { name: "Prefix counts per letter", intuition: "Precompute prefix counts for each letter, then for each query add c(c+1)/2 over the letters.", time: "O(26\u00b7n + 26\u00b7q)", space: "O(26\u00b7n)" },
+  ],
   examples: [
     { label: 'Three ranges', input: '{"s":"abcabca","queries":[[0,6],[1,3],[2,2]]}' },
     { label: 'Repeated letters', input: '{"s":"zzyz","queries":[[0,3],[1,2]]}' },

@@ -17,6 +17,10 @@ const definition = {
   inputLabel: 'Binary matrix as rows of 0 and 1, each row sorted (e.g. [[0,0,1],[0,1,1]])',
   url: 'https://leetcode.com/problems/leftmost-column-with-at-least-a-one/',
   complexity: 'O(rows + cols) get calls: the cursor starts at the top-right corner and only moves left or down, so no cell is read twice. The visualization caps the matrix at 8 x 8; the official query budget is not checked here.',
+  question: "Find the leftmost column that contains a one in a binary matrix you can only query.",
+  approaches: [
+    { name: "Staircase search from top-right", intuition: "Start in the top-right and move left on a one, down otherwise.", time: "O(rows + cols)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Staircase', input: '[[0,0,0,0,1],[0,0,1,1,1],[0,0,0,1,1]]' },
     { label: 'Narrow band', input: '[[0,0,0,0,0,0],[0,0,0,0,1,1],[0,0,0,1,1,1],[0,1,1,1,1,1]]' },

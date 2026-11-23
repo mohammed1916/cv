@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with root as a level-order array (JSON)',
   url: 'https://leetcode.com/problems/cousins-in-binary-tree-ii/',
   complexity: 'O(n) time and O(n) space for n nodes. The visualization caps the tree at 15 entries.',
+  question: "Given a binary tree, replace each node value with the sum of values at its cousins, meaning nodes on the same level with a different parent.",
+  approaches: [
+    { name: "Level sums then sibling subtraction", intuition: "Sum each level, then set each child value to its level sum minus its sibling pair total.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"root":[5,4,9,1,10,null,7]}' },
     { label: 'Example 2', input: '{"root":[3,1,2]}' },

@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON string of the letters c, r, o, a and k (e.g. "ccrrooaakk")',
   url: 'https://leetcode.com/problems/minimum-number-of-frogs-croaking/',
   complexity: 'O(n) time and O(1) space: the state is five counters, one per stage of the croak.',
+  question: "Find the fewest frogs that could be croaking at the same time to produce the sounds given.",
+  approaches: [
+    { name: "Stage counters", intuition: "Keep one counter per croak stage and track how many frogs are mid-sound.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'One frog', input: '"croak"' },
     { label: 'Two overlapping', input: '"ccrrooaakk"' },

@@ -9,6 +9,10 @@ const definition = {
   inputLabel: 'Object with units, a rectangular grid of capacities',
   url: 'https://leetcode.com/problems/maximize-sum-of-device-ratings/',
   complexity: 'O(m · n log n) with the sort, or O(m · n) when the two smallest values of each row are found by a scan. The visualization caps units at 8 devices of 8 units.',
+  question: "Each device holds the same number of units and is rated by its smallest capacity, or 0 when empty; each device may pass one unit to another. Maximise total rating.",
+  approaches: [
+    { name: "Sort and pair the smallest values", intuition: "Sort per device, and use the two smallest values per row to evaluate the best transfer.", time: "O(m x n log n), or O(m x n) by scan", space: "O(m x n)" },
+  ],
   examples: [
     { label: 'Three devices', input: '{"units":[[9,4,7],[8,2,6],[5,10,5]]}' },
     { label: 'Sink already holds the lowest', input: '{"units":[[3,9,4],[7,8,8]]}' },

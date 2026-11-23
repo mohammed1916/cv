@@ -14,6 +14,10 @@ const definition = {
   complexity,
   inputLabel: 'Phone number as a JSON string of digits, spaces and dashes',
   url: 'https://leetcode.com/problems/reformat-phone-number/',
+  question: "Remove spaces and dashes from a phone number and group the digits into blocks of up to three.",
+  approaches: [
+    { name: "Greedy blocks", intuition: "Take blocks of three while more than four digits remain, then split the tail into a block of two and a block of two or three.", time: "O(n)", space: "O(n)" },
+  ],
 }
 
 export default function Problem1694Visualizer() {

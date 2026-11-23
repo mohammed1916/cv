@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'jewels and stones (JSON object of letter strings)',
   url: 'https://leetcode.com/problems/jewels-and-stones/',
   complexity: 'O(j + s) time for j jewel types and s stones, and O(j) extra space.',
+  question: "Count how many letters in a collection are jewels.",
+  approaches: [
+    { name: "Set membership count", intuition: "Store the jewel letters in a set and count stones that are in it.", time: "O(n + m)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Mixed case', input: '{"jewels":"aB","stones":"aAbBcC"}' },
     { label: 'None', input: '{"jewels":"xyz","stones":"abc"}' }, { label: 'Single stone match', input: '{"jewels":"a","stones":"a"}' }, { label: 'Case matters', input: '{"jewels":"aA","stones":"aAaA"}' }, { label: 'No matches', input: '{"jewels":"xyz","stones":"abc"}' }, { label: 'Long run: 50 stones', input: '{"jewels":"aeiouAEIOU","stones":"eaddozczAxxuzuAecbAcezbxaIuIAoOyazeocdoOcuzyzAuoeA"}' },

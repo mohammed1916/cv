@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON {"n": integer from 1 to 1000}',
   url: 'https://leetcode.com/problems/number-of-even-and-odd-bits/',
   complexity: 'O(log n) time and O(1) extra space.',
+  question: "Count the even-indexed and odd-indexed set bits of a number.",
+  approaches: [
+    { name: "Walk the bits", intuition: "Read the bits from low to high and count them by the parity of their position.", time: "O(log n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"n":50}' },
     { label: 'Example 2', input: '{"n":2}' },

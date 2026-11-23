@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with nums array (JSON)',
   url: 'https://leetcode.com/problems/minimum-element-after-replacement-with-digit-sum/',
   complexity: 'O(n * d) time and O(1) extra space for n numbers with at most d digits.',
+  question: "Replace each number with the sum of its digits, then find the smallest number in the result.",
+  approaches: [
+    { name: "Digit sum then minimum", intuition: "Compute the digit sum of each number and keep the smallest.", time: "O(n * d)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"nums":[10,12,13,14]}' },
     { label: 'Example 3', input: '{"nums":[999,19,199]}' },

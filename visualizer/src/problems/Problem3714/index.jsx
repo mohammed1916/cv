@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'Object with s (lowercase letters)',
   url: 'https://leetcode.com/problems/longest-balanced-substring-ii/',
   complexity: 'O(n^2) in this teaching trace, which scans every substring directly.',
+  question: "Find the length of the longest balanced substring of a string.",
+  approaches: [
+    { name: "Scan every substring", intuition: "Scan every substring directly and keep the longest balanced one.", time: "O(n^2)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Whole string', input: '{"s":"abba"}' },
     { label: 'Three letters', input: '{"s":"aabcc"}' },

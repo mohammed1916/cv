@@ -15,6 +15,10 @@ const definition = {
   url: `https://leetcode.com/problems/${meta.slug}/`,
   complexity: 'O(T log T) for T transactions, from grouping by account and month and a sort of the flagged months. The visualizer caps each table at 20 rows.',
   examples,
+  question: "Find accounts with a suspicious pattern in monthly credit totals: three consecutive months each above a threshold derived from the account's income.",
+  approaches: [
+    { name: "Monthly totals then sliding months", intuition: "Aggregate credits per account and month, then check three consecutive months against the limit.", time: "O(r log r)", space: "O(r)" },
+  ],
 }
 
 function Rows({ columns = [], rows = [] }) {

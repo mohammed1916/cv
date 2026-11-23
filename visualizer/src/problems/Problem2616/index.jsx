@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with nums (2 to 10 integers, 0 to 30) and p (JSON)',
   url: 'https://leetcode.com/problems/minimize-the-maximum-difference-of-pairs/',
   complexity: 'O(n log(max value)) time. The visualization caps the input at 10 numbers.',
+  question: "Given an array of numbers and a count p, pick p pairs with minimum possible largest difference between the two numbers in each pair.",
+  approaches: [
+    { name: "Binary search on the difference", intuition: "Guess a maximum difference and greedily count how many non-overlapping adjacent pairs fit under it.", time: "O(n log(max))", space: "O(1)" },
+  ],
   examples: [
     { label: 'Eight values, three changes', input: '{"nums":[7,19,4,25,1,13,6,22],"p":3}' },
     { label: 'Equal values, one change', input: '{"nums":[9,9,9],"p":1}' },

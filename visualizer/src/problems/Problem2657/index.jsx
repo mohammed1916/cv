@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'Two permutations as JSON: {"A": [...], "B": [...]}',
   url: 'https://leetcode.com/problems/find-the-prefix-common-array-of-two-arrays/',
   complexity: 'O(n) time and O(n) space with two sets. The visualization caps input at 20 numbers.',
+  question: "Given two permutations, return an array where each entry is the number of values common to both prefixes up to that index.",
+  approaches: [
+    { name: "Two sets", intuition: "Add each value to its set; count the values that are in both sets after each step.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Five-element permutations', input: '{"A":[3,5,1,4,2],"B":[2,4,5,1,3]}' },
     { label: 'Target is the identity', input: '{"A":[2,1,4,3],"B":[1,2,3,4]}' },

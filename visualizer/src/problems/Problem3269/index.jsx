@@ -8,6 +8,10 @@ const definition = {
   inputLabel: 'Object with nums1 and nums2 (entries are 0 or 1)',
   url: 'https://leetcode.com/problems/constructing-two-increasing-arrays/',
   complexity: 'O(mn) time and O(mn) space. Officially nums1 has up to 1000 entries (and may be empty) and nums2 has 1 to 1000; the visualization caps each at 8.',
+  question: "Build two strictly increasing arrays of length n by choosing values from each input list, keeping them distinct at every position.",
+  approaches: [
+    { name: "Dynamic programming over positions", intuition: "For each position and each of the two lists, keep the cheapest or best count of valid choices from the previous position.", time: "O(m * n)", space: "O(m * n)" },
+  ],
   examples: [
     { label: 'Mixed parities', input: '{"nums1":[1,1,0],"nums2":[0,1]}' },
     { label: 'nums1 empty', input: '{"nums1":[],"nums2":[0,0,1]}' },

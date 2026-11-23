@@ -14,6 +14,10 @@ const definition = {
   inputLabel: "Object with grid, a list of rows of 0 and 1, e.g. {\"grid\":[[1,1],[1,1]]}",
   url: "https://leetcode.com/problems/maximum-area-of-two-non-overlapping-square-submatrices/",
   complexity: "O(s * m^2 * s^2) time for the all-one squares of side s in an m by m grid; the visualization caps the grid at 6 by 6.",
+  question: "Count the square blocks of ones in a grid across all side lengths.",
+  approaches: [
+    { name: "Enumerate squares per side", intuition: "For each side length, list the squares and test pairs for overlap.", time: "O(s x m^2 x s^2)", space: "O(m^2)" },
+  ],
   examples: [
     { label: "Corner squares", input: "{\"grid\":[[1,1,0,1],[1,1,0,1],[0,0,1,1],[1,1,1,1]]}" },
     { label: "Scattered ones", input: "{\"grid\":[[1,0,1],[0,1,0],[1,0,1]]}" },

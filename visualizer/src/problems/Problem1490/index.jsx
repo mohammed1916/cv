@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with val (node values) and children (ordered child indices per node; node 0 is the root)',
   url: 'https://leetcode.com/problems/clone-n-ary-tree/description/',
   complexity: 'O(n) time and O(h) recursion depth for n nodes, plus O(n) for the new nodes. The visualization caps the tree at 10 nodes with values from 0 to 9;',
+  question: "Make a deep copy of an N-ary tree.",
+  approaches: [
+    { name: "Recursive copy", intuition: "Copy each node's value and recursively copy each child in order.", time: "O(n) time, O(h) recursion depth", space: "O(n)" },
+  ],
   examples: [
     { label: 'Ordered children', input: '{"val":[8,4,6,2,7],"children":[[1,2],[3],[],[4],[]]}' },
     { label: 'Single node', input: '{"val":[5],"children":[[]]}' },

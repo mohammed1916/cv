@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON object with n from 1 to 100000, for example {"n":23}',
   url: 'https://leetcode.com/problems/check-divisibility-by-digit-sum-and-product/',
   complexity: 'O(d) time for d digits.',
+  question: "Check whether n is divisible by the sum of its digits plus the product of its digits.",
+  approaches: [
+    { name: "Digit pass", intuition: "Read the digits once to get their sum and product, then test divisibility.", time: "O(d)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"n":23}' },
     { label: 'Zero digit', input: '{"n":10}' },

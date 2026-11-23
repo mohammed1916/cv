@@ -16,6 +16,10 @@ const definition = {
   inputLabel: 'n (JSON integer, 1–11)',
   url: 'https://leetcode.com/problems/all-possible-full-binary-trees/',
   complexity: 'Output-sensitive: O(2^(n/2)/sqrt(n)) trees (Catalan numbers); memoisation shares subtrees between results.',
+  question: "Generate every full binary tree with n nodes, where each node has either zero or two children.",
+  approaches: [
+    { name: "Recursive split with memo", intuition: "A tree with n nodes splits into left and right subtrees with odd sizes adding to n - 1; build all combinations.", time: "O(output)", space: "O(output)" },
+  ],
   examples: [
     { label: 'n = 7', input: '7' },
     { label: 'n = 3', input: '3' },

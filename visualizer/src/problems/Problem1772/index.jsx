@@ -9,6 +9,10 @@ const definition = {
   inputLabel: 'Object with features and responses (lowercase words separated by single spaces)',
   url: 'https://leetcode.com/problems/sort-features-by-popularity/',
   complexity: 'O(R * (W + F)) time for R responses with W words and F features, plus an O(F log F) sort. Words are matched exactly as lowercase tokens, with case and tokenization taken as written in the input.',
+  question: "Sort features by how many responses mention them, breaking ties by original order.",
+  approaches: [
+    { name: "Count matches then sort", intuition: "Count each feature's occurrences across responses, then sort with ties by index.", time: "O(R * (W + F) + F log F)", space: "O(F)" },
+  ],
   examples: [
     { label: 'Ties keep order', input: '{"features":["cooler","lock","touch"],"responses":["i like cooler cooler","lock touch cool","locker like tap"]}' },
     { label: 'Repeated words', input: '{"features":["a","bb","c"],"responses":["bb a","c","bb"]}' },

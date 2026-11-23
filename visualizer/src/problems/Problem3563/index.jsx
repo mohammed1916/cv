@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with lowercase s (JSON)',
   url: 'https://leetcode.com/problems/lexicographically-smallest-string-after-adjacent-removals/',
   complexity: 'O(n^3) time for the erasable table and O(n^2) for the suffix choices. The visualization caps input at 10 letters.',
+  question: "Remove adjacent letters that are neighbours in the alphabet to get the lexicographically smallest string.",
+  approaches: [
+    { name: "Interval table", intuition: "Mark which substrings can be removed completely, then choose removals from left to right.", time: "O(n^3)", space: "O(n^2)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"s":"abc"}' },
     { label: 'Example 2', input: '{"s":"zb"}' },

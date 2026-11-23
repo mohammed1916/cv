@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with nums (1 to 12 distinct integers)',
   url: 'https://leetcode.com/problems/make-array-empty/',
   complexity: 'The visualization caps nums at 12 values. The Python export simulates each operation, which is O(n^2) in the worst case.',
+  question: "Given distinct numbers, repeatedly remove the smallest remaining value, paying for each step based on the current rotation of the array; return the total cost.",
+  approaches: [
+    { name: "Simulate the rotation", intuition: "Track positions in a circular order and count the cost of each move until every element is removed.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Rotate once', input: '{"nums":[5,1,4]}' },
     { label: 'Spread values', input: '{"nums":[2,6,9,7]}' },

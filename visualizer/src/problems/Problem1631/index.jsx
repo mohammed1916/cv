@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Heights grid (JSON)',
   url: 'https://leetcode.com/problems/path-with-minimum-effort/',
   complexity: 'O(m n log(m n)) time. The visualization caps the grid at 5 by 5.',
+  question: "Find a route from the top-left to the bottom-right of a height grid that minimises the largest step difference along the way.",
+  approaches: [
+    { name: "Least effort first", intuition: "Always expand the reachable cell with the least effort so far, as in Dijkstra with a max-step cost.", time: "O(mn log(mn))", space: "O(mn)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"heights":[[1,2,2],[3,8,2],[5,3,5]]}' },
     { label: 'Flat', input: '{"heights":[[1,2,1,1,1],[1,2,1,2,1],[1,2,1,2,1],[1,2,1,2,1],[1,1,1,2,1]]}' },

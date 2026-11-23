@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Parent array and operations (JSON)',
   url: 'https://leetcode.com/problems/operations-on-tree/',
   complexity: 'O(n) per operation for the ancestor and descendant walks in this visual.',
+  question: "Support locking and unlocking nodes of a tree and check whether an operation is allowed given the locked ancestors.",
+  approaches: [
+    { name: "Ancestor walk", intuition: "Walk up the ancestors to check locks; lock and unlock only when the rules allow.", time: "O(n) per call", space: "O(n)" },
+  ],
   examples: [
     { label: 'Lock and upgrade', input: '{"parent":[-1,0,0,2,2,3],"operations":[["lock",3,4],["upgrade",2,5],["unlock",3,4],["upgrade",0,1]]}' },
     { label: 'Chain', input: '{"parent":[-1,0,1],"operations":[["lock",2,5],["upgrade",1,6]]}' },

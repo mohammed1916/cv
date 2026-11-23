@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'bulbs (JSON, day i lights position bulbs[i]) and k',
   url: 'https://leetcode.com/problems/k-empty-slots/',
   complexity: 'O(n * k) time with this scan, or O(n log n) with an ordered set. The visualization caps input at 30 bulbs.',
+  question: "Find the first day on which two lit bulbs have exactly k dark bulbs between them.",
+  approaches: [
+    { name: "Ordered slot window", intuition: "Turn bulbs on in order and check each new bulb's neighbours in position order for a gap of k.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"bulbs":[1,3,2],"k":1}' },
     { label: 'No match', input: '{"bulbs":[1,2,3],"k":1}' },

@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Arrival ranks, smaller is better (e.g. [5, 3, 4, 1, 2])',
   url: 'https://leetcode.com/problems/number-of-student-replacements/',
   complexity: 'O(n) time and O(1) extra space for n arrivals. The visualization caps the line at 16 arrivals; the official bounds are not verified here.',
+  question: "Given a line of student arrivals with ranks, count how many times the selected student is replaced by a new one.",
+  approaches: [
+    { name: "Track the current selection", intuition: "Scan the arrivals once, switching the selection only when a new student beats the current one.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Two replacements', input: '[5, 3, 4, 1, 2]' },
     { label: 'Ties keep the selection', input: '[7, 7, 7]' },

@@ -53,6 +53,11 @@ const examples = [
 ]
 
 const definition = {
+  question: "Using a salary table, report the difference between the highest salary in two named departments.",
+  approaches: [
+    { name: "Filter then aggregate with max", intuition: "Keep the rows of the two departments, take the maximum salary of each, and subtract.", time: "O(n)", space: "O(1) extra" },
+    { name: "Conditional aggregation", intuition: "Use a conditional maximum per department in one grouped pass.", time: "O(n)", space: "O(1)" },
+  ],
   number: meta.number,
   phases,
   parse: parseInput,

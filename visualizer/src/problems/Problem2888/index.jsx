@@ -7,6 +7,11 @@ const definition = {
   inputLabel: 'Object with df1 and df2, each a list of rows with student_id, name and age',
   url: 'https://leetcode.com/problems/reshape-data-concatenate/',
   complexity: 'O(a + b) time and space for a and b rows. The visualization caps each frame at 20 rows; the code has no such limit.',
+  question: "Combine two tables with the same columns into one table by stacking the rows.",
+  approaches: [
+    { name: "Concatenate by rows", intuition: "Place the rows of the first table, then the second, keeping the column order.", time: "O(a + b)", space: "O(a + b)" },
+    { name: "Row-by-row append", intuition: "Append each row from both tables in turn.", time: "O(a + b)", space: "O(a + b)" },
+  ],
   examples: [
     { label: 'Two classes', input: JSON.stringify({ df1: [{ student_id: 11, name: 'Priya', age: 9 }, { student_id: 12, name: 'Tomas', age: 14 }, { student_id: 13, name: 'Wen', age: 12 }], df2: [{ student_id: 21, name: 'Nadia', age: 10 }, { student_id: 22, name: 'Omar', age: 16 }] }) },
     { label: 'Empty df2', input: JSON.stringify({ df1: [{ student_id: 40, name: 'Ines', age: 13 }], df2: [] }) },

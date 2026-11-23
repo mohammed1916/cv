@@ -13,6 +13,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Object {cells, n} (JSON)',
   url: 'https://leetcode.com/problems/prison-cells-after-n-days/',
   complexity: 'O(min(n, 2^6)) simulated days, since states repeat within at most 64 steps.',
+  question: "Cells of a prison row change state each day from their neighbours; find the state after N days.",
+  approaches: [
+    { name: "Simulation with cycle detection", intuition: "The pattern repeats after a short cycle, so simulate and skip whole cycles.", time: "O(cycle length)", space: "O(cycle length)" },
+  ],
   examples: [
     { label: 'Three days', input: '{"cells":[1,1,0,0,1,0,1,0],"n":3}' },
     { label: 'Large day count', input: '{"cells":[0,1,1,1,0,1,0,0],"n":1000}' },

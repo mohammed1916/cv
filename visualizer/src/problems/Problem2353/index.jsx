@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON {"foods", "cuisines", "ratings", "operations", "arguments"}',
   url: 'https://leetcode.com/problems/design-a-food-rating-system/',
   complexity: 'O(log n) per changeRating and amortised O(log n) per highestRated with lazy heaps. The visualization caps input at 8 foods and 12 operations.',
+  question: "Design a food rating system that updates ratings and reports the highest rated food for a cuisine.",
+  approaches: [
+    { name: "Lazy heaps per cuisine", intuition: "Keep a heap per cuisine and skip outdated entries when reading the top.", time: "O(log n) per operation", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example', input: '{"foods":["pho","bun","taco","burrito"],"cuisines":["viet","viet","mex","mex"],"ratings":[7,9,4,4],"operations":["highestRated","changeRating","highestRated","highestRated","changeRating","highestRated"],"arguments":[["viet"],["bun",3],["viet"],["mex"],["taco",6],["mex"]]}' },
     { label: 'One food', input: '{"foods":["soup"],"cuisines":["stew"],"ratings":[3],"operations":["highestRated"],"arguments":[["stew"]]}' },

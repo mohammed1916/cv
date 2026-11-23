@@ -11,6 +11,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Array length n (JSON integer, 1–200)',
   url: 'https://leetcode.com/problems/find-the-derangement-of-an-array/',
   complexity: 'O(n) time and O(1) extra space; the trace keeps the whole row for display.',
+  question: "Count permutations of n elements in which no element stays in its original position.",
+  approaches: [
+    { name: "Derangement recurrence", intuition: "Use d(n) = (n-1)(d(n-1) + d(n-2)) built up from small cases.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Four items', input: '4' },
     { label: 'Two items', input: '2' },

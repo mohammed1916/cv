@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'An integer n from 1 to 100000, for example 100',
   url: 'https://leetcode.com/problems/numbers-with-repeated-digits/',
   complexity: 'O(d * 10) time for d digits of n. The visualization caps n at 100000.',
+  question: "Count the integers from 1 to n that use at least one digit more than once.",
+  approaches: [
+    { name: "Count distinct-digit numbers", intuition: "Count numbers below n whose digits are all different by fixing prefixes and choosing unused digits; subtract from n.", time: "O(d * 10)", space: "O(d)" },
+  ],
   examples: [
     { label: 'Example 1', input: '20' },
     { label: 'Two digits: 27', input: '27' },

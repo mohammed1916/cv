@@ -13,6 +13,10 @@ const definition = {
   python,
   inputLabel,
   complexity,
+  question: "Report, for each user, how many orders they placed in the year 2019 in a relational table of users and orders.",
+  approaches: [
+    { name: "Left join and count", intuition: "Join every user to their 2019 orders and count the matches, keeping users with zero orders.", time: "O(U + O) with hashing", space: "O(U + O)" },
+  ],
   examples,
 }
 

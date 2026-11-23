@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Shops as rows of prices, each row from highest to lowest (JSON)',
   url: 'https://leetcode.com/problems/maximum-spending-after-buying-items/',
   complexity: 'O(m * n log(m * n)) for the sort. The visualization caps the grid at 4 by 4.',
+  question: "Given rows of item prices, buy items day by day to maximise total spending, where each day's price is multiplied by the day number.",
+  approaches: [
+    { name: "Sort and weight by day", intuition: "Flatten all prices, sort them ascending, and multiply each by its day number.", time: "O(mn log(mn))", space: "O(mn)" },
+  ],
   examples: [
     { label: 'Single shop', input: '[[3,2,1]]' },
     { label: 'Two shops', input: '[[2,1],[2,1]]' },

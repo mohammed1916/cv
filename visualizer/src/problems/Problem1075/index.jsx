@@ -5,6 +5,10 @@ import SqlStages from './SqlStages'
 import './SqlStages.css'
 
 const definition = {
+  question: "Report the average experience of employees on each project, rounded to two decimals.",
+  approaches: [
+    { name: "Join and group in SQL", intuition: "Join projects to employees, then average the experience for each project.", time: "O(n + m)", space: "O(n)" },
+  ],
   number: meta.number,
   phases, parse: parseInput, build: buildTrace, code, sql, python, inputLabel,
   url: `https://leetcode.com/problems/${meta.slug}/`,

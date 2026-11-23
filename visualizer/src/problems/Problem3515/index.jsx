@@ -9,6 +9,10 @@ const definition = {
   inputLabel: 'Object with n, edges [u, v, w] and queries ([1, u, v, w] to change a weight, [2, x] to ask a distance)',
   url: 'https://leetcode.com/problems/shortest-path-in-a-weighted-tree/',
   complexity: 'O((n + q) log n) time and O(n) space. Officially n and q reach 100000; the drawing caps n at 15 and q at 12.',
+  question: "Answer shortest-path queries on a weighted tree after edge changes.",
+  approaches: [
+    { name: "Tree with prefix distances", intuition: "Store prefix distances from the root and answer each query from them.", time: "O((n + q) log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Branching tree', input: '{"n":6,"edges":[[1,2,3],[1,3,5],[2,4,2],[2,5,6],[3,6,1]],"queries":[[2,5],[1,1,2,8],[2,5],[2,4],[1,6,3,4],[2,6],[2,1]]}' },
     { label: 'Chain, ends reversed', input: '{"n":5,"edges":[[5,4,2],[3,2,7],[4,3,1],[1,2,4]],"queries":[[2,5],[1,3,4,9],[2,5],[2,3]]}' },

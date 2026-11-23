@@ -10,6 +10,10 @@ const definition = {
   code,
   python,
   pythonLineMap,
+  question: "Simulate pushes and pops that build a target sequence from 1 to n.",
+  approaches: [
+    { name: "Push and pop simulation", intuition: "Push each number and pop it when it is not part of the target.", time: "O(n)", space: "O(target)" },
+  ],
   examples: [
     { label: 'Gap', input: '{"target":[1,3],"n":3}' },
     { label: 'Full', input: '{"target":[1,2,3],"n":3}' },

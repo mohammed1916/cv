@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Object with sequence and word (JSON)',
   url: 'https://leetcode.com/problems/maximum-repeating-substring/',
   complexity: 'O(n * m) time in this simple scan, where n is the sequence length and m is the word length, with a string search per count.',
+  question: "Find the largest number of times a word can be repeated back to back and still appear inside a sequence.",
+  approaches: [
+    { name: "Count repeats from each start", intuition: "Try each start position and keep repeating the word while it matches.", time: "O(n * m)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Sample A', input: '{"sequence":"abababcab","word":"ab"}' },
     { label: 'Triple run', input: '{"sequence":"xyzxyzxy","word":"xyz"}' },

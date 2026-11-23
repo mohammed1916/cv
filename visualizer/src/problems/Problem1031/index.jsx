@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON object with nums, first_len, and second_len',
   url: 'https://leetcode.com/problems/maximum-sum-of-two-non-overlapping-subarrays/',
   complexity: 'O(n) time after the window sums, using running best values. The visualization caps nums at 12 entries.',
+  question: "Find the largest total of two non-overlapping contiguous subarrays with fixed lengths L and M.",
+  approaches: [
+    { name: "Best windows on each side", intuition: "Compute window sums; for each position keep the best window of the other length to its left and to its right.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"nums":[0,6,5,2,2,5,1,9,4],"first_len":1,"second_len":2}' },
     { label: 'Example 2', input: '{"nums":[3,8,1,3,2,1,8,9,0],"first_len":3,"second_len":2}' },

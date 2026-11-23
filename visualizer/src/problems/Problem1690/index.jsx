@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Stone values (JSON array)',
   url: 'https://leetcode.com/problems/stone-game-vii/',
   complexity: 'O(n^2) time and O(n^2) space for the interval table.',
+  question: "Two players remove the leftmost or rightmost stone and score the sum of the remaining stones; find the best score difference.",
+  approaches: [
+    { name: "Interval DP", intuition: "Compute the best difference for every interval of the remaining stones.", time: "O(n^2)", space: "O(n^2)" },
+  ],
   examples: [
     { label: 'Four stones', input: '[4,9,2,7]' },
     { label: 'Five stones', input: '[3,1,8,2,6]' },

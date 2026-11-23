@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Flowers [start, end] and arrival times (JSON)',
   url: 'https://leetcode.com/problems/number-of-flowers-in-full-bloom/',
   complexity: 'O((F + P) log F) time with binary search. The visualization caps input at 10 flowers and 10 arrivals.',
+  question: "For each person arriving at a given time, count the flowers that are in bloom at that moment.",
+  approaches: [
+    { name: "Sorted starts and ends with binary search", intuition: "Count the flowers that have started minus the flowers that have already finished, using two sorted arrays.", time: "O(n log n + m log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Three bloom intervals', input: '{"flowers":[[1,6],[3,9],[8,15]],"people":[2,10,16]}' },
     { label: 'One flower, four people', input: '{"flowers":[[5,5]],"people":[5,6,1,20]}' },

@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with arrivalTime (1 to 23) and delayedTime (1 to 24)',
   url: 'https://leetcode.com/problems/calculate-delayed-arrival-time/',
   complexity: 'O(1) time and O(1) space.',
+  question: "Given an arrival time and a delay, return the time the arrival is delayed to, wrapping past 24 hours.",
+  approaches: [
+    { name: "Add and wrap", intuition: "Add the delay to the hour and reduce modulo 24.", time: "O(1)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Before midnight', input: '{"arrivalTime":9,"delayedTime":4}' },
     { label: 'Wraps', input: '{"arrivalTime":21,"delayedTime":6}' },

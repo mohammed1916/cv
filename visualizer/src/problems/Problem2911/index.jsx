@@ -92,6 +92,11 @@ const definition = {
   complexity:
     "O(n^3 + k*n^2) time and O(n^2) auxiliary space. Detailed visualization is capped at 12 characters.",
 
+  question: "Find the fewest character changes needed to split a string into k pieces where each piece is a semi-palindrome.",
+  approaches: [
+    { name: "Precompute semi-palindrome costs then dynamic programming", intuition: "Compute the cost to make each substring a semi-palindrome, then combine these costs over the k pieces with dynamic programming.", time: "O(n^3)", space: "O(n^2)" },
+    { name: "Brute force over splits", intuition: "Try every way to split the string into k pieces.", time: "exponential", space: "O(n)" },
+  ],
   examples: [
     {
       label: "Two parts",

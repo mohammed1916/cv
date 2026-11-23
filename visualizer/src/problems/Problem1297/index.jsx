@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Object with s, maxLetters, minSize and maxSize (JSON)',
   url: 'https://leetcode.com/problems/maximum-number-of-occurrences-of-a-substring/',
   complexity: 'O(n) time with a fixed window of minSize letters, and O(n) space for the counted substrings.',
+  question: "Find the maximum number of occurrences of any substring that meets length and distinct-letter limits.",
+  approaches: [
+    { name: "Sliding window with a counter", intuition: "Only the minimum length matters, so count substrings of that length with at most the allowed distinct letters.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Repeated pair', input: '{"s":"aabbaabbaa","maxLetters":2,"minSize":2,"maxSize":4}' },
     { label: 'Three letters', input: '{"s":"abcabcabc","maxLetters":2,"minSize":2,"maxSize":3}' },

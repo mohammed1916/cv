@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Tree and guesses as JSON: edges, guesses, k',
   url: 'https://leetcode.com/problems/count-number-of-possible-root-nodes/',
   complexity: 'O(n) time and O(n) space for one walk and one rerooting pass. The visualization caps the tree at 10 vertices.',
+  question: "Count the nodes that could be the root given guesses about parent and child edges and a required number of correct guesses.",
+  approaches: [
+    { name: "Reroot from one root", intuition: "Count correct guesses from a fixed root, then move the root along edges and update the count.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Six vertices, k two', input: '{"edges":[[0,1],[0,2],[2,3],[2,4],[4,5]],"guesses":[[3,2],[5,4],[1,0]],"k":2}' },
     { label: 'Path', input: '{"edges":[[0,1],[1,2],[2,3],[3,4]],"guesses":[[1,0],[3,4],[2,1],[3,2]],"k":1}' },

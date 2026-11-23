@@ -5,6 +5,10 @@ import { StackLane } from '../../components/shared/AlgorithmStatePrimitives'
 import { buildTrace, parseInput, code, python, phases, examples } from './algorithm'
 
 const definition = {
+  question: "Remove k items so that the number of distinct values left is as small as possible.",
+  approaches: [
+    { name: "Remove rarest values first", intuition: "Count each value, sort the counts, and delete whole groups from the smallest count up.", time: "O(n log n)", space: "O(n)" },
+  ],
   number: '1481', phases, parse: parseInput, build: buildTrace, code, python, examples,
   inputLabel: 'Object with arr and k (JSON)',
   url: 'https://leetcode.com/problems/least-number-of-unique-integers-after-k-removals/',

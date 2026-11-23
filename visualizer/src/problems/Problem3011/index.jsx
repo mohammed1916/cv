@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with nums: 1 to 20 integers from 1 to 255, e.g. {"nums":[8,4,2,30,15]}',
   url: 'https://leetcode.com/problems/find-if-array-can-be-sorted/',
   complexity: 'O(n log V) time and O(1) extra space, where V is the largest value. The visualization caps the input at 20 values.',
+  question: "Decide whether an array can be sorted by swapping adjacent values that have the same number of set bits.",
+  approaches: [
+    { name: "Segment by set-bit count", intuition: "Group neighbouring values with the same bit count, then check that each segment's maximum is below the next segment's minimum.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"nums":[8,4,2,30,15]}' },
     { label: 'Example 2', input: '{"nums":[3,16,8,4,2]}' },

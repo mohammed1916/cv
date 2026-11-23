@@ -13,6 +13,11 @@ const definition = {
   inputLabel: 'Range (JSON object with l and r)',
   url: 'https://leetcode.com/problems/count-fancy-numbers-in-a-range/',
   complexity: 'O((r - l) * digits) for this teaching version. The Python solution uses digit DP for the full range up to 10^15.',
+  question: "Count the numbers in a range that are fancy, meaning the number or its digit sum has strictly monotone digits.",
+  approaches: [
+    { name: "Check each number", intuition: "Test every number in the range directly for monotone digits.", time: "O((r - l) * d)", space: "O(d)" },
+    { name: "Digit dynamic programme", intuition: "Count monotone digit patterns across the full range.", time: "O(d * states)", space: "O(states)" },
+  ],
   examples: [
     { label: 'Range of fifty-five numbers', input: '{"l":40,"r":95}' },
     { label: 'Digit sum', input: '{"l":12340,"r":12341}' },

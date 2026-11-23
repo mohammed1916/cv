@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with n, the number of monkeys and vertices (JSON)',
   url: 'https://leetcode.com/problems/count-collisions-of-monkeys-on-a-polygon/',
   complexity: 'O(1) time with fast exponentiation. The visualization caps n at 12 and shows one choice of each kind.',
+  question: "Count the ways monkeys can collide on a polygon where each one moves clockwise or counterclockwise.",
+  approaches: [
+    { name: "Fast exponentiation", intuition: "The count is 2 to the power n minus a small correction, computed by repeated squaring.", time: "O(log n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Triangle', input: '{"n":3}' },
     { label: 'Square', input: '{"n":4}' },

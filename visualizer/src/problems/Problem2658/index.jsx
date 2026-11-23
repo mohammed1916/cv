@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON object with a grid of fish counts (0 is land)',
   url: 'https://leetcode.com/problems/maximum-number-of-fish-in-a-grid/',
   complexity: 'O(mn) time and space for the flood fill. The visualization caps the grid at 7 by 7.',
+  question: "Given a grid of fish counts, find the largest total of fish that can be collected from one connected water region.",
+  approaches: [
+    { name: "Flood fill from each cell", intuition: "Visit connected water cells from each unseen cell and keep the largest total.", time: "O(mn)", space: "O(mn)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"grid":[[0,2,1,0],[4,0,0,3],[1,0,0,4],[0,3,2,0]]}' },
     { label: 'Diagonal', input: '{"grid":[[5,0],[0,7]]}' },

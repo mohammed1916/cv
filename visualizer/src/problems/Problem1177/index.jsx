@@ -5,6 +5,10 @@ import { Sequence, Vars } from './SeqKit'
 
 const definition = {
   number: meta.number, phases, parse: parseInput, build: buildTrace, code, python, inputLabel,
+  question: "For each query, decide whether a substring can be rearranged into a palindrome after replacing at most a given number of letters.",
+  approaches: [
+    { name: "Prefix parity masks", intuition: "Store the parity of each letter's count in prefix masks, then count the set bits in the query's mask.", time: "O(n + q x 26)", space: "O(n)" },
+  ],
   url: `https://leetcode.com/problems/${meta.slug}/`, complexity, examples,
 }
 

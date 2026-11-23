@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON object with numBottles and numExchange',
   url: 'https://leetcode.com/problems/water-bottles-ii/',
   complexity: 'O(answer) time for the drink rounds, which is small for the capped inputs.',
+  question: "Count the total drinks possible when full bottles are drunk and empties can be exchanged for new full bottles at a rising exchange cost.",
+  approaches: [
+    { name: "Simulate drinking rounds", intuition: "Each round drinks every full bottle, then trades empties for one more bottle while the exchange cost allows.", time: "O(answer)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"numBottles":7,"numExchange":4}' },
     { label: 'Example 2', input: '{"numBottles":5,"numExchange":2}' },

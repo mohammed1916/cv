@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Operations as JSON strings',
   url: 'https://leetcode.com/problems/final-value-of-variable-after-performing-operations/',
   complexity: 'O(n) time and O(1) extra space.',
+  question: "Find the final value of a variable after a sequence of increment and decrement operations.",
+  approaches: [
+    { name: "Count operations", intuition: "Add one for each operation that contains a plus and subtract one otherwise.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Two downs then up', input: '["--X","--X","X++"]' },
     { label: 'Up and down', input: '["X++","--X","++X"]' },

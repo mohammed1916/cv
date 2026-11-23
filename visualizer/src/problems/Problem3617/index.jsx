@@ -22,6 +22,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'Object with sessions and min_length',
   complexity: 'O(S log S) for S sessions: sort by student and date, then one pass per student.',
+  question: "Find students whose study history follows a spiral-style subject pattern, and report them.",
+  approaches: [
+    { name: "Mark repeats and order", intuition: "Sort each student's sessions by date, mark matches to the required subject pattern, and output qualifying students.", time: "O(S log S)", space: "O(S)" },
+  ],
   examples: [
     { label: 'Sample', input: SAMPLE_TEXT },
     { label: 'One session, minimum length 3', input: '{"min_length":3,"sessions":[{"session_id":1,"student_id":1,"study_date":"2024-04-01","subject":"Math"}]}' },

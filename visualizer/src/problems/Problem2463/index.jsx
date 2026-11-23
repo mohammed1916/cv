@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with robot positions and factory [position, limit] pairs (JSON)',
   url: 'https://leetcode.com/problems/minimum-total-distance-traveled/',
   complexity: 'O(F * R * limit) time and O(F * R) space for F factories and R robots. The visualization caps input at 5 robots and 3 factories.',
+  question: "Assign robots on a line to factories with repair limits so that the total travel distance is as small as possible.",
+  approaches: [
+    { name: "Dynamic programming over factories", intuition: "Process factories in order and decide how many robots each takes, carrying the best cost for each prefix of robots.", time: "O(F * R * limit)", space: "O(F * R)" },
+  ],
   examples: [
     { label: 'Three robots, two factories', input: '{"robot":[-3,4,10],"factory":[[-5,2],[8,2]]}' },
     { label: 'Two robots, tight limits', input: '{"robot":[0,6],"factory":[[-1,1],[7,1]]}' },

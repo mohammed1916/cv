@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with words (JSON list of lowercase strings)',
   url: 'https://leetcode.com/problems/count-prefix-and-suffix-pairs-i/',
   complexity: 'O(n^2 * L) time for n words of length up to L. The visualization caps input at 6 words.',
+  question: "Count the pairs where the earlier word is both a prefix and a suffix of the later word.",
+  approaches: [
+    { name: "Pairwise prefix and suffix check", intuition: "For each earlier word, test whether each later word starts and ends with it.", time: "O(n^2\u00b7L)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"words":["c","cc","cbc","ccc"]}' },
     { label: 'Example 2', input: '{"words":["ab","abab","ab","b"]}' },

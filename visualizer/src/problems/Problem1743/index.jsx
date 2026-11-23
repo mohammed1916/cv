@@ -14,6 +14,10 @@ const definition = {
   complexity,
   inputLabel: 'JSON array of adjacent pairs [a, b] that form one chain of distinct values',
   url: 'https://leetcode.com/problems/restore-the-array-from-adjacent-pairs/',
+  question: "Rebuild an original array from a list of adjacent pairs.",
+  approaches: [
+    { name: "Walk the neighbour graph", intuition: "Start from an endpoint, then walk from neighbour to neighbour.", time: "O(n)", space: "O(n)" },
+  ],
 }
 
 export default function Problem1743Visualizer() {

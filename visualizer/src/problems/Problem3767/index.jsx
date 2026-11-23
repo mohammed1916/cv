@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Tasks (JSON object with technique1, technique2, k)',
   url: 'https://leetcode.com/problems/maximize-points-after-choosing-k-tasks/',
   complexity: 'O(n log n) time for sorting the gains. The visualization caps n at 20.',
+  question: "Choose k tasks to switch to the better technique so that the total points are maximised.",
+  approaches: [
+    { name: "Switch the largest gains", intuition: "Start from the baseline and switch the tasks with the largest gains while keeping at least k switches.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Three points, one swap', input: '{"technique1":[4,9,2],"technique2":[3,7,8],"k":1}' },
     { label: 'Six reversed pairs, k three', input: '{"technique1":[10,20,30,40,50,60],"technique2":[60,50,40,30,20,10],"k":3}' },

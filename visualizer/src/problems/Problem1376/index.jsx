@@ -12,6 +12,11 @@ const definition = {
   inputLabel: 'Object with n, headID, manager and informTime (JSON)',
   url: 'https://leetcode.com/problems/time-needed-to-inform-all-employees/',
   complexity: 'O(n) time and O(n) space for the manager lists. The visualization caps employees at 12.',
+  question: "Find the time for news to reach every employee from the head of the company.",
+  approaches: [
+    { name: "Depth-first from head", intuition: "Pass the time down the manager tree and take the largest time reached.", time: "O(n)", space: "O(n)" },
+    { name: "Breadth-first by level", intuition: "Visit employees in layers and track the largest time.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Own: chain with a branch', input: '{"n":4,"headID":0,"manager":[-1,0,1,1],"informTime":[2,1,0,3]}' },
     { label: 'Chain', input: '{"n":7,"headID":6,"manager":[1,2,3,4,5,6,-1],"informTime":[0,6,5,4,3,2,1]}' },

@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with nums (JSON)',
   url: 'https://leetcode.com/problems/number-of-distinct-averages/',
   complexity: 'O(n log n) time for sorting and O(n) for the pairing. The visualization caps input at 30 values.',
+  question: "Repeatedly remove the smallest and largest values, average each pair, and count the distinct averages.",
+  approaches: [
+    { name: "Sort and pair from both ends", intuition: "After sorting, the pairs are the outer ends moving inward, so collect their sums in a set.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Own: eight values', input: '{"nums":[9,2,7,7,0,1,3,3]}' },
     { label: 'Repeated', input: '{"nums":[1,100,1,100]}' },

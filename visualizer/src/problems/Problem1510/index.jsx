@@ -8,6 +8,10 @@ const definition = {
   inputLabel: 'Number of stones (1 to 60)',
   url: 'https://leetcode.com/problems/stone-game-iv/',
   complexity: 'O(n√n) time: each stone count tries the square numbers up to it, and O(n) space for the win table.',
+  question: "Decide whether the first player wins a game that removes square numbers of stones.",
+  approaches: [
+    { name: "Win table over stone counts", intuition: "Mark each count as winning if removing some square leaves a losing count.", time: "O(n sqrt n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Small', input: '2' },
     { label: 'Four stones', input: '4' },

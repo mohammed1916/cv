@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with n and max_value (JSON)',
   url: 'https://leetcode.com/problems/count-the-number-of-ideal-arrays/',
   complexity: 'O(maxValue^2) time for the chain table plus a log factor per binomial. The visualization caps n at 12 and max_value at 40.',
+  question: "Count arrays of length n with values up to maxValue in which each element divides the next one.",
+  approaches: [
+    { name: "Chain DP with binomials", intuition: "Count chains of divisors with a DP over values, and distribute repeated values using binomial coefficients.", time: "O(maxValue^2)", space: "O(maxValue)" },
+  ],
   examples: [
     { label: 'Own: three values up to four', input: '{"n":3,"max_value":4}' },
     { label: 'Own: four values up to six', input: '{"n":4,"max_value":6}' },

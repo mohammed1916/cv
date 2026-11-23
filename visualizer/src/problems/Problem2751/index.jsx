@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with positions, healths and directions string L or R (JSON)',
   url: 'https://leetcode.com/problems/robot-collisions/',
   complexity: 'O(n log n) time for sorting and O(n) for the stack pass.',
+  question: "Given robot positions, health, and directions, return the health of the robots that survive collisions in their original order.",
+  approaches: [
+    { name: "Sort then stack", intuition: "Sort the robots by position, then use a stack to resolve collisions between right and left movers.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Four robots, mixed directions', input: '{"positions":[3,8,12,17],"healths":[5,20,11,7],"directions":"RRLL"}' },
     { label: 'Three robots, two left', input: '{"positions":[4,9,15],"healths":[6,6,1],"directions":"LRL"}' },

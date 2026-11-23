@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with brackets [[upper, percent]] and income (JSON)',
   url: 'https://leetcode.com/problems/calculate-amount-paid-in-taxes/',
   complexity: 'O(b) time and O(1) extra space for b brackets.',
+  question: "Given tax brackets with upper limits and rates, compute the total tax on an income.",
+  approaches: [
+    { name: "Walk the brackets", intuition: "Apply each rate to the slice of income that falls inside its bracket, then add the results.", time: "O(b)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Three brackets', input: '{"brackets":[[7,10],[30,25],[60,40]],"income":45}' },
     { label: 'Two brackets, low income', input: '{"brackets":[[3,5],[9,15]],"income":3}' },

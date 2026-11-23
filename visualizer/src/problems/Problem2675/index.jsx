@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with rows: a list of at most 6 objects or arrays, possibly nested',
   url: 'https://leetcode.com/problems/array-of-objects-to-matrix/',
   complexity: 'O(total leaves) to flatten the items, then O(rows * columns) to fill the matrix, plus a sort of the column names.',
+  question: "Given an array of objects, convert them into a matrix whose columns are the sorted keys of the objects.",
+  approaches: [
+    { name: "Collect keys and fill rows", intuition: "Gather the keys across the items, sort them, and read each object's values into rows.", time: "O(n log n)", space: "O(n * keys)" },
+  ],
   examples: [
     { label: 'Two shared keys', input: '{"rows":[{"color":"red","size":2},{"size":5,"shape":"round"}]}' },
     { label: 'Only one object', input: '{"rows":[{"id":7,"ok":true}]}' },

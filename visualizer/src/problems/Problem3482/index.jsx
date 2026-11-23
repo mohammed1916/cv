@@ -18,6 +18,10 @@ const definition = {
   inputLabel: 'JSON object with an employees list (employee_id, employee_name, manager_id, salary, department)',
   url: 'https://leetcode.com/problems/analyze-organization-hierarchy/description/',
   complexity: 'O(n^2) in this teaching version for n employees, since each subtree is found by walking up from every node.',
+  question: "From a table of employees and managers, compute level, team size and budget for each employee.",
+  approaches: [
+    { name: "Walk the hierarchy", intuition: "Walk up from each employee to find the level and walk down to total the team.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example', input: '{"employees":[{"employee_id":1,"employee_name":"Ada","manager_id":null,"salary":300,"department":"exec"},{"employee_id":2,"employee_name":"Ben","manager_id":1,"salary":200,"department":"eng"},{"employee_id":3,"employee_name":"Cy","manager_id":1,"salary":150,"department":"ops"},{"employee_id":4,"employee_name":"Dia","manager_id":2,"salary":120,"department":"eng"},{"employee_id":5,"employee_name":"Eli","manager_id":2,"salary":90,"department":"eng"},{"employee_id":6,"employee_name":"Fay","manager_id":4,"salary":60,"department":"eng"}]}' },
     { label: 'Single', input: '{"employees":[{"employee_id":7,"employee_name":"Gus","manager_id":null,"salary":80,"department":"solo"}]}' },

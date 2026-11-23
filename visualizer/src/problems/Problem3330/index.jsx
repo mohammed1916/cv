@@ -16,6 +16,10 @@ const definition = {
   inputLabel: 'word (JSON object)',
   url: 'https://leetcode.com/problems/find-the-original-typed-string-i/',
   complexity: 'O(n) time and O(1) extra space for word length n (at most 100).',
+  question: "Count the possible original strings that could have been typed, given the observed text where some letters may repeat.",
+  approaches: [
+    { name: "Run length product", intuition: "Count the length of each run of repeated letters and multiply the choices for each run.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"word": "gigaaatt"}' },
     { label: 'Example 2', input: '{"word": "quiz"}' },

@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Lowercase string (JSON object with s)',
   url: 'https://leetcode.com/problems/first-matching-character-from-both-ends/',
   complexity: 'O(n) time and O(1) extra space. The visualization caps input at 30 characters.',
+  question: "Find the first index pair from both ends whose characters match.",
+  approaches: [
+    { name: "Mirror comparison", intuition: "Compare each index with its mirror from the other end; the first equal pair is the answer.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"s":"abcacbd"}' },
     { label: 'Example 2', input: '{"s":"abc"}' },

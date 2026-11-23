@@ -19,6 +19,10 @@ const definition = {
   inputLabel: "JSON object with key nums, a binary array (e.g. {\"nums\": [0, 1, 1, 1]})",
   url: "https://leetcode.com/problems/count-alternating-subarrays/",
   complexity: "O(n) time and O(1) extra space; the table here keeps the run per index for display (n up to 50).",
+  question: "Count the subarrays whose neighbouring values alternate between 0 and 1.",
+  approaches: [
+    { name: "Run length per index", intuition: "The number of alternating subarrays ending at each index equals the current alternating run length, so the running total is summed.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: "Example 1", input: "{\"nums\": [0, 1, 0, 0, 1]}" },
     { label: "Example 2", input: "{\"nums\": [1, 1, 0, 1, 0, 1]}" },

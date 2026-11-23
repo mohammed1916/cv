@@ -19,6 +19,10 @@ const definition = {
   inputLabel: 'Object with target, words and costs (e.g. {"target":"aaaa","words":["a","aa"],"costs":[4,3]})',
   url: "https://leetcode.com/problems/construct-string-with-minimum-cost-easy/",
   complexity: "O(m * w * L) time for target length m, w words and longest word length L, using O(m) extra space for the prefix costs. The visualization accepts a target of up to 30 letters and up to 8 words.",
+  question: "Build a target string from words that each have a cost, using the cheapest total.",
+  approaches: [
+    { name: "Prefix cost table", intuition: "Fill a table from left to right: each word that matches at a reachable position offers a cheaper route to a longer prefix.", time: "O(m * w * L)", space: "O(m)" },
+  ],
   examples: [
     { label: "Two routes", input: '{"target":"abcdab","words":["ab","abc","cd","d"],"costs":[2,5,3,1]}' },
     { label: "Repeated letters", input: '{"target":"aaaa","words":["a","aa"],"costs":[4,3]}' },

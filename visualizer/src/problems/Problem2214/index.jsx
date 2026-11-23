@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON with damage and armor, e.g. {"damage":[2,7,4,3],"armor":4}',
   url: 'https://leetcode.com/problems/minimum-health-to-beat-game/',
   complexity: 'O(n) time and O(1) extra space. The page caps the game at 10 levels.',
+  question: "Find the minimum starting health so the player survives every level, given one armor that blocks the largest hit once.",
+  approaches: [
+    { name: "Put the armor on the largest hit", intuition: "Track the total damage and subtract the largest single hit, since the armor is best used on that level.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Armor on the big hit', input: '{"damage":[2,7,4,3],"armor":4}' },
     { label: 'Armor beyond the hit', input: '{"damage":[2,5,3,4],"armor":7}' },

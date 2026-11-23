@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Integers 1 to 8 as a JSON array',
   url: 'https://leetcode.com/problems/convert-an-array-into-a-2d-array-with-conditions/',
   complexity: 'O(n) time and O(n) space.',
+  question: "Given an integer array, split it into rows so that each row contains distinct values, using the fewest rows.",
+  approaches: [
+    { name: "Frequency layers", intuition: "Each value is placed in the next row where it is not yet used, so the number of rows equals the maximum frequency.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Eight values with repeats', input: '[6,1,8,8,3,1,6,2]' },
     { label: 'Three equal values', input: '[5,5,5]' },

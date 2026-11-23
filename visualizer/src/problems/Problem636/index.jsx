@@ -12,6 +12,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Program (JSON object with n and logs)',
   url: 'https://leetcode.com/problems/exclusive-time-of-functions/',
   complexity: 'O(logs + n) time and O(logs) stack space.',
+  question: "Compute the exclusive running time of each function given a log of start and end events.",
+  approaches: [
+    { name: "Call stack charging", intuition: "Charge each time slice to the function on top of the stack, so callees are excluded from their callers.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Nested', input: '{"n":2,"logs":["0:start:0","1:start:2","1:end:5","0:end:6"]}' },
     { label: 'Recursion', input: '{"n":1,"logs":["0:start:0","0:start:2","0:end:5","0:start:6","0:end:6","0:end:7"]}' },

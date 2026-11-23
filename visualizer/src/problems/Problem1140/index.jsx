@@ -5,6 +5,10 @@ import DPDependencyView from '../../components/shared/DPDependencyView'
 import { Sequence, Vars } from './SeqKit'
 
 const definition = {
+  question: "Two players take piles from the front with a growing limit; find the best total for the first player.",
+  approaches: [
+    { name: "Memoised minimax over state", intuition: "The state is the index and the current limit; the player takes one to twice the limit and the opponent's best is subtracted.", time: "O(n^3)", space: "O(n^2)" },
+  ],
   number: meta.number,
   phases, parse: parseInput, build: buildTrace, code, python, inputLabel, complexity, examples,
   url: `https://leetcode.com/problems/${meta.slug}/`,

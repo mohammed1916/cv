@@ -29,6 +29,10 @@ const definition = {
   inputLabel: 'JSON object with king and operations (birth, death, order)',
   url: 'https://leetcode.com/problems/throne-inheritance/',
   complexity: 'birth and death take O(1) time; an order request takes O(n) time for n people.',
+  question: "Model a royal family where members are born, die and the succession order is kept.",
+  approaches: [
+    { name: "Tree with birth-order traversal", intuition: "Add children in birth order and skip the dead when listing the succession.", time: "O(n) per order request", space: "O(n)" },
+  ],
   examples: [
     { label: 'Invented family', input: '{"king":"ruth","operations":[["birth","ruth","ivo"],["birth","ruth","lena"],["birth","ivo","tom"],["order"],["death","lena"],["birth","lena","ada"],["order"]]}' },
     { label: "King alone", input: "{\"king\":\"arthur\",\"operations\":[[\"order\"]]}" },

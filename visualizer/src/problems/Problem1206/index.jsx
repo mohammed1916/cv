@@ -13,6 +13,10 @@ const definition = {
   inputLabel,
   url: `https://leetcode.com/problems/${meta.slug}/`,
   complexity,
+  question: "Design a skiplist that supports adding, searching and erasing numbers.",
+  approaches: [
+    { name: "Layered linked list", intuition: "Each node has several forward links, and searches start at the highest level and drop down.", time: "O(log n) expected", space: "O(n)" },
+  ],
   examples,
 };
 

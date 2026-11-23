@@ -8,6 +8,10 @@ const definition = {
   inputLabel: 'Word and character (JSON)',
   url: 'https://leetcode.com/problems/reverse-prefix-of-word/',
   complexity: 'O(n) time and O(n) space for the character copy.',
+  question: "Reverse the prefix of a word that ends at the first occurrence of a given letter.",
+  approaches: [
+    { name: "Find and reverse", intuition: "Find the first occurrence and reverse that prefix.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Boundary late', input: '{"word":"leetcode","ch":"e"}' },
     { label: 'Absent letter', input: '{"word":"example","ch":"z"}' },

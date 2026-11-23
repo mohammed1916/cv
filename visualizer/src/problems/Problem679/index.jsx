@@ -12,6 +12,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Four cards (JSON array of four integers 1–9)',
   url: 'https://leetcode.com/problems/24-game/',
   complexity: 'O(1) time for four cards: at most a few hundred combinations are explored.',
+  question: "Decide whether four numbers can reach 24 by combining pairs with the four arithmetic operations.",
+  approaches: [
+    { name: "Recursive pair combination", intuition: "Repeatedly combine two numbers with each operation until one value remains, and check for 24.", time: "O(1)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Reachable', input: '[3,3,8,8]' },
     { label: 'Not reachable', input: '[1,1,1,2]' },

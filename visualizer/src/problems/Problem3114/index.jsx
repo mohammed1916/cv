@@ -18,6 +18,10 @@ const definition = {
   inputLabel: 'JSON object with s (e.g. {"s":"1?:?4"})',
   url: "https://leetcode.com/problems/latest-time-you-can-obtain-after-replacing-characters/",
   complexity: "O(1) time and O(1) space because the time has a fixed five characters.",
+  question: "Replace the hidden digits of a 12-hour clock time so that the result is the latest valid time.",
+  approaches: [
+    { name: "Greedy digit by digit", intuition: "Choose the largest digit at each hidden position that still gives a valid hour or minute.", time: "O(1)", space: "O(1)" },
+  ],
   examples: [
     { label: "Example 1", input: '{"s":"1?:3?"}' },
     { label: "Example 2", input: '{"s":"?0:5?"}' },

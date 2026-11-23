@@ -11,6 +11,11 @@ const definition = {
   inputLabel: "JSON string holding the expression (e.g. \"add(1,mul(2,-3))\")",
   url: "https://leetcode.com/problems/evaluate-valid-expressions/",
   complexity: "O(L) time for an expression of length L, with O(depth) recursion space. Division is exact, so integer division is safe. The visualization caps the text at 80 characters and writes it without spaces.",
+  question: "Evaluate a nested expression made from add, sub, mul and div calls with integer arguments.",
+  approaches: [
+    { name: "Recursive descent", intuition: "Read each call, evaluate its two arguments recursively, and apply the operator.", time: "O(L)", space: "O(depth)" },
+    { name: "Explicit stack", intuition: "Push each open call onto a stack and reduce it when both arguments are known.", time: "O(L)", space: "O(L)" },
+  ],
   examples: [
     { label: "Nested product", input: "\"add(1,mul(2,-3))\"" },
     { label: "Exact division", input: "\"div(sub(10,4),3)\"" },

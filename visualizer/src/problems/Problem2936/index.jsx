@@ -15,6 +15,11 @@ const definition = {
   inputLabel: 'Object with a sorted values list, e.g. {"values":[1,1,1,4,4,7,9,9,9,9,12]}',
   url: 'https://leetcode.com/problems/number-of-equal-numbers-blocks/',
   complexity: 'O(k log n) calls to at() for k blocks in an array of n entries, with O(k) extra space for the answer. The visualization caps the hidden array at 40 entries.',
+  question: "Count the maximal runs of equal values in a hidden sorted array that can only be read through an access interface.",
+  approaches: [
+    { name: "Binary search for run ends", intuition: "From the start of each run, binary search for the first position with a larger value, then jump past it.", time: "O(k log n)", space: "O(1)" },
+    { name: "Linear scan", intuition: "Read every position once and count changes in value.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Five blocks', input: '{"values":[1,1,1,4,4,7,9,9,9,9,12]}' },
     { label: 'Negative start', input: '{"values":[-3,-3,0,0,0,2,2,8]}' },

@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with nums (integers 1 to 9) and k',
   url: 'https://leetcode.com/problems/minimum-partition-score/',
   complexity: 'O(k * n^2) time and O(k * n) space; prefix sums make each block cost constant time.',
+  question: "Split a list into exactly k contiguous blocks with the smallest total triangular-number cost.",
+  approaches: [
+    { name: "Layered prefix dynamic programme", intuition: "Use a table over prefixes and block counts, with prefix sums giving each block's cost.", time: "O(k * n^2)", space: "O(k * n)" },
+  ],
   examples: [
     { label: 'Two blocks', input: '{"nums":[4,2,3,1],"k":2}' },
     { label: 'One block', input: '{"nums":[1,2,3],"k":1}' },

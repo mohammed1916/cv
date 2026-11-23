@@ -10,6 +10,10 @@ const definition = {
   inputLabel: 'Object with EmployeeShifts rows (employee_id, start_time, end_time in minutes; shift_id is optional)',
   url: 'https://leetcode.com/problems/find-overlapping-shifts-ii/description/',
   complexity: 'O(s log s + s^2) for s shifts: one sort for the sweep and one pass over shift pairs for the overlap minutes. The visualization caps the table at 12 shifts.',
+  question: "Among shifts with start and end times, count the minutes where at least two overlapping shifts meet the stated rules.",
+  approaches: [
+    { name: "Sort, then sweep", intuition: "Sort the shifts by start time and sweep, counting overlaps with the shifts that are still open.", time: "O(s log s + s^2)", space: "O(s)" },
+  ],
   examples: [
     { label: 'Mixed shifts', input: mixed },
     { label: 'Back to back', input: backToBack },

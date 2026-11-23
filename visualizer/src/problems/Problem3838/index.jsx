@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'Object with words and weights (26 integers, a to z)',
   url: 'https://leetcode.com/problems/weighted-word-mapping/',
   complexity: 'O(total length of words) time and O(number of words) extra space.',
+  question: "Sum the letter weights of each word modulo 26 and map the result to a letter in reverse alphabet order.",
+  approaches: [
+    { name: "Modular sum per word", intuition: "Add each word's weights, reduce modulo 26, and map the value to a letter.", time: "O(total length)", space: "O(words)" },
+  ],
   examples: [
     { label: 'Two short words, varied weights', input: '{"words":["mno","pqr"],"weights":[3,1,4,1,5,9,2,6,5,3,5,8,9,7,9,3,2,3,8,4,6,2,6,4,3,3]}' },
     { label: 'Single word', input: '{"words":["a"],"weights":[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]}' },

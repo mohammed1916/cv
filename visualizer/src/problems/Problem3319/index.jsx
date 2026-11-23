@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Level-order binary tree with k (JSON object with tree and k)',
   url: 'https://leetcode.com/problems/k-th-largest-perfect-subtree-size-in-binary-tree/',
   complexity: 'O(n log n) time for the sort and O(n) space. The visualization caps the tree at 15 nodes.',
+  question: "Find the k-th largest size among subtrees that are perfect binary trees.",
+  approaches: [
+    { name: "Post-order check and sort", intuition: "Compute the size of each subtree bottom-up, keep the sizes of perfect subtrees, and sort them.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Complete tree', input: '{"tree":[1,2,3,4,5,6,7],"k":2}' },
     { label: 'Chain', input: '{"tree":[1,null,2,null,3],"k":1}' },

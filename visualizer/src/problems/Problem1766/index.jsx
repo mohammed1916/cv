@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'Object with nums (1-50) and edges (tree, n - 1 pairs)',
   url: 'https://leetcode.com/problems/tree-of-coprimes/',
   complexity: 'O(n * h) time for ancestor scans with a stack, O(n) space. The visualization caps n at 12.',
+  question: "Each node has a value; for each node, find the nearest ancestor with a coprime value.",
+  approaches: [
+    { name: "Stack of ancestors by value", intuition: "Walk ancestors on a stack, keep the last ancestor seen for each value, and check coprimality.", time: "O(n * h)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Path of four', input: '{"nums":[7,5,11,5],"edges":[[0,1],[1,2],[2,3]]}' },
     { label: 'Branching seven-node tree', input: '{"nums":[9,4,6,12,3,8,10],"edges":[[0,3],[3,5],[1,4],[2,6],[4,6],[2,0]]}' },

@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with nums (JSON list of positive integers)',
   url: 'https://leetcode.com/problems/find-the-maximum-factor-score-of-array/',
   complexity: 'O(n^2 log M) time for n values up to M, since each removal rescans the list. The visualization caps input at 8 values.',
+  question: "Find the maximum factor score of an array, where removing one value changes the score.",
+  approaches: [
+    { name: "Rescan after each removal", intuition: "For each value, remove it and rescan the rest to compute the factor score.", time: "O(n^2 log M)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"nums":[2,4,8,16]}' },
     { label: 'Example 2', input: '{"nums":[1,2,3,4,5]}' },

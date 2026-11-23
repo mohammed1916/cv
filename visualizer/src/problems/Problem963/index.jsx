@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Points (JSON array of [x, y])',
   url: 'https://leetcode.com/problems/minimum-area-rectangle-ii/',
   complexity: 'O(n^3) time with a set lookup. The visualization caps input at 12 points.',
+  question: "Find the minimum area of any rectangle, at any rotation, whose corners are among the given points.",
+  approaches: [
+    { name: "Shared midpoint and diagonal length", intuition: "Two diagonals of a rectangle share a midpoint and have equal length; group point pairs by these and check the perpendicular corners.", time: "O(n^2)", space: "O(n^2)" },
+  ],
   examples: [
     { label: 'Tilted square', input: '[[1,2],[2,1],[1,0],[0,1]]' },
     { label: 'Axis aligned', input: '[[0,1],[2,1],[1,1],[1,0],[2,0]]' },

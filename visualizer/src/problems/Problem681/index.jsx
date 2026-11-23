@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Time (JSON string, HH:MM)',
   url: 'https://leetcode.com/problems/next-closest-time/',
   complexity: 'O(1) time: at most 4 to the power 4 arrangements of four digits.',
+  question: "Find the next closest time that can be formed from the digits of a clock time.",
+  approaches: [
+    { name: "Digit enumeration", intuition: "Try every digit combination and pick the smallest later valid time, wrapping past midnight.", time: "O(1)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '"19:34"' },
     { label: 'Wraps midnight', input: '"23:59"' },

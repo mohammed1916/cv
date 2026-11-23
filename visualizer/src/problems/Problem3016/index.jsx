@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Lowercase word of 1 to 30 letters (JSON string)',
   url: 'https://leetcode.com/problems/minimum-number-of-pushes-to-type-word-ii/',
   complexity: 'O(n + k log k) where k is the number of distinct letters. The visualization caps input at 30 letters.',
+  question: "Find the fewest key presses needed to type a word when letters are assigned to keys in rounds of eight.",
+  approaches: [
+    { name: "Frequency ranking into rounds", intuition: "Sort letter counts descending and charge each letter its count times its round number.", time: "O(26 log 26)", space: "O(26)" },
+  ],
   examples: [
     { label: 'Descending letters', input: '"gfedcb"' },
     { label: 'Doubled letters, 14 characters', input: '"qqrsttuvwxyzaa"' },

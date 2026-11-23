@@ -16,6 +16,10 @@ const definition = {
   inputLabel: 'Object with s, t, nextCost and previousCost (26 costs each, indexed by the starting letter)',
   url: 'https://leetcode.com/problems/shift-distance-between-two-strings/description/',
   complexity: 'O(n * 26) time and O(1) extra space. The visualization caps the strings at 6 letters.',
+  question: "Find the shift distance between two strings, where each letter can move forward or backward on a circle at a given cost.",
+  approaches: [
+    { name: "Cost per letter and shift", intuition: "For each letter and each shift amount, sum the cheapest direction cost along the string.", time: "O(n * 26)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Invented pair', input: JSON.stringify({ s: 'ccd', t: 'bba', nextCost: Array(26).fill(3), previousCost: Array(26).fill(2) }) },
     { label: 'Short mix', input: JSON.stringify({ s: 'ab', t: 'ca', nextCost: Array.from({ length: 26 }, (_, i) => i % 4), previousCost: Array(26).fill(1) }) },

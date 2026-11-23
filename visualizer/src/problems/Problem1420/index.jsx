@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with n, m and k (JSON)',
   url: 'https://leetcode.com/problems/build-array-where-you-can-find-the-maximum-exactly-k-comparisons/',
   complexity: 'O(n * m * m * k) time for the direct sum. The visualization caps n at 8 and m at 6.',
+  question: "Count arrays whose search cost, the count of new maxima, is exactly k.",
+  approaches: [
+    { name: "Dynamic programming over maxima", intuition: "Track the number of maxima and the current maximum value for each position.", time: "O(n m^2 k)", space: "O(n m k)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"n":2,"m":2,"k":1}' },
     { label: 'Example 2', input: '{"n":2,"m":3,"k":2}' },

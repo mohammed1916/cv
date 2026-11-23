@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Array (JSON object with nums)',
   url: 'https://leetcode.com/problems/merge-adjacent-equal-elements/',
   complexity: 'O(n) amortized time and O(n) space. The visualization caps input at 30 values.',
+  question: "Merge adjacent equal elements repeatedly, where a merge can cascade to the left.",
+  approaches: [
+    { name: "Stack with cascading merges", intuition: "Each new value merges with equal stack tops, and merges can continue to the left.", time: "O(n) amortised", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"nums":[3,1,1,2]}' },
     { label: 'Cascade', input: '{"nums":[1,1,2]}' },

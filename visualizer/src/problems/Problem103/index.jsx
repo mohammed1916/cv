@@ -24,6 +24,10 @@ const definition = {
   inputLabel: "Level-order array (e.g. [3,9,20,null,null,15,7])",
   url: "https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal/",
   complexity: "O(n) time and O(n) space for n nodes. The visualization accepts up to 15 entries.",
+  question: "Return the values of a binary tree by level, alternating left-to-right and right-to-left order.",
+  approaches: [
+    { name: "BFS with direction flag", intuition: "Run a level-order traversal and reverse every other level before recording it.", time: "O(n)", space: "O(n)" },
+  ],
   examples: getExamples("binary-tree-zigzag-level-order-traversal").map(example => ({ label: example.label, input: JSON.stringify(example.root) })),
 };
 

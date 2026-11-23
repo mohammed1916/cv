@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON object with nums (steps from -10 to 10)',
   url: 'https://leetcode.com/problems/ant-on-the-boundary/',
   complexity: 'O(n) time and O(1) space. The visualization caps the steps at 30.',
+  question: "Count how many times an ant returns to the boundary after moving by given steps.",
+  approaches: [
+    { name: "Running position", intuition: "Add each step to a running position and count the times it lands on zero.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"nums":[2,3,-5]}' },
     { label: 'Example 2', input: '{"nums":[3,2,-3,-4]}' },

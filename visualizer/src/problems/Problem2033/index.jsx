@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Grid rows and step x (JSON)',
   url: 'https://leetcode.com/problems/minimum-operations-to-make-a-uni-value-grid/',
   complexity: 'O(m * n log(m * n)) time for the sort; the median is read in O(1).',
+  question: "Find the fewest operations that make every grid cell equal, where each operation adds or subtracts a fixed step.",
+  approaches: [
+    { name: "Median after residue check", intuition: "Check that all values share a remainder modulo the step, then move each value to the median.", time: "O(mn log(mn))", space: "O(mn)" },
+  ],
   examples: [
     { label: 'Sorted median', input: '{"grid":[[3,9],[15,21]],"x":3}' },
     { label: 'Unit step', input: '{"grid":[[4,8,2]],"x":2}' },

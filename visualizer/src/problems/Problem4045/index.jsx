@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with positions (strictly increasing), speeds and distance',
   url: "https://leetcode.com/problems/count-robot-groups/",
   complexity: "O(n^2) time per merge round in this simulation, O(n^3) overall for n robots: each merge rescans adjacent pairs. Times are kept as exact fractions. The visualization caps the line at 8 robots with small values; the official bounds are not verified in this draft.",
+  question: "Robots merge into groups when they come within distance of each other; count the final groups.",
+  approaches: [
+    { name: "Time-ordered merging", intuition: "Process the first-meeting times of adjacent groups in order, merging into the right-hand group.", time: "O(n^3) overall in this simulation", space: "O(n)" },
+  ],
   examples: [
     { label: "Early merge", input: '{"positions":[1,3,6],"speeds":[2,1,1],"distance":2}' },
     { label: "Catch up later", input: '{"positions":[1,4,9],"speeds":[3,1,2],"distance":1}' },

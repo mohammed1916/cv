@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON object with arr (integers from -20 to 20)',
   url: 'https://leetcode.com/problems/jump-game-iv/',
   complexity: 'O(n) time and space. Each value list is cleared after first use, so same-value jumps are scanned once.',
+  question: "Find the fewest jumps to reach the last index, where jumps go to a neighbour or to an equal value.",
+  approaches: [
+    { name: "Breadth-first with value buckets", intuition: "Explore in layers and clear each value bucket after first use.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"arr":[100,-23,-23,404,100,23,23,23,3,404]}' },
     { label: 'Example 2', input: '{"arr":[7,6,9,6,9,6,9,7]}' },

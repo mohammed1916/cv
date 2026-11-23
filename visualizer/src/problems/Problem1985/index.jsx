@@ -7,6 +7,11 @@ const definition = {
   inputLabel: 'Decimal strings and k (JSON)',
   url: 'https://leetcode.com/problems/find-the-kth-largest-integer-in-the-array/',
   complexity: 'O(n log n) comparisons; each comparison takes O(length) characters.',
+  question: "Return the k-th largest number in an array of strings, comparing by length and then by value.",
+  approaches: [
+    { name: "Min-heap of size k", intuition: "Keep the k largest values in a min-heap; its top is the answer.", time: "O(n log k)", space: "O(k)" },
+    { name: "Sort", intuition: "Sort by length then lexicographically and read from the end.", time: "O(n log n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Third largest', input: '{"nums":["8","25","4","25"],"k":3}' },
     { label: 'Length beats digits', input: '{"nums":["99","100","7"],"k":2}' },

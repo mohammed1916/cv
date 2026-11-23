@@ -50,6 +50,10 @@ const definition = {
   phases, parse: parseInput, build: buildTrace, code, sql, python, inputLabel,
   url: `https://leetcode.com/problems/${meta.slug}/`,
   complexity, examples,
+  question: "Pack items into a capacity by taking whole categories in a greedy order.",
+  approaches: [
+    { name: "Group then greedy pack", intuition: "Group items by category, sort the categories by footprint, and add them while they fit.", time: "O(n log n)", space: "O(n)" },
+  ],
 }
 
 function Rows({ columns = [], rows = [] }) {

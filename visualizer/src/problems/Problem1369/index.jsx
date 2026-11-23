@@ -7,6 +7,11 @@ const definition = {
   inputLabel: 'Object with a UserActivity list (username, activity, startDate, endDate)',
   url: 'https://leetcode.com/problems/get-the-second-most-recent-activity/',
   complexity: 'Ranking each user’s rows is one pass per row here, so O(n²) for the visual. A window function ranks every partition in O(n log n). The visualization caps the table at 12 rows.',
+  question: "For each user, find the second most recent activity.",
+  approaches: [
+    { name: "Window ranking", intuition: "Rank each user's rows by time and read rank two.", time: "O(n log n)", space: "O(n)" },
+    { name: "Grouping with counts", intuition: "Use the latest and count of rows per user to pick the second row.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Sample', input: '{"UserActivity":[{"username":"mia","activity":"chess","startDate":"2026-01-02","endDate":"2026-01-05"},{"username":"mia","activity":"rowing","startDate":"2026-01-10","endDate":"2026-01-12"},{"username":"mia","activity":"choir","startDate":"2026-02-01","endDate":"2026-02-03"},{"username":"lee","activity":"climbing","startDate":"2026-03-04","endDate":"2026-03-09"},{"username":"ray","activity":"yoga","startDate":"2026-01-20","endDate":"2026-01-22"},{"username":"ray","activity":"swim","startDate":"2026-01-03","endDate":"2026-01-06"}]}' },
     { label: 'Single activity', input: '{"UserActivity":[{"username":"solo","activity":"run","startDate":"2026-05-01","endDate":"2026-05-02"}]}' },

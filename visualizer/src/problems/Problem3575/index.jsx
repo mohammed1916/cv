@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with vals and par (JSON)',
   url: 'https://leetcode.com/problems/maximum-good-subtree-score/',
   complexity: 'O(n * 2^10 * merges) with digit masks. The visualization caps the tree at 8 nodes.',
+  question: "In a rooted tree with node values, pick a connected subtree whose chosen digits are all distinct and maximize the total value.",
+  approaches: [
+    { name: "Bottom-up digit masks", intuition: "Process children before parents and merge the best score for each digit mask inside each subtree.", time: "O(n * 2^10 * merges)", space: "O(n * 2^10)" },
+  ],
   examples: [
     { label: 'Own: four node tree', input: '{"vals":[5,2,7,1],"par":[-1,0,0,2]}' },
     { label: 'Own: star of three', input: '{"vals":[9,4,6],"par":[-1,0,0]}' },

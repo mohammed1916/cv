@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with "s" (lowercase letters), JSON',
   url: 'https://leetcode.com/problems/minimize-string-length/',
   complexity: 'O(n) time and O(1) extra space for 26 letters. The visualization caps s at 20 letters.',
+  question: "Given a string, repeatedly remove a character that appears more than once, and return the minimum possible length.",
+  approaches: [
+    { name: "Count distinct letters", intuition: "The result is the count of letters that appear at least once.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"s":"aaabc"}' },
     { label: 'Example 2', input: '{"s":"dddaaa"}' },

@@ -11,6 +11,10 @@ const definition = {
   inputLabel: 'Object with x, y and z (integers from 1 to 100)',
   url: 'https://leetcode.com/problems/find-closest-person/',
   complexity: 'O(1) time and O(1) space.',
+  question: "Find which of three people is closer to a target location.",
+  approaches: [
+    { name: "Compare distances", intuition: "Compute the distance from each person to the target and compare them.", time: "O(1)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Three different sizes', input: '{"x":7,"y":42,"z":19}' },
     { label: 'Extremes and ones', input: '{"x":100,"y":1,"z":1}' },

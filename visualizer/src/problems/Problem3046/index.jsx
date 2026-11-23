@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Even-length array of integers 1 to 6 as JSON',
   url: 'https://leetcode.com/problems/split-the-array/',
   complexity: 'O(n) time and O(n) space.',
+  question: "Decide whether an array can be split into two parts that each have distinct values.",
+  approaches: [
+    { name: "Count occurrences", intuition: "The split is possible exactly when no value appears more than twice.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Distinct values in order', input: '[4,1,6,2,5,3]' },
     { label: 'Mixed pairs, eight values', input: '[1,6,6,1,4,4,2,2]' },

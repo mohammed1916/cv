@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with budget (0 to 30) and types ([price, factor] pairs)',
   url: 'https://leetcode.com/problems/maximum-number-of-items-from-sale-ii/',
   complexity: 'O(types * budget * d) time with d grants per type, and O(budget) space. The reading follows the draft: a grant needs a purchased copy and each ordered type pair grants once. The visualization caps types at 6 and budget at 30.',
+  question: "With a budget, buy item copies where some copies earn free copies of related types, and maximise the total.",
+  approaches: [
+    { name: "Budget knapsack with ordered-pair grants", intuition: "Fill a budget table with transitions for each purchase and each grant between an ordered pair of types.", time: "O(types x budget x d)", space: "O(budget)" },
+  ],
   examples: [
     { label: 'Four types', input: '{"budget":10,"types":[[2,1],[3,2],[4,4],[5,3]]}' },
     { label: 'Tight budget', input: '{"budget":4,"types":[[3,2],[2,4],[5,6]]}' },

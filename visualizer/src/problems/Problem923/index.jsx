@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'Object {arr, target} (JSON)',
   url: 'https://leetcode.com/problems/3sum-with-multiplicity/',
   complexity: 'O(n^2) time after sorting, O(1) extra space. arr is capped at 40 values here.',
+  question: "Count the triples of array indices i < j < k whose values sum to a target, modulo 1000000007.",
+  approaches: [
+    { name: "Value counts", intuition: "Count each value, then combine value triples by the rule for distinct, pair and repeated values.", time: "O(n + V^2)", space: "O(V)" },
+  ],
   examples: [
     { label: 'Even numbers to twelve', input: '{"arr":[2,4,6,8,10],"target":12}' },
     { label: 'Repeated middle values', input: '{"arr":[1,3,3,5,7,9],"target":10}' },

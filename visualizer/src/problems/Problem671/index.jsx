@@ -12,6 +12,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Special binary tree (LeetCode level-order JSON array)',
   url: 'https://leetcode.com/problems/second-minimum-node-in-a-binary-tree/',
   complexity: 'O(n) time in the worst case and O(h) recursion space; candidate pruning skips subtrees.',
+  question: "Find the second smallest distinct value in a special binary tree where each node is the smaller of its children.",
+  approaches: [
+    { name: "Root-aware DFS", intuition: "Since the root is the minimum, the second minimum is the smallest value that differs from the root.", time: "O(n)", space: "O(h)" },
+  ],
   examples: [
     { label: 'Two levels', input: '[3,3,7,3,3]' },
     { label: 'Flat', input: '[4,4,4]' },

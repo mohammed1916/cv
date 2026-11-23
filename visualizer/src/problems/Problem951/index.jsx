@@ -14,6 +14,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Object {root1, root2} (JSON level-order)',
   url: 'https://leetcode.com/problems/flip-equivalent-binary-trees/',
   complexity: 'O(min(n1, n2)) for unique values; the visualization caps each tree at 30 nodes.',
+  question: "Decide whether two binary trees can be made identical by swapping children at any nodes.",
+  approaches: [
+    { name: "Recursive comparison of both orders", intuition: "Two nodes match if their values match and their children match in either order.", time: "O(n)", space: "O(h)" },
+  ],
   examples: [
     { label: 'Flip at two levels', input: '{"root1":[4,2,null,1],"root2":[4,null,2,null,1]}' },
     { label: 'Both empty', input: '{"root1":[],"root2":[]}' },

@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with vals (distinct node values) and children (each entry lists child values)',
   url: 'https://leetcode.com/problems/find-root-of-n-ary-tree/description/',
   complexity: 'O(n) time and O(1) extra space for n nodes: one pass XORs every value and every child reference. The visualization caps the tree at 12 nodes with values from 0 to 99. The result is the index of the supplied node.',
+  question: "Find the root of an N-ary tree from a shuffled list of nodes.",
+  approaches: [
+    { name: "XOR of values and child references", intuition: "The root is the only node that never appears as a child; XOR cancels the others.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Shuffled list', input: '{"vals":[7,3,9,5],"children":[[],[7],[],[3,9]]}' },
     { label: 'Root in the middle', input: '{"vals":[2,8,4],"children":[[],[2,4],[]]}' },

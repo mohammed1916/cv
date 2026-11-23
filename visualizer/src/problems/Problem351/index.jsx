@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with m and n (1 <= m <= n <= 4 in this view)',
   url: 'https://leetcode.com/problems/android-unlock-patterns/',
   complexity: 'Exponential in the worst case, but the visited mask keeps the search to valid patterns only. The visualization caps n at 4.',
+  question: "Count the unlock patterns on a phone keypad of a given length, where moves may not jump over unvisited keys.",
+  approaches: [
+    { name: "Depth-first search with visited mask", intuition: "Walk the keypad, marking visited keys in a bitmask and skipping moves that jump over unvisited keys.", time: "exponential worst case", space: "O(n)" },
+  ],
   examples: [
     { label: 'Single keys', input: '{"m":1,"n":1}' },
     { label: 'Two keys', input: '{"m":1,"n":2}' },

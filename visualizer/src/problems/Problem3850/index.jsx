@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with nums and k',
   url: 'https://leetcode.com/problems/count-sequences-to-k/',
   complexity: 'The table can grow with every element. The visual caps the list at 8 numbers from 1 to 6.',
+  question: "Count the sequences of operations that reach a target value, tracking reachable values as fractions.",
+  approaches: [
+    { name: "Reachable fractions with counts", intuition: "Track each reachable reduced fraction with its count while each element multiplies, divides or is skipped.", time: "Grows with the number of states", space: "O(states)" },
+  ],
   examples: [
     { label: 'Example', input: '{"nums":[2,5,2],"k":5}' },
     { label: 'Ones', input: '{"nums":[1,1,2],"k":1}' },

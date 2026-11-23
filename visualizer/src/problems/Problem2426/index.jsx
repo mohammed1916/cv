@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON object: nums1, nums2 (same length) and diff',
   url: 'https://leetcode.com/problems/number-of-pairs-satisfying-inequality/',
   complexity: 'O(n^2) time for this scan. A Fenwick tree over sorted differences gives O(n log n). The visualization caps input at 14 entries.',
+  question: "Count the pairs of indices where the difference of two values is at most the difference of the indices.",
+  approaches: [
+    { name: "Scan all pairs", intuition: "For each pair, test the inequality with the differences of the values and indices.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Spread', input: '{"nums1":[4,1,6],"nums2":[2,2,5],"diff":1}' },
     { label: 'Zero diff', input: '{"nums1":[0,3,3],"nums2":[1,4,2],"diff":0}' },

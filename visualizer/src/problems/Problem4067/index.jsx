@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Numbers (JSON object with nums)',
   url: 'https://www.talentd.in/fleetcode/problems/longest-subarray-with-restricted-pair-sums',
   complexity: 'O(n · w) time for window width w, and O(w) space. The visualization caps input at 12 numbers.',
+  question: "Find the longest subarray in which no three distinct positions form a pair sum that breaks the restriction.",
+  approaches: [
+    { name: "Sliding window", intuition: "Grow the window to the right while the restriction holds; when a new element breaks it, shrink from the left.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"nums":[2,3,5,3,2,1]}' },
     { label: 'Example 2', input: '{"nums":[3,4,5,6]}' },

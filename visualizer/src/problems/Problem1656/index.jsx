@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Object with n and inserts (JSON)',
   url: 'https://leetcode.com/problems/design-an-ordered-stream/',
   complexity: 'O(n) total time across all insertions: the pointer only moves forward, and each slot is released once.',
+  question: "Insert values by id and release the contiguous chunk starting at the next id as soon as it is complete.",
+  approaches: [
+    { name: "Pointer over slots", intuition: "Store values in an array and advance a pointer past every filled slot.", time: "O(1) amortised per insert", space: "O(n)" },
+  ],
   examples: [
     { label: 'Scrambled arrivals', input: '{"n":4,"inserts":[[2,"m"],[4,"p"],[1,"k"],[3,"x"]]}' },
     { label: 'Exact order', input: '{"n":3,"inserts":[[3,"q"],[1,"o"],[2,"r"]]}' },

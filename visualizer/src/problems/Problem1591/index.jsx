@@ -54,6 +54,10 @@ const definition = {
   inputLabel: 'Input JSON: {"targetGrid": [[...], ...]}',
   url: "https://leetcode.com/problems/strange-printer-ii/",
   complexity: "O(C * m * n) time for C colors on an m x n grid, plus O(C^2) for the graph. The visualization caps the grid at 12 x 12 and colors at 24.",
+  question: "Decide whether a grid can be printed by painting rectangles of single colours in some order.",
+  approaches: [
+    { name: "Peel colours by bounding box", intuition: "Find each colour's bounding box and repeatedly remove colours whose box holds only that colour or removed cells.", time: "O(colors * cells)", space: "O(colors * cells)" },
+  ],
   examples: [
     { label: "Example 1", input: JSON.stringify({ targetGrid: [[3, 3, 3], [3, 4, 3], [3, 3, 3]] }) },
     { label: "Example 2", input: JSON.stringify({ targetGrid: [[1, 2], [2, 1]] }) },

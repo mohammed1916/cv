@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'JSON {"nums": [5, 1, 4], "k": 3}',
   url: 'https://leetcode.com/problems/maximum-product-after-k-increments/',
   complexity: 'O(k * n) time and O(n) space here, or O((n + k) log n) with a real heap. The visualization caps n at 8 and k at 20.',
+  question: "Add exactly k to the array values, one unit at a time, to maximise the product of all values.",
+  approaches: [
+    { name: "Increment the smallest value", intuition: "Each unit goes to the smallest value, which keeps the product as large as possible.", time: "O(k log n + n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example', input: '{"nums":[5,1,4],"k":3}' },
     { label: 'Two values', input: '{"nums":[2,7],"k":4}' },

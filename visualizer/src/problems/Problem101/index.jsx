@@ -22,6 +22,11 @@ const definition = {
   inputLabel: "Level-order array (e.g. [1,2,2,3,4,4,3])",
   url: "https://leetcode.com/problems/symmetric-tree/",
   complexity: "O(n) time and O(h) recursion depth for n nodes. The visualization accepts up to 15 entries.",
+  question: "Decide whether a binary tree is a mirror image of itself across its centre.",
+  approaches: [
+    { name: "Paired recursion", intuition: "Compare the left subtree's outer side with the right subtree's outer side, and the inner sides with each other.", time: "O(n)", space: "O(h)" },
+    { name: "Queue of node pairs", intuition: "Walk pairs of nodes level by level with a queue, checking that they match in mirrored positions.", time: "O(n)", space: "O(n)" },
+  ],
   examples: getExamples("symmetric-tree").map(example => ({ label: example.label, input: JSON.stringify(example.tree) })),
 };
 

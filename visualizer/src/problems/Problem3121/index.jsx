@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with "word" (English letters), JSON',
   url: 'https://leetcode.com/problems/count-the-number-of-special-characters-ii/',
   complexity: 'O(n) time and O(1) extra space for 52 letters. The visualization caps input at 30 letters.',
+  question: "Count the letters where every lowercase occurrence comes before the first uppercase occurrence.",
+  approaches: [
+    { name: "Track first uppercase and last lowercase", intuition: "A letter is special exactly when its last lowercase position is before its first uppercase position, tracked in one pass.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"word":"aaAbcBC"}' },
     { label: 'Example 2', input: '{"word":"AbCabc"}' },

@@ -30,6 +30,11 @@ const definition = {
   inputLabel: 'Object with maze (0 empty, 1 wall), start [row, col] and destination [row, col]',
   url: 'https://leetcode.com/problems/the-maze-ii/',
   complexity: 'Dijkstra over stopping cells. With the simple selection used here it is O(V squared) for V stopping cells. The visualization caps the maze at 5 by 5.',
+  question: "Find the shortest distance a rolling ball travels to stop exactly at the destination.",
+  approaches: [
+    { name: "Dijkstra over stopping cells, simple selection", intuition: "Repeatedly finish the closest unfinished stop, roll from it in each direction, and record shorter distances.", time: "O(V^2) for V stops", space: "O(V)" },
+    { name: "Dijkstra with a heap", intuition: "The same search, with a priority queue to pick the closest unfinished stop.", time: "O(E log V)", space: "O(V + E)" },
+  ],
   goal: {
     summary: 'Find the shortest distance a rolling ball travels to stop exactly at the destination.',
     requirement: [

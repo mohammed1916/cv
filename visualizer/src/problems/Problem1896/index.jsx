@@ -125,6 +125,10 @@ const definition = {
   inputLabel: 'Object with expression (digits 0 and 1, operators & and |, parentheses)',
   url: 'https://leetcode.com/problems/minimum-cost-to-change-the-final-value-of-expression/',
   complexity: 'One pass over the tokens with a constant number of cases per node. The sample grammar reads operators left to right inside each parenthesised group.',
+  question: "Find the minimum number of operations needed to change the value of a boolean expression with and, or and parentheses from the current value to its opposite.",
+  approaches: [
+    { name: "Parse tree and cost DP", intuition: "Build the expression tree, then compute for each node the cheapest change to make it true and to make it false.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example', input: '{"expression":"1|(0&1)"}' },
     { label: 'Nested', input: '{"expression":"((0&1)|1)"}' },

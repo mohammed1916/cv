@@ -6,6 +6,11 @@ const definition = {
   inputLabel: 'Employee table as JSON',
   url: 'https://leetcode.com/problems/find-the-team-size/',
   complexity: 'Walkthrough: one count per team, then one lookup per employee.',
+  question: "For each employee, report how many people share their team.",
+  approaches: [
+    { name: "Count per team, then join", intuition: "Count the employees in each team once, then look up that count for every employee.", time: "O(n)", space: "O(t)" },
+    { name: "Window count", intuition: "Count the rows of each team partition with a window function beside each row.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [{ label: 'Sample employees', input: JSON.stringify(sample) }, { label: 'Single employee', input: '{"employee":[{"employee_id":1,"team_id":9}]}' }, { label: 'Tied team sizes', input: '{"employee":[{"employee_id":1,"team_id":10},{"employee_id":2,"team_id":10},{"employee_id":3,"team_id":20},{"employee_id":4,"team_id":20}]}' }, { label: 'Largest ids', input: '{"employee":[{"employee_id":999,"team_id":1000},{"employee_id":1,"team_id":1000}]}' }, { label: 'Long run: 12 employees', input: '{"employee":[{"employee_id":1,"team_id":20},{"employee_id":2,"team_id":30},{"employee_id":3,"team_id":20},{"employee_id":4,"team_id":40},{"employee_id":5,"team_id":20},{"employee_id":6,"team_id":10},{"employee_id":7,"team_id":20},{"employee_id":8,"team_id":10},{"employee_id":9,"team_id":10},{"employee_id":10,"team_id":30},{"employee_id":11,"team_id":30},{"employee_id":12,"team_id":30}]}' }],
 }
 

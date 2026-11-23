@@ -21,6 +21,10 @@ const definition = {
   inputLabel: 'Boxes as JSON with status, candies, keys, containedBoxes and initialBoxes',
   url: "https://leetcode.com/problems/maximum-candies-you-can-get-from-boxes/",
   complexity: "O(n + total list length) time and O(n) space, where n is the number of boxes. The visualization accepts up to 24 boxes.",
+  question: "Find the most candies that can be collected by opening boxes, starting from the available boxes and using keys found along the way.",
+  approaches: [
+    { name: "Breadth-first over unlocked boxes", intuition: "Process boxes as they become reachable, and queue locked boxes until their key appears.", time: "O(n + total keys)", space: "O(n)" },
+  ],
   examples: [
     {
       label: "Keys unlock later boxes",

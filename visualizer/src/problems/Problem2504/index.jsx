@@ -37,6 +37,10 @@ const definition = {
   python,
   inputLabel: 'JSON object with a Person table',
   complexity: 'Linear in the number of people, plus one sort by person_id.',
+  question: "Output each person's name with their profession's first letter in parentheses, ordered by person id.",
+  approaches: [
+    { name: "Format and sort", intuition: "Format each row, then sort the rows by person id.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Teaching sample', input: JSON.stringify(SAMPLE) },
     { label: 'Single person', input: '{"Person":[{"person_id":1,"name":"Amy","profession":"Nurse"}]}' },

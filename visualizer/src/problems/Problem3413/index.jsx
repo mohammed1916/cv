@@ -12,6 +12,11 @@ const definition = {
   inputLabel: 'Object with bags [start, end, coins] and k (JSON)',
   url: 'https://leetcode.com/problems/maximum-coins-from-k-consecutive-bags/',
   complexity: 'O(b^2) time for b bags, because each candidate window scans every bag. The visualization caps the input size.',
+  question: "Given bags at positions with coin counts, choose k consecutive positions that collect the most coins.",
+  approaches: [
+    { name: "Window from each bag", intuition: "Start a candidate window at each bag's left end and sum the coins it covers.", time: "O(b^2)", space: "O(1)" },
+    { name: "Sliding window", intuition: "Slide a window over sorted positions and add or drop bags as it moves.", time: "O(b log b)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"bags":[[8,10,1],[1,3,2],[5,6,4]],"k":4}' },
     { label: 'Example 2', input: '{"bags":[[1,10,3]],"k":2}' },

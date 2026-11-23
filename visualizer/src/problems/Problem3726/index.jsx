@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with n (positive integer)',
   url: 'https://leetcode.com/problems/remove-zeros-in-decimal-representation/',
   complexity: 'O(d) time for d decimal digits, with one pass over the digits.',
+  question: "Remove all zero digits from a number's decimal representation and return the result.",
+  approaches: [
+    { name: "Digit scan", intuition: "Scan the digits once and keep the non-zero digits in order.", time: "O(d)", space: "O(d)" },
+  ],
   examples: [
     { label: 'Scattered zeros', input: '{"n":1020030}' },
     { label: 'Trailing zeros', input: '{"n":1000}' },

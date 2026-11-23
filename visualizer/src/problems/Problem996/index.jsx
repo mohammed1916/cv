@@ -17,6 +17,10 @@ const definition = {
   inputLabel: 'Integers from 0 to 20 (JSON): {"nums": [...]}',
   url: 'https://leetcode.com/problems/number-of-squareful-arrays/',
   complexity: 'Worst case O(n!) time for backtracking over at most 8 values; duplicate skipping prunes equal values.',
+  question: "Count the permutations of an array in which every adjacent pair sums to a perfect square.",
+  approaches: [
+    { name: "Backtracking with duplicate skipping", intuition: "Build permutations one value at a time, allowing only values whose sum with the previous value is a square.", time: "O(n!) worst case, pruned", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"nums":[1,17,8]}' },
     { label: 'Example 2', input: '{"nums":[2,2,2]}' },

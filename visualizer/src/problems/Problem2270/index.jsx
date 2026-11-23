@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON object with a nums array',
   url: 'https://leetcode.com/problems/number-of-ways-to-split-array/',
   complexity: 'O(n) time and O(1) extra space with a running prefix sum. The visualization caps nums at 12 entries.',
+  question: "Count the split positions where the sum of the left part is at least the sum of the right part.",
+  approaches: [
+    { name: "Prefix sums", intuition: "Compare the running left sum with the total minus the left sum at each split.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Own: five signed values', input: '{"nums":[-3,6,-9,2,5]}' },
     { label: 'Own: three values with a zero', input: '{"nums":[0,-4,11]}' },

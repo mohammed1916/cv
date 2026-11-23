@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Swipes as JSON: {"keyName": [...], "keyTime": [...]}',
   url: 'https://leetcode.com/problems/alert-using-same-key-card-three-or-more-times-in-a-one-hour-period/',
   complexity: 'O(n log n) time for sorting each worker’s swipes. The visualization caps input at 20 swipes.',
+  question: "Alert workers who use their key card three or more times in any one-hour window.",
+  approaches: [
+    { name: "Sort each worker's swipes", intuition: "Sort each worker's times and compare each swipe with the one two places earlier.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Morning run', input: '{"keyName":["ava","ava","ava","ben","ben"],"keyTime":["08:05","08:30","09:04","12:00","12:30"]}' },
     { label: 'Exactly an hour', input: '{"keyName":["mia","mia","mia","mia"],"keyTime":["07:00","08:01","08:59","09:01"]}' },

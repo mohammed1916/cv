@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON: {"s": "binary string"}',
   url: 'https://leetcode.com/problems/minimum-flips-to-make-binary-string-coherent/',
   complexity: 'O(n) time and O(1) extra space, since there are at most nine progress pairs. The visualization caps s at 12 characters.',
+  question: "Find the fewest bit flips that let a greedy matching of the patterns 011 and 110 succeed across a binary string.",
+  approaches: [
+    { name: "Pair-of-progress DP", intuition: "Track how far each pattern is matched at once, keeping the fewest flips for each pair of progress values.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"s":"1010"}' },
     { label: 'Example 2', input: '{"s":"0110"}' },

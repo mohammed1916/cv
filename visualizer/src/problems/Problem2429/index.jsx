@@ -8,6 +8,10 @@ const definition = {
   inputLabel: 'Object with num1 and num2 from 1 to 1023, e.g. {"num1":3,"num2":5}',
   url: 'https://leetcode.com/problems/minimize-xor/',
   complexity: 'O(log M) time and O(1) space, where M bounds the bit width. The visualization caps values at 1023.',
+  question: "Find a number with the same count of set bits as one value that minimises the XOR with another value.",
+  approaches: [
+    { name: "Greedy from high bits", intuition: "Set the bits of the answer from the highest position down, matching the other value where possible.", time: "O(log M)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Twelve and ten', input: '{"num1":12,"num2":10}' },
     { label: 'Seven and two', input: '{"num1":7,"num2":2}' },

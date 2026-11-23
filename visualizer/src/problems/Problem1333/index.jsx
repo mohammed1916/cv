@@ -3,6 +3,10 @@ import IndexedSequence from '../../components/shared/IndexedSequence'
 import { buildTrace, parseInput, code, python, pythonLineMap, examples } from './algorithm'
 
 const definition = {
+  question: "Filter restaurants by vegan, price and distance limits, then sort by rating.",
+  approaches: [
+    { name: "Filter then sort", intuition: "Keep matching restaurants and sort by rating and then id.", time: "O(n log n)", space: "O(n)" },
+  ],
   phases: [
     { id: 'filter', label: 'Filter', description: 'Keep only restaurants that pass the vegan, price and distance checks.' },
     { id: 'sort', label: 'Sort', description: 'Order kept restaurants by rating, then id, both descending.' },

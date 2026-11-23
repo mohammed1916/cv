@@ -16,6 +16,11 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Adjacency list graph (JSON)',
   url: 'https://leetcode.com/problems/is-graph-bipartite/',
   complexity: 'O(V + E) time, O(V) space. Visualization limited to 20 nodes.',
+  question: "Decide whether the nodes of an undirected graph can be split into two groups so that every edge joins different groups.",
+  approaches: [
+    { name: "BFS two-colouring", intuition: "Give each component a start colour and colour neighbours the opposite colour; a clash means an odd cycle.", time: "O(V + E)", space: "O(V)" },
+    { name: "DFS two-colouring", intuition: "The same colouring rule run with a depth-first walk.", time: "O(V + E)", space: "O(V) recursion" },
+  ],
   examples: [
     { label: 'Odd cycle (false)', input: '[[1,2,3],[0,2],[0,1,3],[0,2]]' },
     { label: 'Bipartite (true)', input: '[[1,3],[0,2],[1,3],[0,2]]' },

@@ -19,6 +19,10 @@ const definition = {
   inputLabel: 'Object with intervals ([start, end] pairs) and k',
   url: 'https://leetcode.com/problems/minimize-connected-groups-by-inserting-interval/',
   complexity: 'O(n log n) time for the sort and O(n) for the sweep; O(n) space. Reading used here: the added interval has integer ends and length at most k, and sharing an endpoint connects two intervals. The visualization caps the input at 8 intervals on coordinates 0 to 30.',
+  question: "Add one interval of bounded length to a list of intervals so that the number of connected groups is as small as possible.",
+  approaches: [
+    { name: "Sort and sweep", intuition: "Sort the intervals by start and sweep, merging groups that touch, then check the best place for the added interval.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Two bridges', input: '{"intervals":[[1,3],[2,5],[8,10],[15,18]],"k":3}' },
     { label: 'Short bridges only', input: '{"intervals":[[0,2],[4,5],[9,11],[12,12],[20,21]],"k":4}' },

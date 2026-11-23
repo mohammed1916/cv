@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'Object with s (lowercase letters) and k',
   url: 'https://leetcode.com/problems/count-substrings-with-k-frequency-characters-ii/',
   complexity: 'O(n) time with a sliding window over counts of 26 letters, O(1) extra space. The visualization caps s at 20 characters and k at 10; the rule used is that a substring counts when some letter occurs at least k times.',
+  question: "Count substrings that contain some letter at least k times, for longer strings.",
+  approaches: [
+    { name: "Sliding window over letter counts", intuition: "Use a window that tracks letter counts, and count valid starts for each end in one pass.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Mixed letters', input: '{"s":"abacbab","k":2}' },
     { label: 'Long run', input: '{"s":"aaabb","k":3}' },

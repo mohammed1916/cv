@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Words as a JSON array',
   url: 'https://leetcode.com/problems/groups-of-strings/',
   complexity: 'O(n * 26 * 26) mask operations with union-find; O(n) space.',
+  question: "Group words that are one edit away from each other, where an edit adds, removes, or replaces one letter, and count the groups.",
+  approaches: [
+    { name: "Bitmask graph with union find", intuition: "Represent each word as a letter mask, connect words whose masks differ by one letter, and union the connected words.", time: "O(n * 26)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Two groups', input: '["abc","ab","bcd","xyz","yz"]' },
     { label: 'Replace joins', input: '["ab","cd","ac","bd"]' },

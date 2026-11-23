@@ -3,6 +3,10 @@ import { meta } from './meta'
 import { buildTrace, parseInput, code, python, phases, examples, complexity, inputLabel } from './algorithm'
 
 const definition = {
+  question: "For each prefix of a binary array, report whether the prefix read as a binary number is divisible by 5.",
+  approaches: [
+    { name: "Carry the remainder mod 5", intuition: "Keep the running value modulo 5; each new bit doubles it and adds the bit.", time: "O(n)", space: "O(n)" },
+  ],
   number: meta.number,
   phases, parse: parseInput, build: buildTrace, code, python, inputLabel,
   url: `https://leetcode.com/problems/${meta.slug}/`,

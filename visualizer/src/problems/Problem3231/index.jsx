@@ -13,6 +13,10 @@ const definition = {
   inputLabel: "Array of integers from 0 to 99 (e.g. [4,2,5,1,3])",
   url: "https://leetcode.com/problems/minimum-number-of-increasing-subsequence-to-be-removed/",
   complexity: "O(n log n) time with a binary search per value, and O(n) space for the tops. The list form here inserts at the front, so its worst case is O(n^2); storing the tops in reverse order gives O(n log n). The visualization caps the array at 12 values.",
+  question: "Find the fewest strictly increasing subsequences that together cover all values of an array.",
+  approaches: [
+    { name: "Piles with binary search", intuition: "Each removed increasing subsequence is a pile that grows by appending values, and a binary search finds the pile to extend.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: "Zig-zag", input: "[4,2,5,1,3]" },
     { label: "Falling run", input: "[9,7,5,3]" },

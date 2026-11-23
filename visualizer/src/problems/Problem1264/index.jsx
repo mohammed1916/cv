@@ -20,6 +20,10 @@ const definition = {
   inputLabel: 'Object with friendship (user1_id, user2_id) and likes (user_id, page_id); the target user is 1',
   url: 'https://leetcode.com/problems/page-recommendations/',
   complexity: 'O(F + L) with sets for F friendships and L likes. The visualization caps each list at 12 rows.',
+  question: "Recommend pages liked by the friends of a user that the user has not liked.",
+  approaches: [
+    { name: "Friend set then filter", intuition: "Collect the user's friends from both directions of the friendship pairs and keep pages they like that the user does not.", time: "O(F + L)", space: "O(F + L)" },
+  ],
   examples: [
     { label: 'Friends of user 1', input: '{"friendship":[{"user1_id":1,"user2_id":2},{"user1_id":3,"user2_id":1},{"user1_id":2,"user2_id":4},{"user1_id":5,"user2_id":6}],"likes":[{"user_id":1,"page_id":10},{"user_id":2,"page_id":20},{"user_id":3,"page_id":20},{"user_id":3,"page_id":30},{"user_id":4,"page_id":40},{"user_id":4,"page_id":10},{"user_id":5,"page_id":50}]}' },
     { label: 'No friends', input: '{"friendship":[{"user1_id":7,"user2_id":8}],"likes":[{"user_id":8,"page_id":70}]}' },

@@ -11,6 +11,11 @@ const definition = {
   inputLabel: 'Numbers and k (JSON object with nums and k)',
   url: 'https://leetcode.doocs.org/en/lc/4063/',
   complexity: 'O(n · k) time and O(k) space with the residue tables. The visualization caps input at 12 numbers.',
+  question: "Find the longest subarray whose sum is divisible by k when at most one element may be negated.",
+  approaches: [
+    { name: "Prefix remainders with earliest index", intuition: "Track for each remainder the earliest prefix position, separately for states with and without one negation, so each end is handled in constant time.", time: "O(n + k)", space: "O(k)" },
+    { name: "Brute force over subarrays", intuition: "Check every subarray and every negation choice.", time: "O(n^3)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"nums":[4,1,2],"k":3}' },
     { label: 'Example 2', input: '{"nums":[5,3,4],"k":7}' },

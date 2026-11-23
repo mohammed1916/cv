@@ -22,6 +22,10 @@ const definition = {
   inputLabel: 'Object with n, an integer from 1 to 30',
   url: 'https://leetcode.com/problems/fizz-buzz-multithreaded/',
   complexity: 'O(n) total work. In the threaded version each worker waits on a shared turn counter.',
+  question: "Print the numbers 1 to n as Fizz, Buzz or FizzBuzz using four threads that take turns in order.",
+  approaches: [
+    { name: "Shared turn counter", intuition: "Each thread waits until the shared counter matches its turn, prints, and advances the counter.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example', input: '{"n":15}' },
     { label: 'Short', input: '{"n":5}' },

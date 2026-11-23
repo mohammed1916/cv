@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Deadends and target (JSON)',
   url: 'https://leetcode.com/problems/open-the-lock/',
   complexity: 'O(10^4 * 8) at worst; one dequeue frame and one expand frame per state (up to ~20,000 frames).',
+  question: "Find the fewest turns to open a four-wheel lock from zeros to a target, avoiding dead ends.",
+  approaches: [
+    { name: "Breadth-first search over states", intuition: "Explore lock states level by level, skipping dead ends and visited states.", time: "O(10^4)", space: "O(10^4)" },
+  ],
   examples: [
     { label: 'Two scattered dead ends', input: '{"deadends":["2468","1357"],"target":"3579"}' },
     { label: 'Two dead ends near target', input: '{"deadends":["5555","6666"],"target":"5565"}' },

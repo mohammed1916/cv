@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'JSON {"n":4,"lights":[[1,1],[3,0]],"requirement":[0,1,1,2]}',
   url: 'https://leetcode.com/problems/count-positions-on-street-with-required-brightness/',
   complexity: 'O(n + L) time and O(n) space for n positions and L lamps. Each lamp costs two updates to the difference array.',
+  question: "Count the street positions that are lit to at least their required brightness by lights with given ranges.",
+  approaches: [
+    { name: "Difference array of coverage", intuition: "Add a +1 at each light's start and -1 after its end, then prefix-sum the array and compare each position with its requirement.", time: "O(n + L)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example', input: '{"n":4,"lights":[[1,1],[3,0]],"requirement":[0,1,1,2]}' },
     { label: 'Short street', input: '{"n":4,"lights":[[0,2]],"requirement":[1,1,1,0]}' },

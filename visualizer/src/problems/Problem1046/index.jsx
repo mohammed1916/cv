@@ -10,6 +10,11 @@ const definition = {
   inputLabel: 'Stone weights as a JSON array, such as [6,2,9,4]',
   url: 'https://leetcode.com/problems/last-stone-weight/',
   complexity: 'O(n^2 log n) time in this simple version, which re-sorts after each smash; a heap gives O(n log n). Space is O(n).',
+  question: "Repeatedly smash the two heaviest stones; return the weight of the last stone, or zero if none remains.",
+  approaches: [
+    { name: "Sort after each smash", intuition: "Re-sort the list after each pair is smashed; simple but repeats work.", time: "O(n^2 log n)", space: "O(n)" },
+    { name: "Max heap", intuition: "Pop the two heaviest stones and push back their difference when it is non-zero.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Chain', input: '[6,2,9,4]' },
     { label: 'Equal pair', input: '[3,3]' },

@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with coords (JSON array of [x, y])',
   url: 'https://leetcode.com/problems/find-maximum-area-of-a-triangle/',
   complexity: 'O(n^3) time in this direct form. The visualization caps the points at 8.',
+  question: "Find the largest triangle area formed by three of the given points, where one side is parallel to an axis.",
+  approaches: [
+    { name: "Pair the axis-aligned side", intuition: "Pair points that share a coordinate for the base and take the farthest third point for the height.", time: "O(n^3)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"coords":[[1,1],[1,2],[3,2],[3,3]]}' },
     { label: 'Example 2', input: '{"coords":[[1,1],[2,2],[3,3]]}' },

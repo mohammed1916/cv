@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON object with target and maxDoubles',
   url: 'https://leetcode.com/problems/minimum-moves-to-reach-target-score/',
   complexity: 'O(log target) time: each halving removes a doubling, and odd values cost one increment each.',
+  question: "Find the fewest moves to reach a target score starting from 1, where a move adds one or doubles the value, with a limit on doublings.",
+  approaches: [
+    { name: "Work backwards greedily", intuition: "From the target, halve when the value is even and doublings remain, and subtract one otherwise.", time: "O(log target)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Mixed moves', input: '{"target":26,"maxDoubles":3}' },
     { label: 'No doublings', input: '{"target":7,"maxDoubles":0}' },

@@ -11,6 +11,10 @@ const definition = {
   inputLabel: 'JSON object with num (digits) and change (ten digits 0 to 9)',
   url: 'https://leetcode.com/problems/largest-number-after-mutating-substring/',
   complexity: 'O(n) time: one scan to find the start and one pass over the block.',
+  question: "Change at most one contiguous block of digits using a digit map so that the resulting number is as large as possible.",
+  approaches: [
+    { name: "Greedy from first increase", intuition: "Start the block at the first digit the map raises and keep going while the map does not lower it.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Raise a block', input: '{"num":"132","change":[9,8,5,0,3,6,4,2,6,8]}' },
     { label: 'No raise possible', input: '{"num":"021","change":[0,1,2,3,4,5,6,7,8,9]}' },

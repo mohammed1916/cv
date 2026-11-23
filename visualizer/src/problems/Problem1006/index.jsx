@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Object with n (JSON)',
   url: 'https://leetcode.com/problems/clumsy-factorial/',
   complexity: 'O(n) time and O(n) space for the stored signed terms, with n capped at 60 in this view.',
+  question: "Evaluate a repeating sequence of the four operations on consecutive integers, with multiplication and division binding before addition and subtraction.",
+  approaches: [
+    { name: "Signed term stack", intuition: "Each operation folds into a term; multiply and divide combine with the previous term right away, and the stacked terms are summed.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Seven', input: '{"n":7}' },
     { label: 'Four', input: '{"n":4}' },

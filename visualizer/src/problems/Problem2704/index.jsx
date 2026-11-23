@@ -11,6 +11,10 @@ const definition = {
   inputLabel: 'Object with value and checks ([method, expected] pairs)',
   url: 'https://leetcode.com/problems/to-be-or-not-to-be/',
   complexity: 'O(1) per check, using strict equality.',
+  question: "Write an expectation helper with toBe and notToBe methods that throw an error when the value does not match.",
+  approaches: [
+    { name: "Strict equality check", intuition: "Compare with the strict operator and throw when the expectation fails.", time: "O(1)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Mixed checks', input: '{"value":5,"checks":[["toBe",5],["notToBe",5],["toBe",6]]}' },
     { label: 'Strings', input: '{"value":"a","checks":[["notToBe","b"]]}' },

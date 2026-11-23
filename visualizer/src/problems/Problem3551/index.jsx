@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON object with nums (1 to 10 distinct integers from 1 to 999)',
   url: 'https://leetcode.com/problems/minimum-swaps-to-sort-by-digit-sum/',
   complexity: 'O(n log n) time for the sort and O(n) time for the cycle walk.',
+  question: "Find the fewest swaps that sort an array by digit sum.",
+  approaches: [
+    { name: "Sort then count cycles", intuition: "Sort the target order and count the swaps needed by walking the cycles.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"nums":[37,100]}' },
     { label: 'Example 2', input: '{"nums":[21,12,3]}' },

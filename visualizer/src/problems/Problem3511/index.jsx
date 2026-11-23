@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Array of integers, for example [2,-3,1,4,-5,2]',
   url: 'https://leetcode.com/problems/make-a-positive-array/',
   complexity: 'O(n^3) time for n values in this trace: every window is summed directly. The replacement choice is a greedy stab of intervals sorted by right end, O(w log w) for w bad windows. The visualization caps the array at 10 values.',
+  question: "Make an array positive by replacing windows with positive values at the fewest cost.",
+  approaches: [
+    { name: "Greedy interval stabbing", intuition: "Sort bad windows by right end and place replacements greedily.", time: "O(n^3)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Two overlapping dips', input: '[2,-3,1,4,-5,2]' },
     { label: 'Already positive', input: '[3,1,2,5]' },

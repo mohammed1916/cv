@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Object with tomatoSlices and cheeseSlices (JSON)',
   url: 'https://leetcode.com/problems/number-of-burgers-with-no-waste-of-ingredients/',
   complexity: 'O(1): two linear equations in two unknowns are solved directly.',
+  question: "Find how many jumbo and small burgers use exactly the given tomato and cheese amounts.",
+  approaches: [
+    { name: "Solve two linear equations", intuition: "Solve the two equations directly and check the solution is a non-negative integer.", time: "O(1)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Exact mix', input: '{"tomatoSlices":14,"cheeseSlices":5}' },
     { label: 'Odd tomato', input: '{"tomatoSlices":3,"cheeseSlices":1}' },

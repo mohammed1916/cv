@@ -117,6 +117,10 @@ const definition = {
   inputLabel: 'Object with ops: [\'upload\'], [\'remove\', id], [\'watch\', id], [\'like\', id], [\'dislike\', id], [\'stats\', id]',
   url: 'https://leetcode.com/problems/design-video-sharing-platform/',
   complexity: 'Upload and remove use a heap for free ids; the visualization sorts the free list for display. Watch and reactions are constant-time updates. The content of a watched video is not modelled, only the view count.',
+  question: "Design a video sharing platform that supports upload, remove, watch, like, dislike, and statistics, reusing the smallest freed video id.",
+  approaches: [
+    { name: "Min-heap of freed ids and a video map", intuition: "Keep released ids in a min-heap so an upload reuses the smallest one, and store each video's counts in a map.", time: "O(log n) per upload or remove", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example', input: '{"ops":[["upload"],["upload"],["like",0],["watch",0],["remove",0],["upload"],["stats",1]]}' },
   ],

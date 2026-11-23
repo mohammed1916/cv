@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'Binary array and k (JSON): {"nums": [...], "k": n}',
   url: 'https://leetcode.com/problems/minimum-number-of-k-consecutive-bit-flips/',
   complexity: 'O(n * k) time for the visualized window recomputation; the greedy itself is O(n) time and O(n) space. The visualization caps input at 12 bits.',
+  question: "Find the fewest flips of k consecutive bits needed to make every bit 1, or report -1.",
+  approaches: [
+    { name: "Greedy with a flip window", intuition: "Scan left to right; when a 0 is found at position i, flip the window starting there, tracking active flips with a queue.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Own: six bits, k 2', input: '{"nums":[1,1,0,1,0,0],"k":2}' },
     { label: 'Window two, single gap', input: '{"nums":[0,0,1,0],"k":2}' },

@@ -8,6 +8,10 @@ const definition = {
   inputLabel: 'Object with low and high (e.g. {"low":0,"high":21})',
   url: 'https://leetcode.com/problems/stepping-numbers/description/',
   complexity: 'O(k) time for the k stepping numbers reached by the walks, plus O(k log k) to sort them. The visualization caps high at 1000; the draft does not state an exact official bound.',
+  question: "Count the stepping numbers in a range, where neighbouring digits differ by exactly one.",
+  approaches: [
+    { name: "Walks from each leading digit", intuition: "Grow each walk one digit at a time, changing the last digit by one, and keep values inside the range.", time: "O(k log k)", space: "O(k)" },
+  ],
   examples: [
     { label: 'Zero to 21', input: '{"low":0,"high":21}' },
     { label: 'Hundreds', input: '{"low":100,"high":150}' },

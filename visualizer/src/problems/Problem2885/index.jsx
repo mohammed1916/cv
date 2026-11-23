@@ -7,6 +7,11 @@ const definition = {
   inputLabel: 'Object with students (rows holding id, first, last and age)',
   url: 'https://leetcode.com/problems/rename-columns/',
   complexity: 'O(c) header changes for c columns. A plain rename touches labels, so the values are not rewritten; this view shows up to 12 rows.',
+  question: "Rename the columns of a table to new names given by a mapping.",
+  approaches: [
+    { name: "Rename mapping", intuition: "Apply the mapping from old names to new names to the column labels.", time: "O(c)", space: "O(c)" },
+    { name: "Rebuild the table", intuition: "Construct a new table with the new headers and the same values.", time: "O(n c)", space: "O(n c)" },
+  ],
   examples: [
     { label: 'Three students', input: '{"students":[{"id":11,"first":"Priya","last":"Nair","age":15},{"id":12,"first":"Tomas","last":"Ruiz","age":17},{"id":13,"first":"Lena","last":"Okafor","age":14}]}' },
     { label: 'Shuffled columns', input: '{"students":[{"age":19,"last":"Haddad","id":40,"first":"Omar"},{"age":20,"last":"Sato","id":41,"first":"Yuki"}]}' },

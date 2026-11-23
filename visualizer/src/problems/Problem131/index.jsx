@@ -27,6 +27,11 @@ const definition = {
   inputLabel: "String (JSON object, e.g. {\"s\": \"aab\"})",
   url: "https://leetcode.com/problems/palindrome-partitioning/",
   complexity: "Exponential in the worst case for the number of partitions. The visualization caps the string at 16 characters.",
+  question: "Split a string into pieces that are all palindromes and list every such split.",
+  approaches: [
+    { name: "Backtracking with palindrome check", intuition: "Try each prefix that is a palindrome and recurse on the rest of the string.", time: "O(n 2^n)", space: "O(n)" },
+    { name: "Palindrome table plus backtracking", intuition: "Precompute which substrings are palindromes, then backtrack using the table.", time: "O(n 2^n)", space: "O(n^2)" },
+  ],
   examples: getExamples("palindrome-partitioning").map(({ label, s }) => ({ label, input: JSON.stringify({ s }) })),
 };
 

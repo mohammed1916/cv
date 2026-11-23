@@ -3,6 +3,10 @@ import View from './View'
 import { buildTrace, parseInput, code, python, pythonLineMap, phases, examples, complexity } from './algorithm.js'
 
 const definition = {
+  question: "Decide whether two expression trees with only addition are equivalent.",
+  approaches: [
+    { name: "Count leaf letters", intuition: "Two additive trees are equivalent when every letter appears the same number of times.", time: "O(n)", space: "O(1)" },
+  ],
   number: '1612',
   parse: parseInput,
   build: buildTrace,

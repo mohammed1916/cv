@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'Object with arr, brr and k',
   url: 'https://leetcode.com/problems/minimum-cost-to-make-arrays-identical/description/',
   complexity: 'O(n log n) for the sorting step. The visualization caps n at 8.',
+  question: "Make two arrays identical by paying for each value change, with a fixed cost option for reordering.",
+  approaches: [
+    { name: "Sort and pair", intuition: "Sort both arrays and pair values in order, then pick the cheaper of direct changes or the fixed cost.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example', input: '{"arr":[4,-1,2],"brr":[0,3,-2],"k":1}' },
     { label: 'Already equal', input: '{"arr":[5,5],"brr":[5,5],"k":3}' },

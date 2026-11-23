@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON object: {"nums": [...], "queries": [...]}',
   url: 'https://leetcode.com/problems/longest-subsequence-with-limited-sum/',
   complexity: 'Sorting plus one binary search per query over the prefix sums. The visualization caps input at 8 numbers and 6 queries.',
+  question: "For each query, find the largest number of elements whose sum does not exceed the query value.",
+  approaches: [
+    { name: "Sort, prefix sums, binary search", intuition: "Sort the numbers, build prefix sums, then binary search each query in the prefix sums.", time: "O(n log n + q log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Mixed sizes', input: '{"nums":[6,1,3,9],"queries":[4,11,20]}' },
     { label: 'Single query', input: '{"nums":[7,7,2],"queries":[8]}' },

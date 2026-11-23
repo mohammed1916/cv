@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON object with grid (0 empty, 1 occupied), stampHeight and stampWidth',
   url: 'https://leetcode.com/problems/stamping-the-grid/',
   complexity: 'O(m n) time for the prefix sums, the placements and the coverage pass; O(m n) extra space.',
+  question: "Decide whether stamp rectangles of a fixed size can cover every empty cell of a grid without covering any occupied cell.",
+  approaches: [
+    { name: "2D prefix sums and difference array", intuition: "A stamp may sit at a corner only if its rectangle has no occupied cell, which a 2D prefix sum checks in constant time; a difference array marks the covered cells.", time: "O(m * n)", space: "O(m * n)" },
+  ],
   examples: [
     { label: 'Single cells fit', input: '{"grid":[[0,0,0],[0,1,0],[0,0,0]],"stampHeight":1,"stampWidth":1}' },
     { label: 'Blocked pocket', input: '{"grid":[[0,0,0,0],[0,1,0,0],[0,0,0,0]],"stampHeight":1,"stampWidth":2}' },

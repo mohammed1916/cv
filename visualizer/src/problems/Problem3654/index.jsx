@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with nums (1 to 20 positive integers) and k',
   url: 'https://leetcode.com/problems/minimum-sum-after-divisible-sum-deletions/description/',
   complexity: 'O(n + k) time and O(n + k) space: one pass over the prefix sums with a best value per residue.',
+  question: "Delete blocks whose sums are divisible by a given value and return the minimum remaining sum.",
+  approaches: [
+    { name: "Best value per residue", intuition: "Scan prefix sums and keep the best value for each residue, combining with the current prefix.", time: "O(n + k)", space: "O(n + k)" },
+  ],
   examples: [
     { label: 'Invented example', input: '{"nums":[2,5,4,3,6],"k":3}' },
     { label: 'Nothing divisible', input: '{"nums":[1,2,4],"k":5}' },

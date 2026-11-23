@@ -20,6 +20,11 @@ const definition = {
   inputLabel: 'String s | wordDict (e.g. "leetcode | leet, code")',
   url: "https://leetcode.com/problems/word-break/",
   complexity: "O(n * m) time and O(n) space for string length n and dictionary size m. The visualization caps string and dictionary size at 50.",
+  question: "Decide whether a string can be split into words from a dictionary.",
+  approaches: [
+    { name: "Prefix dynamic programming", intuition: "A prefix is breakable if some shorter breakable prefix is followed by a dictionary word.", time: "O(n^2)", space: "O(n)" },
+    { name: "Breadth-first over positions", intuition: "Explore reachable positions and jump by dictionary words.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: getExamples("word-break").map(({ label, input }) => ({ label, input })),
 };
 

@@ -12,6 +12,10 @@ const definition = {
   phases, parse: parseInput, build: buildTrace, code, python, sql,
   inputLabel: INPUT_LABEL,
   complexity: COMPLEXITY,
+  question: "Compute the balance of each account after its transactions.",
+  approaches: [
+    { name: "SQL join and sum", intuition: "Sum each account's transactions and join them to the account list.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [{ label: 'Sample', input: EXAMPLE },
     { label: "Single deposit above threshold", input: "{\"users\":[{\"account\":1,\"name\":\"Ivy\"}],\"transactions\":[{\"trans_id\":1,\"account\":1,\"amount\":20000,\"transacted_on\":\"2020-01-01\"}]}" },
     { label: "Balance exactly at threshold", input: "{\"users\":[{\"account\":2,\"name\":\"Bo\"}],\"transactions\":[{\"trans_id\":2,\"account\":2,\"amount\":10000,\"transacted_on\":\"2020-02-01\"}]}" },

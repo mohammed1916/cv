@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'JSON object with a value field (nested arrays and objects allowed, at most 3 levels)',
   url: 'https://leetcode.com/problems/convert-object-to-json-string/',
   complexity: 'O(size of the value) time and O(size) space for the output pieces.',
+  question: "Convert a value into a JSON string without using the built-in serializer.",
+  approaches: [
+    { name: "Recursive serializer", intuition: "Write primitives directly, and recurse through arrays and objects, joining their pieces.", time: "O(size)", space: "O(size)" },
+  ],
   examples: [
     { label: 'Nested', input: '{"value":{"a":[1,true,null],"b":"hi there"}}' },
     { label: 'Array', input: '{"value":[3,"ab"]}' },

@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with root (level order, distinct values) (JSON)',
   url: 'https://leetcode.com/problems/minimum-number-of-operations-to-sort-a-binary-tree-by-level/',
   complexity: 'O(n log n) time and O(n) space for n nodes. The visualization caps the tree at 15 entries.',
+  question: "Each level of a binary tree must be sorted using swaps; find the fewest swaps needed across all levels.",
+  approaches: [
+    { name: "Cycle counting per level", intuition: "Sort each level's values and count the cycles that the permutation to sorted order forms.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"root":[1,4,3,7,6,8,5]}' },
     { label: 'Example 2', input: '{"root":[1,3,2,7,null,5,4]}' },

@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'arr (JSON object with distinct integers)',
   url: 'https://leetcode.com/problems/binary-trees-with-factors/',
   complexity: 'O(n^2) time and O(n) space.',
+  question: "Count binary trees where each non-leaf value equals the product of its two children's values, using values from a distinct array.",
+  approaches: [
+    { name: "Sorted DP with division check", intuition: "Sort the values; for each root count pairs of children whose product is the root, using a hash map of counts.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Three roots', input: '{"arr":[3,6,9,18]}' },
     { label: 'Chain', input: '{"arr":[2,3,6,12,36]}' },

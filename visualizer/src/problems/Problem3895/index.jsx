@@ -16,6 +16,10 @@ const definition = {
     { id: 'finish', label: 'Number complete', description: 'The quotient is zero, so no digits remain.' },
     { id: 'done', label: 'Return total', description: 'Return all occurrences, not merely the number of matching elements.' },
   ],
+  question: "Count every decimal digit occurrence equal to a target digit across a list of positive integers, including repeats inside one number.",
+  approaches: [
+    { name: "Digit extraction with modulo and division", intuition: "Take the last digit with % 10, count a match, then drop it with integer division by 10.", time: "O(D) for D total digits", space: "O(1) extra" },
+  ],
   examples: authoredExamples0,
 }
 function CountDigitAppearances() {

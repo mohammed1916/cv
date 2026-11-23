@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Positive integers as JSON, e.g. [3,1,3,2,4,3]',
   url: 'https://leetcode.com/problems/minimum-operations-to-make-the-array-alternating/',
   complexity: 'O(n) time and O(n) space for the two frequency tables. The visualization caps the array at 12 values from 1 to 9.',
+  question: "Find the fewest changes so that the even and odd positions each hold one value and the two values differ.",
+  approaches: [
+    { name: "Two most frequent values per parity", intuition: "Count the values at even and at odd positions, and pair the most frequent value of one parity with the most frequent value of the other that differs from it.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Mixed parity', input: '[3,1,3,2,4,3]' },
     { label: 'Shared mode', input: '[4,4,4,4]' },

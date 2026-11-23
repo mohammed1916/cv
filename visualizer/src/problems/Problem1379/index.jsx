@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with root (level-order array of distinct values 1 to 20) and target (a value in the tree) (JSON)',
   url: 'https://leetcode.com/problems/find-a-corresponding-node-of-a-binary-tree-in-a-clone-of-that-tree/',
   complexity: 'O(n) time and O(h) stack space. The visualization caps the tree at 15 entries.',
+  question: "Find the node in a cloned tree that matches a target node in the original tree.",
+  approaches: [
+    { name: "Parallel depth-first", intuition: "Walk both trees together and return the clone when the original matches the target.", time: "O(n)", space: "O(h)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"root":[7,4,3,null,null,6,19],"target":3}' },
     { label: 'Example 2', input: '{"root":[7],"target":7}' },

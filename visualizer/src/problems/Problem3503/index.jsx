@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'An object with s and t, for example {"s": "abcde", "t": "ecdba"}',
   url: 'https://leetcode.com/problems/longest-palindrome-after-substring-concatenation-i/',
   complexity: 'O(n^2 m^2 (n + m)) for lengths n and m. The visualization uses the statement limits of 30 letters.',
+  question: "Find the longest palindrome you can make by joining substrings taken from two strings.",
+  approaches: [
+    { name: "Two-pointer check", intuition: "Test each candidate palindrome with two pointers over the joined pieces, without building the string.", time: "O(n^2 m^2 (n + m))", space: "O(1)" },
+  ],
   examples: [
     { label: 'Carbon and morph', input: '{"s":"carbon","t":"morph"}' },
     { label: 'Two letters swapped', input: '{"s":"ab","t":"ba"}' },

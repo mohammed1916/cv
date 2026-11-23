@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with n (candies) and k (bags), e.g. {"n":4,"k":2}',
   url: "https://leetcode.com/problems/count-ways-to-distribute-candies/",
   complexity: "O(n * k) time and O(n * k) space with modulo 1000000007. The visualization caps n at 12.",
+  question: "Count the ways to split n identical candies into k non-empty bags.",
+  approaches: [
+    { name: "Stirling table", intuition: "Build S(i, j) = j * S(i - 1, j) + S(i - 1, j - 1) modulo the prime.", time: "O(n * k)", space: "O(n * k)" },
+  ],
   examples: [
     { label: "Four candies, two bags", input: '{"n":4,"k":2}' },
     { label: "Three candies, two bags", input: '{"n":3,"k":2}' },

@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with banned (integers 1 to 20), n (1 to 15) and maxSum (1 to 60)',
   url: 'https://leetcode.com/problems/maximum-number-of-integers-to-choose-from-a-range-i/',
   complexity: 'O(n + banned) time. The visualization caps n at 15.',
+  question: "Choose as many integers from 1 to n as possible, skipping banned values, while keeping the sum at most maxSum.",
+  approaches: [
+    { name: "Greedy from the smallest", intuition: "Take the smallest allowed value that still fits, one at a time.", time: "O(n + banned)", space: "O(banned)" },
+  ],
   examples: [
     { label: 'Eight numbers, maxSum 20', input: '{"banned":[4,9,13],"n":8,"maxSum":20}' },
     { label: 'Example 2', input: '{"banned":[1,2,3,4,5,7],"n":8,"maxSum":1}' },

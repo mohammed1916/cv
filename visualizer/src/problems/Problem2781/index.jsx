@@ -12,6 +12,11 @@ const definition = {
   inputLabel: 'Object with "word" (lowercase letters) and "forbidden" (list of strings), JSON',
   url: 'https://leetcode.com/problems/length-of-the-longest-valid-substring/',
   complexity: 'O(n times k times L) time for n letters, k forbidden strings and maximum length L. The visualization caps input at 20 letters.',
+  question: "Find the length of the longest substring that contains none of the forbidden strings.",
+  approaches: [
+    { name: "Sliding window with a forbidden-end check", intuition: "Move the left edge past any forbidden string that ends at the current right edge.", time: "O(n k L)", space: "O(k)" },
+    { name: "Check every substring", intuition: "Test all substrings directly against the forbidden list.", time: "O(n^2 k L)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Overlapping forbidden pairs', input: '{"word":"abcdabc","forbidden":["cd","abc"]}' },
     { label: 'Single-letter forbidden entry', input: '{"word":"stoplight","forbidden":["ht","s","gh"]}' },

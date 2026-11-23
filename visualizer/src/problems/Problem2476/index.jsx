@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with root (level order) and queries (JSON)',
   url: 'https://leetcode.com/problems/closest-nodes-queries-in-a-binary-search-tree/',
   complexity: 'O(n) time to read the tree and O(log n) per query with binary search. The visualization caps the tree at 31 entries.',
+  question: "For each query value, find the largest tree value not greater than it and the smallest not less than it.",
+  approaches: [
+    { name: "In-order list and binary search", intuition: "Read the tree in order into a sorted list, then binary search it for each query.", time: "O(n + q log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Gap in the right subtree', input: '{"root":[20,8,30,4,12,null,35],"queries":[12,21,40]}' },
     { label: 'Small', input: '{"root":[4,2,6,1,3],"queries":[0,3,7]}' },

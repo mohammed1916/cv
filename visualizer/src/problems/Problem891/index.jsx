@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'nums (JSON array, up to 200 values)',
   url: 'https://leetcode.com/problems/sum-of-subsequence-widths/',
   complexity: 'O(n log n) time for sorting plus O(n) for the sum; O(n) space for powers of two.',
+  question: "Sum the width (maximum minus minimum) over all subsequences of an array, modulo 1000000007.",
+  approaches: [
+    { name: "Sort and powers of two", intuition: "After sorting, each value is the maximum in 2^i subsets and the minimum in 2^(n-1-i) subsets, so the widths combine as powers of two.", time: "O(n log n)", space: "O(1) extra" },
+  ],
   examples: [
     { label: 'Four values, unsorted', input: '[7,2,11,4]' },
     { label: 'Single', input: '[2]' },

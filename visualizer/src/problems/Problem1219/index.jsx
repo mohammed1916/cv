@@ -3,6 +3,10 @@ import RecursiveCallTree from '../../components/shared/RecursiveCallTree'
 import { buildTrace, parseInput, code, python, phases, inputLabel, complexity, examples } from './algorithm'
 
 const definition = {
+  question: "Find the maximum total gold collected on a path through a grid, starting anywhere and never revisiting a cell.",
+  approaches: [
+    { name: "Depth-first with backtracking", intuition: "Explore every path from each cell, adding its gold and removing it again on return.", time: "O(4^(cells))", space: "O(cells)" },
+  ],
   phases, parse: parseInput, build: buildTrace, code, python, inputLabel, complexity, examples,
   url: 'https://leetcode.com/problems/path-with-maximum-gold/',
 }

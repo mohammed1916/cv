@@ -13,6 +13,11 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Graph (JSON with n, edges, threshold)',
   url: 'https://leetcode.com/problems/find-the-city-with-the-smallest-number-of-neighbors-at-a-threshold-distance/',
   complexity: 'O(n^3) time and O(n^2) space for Floyd-Warshall. Visualization limited to 8 cities and 12 edges.',
+  question: "Find the city with the fewest neighbours within a distance threshold.",
+  approaches: [
+    { name: "Floyd-Warshall", intuition: "Compute all-pairs shortest paths, then count the reachable cities under the threshold.", time: "O(n^3)", space: "O(n^2)" },
+    { name: "Dijkstra from each city", intuition: "Run shortest paths from each city and count the close neighbours.", time: "O(n m log n)", space: "O(n^2)" },
+  ],
   examples: [
     { label: 'city 3', input: '{"n":4,"edges":[[0,1,3],[1,2,1],[1,3,4],[2,3,1]],"threshold":4}' },
     { label: 'city 0', input: '{"n":5,"edges":[[0,1,2],[0,4,8],[1,2,3],[1,4,2],[2,3,1],[3,4,1]],"threshold":2}' },

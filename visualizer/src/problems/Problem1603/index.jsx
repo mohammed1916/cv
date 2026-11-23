@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Object with slots and cars (JSON)',
   url: 'https://leetcode.com/problems/design-parking-system/',
   complexity: 'O(1) per request and O(1) space: three counters, one per car type.',
+  question: "Track available parking spaces for big, medium and small cars.",
+  approaches: [
+    { name: "Three counters", intuition: "Keep one counter per car type and decrement it when a car parks.", time: "O(1)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Mixed types', input: '{"slots":[2,1,1],"cars":[1,1,2,1,3,3,1,2]}' },
     { label: 'Empty big lot', input: '{"slots":[0,2,0],"cars":[1,3,2,1]}' },

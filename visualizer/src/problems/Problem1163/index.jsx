@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'String (JSON object with s)',
   url: 'https://leetcode.com/problems/last-substring-in-lexicographical-order/',
   complexity: 'O(n) time and O(1) extra space. The visualization caps input at 40 letters.',
+  question: "Return the lexicographically largest substring of a string.",
+  approaches: [
+    { name: "Candidate elimination", intuition: "Keep two pointers for the best start and the current challenger, dropping starts that a later start beats.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example', input: '{"s":"leetcode"}' },
     { label: 'Repeat', input: '{"s":"abab"}' },

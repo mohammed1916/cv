@@ -11,6 +11,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Input (JSON object with nums and k)',
   url: 'https://leetcode.com/problems/maximum-average-subarray-i/',
   complexity: 'O(n) time and O(1) extra space.',
+  question: "Find the maximum average of any contiguous run of exactly k values.",
+  approaches: [
+    { name: "Fixed sliding window", intuition: "Slide a window of length k, adding the entering value and removing the leaving one.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Mixed signs', input: '{"nums":[4,-2,7,1,3,-5],"k":3}' },
     { label: 'Whole array', input: '{"nums":[2,6,4],"k":3}' },

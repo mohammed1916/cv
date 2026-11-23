@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON object with nums (1 to 50 values from 1 to 1000) and k (1 to 100), for example {"nums":[3,9,7],"k":5}',
   url: 'https://leetcode.com/problems/minimum-operations-to-make-array-sum-divisible-by-k/',
   complexity: 'O(n) time for the sum.',
+  question: "Find the fewest single-value operations that make an array sum divisible by k.",
+  approaches: [
+    { name: "Sum modulo k", intuition: "Reduce the total sum modulo k, since that remainder is all that needs removing.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Seven values, k three', input: '{"nums":[6,18,4,40,12,6,9],"k":3}' },
     { label: 'Example 2', input: '{"nums":[4,1,6],"k":5}' },

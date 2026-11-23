@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON object with names and heights (distinct heights)',
   url: 'https://leetcode.com/problems/sort-the-people/',
   complexity: 'O(n^2) time for this selection walk, O(n) space. The visualization caps input at 12 people.',
+  question: "Sort names by the matching heights, from tallest to shortest.",
+  approaches: [
+    { name: "Selection by height", intuition: "Repeatedly pick the tallest remaining person and place their name next.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Three people', input: '{"names":["Ana","Ben","Cleo"],"heights":[150,190,170]}' },
     { label: 'Two people', input: '{"names":["Dev","Eli"],"heights":[160,175]}' },

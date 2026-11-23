@@ -11,6 +11,10 @@ const definition = {
   inputLabel: 'Object with nums, a list of integers from 0 to 15',
   url: 'https://leetcode.com/problems/count-good-subarrays/',
   complexity: 'This visual tries every subarray: O(n^2) windows with an O(n) membership check. The visual caps nums at 12 values.',
+  question: "Count the subarrays whose bitwise OR equals one of the values inside them.",
+  approaches: [
+    { name: "Try every subarray", intuition: "Check each subarray's OR against its own elements.", time: "O(n^2) windows with an O(n) check", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example', input: '{"nums":[5,1,4]}' },
     { label: 'Repeats', input: '{"nums":[2,2,6]}' },

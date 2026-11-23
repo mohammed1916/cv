@@ -3,6 +3,10 @@ import { meta } from './meta'
 import { buildTrace, parseInput, code, python, phases, examples, complexity, inputLabel } from './algorithm'
 
 const definition = {
+  question: "Find the length of the smallest number made only of the digit one that is divisible by K, or report -1.",
+  approaches: [
+    { name: "Track remainder states", intuition: "Build the number remainder by remainder modulo K; if a remainder repeats or the count passes K, no answer exists.", time: "O(K)", space: "O(K)" },
+  ],
   number: meta.number,
   phases, parse: parseInput, build: buildTrace, code, python, inputLabel,
   url: `https://leetcode.com/problems/${meta.slug}/`,

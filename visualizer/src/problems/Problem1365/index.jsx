@@ -7,6 +7,11 @@ const definition = {
   phases, parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'Numbers (JSON array of integers)',
   complexity: 'O(n log n) time for the sort and O(n) extra space. The visualization caps input at 12 values.',
+  question: "For each number, count how many values in the array are smaller.",
+  approaches: [
+    { name: "Sort then rank", intuition: "Sort the values and read each value's rank from its first position.", time: "O(n log n)", space: "O(n)" },
+    { name: "Counting buckets", intuition: "Count each value in a fixed-range table and add prefix sums.", time: "O(n)", space: "O(100)" },
+  ],
   examples: [
     { label: 'Sample', input: '[8,1,2,2,3]' },
     { label: 'Mixed', input: '[6,5,4,8]' },

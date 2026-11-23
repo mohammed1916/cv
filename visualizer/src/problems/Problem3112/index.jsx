@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Graph, edges and disappearance times (JSON)',
   url: 'https://leetcode.com/problems/minimum-time-to-visit-disappearing-nodes/',
   complexity: 'O((V + E) log V) time. The visualization caps input at 7 nodes and 12 edges.',
+  question: "Find the earliest time each node can be reached from node 0 when some nodes disappear at fixed deadlines and edges have lengths.",
+  approaches: [
+    { name: "Dijkstra with deadline check", intuition: "Expand the earliest arrival first, and accept a node only when the arrival is before its deadline.", time: "O((V + E) log V)", space: "O(V + E)" },
+  ],
   examples: [
     { label: 'Example', input: '{"n":3,"edges":[[0,1,2],[1,2,2],[0,2,5]],"disappear":[10,3,10]}' },
     { label: 'Deadline', input: '{"n":3,"edges":[[0,1,2],[1,2,2],[0,2,5]],"disappear":[10,2,10]}' },

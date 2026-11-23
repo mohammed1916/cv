@@ -8,6 +8,10 @@ const definition = {
   inputLabel: 'Object with nums (1 or -1) and k',
   url: 'https://leetcode.com/problems/transform-array-to-all-equal-elements/',
   complexity: 'O(n) time and O(n) space for the working copy; the sign alone would need O(1). The official length is up to 100000; the visualization caps nums at 20 entries.',
+  question: "Decide whether an array of +1 and -1 values can be made entirely equal to one target value within k moves.",
+  approaches: [
+    { name: "Test both targets", intuition: "Simulate the greedy flip process once for target +1 and once for target -1, then check the move count.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Second target wins', input: '{"nums":[-1,1,1,1,-1,1],"k":3}' },
     { label: 'One move short', input: '{"nums":[-1,1,1,1,-1,1],"k":2}' },

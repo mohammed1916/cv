@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'nums and k (JSON object)',
   url: 'https://leetcode.com/problems/subarray-product-less-than-k/',
   complexity: 'O(n) time: l and r each move forward at most n times. O(1) extra space.',
+  question: "Count contiguous slices whose product is less than k.",
+  approaches: [
+    { name: "Sliding window", intuition: "Grow the right end, and shrink from the left while the product is at least k.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Small window', input: '{"nums":[3,1,4,2],"k":10}' },
     { label: 'Tight', input: '{"nums":[2,5,3,1],"k":6}' },

@@ -16,6 +16,10 @@ const definition = {
   inputLabel: 'JSON object with key s (e.g. {"s": "101"})',
   url: "https://leetcode.com/problems/separate-black-and-white-balls/",
   complexity: "O(n) time and O(1) extra space for string length n. The visualization caps s at 50 characters.",
+  question: "Given a binary string, find the minimum number of adjacent swaps that gather all ones on the right.",
+  approaches: [
+    { name: "Count ones before each zero", intuition: "Scan left to right, and for every zero add the number of ones seen so far.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: "Example 1", input: '{"s": "101"}' },
     { label: "Example 2", input: '{"s": "100"}' },

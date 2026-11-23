@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON object with prime_factors from 1 to 60, for example {"prime_factors":8}',
   url: 'https://leetcode.com/problems/maximize-number-of-nice-divisors/',
   complexity: 'O(log n) time with fast exponentiation. The visualization caps the input at 60.',
+  question: "Split a number into factors, maximising the number of divisors of the product under a limit on factors.",
+  approaches: [
+    { name: "Threes first with fast powers", intuition: "Use as many threes as possible, adjust with twos, and compute the powers with fast exponentiation.", time: "O(log n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"prime_factors":3}' },
     { label: 'Example 2', input: '{"prime_factors":8}' },

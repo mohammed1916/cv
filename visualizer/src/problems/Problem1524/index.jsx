@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON array of positive integers',
   url: 'https://leetcode.com/problems/number-of-sub-arrays-with-odd-sum/',
   complexity: 'O(n) time and O(1) space: only the counts of even and odd prefix parities are kept.',
+  question: "Count subarrays with an odd sum.",
+  approaches: [
+    { name: "Prefix parity counts", intuition: "Count how many earlier prefixes have even and odd parity; each odd-parity prefix pairs with the even ones.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Small array', input: '[1,2,3]' },
     { label: 'Even start', input: '[4,5,6,7]' },

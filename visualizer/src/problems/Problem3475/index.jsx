@@ -17,6 +17,10 @@ const definition = {
   inputLabel: 'JSON object with a samples list (sample_id, dna_sequence, species)',
   url: 'https://leetcode.com/problems/dna-pattern-recognition/description/',
   complexity: 'O(total length) time: each sequence is read a constant number of times. The flags are a knowledge-derived teaching version.',
+  question: "Flag rows of a DNA table that match three sequence rules.",
+  approaches: [
+    { name: "Per-row flags", intuition: "Compute three true-or-false checks for each row.", time: "O(total length)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example', input: '{"samples":[{"sample_id":3,"dna_sequence":"ATGGGCTGA","species":"cat"},{"sample_id":1,"dna_sequence":"ATGCCGTAA","species":"mouse"},{"sample_id":5,"dna_sequence":"TGAAAT","species":"owl"},{"sample_id":2,"dna_sequence":"GATTACA","species":"fly"}]}' },
     { label: 'Single', input: '{"samples":[{"sample_id":9,"dna_sequence":"CCCATAG","species":"dog"}]}' },

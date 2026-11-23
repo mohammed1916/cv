@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'JSON object with n (nodes) and edges (undirected pairs, no repeats)',
   url: 'https://leetcode.com/problems/shortest-cycle-in-a-graph/',
   complexity: 'O(n * (n + e)) time for a search from every node. The visualization caps the graph at 10 nodes.',
+  question: "Given an undirected graph, return the length of its shortest cycle, or -1 if the graph has no cycle.",
+  approaches: [
+    { name: "BFS from every node", intuition: "Run a breadth-first search from each node and record the shortest cycle that closes back on itself.", time: "O(n * (n + e))", space: "O(n)" },
+  ],
   examples: [
     { label: 'Triangle and a pair', input: '{"n":6,"edges":[[0,1],[1,2],[2,0],[3,4]]}' },
     { label: 'Four-cycle', input: '{"n":4,"edges":[[0,1],[1,2],[2,3],[3,0]]}' },

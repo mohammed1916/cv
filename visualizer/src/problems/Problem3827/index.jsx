@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Upper bound (JSON object with n)',
   url: 'https://leetcode.com/problems/count-monobit-integers/',
   complexity: 'O(log n) time and O(1) extra space.',
+  question: "Count the integers from 0 to n whose binary digits are all the same.",
+  approaches: [
+    { name: "Count repunits", intuition: "The answer counts zero and the numbers of the form 2^L - 1 up to n.", time: "O(log n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"n":1}' },
     { label: 'Example 2', input: '{"n":4}' },

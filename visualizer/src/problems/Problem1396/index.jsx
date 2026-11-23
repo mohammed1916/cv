@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Operations as JSON: {"operations": [["checkIn", id, station, time], ...]}',
   url: 'https://leetcode.com/problems/design-underground-system/',
   complexity: 'O(1) time per operation with hash maps; the visualization caps input at 40 operations.',
+  question: "Track check-ins and check-outs at stations and report average travel times between stations.",
+  approaches: [
+    { name: "Hash maps of totals", intuition: "Store open trips per customer and total times per station pair.", time: "O(1) per operation", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"operations":[["checkIn",45,"Leyton",3],["checkIn",32,"Paradise",8],["checkIn",27,"Leyton",10],["checkOut",45,"Waterloo",15],["checkOut",27,"Waterloo",20],["checkOut",32,"Cambridge",22],["getAverageTime","Paradise","Cambridge"],["getAverageTime","Leyton","Waterloo"],["checkIn",10,"Leyton",24],["getAverageTime","Leyton","Waterloo"],["checkOut",10,"Waterloo",38],["getAverageTime","Leyton","Waterloo"]]}' },
     { label: 'Two trips', input: '{"operations":[["checkIn",1,"Ab",1],["checkOut",1,"Cd",5],["checkIn",2,"Ab",6],["checkOut",2,"Cd",8],["getAverageTime","Ab","Cd"]]}' },

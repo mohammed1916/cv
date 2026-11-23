@@ -21,6 +21,10 @@ const definition = {
   inputLabel: 'Object with n, roads, apple_cost and k ([a, b, cost] roads)',
   url: 'https://leetcode.com/problems/minimum-cost-to-buy-apples/',
   complexity: 'O(n * (n^2 + m)) time for n cities and m roads with this simple selection step, and O(n + m) space. The visualization caps n at 7; the official limits are larger.',
+  question: "Find the cheapest way to buy apples across a road network, where each city has its own apple price.",
+  approaches: [
+    { name: "Shortest paths from each city", intuition: "Compute the cheapest route from each start city, then pick the best purchase plan.", time: "O(n * (n^2 + m))", space: "O(n + m)" },
+  ],
   examples: [
     { label: 'Chain of four', input: '{"n":4,"roads":[[0,1,2],[1,2,1],[2,3,3]],"apple_cost":[9,2,7,1],"k":2}' },
     { label: 'Hub with a cheap apple', input: '{"n":5,"roads":[[0,1,4],[0,2,1],[2,3,2],[3,4,5],[1,4,1]],"apple_cost":[8,6,20,3,7],"k":3}' },

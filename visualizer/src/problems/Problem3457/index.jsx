@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Array of 4, 8 or 12 pizza weights from 1 to 50 (JSON)',
   url: 'https://leetcode.com/problems/eat-pizzas/',
   complexity: 'O(n log n) for the sort. The visualization caps input at 12 pizzas.',
+  question: "Given pizza weights, pick groups of four to maximize the total weight eaten over days.",
+  approaches: [
+    { name: "Sort then pick", intuition: "Sort the weights and greedily take the largest ones for each group.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Eight pizza weights', input: '[9,31,4,27,12,2,40,15]' },
     { label: 'Example 2', input: '[4,4,4,4]' },

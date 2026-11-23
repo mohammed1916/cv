@@ -11,6 +11,11 @@ const definition = {
   inputLabel: "Object with nums and threshold (e.g. {\"nums\":[3,8],\"threshold\":[1,2]})",
   url: "https://leetcode.com/problems/maximum-total-sum-with-threshold-constraints/",
   complexity: "O(n squared) time in this direct form: each step scans all indexes, and each pick is a heap or sorted choice; O(n) space. The visualization caps n at 10 with values from -20 to 20.",
+  question: "Choose indices in order to maximise the total of their values, where each index unlocks at a threshold step.",
+  approaches: [
+    { name: "Largest eligible value each step", intuition: "At every step, take the largest value whose threshold has been reached.", time: "O(n^2)", space: "O(n)" },
+    { name: "Sort with a heap of unlocked values", intuition: "Unlock values as thresholds are reached and pop the largest from a heap.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: "Negative pick forced", input: "{\"nums\":[5,-2,9,4],\"threshold\":[1,3,2,1]}" },
     { label: "Two early picks", input: "{\"nums\":[3,8,1],\"threshold\":[1,1,3]}" },

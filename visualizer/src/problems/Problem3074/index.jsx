@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with apple and capacity arrays of 1 to 6 integers (JSON)',
   url: 'https://leetcode.com/problems/apple-redistribution-into-boxes/',
   complexity: 'O(m log m) for the sort, where m is the number of boxes.',
+  question: "Find the fewest boxes needed to hold the apples, using the largest boxes first.",
+  approaches: [
+    { name: "Sort capacities descending", intuition: "Sort the box capacities from largest to smallest and add boxes until the total covers the apples.", time: "O(n log n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Two apple packs', input: '{"apple":[3,1],"capacity":[2,4,1]}' },
     { label: 'Four packs, three boxes', input: '{"apple":[7,2,5,1],"capacity":[9,6,4]}' },

@@ -3,6 +3,10 @@ import IndexedSequence from '../../components/shared/IndexedSequence'
 import { buildTrace, parseInput, code, python, phases, examples } from './algorithm'
 
 const definition = {
+  question: "Find the fewest moves to remove all palindromic subsequences from a string of two letters.",
+  approaches: [
+    { name: "Palindrome check", intuition: "The answer is 0 for an empty string, 1 for a palindrome, and otherwise 2.", time: "O(n)", space: "O(1)" },
+  ],
   number: '1332', phases, parse: parseInput, build: buildTrace, code, python, examples,
   inputLabel: 'Object with s made of a and b (JSON)',
   url: 'https://leetcode.com/problems/remove-palindromic-subsequences/',

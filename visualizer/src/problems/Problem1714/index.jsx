@@ -9,6 +9,10 @@ const definition = {
   inputLabel: 'Object with nums and queries ([start, step] pairs)',
   url: 'https://leetcode.com/problems/sum-of-special-evenly-spaced-elements-in-array/',
   complexity: 'Each query walks its stride, so one query costs O(n / step) and q queries cost O(q * n) in this direct form. The visualization caps nums at 12 values. Sums are reduced modulo 1000000007 only when stored.',
+  question: "For each query, sum the array values at indices that start at x and step by k, modulo 1e9 + 7.",
+  approaches: [
+    { name: "Direct stride walk", intuition: "Walk each query's indices and add the values.", time: "O(q * n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Mixed strides', input: '{"nums":[4,8,1,9,3,6],"queries":[[0,2],[1,3],[5,1]]}' },
     { label: 'Single element', input: '{"nums":[7],"queries":[[0,1]]}' },

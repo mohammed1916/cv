@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON object with candies and numPeople',
   url: 'https://leetcode.com/problems/distribute-candies-to-people/',
   complexity: 'O(sqrt(candies) + numPeople) time for the gifts. The visualization caps candies at 100.',
+  question: "Distribute candies to people in rounds with increasing amounts until they run out, and return each person's total.",
+  approaches: [
+    { name: "Round simulation", intuition: "Each round gives the next amount to each person in turn, with the last person getting whatever remains.", time: "O(sqrt(candies) + people)", space: "O(people)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"candies":7,"numPeople":4}' },
     { label: 'Example 2', input: '{"candies":10,"numPeople":3}' },

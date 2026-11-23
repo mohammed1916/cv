@@ -8,6 +8,10 @@ const definition = {
   inputLabel: 'Array of integers (JSON)',
   url: 'https://leetcode.com/problems/rank-transform-of-an-array/',
   complexity: 'O(n log n) time for sorting the distinct values, and O(n) space for the rank table.',
+  question: "Replace every value with its rank among the distinct values, smallest first.",
+  approaches: [
+    { name: "Sort distinct values, map ranks", intuition: "Sort the unique values and assign each its position in that order.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Distinct', input: '[4,10,20,3]' },
     { label: 'Repeats', input: '[5,5,-3,5,0]' },

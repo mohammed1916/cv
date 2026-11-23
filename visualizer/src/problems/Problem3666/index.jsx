@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with s (binary string) and k',
   url: 'https://leetcode.com/problems/minimum-operations-to-equalize-binary-string/',
   complexity: 'O(n * k) time and O(n) space with breadth-first search over zero counts. The visualization caps s at 30 characters.',
+  question: "Find the fewest operations needed to make a binary string uniform, where each operation flips a block of a given size.",
+  approaches: [
+    { name: "Breadth-first search over zero counts", intuition: "Search over zero counts, flipping blocks of size k one step at a time.", time: "O(n * k)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Three flips', input: '{"s":"0110","k":2}' },
     { label: 'Unreachable', input: '{"s":"01011","k":3}' },

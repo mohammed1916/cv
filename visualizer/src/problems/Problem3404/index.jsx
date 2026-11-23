@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Array of integers from 1 to 9, length 1 to 14 (JSON)',
   url: 'https://leetcode.com/problems/count-special-subsequences/',
   complexity: 'O(n^3) time with map lookups, and O(n) extra space per middle pair. The visualization caps input at 14 numbers.',
+  question: "Count the special subsequences of length four, where the middle values have a required relation.",
+  approaches: [
+    { name: "Pairs of middle values with maps", intuition: "For each middle pair, count the ways to pick values on each side from hash maps keyed by reduced fractions.", time: "O(n^3)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Six values with repeats', input: '[3,8,3,5,1,9]' },
     { label: 'Thirteen values', input: '[2,2,7,9,4,6,1,6,3,9,8,2,5]' },

@@ -17,6 +17,10 @@ const definition = {
   inputLabel: 'JSON object: {"mountain": [1, 4, 3, 8, 5]}',
   url: "https://leetcode.com/problems/find-the-peaks/",
   complexity: "O(n) time and O(n) space for the answer. The first and last indices are never peaks. The visualization caps input at 50 values from 1 to 100.",
+  question: "Return the indices of the peaks in a mountain array, where a peak is strictly taller than both neighbours.",
+  approaches: [
+    { name: "Single neighbour scan", intuition: "Scan the interior positions and record each index that is greater than both of its neighbours.", time: "O(n)", space: "O(answer)" },
+  ],
   examples: [
     { label: "Example 1 (from a community test, not the statement)", input: '{"mountain": [1, 4, 3, 8, 5]}' },
     { label: "Second example", input: '{"mountain": [2, 1, 2, 1, 2]}' },

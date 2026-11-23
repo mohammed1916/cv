@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON {"n": integer, "k": integer}, values 0 to 255',
   url: 'https://leetcode.com/problems/number-of-bit-changes-to-make-two-integers-equal/',
   complexity: 'O(log max(n, k)) time and O(1) extra space.',
+  question: "Find the fewest bit changes that turn one integer into another, where a change turns one set bit off.",
+  approaches: [
+    { name: "Compare bits from high to low", intuition: "Bits can only leave the first number, so a bit that the target has and the number lacks makes the goal unreachable, and otherwise each extra bit costs one.", time: "O(log max(n, k))", space: "O(1)" },
+  ],
   examples: [
     { label: 'Ten and six', input: '{"n":10,"k":6}' },
     { label: 'Thirty-seven and twelve', input: '{"n":37,"k":12}' },

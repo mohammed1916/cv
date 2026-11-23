@@ -17,6 +17,10 @@ const definition = {
   inputLabel: 'Object with start and requests as [arrival, floor] pairs, e.g. {"start":1,"requests":[[0,5],[3,2]]}',
   url: 'https://leetcode.com/problems/elevator-requests-iii/',
   complexity: 'O(2^r * r^2) time and O(2^r * r) space for r requests. The visualization caps requests at 6, floors at 20 and arrival times at 30; the official limit is 16 requests.',
+  question: "Find the earliest finish for each set of served requests and last stop, counting a request only once the elevator reaches its floor after arrival.",
+  approaches: [
+    { name: "Subset DP over last stop", intuition: "Track the earliest time for each served subset and last stop, extending one request at a time.", time: "O(2^r x r^2)", space: "O(2^r x r)" },
+  ],
   examples: [
     { label: 'Three requests', input: '{"start":1,"requests":[[0,5],[3,2],[4,4]]}' },
     { label: 'Early arrival', input: '{"start":3,"requests":[[10,1],[0,4],[2,4],[12,2]]}' },

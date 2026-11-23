@@ -13,6 +13,11 @@ const definition = {
   inputLabel: 'Object with nums (student values from 0 to n minus 1)',
   url: 'https://leetcode.com/problems/happy-students/',
   complexity: 'O(n) time with a counting array of size n + 1.',
+  question: "Count the ways to choose a group of students so that each selected student is happy with the group size.",
+  approaches: [
+    { name: "Counting sort with prefix count", intuition: "A group size k works when exactly k students have a value below k and the student with value k is not selected; count valid sizes.", time: "O(n)", space: "O(n)" },
+    { name: "Try each group size", intuition: "For each size, check the condition on the sorted values.", time: "O(n log n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Two groups', input: '{"nums":[4,4,1,0,4,2]}' },
     { label: 'Single group', input: '{"nums":[2,3,0,1,4]}' },

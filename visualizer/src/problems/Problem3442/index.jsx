@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'String of lowercase letters (JSON string, 3 to 30 letters)',
   url: 'https://leetcode.com/problems/maximum-difference-between-even-and-odd-frequency-i/',
   complexity: 'O(n + 26) time and O(1) extra space. The visualization caps input at 30 letters.',
+  question: "Find the largest difference between an odd letter frequency and an even letter frequency in a string.",
+  approaches: [
+    { name: "Count and compare", intuition: "Count every letter, then compare the largest odd count against the smallest even count.", time: "O(n + 26)", space: "O(26)" },
+  ],
   examples: [
     { label: 'Odd and even counts', input: '"xxxyzz"' },
     { label: 'Ten letters, mixed counts', input: '"pqqqqrrsss"' },

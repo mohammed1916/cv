@@ -14,6 +14,10 @@ const definition = {
   complexity,
   inputLabel: 'JSON array of grid rows: * start, # food, O free cell, X obstacle',
   url: 'https://leetcode.com/problems/shortest-path-to-get-food/',
+  question: "Find the shortest route from your position to a food cell on a grid with obstacles.",
+  approaches: [
+    { name: "Breadth-first search", intuition: "Explore the grid in rings of equal distance and stop at the first food cell.", time: "O(m * n)", space: "O(m * n)" },
+  ],
 }
 
 export default function Problem1730Visualizer() {

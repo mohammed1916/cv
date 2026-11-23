@@ -13,6 +13,11 @@ const definition = {
   inputLabel: 'JSON {"nums": [9,3,7,4,8], "limit": 2}',
   url: 'https://leetcode.com/problems/make-lexicographically-smallest-array-by-swapping-elements/',
   complexity: 'O(n log n) time for sorting and grouping, O(n) extra space. The visualization caps the array at 10 values.',
+  question: "Rearrange values by swapping elements whose values differ by at most a limit, to get the lexicographically smallest array.",
+  approaches: [
+    { name: "Sorted groups of close values", intuition: "Sort indices by value, split them into groups where neighbouring values are within the limit, and place each group's values in sorted index order.", time: "O(n log n)", space: "O(n)" },
+    { name: "Union-find over sorted neighbours", intuition: "Union neighbouring sorted values within the limit, then sort the values inside each component.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Two groups', input: '{"nums":[9,3,7,4,8],"limit":2}' },
     { label: 'One chain', input: '{"nums":[4,12,9,2],"limit":5}' },

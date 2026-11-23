@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON string of 0 and 1 characters (e.g. "10010")',
   url: 'https://leetcode.com/problems/maximum-score-after-splitting-a-string/',
   complexity: 'O(n) time and O(1) extra space: one pass moves the cut and keeps two running counts.',
+  question: "Split a binary string to maximize zeros on the left plus ones on the right.",
+  approaches: [
+    { name: "Prefix counts", intuition: "Walk the cut and keep a running count of zeros on the left and ones on the right.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Mixed', input: '"10010"' },
     { label: 'All ones', input: '"11111"' },

@@ -16,6 +16,10 @@ const definition = {
   inputLabel: 'Strings [s1, s2] (JSON, length up to 8, letters a-f)',
   url: 'https://leetcode.com/problems/k-similar-strings/',
   complexity: 'Worst case explores O(n!) strings, but fixing the first mismatch each time prunes branching to at most n per string. Capped at length 8 here.',
+  question: "Find the fewest swaps of two letters that turn string s into string t.",
+  approaches: [
+    { name: "BFS over strings", intuition: "Each step swaps two letters that fix the first mismatch; breadth-first search finds the fewest swaps.", time: "Exponential worst case, pruned by mismatches", space: "O(states)" },
+  ],
   examples: [
     { label: 'ab to ba', input: '["ab","ba"]' },
     { label: 'abc to bca', input: '["abc","bca"]' },

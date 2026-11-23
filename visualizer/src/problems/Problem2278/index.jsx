@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with "s" (string) and "letter" (one lowercase letter), JSON',
   url: 'https://leetcode.com/problems/percentage-of-letter-in-string/',
   complexity: 'O(n) time and O(1) extra space. The visualization caps s at 30 letters.',
+  question: "Return the percentage of characters in a string that equal a given letter, rounded down.",
+  approaches: [
+    { name: "Count and divide", intuition: "Count the matching letters in one pass, then compute the floored percentage.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'First letter at start', input: '{"s":"bunnybird","letter":"b"}' },
     { label: 'Absent letter', input: '{"s":"zzzz","letter":"a"}' },

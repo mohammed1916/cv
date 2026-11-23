@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Coins per node (JSON level order)',
   url: 'https://leetcode.com/problems/distribute-coins-in-binary-tree/',
   complexity: 'O(n) time and O(h) stack space. The visualization caps input at 15 nodes.',
+  question: "Each node of a binary tree holds some coins; find the fewest moves so that every node holds exactly one coin.",
+  approaches: [
+    { name: "Post-order excess flow", intuition: "Each subtree's excess is its coins minus its size; the moves through an edge equal the absolute excess of the child's subtree.", time: "O(n)", space: "O(h)" },
+  ],
   examples: [
     { label: 'Own: root with two children', input: '[1,0,2]' },
     { label: 'Own: root with one empty child', input: '[2,null,0]' },

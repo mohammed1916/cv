@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with root (level-order array of distinct values 1 to 15) and to_delete (up to 6 distinct values) (JSON)',
   url: 'https://leetcode.com/problems/delete-nodes-and-return-forest/',
   complexity: 'O(n) time for n nodes, plus O(d) for the delete set. The visualization caps the tree at 15 entries.',
+  question: "Delete the nodes with the given values from a tree and return the remaining trees as a forest.",
+  approaches: [
+    { name: "DFS with new roots", intuition: "Walk down; when a node is deleted, each of its surviving children becomes a new root.", time: "O(n)", space: "O(h + n)" },
+  ],
   examples: [
     { label: 'Delete an inner pair', input: '{"root":[9,5,12,3,7,10,15],"to_delete":[5,12]}' },
     { label: 'Delete a leaf', input: '{"root":[10,6,11,null,2,9],"to_delete":[2]}' },

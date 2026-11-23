@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with grid (JSON array of rows)',
   url: 'https://leetcode.com/problems/equal-sum-grid-partition-ii/',
   complexity: 'Polynomial in the grid size. The visualization caps the grid at 12 cells.',
+  question: "Decide whether a grid can be cut into two parts with equal sums, allowing one cell to be removed.",
+  approaches: [
+    { name: "Prefix sums with connectivity", intuition: "Use prefix sums to find cuts, then check each side is connected with a search.", time: "polynomial", space: "O(m n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"grid":[[1,4],[2,3]]}' },
     { label: 'Example 2', input: '{"grid":[[1,2],[3,4]]}' },

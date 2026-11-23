@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with words, letters and a 26-value score (JSON)',
   url: 'https://leetcode.com/problems/maximum-score-words-formed-by-letters/',
   complexity: 'O(2^w * w * 26) time for w words. The visualization caps the input at 8 words.',
+  question: "Find the maximum score of words that can be formed from the given letters, each letter used once.",
+  approaches: [
+    { name: "Backtracking over word subsets", intuition: "Try including or skipping each word while tracking the letter counts left.", time: "O(2^w x w)", space: "O(26)" },
+  ],
   examples: [
     {
       label: 'Example 1',

@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with postfix: a list of digits and operators + - * /',
   url: 'https://leetcode.com/problems/design-an-expression-tree-with-evaluate-function/',
   complexity: 'O(n) for n tokens. Each operator combines the two newest subtrees, so the stack never grows past the number of leaves.',
+  question: "Build an expression tree from a postfix token list and evaluate it.",
+  approaches: [
+    { name: "Stack of subtrees", intuition: "Push leaves; each operator pops two subtrees and makes them its children.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example', input: '{"postfix":["6","3","+","5","*","4","-"]}' },
     { label: 'Division', input: '{"postfix":["9","2","/","1","+"]}' },

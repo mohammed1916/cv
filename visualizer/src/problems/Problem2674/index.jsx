@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with values in ring order, starting at the head (e.g. {"values":[7,3,9,4,8,2]})',
   url: "https://leetcode.com/problems/split-a-circular-linked-list/",
   complexity: "O(n) time: one walk counts the nodes, a second walk of about n / 2 steps finds the cut, and a third walk closes the second list. O(1) extra space, since the nodes are rewired in place. The visualization caps the ring at 12 nodes. For a single node, the first list keeps it and the second list is reported as empty, which is the reading used here.",
+  question: "Given a circular linked list, split it into two circular lists of nearly equal length.",
+  approaches: [
+    { name: "Find the middle with two pointers", intuition: "Use a slow and fast pointer to locate the midpoint, then close each half into its own loop.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: "Even count", input: '{"values":[7,3,9,4,8,2]}' },
     { label: "Odd count", input: '{"values":[5,1,6,2,9]}' },

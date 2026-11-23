@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with nums (0/1 list), k and maxChanges',
   url: 'https://leetcode.com/problems/minimum-moves-to-pick-k-ones/',
   complexity: 'O(n^2 log n) time for the visualization; it is intended for small arrays.',
+  question: "Alice must collect k ones from a binary array by walking through it, where a limited number of moves can create new ones, and the task asks for the fewest total moves.",
+  approaches: [
+    { name: "Try each start index", intuition: "For each start, take the cheapest mix of existing ones and created ones within reach, then add up the walking cost.", time: "O(n^2 log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Invented example', input: '{"nums":[0,1,1,0,1],"k":3,"maxChanges":0}' },
     { label: 'Created ones', input: '{"nums":[0,0,0,0,0],"k":3,"maxChanges":3}' },

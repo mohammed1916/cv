@@ -5,6 +5,10 @@ import { buildTrace, parseInput, code, python, pythonLineMap, phases, inputLabel
 
 const definition = {
   number: meta.number, phases, parse: parseInput, build: buildTrace, code, python, pythonLineMap, inputLabel,
+  question: "Find the longest substring of s that can be changed into the matching substring of t within a cost budget.",
+  approaches: [
+    { name: "Sliding window on cost", intuition: "Extend the window while the total character cost stays within the budget, and shrink from the left when it does not.", time: "O(n)", space: "O(1)" },
+  ],
   url: `https://leetcode.com/problems/${meta.slug}/`, complexity, examples,
 }
 

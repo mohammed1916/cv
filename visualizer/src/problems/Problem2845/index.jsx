@@ -12,6 +12,11 @@ const definition = {
   inputLabel: 'An object with nums (1 to 10 integers 0-20), modulo (2-6) and k (below modulo)',
   url: 'https://leetcode.com/problems/count-of-interesting-subarrays/',
   complexity: 'O(n + m) time and O(m) space for modulo m. The visualization caps nums at 10 entries.',
+  question: "Count subarrays where the number of elements with a given remainder modulo m equals k, modulo m.",
+  approaches: [
+    { name: "Prefix counts modulo m", intuition: "Track the prefix count modulo m and store how many earlier prefixes had each residue, so each new prefix finds its matches in constant time.", time: "O(n + m)", space: "O(m)" },
+    { name: "Check every subarray", intuition: "Count matches inside each subarray directly.", time: "O(n^2)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Four values, modulo four', input: '{"nums":[6,1,8,3],"modulo":4,"k":2}' },
     { label: 'Five values, modulo five', input: '{"nums":[9,0,5,7,12],"modulo":5,"k":3}' },

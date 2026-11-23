@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Object with word1 and word2 (JSON)',
   url: 'https://leetcode.com/problems/determine-if-two-strings-are-close/',
   complexity: 'O(n + k log k) time, where n is the word length and k is at most 26 distinct letters; the tallies need O(1) extra space.',
+  question: "Decide whether two strings can be made equal using only swaps of letters and swaps of counts.",
+  approaches: [
+    { name: "Compare letter sets and count multisets", intuition: "Check that both strings use the same letters and the same sorted list of counts.", time: "O(n + k log k)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Close pair', input: '{"word1":"banana","word2":"aaabbn"}' },
     { label: 'Same letters, different counts', input: '{"word1":"aaab","word2":"aabb"}' },

@@ -12,6 +12,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Object with fronts and backs (JSON)',
   url: 'https://leetcode.com/problems/card-flipping-game/',
   complexity: 'O(n) time and O(n) space for the bad set.',
+  question: "Cards have a front and back number; flipping chosen cards, find the smallest positive number that is not on the face-up side of any card.",
+  approaches: [
+    { name: "Mark numbers that appear on both faces", intuition: "A number that is the same on both faces of a card can never be hidden, so collect those numbers and return the smallest other positive value.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Three cards', input: '{"fronts":[3,6,6],"backs":[6,2,9]}' },
     { label: 'Single card', input: '{"fronts": [1], "backs": [1]}' },

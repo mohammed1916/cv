@@ -15,6 +15,11 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Grid (JSON rows of arrows 1 to 4)',
   url: 'https://leetcode.com/problems/minimum-cost-to-make-at-least-one-valid-path-in-a-grid/',
   complexity: 'O(m n) time: every cell has four edges of cost 0 or 1, so a deque gives 0-1 BFS. Visualization limited to 6 by 6.',
+  question: "Find the least cost to reach the bottom-right cell of a grid where arrows can be changed at a cost.",
+  approaches: [
+    { name: "0-1 breadth-first search", intuition: "Follow arrows at cost 0 and changes at cost 1 with a deque.", time: "O(mn)", space: "O(mn)" },
+    { name: "Dijkstra", intuition: "Use a priority queue on the same cost graph.", time: "O(mn log(mn))", space: "O(mn)" },
+  ],
   examples: [
     { label: 'cost 3', input: '[[1,1,1,1],[2,2,2,2],[1,1,1,1],[2,2,2,2]]' },
     { label: 'cost 0', input: '[[1,1,3],[3,2,2],[1,1,4]]' },

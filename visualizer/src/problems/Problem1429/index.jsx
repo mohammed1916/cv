@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with ops: ["add", value] or ["first"]',
   url: 'https://leetcode.com/problems/first-unique-number/',
   complexity: 'O(1) per add and O(k) per query, where k is the number of distinct values seen. The visualization caps the input at 20 operations.',
+  question: "Support adding numbers and asking for the first value that appears exactly once.",
+  approaches: [
+    { name: "Queue with count map", intuition: "Keep a queue of candidates and a count per value, and drop values that repeat.", time: "O(1) add, O(k) query", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example', input: '{"ops":[["add",7],["first"],["add",4],["first"],["add",7],["first"],["add",9],["first"]]}' },
     { label: 'One add, one query', input: '{"ops":[["add",1],["first"]]}' },

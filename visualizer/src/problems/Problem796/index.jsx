@@ -13,6 +13,11 @@ const definition = {
   inputLabel: 's and goal (JSON object)',
   url: 'https://leetcode.com/problems/rotate-string/',
   complexity: 'O(n^2) for this direct version; checking whether goal appears inside s + s runs in O(n).',
+  question: "Decide whether goal is a rotation of string s.",
+  approaches: [
+    { name: "Try every shift", intuition: "Compare goal with every rotation of s directly.", time: "O(n^2)", space: "O(1)" },
+    { name: "Search in s + s", intuition: "Every rotation appears as a substring of s + s, so search for goal there.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Shift', input: '{"s":"lunch","goal":"chlun"}' },
     { label: 'Miss', input: '{"s":"abcde","goal":"abced"}' }, { label: 'Empty strings', input: '{"s":"","goal":""}' }, { label: 'Rotation by zero', input: '{"s":"aa","goal":"aa"}' }, { label: 'Length mismatch', input: '{"s":"abc","goal":"abcd"}' }, { label: 'Long run: 100 letters', input: '{"s":"xggvwkkprlmdogfzbmuuejxhqvggyrwtogknhqcgwsmbzpxtmyygcojghqxuzccvqfuzuvuirezzutngzryurwvoijlzeekazvmo","goal":"qcgwsmbzpxtmyygcojghqxuzccvqfuzuvuirezzutngzryurwvoijlzeekazvmoxggvwkkprlmdogfzbmuuejxhqvggyrwtogknh"}' },

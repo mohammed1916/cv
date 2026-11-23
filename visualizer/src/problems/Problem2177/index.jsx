@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'A non-negative integer, e.g. 33',
   url: 'https://leetcode.com/problems/find-three-consecutive-integers-that-sum-to-a-given-number/',
   complexity: 'O(1) time and O(1) space. The visualization accepts totals up to 1,000,000.',
+  question: "Find three consecutive integers that add up to a given number, or return an empty list if none exist.",
+  approaches: [
+    { name: "Middle value is the sum divided by three", intuition: "Three consecutive integers sum to three times the middle one, so the number must be divisible by three and the middle is num / 3.", time: "O(1)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Multiple of 3', input: '33' },
     { label: 'Not a multiple', input: '4' },

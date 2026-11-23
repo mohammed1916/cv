@@ -11,6 +11,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Image (JSON array of equal-length rows)',
   url: 'https://leetcode.com/problems/image-smoother/',
   complexity: 'O(rows × cols) time and O(rows × cols) space for the output.',
+  question: "Smooth an image by replacing each cell with the rounded-down average of its neighbourhood inside the grid.",
+  approaches: [
+    { name: "Neighbourhood sum", intuition: "Sum the three-by-three block around each cell, counting only cells inside the grid.", time: "O(mn)", space: "O(mn)" },
+  ],
   examples: [
     { label: 'Dark centre', input: '[[2,4,6],[4,0,4],[6,4,2]]' },
     { label: 'Corner', input: '[[9,9],[9,1]]' },

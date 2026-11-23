@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Graph {"n", "edges": [[a, b, p], ...], "start", "end"} (JSON)',
   url: 'https://leetcode.com/problems/path-with-maximum-probability/',
   complexity: 'O((V + E) log V) time. The visualization caps input at 6 nodes and 8 edges.',
+  question: "Find the path with the highest product of edge success probabilities from a start to an end node.",
+  approaches: [
+    { name: "Max-probability Dijkstra", intuition: "Use a max-heap and expand the most probable node, multiplying probabilities along edges.", time: "O((V + E) log V)", space: "O(V + E)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"n":3,"edges":[[0,1,0.5],[1,2,0.5],[0,2,0.2]],"start":0,"end":2}' },
     { label: 'Chain', input: '{"n":4,"edges":[[0,1,0.9],[1,3,0.9],[0,3,0.5]],"start":0,"end":3}' },

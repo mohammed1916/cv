@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with nums and k, for example {"nums":[1,2,0,3,0],"k":1}',
   url: 'https://leetcode.com/problems/make-the-xor-of-all-segments-equal-to-zero/',
   complexity: 'O(n * k * V) time with V = 8 xor states in this visualization; the full problem uses bits up to 2^10.',
+  question: "Change the fewest elements so that every segment of length k has an XOR of zero.",
+  approaches: [
+    { name: "Bit DP over XOR states", intuition: "Group positions by residue and track possible XOR values with a DP.", time: "O(n * k * V)", space: "O(k * V)" },
+  ],
   examples: [
     { label: 'Six entries, k 3', input: '{"nums":[1,0,3,3,2,0],"k":3}' },
     { label: 'Eight entries, k 4', input: '{"nums":[5,5,2,6,0,1,4,7],"k":4}' },

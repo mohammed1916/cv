@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'Object with nums (equal-length digit strings) and queries ([k, trim] pairs)',
   url: 'https://leetcode.com/problems/query-kth-smallest-trimmed-number/',
   complexity: 'O(q * n * (L + log n)) time for q queries over n numbers of length L. The visualization caps the sizes.',
+  question: "For each query, find the index of the k-th smallest number after trimming each number to its last digits.",
+  approaches: [
+    { name: "Sort per query", intuition: "For each query, trim every number, sort the trimmed strings with their indices, and read the k-th entry.", time: "O(q * n * (L + log n))", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example', input: '{"nums":["12","95","37","60"],"queries":[[1,1],[2,2],[4,1]]}' },
     { label: 'Ties', input: '{"nums":["20","11","30"],"queries":[[2,1],[1,2]]}' },

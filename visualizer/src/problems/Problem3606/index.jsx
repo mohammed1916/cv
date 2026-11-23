@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON object with code, business_line and is_active arrays of equal length (1 to 8 coupons)',
   url: 'https://leetcode.com/problems/coupon-code-validator/',
   complexity: 'O(n log n) time for n coupons. The visualization caps coupons at 8.',
+  question: "Given coupon records with codes, business lines and activity flags, return the valid coupon codes in order.",
+  approaches: [
+    { name: "Filter then sort", intuition: "Keep only coupons that pass the code and business rules, then sort the survivors by business line and code.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"code":["SAVE20","","PHARMA5","SAVE@20"],"business_line":["restaurant","grocery","pharmacy","restaurant"],"is_active":[true,true,true,true]}' },
     { label: 'Example 2', input: '{"code":["GROCERY15","ELECTRONICS_50","DISCOUNT10"],"business_line":["grocery","electronics","invalid"],"is_active":[false,true,true]}' },

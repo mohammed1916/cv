@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON object with s (binary string)',
   url: 'https://leetcode.com/problems/time-needed-to-rearrange-a-binary-string/',
   complexity: 'O(n * seconds) for the simulation; a running pass gives O(n). The visualization caps s at 30 characters.',
+  question: "Given a binary string where each second every block of 01 becomes 10, count the seconds until no 01 remains.",
+  approaches: [
+    { name: "Simulate or track running count", intuition: "Each second moves the zeros ahead by one place, so track how many seconds each zero needs.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Own: 1010110', input: '{"s":"1010110"}' },
     { label: 'Own: 0001101', input: '{"s":"0001101"}' },

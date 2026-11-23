@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON: {"nums": [...sorted], "k": k}',
   url: 'https://leetcode.com/problems/limit-occurrences-in-sorted-array/',
   complexity: 'O(n) time and O(n) extra space for the answer, or O(1) extra space when done in place.',
+  question: "Given a sorted array and a limit k, keep each value at most k times while preserving order.",
+  approaches: [
+    { name: "Single pass with a run counter", intuition: "Walk once, keeping a value only while its kept count is below k.", time: "O(n)", space: "O(n) extra, or O(1) in place" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"nums":[1,1,1,2,2,3],"k":2}' },
     { label: 'Example 2', input: '{"nums":[1,2,3],"k":1}' },

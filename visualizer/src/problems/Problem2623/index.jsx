@@ -16,6 +16,10 @@ const definition = {
   inputLabel: 'JSON object with calls: a list of argument lists (up to 3 whole numbers each)',
   url: 'https://leetcode.com/problems/memoize/',
   complexity: 'O(total argument size) per call to build keys; each distinct argument list runs fn once.',
+  question: "Memoize a function so repeated calls with the same arguments return the stored result instead of recomputing.",
+  approaches: [
+    { name: "Cache keyed by arguments", intuition: "Serialize the argument list into a key and store the result the first time it is seen.", time: "O(args) per call", space: "O(calls)" },
+  ],
   examples: [
     { label: 'Repeats', input: '{"calls":[[1,2],[1,2],[3]]}' },
     { label: 'Empty args', input: '{"calls":[[],[],[5]]}' },

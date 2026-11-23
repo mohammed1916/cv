@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with cards (two-letter strings) and x (one letter)',
   url: 'https://leetcode.com/problems/two-letter-card-game/',
   complexity: 'Tries each number of only-x cards and counts 26 letters per group, so the work is about 26 times the number of cards.',
+  question: "Decide how many pairs of cards can be formed from a two-letter card set, given the letter rules.",
+  approaches: [
+    { name: "Try the only-x counts", intuition: "Try each count of only-x cards and check the remaining letters for pairing.", time: "O(26 * n)", space: "O(26)" },
+  ],
   examples: [
     { label: 'Mixed', input: '{"cards":["ca","bc","cc","ac","cb","bb"],"x":"c"}' },
     { label: 'No partner', input: '{"cards":["ab","cd","ef"],"x":"z"}' },

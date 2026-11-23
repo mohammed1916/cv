@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with nums (0/1) and k (JSON)',
   url: 'https://leetcode.com/problems/max-consecutive-ones-iii/',
   complexity: 'O(n) time and O(1) space. The visualization caps input at 30 values.',
+  question: "Given a binary array and a budget of flips, find the longest run of ones after flipping at most that many zeros.",
+  approaches: [
+    { name: "Sliding window with zero count", intuition: "Grow the window to the right and shrink from the left whenever more zeros are inside than the budget allows.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'One flip across a gap', input: '{"nums":[1,0,0,1,1,0,1,0,0,1],"k":1}' },
     { label: 'Long run: 19 values, k three', input: '{"nums":[0,1,0,0,1,1,1,0,1,0,0,0,1,1,0,1,0,1,1],"k":3}' },

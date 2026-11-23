@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON object with nums (up to 8 whole numbers), init, and fn ("sum" or "squareSum")',
   url: 'https://leetcode.com/problems/array-reduce-transformation/',
   complexity: 'O(n) time and O(1) extra space for n elements.',
+  question: "Given an array, a reducer, and an initial value, produce the value obtained by applying the reducer across the array from left to right.",
+  approaches: [
+    { name: "Left fold loop", intuition: "Start from the initial value and apply the reducer to each element in order.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Sum', input: '{"nums":[2,5,1],"init":3}' },
     { label: 'Squares', input: '{"nums":[2,-3],"init":10,"fn":"squareSum"}' },

@@ -14,6 +14,10 @@ const definition = {
   complexity,
   inputLabel: 'Object with source, target (equal-length arrays) and allowedSwaps (position pairs)',
   url: 'https://leetcode.com/problems/minimize-hamming-distance-after-swap-operations/',
+  question: "Given allowed swaps between indices, rearrange one array to be as close as possible to a target in Hamming distance.",
+  approaches: [
+    { name: "Union-find groups", intuition: "Group indices connected by swaps, then match values to target positions within each group.", time: "O(n)", space: "O(n)" },
+  ],
 }
 
 export default function Problem1722Visualizer() {

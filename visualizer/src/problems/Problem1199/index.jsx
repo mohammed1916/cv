@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with blocks (list of times) and split (e.g. {"blocks":[1,2,3],"split":1})',
   url: 'https://leetcode.com/problems/minimum-time-to-build-blocks/',
   complexity: 'O(n log n) time and O(n) space for n blocks with a min-heap. The visualization caps the input at 8 blocks, times and split from 0 to 1000; the official bounds were not verified.',
+  question: "Find the minimum time to build blocks, where a worker can split to double its workforce at a cost.",
+  approaches: [
+    { name: "Min-heap merge", intuition: "Repeatedly merge the two smallest times with the split cost, as in Huffman coding.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Three blocks', input: '{"blocks":[1,2,3],"split":1}' },
     { label: 'Four equal blocks', input: '{"blocks":[1,1,1,1],"split":0}' },

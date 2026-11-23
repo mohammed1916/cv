@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Input JSON, e.g. {"s":"aabb","k":2}',
   url: "https://leetcode.com/problems/count-rotations-with-exactly-k-equal-adjacent-pairs/",
   complexity: "O(n^2) time and O(n) extra space: each of the n rotations is checked in O(n). The note's bounds (lowercase string of length 2 to 100, 0 <= k <= n - 1) are checked on parse; the visualization caps the string at 12 characters.",
+  question: "Count the rotations of a string whose linear text has exactly k equal neighbouring pairs.",
+  approaches: [
+    { name: "Check each rotation", intuition: "Move each prefix to the end and count equal neighbours.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: "aabb, k = 2 gives 2", input: JSON.stringify({ s: "aabb", k: 2 }) },
     { label: "abab, k = 0 gives 4", input: JSON.stringify({ s: "abab", k: 0 }) },

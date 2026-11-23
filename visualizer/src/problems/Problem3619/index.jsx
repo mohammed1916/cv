@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'JSON object with grid (values 0-9, 0 is land) and k',
   url: 'https://leetcode.com/problems/count-islands-with-total-value-divisible-by-k/',
   complexity: 'O(m * n) time and space for the flood fill. The visualization caps the grid at 8 by 8.',
+  question: "Count the islands in a grid whose total value is divisible by k.",
+  approaches: [
+    { name: "Flood fill each island", intuition: "Visit each island once with a flood fill and test its total value against k.", time: "O(m * n)", space: "O(m * n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"grid":[[1,0],[0,2]],"k":2}' },
     { label: 'Example 2', input: '{"grid":[[1,2,0],[0,3,0],[4,0,5]],"k":3}' },

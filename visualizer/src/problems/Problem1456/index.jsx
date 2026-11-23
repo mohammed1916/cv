@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Object with text and k (JSON)',
   url: 'https://leetcode.com/problems/maximum-number-of-vowels-in-a-substring-of-given-length/',
   complexity: 'O(n) time and O(1) extra space: each character enters and leaves the window once.',
+  question: "Find the largest number of vowels in any substring of a fixed length k.",
+  approaches: [
+    { name: "Fixed-size sliding window", intuition: "Add the incoming character, drop the outgoing one, and keep the best vowel count seen.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Vowel run', input: '{"text":"aeiouxyz","k":3}' },
     { label: 'Mixed', input: '{"text":"bcdfgaeb","k":2}' },

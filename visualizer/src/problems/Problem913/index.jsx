@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Graph adjacency list (JSON)',
   url: 'https://leetcode.com/problems/cat-and-mouse/',
   complexity: 'O(n^3) time and O(n^2) space for n nodes (states times moves). Graphs are capped at 16 nodes.',
+  question: "On a graph, a cat and a mouse move alternately; the mouse wins at node 0 and the cat cannot enter it. Find the winner from the start.",
+  approaches: [
+    { name: "Retrograde game analysis", intuition: "Mark terminal states, then propagate wins and losses backwards, decreasing each unresolved state's count of moves.", time: "O(n^3)", space: "O(n^2)" },
+  ],
   examples: [
     { label: 'Four-cycle graph', input: '[[1,3],[0,2],[1,3],[0,2]]' },
     { label: 'Triangle with pendant', input: '[[1,2],[0,2,3],[0,1],[1]]' },

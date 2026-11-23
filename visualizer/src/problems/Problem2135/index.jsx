@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON object with startWords and targetWords',
   url: 'https://leetcode.com/problems/count-words-obtained-after-adding-a-letter/',
   complexity: 'O(total length) time with a set of start masks; O(number of start words) space.',
+  question: "Count the target words that can be made from some start word by adding one new letter and rearranging the letters.",
+  approaches: [
+    { name: "Letter bitmask and set lookup", intuition: "Store each word as a 26-bit letter mask; a target matches when removing one of its letters gives a start mask.", time: "O(n * 26 + m * 26)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Two obtained', input: '{"startWords":["abc","de"],"targetWords":["abcd","dea","xyz","be"]}' },
     { label: 'Nothing matches', input: '{"startWords":["ab","cd"],"targetWords":["abe","xyz"]}' },

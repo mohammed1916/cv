@@ -11,6 +11,10 @@ const definition = {
   inputLabel: 'JSON object with parents and queries (e.g. {"parents":[-1,0,0,2],"queries":[[3,1],[1,3]]})',
   url: 'https://leetcode.com/problems/maximum-genetic-difference-query/',
   complexity: 'O((n + q) · B) time with a binary trie of B bits (18 for the official value bound). The visualization uses the same trie walk over a short root path.',
+  question: "For each query, find the largest value of a node's genetic value xor a given value, over the path from the root to that node.",
+  approaches: [
+    { name: "DFS with a binary trie", intuition: "Walk the tree while keeping the values on the current root path in a binary trie with counts, then answer each query greedily.", time: "O((n + q) log V)", space: "O(n log V)" },
+  ],
   examples: [
     { label: 'Branching tree', input: '{"parents":[-1,0,0,2],"queries":[[3,1],[1,3]]}' },
     { label: 'Chain', input: '{"parents":[-1,0,1,2],"queries":[[3,2],[2,0]]}' },

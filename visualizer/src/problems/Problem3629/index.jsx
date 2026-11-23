@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON array of integers from 1 to 1000000',
   url: 'https://leetcode.com/problems/minimum-jumps-to-reach-end-via-prime-teleportation/',
   complexity: 'O(n * sqrt(max value)) with trial-division primality, plus each prime bucket scanned once.',
+  question: "Find the fewest jumps from the start to the end of an array, where a prime-indexed teleport is allowed.",
+  approaches: [
+    { name: "Breadth-first search with prime buckets", intuition: "Run a breadth-first search, and when a prime value is reached, use its bucket of positions once.", time: "O(n * sqrt(max value))", space: "O(n)" },
+  ],
   examples: [
     { label: 'Five values, one small', input: '[7,1,5,3,9]' },
     { label: 'Large value first', input: '[1000000,1]' },

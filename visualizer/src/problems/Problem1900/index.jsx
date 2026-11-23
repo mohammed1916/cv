@@ -99,6 +99,10 @@ const definition = {
   inputLabel: 'Object with n (2 to 8), first and second (player numbers)',
   url: 'https://leetcode.com/problems/the-earliest-and-latest-rounds-where-players-compete/',
   complexity: 'The search tries every winner set, two choices per pair per round. The sample is capped at 8 players, so the search stays tiny.',
+  question: "For two chosen players in a knockout tournament, find the earliest and latest round in which they can meet.",
+  approaches: [
+    { name: "Enumerate outcomes of free pairs", intuition: "Tracked players always win; enumerate every win-or-lose pattern for the other pairs and record the earliest and latest meeting round.", time: "O(2^f * n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example', input: '{"n":5,"first":1,"second":3}' },
     { label: 'Pair', input: '{"n":4,"first":1,"second":4}' },

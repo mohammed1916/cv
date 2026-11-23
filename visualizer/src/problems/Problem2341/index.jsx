@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Integers 0 to 20 as a JSON array',
   url: 'https://leetcode.com/problems/maximum-number-of-pairs-in-array/',
   complexity: 'O(n) time and O(n) space.',
+  question: "Count how many pairs of equal values can be formed from an array, and how many values are left over.",
+  approaches: [
+    { name: "Frequency count", intuition: "Count each value and add half of each count to the pairs total.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Seven numbers', input: '[5,1,5,3,1,1,0]' },
     { label: 'Three equal values', input: '[4,4,4]' },

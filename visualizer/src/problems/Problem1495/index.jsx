@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with content and tv_program lists',
   url: 'https://leetcode.com/problems/friendly-movies-streamed-last-month/',
   complexity: 'O(n log n) time for sorting the airings; n is the number of airing rows.',
+  question: "List the titles of kid-friendly movies that streamed in June 2020.",
+  approaches: [
+    { name: "Filter then join", intuition: "Keep kid-friendly movies, keep the June 2020 airings, then join the two.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example', input: '{"content":[{"content_id":1,"title":"Dragon Quest","Kids_content":"Y","content_type":"Movies"},{"content_id":2,"title":"Night Shift","Kids_content":"N","content_type":"Movies"},{"content_id":3,"title":"Little Paws","Kids_content":"Y","content_type":"Series"},{"content_id":4,"title":"Ocean Tales","Kids_content":"Y","content_type":"Movies"},{"content_id":5,"title":"Late Show","Kids_content":"Y","content_type":"Movies"}],"tv_program":[{"program_date":"2020-06-02","content_id":1,"channel":"A"},{"program_date":"2020-06-02","content_id":2,"channel":"B"},{"program_date":"2020-06-10","content_id":1,"channel":"B"},{"program_date":"2020-05-31","content_id":4,"channel":"A"},{"program_date":"2020-06-15","content_id":4,"channel":"C"},{"program_date":"2020-06-20","content_id":3,"channel":"A"},{"program_date":"2020-07-01","content_id":5,"channel":"A"},{"program_date":"2020-06-30","content_id":5,"channel":"B"}]}' },
     { label: 'Single airing', input: '{"content":[{"content_id":1,"title":"Solo","Kids_content":"N","content_type":"Movies"}],"tv_program":[{"program_date":"2021-05-05","content_id":1,"channel":"C"}]}' },

@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with nums, k, op1 and op2',
   url: 'https://leetcode.com/problems/minimum-array-sum/description/',
   complexity: 'O(n * op1 * op2) states with at most four fates each. The visualization caps nums at 6 values.',
+  question: "Minimise the sum of an array after applying two limited operations to each value.",
+  approaches: [
+    { name: "Dynamic programming over operations left", intuition: "Track the minimum sum for each count of remaining operations of each kind, value by value.", time: "O(n * op1 * op2)", space: "O(op1 * op2)" },
+  ],
   examples: [
     { label: 'Invented set', input: JSON.stringify({ nums: [9, 4, 7], k: 3, op1: 1, op2: 1 }) },
     { label: 'Two halvings', input: JSON.stringify({ nums: [12, 5], k: 4, op1: 2, op2: 0 }) },

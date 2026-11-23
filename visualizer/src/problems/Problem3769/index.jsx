@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Numbers (JSON object with nums)',
   url: 'https://leetcode.com/problems/sort-integers-by-binary-reflection/',
   complexity: 'O(n log n) comparisons, each with an O(log V) reflection. The visualization caps n at 20.',
+  question: "Sort integers by the value obtained when their binary digits are reversed, breaking ties by the original value.",
+  approaches: [
+    { name: "Reflect and sort", intuition: "Compute each reflected value once per comparison, then sort by the reflection and the original value.", time: "O(n log n * log V)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"nums":[4,5,4]}' },
     { label: 'Example 2', input: '{"nums":[3,6,5,8]}' },

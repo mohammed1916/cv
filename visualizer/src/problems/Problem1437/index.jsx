@@ -10,6 +10,10 @@ const definition = {
   code,
   python,
   pythonLineMap,
+  question: "Check whether every pair of ones has at least k zeros between them.",
+  approaches: [
+    { name: "Track the last one", intuition: "Keep the position of the previous one and compare the gap.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Spaced', input: '{"nums":[1,0,0,0,1,0,0,1],"k":2}' },
     { label: 'Too close', input: '{"nums":[1,0,1],"k":2}' },

@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Bound (JSON object with n)',
   url: 'https://leetcode.com/problems/largest-prime-from-consecutive-prime-sum/',
   complexity: 'O(sqrt(n) * number of primes added) time. The visualization caps n at 500.',
+  question: "Find the largest prime that is the running sum of consecutive primes starting at 2 and not above n.",
+  approaches: [
+    { name: "Running prime sums", intuition: "Add primes in order and keep the largest running sum that is itself prime and at most n.", time: "O(sqrt(n) * primes added)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"n":20}' },
     { label: 'Example 2', input: '{"n":2}' },

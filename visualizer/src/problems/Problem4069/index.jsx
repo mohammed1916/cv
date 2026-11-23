@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with prices, costs (one fee per holding length) and cooldown',
   url: "https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-cooldown-ii/",
   complexity: "O(n^2) time and O(n) space: each sale day scans every earlier buy day. A buy and sale on the same day is never chosen here, because the holding fee is not negative. The visualization caps the timeline at 12 days; the official bounds are not verified in this draft.",
+  question: "Find the maximum profit from buying and selling a stock with a cooldown after each sale and a holding fee per day.",
+  approaches: [
+    { name: "Day-by-day state DP", intuition: "For each sale day, take the best buy that is still available after the cooldown, subtract the holding fee, and keep the best total.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: "Rising prices", input: '{"prices":[1,2,3],"costs":[0,0,0],"cooldown":0}' },
     { label: "Cooldown blocks a second trade", input: '{"prices":[1,5,2,8],"costs":[0,1,0,1],"cooldown":1}' },

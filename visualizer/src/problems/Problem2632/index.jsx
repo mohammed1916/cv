@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'JSON object with arity (1 to 4) and calls (argument lists)',
   url: 'https://leetcode.com/problems/curry/',
   complexity: 'O(total arguments) time and space for the collected list.',
+  question: "Write a curry function that collects arguments across calls until enough are supplied, then calls the original function.",
+  approaches: [
+    { name: "Accumulate arguments", intuition: "Each call returns a new function until the count of collected arguments reaches the function's arity.", time: "O(total args)", space: "O(total args)" },
+  ],
   examples: [
     { label: 'Split', input: '{"arity":3,"calls":[[1],[2,3]]}' },
     { label: 'Early', input: '{"arity":2,"calls":[[1],[2],[3]]}' },

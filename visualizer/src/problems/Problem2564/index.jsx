@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Binary string and queries as JSON: s, queries',
   url: 'https://leetcode.com/problems/substring-xor-queries/',
   complexity: 'O(n * 30) time to record substrings and O(1) per query lookup. The visualization caps s at 40 characters.',
+  question: "For each query value, find the shortest substring of s whose binary value xored with the first value equals the second.",
+  approaches: [
+    { name: "Table of short substrings", intuition: "Record the first occurrence of each short substring value, then answer each query by lookup.", time: "O(n * 30)", space: "O(n * 30)" },
+  ],
   examples: [
     { label: 'Three queries on seven bits', input: '{"s":"1100101","queries":[[0,1],[2,6],[5,5]]}' },
     { label: 'All zeros string', input: '{"s":"00000","queries":[[0,0],[3,9]]}' },

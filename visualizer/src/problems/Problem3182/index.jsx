@@ -12,6 +12,10 @@ const examples = [
   ]
 
 const definition = {
+  question: "From students, courses and enrollments tables, list the students who earned an A in every required course of their major.",
+  approaches: [
+    { name: "Required pairs then check grades", intuition: "List the required courses of each student's major, then check that each was taken and earned an A.", time: "O(s * (c + e))", space: "O(s + c + e)" },
+  ],
   number: meta.number,
   phases, parse: parseInput, build: buildTrace, code, sql, python, inputLabel,
   url: `https://leetcode.com/problems/${meta.slug}/`,

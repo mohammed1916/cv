@@ -12,6 +12,11 @@ const definition = {
   inputLabel: 'JSON {"nums": [...], "k": threshold} with values 0 to 31',
   url: 'https://leetcode.com/problems/find-the-k-or-of-an-array/',
   complexity: 'O(n * 31) time. The visualization checks bits 0 to 5 for values up to 31.',
+  question: "Compute the K-or of an array, where a bit is set if at least k numbers have it set.",
+  approaches: [
+    { name: "Count bits per position", intuition: "For each bit position, count the numbers that have it; set the bit when the count is at least k.", time: "O(n * bits)", space: "O(bits)" },
+    { name: "Build from each number", intuition: "Loop over each number's bits and accumulate counts in a single pass.", time: "O(n * bits)", space: "O(bits)" },
+  ],
   examples: [
     { label: 'Seven values, k of three', input: '{"nums":[14,3,22,9,6,17,0],"k":3}' },
     { label: 'Repeated 25, k of five', input: '{"nums":[25,12,25,3,19,8],"k":5}' },

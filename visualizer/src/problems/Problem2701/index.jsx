@@ -15,6 +15,10 @@ const examples = [{
 const reasoning = 'Within each customer, a day joins the current run only when it follows the previous transaction on the very next calendar day and its amount is strictly larger. Runs are the groups of joined days; only runs with at least three dates are returned.'
 
 const definition = {
+  question: "Given a table of transactions, find runs of at least three consecutive days where each day's amount is larger than the one before.",
+  approaches: [
+    { name: "Sort then streak scan", intuition: "Sort the rows by customer and date, then extend a streak while each amount increases.", time: "O(n log n)", space: "O(n)" },
+  ],
   number: meta.number,
   phases, parse: parseInput, build: buildTrace, code, sql, python, inputLabel,
   url: `https://leetcode.com/problems/${meta.slug}/`,

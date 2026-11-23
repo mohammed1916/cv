@@ -8,6 +8,10 @@ const definition = {
   inputLabel: 'JSON object with s (lowercase letters, up to 40)',
   url: 'https://leetcode.com/problems/maximum-deletions-on-a-string/',
   complexity: 'O(n^2) letter comparisons in this build (O(n^3) if each comparison is a substring check).',
+  question: "From a string, find the largest number of operations that delete a prefix equal to the next equal-length block.",
+  approaches: [
+    { name: "DP on matching prefixes", intuition: "Compute the longest common prefix lengths of every pair of suffixes, then use them to find the best deletion sequence.", time: "O(n^2)", space: "O(n^2)" },
+  ],
   examples: [
     { label: 'Own: zxyzxw', input: '{"s": "zxyzxw"}' },
     { label: 'Own: abba', input: '{"s": "abba"}' },

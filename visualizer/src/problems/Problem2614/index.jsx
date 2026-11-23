@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with nums: a square matrix of integers 1 to 50 (JSON)',
   url: 'https://leetcode.com/problems/prime-in-diagonal/',
   complexity: 'O(n * sqrt(V)) time, O(1) extra space. The visualization caps the matrix at 6 by 6.',
+  question: "Given a square matrix, return the largest prime found on either diagonal, or 0 if none is prime.",
+  approaches: [
+    { name: "Check diagonal values for primes", intuition: "Visit each diagonal cell and test its value for primality with trial division up to its square root.", time: "O(n * sqrt(V))", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example', input: '{"nums":[[1,2],[3,4]]}' },
     { label: 'No prime', input: '{"nums":[[4,6],[8,9]]}' },

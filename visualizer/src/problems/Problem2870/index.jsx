@@ -13,6 +13,11 @@ const definition = {
   inputLabel: 'Integers 1 to 10 as a JSON array',
   url: 'https://leetcode.com/problems/minimum-number-of-operations-to-make-array-empty/',
   complexity: 'O(n) time and O(n) space.',
+  question: "Find the fewest operations that empty an array, where each operation removes two or three equal values.",
+  approaches: [
+    { name: "Count frequencies with greedy grouping", intuition: "Each frequency c needs ceil(c/3) operations when c is at least 2, and an answer is impossible when a value appears once.", time: "O(n)", space: "O(n)" },
+    { name: "Dynamic programming over counts", intuition: "Find the cheapest split of each frequency into groups of 2 and 3.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Six values, repeated four', input: '[4,1,4,2,7,1]' },
     { label: 'Two equal values', input: '[5,5]' },

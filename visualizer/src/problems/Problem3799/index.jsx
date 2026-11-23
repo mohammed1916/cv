@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Words (JSON object with words)',
   url: 'https://leetcode.com/problems/word-squares-ii/',
   complexity: 'O(n^4) time for trying every choice of four words. The visualization caps the list at 8 words.',
+  question: "Choose four distinct words whose first and last letters meet at the four corners of a square.",
+  approaches: [
+    { name: "Try every group of four words", intuition: "Test each choice of four words against the corner rule.", time: "O(n^4)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Two squares', input: '{"words":["able","area","echo","also"]}' },
     { label: 'None', input: '{"words":["code","cafe","eden","edge"]}' },

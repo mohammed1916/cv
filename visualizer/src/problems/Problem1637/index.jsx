@@ -14,6 +14,10 @@ const definition = {
   complexity,
   inputLabel: 'Object with points: a list of [x, y] pairs',
   url: 'https://leetcode.com/problems/widest-vertical-area-between-two-points-containing-no-points/',
+  question: "Find the widest vertical strip between two points' x-values that contains no point inside it.",
+  approaches: [
+    { name: "Sort x and take gaps", intuition: "Sort the distinct x-values and take the largest gap between neighbours.", time: "O(n log n)", space: "O(n)" },
+  ],
 }
 
 export default function Problem1637Visualizer() {

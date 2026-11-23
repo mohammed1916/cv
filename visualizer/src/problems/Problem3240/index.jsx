@@ -19,6 +19,10 @@ const definition = {
   inputLabel: 'Binary grid (JSON, e.g. {"grid": [[1,0,0],[0,1,0]]})',
   url: "https://leetcode.com/problems/minimum-number-of-flips-to-make-binary-grid-palindromic-ii/",
   complexity: "O(m * n) time and O(1) extra space beyond the grid, using a 4-entry remainder table. The visualization accepts grids up to 6 by 6.",
+  question: "Find the fewest flips that make a binary grid palindromic by rows and columns together.",
+  approaches: [
+    { name: "Remainder table over cells", intuition: "Each cell belongs to a small mirror class, so a four-entry remainder table counts the flips in one pass.", time: "O(m * n)", space: "O(1)" },
+  ],
   examples: [
     { label: "2 by 3 (illustrative)", input: '{"grid": [[1,0,0],[0,1,1]]}' },
     { label: "3 by 3 (illustrative)", input: '{"grid": [[1,0,1],[0,1,0],[1,1,0]]}' },

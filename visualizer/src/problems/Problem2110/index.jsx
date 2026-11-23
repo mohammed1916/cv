@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Prices as a JSON array (e.g. [3,2,1,4])',
   url: 'https://leetcode.com/problems/number-of-smooth-descent-periods-of-a-stock/',
   complexity: 'O(n) time and O(1) extra space; the visualization keeps the run length of every day.',
+  question: "Count the contiguous periods in a price list where each day's price is exactly one less than the day before, or the period is a single day.",
+  approaches: [
+    { name: "Run length dynamic programming", intuition: "The run ending on day i extends the run ending on day i minus 1 when the price drops by exactly one; add up all run lengths.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'One long run', input: '[9,8,7,4,3]' },
     { label: 'Two runs', input: '[5,4,4,3,2]' },

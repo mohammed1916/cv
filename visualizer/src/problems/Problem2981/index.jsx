@@ -18,6 +18,11 @@ const definition = {
   inputLabel: "JSON object: {\"s\": \"...\"} (3 to 60 lowercase letters for this view)",
   url: "https://leetcode.com/problems/find-longest-special-substring-that-occurs-thrice-i/",
   complexity: "O(n) time and O(1) extra space for the 26-letter lists. The visualization caps s at 60 characters; LeetCode allows 3 to 50.",
+  question: "Find the longest substring made only of one repeated letter that occurs at least three times.",
+  approaches: [
+    { name: "Run lengths per letter", intuition: "Collect the run lengths of each letter, and take the largest length that appears in at least three runs (or three overlapping copies).", time: "O(n)", space: "O(n)" },
+    { name: "Brute force substrings", intuition: "Check every substring for being special and count occurrences.", time: "O(n^2)", space: "O(1)" },
+  ],
   examples: [
     { label: "Long run", input: "{\"s\": \"bbbbbb\"}" },
     { label: "Two runs", input: "{\"s\": \"xyzzyzz\"}" },

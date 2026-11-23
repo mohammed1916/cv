@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with s (digits) and k (JSON)',
   url: 'https://leetcode.com/problems/partition-string-into-substrings-with-values-at-most-k/',
   complexity: 'O(n^2) substring checks, each in O(n) time. The visualization caps s at 12 digits and k at 1000.',
+  question: "Split a digit string into the fewest pieces with no leading zeros, where each piece's value is at most k.",
+  approaches: [
+    { name: "Dynamic programming over substrings", intuition: "Let each prefix's best split depend on the valid last pieces that end there.", time: "O(n^2) checks", space: "O(n)" },
+  ],
   examples: [
     { label: 'Digits with a zero', input: '{"s":"8054","k":17}' },
     { label: 'Repeated digits, larger k', input: '{"s":"11223","k":44}' },

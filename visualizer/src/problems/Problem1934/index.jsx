@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with Signups (user_id, time_stamp) and Confirmations (user_id, time_stamp, action)',
   url: 'https://leetcode.com/problems/confirmation-rate/',
   complexity: 'O(s + c) for s signups and c confirmation events, using one grouping pass and one lookup per signup.',
+  question: "Compute each user's confirmation rate, the share of their requests that were confirmed, with users who made no requests counted as zero.",
+  approaches: [
+    { name: "Left join then average", intuition: "Left join users to confirmations, count confirmed actions, and average per user.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Sample', input: sampleText },
     { label: 'One user, one timeout', input: '{"Signups":[{"user_id":1,"time_stamp":"2026-01-01 09:00:00"}],"Confirmations":[{"user_id":1,"time_stamp":"2026-01-01 09:01:00","action":"timeout"}]}' },

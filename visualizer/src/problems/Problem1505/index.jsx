@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with num (a string of 1 to 8 digits) and k (0 to 20)',
   url: 'https://leetcode.com/problems/minimum-possible-integer-after-at-most-k-adjacent-swaps-on-digits/',
   complexity: 'O(n * k) time for the visualization, where the window of each position is at most k digits.',
+  question: "Make the smallest number reachable from a digit string using at most k adjacent swaps.",
+  approaches: [
+    { name: "Greedy smallest reachable digit", intuition: "At each position pick the smallest digit within the remaining swap budget and bring it forward.", time: "O(n * k)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Four digits, four moves', input: '{"num":"8136","k":4}' },
     { label: 'Three digits, one move', input: '{"num":"907","k":1}' },

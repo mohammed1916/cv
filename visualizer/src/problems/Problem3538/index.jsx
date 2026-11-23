@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with l, n, k, position and time (JSON)',
   url: 'https://leetcode.com/problems/merge-operations-for-minimum-travel-time/',
   complexity: 'O(n^3 * k) time for the state table. The visualization caps n at 12.',
+  question: "Merge adjacent operations on a road of travel times to minimize the total travel time.",
+  approaches: [
+    { name: "DP over sign states", intuition: "Track the best road cost for each previous sign, current sign and merge count.", time: "O(n^3 k)", space: "O(n^2 k)" },
+  ],
   examples: [
     { label: 'Own: four stops', input: '{"l":12,"n":4,"k":1,"position":[0,4,7,12],"time":[6,2,9,4]}' },
     { label: 'Own: three stops, k 0', input: '{"l":9,"n":3,"k":0,"position":[0,2,9],"time":[3,5,4]}' },

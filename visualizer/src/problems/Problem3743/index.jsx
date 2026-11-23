@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON object with nums and k, for example {"nums":[1,2,3,3],"k":2}',
   url: 'https://leetcode.com/problems/maximize-cyclic-partition-score/',
   complexity: 'O(n^4) time for the dynamic programme over n starts. The visualization caps the array at 8 values.',
+  question: "Cut a circular array at one point, split the line into at most k pieces, and maximise the total of the piece ranges.",
+  approaches: [
+    { name: "Try each start cut with a split DP", intuition: "Fix the starting cut, then run a dynamic programme over splits of the resulting line.", time: "O(n^4)", space: "O(n^3)" },
+  ],
   examples: [
     { label: 'Four values, k two', input: '{"nums":[2,7,1,8],"k":2}' },
     { label: 'Largest value alone', input: '{"nums":[1000000000],"k":1}' },

@@ -11,6 +11,10 @@ const definition = {
   inputLabel: 'Object with nums1 and nums2 (equal-length integer arrays)',
   url: 'https://leetcode.com/problems/find-the-integer-added-to-array-i/',
   complexity: 'O(n) time to find the two minimums.',
+  question: "Find the integer that, added to every value of one array, makes it match the other array as a multiset.",
+  approaches: [
+    { name: "Compare the two minimums", intuition: "The smallest value of the first array plus the shift must be the smallest value of the second, so the shift is their difference.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Four mixed-sign pairs', input: '{"nums1":[-4,12,9,0],"nums2":[2,-7,15,3]}' },
     { label: 'Single negative pair', input: '{"nums1":[-300],"nums2":[450]}' },

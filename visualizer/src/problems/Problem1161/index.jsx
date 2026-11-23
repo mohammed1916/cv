@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'JSON object with values: level-order array (null = missing)',
   url: 'https://leetcode.com/problems/maximum-level-sum-of-a-binary-tree/',
   complexity: 'O(n) time and O(w) space for the widest level. The visualization caps input at 15 entries.',
+  question: "Find the level of a binary tree whose node values have the largest sum, with the smallest level number winning ties.",
+  approaches: [
+    { name: "Level-order sums", intuition: "Process the tree breadth-first, add each level's values, and keep the first level with the greatest sum.", time: "O(n)", space: "O(w)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"values":[1,7,0,7,-8,null,null]}' },
     { label: 'Example 2', input: '{"values":[989,null,10250,98693,-89388,null,null,null,-32127]}' },

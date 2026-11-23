@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Grid of 0s and 1s as a list of rows, JSON',
   url: 'https://leetcode.com/problems/right-triangles/',
   complexity: 'O(rows times cols) time and space. The visualization caps the grid at 6 by 6.',
+  question: "Count right triangles that can be formed from 1s in a binary grid, where the right angle sits at a 1.",
+  approaches: [
+    { name: "Corner counting by row and column", intuition: "Each corner contributes the other 1s in its row times the other 1s in its column.", time: "O(rows * cols)", space: "O(rows * cols)" },
+  ],
   examples: [
     { label: 'Three rows, four columns', input: '[[1,1,0,1],[0,1,1,1],[1,0,1,0]]' },
     { label: 'Two columns', input: '[[0,1],[1,1],[1,0]]' },

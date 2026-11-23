@@ -7,6 +7,10 @@ const definition = {
   phases, parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'Values (JSON array of integers)',
   complexity: 'O(n log n) time for the sort and O(n log 10) time to count bits, with O(n) extra space.',
+  question: "Sort integers by how many one-bits they contain, breaking ties by value.",
+  approaches: [
+    { name: "Popcount comparator sort", intuition: "Count the one-bits of each number and sort with a comparator.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Sample', input: '[0,1,2,3,4,5,6,7,8]' },
     { label: 'Powers', input: '[512,256,1,2,768]' },

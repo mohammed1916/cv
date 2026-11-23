@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON object with a grid of integers',
   url: 'https://leetcode.com/problems/difference-of-number-of-distinct-values-on-diagonals/',
   complexity: 'O(mn * min(m, n)) time from walking each diagonal. The visualization caps the grid at 6 by 6.',
+  question: "Given a grid, compute for each cell the absolute difference between distinct values on its two diagonals.",
+  approaches: [
+    { name: "Walk each diagonal", intuition: "For each cell, count distinct values on the upper-left and lower-right diagonals.", time: "O(mn * min(m, n))", space: "O(min(m, n))" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"grid":[[1,2,3],[3,1,5],[3,2,1]]}' },
     { label: 'Single cell', input: '{"grid":[[1]]}' },

@@ -14,6 +14,11 @@ const definition = {
   inputLabel: 'Tree with n nodes and n-1 directed edges (JSON object)',
   url: 'https://leetcode.com/problems/minimum-edge-reversals-so-every-node-is-reachable/',
   complexity: 'O(n) time and O(n) space. The visualization caps the tree at 12 nodes.',
+  question: "For each node in a tree with directed edges, find the fewest edge reversals needed to reach every other node from it.",
+  approaches: [
+    { name: "Rerooting dynamic programming", intuition: "Count reversals for the root, then update each child's answer by adding or subtracting one for the edge between them.", time: "O(n)", space: "O(n)" },
+    { name: "Search from each node", intuition: "Run a traversal from every node counting reversed edges.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Two nodes', input: '{"n":2,"edges":[[0,1]]}' },
     { label: 'Star', input: '{"n":4,"edges":[[2,0],[2,1],[1,3]]}' },

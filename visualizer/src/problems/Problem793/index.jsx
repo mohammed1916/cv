@@ -14,6 +14,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Integer k (JSON)',
   url: 'https://leetcode.com/problems/preimage-size-of-factorial-zeroes-function/',
   complexity: 'O(log^2 k) time: about log k binary search steps, each counting zeros in O(log x).',
+  question: "Given k, count the non-negative integers x whose factorial ends with exactly k zeros.",
+  approaches: [
+    { name: "Binary search on the factorial", intuition: "The trailing-zero count of x! never decreases, so binary search the smallest x with count at least k and with count at least k+1.", time: "O(log^2 k)", space: "O(1)" },
+  ],
   examples: [
     { label: 'k = 0 (answer 5)', input: '0' },
     { label: 'k = 5 (answer 0)', input: '5' },

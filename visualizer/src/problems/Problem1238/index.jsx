@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'n and start with 0 at most start < 2^n (JSON object)',
   url: 'https://leetcode.com/problems/circular-permutation-in-binary-representation/',
   complexity: 'O(2^n) time and space. The visualization caps n at 6.',
+  question: "Produce a circular ordering of all n-bit numbers where neighbours differ by one bit.",
+  approaches: [
+    { name: "Gray code", intuition: "Use the binary-reflected Gray code, rotated to start at the given value.", time: "O(2^n)", space: "O(2^n)" },
+  ],
   examples: [
     { label: 'Two bits', input: '{"n":2,"start":3}' },
     { label: 'Three bits', input: '{"n":3,"start":2}' },

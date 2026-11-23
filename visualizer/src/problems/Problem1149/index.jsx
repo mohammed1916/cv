@@ -4,6 +4,10 @@ import { buildTrace, parseInput, code, sql, python, phases, inputLabel, complexi
 import { meta } from './meta'
 
 const definition = {
+  question: "Find users who viewed more than one article on the same day.",
+  approaches: [
+    { name: "Join and group in SQL", intuition: "Group views by user and day, count distinct articles, and keep the groups above one.", time: "O(n)", space: "O(n)" },
+  ],
   number: meta.number,
   phases,
   parse: parseInput,

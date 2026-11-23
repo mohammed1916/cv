@@ -4,6 +4,10 @@ import RecordStateTable from '../../components/shared/RecordStateTable'
 import { buildTrace, parseInput, code, python, pythonLineMap, examples } from './algorithm'
 
 const definition = {
+  question: "Apply a discount to every nth customer's bill in a shop checkout.",
+  approaches: [
+    { name: "Order counter", intuition: "Count orders and apply the discount when the count reaches n.", time: "O(|products|) per bill", space: "O(P)" },
+  ],
   phases: [
     { id: 'setup', label: 'Setup', description: 'Store the price table and start the customer counter.' },
     { id: 'bill', label: 'Bill', description: 'Price each order and apply the discount on every nth customer.' },

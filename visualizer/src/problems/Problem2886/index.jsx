@@ -8,6 +8,11 @@ const definition = {
   inputLabel: 'Object with students (student_id, name, age, grade)',
   url: 'https://leetcode.com/problems/change-data-type/',
   complexity: 'O(n) time for n rows, since every grade is converted once. The visualization shows up to 12 students.',
+  question: "Convert a grade column of text values into whole numbers by dropping any fractional part, in a table of students.",
+  approaches: [
+    { name: "Column type conversion", intuition: "Cast the whole column to integers in one step, which truncates the decimal part.", time: "O(n)", space: "O(n)" },
+    { name: "Row-by-row parse", intuition: "Parse each value, keep the integer part, and write it back.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Whole grades', input: '{"students":[{"student_id":31,"name":"Noor","age":12,"grade":64.0},{"student_id":32,"name":"Theo","age":14,"grade":91.0},{"student_id":33,"name":"Priya","age":13,"grade":58.0}]}' },
     { label: 'Fractions are cut', input: '{"students":[{"student_id":7,"name":"Ines","age":16,"grade":79.9},{"student_id":8,"name":"Omar","age":15,"grade":0.5}]}' },

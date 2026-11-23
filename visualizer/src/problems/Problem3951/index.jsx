@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with bulbs, brightness and intervals ([start, end] pairs)',
   url: 'https://leetcode.com/problems/minimum-energy-to-maintain-brightness/',
   complexity: 'O(k log k) for k intervals after sorting; the visual caps the line at 12 bulbs and 8 intervals.',
+  question: "Along a line of bulbs, each active bulb lights itself and its neighbours; choose bulbs so every requested time is covered at minimum energy.",
+  approaches: [
+    { name: "Merge intervals, then charge once", intuition: "Sort the requested intervals, merge overlaps, and charge the cost once per distinct covered time.", time: "O(k log k)", space: "O(k)" },
+  ],
   examples: [
     { label: 'Two blocks', input: '{"bulbs":6,"brightness":3,"intervals":[[0,2],[5,6]]}' },
     { label: 'Overlap', input: '{"bulbs":8,"brightness":5,"intervals":[[1,4],[3,6],[10,10]]}' },

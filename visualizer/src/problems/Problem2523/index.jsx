@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with left and right (JSON), 1 <= left <= right <= 1000',
   url: 'https://leetcode.com/problems/closest-prime-numbers-in-range/',
   complexity: 'O(R sqrt(R)) time with trial division. The visualization caps the range at 1000.',
+  question: "Find the pair of primes in a range whose difference is smallest.",
+  approaches: [
+    { name: "Trial division scan", intuition: "Test each number in the range for primality and keep the closest consecutive pair.", time: "O(R sqrt(R))", space: "O(R)" },
+  ],
   examples: [
     { label: 'Two-digit span', input: '{"left":14,"right":31}' },
     { label: 'Range near one hundred', input: '{"left":100,"right":104}' },

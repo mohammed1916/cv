@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'Object with s and p (p has exactly two *)',
   url: 'https://leetcode.com/problems/shortest-matching-substring/',
   complexity: 'O(n * n) time in this scan. The visualization caps s at 20 characters.',
+  question: "Find the shortest substring of a text that matches a pattern with its wildcard parts filled in.",
+  approaches: [
+    { name: "Try each start", intuition: "From each start position, extend the match and keep the shortest success.", time: "O(n^2)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example', input: '{"s":"abcbc","p":"a*bc*"}' },
     { label: 'No match', input: '{"s":"xyz","p":"a*b*c"}' },

@@ -11,6 +11,10 @@ const definition = {
   inputLabel: 'JSON string of lowercase letters',
   url: 'https://leetcode.com/problems/lexicographically-smallest-string-after-reverse/',
   complexity: 'O(n^2) time in this direct version, which builds all 2n candidates.',
+  question: "Find the lexicographically smallest string obtainable by reversing prefixes of a string.",
+  approaches: [
+    { name: "Build all candidates", intuition: "Build all candidate strings from the allowed reversals and take the smallest.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example', input: '"gfec"' },
     { label: 'Reverse', input: '"mkj"' },

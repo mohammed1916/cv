@@ -42,6 +42,10 @@ const definition = {
   inputLabel: 'Object with employees and performance_reviews lists (one review per date for each employee)',
   url: 'https://leetcode.com/problems/find-consistently-improving-employees/description/',
   complexity: 'O(r log r) time for r reviews in this trace, dominated by sorting each employee’s reviews by date.',
+  question: "Find employees whose three most recent performance reviews all have ratings that keep improving, and report them in order.",
+  approaches: [
+    { name: "Group, sort, and check", intuition: "Group reviews by employee, keep the latest three by date, and accept only strictly rising ratings.", time: "O(r log r)", space: "O(r)" },
+  ],
   examples: [
     {
       label: 'Sample',

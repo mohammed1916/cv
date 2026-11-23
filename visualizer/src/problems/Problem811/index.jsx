@@ -13,6 +13,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Array cpdomains (JSON)',
   url: 'https://leetcode.com/problems/subdomain-visit-count/',
   complexity: 'O(total characters) time with a hash map of at most (entries * labels) keys.',
+  question: "Given count-prefixed domain visits, return the visit count for every domain and each of its parent subdomains.",
+  approaches: [
+    { name: "Suffix count map", intuition: "Split each domain at its dots and add the count to every suffix in a hash map.", time: "O(total length)", space: "O(total length)" },
+  ],
   examples: [
     { label: 'Count with three labels', input: '["301 gmail.com.uk"]' },
     { label: 'Overlapping domains', input: '["42 mail.zed.net","17 zed.net","6 ops.mail.zed.net"]' },

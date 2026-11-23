@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Number of boxes n (1 to 1000000000)',
   url: 'https://leetcode.com/problems/building-boxes/',
   complexity: 'O(cbrt(n)) time for the pyramid search and O(sqrt(n)) for the leftover floor boxes, O(1) extra space.',
+  question: "Stack boxes in a corner room to maximise the count with the fewest floor boxes.",
+  approaches: [
+    { name: "Pyramid then floor", intuition: "Find the largest full pyramid within n boxes, then add the floor boxes that remain.", time: "O(cbrt(n) + sqrt(n))", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '3' },
     { label: 'Example 2', input: '4' },

@@ -18,6 +18,10 @@ const definition = {
   inputLabel: 'Array of values (e.g. [1,2,2,1])',
   url: 'https://leetcode.com/problems/count-integers-appearing-in-a-single-block/',
   complexity: 'O(n) time and O(d) space for n values with d distinct values. The visualization caps the array at 20 values; the official limit is 100.',
+  question: "Count the values whose copies sit together in a single run.",
+  approaches: [
+    { name: "Run starts", intuition: "Mark each place where a value starts a new run; values that start exactly one run count.", time: "O(n)", space: "O(d)" },
+  ],
   examples: [
     { label: 'Mixed blocks', input: '[1,2,2,1,3,3,3,4]' },
     { label: 'Split value', input: '[5,5,6,5]' },

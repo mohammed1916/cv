@@ -14,6 +14,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Bookings (JSON array of [start, end))',
   url: 'https://leetcode.com/problems/my-calendar-iii/',
   complexity: 'O(n log n) per booking for this sweep; a lazy segment tree gives O(log n) per booking.',
+  question: "Track the maximum number of concurrent bookings after each booking is added.",
+  approaches: [
+    { name: "Difference map sweep", intuition: "Record +1 at each start and -1 at each end; the largest running total is the maximum overlap.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Growing overlap', input: '[[10,20],[50,60],[10,40],[5,15],[5,10],[25,55]]' },
     { label: 'Single booking', input: '[[1,2]]' },

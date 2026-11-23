@@ -13,6 +13,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Pattern (JSON string of (, ) and *)',
   url: 'https://leetcode.com/problems/valid-parenthesis-string/',
   complexity: 'O(n) time and O(1) extra space for the two counters.',
+  question: "Decide whether a string with brackets and wildcard stars can be read as a valid bracket sequence.",
+  approaches: [
+    { name: "Range of open brackets", intuition: "Track the minimum and maximum possible count of open brackets as each character is read.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Star closes', input: '"(*)"' },
     { label: 'Extra close', input: '"*)(*"' },

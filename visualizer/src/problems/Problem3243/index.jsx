@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with n and queries of [u, v] (JSON)',
   url: 'https://leetcode.com/problems/shortest-distance-after-road-addition-queries-i/',
   complexity: 'O(q * (n + q)) time and O(n + q) space. The visualization caps n at 12 and queries at 8.',
+  question: "After each road is added, find the shortest path distance from city 0 to the last city when roads only point forward.",
+  approaches: [
+    { name: "Breadth-first search per query", intuition: "Each query runs a breadth-first search over all roads added so far.", time: "O(q * (n + q))", space: "O(n + q)" },
+  ],
   examples: [
     { label: 'Six cities, three queries', input: '{"n":7,"queries":[[0,4],[2,6],[1,5]]}' },
     { label: 'Two roads', input: '{"n":4,"queries":[[0,3],[1,3]]}' },

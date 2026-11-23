@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with time, a list of song durations (JSON)',
   url: 'https://leetcode.com/problems/pairs-of-songs-with-total-durations-divisible-by-60/',
   complexity: 'O(n) time and O(1) auxiliary space, because there are always exactly sixty buckets.',
+  question: "Count pairs of song durations whose total is a multiple of 60.",
+  approaches: [
+    { name: "Remainder buckets", intuition: "Bucket durations by remainder mod 60; a remainder r pairs with 60 minus r, and remainders 0 and 30 pair with themselves.", time: "O(n)", space: "O(1)" },
+  ],
   examples: authoredExamples,
 }
 

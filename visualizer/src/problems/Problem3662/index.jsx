@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with s and k (e.g. {"s":"aabbc","k":2})',
   url: 'https://leetcode.com/problems/filter-characters-by-frequency/',
   complexity: 'O(n) time and O(1) extra space for a string of n lowercase letters, since there are at most 26 letters. The visualization caps s at 20 characters and k at 10; the official bounds are not verified here.',
+  question: "Keep only the characters whose frequency meets the stated rule, and return the filtered string.",
+  approaches: [
+    { name: "Count then filter", intuition: "Count letter frequencies, then keep characters whose frequency passes the rule in order.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Keep the rare letters', input: '{"s":"aabbc","k":2}' },
     { label: 'Everything survives', input: '{"s":"abcabc","k":3}' },

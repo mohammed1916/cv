@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON array of 1 to 8 integers',
   url: 'https://leetcode.com/problems/partition-array-for-maximum-xor-and-and/',
   complexity: 'Up to 3^n states in the worst case. Equal states merge, and the official limit is n <= 19.',
+  question: "Partition an array into two parts to maximize the XOR and AND combination of the parts.",
+  approaches: [
+    { name: "Memoised partition states", intuition: "Explore partition states with memoisation, merging states that repeat.", time: "up to 3^n", space: "O(3^n)" },
+  ],
   examples: [
     { label: 'Huge and tiny values', input: '[1000000000,1,5]' },
     { label: 'Pairs of equal values', input: '[3,3,8,8]' },

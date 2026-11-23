@@ -11,6 +11,10 @@ const definition = {
   inputLabel: 'JSON array of milestone counts (e.g. [4,1,1])',
   url: 'https://leetcode.com/problems/maximum-number-of-weeks-for-which-you-can-work/',
   complexity: 'O(n) time and O(1) extra space for the sum and maximum.',
+  question: "Find the maximum number of weeks you can work on projects with a given number of milestones each, without working on two milestones of a row in one week.",
+  approaches: [
+    { name: "Greedy formula", intuition: "The largest project caps the weeks; if it outnumbers the rest by more than one, add rest plus one, otherwise add everything.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Capped by the largest', input: '[4,1,1]' },
     { label: 'Balanced', input: '[1,2,3]' },

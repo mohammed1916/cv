@@ -18,6 +18,10 @@ const definition = {
   inputLabel: 'Object with d (digit 0 to 9), low and high (1 <= low <= high)',
   url: 'https://leetcode.com/problems/digit-count-in-range/description/',
   complexity: 'O(log high) time and O(1) extra space: one pass over the decimal places of each bound. The visualization caps high at 99999; the official numeric bounds are not verified.',
+  question: "Count how many times each digit from 0 to 9 appears across all numbers in a range.",
+  approaches: [
+    { name: "Digit-position counting", intuition: "For each decimal place, count each digit from the full cycles and the remainder of the bounds.", time: "O(log high)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Digit 3 from 20 to 40', input: '{"d":3,"low":20,"high":40}' },
     { label: 'Zeros up to 105', input: '{"d":0,"low":1,"high":105}' },

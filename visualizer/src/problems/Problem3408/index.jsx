@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'JSON {"operations": [add | edit | rmv | execTop], "arguments": [...]}',
   url: 'https://leetcode.com/problems/design-task-manager/',
   complexity: 'O(log n) per add, edit, or execTop with a max heap and lazy deletion. The visualization caps input at 12 operations.',
+  question: "Design a task manager that adds, edits and runs the highest-priority task.",
+  approaches: [
+    { name: "Max heap with lazy deletion", intuition: "Keep the tasks in a max heap by priority and skip stale entries when running the top task.", time: "O(log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example', input: '{"operations":["add","add","add","add","edit","execTop","rmv","add","execTop"],"arguments":[[1,101,10],[2,102,20],[3,103,15],[4,104,5],[102,8],[],[101],[5,105,15],[]]}' },
     { label: 'Single task runs', input: '{"operations":["add","execTop"],"arguments":[[1,1,0],[]]}' },

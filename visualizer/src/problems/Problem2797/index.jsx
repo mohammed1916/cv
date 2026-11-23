@@ -14,6 +14,11 @@ const definition = {
   inputLabel: 'JSON {"bound": [1, "_", 3], "call": [2]}',
   url: 'https://leetcode.com/problems/partial-function-with-placeholders/',
   complexity: 'O(b + c) time for b bound values and c call arguments, with a fresh list for every call.',
+  question: "Create a function that calls the original with some arguments fixed and the rest supplied later, with placeholder slots filled in order.",
+  approaches: [
+    { name: "Merge bound values with new arguments", intuition: "On each call, walk the bound list, filling placeholders from the new arguments and appending the remainder.", time: "O(b + c) per call", space: "O(b + c)" },
+    { name: "Pre-split placeholder positions", intuition: "Record placeholder indexes once so each call only copies values into fixed slots.", time: "O(b + c) per call", space: "O(b)" },
+  ],
   examples: [
     { label: 'Two holes, one extra', input: '{"bound":[1,"_",3,"_"],"call":[2,4,5]}' },
     { label: 'Leading hole', input: '{"bound":["_","x"],"call":[9]}' },

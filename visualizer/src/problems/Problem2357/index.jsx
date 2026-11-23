@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with nums (non-negative integers)',
   url: 'https://leetcode.com/problems/make-array-zero-by-subtracting-equal-amounts/',
   complexity: 'O(n) time and O(n) space with a set of positive values.',
+  question: "Find the fewest operations to make all values zero, where each operation subtracts the same positive amount from every positive value.",
+  approaches: [
+    { name: "Count distinct positive values", intuition: "Each distinct positive value needs one operation, so count the distinct positive values.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Own: four values with zero', input: '{"nums":[2,8,0,6]}' },
     { label: 'All zero', input: '{"nums":[0,0,0]}' },

@@ -17,6 +17,10 @@ const definition = {
   inputLabel: 'Object with nums (a permutation of 0 to n-1)',
   url: 'https://leetcode.com/problems/find-the-minimum-cost-array-permutation/',
   complexity: 'O(2^n * n^2) time and O(2^n * n) space with a bitmask table. The visualization caps n at 8; the official limit is 14.',
+  question: "Find the minimum cost of a cyclic permutation of indices, where each step uses the value at the next index.",
+  approaches: [
+    { name: "Bitmask dynamic programming", intuition: "Track which positions are used and the last one chosen, and build the cheapest cycle over those states.", time: "O(2^n * n^2)", space: "O(2^n * n)" },
+  ],
   examples: [
     { label: 'Four values', input: '{"nums":[2,0,3,1]}' },
     { label: 'Reversed', input: '{"nums":[3,2,1,0]}' },

@@ -12,6 +12,10 @@ const examples = [
   ]
 
 const definition = {
+  question: "From email and text tables, list the users who verified on the day after signing up.",
+  approaches: [
+    { name: "Map emails to signups", intuition: "Attach each text to its signup, check the day gap, and list each qualifying user once.", time: "O(n + m)", space: "O(n)" },
+  ],
   number: meta.number,
   phases, parse: parseInput, build: buildTrace, code, sql, python, inputLabel,
   url: `https://leetcode.com/problems/${meta.slug}/`,

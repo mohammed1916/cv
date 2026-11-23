@@ -10,6 +10,11 @@ const definition = {
   inputLabel: 'Object with weather: rows of city, month and temperature',
   url: 'https://leetcode.com/problems/reshape-data-pivot/',
   complexity: 'O(r + m log m + c log c) time and O(m × c) space for r rows, m months and c cities. The visualization caps weather at 30 rows.',
+  question: "Reshape long rows of month, city and value into a table with one row per month and one column per city.",
+  approaches: [
+    { name: "Build an empty grid then fill", intuition: "Collect the sorted months and cities, create a blank table, and fill each cell from the rows.", time: "O(r + m log m + c log c)", space: "O(m c)" },
+    { name: "Pivot operation", intuition: "Use a pivot that uses month as rows and city as columns.", time: "O(r log r)", space: "O(m c)" },
+  ],
   examples: [
     { label: 'Three months, two cities', input: JSON.stringify({ weather: [
       row('Oslo', 'June', 16), row('Oslo', 'July', 18), row('Oslo', 'August', 17),

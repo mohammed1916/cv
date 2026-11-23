@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'JSON object: {"packages": [...], "boxes": [[...], ...]}',
   url: 'https://leetcode.com/problems/minimum-space-wasted-from-packaging/',
   complexity: 'Sort packages once, then each box is one binary search over the packages. The visualization caps input at 6 packages and 3 suppliers.',
+  question: "Choose one supplier and a box size for every package so that the total unused space in the boxes is as small as possible.",
+  approaches: [
+    { name: "Sort and binary search per supplier", intuition: "Sort packages and boxes, then for each supplier binary-search the smallest box that fits each group of packages using prefix sums.", time: "O(s * (n log m))", space: "O(n)" },
+  ],
   examples: [
     { label: 'Two suppliers, three packages', input: '{"packages":[2,3,5],"boxes":[[4,8],[6]]}' },
     { label: 'Four packages, two suppliers', input: '{"packages":[5,7,9,15],"boxes":[[8,12],[6,20,10]]}' },

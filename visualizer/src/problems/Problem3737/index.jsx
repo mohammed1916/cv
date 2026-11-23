@@ -12,6 +12,11 @@ const definition = {
   inputLabel: 'An object with nums (1 to 12 integers from 0 to 3) and target (0 to 3)',
   url: 'https://leetcode.com/problems/count-subarrays-with-majority-element-i/',
   complexity: 'O(n^2) time for this visualization. The visualization caps input at 12 numbers.',
+  question: "Count subarrays in which the target value appears more than half the time.",
+  approaches: [
+    { name: "Prefix balance pairs", intuition: "Map the target to +1 and every other value to -1, then count pairs of prefix sums whose difference is positive.", time: "O(n^2)", space: "O(n)" },
+    { name: "Prefix balance with a counting structure", intuition: "Keep counts of earlier prefix balances so each new prefix is matched in logarithmic time.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Five values, target three', input: '{"nums":[0,2,3,1,3],"target":3}' },
     { label: 'Example 2', input: '{"nums":[1,1,1,1],"target":2}' },

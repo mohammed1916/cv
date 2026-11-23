@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Integer array of length 3 to 30 (JSON)',
   url: 'https://leetcode.com/problems/sum-of-beauty-in-the-array/',
   complexity: 'O(n) time with prefix maxima and suffix minima.',
+  question: "Sum the beauty of each middle element of an array, where an element is beautiful if it is larger than all values to its left and smaller than all values to its right.",
+  approaches: [
+    { name: "Prefix maximum and suffix minimum", intuition: "Precompute prefix maxima and suffix minima, then check the two conditions at each index.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Global beauty', input: '[1,2,5,3,6]' },
     { label: 'Increasing', input: '[1,2,3,4]' },

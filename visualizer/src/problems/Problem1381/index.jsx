@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'Object with max_size and operations such as ["push", 3] (JSON)',
   url: 'https://leetcode.com/problems/design-a-stack-with-increment-operation/',
   complexity: 'O(1) per operation, using one lazy add per stack slot.',
+  question: "Design a stack that can add a value to the bottom k items in one operation.",
+  approaches: [
+    { name: "Lazy increment per slot", intuition: "Store pending increments on each slot and apply them when popping.", time: "O(1) per operation", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"max_size":3,"operations":[["push",1],["push",2],["pop"],["push",2],["push",3],["push",4],["increment",5,100],["increment",2,100],["pop"],["pop"],["pop"],["pop"]]}' },
     { label: "Pop on empty stack", input: "{\"max_size\":1,\"operations\":[[\"pop\"]]}" },

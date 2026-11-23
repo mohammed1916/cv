@@ -13,6 +13,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Target string (JSON string of lowercase letters)',
   url: 'https://leetcode.com/problems/strange-printer/',
   complexity: 'O(n³) time and O(n²) space for the interval table.',
+  question: "Find the fewest turns a printer needs to print a string where each turn lays one colour over a span.",
+  approaches: [
+    { name: "Interval DP", intuition: "Merge equal endpoints into the same turn and combine the best splits of each sub-span.", time: "O(n^3)", space: "O(n^2)" },
+  ],
   examples: [
     { label: 'Interleaved', input: '"abcab"' },
     { label: 'Mirror', input: '"xyzyx"' },

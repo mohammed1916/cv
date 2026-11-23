@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with points (distinct pairs, -10 to 10) and s (one letter per point) (JSON)',
   url: 'https://leetcode.com/problems/maximum-points-inside-the-square/',
   complexity: 'O(n log n) for the sort. The visualization caps input at 8 points.',
+  question: "Find the largest number of points that fit strictly inside a square centred at the origin with sides parallel to the axes.",
+  approaches: [
+    { name: "Grow the square by distance rings", intuition: "Sort points by distance, then take whole rings of equal distance while the square stays valid.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"points":[[-2,-2],[0,0]],"s":"ab"}' },
     { label: 'Four points on diagonals', input: '{"points":[[7,7],[-7,-7],[7,-7],[-7,7]],"s":"wxyz"}' },

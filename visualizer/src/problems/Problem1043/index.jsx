@@ -10,6 +10,10 @@ const definition = {
   inputLabel: 'Object with arr and k (JSON), such as {"arr":[4,1,7,2],"k":2}',
   url: 'https://leetcode.com/problems/partition-array-for-maximum-sum/',
   complexity: 'O(n * k) time and O(n) space: each prefix tries every block length up to k.',
+  question: "Split an array into contiguous pieces of length at most k, replacing each piece by its maximum times its length, to maximise the total.",
+  approaches: [
+    { name: "DP over prefixes", intuition: "For each prefix, try every length of the last piece up to k and add that piece's maximum times its length.", time: "O(n * k)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Mixed blocks', input: '{"arr":[4,1,7,2],"k":2}' },
     { label: 'Peak inside', input: '{"arr":[1,9,2,8,3],"k":3}' },

@@ -11,6 +11,10 @@ const definition = {
   inputLabel: 'Object with value and ms',
   url: 'https://leetcode.com/problems/delay-the-resolution-of-each-promise/',
   complexity: 'O(1) work plus one timer of ms milliseconds.',
+  question: "Given a value and a delay, return a promise that resolves to that value only after the delay has passed.",
+  approaches: [
+    { name: "Timer-backed promise", intuition: "Create a promise whose resolve is called from a timer set for the delay.", time: "O(1) plus the delay", space: "O(1)" },
+  ],
   examples: [
     { label: 'Short delay', input: '{"value":"ready","ms":40}' },
     { label: 'Number', input: '{"value":42,"ms":120}' },

@@ -8,6 +8,10 @@ const definition = {
   inputLabel: 'String of X and O (JSON)',
   url: 'https://leetcode.com/problems/minimum-moves-to-convert-string/',
   complexity: 'O(n) time: each move skips three positions.',
+  question: "Find the minimum number of moves to convert a string so that no three consecutive characters are 'X'.",
+  approaches: [
+    { name: "Greedy skip", intuition: "Scan from the left; when an X starts a block of three, convert it and skip the next two characters.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Scattered', input: '{"s":"XOXOXOX"}' },
     { label: 'Two blocks', input: '{"s":"XXXOXXX"}' },

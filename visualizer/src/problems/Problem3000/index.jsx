@@ -16,6 +16,10 @@ const definition = {
   inputLabel: "JSON object: {\"dimensions\": [[length,width],...]} (1 to 50 rectangles for this view)",
   url: "https://leetcode.com/problems/maximum-area-of-longest-diagonal-rectangle/",
   complexity: "O(n) time and O(1) extra space. The visualization caps input at 50 rectangles; LeetCode allows up to 100.",
+  question: "Find the rectangle with the longest diagonal, breaking ties by the larger area.",
+  approaches: [
+    { name: "Single scan with tie rule", intuition: "Compare squared diagonal lengths and then areas across the rectangles in one pass.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: "Longest diagonal wins", input: "{\"dimensions\": [[5, 12], [9, 2], [7, 6]]}" },
     { label: "Tie broken by area", input: "{\"dimensions\": [[2, 8], [8, 2], [6, 4]]}" },

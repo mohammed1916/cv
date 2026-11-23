@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'Object with start, n and m (e.g. {"start":5,"n":4,"m":3})',
   url: 'https://leetcode.com/problems/maximum-value-of-an-alternating-sequence/',
   complexity: 'O(n) time and O(1) extra space with the simulation shown; the answer is also a closed form. The visualization caps n at 12.',
+  question: "Zigzag up and down from a start value, climbing as far as each up move allows and dropping by the smallest amount on down moves; find the highest value.",
+  approaches: [
+    { name: "Greedy zigzag simulation", intuition: "Simulate the up and down moves greedily, climbing as far as allowed and dropping minimally.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Four steps', input: '{"start":5,"n":4,"m":3}' },
     { label: 'Single element', input: '{"start":20,"n":1,"m":9}' },

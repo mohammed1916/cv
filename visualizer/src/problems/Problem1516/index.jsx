@@ -21,6 +21,10 @@ const definition = {
   inputLabel: 'Object with root (val and children), p and q (e.g. {"root":{"val":1,"children":[]},"p":1,"q":1})',
   url: 'https://leetcode.com/problems/move-sub-tree-of-n-ary-tree/',
   complexity: 'O(n) time and O(h) extra space for n nodes, where h is the height, found by walking the tree once to locate parents and to test the subtree. The visualization caps the tree at 20 nodes.',
+  question: "Move one node and its subtree so that it becomes a child of another node.",
+  approaches: [
+    { name: "Relink parent pointers", intuition: "Check whether the target lies in the moving subtree, then detach and reattach the node.", time: "O(n)", space: "O(h)" },
+  ],
   examples: [
     { label: 'Lift the target first', input: '{"root":{"val":1,"children":[{"val":2,"children":[{"val":3,"children":[{"val":4,"children":[]}]}]},{"val":5,"children":[]}]},"p":2,"q":3}' },
     { label: 'Target outside the subtree', input: '{"root":{"val":1,"children":[{"val":2,"children":[{"val":4,"children":[]}]},{"val":3,"children":[]}]},"p":4,"q":3}' },

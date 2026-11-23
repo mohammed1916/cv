@@ -12,6 +12,11 @@ const definition = {
   inputLabel: 'JSON array with an even number of integers, e.g. [3,2,3,2,2,2]',
   url: 'https://leetcode.com/problems/divide-array-into-equal-pairs/',
   complexity: 'O(n) time and O(n) space for the counts. The page caps the array at 16 values from 1 to 9.',
+  question: "Decide whether an array can be split into pairs of equal values.",
+  approaches: [
+    { name: "Count parity per value", intuition: "Every value must occur an even number of times, so count occurrences and check each count.", time: "O(n)", space: "O(n)" },
+    { name: "Sort and pair neighbours", intuition: "Sort the array and check that each neighbouring pair matches.", time: "O(n log n)", space: "O(1) extra" },
+  ],
   examples: [
     { label: 'Even counts', input: '[3,2,3,2,2,2]' },
     { label: 'All distinct', input: '[1,2,3,4]' },

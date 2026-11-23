@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with nums and x (e.g. {"nums":[1,2,3,4],"x":3})',
   url: 'https://leetcode.com/problems/valid-subarrays-with-matching-sum-digits-i/',
   complexity: 'O(n^2) time for this direct scan, with O(1) extra space. The visual caps the array at 12 values.',
+  question: "Count subarrays whose sum's first and last digits both equal a target digit.",
+  approaches: [
+    { name: "Direct scan", intuition: "Grow each subarray from every start, read the first and last digits of its sum, and count matches.", time: "O(n^2)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Small values', input: '{"nums":[1,2,3,4],"x":3}' },
     { label: 'Repeated digit', input: '{"nums":[5,5,10,1],"x":5}' },

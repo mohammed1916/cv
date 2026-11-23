@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Grid (JSON array of 0/1 rows)',
   url: 'https://leetcode.com/problems/making-a-large-island/',
   complexity: 'O(n^2) time and O(n^2) space for n by n grids.',
+  question: "Change at most one 0 cell to 1 so the largest possible island is formed; return that island's size.",
+  approaches: [
+    { name: "Label islands then merge", intuition: "Flood fill and label each island with its size; each 0 cell's value is 1 plus the distinct island sizes around it.", time: "O(n^2)", space: "O(n^2)" },
+  ],
   examples: [
     { label: 'Bridge', input: '[[1,0,1],[0,0,0],[1,0,1]]' },
     { label: 'Solid', input: '[[1,1],[1,1]]' },

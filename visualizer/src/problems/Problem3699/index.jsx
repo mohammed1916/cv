@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with n, l and r (JSON), for example {"n":3,"l":1,"r":3}',
   url: 'https://leetcode.com/problems/number-of-zigzag-arrays-i/',
   complexity: 'O(n * (r - l)) time and O(r - l) space with prefix sums. The visualization caps n and r at 12.',
+  question: "Count zigzag arrays of a given length with values in a range.",
+  approaches: [
+    { name: "Prefix sums over values", intuition: "Extend the array one position at a time, using prefix sums over the values in the range.", time: "O(n * (r - l))", space: "O(r - l)" },
+  ],
   examples: [
     { label: 'Five nodes, middle window', input: '{"n":5,"l":2,"r":4}' },
     { label: 'Three nodes, widest window', input: '{"n":3,"l":1,"r":3}' },

@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with rolls (values 1 to k) and k (1 to 4)',
   url: 'https://leetcode.com/problems/shortest-impossible-sequence-of-rolls/',
   complexity: 'O(n) time with a set of at most k faces. The visualization caps input at 10 rolls.',
+  question: "Find the length of the shortest sequence of die rolls that cannot be formed as a subsequence of the given rolls.",
+  approaches: [
+    { name: "Greedy collect segments", intuition: "Scan the rolls and close a segment each time every face has appeared; the next unseen face is the answer.", time: "O(n)", space: "O(k)" },
+  ],
   examples: [
     { label: 'Six rolls, k 3', input: '{"rolls":[1,3,2,3,1,2],"k":3}' },
     { label: 'Eight rolls, k 4', input: '{"rolls":[4,4,1,2,1,3,2,4],"k":4}' },

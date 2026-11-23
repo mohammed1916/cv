@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with price, tastiness, maxAmount and maxCoupons',
   url: 'https://leetcode.com/problems/maximize-total-tastiness-of-purchased-fruits/',
   complexity: 'O(n * maxAmount * maxCoupons) time and O(maxAmount * maxCoupons) space with a rolling table. The visualization caps the input at 8 fruits, 3 coupons and money 24.',
+  question: "Choose fruits that fit a budget and at most a given number of coupons to maximise total tastiness.",
+  approaches: [
+    { name: "Knapsack with coupon dimension", intuition: "Run a knapsack over money and coupons used, adding each fruit at its price or its discounted price.", time: "O(n * maxAmount * maxCoupons)", space: "O(maxAmount * maxCoupons)" },
+  ],
   examples: [
     { label: 'Two coupons', input: '{"price":[10,6,8,4],"tastiness":[5,8,3,2],"maxAmount":12,"maxCoupons":2}' },
     { label: 'No coupons', input: '{"price":[7,3],"tastiness":[4,9],"maxAmount":8,"maxCoupons":0}' },

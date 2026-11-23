@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with grid, row, col and color (JSON)',
   url: 'https://leetcode.com/problems/coloring-a-border/',
   complexity: 'O(R * C) time and space for a grid of R rows and C columns.',
+  question: "Recolour the border cells of the connected component containing a given cell.",
+  approaches: [
+    { name: "DFS for component and border", intuition: "Explore the same-colour region; a cell is border when it touches the grid edge or a different colour.", time: "O(R * C)", space: "O(R * C)" },
+  ],
   examples: [
     { label: 'Corner cell recolored', input: '{"grid":[[1,1,3],[2,1,1],[1,3,2]],"row":0,"col":2,"color":5}' },
     { label: 'Recolor to zero', input: '{"grid":[[0,1,1,2],[1,1,2,2],[2,0,1,1]],"row":1,"col":3,"color":0}' },

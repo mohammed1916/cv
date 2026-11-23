@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with skill and mana arrays',
   url: 'https://leetcode.com/problems/find-the-minimum-amount-of-time-to-brew-potions/',
   complexity: 'O(n * m) time and O(n + m) space for n wizards and m potions.',
+  question: "Find the minimum time to brew each potion across wizards whose skill and mana rules create a chain of waits.",
+  approaches: [
+    { name: "Prefix-sum recurrence", intuition: "Use prefix sums of skill to compute each potion's start time from the previous one.", time: "O(n m)", space: "O(n + m)" },
+  ],
   examples: [
     { label: 'Example', input: '{"skill":[2,3,1],"mana":[4,2]}' },
     { label: 'One potion', input: '{"skill":[3,1],"mana":[2]}' },

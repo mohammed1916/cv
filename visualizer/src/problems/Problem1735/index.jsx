@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Queries (JSON object with queries as [n, k] pairs)',
   url: 'https://leetcode.com/problems/count-ways-to-make-array-with-product/',
   complexity: 'O(q * sqrt(k) + table size) time for q queries. The visualization caps n at 6 and k at 20.',
+  question: "Count the arrays of n positive integers whose product equals k, for several queries.",
+  approaches: [
+    { name: "Prime factors and stars and bars", intuition: "Factor k into prime powers and count the distributions with stars and bars.", time: "O(q * sqrt(k) + table)", space: "O(table)" },
+  ],
   examples: [
     { label: 'Two queries', input: '{"queries":[[2,6],[5,1]]}' },
     { label: 'Three queries', input: '{"queries":[[2,6],[5,1],[3,4]]}' },

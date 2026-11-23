@@ -16,6 +16,11 @@ const definition = {
   inputLabel: 'JSON array of 1 to 12 integers from 1 to 1000',
   url: 'https://leetcode.com/problems/find-the-maximum-number-of-elements-in-subset/',
   complexity: 'O(n) expected time with a hash map. Each chain climbs only while values keep appearing twice.',
+  question: "Find the largest subset that can be arranged in a power-chain pattern like x, x^2, x^4, and so on.",
+  approaches: [
+    { name: "Frequency chains", intuition: "For each base value, walk its square chain while counts exist, and use odd counts for the peak.", time: "O(n log log n)", space: "O(n)" },
+    { name: "Brute force bases", intuition: "Try every base value and walk its chain directly.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '[4,4,16,2]' },
     { label: 'Example 2', input: '[6,1,1,1,2]' },

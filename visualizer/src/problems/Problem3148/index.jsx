@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'JSON grid of integers from 1 to 100, up to 6 by 6, at least two cells',
   url: 'https://leetcode.com/problems/maximum-difference-score-in-a-grid/',
   complexity: 'O(m * n) time and space.',
+  question: "Find the maximum score of a path in a grid, where the score is the last cell's value minus the first cell's value.",
+  approaches: [
+    { name: "Prefix minimum over regions", intuition: "For each cell, the best start is the smallest value seen over the region up to that cell, so one pass suffices.", time: "O(mn)", space: "O(mn)" },
+  ],
   examples: [
     { label: 'Three by two grid', input: '[[3,9],[8,1],[7,7]]' },
     { label: 'Two by four grid', input: '[[12,30,4,2],[5,5,1,9]]' },

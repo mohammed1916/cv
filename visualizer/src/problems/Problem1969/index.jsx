@@ -11,6 +11,10 @@ const definition = {
   inputLabel: 'Bit width p (1 to 5)',
   url: 'https://leetcode.com/problems/minimum-non-zero-product-of-the-array-elements/',
   complexity: 'O(2^p) to list the pairs for the visualization and O(p) multiplications for the power. The official bound is p up to 60.',
+  question: "Pick values from an array of integers in a fixed range to minimise the product of all values, after any number of swaps of matching bits.",
+  approaches: [
+    { name: "Pair with complement", intuition: "Pair each value with its complement; each pair becomes one number one lower and the complement, and fast exponentiation gives the product.", time: "O(log p)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Two bits', input: '2' },
     { label: 'Three bits', input: '3' },

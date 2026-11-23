@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'JSON object with n, red_edges and blue_edges (directed pairs)',
   url: 'https://leetcode.com/problems/shortest-path-with-alternating-colors/',
   complexity: 'O(n + e) time over the 2n colour states. The visualization caps the graph at 10 nodes.',
+  question: "Find the shortest path from node 0 to every node whose edges alternate between red and blue.",
+  approaches: [
+    { name: "BFS over colour states", intuition: "Each node paired with the colour of the last edge is a state; BFS finds the shortest alternating paths.", time: "O(n + e)", space: "O(n + e)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"n":3,"red_edges":[[0,1],[1,2]],"blue_edges":[]}' },
     { label: 'Example 2', input: '{"n":3,"red_edges":[[0,1]],"blue_edges":[[1,2]]}' },

@@ -11,6 +11,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Binary string (JSON string of 0 and 1)',
   url: 'https://leetcode.com/problems/count-binary-substrings/',
   complexity: 'O(n) time and O(number of runs) space.',
+  question: "Count substrings made of one block of zeros followed by one block of ones, or the reverse, with equal lengths.",
+  approaches: [
+    { name: "Adjacent run lengths", intuition: "Group the string into runs and count the overlap between each pair of neighbouring runs.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Mixed runs', input: '"0011100"' },
     { label: 'Long runs', input: '"000111"' },

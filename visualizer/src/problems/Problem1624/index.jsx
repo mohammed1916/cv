@@ -8,6 +8,10 @@ const definition = {
   inputLabel: 'Object with s, a lowercase string (JSON)',
   url: 'https://leetcode.com/problems/largest-substring-between-two-equal-characters/',
   complexity: 'O(n) time and O(1) extra space for a fixed 26-letter alphabet: one pass that stores each first position.',
+  question: "Find the longest substring that lies strictly between two equal letters, or report -1 when no letter repeats.",
+  approaches: [
+    { name: "Record first positions", intuition: "Remember where each letter first appeared and measure to each later match.", time: "O(n)", space: "O(1) for 26 letters" },
+  ],
   examples: [
     { label: 'Repeat with gap', input: '{"s":"mnopqmrs"}' },
     { label: 'No repeat', input: '{"s":"abcd"}' },

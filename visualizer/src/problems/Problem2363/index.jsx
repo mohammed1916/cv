@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Two item lists as JSON: {"items1": [[value, weight], ...], "items2": [...]}',
   url: 'https://leetcode.com/problems/merge-similar-items/',
   complexity: 'O((n + m) log(n + m)) time for the final sort, with O(n + m) space for the totals. The visualization caps each list at 10 items.',
+  question: "Merge two lists of items with weights and values, summing values for equal weights, and return the merged list sorted by weight.",
+  approaches: [
+    { name: "Hash totals then sort", intuition: "Add the values for each weight into a map, then sort the keys.", time: "O((n + m) log(n + m))", space: "O(n + m)" },
+  ],
   examples: [
     { label: 'Two items each', input: '{"items1":[[3,2],[6,4]],"items2":[[5,7],[3,1]]}' },
     { label: 'Own: two items each side', input: '{"items1":[[4,2],[7,1]],"items2":[[7,3],[4,5]]}' },

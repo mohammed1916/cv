@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'Asteroids (JSON object with an asteroids array)',
   url: 'https://leetcode.com/problems/asteroid-collision/',
   complexity: 'O(n) time and O(n) space: each asteroid is pushed and popped at most once.',
+  question: "Find which asteroids survive when neighbouring pairs moving in opposite directions collide.",
+  approaches: [
+    { name: "Stack of moving asteroids", intuition: "Keep a stack of right-moving asteroids and resolve each collision against the top.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Chain', input: '{"asteroids":[6,-3,-4,5,-9]}' },
     { label: 'Equal', input: '{"asteroids":[7,-7,-2,3]}' },

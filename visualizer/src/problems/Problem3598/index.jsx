@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with words (JSON array of strings)',
   url: 'https://leetcode.com/problems/longest-common-prefix-between-adjacent-strings-after-removals/',
   complexity: 'O(total length) time with prefix and suffix maxima. The visualization caps the list at 8 words.',
+  question: "For a list of words, find the longest common prefix between each adjacent pair after one word is removed.",
+  approaches: [
+    { name: "Prefix and suffix maxima", intuition: "Precompute prefix and suffix maxima of adjacent pair lengths so each removal is read in constant time.", time: "O(total length)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"words":["jump","run","run","jump","run"]}' },
     { label: 'Example 2', input: '{"words":["dog","racer","car"]}' },

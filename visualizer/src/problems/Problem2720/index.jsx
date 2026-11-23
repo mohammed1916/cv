@@ -15,6 +15,10 @@ const examples = [{
 const reasoning = 'A friendship counts for both people, so each row adds one to each user. The denominator in this teaching version is the number of distinct users named in the table. User 1 has three friends out of six users, which is 50 percent.'
 
 const definition = {
+  question: "Given a friendship table, find the popularity percentage of each user, the share of other users who are friends with them.",
+  approaches: [
+    { name: "Count friendships per user", intuition: "Count each user's friends and divide by the number of other users.", time: "O(n log n)", space: "O(n)" },
+  ],
   number: meta.number,
   phases, parse: parseInput, build: buildTrace, code, sql, python, inputLabel,
   url: `https://leetcode.com/problems/${meta.slug}/`,

@@ -17,6 +17,10 @@ const definition = {
   inputLabel: 'JSON: {"colors": [0,1,0,0,1]}',
   url: "https://leetcode.com/problems/alternating-groups-i/",
   complexity: "O(n) time and O(1) extra space for n tiles on the circle. The visualization caps n at 100.",
+  question: "Count alternating groups of tiles on a circle, where a group is a run of tiles whose neighbouring colours differ.",
+  approaches: [
+    { name: "Circular scan of colour changes", intuition: "Walk around the circle once and count the windows where every neighbouring pair differs.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: "Example 1", input: '{"colors":[1,1,1]}' },
     { label: "Example 2", input: '{"colors":[0,1,0,0,1]}' },

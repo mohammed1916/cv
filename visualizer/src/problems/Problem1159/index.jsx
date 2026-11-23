@@ -13,6 +13,10 @@ const definition = {
   python,
   inputLabel,
   complexity,
+  question: "Report, for each seller, whether the second item they sold was bought by a user who also bought their favourite brand.",
+  approaches: [
+    { name: "Per-seller ordering", intuition: "Rank each seller's orders by date and check the second one against the seller's recorded favourite brand.", time: "O(O log O)", space: "O(O)" },
+  ],
   examples,
 }
 

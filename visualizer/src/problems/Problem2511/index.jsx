@@ -17,6 +17,10 @@ const definition = {
   inputLabel: 'Forts object (JSON, e.g. {"forts": [1, 0, 0, -1]})',
   url: 'https://leetcode.com/problems/maximum-enemy-forts-that-can-be-captured/',
   complexity: 'O(n) time and O(1) space for n forts. The visualization caps the array at 1000 positions.',
+  question: "Find the most enemy forts that can be captured by moving from one of your forts across empty cells to an empty target.",
+  approaches: [
+    { name: "Scan gaps between own forts", intuition: "Scan left to right and count the enemy forts between two of your forts with only empty cells between them.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Capture three forts', input: '{"forts": [1,0,0,0,-1,0,1,0,-1]}' },
     { label: 'Same owner first', input: '{"forts": [1,0,0,1,0,-1]}' },

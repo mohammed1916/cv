@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Words (JSON object with s)',
   url: 'https://leetcode.com/problems/reverse-words-with-same-vowel-count/',
   complexity: 'O(n) time and O(n) space, where n is the length of s. The visualization caps input at 80 characters.',
+  question: "Reverse each word whose vowel count matches the first word, keeping the rest unchanged.",
+  approaches: [
+    { name: "Count vowels per word", intuition: "Compare each later word's vowel count with the first word and reverse the matches.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"s":"cat and mice"}' },
     { label: 'Second word', input: '{"s":"book is nice"}' },

@@ -8,6 +8,10 @@ const definition = {
   inputLabel: 'List of node values in order (e.g. [1,2,3])',
   url: 'https://leetcode.com/problems/print-immutable-linked-list-in-reverse/description/',
   complexity: 'O(n) time and O(n) stack space for n nodes; each node is printed once. The visualization caps the list at 12 nodes; the draft does not state an exact official bound. The list is read only through getNext and printValue.',
+  question: "Print the values of an immutable linked list in reverse, using only the given accessor methods.",
+  approaches: [
+    { name: "Stack then unwind", intuition: "Walk the list forward and push each node, then print the stack from the top.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Three nodes', input: '[1,2,3]' },
     { label: 'Single node', input: '[9]' },

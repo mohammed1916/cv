@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with nums (JSON)',
   url: 'https://leetcode.com/problems/minimum-number-of-removals-to-make-mountain-array/',
   complexity: 'O(n^2) time and O(n) space. The visualization caps n at 12.',
+  question: "Remove the fewest elements so that the rest forms a mountain: strictly rising, then strictly falling.",
+  approaches: [
+    { name: "Rising and falling runs", intuition: "For each peak, combine the longest rising run ending there with the longest falling run starting there.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"nums":[1,3,1]}' },
     { label: 'Example 2', input: '{"nums":[2,1,1,5,6,2,3,1]}' },

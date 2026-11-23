@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with n, edges (pairs), and three distinct targets x, y, z',
   url: 'https://leetcode.com/problems/pythagorean-distance-nodes-in-a-tree/',
   complexity: 'O(n) time: three breadth-first searches and one pass over the nodes.',
+  question: "Find whether the distances from three marked nodes to a node satisfy a Pythagorean-style condition.",
+  approaches: [
+    { name: "Three breadth-first searches", intuition: "Measure every node's distance to the three marked nodes, then test the sorted triple.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Star', input: '{"n":5,"edges":[[0,1],[0,2],[0,3],[3,4]],"x":1,"y":2,"z":4}' },
     { label: 'Path', input: '{"n":5,"edges":[[4,0],[0,1],[1,2],[2,3]],"x":4,"y":3,"z":2}' },

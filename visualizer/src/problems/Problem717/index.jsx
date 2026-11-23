@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Bits (JSON array of 0 and 1)',
   url: 'https://leetcode.com/problems/1-bit-and-2-bit-characters/',
   complexity: 'O(n) time and O(1) extra space.',
+  question: "Decide whether the last bit of a binary sequence must be a one-bit character.",
+  approaches: [
+    { name: "Scan skipping two-bit pairs", intuition: "Walk the bits, skipping two bits on each leading one; the last character is a single bit if it lands on the final index.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Ends alone', input: '[1,1,0,0]' },
     { label: 'Pair ends', input: '[0,1,1,0]' },

@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with nums (even length) and k (JSON)',
   url: 'https://leetcode.com/problems/minimum-array-changes-to-make-differences-equal/',
   complexity: 'O(k * n) time and O(1) extra space. The visualization caps n at 8 and k at 6.',
+  question: "Find the fewest changes so that every mirrored pair has the same gap, where each change can move one element within a limit.",
+  approaches: [
+    { name: "Common target gap", intuition: "Each pair is judged against one target difference, costing zero, one or two changes.", time: "O(k * n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"nums":[0,1,2,3],"k":3}' },
     { label: 'Example 2', input: '{"nums":[1,0,3,0],"k":3}' },

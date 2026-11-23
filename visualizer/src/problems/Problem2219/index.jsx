@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Integer array as JSON (e.g. [4,3,-2,5])',
   url: 'https://leetcode.com/problems/maximum-sum-score-of-array/',
   complexity: 'O(n) time and O(1) extra space. The visualization caps the array at 12 values with magnitude up to 100.',
+  question: "Find the largest sum score over all positions, where the score at a position is the larger of its prefix sum and its suffix sum.",
+  approaches: [
+    { name: "Prefix and suffix sums", intuition: "Build prefix and suffix sums and take the larger of the two at each index.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Mixed signs', input: '[2,-5,4,1]' },
     { label: 'Two values', input: '[6,-6]' },

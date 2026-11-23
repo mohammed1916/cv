@@ -12,6 +12,11 @@ const definition = {
   inputLabel: 'List of integers from 1 to 9999, JSON',
   url: 'https://leetcode.com/problems/max-pair-sum-in-an-array/',
   complexity: 'O(n times d) time for n values with d digits, and O(10) extra space. The visualization caps input at 12 values.',
+  question: "Find the largest sum of two numbers that have the same largest digit, or return -1 if none exists.",
+  approaches: [
+    { name: "Track the best number per largest digit", intuition: "Group numbers by their largest digit and keep the largest value per group; the pair sum is the best two in a group.", time: "O(n d)", space: "O(10)" },
+    { name: "Compare all pairs", intuition: "Check each pair's largest digits and keep the best sum.", time: "O(n^2 d)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Six values, mixed sizes', input: '[88,31,7,52,9,64]' },
     { label: 'Example 2', input: '[1,2,3,4]' },

@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with order and friends',
   url: 'https://leetcode.com/problems/restore-finishing-order/',
   complexity: 'O(n) time and O(n) space for one pass over the finishing order. The visualization caps order at 12 participants.',
+  question: "Restore the finishing order of participants, given the original order and the friends in it.",
+  approaches: [
+    { name: "Single pass with marks", intuition: "Walk the finishing order once and keep friends in the order they appear.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example', input: '{"order":[5,3,1,4,2],"friends":[2,4]}' },
     { label: 'Single friend', input: '{"order":[3,1,2],"friends":[2]}' },

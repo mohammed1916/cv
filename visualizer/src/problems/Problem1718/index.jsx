@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with integer n (JSON)',
   url: 'https://leetcode.com/problems/construct-the-lexicographically-largest-valid-sequence/',
   complexity: 'Backtracking with pruning. The visualization caps n at 10.',
+  question: "Build the lexicographically largest sequence where 1 appears once, each value from 2 to n appears twice, and the two copies of i are i apart.",
+  approaches: [
+    { name: "Backtracking with pruning", intuition: "Place the largest values first, backtracking when a position cannot be filled.", time: "exponential, pruned", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"n":3}' },
     { label: 'Example 2', input: '{"n":4}' },

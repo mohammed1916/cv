@@ -14,6 +14,11 @@ const definition = {
   inputLabel: 'Object with grid (rows of "." and "#") and d',
   url: 'https://leetcode.com/problems/count-routes-to-climb-a-rectangular-grid/',
   complexity: 'O(rows * cols) time per run with prefix sums, and O(cols) extra space per row. The official limit is 750 by 750 with d up to 750; the visualization caps the grid at 8 by 8 and keeps d up to 750.',
+  question: "Count the routes that climb a grid of dot cells, moving to nearby cells and never making two sideways moves in a row.",
+  approaches: [
+    { name: "Row-by-row dynamic programme with prefix sums", intuition: "Count routes row by row, using prefix sums to add reachable columns in range.", time: "O(rows * cols)", space: "O(cols)" },
+    { name: "Cell-by-cell dynamic programme", intuition: "Add the counts from each reachable cell directly.", time: "O(rows * cols * d)", space: "O(rows * cols)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"grid":["..."],"d":2}' },
     { label: 'Example 2', input: '{"grid":["..","..","#."],"d":1}' },

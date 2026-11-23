@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'List of [studentId, score] records (e.g. [[1,91],[1,92],...])',
   url: 'https://leetcode.com/problems/high-five/',
   complexity: 'O(n log k) time and O(n) space for n records, with k = 5 scores kept per student. The visualization caps the input at 30 records, 6 students, and integer scores from 0 to 1000; the official numeric bounds were not verified.',
+  question: "For each student, compute the average of their five highest scores, rounded down.",
+  approaches: [
+    { name: "Bucket and keep top five", intuition: "Group scores by student, keep only the five highest per student, and average them.", time: "O(n log k)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Two students', input: '[[1,91],[1,92],[2,93],[2,97],[1,60],[2,77],[1,95],[1,88],[2,100],[2,95],[1,70],[2,80],[1,99],[2,88]]' },
     { label: 'Exactly five records', input: '[[1,10],[1,20],[1,30],[1,40],[1,50],[2,1],[2,1],[2,1],[2,1],[2,1]]' },

@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with nums (1 to 30 values, 0 to 255) and k (1 to 255), e.g. {"nums":[1,2,3],"k":2}',
   url: 'https://leetcode.com/problems/shortest-subarray-with-or-at-least-k-i/',
   complexity: 'O(n^2) time and O(1) space. The visualization caps the input at 30 values.',
+  question: "Find the length of the shortest subarray whose bitwise OR is at least k.",
+  approaches: [
+    { name: "Extend from every start", intuition: "For each start, grow the OR one value at a time until it reaches k, and keep the shortest length seen.", time: "O(n^2)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Four values, k seven', input: '{"nums":[10,6,12,1],"k":7}' },
     { label: 'Three values, k 21', input: '{"nums":[16,5,8],"k":21}' },

@@ -9,6 +9,10 @@ const definition = {
   inputLabel: 'Object with m, k and nums',
   url: 'https://leetcode.com/problems/find-sum-of-array-product-of-magical-sequences/',
   complexity: 'O(n · m³ · k) time with n = nums.length, since each of the O(m² · k) states per index tries up to m copies. Officially m and k reach 30 and nums reaches 50 entries; the visualization caps m and nums at 6 to keep the states readable.',
+  question: "Find the sum of products over magical sequences built from a set of values.",
+  approaches: [
+    { name: "Bit DP", intuition: "Build sequences bit by bit, tracking the states of each product.", time: "O(n m^3 k)", space: "O(m^2 k)" },
+  ],
   examples: [
     { label: 'Three positions', input: '{"m":3,"k":2,"nums":[2,3,5]}' },
     { label: 'Carries matter', input: '{"m":3,"k":1,"nums":[2,3]}' },

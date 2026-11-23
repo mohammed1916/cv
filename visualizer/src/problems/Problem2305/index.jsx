@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with cookies (bag sizes) and k (JSON)',
   url: 'https://leetcode.com/problems/fair-distribution-of-cookies/',
   complexity: 'O(k^n) worst case for n bags and k children, pruned by the best answer so far. The visualization caps n at 8 and k at 4.',
+  question: "Distribute bags of cookies among k children to minimise the largest total any one child receives.",
+  approaches: [
+    { name: "Backtracking with pruning", intuition: "Assign each bag to each child in turn, skipping branches that cannot beat the best answer found so far.", time: "O(k^n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Five bags, k 3', input: '{"cookies":[6,12,4,9,5],"k":3}' },
     { label: 'Eight bags, k 4', input: '{"cookies":[8,3,7,2,6,1,5,4],"k":4}' },

@@ -18,6 +18,10 @@ const definition = {
   inputLabel: 'Bottom row and allowed triples (JSON)',
   url: 'https://leetcode.com/problems/pyramid-transition-matrix/',
   complexity: 'Exponential in the worst case, reduced by memoising failed rows. The visualization caps the bottom row at 6 letters and 40 triples.',
+  question: "Decide whether a pyramid can be built from bottom rows using allowed three-block patterns.",
+  approaches: [
+    { name: "Backtracking with memoised rows", intuition: "Choose allowed top blocks row by row and memoise rows that cannot be completed.", time: "exponential, pruned", space: "O(states)" },
+  ],
   examples: [
     { label: 'Three-row pyramid tower', input: '{"bottom":"ADE","allowed":["ADF","DEB","FBC"]}' },
     { label: 'Four-letter base, no solution', input: '{"bottom":"FEDC","allowed":["FEA","EDB","DCA","BAC"]}' },

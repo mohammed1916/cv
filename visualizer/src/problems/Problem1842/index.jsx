@@ -12,6 +12,10 @@ const definition = {
   inputLabel: "A palindromic digit string, e.g. 1221",
   url: "https://leetcode.com/problems/next-palindrome-using-same-digits/",
   complexity: "O(n) time and O(n) space for a digit string of length n. The visualization shows at most 10 digits so each swap and reversal stays visible.",
+  question: "Find the smallest number larger than a given digit string that is a palindrome built from the same digits.",
+  approaches: [
+    { name: "Next permutation of the left half", intuition: "Take the left half of the digits, find the next larger arrangement with the next-permutation step, then mirror it.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: "Even length", input: "1221" },
     { label: "Odd length", input: "12321" },

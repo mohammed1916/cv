@@ -10,6 +10,10 @@ const definition = {
   inputLabel: 'Grid and shifts (JSON object with grid, rowShift and colShift)',
   url: 'https://leetcode.com/problems/cyclically-shift-rows-and-columns/',
   complexity: 'O(n²) time and O(n²) space. The visualization caps the grid at 10 by 10.',
+  question: "Rotate each row left by its shift, then rotate each column up by its shift.",
+  approaches: [
+    { name: "Sequential rotation", intuition: "Rotate each row, then rotate each column using the already shifted rows.", time: "O(n^2)", space: "O(n^2)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"grid":[[1,2],[3,4]],"rowShift":[1,0],"colShift":[0,1]}' },
     { label: 'Example 2', input: '{"grid":[[1,2,3],[4,5,6],[7,8,9]],"rowShift":[1,2,0],"colShift":[2,2,1]}' },

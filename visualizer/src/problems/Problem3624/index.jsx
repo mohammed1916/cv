@@ -10,6 +10,10 @@ const definition = {
   inputLabel: 'Object with nums and queries ([1, l, r, k] counts, [2, idx, val] updates, positions from 0)',
   url: 'https://leetcode.com/problems/number-of-integers-with-popcount-depth-equal-to-k-ii/',
   complexity: 'O((n + q) log n) time, since a depth takes a few popcounts and each tree touch is logarithmic, and O(n) space for the six trees. The official limit is 100000 entries and queries; the visualization caps these at 12 entries and 8 queries.',
+  question: "Process updates and queries on an array, counting how many values fall in a range for each popcount-depth.",
+  approaches: [
+    { name: "Segment trees per depth", intuition: "Keep segment trees that count values by depth, and update a position only when its depth changes.", time: "O((n + q) log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Update changes depth', input: '{"nums":[7,8,3,1,15,6],"queries":[[1,0,5,2],[2,3,31],[1,1,4,3],[1,2,2,0]]}' },
     { label: 'Update keeps depth', input: '{"nums":[5,9,12],"queries":[[1,0,2,2],[2,1,6],[1,1,2,2]]}' },

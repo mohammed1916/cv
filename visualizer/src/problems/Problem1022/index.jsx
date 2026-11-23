@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with root: a 0/1 level-order array (JSON)',
   url: 'https://leetcode.com/problems/sum-of-root-to-leaf-binary-numbers/',
   complexity: 'O(n) time and O(h) stack. The visualization caps the tree at 15 entries.',
+  question: "Sum the binary numbers read along every root-to-leaf path of a binary tree whose nodes hold bits.",
+  approaches: [
+    { name: "DFS carrying the prefix value", intuition: "Pass the value down the path, shifting left and adding each bit; add the value at each leaf.", time: "O(n)", space: "O(h)" },
+  ],
   examples: [
     { label: 'Example', input: '{"root":[1,0,1,0,1,0,1]}' },
     { label: 'Missing child', input: '{"root":[1,0,1,null,1]}' },

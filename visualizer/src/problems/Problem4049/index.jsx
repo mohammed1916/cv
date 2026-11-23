@@ -20,6 +20,10 @@ const definition = {
   inputLabel: 'Array of values (e.g. [3,7,3,7,3,7,3])',
   url: 'https://leetcode.com/problems/count-values-with-equally-spaced-occurrences-ii/',
   complexity: 'O(n) expected time and O(n) space for n values, using a table of index lists. The visualization caps the array at 20 values; the official limit is 100000.',
+  question: "Count the values with three or more occurrences whose positions are equally spaced.",
+  approaches: [
+    { name: "Grouped index lists", intuition: "Group the indices of each value and check that every consecutive gap is the same.", time: "O(n) expected", space: "O(n)" },
+  ],
   examples: [
     { label: 'Constant gaps', input: '[3,7,3,7,3,7,3]' },
     { label: 'Mixed gaps', input: '[5,9,5,9,5,9,5,9,9]' },

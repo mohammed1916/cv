@@ -17,6 +17,10 @@ const definition = {
   inputLabel: 'Assignment JSON with groups and elements',
   url: 'https://leetcode.com/problems/assign-elements-to-groups-with-constraints/',
   complexity: 'O(n + m + M log M) time for n groups, m elements and largest group size M. The visualization caps lists at 8 values and values at 50.',
+  question: "Assign each element to a group whose size it divides, under per-group constraints.",
+  approaches: [
+    { name: "Group scan", intuition: "Scan the groups and elements, checking divisibility with the group sizes.", time: "O(n + m + M log M)", space: "O(M)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"groups":[6,9,4],"elements":[3,2,7]}' },
     { label: 'Example 2', input: '{"groups":[12,5,8,1],"elements":[5,4,2,4]}' },

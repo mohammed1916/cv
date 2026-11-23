@@ -4,6 +4,10 @@ import { buildTrace, parseInput, code, python, phases, examples, complexity, inp
 import { Sequence, Vars } from './SeqKit'
 
 const definition = {
+  question: "Count substrings of length K that have no repeated letters.",
+  approaches: [
+    { name: "Sliding window of size K", intuition: "Keep letter counts for a window of length K and count windows with no letter above one.", time: "O(n)", space: "O(1)" },
+  ],
   number: meta.number, phases, parse: parseInput, build: buildTrace, code, python, inputLabel,
   url: `https://leetcode.com/problems/${meta.slug}/`, complexity, examples,
 }

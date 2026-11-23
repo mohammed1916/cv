@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON object with confirmations rows [user_id, "YYYY-MM-DD HH:MM:SS", action]',
   url: 'https://leetcode.com/problems/users-that-actively-request-confirmation-messages/',
   complexity: 'O(r²) for the self-join of r rows in this trace; a database answers the same query with an index on (user_id, time_stamp).',
+  question: "List the users who sent at least two confirmation requests within a rolling twenty-four-hour window.",
+  approaches: [
+    { name: "Self join by time window", intuition: "Pair each user's requests and keep pairs at most a day apart.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Mixed users', input: '{"confirmations":[[2,"2024-01-01 10:00:00","confirmed"],[2,"2024-01-02 10:00:00","timeout"],[3,"2024-01-01 12:00:00","confirmed"],[3,"2024-01-01 12:06:59","timeout"],[6,"2024-01-01 09:00:00","confirmed"],[6,"2024-01-03 09:01:00","timeout"]]}' },
     { label: 'Single timeout', input: '{"confirmations":[[1,"2024-01-01 09:00:00","timeout"]]}' },

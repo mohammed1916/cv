@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with fruits and baskets arrays (JSON)',
   url: 'https://leetcode.com/problems/fruits-into-baskets-ii/',
   complexity: 'O(n^2) time and O(n) space for n fruits. The visualization caps n at 12.',
+  question: "Place each fruit into the first basket that can hold it, and count the fruits that cannot be placed.",
+  approaches: [
+    { name: "Scan baskets per fruit", intuition: "For each fruit, scan the baskets from left to right for the first one that fits.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Three fruit types', input: '{"fruits":[8,3,12],"baskets":[10,4,9]}' },
     { label: 'Same size', input: '{"fruits":[1,1,1],"baskets":[1,1,1]}' },

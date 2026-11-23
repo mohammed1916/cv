@@ -5,6 +5,10 @@ import SqlStages from './SqlStages'
 import './SqlStages.css'
 
 const definition = {
+  question: "For each project, report the employees with the most experience on that project.",
+  approaches: [
+    { name: "Join and group in SQL", intuition: "Find the maximum experience per project and keep the employees who match it.", time: "O(n)", space: "O(p)" },
+  ],
   number: meta.number,
   phases, parse: parseInput, build: buildTrace, code, sql, python, inputLabel,
   url: `https://leetcode.com/problems/${meta.slug}/`,

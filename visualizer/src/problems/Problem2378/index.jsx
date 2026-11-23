@@ -12,6 +12,10 @@ const definition = {
   inputLabel: "Object with parents (parents[0] = -1) and weights (weights[v] is the edge from parents[v] to v)",
   url: "https://leetcode.com/problems/choose-edges-to-maximize-score-in-a-tree/description/",
   complexity: "O(n) time and space for n nodes. The visualization caps the tree at 10 nodes and weights at -100 to 100.",
+  question: "On a tree with weighted nodes, choose edges so that no two chosen edges share a node and the total weight is largest.",
+  approaches: [
+    { name: "Tree DP", intuition: "For each node, compute the best total with and without its parent edge.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: "Example", input: '{"parents":[-1,0,0,1,1,2],"weights":[0,4,-3,6,2,5]}' },
     { label: "Skip negative", input: '{"parents":[-1,0,0],"weights":[0,-4,-7]}' },

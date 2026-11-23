@@ -13,6 +13,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Array (JSON array of integers)',
   url: 'https://leetcode.com/problems/longest-continuous-increasing-subsequence/',
   complexity: 'O(n) time and O(1) extra space.',
+  question: "Find the length of the longest run of strictly increasing neighbouring values.",
+  approaches: [
+    { name: "Single linear scan", intuition: "Extend the current run while each value exceeds its predecessor, and reset otherwise.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Two runs', input: '[2,5,1,3,4,8]' },
     { label: 'All equal', input: '[7,7,7]' },

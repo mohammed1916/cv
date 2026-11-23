@@ -4,6 +4,10 @@ import { buildTrace, parseInput, code, python, phases, examples, complexity, inp
 import { Sequence, Vars } from './SeqKit'
 
 const definition = {
+  question: "Replace every dot in an IPv4 address with the marker [.].",
+  approaches: [
+    { name: "Scan and copy", intuition: "Copy each character, substituting the marker for each dot.", time: "O(n)", space: "O(n)" },
+  ],
   number: meta.number,
   phases, parse: parseInput, build: buildTrace, code, python, inputLabel, complexity, examples,
   url: `https://leetcode.com/problems/${meta.slug}/`,

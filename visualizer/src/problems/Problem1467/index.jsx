@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON array of colour counts, for example [2,1,1]',
   url: 'https://leetcode.com/problems/probability-of-a-two-boxes-having-the-same-number-of-distinct-balls/',
   complexity: 'O(colours * T^2 * k^2) time for the state table. The visualization caps the total at 16 balls.',
+  question: "Find the probability that two boxes hold the same number of distinct colours after a random split of the balls.",
+  approaches: [
+    { name: "Colour-by-colour DP", intuition: "Process one colour at a time and track how many balls and distinct colours each box holds.", time: "O(colours * T^2 * k^2)", space: "O(T^2 * k^2) for the state table" },
+  ],
   examples: [
     { label: 'Four colours, twelve balls', input: '[2,5,1,4]' },
     { label: 'Four colours', input: '[1,2,1,2]' },

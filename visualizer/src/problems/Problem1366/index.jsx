@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON object with votes (ballots of equal length)',
   url: 'https://leetcode.com/problems/rank-teams-by-votes/',
   complexity: 'O(v * t + t log t * t) time for v ballots of t teams, with the place counts stored per team.',
+  question: "Rank teams from ballots that list each team by preference.",
+  approaches: [
+    { name: "Place counts then sort", intuition: "Count the votes each team gets in each position, then sort by those counts.", time: "O(v t + t log t)", space: "O(t^2)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"votes":["ABC","ACB","ABC","ACB","ACB"]}' },
     { label: 'Example 2', input: '{"votes":["WXYZ","XYZW"]}' },

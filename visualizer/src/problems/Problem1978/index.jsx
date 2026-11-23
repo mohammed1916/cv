@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON object with employees: [employee_id, name, manager_id or null, salary]',
   url: 'https://leetcode.com/problems/employees-whose-manager-left-the-company/',
   complexity: 'O(e) with a hash set of IDs for the manager check. A database runs a filter and an anti-join.',
+  question: "List employees whose salary is below a threshold and whose manager has left the company.",
+  approaches: [
+    { name: "Filter and anti-join", intuition: "Filter salaries below the threshold with a manager, then keep those whose manager is not an employee.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'One affected', input: '{"employees":[[1,"Kalel",11,20000],[11,"Joziah",6,40000],[6,"Ann",null,90000],[7,"Bo",8,10000]]}' },
     { label: 'None affected', input: '{"employees":[[3,"Cy",9,10000],[9,"Di",null,80000]]}' },

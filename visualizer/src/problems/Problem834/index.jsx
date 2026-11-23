@@ -14,6 +14,11 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Object with n and edges (JSON)',
   url: 'https://leetcode.com/problems/sum-of-distances-in-tree/',
   complexity: 'O(n) time and space: two DFS passes over the n - 1 edges.',
+  question: "For each node of a tree, return the sum of the distances from that node to all other nodes.",
+  approaches: [
+    { name: "Two DFS passes with rerooting", intuition: "One post-order pass computes subtree sizes and distance sums; a pre-order pass moves the answer from a parent to each child.", time: "O(n)", space: "O(n)" },
+    { name: "BFS from every node", intuition: "Run a BFS from each node and add the distances.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Star-like five nodes', input: '{"n":5,"edges":[[0,2],[2,1],[2,3],[3,4]]}' },
     { label: 'Single node', input: '{"n":1,"edges":[]}' },

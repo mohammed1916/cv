@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with nums (integers) and k',
   url: 'https://leetcode.com/problems/delayed-count-of-equal-elements/',
   complexity: 'O(n) time and O(n) space with a running tally that grows as the sweep moves left. The visualization caps nums at 14 values.',
+  question: "Count the equal elements that are at least k places apart, for each position.",
+  approaches: [
+    { name: "Right-to-left sweep with tally", intuition: "Sweep from the right while a tally holds only values at least k plus one places ahead.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Repeated fours', input: '{"nums":[4,4,7,4,7,4,1,7],"k":2}' },
     { label: 'Negative values, k zero', input: '{"nums":[-3,0,-3,-3,0],"k":0}' },

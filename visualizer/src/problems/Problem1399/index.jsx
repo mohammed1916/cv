@@ -4,6 +4,10 @@ import { StackLane } from '../../components/shared/AlgorithmStatePrimitives'
 import { buildTrace, parseInput, code, python, pythonLineMap, phases, examples } from './algorithm'
 
 const definition = {
+  question: "Count the groups whose digit sums give the largest group size.",
+  approaches: [
+    { name: "Count by digit sum", intuition: "Count how many numbers share each digit sum and count the largest groups.", time: "O(n)", space: "O(n)" },
+  ],
   number: '1399', phases, parse: parseInput, build: buildTrace, code, python, pythonLineMap, examples,
   inputLabel: 'Object with n (JSON)',
   url: 'https://leetcode.com/problems/count-largest-group/',

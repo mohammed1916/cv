@@ -12,6 +12,11 @@ const definition = {
   inputLabel: 'JSON object with nums1 and nums2 (integers 0 to 6)',
   url: 'https://leetcode.com/problems/minimum-equal-sum-of-two-arrays-after-replacing-zeros/',
   complexity: 'O(n + m) time. The visualization caps each array at eight entries.',
+  question: "Replace zeros in two arrays with positive numbers so the two sums become equal, and find the smallest possible equal sum, or -1.",
+  approaches: [
+    { name: "Compare minimal sums", intuition: "Each zero must become at least one; if one array has zeros and the other does not, check whether its sum can reach the other's.", time: "O(n + m)", space: "O(1)" },
+    { name: "Try candidate values", intuition: "Try each possible replacement total and check feasibility.", time: "O(n m)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Lists of different lengths', input: '{"nums1":[5,0,5,2],"nums2":[3,3,0,6,1]}' },
     { label: 'Equal values in first list', input: '{"nums1":[6,6,2],"nums2":[0,4,1,4]}' },

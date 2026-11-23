@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with s and dictionary (JSON)',
   url: 'https://leetcode.com/problems/extra-characters-in-a-string/',
   complexity: 'O(n^2) substring checks for a string of length n, with a set lookup each. The visualization caps s at 16 characters.',
+  question: "Given a string and a dictionary of words, split the string to leave the fewest unused characters.",
+  approaches: [
+    { name: "DP over prefixes", intuition: "Track the fewest extra characters for each prefix, and extend it with a dictionary word or a skipped character.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Two words split exactly', input: '{"s":"bakerycake","dictionary":["bakery","cake"]}' },
     { label: 'Overlapping choices', input: '{"s":"stopsigns","dictionary":["stop","sign","signs","tops"]}' },

@@ -20,6 +20,10 @@ const definition = {
   inputLabel: 'Object with n and k',
   url: 'https://leetcode.com/problems/balanced-k-factor-decomposition/',
   complexity: 'Search over non-decreasing divisor lists, pruned by the product bound. The visualization caps n at 1000.',
+  question: "Split n into k factors whose product is n and whose spread is as small as possible.",
+  approaches: [
+    { name: "Search divisor lists", intuition: "Search non-decreasing divisor lists, pruned by the product bound.", time: "pruned search", space: "O(k)" },
+  ],
   examples: [
     { label: 'Example', input: '{"n":60,"k":3}' },
     { label: 'Square', input: '{"n":36,"k":2}' },

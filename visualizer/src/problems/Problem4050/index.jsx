@@ -17,6 +17,10 @@ const definition = {
   inputLabel: 'A whole number n (e.g. 7)',
   url: 'https://leetcode.com/problems/minimum-days-to-score-exactly-n-points/',
   complexity: 'O(n * sqrt(n)) time and O(n) space: each total tries the run lengths whose triangular number fits. The visualization caps n at 60; the official limit is 100000.',
+  question: "Find the fewest days needed to score exactly n points, where each run of scoring days is followed by one skip day.",
+  approaches: [
+    { name: "Triangular runs DP", intuition: "Fill a table of best day counts, trying each run length whose triangular number fits.", time: "O(n x sqrt(n))", space: "O(n)" },
+  ],
   examples: [
     { label: 'Two runs', input: '7' },
     { label: 'Small total', input: '2' },

@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with nums, x and y (e.g. {"nums":[3,4],"x":3,"y":1})',
   url: "https://leetcode.com/problems/minimum-operations-to-make-numbers-non-positive/",
   complexity: "O(n log max) time and O(1) extra space for n values, using binary search on the number of operations. The visualization caps nums at 8 values from 1 to 50 and x at 10; the page keeps nums short for teaching.",
+  question: "Given an array, find the minimum number of operations to make every element non-positive, where each operation subtracts from a range.",
+  approaches: [
+    { name: "Binary search on operations", intuition: "Guess a count and check whether the excess can be covered by that many operations.", time: "O(n log(max))", space: "O(1)" },
+  ],
   examples: [
     { label: "Example", input: '{"nums":[3,4],"x":3,"y":1}' },
     { label: "Three equal values", input: '{"nums":[1,1,1],"x":2,"y":1}' },

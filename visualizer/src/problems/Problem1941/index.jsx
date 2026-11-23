@@ -11,6 +11,10 @@ const definition = {
   inputLabel: 'Lowercase string (e.g. xxyyzz)',
   url: 'https://leetcode.com/problems/check-if-all-characters-have-equal-number-of-occurrences/',
   complexity: 'O(n) time and O(1) extra space, since there are at most 26 letters.',
+  question: "Decide whether every letter that appears in a string occurs the same number of times.",
+  approaches: [
+    { name: "Count and compare", intuition: "Count letters and check that all nonzero counts are equal.", time: "O(n)", space: "O(26)" },
+  ],
   examples: [
     { label: 'Equal counts', input: 'xxyyzz' },
     { label: 'Unequal counts', input: 'xxxyz' },

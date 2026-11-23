@@ -11,6 +11,10 @@ const definition = {
   inputLabel: 'JSON object with mainTank and additionalTank',
   url: 'https://leetcode.com/problems/total-distance-traveled/',
   complexity: 'O(mainTank) time with a constant-size state. The visualization caps each tank at 100 liters.',
+  question: "Given two fuel tanks, simulate travel where each litre used moves the car, and an extra litre is moved from the auxiliary tank every fixed distance; return the total distance.",
+  approaches: [
+    { name: "Simulate in steps", intuition: "Subtract fuel one step at a time and transfer from the auxiliary tank when the main tank hits multiples of five.", time: "O(mainTank)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Fifteen liters, four spare', input: '{"mainTank":15,"additionalTank":4}' },
     { label: 'Nine liters, no auxiliary', input: '{"mainTank":9,"additionalTank":0}' },

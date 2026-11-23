@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Binary grid as JSON array of rows (1 to 6 by 1 to 6, at least three 1s)',
   url: 'https://leetcode.com/problems/find-the-minimum-area-to-cover-all-ones-ii/',
   complexity: 'O(R * C) work per split, O(R^2 * C^2) splits with the direct method. The visualization caps the grid at 6 by 6.',
+  question: "Find the smallest total area of three non-overlapping rectangles that together cover every 1 in a binary grid.",
+  approaches: [
+    { name: "Try every straight-cut split", intuition: "Any three rectangles can be separated by straight cuts, so only the strip splits need checking, each boxed around its own ones.", time: "O(R^2 * C^2) splits", space: "O(1)" },
+  ],
   examples: [
     { label: 'Four ones in two rows', input: '[[1,0,0,1],[0,1,1,0]]' },
     { label: 'Three rows of mixed cells', input: '[[1,0,1],[0,1,0],[1,0,0]]' },

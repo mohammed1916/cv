@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with nums (integers)',
   url: 'https://leetcode.com/problems/minimum-total-operations/',
   complexity: 'O(n) time and O(n) space for the working copy used by the trace; O(1) extra space for the count alone. Reading used here: an operation adds a chosen integer to every value in one prefix, and the answer is the number of neighbouring pairs that differ, since one prefix shift can close exactly one such gap. The visualization caps nums at 10 values in -50 to 50.',
+  question: "Count the minimum total operations to make an array's adjacent pairs sum to an even value.",
+  approaches: [
+    { name: "Greedy count of operations", intuition: "Scan from left to right and apply an operation whenever a pair needs one, counting the total.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Mixed gaps', input: '{"nums":[4,4,7,2,2,9]}' },
     { label: 'Negative values', input: '{"nums":[3,-1,-1,6,5]}' },

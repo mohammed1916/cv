@@ -12,6 +12,11 @@ const definition = {
   inputLabel: 'Object with processorTime (1 to 3 entries) and tasks (four per processor)',
   url: 'https://leetcode.com/problems/minimum-processing-time/',
   complexity: 'O(n log n) time for the sorts, where n is the number of tasks. The visualization caps input at 3 processors.',
+  question: "Assign tasks to processors, each with a start availability time and four tasks, so the latest finish time is as small as possible.",
+  approaches: [
+    { name: "Greedy pairing of sorted lists", intuition: "Give the earliest available processor the largest tasks, and check each processor's finish time.", time: "O(n log n)", space: "O(n)" },
+    { name: "Try all assignments", intuition: "Enumerate task assignments and take the best finish time.", time: "exponential", space: "O(n)" },
+  ],
   examples: [
     { label: 'Two processors, eight tasks', input: '{"processorTime":[4,6],"tasks":[5,3,2,7,4,1,6,2]}' },
     { label: 'Three processors, twelve tasks', input: '{"processorTime":[2,9,5],"tasks":[6,1,4,8,3,7,2,5,9,1,4,6]}' },

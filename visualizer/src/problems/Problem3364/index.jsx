@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with nums, l and r',
   url: 'https://leetcode.com/problems/minimum-positive-sum-subarray/',
   complexity: 'O(n^2) time for every window, O(n) extra space for the prefix sums.',
+  question: "Find the shortest subarray with a positive sum that lies in a given range.",
+  approaches: [
+    { name: "Prefix sums over every window", intuition: "Compute prefix sums and check each subarray in the range for a positive total.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Mixed signs', input: '{"nums":[5,-3,2,-1,4],"l":2,"r":3}' },
     { label: 'No positive sum', input: '{"nums":[-2,2,-3,1],"l":2,"r":3}' },

@@ -15,6 +15,10 @@ const definition = {
     { id: 'leading', label: 'Check first digit', description: 'The leading digit must differ from x.' },
     { id: 'done', label: 'AND / return', description: 'Both conditions must pass.' },
   ],
+  question: "Check a number against a restriction on its leading digit and a condition on its digits, and report whether both hold.",
+  approaches: [
+    { name: "Digit scan", intuition: "Extract the digits once, check the leading digit, then test the remaining condition.", time: "O(d)", space: "O(d)" },
+  ],
   examples: authoredExamples0,
 }
 function ValidDigitNumber() {

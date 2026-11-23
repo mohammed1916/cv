@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'String (JSON object with s)',
   url: 'https://leetcode.com/problems/reverse-degree-of-a-string/',
   complexity: 'O(n) time and O(1) extra space. The visualization caps input at 50 letters.',
+  question: "Compute a reversed-alphabet degree for a string, summing the position values of its letters.",
+  approaches: [
+    { name: "Map letters", intuition: "Map each letter to its reversed position and add the values.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"s":"abc"}' },
     { label: 'Example 2', input: '{"s":"zaza"}' },

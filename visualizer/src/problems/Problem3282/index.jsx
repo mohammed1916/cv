@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Array of 2 to 30 integers from 1 to 50, for example [1,3,1,5]',
   url: 'https://leetcode.com/problems/reach-end-of-array-with-max-score/',
   complexity: 'O(n) time and O(1) extra space. The visualization caps the array at 30 numbers.',
+  question: "Start at the first index of an array and reach the last index, where each jump adds the value at the new index to the score.",
+  approaches: [
+    { name: "Track the running maximum", intuition: "The best path to each index picks the biggest value seen so far, so one pass with a running maximum is enough.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Repeated eights', input: '[8,3,8,5,1,8]' },
     { label: 'Seven distinct values', input: '[17,3,9,30,2,11,6]' },

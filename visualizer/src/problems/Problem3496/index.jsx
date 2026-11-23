@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Array of integers, for example [4,-1,7,2,3]',
   url: 'https://leetcode.com/problems/maximize-score-after-pair-deletions/',
   complexity: 'O(n^2) time and O(n^2) space for n values: each window is scored once from its three smaller windows. The visualization caps the array at 10 values.',
+  question: "Repeatedly delete pairs from an array to maximize the score, where each deletion scores the sum of a neighbourhood.",
+  approaches: [
+    { name: "Interval DP", intuition: "Store the best score for each window from its three smaller windows.", time: "O(n^2)", space: "O(n^2)" },
+  ],
   examples: [
     { label: 'Mixed signs', input: '[4,-1,7,2,3]' },
     { label: 'Ends pay best', input: '[-5,8,-2,9,1,-3]' },

@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with n (JSON)',
   url: 'https://leetcode.com/problems/complement-of-base-10-integer/',
   complexity: 'O(log n) time and space, proportional to the number of written binary digits.',
+  question: "Flip every bit of the binary form of a positive integer, ignoring leading zeros.",
+  approaches: [
+    { name: "All-ones mask", intuition: "Build a mask of ones with the same bit length as the number and XOR the number with it.", time: "O(log n)", space: "O(1)" },
+  ],
   examples: authoredExamples,
 }
 

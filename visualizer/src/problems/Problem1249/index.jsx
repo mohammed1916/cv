@@ -6,6 +6,10 @@ const definition = {
   number: meta.number,
   phases, parse: parseInput, build: buildTrace, code, python, inputLabel,
   url: `https://leetcode.com/problems/${meta.slug}/`,
+  question: "Remove the fewest parentheses so that the remaining string is valid.",
+  approaches: [
+    { name: "Stack of unmatched brackets", intuition: "Mark unmatched closing brackets when they appear and unmatched opening brackets at the end.", time: "O(n)", space: "O(n)" },
+  ],
   complexity, examples,
 }
 

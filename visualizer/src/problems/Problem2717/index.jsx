@@ -20,6 +20,10 @@ const definition = {
   inputLabel: 'nums JSON object (e.g. {"nums": [2,1,4,3]})',
   url: "https://leetcode.com/problems/semi-ordered-permutation/",
   complexity: "O(n) time and O(1) extra space for permutation length n between 2 and 50.",
+  question: "Given a permutation, find the minimum number of adjacent swaps to place one at the start and n at the end.",
+  approaches: [
+    { name: "Positions of 1 and n", intuition: "Count the swaps needed to move 1 to the front and n to the end, subtracting one if n is before 1.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: "Overlapping moves", input: '{"nums": [3,1,2]}' },
     { label: "Long walk", input: '{"nums": [4,1,3,2]}' },

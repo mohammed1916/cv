@@ -12,6 +12,10 @@ const definition = {
   phases, parse: parseInput, build: buildTrace, code, python, sql,
   inputLabel: INPUT_LABEL,
   complexity: COMPLEXITY,
+  question: "Compute for each contest the percentage of all users who registered for it, rounded to two decimals.",
+  approaches: [
+    { name: "Count and divide", intuition: "Count registrations per contest, divide by the total number of users, and round.", time: "O(n)", space: "O(c)" },
+  ],
   examples: [{ label: 'Sample', input: EXAMPLE },
     { label: "Single user, no registrations", input: "{\"users\":[{\"user_id\":1,\"user_name\":\"Ada\"}],\"register\":[]}" },
     { label: "Equal percentages", input: "{\"users\":[{\"user_id\":1,\"user_name\":\"Ada\"},{\"user_id\":2,\"user_name\":\"Bo\"}],\"register\":[{\"contest_id\":101,\"user_id\":1},{\"contest_id\":101,\"user_id\":2}]}" },

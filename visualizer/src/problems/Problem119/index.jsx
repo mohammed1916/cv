@@ -16,6 +16,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, pythonLineMap, phases,
   inputLabel: 'Row index (integer from 0 to 33)',
   complexity: 'O(k²) time and O(k) extra space for row k, updating a single row in place.',
+  question: "Return row k of Pascal's triangle.",
+  approaches: [
+    { name: "In-place row update", intuition: "Update one row from right to left so each entry adds the two values above it.", time: "O(k^2)", space: "O(k)" },
+  ],
   examples: [
     { label: 'Row 0', input: '0' },
     { label: 'Row 3', input: '3' },

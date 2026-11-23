@@ -13,6 +13,11 @@ const definition = {
   inputLabel: 'Object with "s" (lowercase letters), JSON',
   url: 'https://leetcode.com/problems/existence-of-a-substring-in-a-string-and-its-reverse/',
   complexity: 'O(n) time and O(n) space for the pair set. The visualization caps s at 20 letters.',
+  question: "Decide whether some substring of a string also appears reversed in the string.",
+  approaches: [
+    { name: "Adjacent pair set", intuition: "Store every adjacent pair and check whether any reversed pair is already stored.", time: "O(n)", space: "O(n)" },
+    { name: "Brute force", intuition: "Compare every substring with the reversed text.", time: "O(n^2)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"s":"leetcode"}' },
     { label: 'Example 2', input: '{"s":"abcba"}' },

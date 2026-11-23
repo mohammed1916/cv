@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON object with words (2 to 8 lowercase words, up to 5 letters) and k (1 to words minus 1)',
   url: 'https://leetcode.com/problems/longest-common-prefix-of-k-strings-after-removal/',
   complexity: 'O(n * L^2) time for n words of length L, using prefix counts. The visualization caps the input at 8 words.',
+  question: "Find the longest common prefix among k strings after removing one string.",
+  approaches: [
+    { name: "Prefix counts", intuition: "Count prefix occurrences so that each candidate removal is checked quickly.", time: "O(n L^2)", space: "O(n L)" },
+  ],
   examples: [
     { label: 'Four short words, k two', input: '{"words":["ab","cde","fg","hi"],"k":2}' },
     { label: 'Single word', input: '{"words":["ab","abc","a"],"k":1}' },

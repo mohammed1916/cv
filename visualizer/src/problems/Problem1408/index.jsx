@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Distinct lowercase words (JSON array)',
   url: 'https://leetcode.com/problems/string-matching-in-an-array/',
   complexity: 'O(n² · L) time for n words of length up to L, using a substring check per pair. O(n) extra space for the answer.',
+  question: "Find words that appear as substrings of other words in the list.",
+  approaches: [
+    { name: "Pairwise substring check", intuition: "For each pair of words, check whether one contains the other.", time: "O(n^2 L)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Nested words', input: '["mass", "as", "hero", "superhero"]' },
     { label: 'No match', input: '["cat", "dog"]' },

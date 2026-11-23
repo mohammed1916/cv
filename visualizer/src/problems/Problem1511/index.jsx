@@ -51,6 +51,10 @@ const definition = {
   inputLabel: 'Object with Customers, Product (price per unit) and Orders (quantity, order_date) lists',
   url: 'https://leetcode.com/problems/customer-order-frequency/',
   complexity: 'O(c * o) in this visualization, which rescans the orders for each customer.',
+  question: "List customers who spent at least 100 in both June and July 2020.",
+  approaches: [
+    { name: "Group, sum and filter", intuition: "Sum each customer's spend in each month and keep those where both totals reach 100.", time: "O(c * o) for this scan", space: "O(c)" },
+  ],
   examples: [
     { label: 'Example', input: '{"Customers":[{"customer_id":1,"name":"Winston"},{"customer_id":2,"name":"Jonathan"},{"customer_id":3,"name":"Annabelle"}],"Product":[{"product_id":1,"price":50},{"product_id":2,"price":20}],"Orders":[{"order_id":1,"customer_id":1,"product_id":1,"order_date":"2020-06-10","quantity":2},{"order_id":2,"customer_id":1,"product_id":1,"order_date":"2020-07-05","quantity":3},{"order_id":3,"customer_id":2,"product_id":1,"order_date":"2020-06-01","quantity":5},{"order_id":4,"customer_id":2,"product_id":1,"order_date":"2020-07-20","quantity":1},{"order_id":5,"customer_id":3,"product_id":1,"order_date":"2020-06-15","quantity":1},{"order_id":6,"customer_id":3,"product_id":2,"order_date":"2020-06-15","quantity":1},{"order_id":7,"customer_id":3,"product_id":1,"order_date":"2020-07-01","quantity":4},{"order_id":8,"customer_id":2,"product_id":1,"order_date":"2020-08-01","quantity":1}]}' },
     { label: 'Single order', input: '{"Customers":[{"customer_id":1,"name":"Ada"}],"Product":[{"product_id":1,"price":10}],"Orders":[{"order_id":1,"customer_id":1,"product_id":1,"order_date":"2020-08-01","quantity":1}]}' },

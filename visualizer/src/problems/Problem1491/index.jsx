@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Object with a salary list (JSON)',
   url: 'https://leetcode.com/problems/average-salary-excluding-the-minimum-and-maximum-salary/',
   complexity: 'O(n) time and O(1) extra space: one pass tracks the total, lowest and highest values.',
+  question: "Return the average salary after removing the lowest and highest values.",
+  approaches: [
+    { name: "Single-pass totals", intuition: "Track the sum, minimum and maximum, then average the rest.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Four salaries', input: '{"salary":[4000,3000,1000,2000]}' },
     { label: 'All equal', input: '{"salary":[5000,5000,5000]}' },

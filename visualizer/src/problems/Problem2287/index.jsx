@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON object with s and target (lowercase letters)',
   url: 'https://leetcode.com/problems/rearrange-characters-to-make-target-string/',
   complexity: 'O(n + m) time and O(1) extra space for the 26 letters. The visualization caps s at 20 letters.',
+  question: "Find how many times the target string can be built from the letters of a given string, using each letter once.",
+  approaches: [
+    { name: "Count letters", intuition: "Count each letter in both strings and take the minimum of the available count divided by the needed count.", time: "O(n + m)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"s":"ababcbarc","target":"baca"}' },
     { label: 'Missing letter', input: '{"s":"aaa","target":"ab"}' },

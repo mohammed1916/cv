@@ -16,6 +16,10 @@ const definition = {
   inputLabel: 'JSON object: {"rains": [...]} with 0 for a dry day',
   url: 'https://leetcode.com/problems/avoid-flood-in-the-city/',
   complexity: 'Each rain does one binary search over the sorted dry days. The visualization caps input at 12 days.',
+  question: "Choose which dry day to use for each lake so that it is dry when it floods, or report an impossible plan.",
+  approaches: [
+    { name: "Sorted dry days with binary search", intuition: "For each rain, find the earliest unused dry day after the lake's last rain.", time: "O(log n) per rain", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"rains":[1,2,3,4]}' },
     { label: 'Example 2', input: '{"rains":[1,2,0,0,2,1]}' },

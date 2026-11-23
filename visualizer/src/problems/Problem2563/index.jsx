@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with nums, lower and upper (JSON)',
   url: 'https://leetcode.com/problems/count-the-number-of-fair-pairs/',
   complexity: 'O(n log n) time for the sort and O(n) for each two-pointer pass.',
+  question: "Count pairs whose sum lies between a lower and an upper bound.",
+  approaches: [
+    { name: "Sort and two pointers", intuition: "Sort the values and count pairs in the range with two pointers for each bound.", time: "O(n log n)", space: "O(1) extra" },
+  ],
   examples: [
     { label: 'Negative and positive values', input: '{"nums":[-3,4,-7,10,2,-1,6],"lower":-5,"upper":8}' },
     { label: 'Wide range', input: '{"nums":[-15,20,-2,9],"lower":0,"upper":25}' },

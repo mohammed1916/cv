@@ -16,6 +16,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Words (JSON array)',
   url: 'https://leetcode.com/problems/find-the-shortest-superstring/',
   complexity: 'O(2^n * n^2) time, O(2^n * n) space. The visualization caps words at 8.',
+  question: "Find the shortest string that contains every given word as a substring.",
+  approaches: [
+    { name: "Bitmask DP over word order", intuition: "Compute the overlap between words and combine subsets with bitmask DP to find the cheapest order.", time: "O(n^2 * 2^n)", space: "O(n * 2^n)" },
+  ],
   examples: [
     { label: 'Overlapping three words', input: '["cat","tan","nap"]' },
     { label: 'Disjoint words', input: '["red","blue","green"]' },

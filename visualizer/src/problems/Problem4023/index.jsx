@@ -12,6 +12,10 @@ const definition = {
   inputLabel: "Object with start and floors (distinct requested floors), e.g. {\"start\":4,\"floors\":[1,6,9]}",
   url: "https://leetcode.com/problems/elevator-requests-ii/",
   complexity: "O(n^2) interval states with two ends each, where n counts the distinct floors plus the start. The visualization caps floors at 8.",
+  question: "Find the cheapest total for covering a set of floors by growing intervals from either end.",
+  approaches: [
+    { name: "Interval DP over floor ranges", intuition: "Grow intervals from either end and track the cheapest cost for each interval.", time: "O(n^2) interval states", space: "O(n^2)" },
+  ],
   examples: [
     { label: "Spread requests", input: "{\"start\":4,\"floors\":[1,6,9]}" },
     { label: "Start inside", input: "{\"start\":2,\"floors\":[2,3,7]}" },

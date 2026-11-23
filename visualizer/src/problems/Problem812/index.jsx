@@ -12,6 +12,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Array points (JSON)',
   url: 'https://leetcode.com/problems/largest-triangle-area/',
   complexity: 'O(n^3) time and O(1) extra space; fine for n up to 50.',
+  question: "Given points on a plane, find the largest area of a triangle formed by any three of them.",
+  approaches: [
+    { name: "Try every triple with the shoelace formula", intuition: "Compute the doubled area of each triple directly and keep the maximum.", time: "O(n^3)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Rectangle corners', input: '[[0,0],[4,0],[0,3],[4,3]]' },
     { label: 'Four irregular points', input: '[[1,1],[5,2],[2,6],[-3,4]]' },

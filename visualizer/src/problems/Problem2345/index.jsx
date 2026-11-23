@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'List of [x, y] peaks (e.g. [[2,2],[2,2],[3,2]])',
   url: 'https://leetcode.com/problems/finding-the-number-of-visible-mountains/',
   complexity: 'O(n^2) time and O(n) space for this teaching trace, which tests every pair. Sorting the intervals gives an O(n log n) sweep. The visualization caps the input at 10 peaks with x up to 40 and y up to 20.',
+  question: "Given mountains as intervals, count the mountains that are not hidden by any other mountain.",
+  approaches: [
+    { name: "Pairwise check", intuition: "For each mountain, test whether another mountain covers it.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Twin peaks', input: '[[4,3],[1,1],[9,4],[4,1]]' },
     { label: 'Identical pair', input: '[[2,2],[2,2],[3,2]]' },

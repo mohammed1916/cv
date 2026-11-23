@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Router operations (JSON object with memory_limit and an operations list)',
   url: 'https://leetcode.com/problems/implement-router/',
   complexity: 'O(n) per call in this simple version, where n is the number of stored packets. The visualization caps input at 16 operations.',
+  question: "Implement a router that stores packets in arrival order, with a size limit and per-destination lookup.",
+  approaches: [
+    { name: "Queue with index", intuition: "Keep packets in a queue and an index map from destination to packet positions.", time: "O(n) per call", space: "O(n)" },
+  ],
   examples: [
     { label: 'Eviction', input: '{"memory_limit":2,"operations":[["addPacket",1,2,3],["addPacket",1,2,3],["addPacket",4,5,6],["addPacket",7,8,9],["forwardPacket"],["getCount",8,0,10],["addPacket",7,8,9]]}' },
     { label: 'Empty forward', input: '{"memory_limit":1,"operations":[["forwardPacket"],["addPacket",2,3,1],["getCount",3,0,1]]}' },

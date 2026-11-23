@@ -20,6 +20,10 @@ const definition = {
   inputLabel: "JSON object with keys nums and k (e.g. {\"nums\": [4, 2, 5, 6, 7], \"k\": 2})",
   url: "https://leetcode.com/problems/find-the-maximum-sequence-value-of-array/",
   complexity: "O(n * k * 32) set work with 5-bit OR values here, for n up to 20 in the visualization (LeetCode allows n up to 400).",
+  question: "Find the maximum value that can be made from a subsequence of an array by taking the OR of chosen values.",
+  approaches: [
+    { name: "Dynamic programming over OR values", intuition: "Track the sets of reachable OR values for each subsequence length, with values bounded by 5 bits.", time: "O(n * k * 32)", space: "O(k * 32)" },
+  ],
   examples: [
     { label: "Invented four values", input: "{\"nums\": [3, 9, 12, 5], \"k\": 1}" },
     { label: "Invented six values", input: "{\"nums\": [1, 8, 2, 4, 16, 3], \"k\": 2}" },

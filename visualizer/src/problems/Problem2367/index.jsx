@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Numbers and difference as JSON: {"nums": [...], "diff": d}',
   url: 'https://leetcode.com/problems/number-of-arithmetic-triplets/',
   complexity: 'O(n) time and O(n) space with a hash set. The visualization caps input at 20 numbers.',
+  question: "Count the triplets of increasing values where the gap between the first two and between the last two equals a given difference.",
+  approaches: [
+    { name: "Hash set lookup", intuition: "For each value, check whether value plus the difference and value plus twice the difference are in the set.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Six numbers, diff 5', input: '{"nums":[0,3,4,9,15,22],"diff":5}' },
     { label: 'Seven numbers, diff 2', input: '{"nums":[2,5,8,11,14,17,20],"diff":2}' },

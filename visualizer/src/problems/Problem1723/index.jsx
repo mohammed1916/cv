@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON object: {"jobs": [...], "k": workers}',
   url: 'https://leetcode.com/problems/find-minimum-time-to-finish-all-jobs/',
   complexity: 'Backtracking over the ways to assign jobs, pruned by the best peak so far. The visualization caps input at 8 jobs.',
+  question: "Assign jobs to workers so the busiest worker has as little work as possible.",
+  approaches: [
+    { name: "Backtracking with pruning", intuition: "Assign each job to a worker, pruning branches that cannot beat the best peak found so far.", time: "exponential, pruned", space: "O(k)" },
+  ],
   examples: [
     { label: 'Own: five jobs, two workers', input: '{"jobs":[5,5,4,4,8],"k":2}' },
     { label: 'Five jobs, three workers', input: '{"jobs":[10,4,7,12,6],"k":3}' },

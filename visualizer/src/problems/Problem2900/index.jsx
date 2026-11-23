@@ -13,6 +13,11 @@ const definition = {
   inputLabel: 'JSON object with words (short lowercase strings) and groups (0 or 1 for each word)',
   url: 'https://leetcode.com/problems/longest-unequal-adjacent-groups-subsequence-i/',
   complexity: 'O(n) time and O(n) space for the chain. The visualization caps input at 10 words.',
+  question: "Find the longest subsequence of words where each consecutive pair belongs to different groups, using group labels given with the words.",
+  approaches: [
+    { name: "Greedy scan keeping a change", intuition: "Whenever the group changes from the last chosen word, take the word.", time: "O(n)", space: "O(n)" },
+    { name: "Dynamic programming over subsequences", intuition: "Track the longest valid subsequence ending in each group.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Three words, groups 0 1 1', input: '{"words":["ab","cde","f"],"groups":[0,1,1]}' },
     { label: 'Alternating', input: '{"words":["a","b","c","d"],"groups":[1,0,1,1]}' },

@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with nums and edges of a tree (JSON)',
   url: 'https://leetcode.com/problems/minimum-score-after-removals-on-a-tree/',
   complexity: 'O(n^2) time over pairs of cut edges, after one O(n) pass for subtree XORs. The visualization caps the tree at 12 nodes.',
+  question: "Remove two edges from a tree to split it into three parts, and minimise the spread of the XOR values of the parts.",
+  approaches: [
+    { name: "Subtree XOR over edge pairs", intuition: "Compute subtree XORs once, then try each pair of cut edges and derive the three component XORs.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Path', input: '{"nums":[1,2,3],"edges":[[0,1],[1,2]]}' },
     { label: 'Star', input: '{"nums":[4,4,4,4],"edges":[[0,1],[0,2],[0,3]]}' },

@@ -14,6 +14,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Operations (JSON array)',
   url: 'https://leetcode.com/problems/design-hashmap/',
   complexity: 'O(1) expected per operation with a good hash and bounded chains.',
+  question: "Implement a hash map from integers to integers without built-in map types.",
+  approaches: [
+    { name: "Chained buckets", intuition: "Store key-value pairs in chained buckets; put updates in place and get scans one chain.", time: "O(n / b) per operation", space: "O(n + b)" },
+  ],
   examples: [
     { label: 'Overwrite then remove', input: '[["put",3,7],["put",13,8],["get",3],["get",4],["put",13,9],["get",13],["remove",3],["get",3]]' },
     { label: 'Read before any write', input: '[["get",0]]' },

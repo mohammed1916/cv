@@ -13,6 +13,11 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 's and words (JSON)',
   url: 'https://leetcode.com/problems/number-of-matching-subsequences/',
   complexity: 'O(|s| + total word length) time; every word letter is processed at most once.',
+  question: "Count how many of the given words are subsequences of string s.",
+  approaches: [
+    { name: "Waiting buckets", intuition: "Keep each word in a bucket keyed by the next letter it needs; scanning s moves each word to its next bucket.", time: "O(|s| + total word length)", space: "O(total word length)" },
+    { name: "Per-letter index lists with binary search", intuition: "For each word, find the next occurrence of each letter with binary search in the position list of s.", time: "O(words * length * log |s|)", space: "O(|s|)" },
+  ],
   examples: [
     { label: 'abcde', input: '{"s":"abcde","words":["a","bb","acd","ace"]}' },
     { label: 'dsahjpjauf', input: '{"s":"dsahjpjauf","words":["ahjpjau","ja","ahbwzgqnuk","tnmlanowax"]}' },

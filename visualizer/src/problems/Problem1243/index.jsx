@@ -8,6 +8,10 @@ const definition = {
   inputLabel: 'Array of integers (e.g. [6,2,3,4,1])',
   url: 'https://leetcode.com/problems/array-transformation/description/',
   complexity: 'O(rounds * n) time and O(rounds * n) space for the stored table. The visualization caps the array at 12 values with values from -100 to 100; the draft does not state an exact official bound or round count.',
+  question: "Repeatedly update an array where each interior value changes based on its neighbours, and return the final array.",
+  approaches: [
+    { name: "Round-by-round simulation", intuition: "Compute each round from the previous round, updating all interior values at once.", time: "O(rounds x n)", space: "O(rounds x n)" },
+  ],
   examples: [
     { label: 'Settles fast', input: '[6,2,3,4,1]' },
     { label: 'Several rounds', input: '[1,6,3,4,3,5]' },

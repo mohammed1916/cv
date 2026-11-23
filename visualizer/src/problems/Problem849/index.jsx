@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Seats (JSON array of 0 and 1)',
   url: 'https://leetcode.com/problems/maximize-distance-to-closest-person/',
   complexity: 'O(n) time with the left and right scans; this visualization uses an O(n^2) check that is easy to follow.',
+  question: "Seats are occupied by people or empty; maximise the distance from an empty seat to its closest person.",
+  approaches: [
+    { name: "Nearest person from each side", intuition: "For each empty seat, the closest person is the nearer of the gaps to the left and to the right.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Middle gap', input: '[1,0,0,0,1,0,0,0,0]' },
     { label: 'Edge gap', input: '[0,0,1,0,0,0]' },

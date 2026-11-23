@@ -15,6 +15,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Object {s, words} (JSON)',
   url: 'https://leetcode.com/problems/expressive-words/',
   complexity: 'O(total length of s and all words) time and space for the encodings.',
+  question: "Count the words that can be stretched to match s, where a letter group in s may be extended only when it has at least three letters.",
+  approaches: [
+    { name: "Run-length comparison", intuition: "Encode s and each word as runs of equal letters, then compare the runs one by one with the stretch rule.", time: "O(total length)", space: "O(total length)" },
+  ],
   examples: [
     { label: 'Stretch triple run', input: '{"s":"xxxyyz","words":["xyz","xxyyz","xxxxyz"]}' },
     { label: 'Three runs, three words', input: '{"s":"qqqrrrssss","words":["qrs","qqrs","qqqqrrss"]}' },

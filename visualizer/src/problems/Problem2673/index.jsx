@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Perfect-style heap tree as JSON: n, cost',
   url: 'https://leetcode.com/problems/make-costs-of-paths-equal-in-a-binary-tree/',
   complexity: 'O(n) time and O(n) space. The visualization caps the tree at 15 nodes.',
+  question: "Given a complete binary tree with positive costs, add the fewest increments so that every root-to-leaf path has the same total.",
+  approaches: [
+    { name: "Bottom-up balancing", intuition: "Balance each pair of children from the leaves upward and add the difference to the cheaper branch.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Five nodes', input: '{"n":5,"cost":[2,9,4,4,1]}' },
     { label: 'Nine costs', input: '{"n":9,"cost":[6,1,1,6,3,8,2,2,5]}' },

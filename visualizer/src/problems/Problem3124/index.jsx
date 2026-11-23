@@ -16,6 +16,10 @@ const examples = [
 ]
 
 const definition = {
+  question: "From contacts and calls tables, rank each caller's calls by duration within each call type and keep ranks one to three.",
+  approaches: [
+    { name: "Window ranking within each type", intuition: "Rank calls inside each type by duration, with ties sharing a rank, then keep the top three ranks.", time: "O(c log c)", space: "O(c)" },
+  ],
   number: meta.number,
   phases, parse: parseInput, build: buildTrace, code, sql, python, inputLabel,
   url: `https://leetcode.com/problems/${meta.slug}/`,

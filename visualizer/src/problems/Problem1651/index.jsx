@@ -7,6 +7,10 @@ const definition = {
   phases, parse: parseInput, build: buildTrace, code, sql, python, inputLabel,
   url: `https://leetcode.com/problems/${meta.slug}/`,
   complexity, examples,
+  question: "Slide a three-month window across 2020 and average the accepted ride distances inside each window.",
+  approaches: [
+    { name: "Rolling window", intuition: "For each window, group the rides in the three months and average the distance.", time: "O(months * rides)", space: "O(rides in window)" },
+  ],
 }
 
 function Rows({ columns = [], rows = [] }) {

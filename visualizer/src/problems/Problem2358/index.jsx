@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with grades (1 to 12 positive integers, one per student)',
   url: 'https://leetcode.com/problems/maximum-number-of-groups-entering-a-competition/',
   complexity: 'O(sqrt(n)) time for the group sizes. The visualization caps input at 12 students.',
+  question: "Form the largest number of groups where each group has more students than the previous one.",
+  approaches: [
+    { name: "Grow group sizes greedily", intuition: "Form groups of size one, two, three and so on, using the students available.", time: "O(sqrt(n))", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"grades":[10,6,12]}' },
     { label: 'Own: three grades', input: '{"grades":[15,4,9]}' },

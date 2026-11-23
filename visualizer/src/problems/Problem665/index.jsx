@@ -13,6 +13,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Array (JSON array of integers)',
   url: 'https://leetcode.com/problems/non-decreasing-array/',
   complexity: 'O(n) time and O(n) space for the working copy.',
+  question: "Decide whether one change to an array can make it non-decreasing.",
+  approaches: [
+    { name: "Single violation check", intuition: "Count the places where a value drops below its predecessor and decide whether one adjustment repairs them.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Fixable', input: '[5,7,3,9]' },
     { label: 'Early drop', input: '[2,1,4,6]' },

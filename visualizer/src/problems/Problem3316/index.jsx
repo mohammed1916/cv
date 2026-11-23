@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON object with source, pattern and targetIndices',
   url: 'https://leetcode.com/problems/find-maximum-removals-from-source-string/',
   complexity: 'O(n * m) time and O(m) space for the pattern DP. The visualization caps source at 16 characters.',
+  question: "Remove as many characters as possible from a source string while the pattern is still a subsequence of it.",
+  approaches: [
+    { name: "Pattern dynamic programming", intuition: "Track for each prefix of source and pattern whether the rest can still be matched, then count removable characters.", time: "O(n * m)", space: "O(m)" },
+  ],
   examples: [
     { label: 'Subsequence with a gap', input: '{"source":"opqrs","pattern":"pqs","targetIndices":[1,4]}' },
     { label: 'Own: remove two indices', input: '{"source":"yabcb","pattern":"ab","targetIndices":[0,3]}' },

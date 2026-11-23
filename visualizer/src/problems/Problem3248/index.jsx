@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON object with n and commands (UP, DOWN, LEFT, RIGHT)',
   url: 'https://leetcode.com/problems/snake-in-matrix/',
   complexity: 'O(commands) time. The visualization caps n at 8 and the commands at 40.',
+  question: "Follow a snake that starts in cell 0 of an n by n grid through a list of UP, DOWN, LEFT and RIGHT moves, then report its final cell index.",
+  approaches: [
+    { name: "Simulate the row and column", intuition: "Apply each move to a row and column pair, then encode the final pair as row times n plus column.", time: "O(commands)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Three by three, right then left', input: '{"n":3,"commands":["RIGHT","RIGHT","DOWN","LEFT","LEFT"]}' },
     { label: 'Own: zigzag on 4 by 4', input: '{"n":4,"commands":["RIGHT","RIGHT","DOWN","LEFT","DOWN"]}' },

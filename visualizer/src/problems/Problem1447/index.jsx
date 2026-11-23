@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Largest denominator n',
   url: 'https://leetcode.com/problems/simplified-fractions/',
   complexity: 'O(n^2 log n) time for every pair of numerator and denominator, with O(n^2) output.',
+  question: "List all fractions between zero and one with no common factor in top and bottom.",
+  approaches: [
+    { name: "Check every pair", intuition: "Try every numerator and denominator and keep those with gcd one.", time: "O(n^2 log n)", space: "O(n^2)" },
+  ],
   examples: [
     { label: 'Six', input: '6' },
     { label: 'Two', input: '2' },

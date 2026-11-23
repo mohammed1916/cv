@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'JSON {"nums": [...], "queries": [[1, l, r] or [2, index, value], ...]}',
   url: 'https://leetcode.com/problems/peaks-in-array/',
   complexity: 'O(log n) per query with the Fenwick tree and O(1) peak rechecks per update. The visualization caps input at 12 values.',
+  question: "Answer peak queries on an array where updates change values and a range query counts peaks inside the range.",
+  approaches: [
+    { name: "Fenwick tree of peak marks", intuition: "A peak changes only near an update, so three positions are rechecked, and range counts come from a Fenwick tree.", time: "O(log n) per query", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"nums":[3,1,4,2,5],"queries":[[2,2,4],[1,0,2],[1,0,4]]}' },
     { label: 'Example 2', input: '{"nums":[4,1,4,2,1,5],"queries":[[2,2,4],[1,0,2],[1,0,5]]}' },

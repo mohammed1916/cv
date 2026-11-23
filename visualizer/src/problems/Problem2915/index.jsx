@@ -13,6 +13,11 @@ const definition = {
   inputLabel: 'Input (JSON object with nums and target)',
   url: 'https://leetcode.com/problems/length-of-the-longest-subsequence-that-sums-to-target/',
   complexity: 'O(n * target) time and O(target) space. The visualization caps nums at 12 entries and target at 30.',
+  question: "Find the length of the longest subsequence of the numbers whose sum equals the target, or -1 if none exists.",
+  approaches: [
+    { name: "Knapsack over sums", intuition: "Track the longest subsequence reaching each sum up to target, processing each number once.", time: "O(n target)", space: "O(target)" },
+    { name: "Enumerate subsequences", intuition: "Try every subset and keep the longest one with the target sum.", time: "exponential", space: "O(n)" },
+  ],
   examples: [
     { label: 'Three values', input: '{"nums":[2,3,5,4],"target":10}' },
     { label: 'Repeats help', input: '{"nums":[1,3,3,1,2],"target":5}' },

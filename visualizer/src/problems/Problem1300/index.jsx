@@ -8,6 +8,10 @@ const definition = {
   inputLabel: 'Object with arr and target (JSON)',
   url: 'https://leetcode.com/problems/sum-of-mutated-array-closest-to-target/',
   complexity: 'O(n log M) time, where M is the largest element, and O(1) extra space beyond the input.',
+  question: "Find the integer value that makes the sum of the array closest to a target after capping values at that value.",
+  approaches: [
+    { name: "Binary search on the cap", intuition: "Search the cap value for the sum closest to the target.", time: "O(n log M)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Exact hit', input: '{"arr":[1,5,9,2],"target":14}' },
     { label: 'Below the top', input: '{"arr":[2,3,5],"target":10}' },

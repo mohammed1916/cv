@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Object with nums1 and nums2 (JSON)',
   url: 'https://leetcode.com/problems/max-dot-product-of-two-subsequences/',
   complexity: 'O(m * n) time and O(m * n) space for lists of lengths m and n; this view caps each list at 12 values.',
+  question: "Choose non-empty subsequences from two arrays to maximise the sum of their pairwise dot products.",
+  approaches: [
+    { name: "2D dynamic programming", intuition: "Each cell is the best value using a prefix of each array, with the option of pairing the current values.", time: "O(m * n)", space: "O(m * n)" },
+  ],
   examples: [
     { label: 'Pair across lists', input: '{"nums1":[3,-1,4],"nums2":[2,6,-5]}' },
     { label: 'All negative', input: '{"nums1":[-1,-2],"nums2":[1,2]}' },

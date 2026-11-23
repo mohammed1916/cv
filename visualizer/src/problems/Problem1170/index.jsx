@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON {"queries": [strings], "words": [strings]}',
   url: 'https://leetcode.com/problems/compare-strings-by-frequency-of-the-smallest-character/description/',
   complexity: 'O(L (Q + W)) time for Q queries, W words and string length L, plus the space for the word scores. The visualization caps each list at 20 strings.',
+  question: "Compare each query string with each word using the frequency of the smallest letter, and count the words with a larger value.",
+  approaches: [
+    { name: "Precomputed scores and sorting", intuition: "Compute each string's smallest-letter frequency once, sort the word scores, and binary search for each query.", time: "O(L (Q + W) + (Q + W) log W)", space: "O(W)" },
+  ],
   examples: [
     { label: 'Sample', input: '{"queries":["cbd","zzz","aaaa"],"words":["cc","ab","bbb","abcd"]}' },
     { label: 'Ties', input: '{"queries":["ab"],"words":["bb","ax","c"]}' },

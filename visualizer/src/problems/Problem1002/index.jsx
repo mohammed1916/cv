@@ -8,6 +8,10 @@ const definition = {
   inputLabel: 'List of lowercase words (JSON)',
   url: 'https://leetcode.com/problems/find-common-characters/',
   complexity: 'O(W * L + 26) time for W words of length L at most, and O(26) counting space.',
+  question: "Given a list of words, list each letter that appears in every word, repeated as many times as its smallest count across the words.",
+  approaches: [
+    { name: "Minimum count per letter", intuition: "Count letters in each word and keep the smallest count seen for each letter across all words.", time: "O(W * L + 26)", space: "O(26)" },
+  ],
   examples: [
     { label: 'Repeats kept', input: '["pepper","paper","reap"]' },
     { label: 'Two words', input: '["ab","ba"]' },

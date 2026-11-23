@@ -11,6 +11,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Tree (LeetCode level-order JSON array)',
   url: 'https://leetcode.com/problems/longest-univalue-path/',
   complexity: 'O(n) time and O(h) recursion space.',
+  question: "Find the longest path in a tree where every node has the same value.",
+  approaches: [
+    { name: "DFS returning arm lengths", intuition: "Each node returns its longest same-value arm, and joins two arms to form a path through it.", time: "O(n)", space: "O(h)" },
+  ],
   examples: [
     { label: 'Three equal', input: '[2,2,2,2,null,2]' },
     { label: 'Mixed', input: '[1,2,3,2,2,null,3]' },

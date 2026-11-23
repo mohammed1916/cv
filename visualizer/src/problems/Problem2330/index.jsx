@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Lowercase string (e.g. kitten)',
   url: 'https://leetcode.com/problems/valid-palindrome-iv/',
   complexity: 'O(n) time and O(1) extra space. The visualization caps the string at 20 letters.',
+  question: "Decide whether a string can become a palindrome by changing at most two characters.",
+  approaches: [
+    { name: "Count mismatched pairs", intuition: "Compare each mirrored pair of characters and count the mismatches.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Two mismatches', input: 'kitten' },
     { label: 'Three mismatches', input: 'harbors' },

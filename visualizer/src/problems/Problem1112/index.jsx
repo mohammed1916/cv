@@ -5,6 +5,10 @@ import SqlStages from './SqlStages'
 import './SqlStages.css'
 
 const definition = {
+  question: "For each student, report the course with the highest grade, breaking ties by the lower course number.",
+  approaches: [
+    { name: "Join and group in SQL", intuition: "Rank each student's enrollments by grade and course, and keep the top one.", time: "O(n log n)", space: "O(n)" },
+  ],
   number: meta.number,
   phases, parse: parseInput, build: buildTrace, code, sql, python, inputLabel,
   url: `https://leetcode.com/problems/${meta.slug}/`,

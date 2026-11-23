@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON string of lowercase letters and digits (e.g. "a1b2c3")',
   url: 'https://leetcode.com/problems/reformat-the-string/',
   complexity: 'O(n) time and O(n) space, where n is the string length.',
+  question: "Rearrange a string so letters and digits alternate, if possible.",
+  approaches: [
+    { name: "Split and interleave", intuition: "Separate letters and digits, then merge them one by one.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Mixed', input: '"a1b2c3"' },
     { label: 'Digits first', input: '"123abc4"' },

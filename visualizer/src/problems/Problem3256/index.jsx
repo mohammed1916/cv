@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with grid, a rectangle of integers from -9 to 9 with 3 to 6 rows and columns, for example {"grid":[[1,2,3],[4,5,6],[7,8,9]]}',
   url: 'https://leetcode.com/problems/maximum-value-sum-by-placing-three-rooks-i/',
   complexity: 'O(m^3 * n^3) time with this enumeration. The visualization caps the board at 6 by 6.',
+  question: "Place three rooks on a board so that no two share a row or column, maximising the sum of the chosen cell values.",
+  approaches: [
+    { name: "Enumerate rook placements", intuition: "Try every set of three cells with distinct rows and columns and keep the largest sum.", time: "O(m^3 * n^3)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"grid":[[-3,1,1,-3],[-3,1,-3,1],[-3,2,1,2]]}' },
     { label: 'Example 2', input: '{"grid":[[1,2,3],[4,5,6],[7,8,9]]}' },

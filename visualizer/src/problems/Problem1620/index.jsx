@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with towers [x, y, quality] and radius (JSON)',
   url: 'https://leetcode.com/problems/coordinate-with-maximum-network-quality/',
   complexity: 'O(X * Y * towers) time for the scan. The visualization caps coordinates and qualities at 20.',
+  question: "Find the integer point where a set of towers gives the highest network quality, given each tower's position, radius and strength.",
+  approaches: [
+    { name: "Scan every point", intuition: "Check each candidate coordinate against every tower and keep the best quality.", time: "O(X * Y * towers)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Three towers, radius four', input: '{"towers":[[1,2,5],[6,3,9],[4,8,2]],"radius":4}' },
     { label: 'Single tower', input: '{"towers":[[12,11,15]],"radius":9}' },

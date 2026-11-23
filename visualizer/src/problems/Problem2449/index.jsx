@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with nums and target (equal-length arrays, same sum and same odd count)',
   url: 'https://leetcode.com/problems/minimum-number-of-operations-to-make-arrays-similar/',
   complexity: 'O(n log n) time for the sorts. The visualization caps input at 6 values.',
+  question: "Make one array similar to another by adding or subtracting 2 from elements, and find the fewest operations.",
+  approaches: [
+    { name: "Sort odd and even values apart", intuition: "Operations keep parity, so sort the odd values and the even values separately and pair them in order.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Three values, equal sums', input: '{"nums":[5,2,8],"target":[7,4,4]}' },
     { label: 'Example 2', input: '{"nums":[1,2,5],"target":[2,5,1]}' },

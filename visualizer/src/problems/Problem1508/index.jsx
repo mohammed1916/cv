@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Object with nums, left and right (JSON)',
   url: 'https://leetcode.com/problems/range-sum-of-sorted-subarray-sums/',
   complexity: 'O(n² log n) time and O(n²) space: build every subarray sum, then sort. Fine for the small visual sizes.',
+  question: "Find the sum of the subarray sums from index left to right in the sorted list of all subarray sums.",
+  approaches: [
+    { name: "Enumerate, sort and sum", intuition: "Build every subarray sum, sort them, and add the requested range.", time: "O(n^2 log n)", space: "O(n^2)" },
+  ],
   examples: [
     { label: 'Sample A', input: '{"nums":[1,2,3,4],"left":1,"right":10}' },
     { label: 'Middle ranks', input: '{"nums":[5,9,2],"left":2,"right":4}' },

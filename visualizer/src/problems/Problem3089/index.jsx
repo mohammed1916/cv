@@ -4,6 +4,10 @@ import { meta } from './meta'
 import { buildTrace, parseInput, code, sql, python, phases, examples, complexity, inputLabel } from './algorithm'
 
 const definition = {
+  question: "Find users whose busiest seven-day stretch in February 2024 holds at least half of their February posts.",
+  approaches: [
+    { name: "Windows that start on a post day", intuition: "Only windows starting on a day the user posted need checking, so slide over those days and compare each window to half the total.", time: "O(p log p) for p posts", space: "O(p)" },
+  ],
   number: meta.number,
   phases, parse: parseInput, build: buildTrace, code, sql, python, inputLabel, complexity, examples,
   url: `https://leetcode.com/problems/${meta.slug}/`,

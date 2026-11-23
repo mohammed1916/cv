@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON object with nums1, nums2 (equal length) and k',
   url: 'https://leetcode.com/problems/minimum-operations-to-make-array-equal-ii/',
   complexity: 'O(n) time and O(n) space. The visualization caps the arrays at ten entries.',
+  question: "Add or subtract k in pairs to make two arrays equal, minimising the number of operations.",
+  approaches: [
+    { name: "Balance the differences", intuition: "Check that each difference is a multiple of k and that the positive and negative parts balance.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Five pairs, k three', input: '{"nums1":[7,1,3,8,2],"nums2":[4,6,2,9,5],"k":3}' },
     { label: 'Repeated values in one list', input: '{"nums1":[12,12,12],"nums2":[1,30,2],"k":1}' },

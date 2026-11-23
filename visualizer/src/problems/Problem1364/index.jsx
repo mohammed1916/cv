@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Object with customers, contacts and invoices (JSON lists)',
   url: 'https://leetcode.com/problems/number-of-trusted-contacts-of-a-customer/',
   complexity: 'One pass over contacts to build per-user totals, then one lookup per invoice. The visualization caps the tables at 8 customers, 10 contacts and 8 invoices.',
+  question: "For each customer, count trusted contacts and total their invoices.",
+  approaches: [
+    { name: "Aggregate then look up", intuition: "Count contacts and totals per customer, then look up each customer.", time: "O(n + m)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Sample', input: '{"customers":[{"customer_id":1,"customer_name":"Ana","email":"ana@x.io"},{"customer_id":2,"customer_name":"Ben","email":"ben@x.io"},{"customer_id":3,"customer_name":"Cy","email":"cy@x.io"}],"contacts":[{"user_id":1,"contact_name":"Ben","contact_email":"ben@x.io"},{"user_id":1,"contact_name":"Zed","contact_email":"zed@y.io"},{"user_id":2,"contact_name":"Ana","contact_email":"ana@x.io"}],"invoices":[{"invoice_id":13,"user_id":3,"price":90},{"invoice_id":11,"user_id":1,"price":50},{"invoice_id":12,"user_id":2,"price":20}]}' },
     { label: 'No contacts', input: '{"customers":[{"customer_id":4,"customer_name":"Dee","email":"dee@x.io"}],"contacts":[],"invoices":[{"invoice_id":21,"user_id":4,"price":15}]}' },

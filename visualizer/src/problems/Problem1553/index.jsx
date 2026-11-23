@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with n (1 to 2000)',
   url: 'https://leetcode.com/problems/minimum-number-of-days-to-eat-n-oranges/',
   complexity: 'O(log n) distinct states are reached, so the memoized recursion is fast. The visualization caps n at 2000.',
+  question: "Find the fewest days to eat n oranges when one day you can eat one, half, or two thirds.",
+  approaches: [
+    { name: "Memoised recursion", intuition: "Only a few distinct counts are reached, so memoise each count and try the division options.", time: "O(log n) states", space: "O(log n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"n":10}' },
     { label: 'Example 2', input: '{"n":6}' },

@@ -11,6 +11,10 @@ const definition = {
   inputLabel: 'Object with arrivals, w and m',
   url: 'https://leetcode.com/problems/minimum-discards-to-balance-inventory/',
   complexity: 'O(n^2) in this straightforward version, because each day scans the kept list. A per-type queue would make it O(n).',
+  question: "Discard arrivals so that no inventory window holds too many items of a type, and count the discards.",
+  approaches: [
+    { name: "Scan kept list", intuition: "Scan the kept list for each day to decide whether each arrival can stay.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example', input: '{"arrivals":[4,4,2,4,4],"w":3,"m":2}' },
     { label: 'Tight limit', input: '{"arrivals":[1,1,1,2,1],"w":4,"m":1}' },

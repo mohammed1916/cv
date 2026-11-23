@@ -14,6 +14,10 @@ const definition = {
   complexity,
   inputLabel: 'Object with releaseTimes (strictly increasing) and keysPressed (one lowercase letter per release)',
   url: 'https://leetcode.com/problems/slowest-key/',
+  question: "Given release times and the keys pressed, find the key that was held the longest, breaking ties with the larger key.",
+  approaches: [
+    { name: "Single scan", intuition: "Track the longest press so far, replacing it when a later press is longer or ties with a larger key.", time: "O(n)", space: "O(1)" },
+  ],
 }
 
 export default function Problem1629Visualizer() {

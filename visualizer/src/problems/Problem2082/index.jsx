@@ -12,6 +12,10 @@ const definition = {
   phases, parse: parseInput, build: buildTrace, code, sql, python, inputLabel,
   url: `https://leetcode.com/problems/${meta.slug}/`,
   complexity, examples,
+  question: "Count customers whose total spending is above a threshold.",
+  approaches: [
+    { name: "Group and filter", intuition: "Sum spending per customer and keep customers above the threshold.", time: "O(n)", space: "O(n)" },
+  ],
 }
 
 function Rows({ columns = [], rows = [] }) {

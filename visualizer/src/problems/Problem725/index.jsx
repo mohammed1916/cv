@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'values and k (JSON object)',
   url: 'https://leetcode.com/problems/split-linked-list-in-parts/',
   complexity: 'O(n + k) time for the walk and the cuts; the parts reuse the existing nodes.',
+  question: "Split a linked list into k consecutive parts whose lengths differ by at most one.",
+  approaches: [
+    { name: "Count then cut", intuition: "Count the nodes, then cut them into k parts, with earlier parts one longer when needed.", time: "O(n + k)", space: "O(k)" },
+  ],
   examples: [
     { label: 'Uneven', input: '{"values":[4,8,15,16,23],"k":2}' },
     { label: 'Empty tail', input: '{"values":[7,7,7],"k":4}' },

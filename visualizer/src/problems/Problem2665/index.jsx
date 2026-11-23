@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with init and ops (increment, decrement, reset)',
   url: 'https://leetcode.com/problems/counter-ii/',
   complexity: 'O(1) per call. The closure holds one number.',
+  question: "Write a counter that starts at an initial value and returns increasing numbers, plus a reset and decrement operation.",
+  approaches: [
+    { name: "Closure over the current value", intuition: "Keep the value in a closure and update it on each method call.", time: "O(1)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Mixed calls', input: '{"init":3,"ops":["increment","decrement","reset","increment"]}' },
     { label: 'Only decrements', input: '{"init":-2,"ops":["decrement","decrement"]}' },

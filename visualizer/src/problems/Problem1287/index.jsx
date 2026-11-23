@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Sorted array (JSON)',
   url: 'https://leetcode.com/problems/element-appearing-more-than-25-in-sorted-array/',
   complexity: 'O(n) time and O(1) extra space: one left-to-right pass over the sorted runs.',
+  question: "Find the value that occupies more than a quarter of a sorted array.",
+  approaches: [
+    { name: "Check candidates in the run", intuition: "Only a few positions can start such a run, so test those positions.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Clear majority run', input: '[1,1,2,3,3,3,4,5]' },
     { label: 'Early run', input: '[7,7,7,7,9]' },

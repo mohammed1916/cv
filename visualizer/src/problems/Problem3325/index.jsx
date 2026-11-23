@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON object with s and k',
   url: 'https://leetcode.com/problems/count-substrings-with-k-frequency-characters-i/',
   complexity: 'O(n^2) time in the worst case and O(1) extra space for 26 letters. The visualization caps input at 12 letters.',
+  question: "Count substrings that contain some letter at least k times, for a short string.",
+  approaches: [
+    { name: "Check every substring", intuition: "For each start, extend the end and count substrings in which some letter reaches k occurrences.", time: "O(n^2)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Repeated block, k two', input: '{"s":"abcabc","k":2}' },
     { label: 'Four letters, k five', input: '{"s":"zyxw","k":5}' },

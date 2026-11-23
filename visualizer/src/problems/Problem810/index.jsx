@@ -12,6 +12,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Array nums (JSON)',
   url: 'https://leetcode.com/problems/chalkboard-xor-game/',
   complexity: 'O(n) time, O(1) extra space; the game tree is never searched.',
+  question: "Players take turns erasing one number from a chalkboard, and a player whose move makes the XOR of the remaining numbers zero loses; decide whether the first player wins.",
+  approaches: [
+    { name: "Parity rule", intuition: "If the count is even or the XOR is already zero, the first player wins; otherwise the parity of the count decides the result.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Three piles', input: '[3,5,6]' },
     { label: 'Four values, even count', input: '[9,10,21,4]' },

@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Formula (JSON string)',
   url: 'https://leetcode.com/problems/number-of-atoms/',
   complexity: 'O(n) time for the scan and O(n) space for the stack of levels.',
+  question: "Count the atoms in a chemical formula that may include nested parentheses and multipliers.",
+  approaches: [
+    { name: "Stack of counts", intuition: "Keep a stack of atom counts for each open parenthesis; a closing group multiplies into its parent.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Ethanol', input: '"C2H5OH"' },
     { label: 'Iron cyclo', input: '"Fe(C5H5)2"' },

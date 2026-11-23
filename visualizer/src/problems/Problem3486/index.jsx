@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'Object with edges ([u, v, length] triples) and nums',
   url: 'https://leetcode.com/problems/longest-special-path-ii/',
   complexity: 'O(n * depth) time in this walk-up model; the visualization caps n at 10.',
+  question: "Find the longest path in a tree from a node that never repeats a value, with at most one branch allowed.",
+  approaches: [
+    { name: "Walk up from each node", intuition: "Walk up from each node to the root and keep the best special path.", time: "O(n * depth)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example', input: '{"edges":[[0,1,2],[1,2,3],[1,3,4]],"nums":[1,2,1,3]}' },
     { label: 'Path', input: '{"edges":[[0,1,4]],"nums":[7,7]}' },

@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Board rows and word (JSON)',
   url: 'https://leetcode.com/problems/check-if-word-can-be-placed-in-crossword/',
   complexity: 'O(m * n * L) time: each run is compared with the word and its reverse.',
+  question: "Decide whether a word can be placed in a crossword grid, either across or down, into an empty space of its exact length.",
+  approaches: [
+    { name: "Check each row and column segment", intuition: "For every maximal run of empty cells in each row and column, test the word in both directions.", time: "O(m n max(m, n))", space: "O(max(m, n))" },
+  ],
   examples: [
     { label: 'Vertical slot', input: '{"board":[" # ","   ","# #"],"word":"ab"}' },
     { label: 'Reversed across', input: '{"board":["ab#"],"word":"ba"}' },

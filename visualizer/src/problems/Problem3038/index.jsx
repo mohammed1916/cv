@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Array of 2 to 40 integers from 1 to 1000, for example [3,2,1,4,5]',
   url: 'https://leetcode.com/problems/maximum-number-of-operations-with-the-same-score-i/',
   complexity: 'O(n) time and O(1) extra space. The visualization caps the array at 40 numbers.',
+  question: "Count the operations that remove the first two values when their sum equals the same target as before.",
+  approaches: [
+    { name: "Greedy pair scan", intuition: "Remove the first two values, record their sum, then keep removing pairs that have the same sum.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Six mixed values', input: '[7,2,9,4,5,1]' },
     { label: 'Example 2', input: '[3,2,6,1,4]' },

@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with a Listens list (user_id, song_id, day) and a Friendship list (user1_id, user2_id)',
   url: 'https://leetcode.com/problems/leetcodify-friends-recommendations/',
   complexity: 'O(s * u^2) in the worst case for s song-day groups with u listeners, plus a sort of the recommendations.',
+  question: "Recommend pairs of users who are not friends and have listened to at least one common song, without repeating a pair.",
+  approaches: [
+    { name: "Join listens then filter", intuition: "Join listens on the same song, drop existing friends and self pairs, and remove duplicates.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Sample', input: sampleText },
     { label: 'One listen, no friends', input: '{"Listens":[{"user_id":1,"song_id":10,"day":"d1"}],"Friendship":[]}' },

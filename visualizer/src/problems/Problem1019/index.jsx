@@ -8,6 +8,10 @@ const definition = {
   inputLabel: 'JSON {"values": [...]} with values 1 to 10, in list order',
   url: 'https://leetcode.com/problems/next-greater-node-in-linked-list/',
   complexity: 'O(n) time and O(n) space with a monotonic stack.',
+  question: "For each node in a linked list, find the value of the next strictly larger node after it, or zero if none exists.",
+  approaches: [
+    { name: "Monotonic stack", intuition: "Scan forward with a stack of nodes still waiting for a larger value; each larger value resolves the waiting nodes below it.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"values":[2,1,5]}' },
     { label: 'Example 2', input: '{"values":[2,7,4,3,5]}' },

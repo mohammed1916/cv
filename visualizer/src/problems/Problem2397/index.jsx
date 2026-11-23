@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Binary matrix and number of columns to choose (JSON object with matrix and num_select)',
   url: 'https://leetcode.com/problems/maximum-rows-covered-by-columns/',
   complexity: 'O(2^n * m) time for an m by n matrix. The visualization caps the matrix at 6 by 6.',
+  question: "Choose a set of columns, with at most numSelect of them, to cover as many rows as possible.",
+  approaches: [
+    { name: "Try every column subset", intuition: "Enumerate column subsets of the allowed size and count the covered rows for each.", time: "O(2^n * m)", space: "O(m)" },
+  ],
   examples: [
     { label: 'Official', input: '{"matrix":[[0,0,0],[1,0,1],[0,1,1],[0,0,1]],"num_select":2}' },
     { label: 'Single column', input: '{"matrix":[[1],[0]],"num_select":1}' },

@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'nums and k (JSON object)',
   url: 'https://leetcode.com/problems/largest-sum-of-averages/',
   complexity: 'O(k * n^2) time and O(k * n) space.',
+  question: "Split an array into at most k contiguous groups to maximise the sum of the group averages.",
+  approaches: [
+    { name: "Layered DP over groups", intuition: "dp after g groups gives the best total for each prefix; the last group runs from some earlier index to the current one.", time: "O(k n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Three groups', input: '{"nums":[9,1,2,3,9],"k":3}' },
     { label: 'Two groups', input: '{"nums":[4,1,7,2],"k":2}' },

@@ -9,6 +9,10 @@ const definition = {
   inputLabel: 'List values (JSON array of integers)',
   url: 'https://leetcode.com/problems/sort-list/',
   complexity: 'O(n log n) time and O(log n) recursion stack, because the list is split in halves and merged without copying nodes. The visualization caps the list at 32 values.',
+  question: "Sort a linked list in ascending order.",
+  approaches: [
+    { name: "Top-down merge sort", intuition: "Split the list in half with slow and fast pointers, sort each half, then merge them.", time: "O(n log n)", space: "O(log n) recursion stack" },
+  ],
   examples: [
     { label: 'Mixed', input: '[9,-3,5,0,7,2]' },
     { label: 'Duplicates', input: '[4,4,1,4]' },

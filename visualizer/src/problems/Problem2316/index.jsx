@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with n and edges, e.g. {"n":7,"edges":[[0,2],[0,5]]}',
   url: 'https://leetcode.com/problems/count-unreachable-pairs-of-nodes-in-an-undirected-graph/',
   complexity: 'O(n + m * alpha(n)) time with union-find. The visualization caps n at 20 nodes.',
+  question: "In an undirected graph, count pairs of nodes that cannot reach each other.",
+  approaches: [
+    { name: "Union-find component sizes", intuition: "Merge connected nodes and count pairs across different components from the component sizes.", time: "O(n + m * alpha(n))", space: "O(n)" },
+  ],
   examples: [
     { label: 'Chain plus pair', input: '{"n":6,"edges":[[0,2],[2,4],[4,1],[3,5]]}' },
     { label: 'Two components', input: '{"n":5,"edges":[[0,1],[1,2],[3,4]]}' },

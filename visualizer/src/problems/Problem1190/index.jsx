@@ -10,6 +10,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, pythonLineMap, phases,
   inputLabel: 'Text with brackets (JSON object)',
   complexity: 'O(n) time and O(n) extra space: a stack pairs brackets, then one walk writes each letter once.',
+  question: "Reverse the letters inside every pair of matching parentheses, starting from the innermost pair.",
+  approaches: [
+    { name: "Stack of segments", intuition: "Push the text at each open bracket and reverse it when the matching close bracket appears.", time: "O(n)", space: "O(n)" },
+  ],
   examples: authoredExamples0,
 };
 

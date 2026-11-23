@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with root (level order) and start value (JSON)',
   url: 'https://leetcode.com/problems/amount-of-time-for-binary-tree-to-be-infected/',
   complexity: 'O(n) time and O(n) space for n nodes. The visualization caps the tree at 15 entries.',
+  question: "Starting from one node in a binary tree, find how many minutes it takes for the infection to reach every node.",
+  approaches: [
+    { name: "Tree to graph BFS", intuition: "Turn the tree into an undirected graph and run a BFS from the starting node, reading the largest distance.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Nine nodes, start 3', input: '{"root":[5,3,8,1,null,6,9,null,2],"start":3}' },
     { label: 'Chain', input: '{"root":[1,2,null,3,null,4,null,5],"start":3}' },

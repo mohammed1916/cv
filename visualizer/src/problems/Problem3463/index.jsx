@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with s, a string of 3 to 12 digits',
   url: 'https://leetcode.com/problems/check-if-digits-are-equal-in-string-after-operations-ii/',
   complexity: 'Simulation takes O(n^2) time here because the visualization caps s at 12 digits. The full problem needs a faster counting method for long strings.',
+  question: "Repeatedly replace a digit string by pairwise sums mod 10 and check whether the final two digits are equal.",
+  approaches: [
+    { name: "Simulate the rounds", intuition: "Apply each round to the digits in the visualization's short inputs.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Equal', input: '{"s":"9999"}' },
     { label: 'Different', input: '{"s":"5678"}' },

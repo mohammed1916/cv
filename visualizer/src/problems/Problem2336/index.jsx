@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON {"operations": ["popSmallest" | "addBack", ...], "arguments": [[], [x], ...]}',
   url: 'https://leetcode.com/problems/smallest-number-in-infinite-set/',
   complexity: 'O(log n) per operation with a min heap of added-back numbers. The visualization caps input at 12 operations.',
+  question: "Maintain the set of all positive integers that supports removing the smallest and adding back a number.",
+  approaches: [
+    { name: "Min heap plus pointer", intuition: "Keep a pointer for the next never-removed number and a min heap for numbers added back.", time: "O(log n) per operation", space: "O(n)" },
+  ],
   examples: [
     { label: 'Own: two adds and pops', input: '{"operations":["addBack","addBack","popSmallest","popSmallest","addBack","popSmallest"],"arguments":[[5],[3],[],[],[9],[]]}' },
     { label: 'Single pop', input: '{"operations":["popSmallest"],"arguments":[[]]}' },

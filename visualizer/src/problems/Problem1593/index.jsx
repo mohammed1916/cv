@@ -16,6 +16,10 @@ const definition = {
   inputLabel: 'Object with a lowercase string s (JSON)',
   url: 'https://leetcode.com/problems/split-a-string-into-the-max-number-of-unique-substrings/',
   complexity: 'Exponential in the length of s in the worst case. The visualization caps s at 12 characters.',
+  question: "Split a string into the largest number of unique non-empty pieces.",
+  approaches: [
+    { name: "Backtracking over splits", intuition: "Try each next piece that is still unused, and keep the largest count found.", time: "Exponential in the length of s", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"s":"ababccc"}' },
     { label: 'Example 2', input: '{"s":"aba"}' },

@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with x and y (1 to 200 each)',
   url: 'https://leetcode.com/problems/minimum-number-of-operations-to-make-x-and-y-equal/',
   complexity: 'O(L) time for a search over L bounded values, where L is about 10 times the larger input. The visualization caps x and y at 200.',
+  question: "Find the fewest operations that turn x into y using division or adjustment by one.",
+  approaches: [
+    { name: "BFS over bounded integers", intuition: "Run a breadth-first search from x over a bounded range, using the allowed operations as edges.", time: "O(L)", space: "O(L)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"x":18,"y":7}' },
     { label: 'Example 2', input: '{"x":9,"y":20}' },

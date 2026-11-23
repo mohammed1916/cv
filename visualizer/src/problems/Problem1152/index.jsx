@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with visits: [user, time, site] entries',
   url: 'https://leetcode.com/problems/analyze-user-website-visit-pattern/',
   complexity: 'O(u * v^3) for u users with at most v visits each, plus a sort. The visualization caps the input at 30 visits.',
+  question: "Find the most common three-site visit pattern in time order, counted across distinct users.",
+  approaches: [
+    { name: "Per-user pattern sets and counts", intuition: "For each user, list each distinct three-site pattern in time order once, count across users, and pick the most frequent, with ties broken alphabetically.", time: "O(u * v^3)", space: "O(u * v^3)" },
+  ],
   examples: [
     { label: 'Example', input: '{"visits":[["ann",1,"home"],["ann",2,"shop"],["ann",3,"cart"],["bo",1,"home"],["bo",2,"shop"],["bo",4,"cart"],["cy",1,"shop"],["cy",2,"home"],["cy",3,"cart"]]}' },
     { label: 'Tie', input: '{"visits":[["a",1,"x"],["a",2,"y"],["a",3,"z"],["b",1,"x"],["b",2,"y"],["b",3,"w"]]}' },

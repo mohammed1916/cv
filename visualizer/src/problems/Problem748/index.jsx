@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Plate and words (JSON)',
   url: 'https://leetcode.com/problems/shortest-completing-word/',
   complexity: 'O(total letters of words) time with a 26-letter counter; the trace shows one frame set per word (capped at 40 words).',
+  question: "Find the shortest word that contains every letter of a licence plate, counting repeats.",
+  approaches: [
+    { name: "Letter count covering", intuition: "Count the plate letters, then keep the shortest word whose letter counts cover them.", time: "O(total chars)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Letters and digits mixed', input: '{"licensePlate":"abc 12","words":["cabbage","bcaa","cba"]}' },
     { label: 'Two letters with digit', input: '{"licensePlate":"XY 9","words":["xylophone","yellow"]}' },

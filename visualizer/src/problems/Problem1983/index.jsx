@@ -8,6 +8,10 @@ const definition = {
   inputLabel: 'Two binary arrays of equal length (JSON)',
   url: 'https://leetcode.com/problems/widest-pair-of-indices-with-equal-range-sum/',
   complexity: 'O(n) time and O(n) space for the balance map.',
+  question: "Find the widest pair of indices whose prefix ranges in two arrays have equal sums.",
+  approaches: [
+    { name: "Prefix difference with first index map", intuition: "Track the running difference, store the first index of each difference, and keep the widest gap.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Equal prefix', input: '{"nums1":[1,0,0,1,1],"nums2":[1,1,0,0,0]}' },
     { label: 'Single swap', input: '{"nums1":[0,1],"nums2":[1,0]}' },

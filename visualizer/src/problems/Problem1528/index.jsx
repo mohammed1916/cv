@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Letters and destination indices (JSON object)',
   url: 'https://leetcode.com/problems/shuffle-string/',
   complexity: 'O(n) time and O(n) space: one pass drops each letter into its slot.',
+  question: "Restore a shuffled string using the index of each character.",
+  approaches: [
+    { name: "Place into slots", intuition: "Write each character at its target index in a new array.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Scrambled word', input: '{"s":"harvest","indices":[2,0,5,6,1,3,4]}' },
     { label: 'Already in order', input: '{"s":"abc","indices":[0,1,2]}' },

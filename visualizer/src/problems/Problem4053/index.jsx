@@ -17,6 +17,10 @@ const definition = {
   inputLabel: 'JSON array of positive integers, e.g. [10, 21, 34]',
   url: 'https://leetcode.com/problems/minimum-operations-to-make-every-element-palindromic/',
   complexity: 'O(P + n log P) time after building the sorted palindrome list P once, where P is about 2 * 10^5 values up to 10 digits. The visualization caps the array at 12 values.',
+  question: "Each step moves a value by two, so its parity is fixed; find the fewest operations that make every element palindromic.",
+  approaches: [
+    { name: "Nearest palindrome per value", intuition: "Use a sorted palindrome list and take the nearest palindrome of the same parity for each value.", time: "O(P + n log P)", space: "O(P)" },
+  ],
   examples: [
     { label: 'Mixed parities', input: '[10, 21, 34]' },
     { label: 'Already palindromes', input: '[1, 22, 303]' },

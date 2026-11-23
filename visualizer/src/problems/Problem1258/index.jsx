@@ -8,6 +8,10 @@ const definition = {
   inputLabel: 'Object with synonyms ([a, b] pairs) and text (single-space sentence)',
   url: 'https://leetcode.com/problems/synonymous-sentences/description/',
   complexity: 'O(p α(w) + S * n) time for p pairs, w words, S distinct sentences of n words, plus sorting. The visualization caps pairs at 10, words at 8, and combinations at 64; the draft does not state an exact official bound.',
+  question: "Generate all sentences formed by replacing words with their synonyms, where synonymy is transitive.",
+  approaches: [
+    { name: "Union-find and combinations", intuition: "Group synonyms with union-find, then enumerate every choice of one word per position.", time: "O(p + S x n)", space: "O(p + S x n)" },
+  ],
   examples: [
     { label: 'Two groups', input: '{"synonyms":[["happy","joy"],["sad","sorrow"],["joy","cheerful"]],"text":"I am happy today but was sad"}' },
     { label: 'One pair', input: '{"synonyms":[["big","large"]],"text":"big house"}' },

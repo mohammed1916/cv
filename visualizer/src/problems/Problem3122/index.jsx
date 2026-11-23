@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Grid (JSON object with grid)',
   url: 'https://leetcode.com/problems/minimum-number-of-operations-to-satisfy-conditions/',
   complexity: 'O(m * n * 10^2) time and O(10) space in this trace. The visualization caps the grid at 4 by 4.',
+  question: "Find the fewest cell changes so every column holds one colour and neighbouring columns use different colours.",
+  approaches: [
+    { name: "Dynamic programming over columns", intuition: "For each column and colour, keep the cheapest cost where the previous column used a different colour.", time: "O(m * n * 10^2)", space: "O(10)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"grid":[[3,3,7],[3,6,7],[3,6,6]]}' },
     { label: 'Example 2', input: '{"grid":[[4,4],[5,4]]}' },

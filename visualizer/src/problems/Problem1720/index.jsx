@@ -14,6 +14,10 @@ const definition = {
   complexity,
   inputLabel: 'Object with encoded (the XOR of neighbours) and first (arr[0])',
   url: 'https://leetcode.com/problems/decode-xored-array/',
+  question: "Recover an original array from its encoded form, where each encoded value is the XOR of two neighbours.",
+  approaches: [
+    { name: "Chain XOR", intuition: "Each next value is the previous value XOR the encoded value.", time: "O(n)", space: "O(n)" },
+  ],
 }
 
 export default function Problem1720Visualizer() {

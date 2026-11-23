@@ -10,6 +10,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, pythonLineMap, phases,
   inputLabel: 'Array and repeat count (JSON object)',
   complexity: 'O(n) time and O(1) extra space. The visualization reports the exact integer; apply a modulus only when the judge requires one.',
+  question: "Find the maximum subarray sum of the array repeated k times.",
+  approaches: [
+    { name: "Kadane plus totals", intuition: "Combine the best prefix, best suffix and the whole-array total, or use Kadane alone when k is one.", time: "O(n)", space: "O(1)" },
+  ],
   examples: authoredExamples0,
 };
 

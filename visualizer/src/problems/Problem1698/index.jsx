@@ -14,6 +14,10 @@ const definition = {
   complexity,
   inputLabel: 'JSON string of lowercase letters',
   url: 'https://leetcode.com/problems/number-of-distinct-substrings-in-a-string/',
+  question: "Count the distinct substrings of a string.",
+  approaches: [
+    { name: "Sorted suffixes", intuition: "Sort the suffixes; each suffix adds the prefix lengths not shared with the suffix before it.", time: "O(n^2 log n)", space: "O(n^2)" },
+  ],
 }
 
 export default function Problem1698Visualizer() {

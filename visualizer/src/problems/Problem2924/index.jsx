@@ -17,6 +17,10 @@ const definition = {
   inputLabel: 'JSON object with keys n and edges (e.g. {"n": 3, "edges": [[0,1],[1,2]]})',
   url: "https://leetcode.com/problems/find-champion-ii/",
   complexity: "O(n + m) time and O(n) space for n teams and m edges. The visualization caps n at 24 teams.",
+  question: "Given n teams and strength edges, find the unique team that no other team is stronger than.",
+  approaches: [
+    { name: "In-degree count", intuition: "Count incoming edges per team; the champion is the only team with zero incoming edges.", time: "O(n + m)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Five teams, two rivalries', input: '{"n":5,"edges":[[0,3],[3,4]]}' },
     { label: 'Six teams, four rivalries', input: '{"n":6,"edges":[[1,4],[2,5],[0,1],[3,5]]}' },

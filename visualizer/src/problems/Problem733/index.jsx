@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'image, sr, sc and color (JSON object)',
   url: 'https://leetcode.com/problems/flood-fill/',
   complexity: 'O(rows * columns) time and O(rows * columns) space for the stack in the worst case.',
+  question: "Recolour the connected region of matching pixels that touches a starting cell.",
+  approaches: [
+    { name: "Flood fill DFS", intuition: "Spread outwards from the start across neighbours with the original colour.", time: "O(mn)", space: "O(mn)" },
+  ],
   examples: [
     { label: 'Corner fill', input: '{"image":[[3,3,0],[3,0,0],[0,3,3]],"sr":0,"sc":0,"color":7}' },
     { label: 'Ring', input: '{"image":[[5,5,5],[5,1,5],[5,5,5]],"sr":0,"sc":1,"color":9}' },

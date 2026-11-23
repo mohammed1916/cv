@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'An object with arr (nested lists of integers) and n (depth limit)',
   url: 'https://leetcode.com/problems/flatten-deeply-nested-array/',
   complexity: 'O(size of the nested input) time and O(output) space for the walk.',
+  question: "Given a nested array and a depth, return a flattened copy of the array down to that depth.",
+  approaches: [
+    { name: "Recursive flatten", intuition: "Recurse into nested arrays while the depth allows, copying elements into one output list.", time: "O(size)", space: "O(output)" },
+  ],
   examples: [
     { label: 'Limit 1', input: '{"arr":[4,[5,[6,7]],[8]],"n":1}' },
     { label: 'Limit 0', input: '{"arr":[4,[5,[6,7]],[8]],"n":0}' },

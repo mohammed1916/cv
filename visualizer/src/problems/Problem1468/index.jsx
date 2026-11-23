@@ -16,6 +16,10 @@ const definition = {
   inputLabel: 'Object with a Salaries list of { company_id, employee_id, employee_name, salary } rows',
   url: 'https://leetcode.com/problems/calculate-salaries/',
   complexity: 'O(n) to find company maxima, plus a sort of the employees by id.',
+  question: "Compute each employee's salary after a tax rate chosen by their company's maximum salary.",
+  approaches: [
+    { name: "Company maximum join", intuition: "Find the maximum per company, join it back to each employee and apply the matching rate.", time: "O(n) plus a sort", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example', input: '{"Salaries":[{"company_id":1,"employee_id":1,"employee_name":"Alice","salary":2000},{"company_id":1,"employee_id":2,"employee_name":"Bob","salary":500},{"company_id":1,"employee_id":3,"employee_name":"Erin","salary":1001},{"company_id":2,"employee_id":4,"employee_name":"Carl","salary":15000},{"company_id":3,"employee_id":5,"employee_name":"Dan","salary":900}]}' },
     { label: 'One salary row', input: '{"Salaries":[{"company_id":1,"employee_id":1,"employee_name":"Ada","salary":0}]}' },

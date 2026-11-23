@@ -8,6 +8,10 @@ const definition = {
   inputLabel: 'String s of 2 to 12 lowercase letters (JSON)',
   url: 'https://leetcode.com/problems/maximum-product-of-the-length-of-two-palindromic-subsequences/',
   complexity: 'O(2^n * n^2) time: every split of the n positions, with an O(n^2) palindrome table per side.',
+  question: "Find the largest product of the lengths of two disjoint palindromic subsequences of a string.",
+  approaches: [
+    { name: "Bitmask over subsets", intuition: "For each subset of positions, test whether it spells a palindrome, then combine disjoint masks.", time: "O(2^n * n)", space: "O(2^n)" },
+  ],
   examples: [
     { label: 'Two palindromes', input: '{"s":"ababbb"}' },
     { label: 'Long runs', input: '{"s":"zaaaxbbby"}' },

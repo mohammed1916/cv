@@ -21,6 +21,11 @@ const definition = {
   inputLabel: 'Object with stream (the bits it yields) and pattern',
   url: 'https://leetcode.com/problems/find-pattern-in-infinite-stream-ii/',
   complexity: 'O(n + m) time and O(m) extra space for n bits read and a pattern of m bits. The visualization caps the stream at 60 bits and the pattern at 12 bits.',
+  question: "Find the first position where a pattern appears in an infinite stream, for a large pattern.",
+  approaches: [
+    { name: "KMP over the stream", intuition: "Track the matched prefix length as each bit arrives, using the prefix function.", time: "O(n + m)", space: "O(m)" },
+    { name: "Sliding window compare", intuition: "Compare the last window of bits with the pattern at each bit.", time: "O(n\u00b7m)", space: "O(m)" },
+  ],
   examples: [
     { label: 'Longer pattern', input: '{"stream":"101101110010","pattern":"110010"}' },
     { label: 'Long run of zeros', input: '{"stream":"0000000001","pattern":"0001"}' },

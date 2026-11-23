@@ -34,6 +34,10 @@ const definition = {
   python,
   inputLabel: 'Grid as JSON rows, e.g. [[1,0],[0,0]] (1 = land, 0 = water)',
   complexity: 'O(n²) time and space for an n by n grid. The trace accepts grids up to 6 by 6.',
+  question: "On a grid of land and water cells, find the water cell farthest from any land cell by Manhattan distance.",
+  approaches: [
+    { name: "Multi-source BFS", intuition: "Start a breadth-first search from every land cell at once, so the last water cell reached is the farthest.", time: "O(n^2)", space: "O(n^2)" },
+  ],
   examples: [
     { label: 'Three land cells', input: '[[1,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,1]]' },
     { label: 'Corner land', input: '[[1,0],[0,0]]' },

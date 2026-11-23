@@ -13,6 +13,11 @@ const definition = {
   inputLabel: 'Votes as JSON',
   url: 'https://leetcode.com/problems/election-results/',
   complexity: 'Walkthrough: distinct picks, equal shares, then tie-aware maximum.',
+  question: "From a table of votes, compute each candidate's total where each voter's single vote is shared equally among their distinct choices, and report the top candidates.",
+  approaches: [
+    { name: "Staged SQL with shares then grouping", intuition: "Remove duplicates and empty choices, compute each voter's share, sum per candidate, then keep the maximum totals.", time: "O(n log n)", space: "O(n)" },
+    { name: "Window function ranking", intuition: "Rank candidates by total with a window function and keep those tied for first.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [{ label: 'Sample tables', input: JSON.stringify(sample) },
     { label: "Single vote", input: "{\"votes\":[{\"voter\":\"A\",\"candidate\":\"X\"}]}" },
     { label: "Tie between candidates", input: "{\"votes\":[{\"voter\":\"A\",\"candidate\":\"X\"},{\"voter\":\"B\",\"candidate\":\"Y\"}]}" },

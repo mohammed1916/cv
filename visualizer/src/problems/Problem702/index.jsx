@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Sorted array and target (JSON)',
   url: 'https://leetcode.com/problems/search-in-a-sorted-array-of-unknown-size/',
   complexity: 'O(log n) reads. The visualization caps the array at 30 values.',
+  question: "Find a target in a sorted array whose length is unknown and can only be read by index.",
+  approaches: [
+    { name: "Exponential probe then binary search", intuition: "Double a probe index until it passes the target, then binary search the range it bounds.", time: "O(log target)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"arr":[-1,0,3,5,9,12],"target":9}' },
     { label: 'Missing', input: '{"arr":[-1,0,3,5,9,12],"target":2}' },

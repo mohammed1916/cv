@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'Object with nums: 1 to 12 integers from 0 to 5, e.g. {"nums":[3,1,2,1]}',
   url: 'https://leetcode.com/problems/minimum-operations-to-convert-all-elements-to-zero/',
   complexity: 'O(n) time and O(n) space for the stack. The visualization caps the input at 12 values.',
+  question: "Make every element of an array zero with the fewest operations, where each operation zeroes a run.",
+  approaches: [
+    { name: "Monotonic stack", intuition: "Keep a stack of positive values and pop when a smaller value appears.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"nums":[0,2]}' },
     { label: 'Example 2', input: '{"nums":[3,1,2,1]}' },

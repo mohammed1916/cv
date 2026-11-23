@@ -23,6 +23,10 @@ const definition = {
   inputLabel: "Level-order tree (JSON object, e.g. {\"root\": [-10,9,20,null,null,15,7]})",
   url: "https://leetcode.com/problems/binary-tree-maximum-path-sum/",
   complexity: "O(n) time and O(n) space for n nodes. The visualization caps the array at 60 slots.",
+  question: "Find the largest path sum in a binary tree, where a path may start and end at any node.",
+  approaches: [
+    { name: "Post-order gain", intuition: "Return the best one-side gain from each node and combine both sides at the node.", time: "O(n)", space: "O(h)" },
+  ],
   examples: getExamples("binary-tree-maximum-path-sum").map(({ label, input }) => ({ label, input: JSON.stringify({ root: JSON.parse(input) }) })),
 };
 

@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON object with nums, low and high, for example {"nums":[1,4,2,7],"low":2,"high":6}',
   url: 'https://leetcode.com/problems/count-pairs-with-xor-in-a-range/',
   complexity: 'O(n * B) time and O(n * B) space for B = 7 bits. The visualization caps nums at 12 values.',
+  question: "Count pairs whose bitwise xor lies between two limits.",
+  approaches: [
+    { name: "Bitwise trie count", intuition: "Insert each value into a binary trie and count earlier values whose xor stays below the limit.", time: "O(n * B)", space: "O(n * B)" },
+  ],
   examples: [
     { label: 'Pairs in a window', input: '{"nums":[12,7,30,4,18],"low":5,"high":20}' },
     { label: 'Wide window with repeats', input: '{"nums":[25,1,40,8,8,15],"low":9,"high":30}' },

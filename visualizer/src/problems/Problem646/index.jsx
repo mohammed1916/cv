@@ -12,6 +12,11 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Pairs (JSON array of [left, right])',
   url: 'https://leetcode.com/problems/maximum-length-of-pair-chain/',
   complexity: 'O(n log n) time for the sort and O(n) extra space for the sorted copy.',
+  question: "Find the longest chain of pairs where each pair starts after the previous pair ends.",
+  approaches: [
+    { name: "Greedy by end value", intuition: "Sort pairs by second value and take every pair that starts after the last taken end.", time: "O(n log n)", space: "O(1)" },
+    { name: "Longest-chain DP", intuition: "Compute the best chain ending at each pair.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Three steps', input: '[[1,3],[2,5],[4,6],[7,9]]' },
     { label: 'Overlap', input: '[[5,6],[1,2],[3,4],[2,3]]' },

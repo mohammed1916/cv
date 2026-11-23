@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with edges1 and edges2 (each a tree, up to 6 edges)',
   url: 'https://leetcode.com/problems/find-minimum-diameter-after-merging-two-trees/',
   complexity: 'O(n + m) time with two searches per tree. The visualization caps each tree at 6 edges.',
+  question: "Find the minimum diameter of a tree formed by joining two trees with one new edge.",
+  approaches: [
+    { name: "Combine the two diameters", intuition: "The new diameter is the larger original diameter or the path through the new edge, which is half of each diameter plus one.", time: "O(n + m)", space: "O(n + m)" },
+  ],
   examples: [
     { label: 'Example', input: '{"edges1":[[0,1]],"edges2":[[0,1],[1,2]]}' },
     { label: 'Single node', input: '{"edges1":[],"edges2":[[0,1]]}' },

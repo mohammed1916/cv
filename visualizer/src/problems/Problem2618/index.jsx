@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'JSON object with chain (nearest class first), target and primitive',
   url: 'https://leetcode.com/problems/check-if-object-instance-of-class/',
   complexity: 'O(k) time for a chain of k classes, O(1) extra space.',
+  question: "Given a value and a class, decide whether the value is an instance of the class by walking its prototype chain.",
+  approaches: [
+    { name: "Walk the prototype chain", intuition: "Start at the prototype of the value and move up until you find the class prototype or reach null.", time: "O(k)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Ancestor', input: '{"chain":["Dog","Animal","Object"],"target":"Animal"}' },
     { label: 'Primitive', input: '{"chain":["Object"],"target":"Object","primitive":true}' },

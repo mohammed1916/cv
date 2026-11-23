@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with word1 and word2 (JSON)',
   url: 'https://leetcode.com/problems/make-number-of-distinct-characters-equal/',
   complexity: 'O(a * b) time for a and b distinct letters, using counts only. The visualization caps each word at 20 letters.',
+  question: "Decide whether one swap of a letter between two words can make their counts of distinct letters equal.",
+  approaches: [
+    { name: "Count letters and try swaps", intuition: "Count each word's letters, then test each possible letter swap by adjusting the counts.", time: "O(a * b)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Swap works', input: '{"word1":"abcc","word2":"aab"}' },
     { label: 'No swap works', input: '{"word1":"ab","word2":"abcc"}' },

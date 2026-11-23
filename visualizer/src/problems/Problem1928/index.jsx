@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with max_time, edges, and passing_fees (JSON)',
   url: 'https://leetcode.com/problems/minimum-cost-to-reach-destination-in-time/',
   complexity: 'O(maxTime * E) time and O(maxTime * n) space. The visualization caps max_time at 8 and cities at 4.',
+  question: "Find the cheapest way to travel from the first city to the last within a time limit, where roads have travel times and tolls.",
+  approaches: [
+    { name: "DP over time and city", intuition: "For each elapsed time and city, keep the cheapest cost; extend along roads whose travel time fits in the limit.", time: "O(T * E)", space: "O(T * n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"max_time":3,"edges":[[0,1,1],[1,2,1],[0,2,3]],"passing_fees":[1,5,1]}' },
     { label: 'Example 2', input: '{"max_time":1,"edges":[[0,1,2]],"passing_fees":[1,2]}' },

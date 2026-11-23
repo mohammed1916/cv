@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON object with a grid of positive integers',
   url: 'https://leetcode.com/problems/get-biggest-three-rhombus-sums-in-a-grid/',
   complexity: 'O(mn * min(m, n)) time for all borders, with a constant-size top list. The visualization caps the grid at 6 by 6.',
+  question: "Find the three largest distinct sums of the border of a rhombus, taken over all centres and radii in a grid.",
+  approaches: [
+    { name: "Diagonal prefix sums", intuition: "Precompute prefix sums along both diagonals so each rhombus border sum costs constant time, then keep the top three.", time: "O(m n min(m, n))", space: "O(m n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"grid":[[3,4,5,1,3],[3,3,4,2,3],[20,1,0,3,4]]}' },
     { label: 'Single row', input: '{"grid":[[7,7,7]]}' },

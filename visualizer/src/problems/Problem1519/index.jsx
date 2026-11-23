@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Tree with n nodes, n-1 edges and lowercase labels (JSON object)',
   url: 'https://leetcode.com/problems/number-of-nodes-in-the-sub-tree-with-the-same-label/',
   complexity: 'O(n * 26) time and O(n * 26) space. The visualization caps the tree at 12 nodes.',
+  question: "For each node of a tree, count the nodes in its subtree that share its letter.",
+  approaches: [
+    { name: "DFS with letter counts", intuition: "Combine child count arrays of 26 letters and read the count of this node's letter.", time: "O(n * 26)", space: "O(n * 26)" },
+  ],
   examples: [
     { label: 'Path with repeated letters', input: '{"n":6,"edges":[[0,3],[3,1],[1,4],[4,2],[2,5]],"labels":"xyzxyz"}' },
     { label: 'Star', input: '{"n":4,"edges":[[0,1],[0,2],[0,3]],"labels":"aaaa"}' },

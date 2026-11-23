@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with a, b (rook), c, d (bishop), e, f (queen), 1-indexed (JSON)',
   url: 'https://leetcode.com/problems/minimum-moves-to-capture-the-queen/',
   complexity: 'O(1) time on an 8 by 8 board.',
+  question: "Count the minimum moves for a rook-or-bishop to capture a queen when a blocker may stand in the way.",
+  approaches: [
+    { name: "Line and block checks", intuition: "Check whether the rook or bishop reaches the queen in one move along an open line, otherwise the answer is two.", time: "O(1)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Rook captures', input: '{"a":5,"b":3,"c":3,"d":4,"e":5,"f":2}' },
     { label: 'Two moves', input: '{"a":1,"b":1,"c":8,"d":8,"e":2,"f":3}' },

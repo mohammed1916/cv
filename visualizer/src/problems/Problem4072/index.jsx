@@ -11,6 +11,10 @@ const definition = {
   inputLabel: 'Numbers (JSON object with nums)',
   url: 'https://leetcode.com/problems/maximum-alternating-subarray-sum-with-one-deletion/',
   complexity: 'O(n) time and O(n) space. The visualization caps input at 12 numbers.',
+  question: "Find the maximum alternating sum of a subarray when exactly one element may be deleted.",
+  approaches: [
+    { name: "Two-state DP with one deletion", intuition: "Track alternating sums ending on a plus or minus sign, with and without one skipped element, so later signs shift correctly.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"nums":[5,-5,1]}' },
     { label: 'Example 2', input: '{"nums":[10,-5,-100]}' },

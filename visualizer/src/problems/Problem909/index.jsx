@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Board (JSON 2D array)',
   url: 'https://leetcode.com/problems/snakes-and-ladders/',
   complexity: 'O(n^2) time and space: each square is enqueued once and tries 6 rolls. Boards are capped at 20 x 20.',
+  question: "On a boustrophedon board with snakes and ladders, find the fewest dice moves from square 1 to the last square.",
+  approaches: [
+    { name: "BFS over squares", intuition: "Map each square index to its board cell, apply any snake or ladder, and run breadth-first search with dice rolls of 1 to 6.", time: "O(n^2)", space: "O(n^2)" },
+  ],
   examples: [
     { label: 'Ladder in 3 by 3', input: '[[-1,-1,9],[-1,4,-1],[-1,-1,-1]]' },
     { label: 'Single ladder top-left', input: '[[16,-1,-1,-1],[-1,-1,-1,-1],[-1,-1,-1,-1],[-1,-1,-1,-1]]' },

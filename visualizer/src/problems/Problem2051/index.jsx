@@ -12,6 +12,10 @@ const definition = {
   phases, parse: parseInput, build: buildTrace, code, sql, python, inputLabel,
   url: `https://leetcode.com/problems/${meta.slug}/`,
   complexity, examples,
+  question: "Classify each member of a store as a visitor, customer or a mix based on their purchases.",
+  approaches: [
+    { name: "Count visits and purchases with CASE", intuition: "Count visits and purchases per member and assign categories with a CASE expression.", time: "O(n log n)", space: "O(n)" },
+  ],
 }
 
 function Rows({ columns = [], rows = [] }) {

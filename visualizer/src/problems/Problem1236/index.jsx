@@ -8,6 +8,10 @@ const definition = {
   inputLabel: 'Object with startUrl and edges (each page maps to its links)',
   url: 'https://leetcode.com/problems/web-crawler/description/',
   complexity: 'O(V + E) time for V reachable pages and E links, with hostname checks per link. The visualization caps the site at 12 pages; the draft does not state an exact official bound. The HtmlParser is simulated by the edges map.',
+  question: "Crawl all pages reachable from a start page that share its hostname.",
+  approaches: [
+    { name: "Breadth-first with hostname filter", intuition: "Visit each page once, following only links whose hostname matches the start page.", time: "O(V + E)", space: "O(V)" },
+  ],
   examples: [
     { label: 'Same host only', input: '{"startUrl":"http://news.example/a","edges":{"http://news.example/a":["http://news.example/b","http://news.example.org/x"],"http://news.example/b":["http://news.example/a","http://news.example/c"],"http://news.example/c":[]}}' },
     { label: 'Prefix trap', input: '{"startUrl":"http://example.org/","edges":{"http://example.org/":["http://example.org.evil.com/","http://example.org/docs"],"http://example.org/docs":["http://example.org/"]}}' },

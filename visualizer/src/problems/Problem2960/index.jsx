@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON object with batteryPercentages',
   url: 'https://leetcode.com/problems/count-tested-devices-after-test-operations/',
   complexity: 'O(n) time. The visualization caps the list at 30 devices.',
+  question: "Count the devices that can be tested when each test decrements later batteries.",
+  approaches: [
+    { name: "Greedy running count", intuition: "Scan the devices in order and count a device when its battery minus the tests so far is positive.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"batteryPercentages":[1,1,2,1,3]}' },
     { label: 'Example 2', input: '{"batteryPercentages":[0,1,2]}' },

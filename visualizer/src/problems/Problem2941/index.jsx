@@ -15,6 +15,11 @@ const definition = {
   inputLabel: 'Object with nums and k, e.g. {"nums":[3,6,9,4,8],"k":2}',
   url: 'https://leetcode.com/problems/maximum-gcd-sum-of-a-subarray/',
   complexity: 'O(n log M) time and O(log M) extra space, where M is the largest value, because each right end keeps at most about log M distinct gcds. The visualization caps the array at 10 entries with values up to 60. Numbers are read as positive integers, so the earliest start for a gcd gives the largest sum.',
+  question: "Find the best subarray score when a subarray is scored from its sum and the gcd of its values, subject to the length rule.",
+  approaches: [
+    { name: "Group end positions by gcd", intuition: "For each right end keep the distinct gcd values of subarrays ending there, merged with their sums and lengths.", time: "O(n log V)", space: "O(log V)" },
+    { name: "Brute force subarrays", intuition: "Enumerate every subarray and compute its gcd and sum directly.", time: "O(n^2 log V)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Mixed', input: '{"nums":[3,6,9,4,8],"k":2}' },
     { label: 'Single', input: '{"nums":[5],"k":1}' },

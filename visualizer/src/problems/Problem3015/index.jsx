@@ -15,6 +15,10 @@ const definition = {
   inputLabel: "JSON object: {\"n\": 6, \"x\": 2, \"y\": 5} (2 to 30 houses for this view)",
   url: "https://leetcode.com/problems/count-the-number-of-houses-at-a-certain-distance-i/",
   complexity: "O(n^2) time and O(n) space. The visualization caps n at 30; LeetCode allows n up to 100.",
+  question: "Count the pairs of houses at each distance in a street graph with one extra link between two houses.",
+  approaches: [
+    { name: "Pairwise distance count", intuition: "For each pair, take the shortest of the direct path and the two routes using the extra link, then count by distance.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: "n=6, x=2, y=5", input: "{\"n\": 6, \"x\": 2, \"y\": 5}" },
     { label: "n=4, x=1, y=4", input: "{\"n\": 4, \"x\": 1, \"y\": 4}" },

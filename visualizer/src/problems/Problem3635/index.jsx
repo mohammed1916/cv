@@ -25,6 +25,10 @@ const definition = {
   inputLabel: 'Object with land and water, each a list of [opening time, duration] rides',
   url: 'https://leetcode.com/problems/earliest-finish-time-for-land-and-water-rides-ii/',
   complexity: 'O(L * W) time for L land rides and W water rides. The visualization caps each list at 6 rides.',
+  question: "Choose one land ride and one water ride to finish the trip as early as possible, with two lists of rides.",
+  approaches: [
+    { name: "Try every pair", intuition: "Compare every land ride with every water ride in both orders.", time: "O(L * W)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example', input: '{"land":[[2,8]],"water":[[6,3]]}' },
     { label: 'Several rides', input: '{"land":[[2,15],[30,5]],"water":[[20,10],[40,5]]}' },

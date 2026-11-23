@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Array of exactly 3 integers from 1 to 127 (JSON)',
   url: 'https://leetcode.com/problems/maximum-possible-number-by-binary-concatenation/',
   complexity: 'O(1) for three numbers. The sort compares strings of at most 21 bits.',
+  question: "Concatenate three binary numbers in some order to get the largest possible value.",
+  approaches: [
+    { name: "Sort by concatenation order", intuition: "Sort the binary strings so that a comes before b when a plus b is larger than b plus a, then join them.", time: "O(1)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Three distinct values', input: '[100,27,6]' },
     { label: 'Example 2', input: '[1,1,1]' },

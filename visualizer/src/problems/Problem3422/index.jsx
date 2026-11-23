@@ -20,6 +20,10 @@ const definition = {
   inputLabel: 'Object with nums and k (e.g. {"nums":[1,3,6],"k":2})',
   url: "https://leetcode.com/problems/minimum-operations-to-make-subarray-elements-equal/",
   complexity: "O(n * k log k) time with a sort per window and O(k) extra space for the sorted copy. A sliding sorted structure would be faster; this view keeps each window explicit. The visualization caps nums at 12 digits.",
+  question: "Make every value of each window of length k equal using the fewest unit changes.",
+  approaches: [
+    { name: "Median per window", intuition: "Sort each window and pay the distance to its median, which is the cheapest common target.", time: "O(n k log k)", space: "O(k)" },
+  ],
   examples: [
     { label: "Spread values", input: '{"nums":[1,3,6,2,8,5],"k":3}' },
     { label: "Already equal", input: '{"nums":[4,4,4,4],"k":2}' },

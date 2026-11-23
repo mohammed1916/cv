@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'JSON object: { "s": string, "t": string, "k": divisor of the length }',
   url: 'https://leetcode.com/problems/rearrange-k-substrings-to-form-target-string/',
   complexity: 'O(n) time and O(n) space for the block counts.',
+  question: "Rearrange k substrings of a string to form a target string, using the allowed block moves.",
+  approaches: [
+    { name: "Count blocks", intuition: "Count the blocks of each type in the string and in the target, then compare the counts.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Reversed six letters, k three', input: '{"s":"abcdef","t":"fedcba","k":3}' },
     { label: 'Eight letters, k four', input: '{"s":"xyzxyzxy","t":"yzxyzxyx","k":4}' },

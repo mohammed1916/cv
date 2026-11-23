@@ -13,6 +13,11 @@ const definition = {
   inputLabel: 'Integers from 1 to 100 (JSON object with nums)',
   url: 'https://leetcode.com/problems/maximum-strong-pair-xor-i/',
   complexity: 'O(n^2) time in the worst case and O(n) space. The visualization caps the list at 12 numbers.',
+  question: "Find the maximum XOR over pairs that form a strong pair, where two values are strong when their gap is at most the smaller value.",
+  approaches: [
+    { name: "Sorted window with pair checks", intuition: "Sort the values and slide a left pointer past values that are too far from the right one, testing pairs inside the window.", time: "O(n^2)", space: "O(1)" },
+    { name: "Brute force pairs", intuition: "Test every pair directly against the strong-pair rule and keep the largest XOR.", time: "O(n^2)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example', input: '{"nums":[1,2,3,4,5]}' },
     { label: 'Far apart', input: '{"nums":[1,100]}' },

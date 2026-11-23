@@ -11,6 +11,10 @@ const definition = {
   inputLabel: 'Object with l, r (decimal strings below 10^16) and directions (three D and three R)',
   url: 'https://leetcode.com/problems/count-good-integers-on-a-grid-path/',
   complexity: 'O(16 * 10 * states) digit DP per bound, where the states are tight flag and last route digit. The visual shows a 16-digit example.',
+  question: "Count the 16-digit numbers in a range whose digits, read along a fixed route through a 4 by 4 grid, never decrease.",
+  approaches: [
+    { name: "Digit DP", intuition: "Build digits from the most significant end, tracking the tight-bound flag and the last route digit.", time: "O(16 x 10 x states) per bound", space: "O(states)" },
+  ],
   examples: [
     { label: 'Small range', input: '{"l":"0","r":"300","directions":"DDDRRR"}' },
     { label: 'Mixed route', input: '{"l":"1234","r":"5678","directions":"RDRDRD"}' },

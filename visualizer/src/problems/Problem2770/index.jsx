@@ -12,6 +12,11 @@ const definition = {
   inputLabel: 'Object with nums (integers) and target',
   url: 'https://leetcode.com/problems/maximum-number-of-jumps-to-reach-the-last-index/',
   complexity: 'O(n^2) time and O(n) space. The visualization caps input at 10 numbers.',
+  question: "Find the most jumps from index 0 to the last index, where each jump moves forward to a value within a target difference.",
+  approaches: [
+    { name: "Dynamic programming over indices", intuition: "Let jumps[i] be the best count reaching i; for each i try every earlier reachable j.", time: "O(n^2)", space: "O(n)" },
+    { name: "Forward relaxation from each reachable index", intuition: "From each reached index push the improvement to the later indices it can reach.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Target 2', input: '{"nums":[1,3,6,4,1,2],"target":2}' },
     { label: 'Target 0', input: '{"nums":[1,3,6,4,1,2],"target":0}' },

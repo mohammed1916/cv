@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with nums and target arrays (JSON)',
   url: 'https://leetcode.com/problems/minimum-increments-for-target-multiples-in-an-array/',
   complexity: 'O(n * 3^t) time for n numbers and t targets. The visualization caps nums at 5 and target at 4.',
+  question: "Add the fewest increments to an array so that each target value divides some element.",
+  approaches: [
+    { name: "DP over covered targets", intuition: "Track which subset of targets is covered and extend the set one number at a time.", time: "O(n * 3^t)", space: "O(3^t)" },
+  ],
   examples: [
     { label: 'Three numbers, two targets', input: '{"nums":[3,7,2],"target":[9,4]}' },
     { label: 'Two targets', input: '{"nums":[8,4],"target":[6]}' },

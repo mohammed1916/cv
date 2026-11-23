@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Binary array as JSON (e.g. [0,0,1,0])',
   url: 'https://leetcode.com/problems/all-divisions-with-the-highest-score-of-a-binary-array/',
   complexity: 'O(n) time with running counts; O(n) space for the scores shown.',
+  question: "Return every split index of a binary array that gives the highest score, where a split's score is zeros before it plus ones from it onward.",
+  approaches: [
+    { name: "Running counts", intuition: "Walk the split index from left to right, updating the zero and one counts, and keep the splits with the best score.", time: "O(n)", space: "O(1) extra" },
+  ],
   examples: [
     { label: 'Two best divisions', input: '[0,0,1,0]' },
     { label: 'All ones', input: '[1,1,1]' },

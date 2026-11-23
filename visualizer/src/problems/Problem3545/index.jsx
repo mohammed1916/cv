@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'Object with string s and integer k',
   url: 'https://leetcode.com/problems/minimum-deletions-for-at-most-k-distinct-characters/',
   complexity: 'O(n + u log u) time, where u is the number of distinct letters. The visualization caps the string at 30 letters.',
+  question: "Delete characters from a string so that at most k distinct letters remain, using the fewest deletions.",
+  approaches: [
+    { name: "Frequency sort", intuition: "Count letters, keep the k most frequent, and delete the rest.", time: "O(n + u log u)", space: "O(u)" },
+  ],
   examples: [
     { label: 'Two pairs', input: '{"s":"aabbcc","k":1}' },
     { label: 'Already fits', input: '{"s":"abcabc","k":3}' },

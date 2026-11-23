@@ -13,6 +13,11 @@ const definition = {
   inputLabel: 'Object with nums (1 to 8 integers, 0 to 10) (JSON)',
   url: 'https://leetcode.com/problems/minimize-maximum-of-array/',
   complexity: 'O(n log(max value)) time. The visualization caps the input at 8 values.',
+  question: "Move units from each position to the left neighbour as needed, and find the smallest possible maximum value in the array.",
+  approaches: [
+    { name: "Binary search on the limit", intuition: "Test whether a candidate maximum lets every excess be carried left without going negative.", time: "O(n log(max value))", space: "O(1)" },
+    { name: "Prefix averages", intuition: "The answer is the largest ceiling of a prefix sum divided by its length, found in one scan.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Own: five values', input: '{"nums":[2,0,9,4,4]}' },
     { label: 'Own: two values', input: '{"nums":[5,8]}' },

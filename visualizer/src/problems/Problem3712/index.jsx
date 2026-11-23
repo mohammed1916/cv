@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'JSON object with nums and k, for example {"nums":[1,2,2,3],"k":2}',
   url: 'https://leetcode.com/problems/sum-of-elements-with-frequency-divisible-by-k/',
   complexity: 'O(n) time and O(n) space. The visualization caps the array at 12 values.',
+  question: "Sum the values whose frequency is divisible by k.",
+  approaches: [
+    { name: "Count then sum", intuition: "Count each value's frequency, then add up values whose count is divisible by k.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Four values, k four', input: '{"nums":[3,8,1,6],"k":4}' },
     { label: 'Single value at limit', input: '{"nums":[10],"k":10}' },

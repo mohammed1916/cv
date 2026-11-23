@@ -14,6 +14,10 @@ const definition = {
   complexity,
   inputLabel: 'Object with nums and k (window size, at least 1)',
   url: 'https://leetcode.com/problems/jump-game-vi/',
+  question: "Start at the first index and jump up to k steps forward to reach the last index, maximising the total score.",
+  approaches: [
+    { name: "Monotonic deque DP", intuition: "Keep the best recent scores in a deque with the largest score at the front.", time: "O(n)", space: "O(k)" },
+  ],
 }
 
 export default function Problem1696Visualizer() {

@@ -171,6 +171,10 @@ const definition = {
   inputLabel: 'Object with grid (1 open, 0 blocked), target [row, col]',
   url: 'https://leetcode.com/problems/shortest-path-in-a-hidden-grid/',
   complexity: 'Exploration visits each reachable cell and each edge a constant number of times; the search after exploration is breadth-first. The visual shows the full grid only for learning, the robot sees only neighbours.',
+  question: "Find the shortest path to a hidden target on a grid that you can only explore through a move and sensor interface.",
+  approaches: [
+    { name: "Explore, then search", intuition: "Map the reachable cells by depth-first exploration, then run breadth-first search for the distance.", time: "O(cells)", space: "O(cells)" },
+  ],
   examples: [
     { label: 'Example', input: '{"grid":[[1,1,0],[1,0,1],[1,1,1]],"target":[2,2]}' },
     { label: 'Walled off', input: '{"grid":[[1,0,1],[1,0,1]],"target":[0,2]}' },

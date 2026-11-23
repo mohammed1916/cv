@@ -12,6 +12,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Number (JSON integer)',
   url: 'https://leetcode.com/problems/maximum-swap/',
   complexity: 'O(n) time for n digits, with O(1) extra space for the ten last-position slots.',
+  question: "Make a number as large as possible by swapping two of its digits once.",
+  approaches: [
+    { name: "Last occurrence swap", intuition: "Record the last index of each digit, then swap the first digit that has a larger digit later.", time: "O(d)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Far swap', input: '1993' },
     { label: 'Already max', input: '9876' },

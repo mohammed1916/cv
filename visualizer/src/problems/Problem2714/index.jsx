@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with n, edges ([from, to, weight]), source, destination and k',
   url: 'https://leetcode.com/problems/find-shortest-path-with-k-hops/',
   complexity: 'O(n^2 * k + n * k * m) time with a linear scan for the cheapest state, and O(n * k) space for the cost table, for m directed edges. The visualization caps n at 8, edges at 16 and k at 6.',
+  question: "Given a graph and k, find the shortest path from start to target that uses at most k special hops, where a hop skips one edge.",
+  approaches: [
+    { name: "Layered Dijkstra", intuition: "Track the cost of each node for each number of hops used.", time: "O(n * k * m)", space: "O(n * k)" },
+  ],
   examples: [
     { label: 'Free hop on the costly leg', input: '{"n":5,"edges":[[0,1,4],[1,2,7],[0,3,1],[3,2,9],[2,4,2],[1,4,8]],"source":0,"destination":4,"k":1}' },
     { label: 'Unreachable', input: '{"n":3,"edges":[[0,1,2]],"source":2,"destination":0,"k":2}' },

@@ -11,6 +11,10 @@ const definition = {
   inputLabel: 'Number n (1 to 100)',
   url: 'https://leetcode.com/problems/prime-arrangements/',
   complexity: 'Trial division tests each number up to its square root, about O(n√n) in total. The two factorials take O(n) multiplications.',
+  question: "Count the ways to arrange prime-numbered and other positions so that prime positions are filled by primes.",
+  approaches: [
+    { name: "Count primes then factorials", intuition: "Count the primes up to n, then multiply the factorials of the prime and non-prime counts modulo a prime.", time: "O(n sqrt n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Seven', input: '7' },
     { label: 'Ten', input: '10' },

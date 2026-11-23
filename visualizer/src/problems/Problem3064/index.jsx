@@ -17,6 +17,10 @@ const definition = {
   inputLabel: "Hidden integer n as JSON (1 to 2^30 - 1)",
   url: "https://leetcode.com/problems/guess-the-number-using-bitwise-questions-i/",
   complexity: "O(1) oracle calls per bit, 30 calls in total, and O(1) extra space. The visualization draws the hidden number from the presets; the algorithm reads it only through the oracle replies.",
+  question: "Find a hidden number by asking bitwise questions through an oracle.",
+  approaches: [
+    { name: "Bit probing", intuition: "Ask one question per bit position and set the bit when the oracle's answer shows it.", time: "O(log N)", space: "O(1)" },
+  ],
   examples: [
     { label: "Bits 0, 2 and 5", input: "37" },
     { label: "Single bit", input: "1024" },

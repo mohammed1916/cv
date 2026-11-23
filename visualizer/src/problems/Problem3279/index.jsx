@@ -18,6 +18,10 @@ const definition = {
   inputLabel: 'Object with height, positions and directions (e.g. {"height":5,"positions":[1,3,4],"directions":["up","down","up"]})',
   url: "https://leetcode.com/problems/maximum-total-area-occupied-by-pistons/",
   complexity: "O(height * k) time for k pistons, because the synchronized motion repeats every 2 * height integer steps and each step sums k positions. The visualization accepts height up to 20 and up to 8 pistons. Time is treated as integer steps, which covers every breakpoint of this piecewise-linear total.",
+  question: "Pistons move up and down in a tube; find the maximum total area occupied at any time.",
+  approaches: [
+    { name: "Sample integer time steps", intuition: "Because the total area changes linearly between breakpoints, it is enough to sample every integer time in one full cycle and keep the best total.", time: "O(height * k)", space: "O(1)" },
+  ],
   examples: [
     { label: "Three pistons", input: '{"height":5,"positions":[1,3,4],"directions":["up","down","up"]}' },
     { label: "Two pistons", input: '{"height":3,"positions":[0,3],"directions":["up","down"]}' },

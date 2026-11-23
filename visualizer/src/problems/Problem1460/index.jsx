@@ -8,6 +8,10 @@ const definition = {
   inputLabel: 'Object with target and arr (JSON)',
   url: 'https://leetcode.com/problems/make-two-arrays-equal-by-reversing-subarrays/',
   complexity: 'O(n) expected time and O(n) space: one tally pass over each array and one check of the balances.',
+  question: "Decide whether one array can be turned into another by reversing subarrays.",
+  approaches: [
+    { name: "Frequency tally", intuition: "Reversals can reorder anything, so equal value counts are enough; compare the two tallies.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Reordered', input: '{"target":[1,2,3,4],"arr":[2,4,1,3]}' },
     { label: 'Repeated value', input: '{"target":[5,1,5,2],"arr":[2,5,1,1]}' },

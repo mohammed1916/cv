@@ -12,6 +12,11 @@ const definition = {
   inputLabel: 'JSON object: nums (1-20 each), k and dist',
   url: 'https://leetcode.com/problems/divide-an-array-into-subarrays-with-minimum-cost-ii/',
   complexity: 'O(n * dist * log dist) time for this scan. A sliding window with two heaps is faster. The visualization caps input at 12 numbers.',
+  question: "Split an array into subarrays with minimum total cost, where subarrays must start within a distance window.",
+  approaches: [
+    { name: "Window scan with sorted sums", intuition: "For each start, sort the window of candidate values and add the smallest k - 2.", time: "O(n\u00b7d log d)", space: "O(d)" },
+    { name: "Two heaps sliding window", intuition: "Keep the smallest values of a sliding window in two heaps to update the sum in logarithmic time.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Seven values, k three, distance four', input: '{"nums":[6,1,9,4,4,8,2],"k":3,"dist":4}' },
     { label: 'Adjacent', input: '{"nums":[5,1,9,1],"k":3,"dist":1}' },

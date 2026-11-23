@@ -18,6 +18,10 @@ const definition = {
   inputLabel: 'Board object (JSON, e.g. {"n": 5})',
   url: 'https://leetcode.com/problems/count-distinct-numbers-on-board/',
   complexity: 'The loop is a fixpoint over values 1 to n, so the visualization runs in O(n^3) for n up to 30.',
+  question: "Start with a board holding n, repeatedly add the values that appear, and count the distinct numbers on the board at the end.",
+  approaches: [
+    { name: "Fixpoint scan", intuition: "Repeat passes over the values until a full pass adds nothing new, counting what appears.", time: "O(n^3)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example', input: '{"n": 5}' },
     { label: 'Smallest', input: '{"n": 1}' },

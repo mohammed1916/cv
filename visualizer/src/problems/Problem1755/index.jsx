@@ -16,6 +16,10 @@ const definition = {
   inputLabel: 'Object with nums (integers) and goal (JSON)',
   url: 'https://leetcode.com/problems/closest-subsequence-sum/',
   complexity: 'O(2^(n/2) log 2^(n/2)) time by meet in the middle. The visualization caps n at 8.',
+  question: "Choose a subsequence whose sum is as close as possible to a goal.",
+  approaches: [
+    { name: "Meet in the middle", intuition: "Split the numbers in half, list the sums for each half, and merge the sorted lists with two pointers.", time: "O(2^(n/2) log 2^(n/2))", space: "O(2^(n/2))" },
+  ],
   examples: [
     { label: 'Mixed signs', input: '{"nums":[4,-2,9,-5,1],"goal":6}' },
     { label: 'Negative total', input: '{"nums":[-3,-3,11],"goal":-9}' },

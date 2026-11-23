@@ -12,6 +12,11 @@ const definition = {
   inputLabel: 'Object with nums and k (JSON)',
   url: 'https://leetcode.com/problems/find-the-sum-of-the-power-of-all-subsequences/',
   complexity: 'O(n * k * n) time and O(k * n) space. The visualization caps nums at 6 values.',
+  question: "Find the sum of the power of all subsequences, where power counts subsequences that sum to k.",
+  approaches: [
+    { name: "Subset sum DP", intuition: "Count subsequences by sum with a DP over values, and combine the counts for each number of picked values.", time: "O(n\u00b7k)", space: "O(k)" },
+    { name: "Enumerate subsets", intuition: "Enumerate every subset and count the ones that sum to k.", time: "O(2^n\u00b7n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Four values, k six', input: '{"nums":[1,5,2,5],"k":6}' },
     { label: 'Example 2', input: '{"nums":[2,3,5],"k":5}' },

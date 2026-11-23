@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Object with an integer n (JSON)',
   url: 'https://leetcode.com/problems/armstrong-number/',
   complexity: 'O(d) time for d digits and O(d) extra space for the digits. The visualization accepts n up to 100000000.',
+  question: "Decide whether a number equals the sum of its digits raised to the number of digits.",
+  approaches: [
+    { name: "Digit power sum", intuition: "Split the number into digits, raise each to the digit count, and compare the sum with the number.", time: "O(d)", space: "O(d)" },
+  ],
   examples: [
     { label: 'Three digits', input: '{"n":370}' },
     { label: 'Not Armstrong', input: '{"n":10}' },

@@ -14,6 +14,10 @@ const definition = {
   number: meta.number,
   phases, parse: parseInput, build: buildTrace, code, sql, python, inputLabel,
   url: `https://leetcode.com/problems/${meta.slug}/`,
+  question: "Turn a list of polynomial terms (power and factor) into one equation string with terms in descending power order.",
+  approaches: [
+    { name: "Ordered aggregation in SQL", intuition: "Sort the terms by power and concatenate each signed piece into one string.", time: "O(t log t)", space: "O(t)" },
+  ],
   complexity, examples,
 }
 

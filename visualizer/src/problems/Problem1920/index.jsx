@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON permutation of 0 to n - 1 (e.g. [3,0,1,2])',
   url: 'https://leetcode.com/problems/build-array-from-permutation/',
   complexity: 'O(n) time and O(n) space for the output array.',
+  question: "Build an array whose entry at each index is the value at the position named by that index in a permutation.",
+  approaches: [
+    { name: "Direct indexing", intuition: "Set each result entry to the permutation value at the position given by the original entry.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Four values', input: '[3,0,1,2]' },
     { label: 'Shuffled', input: '[4,2,0,1,3]' },

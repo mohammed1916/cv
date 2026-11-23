@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Tree edges and node values 1 to 20 (JSON object)',
   url: 'https://leetcode.com/problems/maximum-score-after-applying-operations-on-a-tree/',
   complexity: 'O(n) time and O(n) space. The visualization caps the tree at 10 nodes.',
+  question: "Given a rooted tree with node values, choose values to zero so that every root-to-leaf path keeps a positive value and the remaining sum is maximised.",
+  approaches: [
+    { name: "Bottom-up tree DP", intuition: "Process children before parents and decide, per subtree, whether to keep or zero each node while every path keeps one positive value.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Star', input: '{"edges":[[0,1],[0,2]],"values":[5,1,1]}' },
     { label: 'Path', input: '{"edges":[[0,1],[1,2]],"values":[1,1,1]}' },

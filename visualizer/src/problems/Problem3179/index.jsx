@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with n and k (JSON)',
   url: 'https://leetcode.com/problems/find-the-n-th-value-after-k-seconds/',
   complexity: 'O(n * k) time and O(n) space. The visualization caps n and k at 30.',
+  question: "Find the value at the last position of an array after k rounds of prefix sums.",
+  approaches: [
+    { name: "Repeated prefix sums in place", intuition: "Each round replaces every value with the running total up to it, and updating left to right reuses the new totals.", time: "O(n * k)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Seven items, twelve steps', input: '{"n":7,"k":12}' },
     { label: 'Nine items, five steps', input: '{"n":9,"k":5}' },

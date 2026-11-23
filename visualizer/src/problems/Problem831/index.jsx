@@ -14,6 +14,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Email or phone (JSON string)',
   url: 'https://leetcode.com/problems/masking-personal-information/',
   complexity: 'O(n) time and space for a string of n characters.',
+  question: "Mask personal information in an email address or a phone number following the given formatting rules.",
+  approaches: [
+    { name: "Branch on the format", intuition: "An email keeps its first and last letters of the name with masked letters in between; a phone number keeps only its last four digits and gets a masked prefix.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Email', input: '"LeetCode@LeetCode.com"' },
     { label: 'Phone, 10 digits', input: '"1(234)567-890"' },

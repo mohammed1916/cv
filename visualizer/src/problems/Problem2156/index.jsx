@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON object with s, power, modulo, k and hashValue',
   url: 'https://leetcode.com/problems/find-substring-with-given-hash-value/',
   complexity: 'O(n) time with a rolling hash; O(1) extra space.',
+  question: "Find the first substring of a given length whose polynomial hash equals a target value.",
+  approaches: [
+    { name: "Rolling hash from the right", intuition: "Compute the hash of each window of length k by removing the last character and adding the new first one, using modular arithmetic.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Leftmost match', input: '{"s":"leetcode","power":7,"modulo":20,"k":2,"hashValue":0}' },
     { label: 'Longer window', input: '{"s":"abcdefgh","power":3,"modulo":50,"k":4,"hashValue":21}' },

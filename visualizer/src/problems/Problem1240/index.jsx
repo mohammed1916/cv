@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON object: {"n": rows, "m": columns}',
   url: 'https://leetcode.com/problems/tiling-a-rectangle-with-the-fewest-squares/',
   complexity: 'Backtracking over square sizes at the first empty cell, pruned by the best count. The visualization caps the rectangle at 8 by 8.',
+  question: "Tile a rectangle with the fewest squares.",
+  approaches: [
+    { name: "Backtracking with pruning", intuition: "Fill the first empty cell with the largest square that fits, and prune when the count exceeds the best.", time: "Exponential, pruned", space: "O(cells)" },
+  ],
   examples: [
     { label: 'Four by six board', input: '{"n":4,"m":6}' },
     { label: 'Own: 3 by 7 board', input: '{"n":3,"m":7}' },

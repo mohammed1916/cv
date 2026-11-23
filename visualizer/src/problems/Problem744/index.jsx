@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'letters and target (JSON object)',
   url: 'https://leetcode.com/problems/find-smallest-letter-greater-than-target/',
   complexity: 'O(log n) time and O(1) extra space.',
+  question: "Find the first letter alphabetically after a target letter, wrapping around if needed.",
+  approaches: [
+    { name: "Binary search with wrap", intuition: "Binary search for the first letter above the target and wrap to the first letter if none exists.", time: "O(log n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Middle', input: '{"letters":["c","f","j","m","q"],"target":"k"}' },
     { label: 'Wrap', input: '{"letters":["b","d","e"],"target":"f"}' },

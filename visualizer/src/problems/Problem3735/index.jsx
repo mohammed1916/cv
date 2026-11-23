@@ -11,6 +11,10 @@ const definition = {
   inputLabel: "JSON string of lowercase letters (e.g. \"dcba\")",
   url: "https://leetcode.com/problems/lexicographically-smallest-string-after-reverse-ii/",
   complexity: "O(n squared) time: all 2n prefix and suffix reversals are built and compared, each in O(n). O(n) space. The visualization caps the string at 12 letters.",
+  question: "Reverse exactly one nonempty prefix or suffix of a string so that the result is as small as possible.",
+  approaches: [
+    { name: "Try every prefix and suffix", intuition: "Build each of the 2n reversals and keep the smallest string seen.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: "Full reversal", input: "\"dcba\"" },
     { label: "Prefix fix", input: "\"bacd\"" },

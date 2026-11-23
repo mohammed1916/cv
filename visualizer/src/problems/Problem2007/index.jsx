@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Changed array (JSON)',
   url: 'https://leetcode.com/problems/find-original-array-from-doubled-array/',
   complexity: 'O(n log n) time for the sort and O(n) for the count map.',
+  question: "Recover an original array from a doubled array that contains each original value and its double.",
+  approaches: [
+    { name: "Sort and match smallest", intuition: "Sort the values and match each smallest unmatched value with its double.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Doubled', input: '[2,4,1,8,4,2]' },
     { label: 'Not doubled', input: '[1,2,3]' },

@@ -34,6 +34,11 @@ const definition = {
   inputLabel: "Object with words and separator (JSON), e.g. {\"words\":[\"one.two\"],\"separator\":\".\"}",
   url: "https://leetcode.com/problems/split-strings-by-separator/",
   complexity: "O(total length of words) time. The visualization caps input at 20 words of up to 30 characters.",
+  question: "Split each word on a separator character and collect every nonempty piece in order.",
+  approaches: [
+    { name: "Split and filter", intuition: "Split each word, skip empty parts, and append the rest.", time: "O(total length)", space: "O(total length)" },
+    { name: "Manual scan", intuition: "Walk each character and emit a piece whenever the separator is hit and the buffer is nonempty.", time: "O(total length)", space: "O(total length)" },
+  ],
   examples: [
   {
     "label": "Example 1",

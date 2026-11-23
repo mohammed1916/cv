@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with nums and k (JSON)',
   url: 'https://leetcode.com/problems/count-prime-gap-balanced-subarrays/',
   complexity: 'O(n^2) time for the subarray scan. The visualization caps nums at 12 entries.',
+  question: "Count subarrays where the gap between the largest and smallest prime values is balanced against the limit k.",
+  approaches: [
+    { name: "Scan every subarray", intuition: "Scan each start index forward and track the prime values to decide whether the subarray qualifies.", time: "O(n^2)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Three numbers, k two', input: '{"nums":[11,4,8],"k":2}' },
     { label: 'Twelve equal ones', input: '{"nums":[1,1,1,1,1,1,1,1,1,1,1,1],"k":0}' },

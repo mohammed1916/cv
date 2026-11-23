@@ -11,6 +11,10 @@ const definition = {
   inputLabel: 'Numbers and k (JSON object with nums and k)',
   url: 'https://leetcode.com/problems/longest-subarray-divisible-by-k-with-at-most-one-negation-ii/',
   complexity: 'O(n · k) time and O(k) space with the residue tables. The visualization caps input at 12 numbers.',
+  question: "Find the longest subarray whose sum is divisible by k when at most one element may be negated, for larger inputs.",
+  approaches: [
+    { name: "Prefix remainders with earliest index", intuition: "Keep the earliest start for each remainder with and without one negation, so each position is processed in one pass.", time: "O(n + k)", space: "O(k)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"nums":[4,1,2],"k":3}' },
     { label: 'Example 2', input: '{"nums":[5,3,4],"k":7}' },

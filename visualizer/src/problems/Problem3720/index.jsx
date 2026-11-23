@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON object with s and target, for example {"s":"abc","target":"bba"}',
   url: 'https://leetcode.com/problems/lexicographically-smallest-permutation-greater-than-target/',
   complexity: 'O(n^2) time with 26 letters. The visualization caps the strings at 8 letters.',
+  question: "Find the lexicographically smallest permutation of a string that is greater than a target string.",
+  approaches: [
+    { name: "Scan for the first larger position", intuition: "Find the rightmost position where a larger letter can be placed, then arrange the rest in order.", time: "O(n^2)", space: "O(26)" },
+  ],
   examples: [
     { label: 'Reverse of three letters', input: '{"s":"xyz","target":"zyx"}' },
     { label: 'Already at target', input: '{"s":"mnop","target":"mnop"}' },

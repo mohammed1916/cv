@@ -2,6 +2,10 @@ import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import * as model from './algorithm'
 
 const definition = {
+  question: "Given two promises that resolve to numbers, return a promise that resolves to their sum.",
+  approaches: [
+    { name: "Promise.all then sum", intuition: "Wait for both promises together and add their results.", time: "O(1)", space: "O(1)" },
+  ],
   phases: model.PHASES, parse: model.parseInput, build: model.buildTrace, code: model.code, python: model.python,
   inputLabel: model.INPUT_LABEL, url: model.URL, complexity: model.COMPLEXITY, examples: model.EXAMPLES,
 }

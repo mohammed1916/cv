@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'JSON object with word and k',
   url: 'https://leetcode.com/problems/count-of-substrings-containing-every-vowel-and-k-consonants-i/',
   complexity: 'O(n^2) time in the worst case with early stops. The visualization caps input at 14 letters.',
+  question: "Count substrings that contain every vowel and exactly k consonants, for a short string.",
+  approaches: [
+    { name: "Check every substring", intuition: "For each start position, extend the end and count vowels and consonants until the rule is broken.", time: "O(n^2)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Seven letters, k three', input: '{"word":"aeixyou","k":3}' },
     { label: 'Five letters, k zero', input: '{"word":"zebra","k":0}' },

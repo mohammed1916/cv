@@ -9,6 +9,10 @@ const definition = {
   inputLabel: 'Two arrays [a, b] (JSON)',
   url: 'https://leetcode.com/problems/uncrossed-lines/',
   complexity: 'O(n × m) time and space for the table.',
+  question: "Match equal numbers from two lists with non-crossing lines and find the largest number of matches.",
+  approaches: [
+    { name: "Longest common subsequence table", intuition: "Equal values extend the diagonal from the smaller table entry; otherwise take the better of dropping one value.", time: "O(n * m)", space: "O(n * m)" },
+  ],
   examples: [
     { label: 'Sample', input: '[[6,2,7],[2,6,7,1]]' },
     { label: 'Longer', input: '[[2,5,1,2,5],[9,5,2,1,5,2]]' },

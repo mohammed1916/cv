@@ -18,6 +18,11 @@ const definition = {
   inputLabel: 'JSON object: {"grid": [[1, 3], [2, 2]]}',
   url: "https://leetcode.com/problems/find-missing-and-repeated-values/",
   complexity: "O(n^2) time and O(n^2) space for an n x n grid. The visualization caps n at 9.",
+  question: "Find the value that appears twice and the value that is missing in a grid holding the numbers 1 to n squared.",
+  approaches: [
+    { name: "Occurrence count", intuition: "Count each value across the grid and report the value counted twice and the value counted zero times.", time: "O(n^2)", space: "O(n^2)" },
+    { name: "Sum and square sums", intuition: "Compare the grid's sum and sum of squares with the expected totals to solve for the two values.", time: "O(n^2)", space: "O(1)" },
+  ],
   examples: [
     { label: "Second example", input: '{"grid": [[1, 3], [2, 2]]}' },
     { label: "Second example", input: '{"grid": [[9, 1, 7], [8, 9, 2], [3, 4, 6]]}' },

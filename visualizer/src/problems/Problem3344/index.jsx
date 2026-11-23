@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'Object with s (the total sum limit)',
   url: 'https://leetcode.com/problems/maximum-sized-array/',
   complexity: 'O(n^2) time with a running sum of the OR layers, where n is the answer; O(1) extra space. Reading used here: A[i][j][k] = i * (j OR k) over zero-based indices, and the answer counts sizes from 1 upward. The visualization caps s at 5000.',
+  question: "Find the largest array size s allowed by a sum rule over bitwise OR values.",
+  approaches: [
+    { name: "Running sum of OR layers", intuition: "Add the layers one at a time, keeping a running sum of the OR values until the limit is exceeded.", time: "O(n^2)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Small limit', input: '{"s":50}' },
     { label: 'Medium limit', input: '{"s":1000}' },

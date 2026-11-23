@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with nums1 and nums2 (equal-length arrays, 1 to 6 entries, values 1 to 9)',
   url: 'https://leetcode.com/problems/minimum-total-cost-to-make-arrays-unequal/',
   complexity: 'O(n) time after counting the clashes. The visualization caps input at 6 entries.',
+  question: "Swap elements between two arrays at a cost per index so that no position matches; find the minimum total cost.",
+  approaches: [
+    { name: "Greedy on clashing indices", intuition: "Count clashes by value, then borrow the cheapest swap indices that break the most clashes.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Four pairs, no equal start', input: '{"nums1":[1,7,4,9],"nums2":[8,3,6,2]}' },
     { label: 'Example 2', input: '{"nums1":[1,1],"nums2":[1,1]}' },

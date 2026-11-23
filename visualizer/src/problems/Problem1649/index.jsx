@@ -13,6 +13,11 @@ const definition = {
   inputLabel: 'JSON object with instructions (integers 1-10)',
   url: 'https://leetcode.com/problems/create-sorted-array-through-instructions/',
   complexity: 'O(n^2) time for this scan. A Fenwick tree gives O(n log V). The visualization caps input at 30 instructions.',
+  question: "Insert numbers one at a time into a sorted array, where each insertion costs the smaller of the counts below and above it.",
+  approaches: [
+    { name: "Direct count", intuition: "For each insertion, scan the array to count smaller and larger values.", time: "O(n^2)", space: "O(n)" },
+    { name: "Fenwick tree", intuition: "Keep value counts in a Fenwick tree and query prefix counts.", time: "O(n log V)", space: "O(V)" },
+  ],
   examples: [
     { label: 'Example A', input: '{"instructions":[1,5,6,2]}' },
     { label: 'Example B', input: '{"instructions":[1,3,3,3,2,4,2,1,2]}' },

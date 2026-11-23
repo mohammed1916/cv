@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON object with capacity, rocks (same length, each at most its capacity) and additional_rocks',
   url: 'https://leetcode.com/problems/maximum-bags-with-full-capacity-of-rocks/',
   complexity: 'O(n log n) time for n bags. The visualization caps bags at 12.',
+  question: "Given bags with capacities and rocks already in them plus spare rocks, maximise the number of bags that become full.",
+  approaches: [
+    { name: "Fill the smallest gaps first", intuition: "Sort the remaining space needed per bag and fill the cheapest bags first with the spare rocks.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Own: three bags, two extra rocks', input: '{"capacity":[6,4,9],"rocks":[2,4,1],"additional_rocks":5}' },
     { label: 'Own: two bags, ample rocks', input: '{"capacity":[7,3],"rocks":[0,1],"additional_rocks":3}' },

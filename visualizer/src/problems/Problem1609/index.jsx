@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Tree values (JSON level-order array, null for a missing child)',
   url: 'https://leetcode.com/problems/even-odd-tree/',
   complexity: 'O(n) time and O(w) space for the widest level. The visualization caps the tree at 15 entries.',
+  question: "Decide whether a binary tree is an even-odd tree, with alternating parity and ordering by level.",
+  approaches: [
+    { name: "Level-by-level check", intuition: "Walk the levels in order and check the parity and ordering of each level.", time: "O(n)", space: "O(w)" },
+  ],
   examples: [
     { label: 'Mixed depths', input: '[5,3,8,1,4,null,9,null,null,6,2]' },
     { label: 'Root even', input: '[2]' },

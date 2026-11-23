@@ -13,6 +13,11 @@ const definition = {
   inputLabel: 'JSON object with s and target, for example {"s":"baba","target":"abba"}',
   url: 'https://leetcode.com/problems/lexicographically-smallest-palindromic-permutation-greater-than-target/',
   complexity: 'O(n * 26) time for strings of length n. The visualization caps the strings at 8 letters.',
+  question: "Build the smallest palindrome that is strictly greater than a target string, using only the letters available in the target.",
+  approaches: [
+    { name: "Half-string search", intuition: "Count letters, fix the first half of the palindrome, and try the closest larger arrangement of that half.", time: "O(n * 26)", space: "O(26)" },
+    { name: "Next permutation on the half", intuition: "Advance the half-string to its next arrangement and mirror it to form the palindrome.", time: "O(n) per step", space: "O(n)" },
+  ],
   examples: [
     { label: 'Adjacent pairs swapped', input: '{"s":"pqrs","target":"qpsr"}' },
     { label: 'Repeated letters to target', input: '{"s":"aaa","target":"zzz"}' },

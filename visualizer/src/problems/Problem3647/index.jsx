@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with items, w1 and w2 (e.g. {"items":[4,3,2],"w1":5,"w2":4})',
   url: 'https://leetcode.com/problems/maximum-weight-in-two-bags/',
   complexity: 'O(n × w1 × w2) time and O(w1 × w2) space for n items. The visualization caps there at 8 items, weights up to 9 and capacities up to 12; the official bounds are not verified here.',
+  question: "Distribute items between two bags with separate capacities to maximize their total weight.",
+  approaches: [
+    { name: "Two-dimensional knapsack", intuition: "Fill a table indexed by the remaining capacity of each bag, item by item.", time: "O(n * w1 * w2)", space: "O(w1 * w2)" },
+  ],
   examples: [
     { label: 'Split across bags', input: '{"items":[4,3,2],"w1":5,"w2":4}' },
     { label: 'No room', input: '{"items":[1,2,3],"w1":0,"w2":0}' },

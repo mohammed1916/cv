@@ -11,6 +11,10 @@ const definition = {
   inputLabel: "Object with nums1 and nums2 (e.g. {\"nums1\":[7,3],\"nums2\":[3,7]})",
   url: "https://leetcode.com/problems/minimum-index-sum-of-common-elements/",
   complexity: "O(n + m) time with a hash map of first positions in nums2, plus O(k log k) to sort k answers; O(m) space. Reading used: first occurrences decide each value index sum, and every value at the smallest sum is returned in ascending order. The visualization caps each array at 10 values.",
+  question: "Find the minimum index sum of common values between two lists.",
+  approaches: [
+    { name: "Map first positions", intuition: "Map each value in one list to its first position, then scan the other list for matches and their index sum.", time: "O(n + m)", space: "O(n + m)" },
+  ],
   examples: [
     { label: "Unique minimum", input: "{\"nums1\":[7,3,9,4,1],\"nums2\":[4,8,1,3,6]}" },
     { label: "Four-way tie", input: "{\"nums1\":[6,1,4,9],\"nums2\":[9,4,1,6]}" },

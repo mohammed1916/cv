@@ -11,6 +11,10 @@ const definition = {
   inputLabel: 'Object with n (1 to 50), for example {"n":12}',
   url: 'https://leetcode.com/problems/stone-removal-game/',
   complexity: 'O(1) time: the required count falls from 10, so there are at most 10 turns.',
+  question: "In a stone game with two players, decide the number of stones needed to win when each player must take at least a set amount.",
+  approaches: [
+    { name: "Closed-form count of turns", intuition: "Count the turns needed by subtracting the required amount each step; the number of turns is small.", time: "O(1)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Exactly ten', input: '{"n":10}' },
     { label: 'Nine stones', input: '{"n":9}' },

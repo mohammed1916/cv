@@ -14,6 +14,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Level-order tree (JSON)',
   url: 'https://leetcode.com/problems/binary-tree-pruning/',
   complexity: 'O(n) time and O(h) recursion space.',
+  question: "Remove every subtree of a binary tree that contains no node with value 1.",
+  approaches: [
+    { name: "Post-order pruning", intuition: "Prune the children first; a node with value 0 and no remaining children is removed.", time: "O(n)", space: "O(h) recursion" },
+  ],
   examples: [
     { label: 'Two levels below the root', input: '[1,0,1,null,1,0,null]' },
     { label: 'Left empty, right leaf', input: '[1,null,0]' },

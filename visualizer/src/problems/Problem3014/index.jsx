@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON object with a lowercase string word',
   url: 'https://leetcode.com/problems/minimum-number-of-pushes-to-type-word-i/',
   complexity: 'O(d log d) time for d distinct letters. The visualization caps the word at 40 letters.',
+  question: "Find the fewest key presses needed to type a word when letters are assigned to keys in rounds of eight.",
+  approaches: [
+    { name: "Frequency ranking into rounds", intuition: "Sort letter counts descending and charge each letter its count times its round number.", time: "O(26 log 26)", space: "O(26)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"word":"abcde"}' },
     { label: 'Example 2', input: '{"word":"xyzxyzx"}' },

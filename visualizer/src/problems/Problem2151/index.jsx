@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Statement matrix as JSON (0 bad, 1 good, 2 none; diagonal 2)',
   url: 'https://leetcode.com/problems/maximum-good-people-based-on-statements/',
   complexity: 'O(2^n n^2) time for n people by trying every subset; O(n) extra space.',
+  question: "Find the largest number of people who can be good, where a good person's statements must all be true.",
+  approaches: [
+    { name: "Try every subset", intuition: "Assume a subset is good, check each member's statements against that assumption, and keep the largest valid subset.", time: "O(2^n * n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Two good people', input: '[[2,1,2],[1,2,0],[2,1,2]]' },
     { label: 'Contradiction', input: '[[2,0],[0,2]]' },

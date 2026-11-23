@@ -4,6 +4,10 @@ import { StackLane } from '../../components/shared/AlgorithmStatePrimitives'
 import { buildTrace, parseInput, code, python, phases, examples } from './algorithm'
 
 const definition = {
+  question: "Check whether a string can be split into k palindromes.",
+  approaches: [
+    { name: "Odd count check", intuition: "Count letters with odd totals, which must be at most k and at most the length.", time: "O(n)", space: "O(1)" },
+  ],
   number: '1400', phases, parse: parseInput, build: buildTrace, code, python, examples,
   inputLabel: 'Object with s and k (JSON)',
   url: 'https://leetcode.com/problems/construct-k-palindrome-strings/',

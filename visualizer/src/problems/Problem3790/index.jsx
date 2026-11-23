@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Divisor (JSON object with k)',
   url: 'https://leetcode.com/problems/smallest-all-ones-multiple/',
   complexity: 'O(k) time and O(1) extra space. The visualization caps k at 60.',
+  question: "Find the smallest positive number made only of ones that is divisible by k, or report it as not available.",
+  approaches: [
+    { name: "Remainder tracking", intuition: "Track the remainder of 1, 11, 111, and so on modulo k until one divides evenly.", time: "O(k)", space: "O(1)" },
+  ],
   examples: [
     { label: 'k = 3', input: '{"k":3}' },
     { label: 'k = 7', input: '{"k":7}' },

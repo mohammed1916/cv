@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with root (level-order JSON) and limit',
   url: 'https://leetcode.com/problems/insufficient-nodes-in-root-to-leaf-paths/',
   complexity: 'O(n) time and O(h) space. The visualization caps input at 15 nodes.',
+  question: "Delete the nodes whose every root-to-leaf path sums below a limit, and return the root.",
+  approaches: [
+    { name: "Post-order pruning", intuition: "Carry the running sum down; at each leaf, prune when it is below the limit, and remove children that become empty.", time: "O(n)", space: "O(h)" },
+  ],
   examples: [
     { label: 'Mixed values with limit three', input: '{"root":[7,-3,5,-9,4,null,8],"limit":3}' },
     { label: 'Single node', input: '{"root":[5],"limit":-1}' },

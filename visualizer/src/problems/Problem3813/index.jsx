@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON object with s: 1 to 30 lowercase letters and spaces',
   url: 'https://leetcode.com/problems/vowel-consonant-score/',
   complexity: 'O(n) time for a string of length n. The visualization caps s at 30 characters.',
+  question: "Compute the vowel count divided by the consonant count, rounded down.",
+  approaches: [
+    { name: "Single pass count", intuition: "Count vowels and consonants in one pass, then divide.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Education', input: '{"s":"education"}' },
     { label: 'Vowels only', input: '{"s":"aeiou"}' },

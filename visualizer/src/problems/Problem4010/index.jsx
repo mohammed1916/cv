@@ -11,6 +11,10 @@ const definition = {
   inputLabel: 'Numbers (JSON object with nums)',
   url: 'https://leetcode.com/problems/maximize-pair-strength-using-gcd/',
   complexity: 'O(n² log M) time and O(1) extra space. The visualization caps input at 8 numbers.',
+  question: "Score each pair of numbers as their product divided by the square of their gcd, and find the best pair.",
+  approaches: [
+    { name: "All-pairs scoring", intuition: "Try every pair, compute the gcd, and keep the best score.", time: "O(n^2 log M)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"nums":[2,3,5]}' },
     { label: 'Example 2', input: '{"nums":[4,6,8]}' },

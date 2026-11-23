@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON array of integers (1 to 12 values, each from 1 to 100)',
   url: 'https://leetcode.com/problems/minimum-moves-to-equal-array-elements-iii/',
   complexity: 'O(n) time and O(1) extra space.',
+  question: "Make every value in an array equal by only increasing values, counting the total increase needed.",
+  approaches: [
+    { name: "Raise everything to the maximum", intuition: "The largest value is the only reachable target, so sum the gaps between it and each value.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example', input: '[3,7,4]' },
     { label: 'Equal values', input: '[2,2,8,5]' },

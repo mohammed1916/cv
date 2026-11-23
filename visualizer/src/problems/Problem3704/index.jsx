@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'An integer n from 2 to 1000000, for example 11',
   url: 'https://leetcode.com/problems/count-no-zero-pairs-that-sum-to-n/',
   complexity: 'O(d * 10 * 10) time for d digits of n with a small set of states. The visualization caps n at 1000000.',
+  question: "Count pairs of positive integers with no zero digits that sum to n.",
+  approaches: [
+    { name: "Digit DP", intuition: "Walk the digits of n with carry states, counting valid pairs.", time: "O(d * 10 * 10)", space: "O(d)" },
+  ],
   examples: [
     { label: 'Example 1', input: '2' },
     { label: 'Example 2', input: '11' },

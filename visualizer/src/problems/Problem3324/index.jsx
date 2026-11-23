@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON object with target: 1 to 5 lowercase letters',
   url: 'https://leetcode.com/problems/find-the-sequence-of-strings-appeared-on-the-screen/',
   complexity: 'O(L * 26) screens for a target of length L. The visualization caps the target at 5 letters.',
+  question: "Find the sequence of strings that appear on a screen while typing a target, using only the allowed key presses.",
+  approaches: [
+    { name: "Simulate typing each step", intuition: "Simulate each key press and record the screen after every step.", time: "O(L * 26)", space: "O(L)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"target":"abc"}' },
     { label: 'Example 2', input: '{"target":"he"}' },

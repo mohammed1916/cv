@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON object with nums (2 to 12 positive integers)',
   url: 'https://leetcode.com/problems/find-the-value-of-the-partition/',
   complexity: 'O(n log n) time for the sort, O(n) extra space for the sorted copy.',
+  question: "Given an array, partition it into two non-empty parts and minimize the difference between the largest of one and the smallest of the other.",
+  approaches: [
+    { name: "Sort then adjacent gaps", intuition: "After sorting, the best split is between two adjacent values, so check each gap.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"nums":[7,20,11,9]}' },
     { label: 'Example 2', input: '{"nums":[90,4,15,23]}' },

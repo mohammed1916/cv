@@ -12,6 +12,11 @@ const definition = {
   inputLabel: 'Nested object {"v", "l", "r"}; leaves have no l or r',
   url: 'https://leetcode.com/problems/height-of-special-binary-tree/',
   complexity: 'O(n) time and O(h) stack space for n nodes and height h; the leaf chain is never traversed, so it adds no work. The visualization caps the tree at 12 nodes with values from 1 to 99. Height is counted in nodes, so a single node has height 1.',
+  question: "Find the height of a special binary tree whose leaves are linked to each other, counting nodes on the longest root-to-leaf path.",
+  approaches: [
+    { name: "Depth-first traversal skipping leaf links", intuition: "Walk the real child pointers only, tracking depth, and never follow the leaf chain.", time: "O(n)", space: "O(h)" },
+    { name: "Recursive height", intuition: "Height of a node is one plus the larger child height, computed recursively.", time: "O(n)", space: "O(h)" },
+  ],
   examples: [
     { label: 'Lopsided oak', input: '{"v":8,"l":{"v":3,"l":{"v":1},"r":{"v":6,"l":{"v":4}}},"r":{"v":9}}' },
     { label: 'Single node', input: '{"v":5}' },

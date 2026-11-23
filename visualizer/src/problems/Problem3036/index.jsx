@@ -14,6 +14,11 @@ const definition = {
   inputLabel: 'Object with nums (integers -5 to 5) and pattern (-1, 0, 1 entries)',
   url: 'https://leetcode.com/problems/number-of-subarrays-that-match-a-pattern-ii/',
   complexity: 'O(n + m) time with KMP, O(m) extra space. The visualization caps nums at 12 values.',
+  question: "Count subarrays whose up, down, and equal steps match a given pattern, for a large input.",
+  approaches: [
+    { name: "Prefix function on signs", intuition: "Turn the array into a sign sequence and use KMP to find all matches.", time: "O(n + m)", space: "O(m)" },
+    { name: "Window compare", intuition: "Compare each window of signs with the pattern.", time: "O(n\u00b7m)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example', input: '{"nums":[5,1,4,4,0,3,-2,1],"pattern":[-1,1]}' },
     { label: 'Run', input: '{"nums":[1,2,3,4,5],"pattern":[1,1]}' },

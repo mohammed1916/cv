@@ -4,6 +4,10 @@ import { meta } from './meta'
 import { buildTrace, parseInput, code, python, javascript, phases, examples, complexity, inputLabel } from './algorithm'
 
 const definition = {
+  question: "Given a date, return the next day, rolling over months and years correctly.",
+  approaches: [
+    { name: "Date arithmetic", intuition: "Add one day, then move to the next month or year when the end of the current month is reached.", time: "O(1)", space: "O(1)" },
+  ],
   number: meta.number,
   phases, parse: parseInput, build: buildTrace, code, python, inputLabel, complexity, examples,
   url: `https://leetcode.com/problems/${meta.slug}/`,

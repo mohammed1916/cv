@@ -14,6 +14,11 @@ const definition = {
   inputLabel: 'Edges as JSON, where edges[i] is the node that i points to, e.g. {"edges": [1,2,0,0]}',
   url: 'https://leetcode.com/problems/count-visited-nodes-in-a-directed-graph/',
   complexity: 'O(n) time and O(n) space, since every node is walked and answered once.',
+  question: "For a directed graph where each node has one outgoing edge, count how many distinct nodes are visited starting from each node.",
+  approaches: [
+    { name: "Cycle detection with memoized counts", intuition: "Walk each path, and when it reaches a finished node reuse its count; a cycle gets the cycle length.", time: "O(n)", space: "O(n)" },
+    { name: "Walk each start to the end", intuition: "Follow the edges from each start while recording visited nodes.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"edges": [1,2,0,0]}' },
     { label: 'Example 2', input: '{"edges": [1,2,3,4,0]}' },

@@ -12,6 +12,11 @@ const definition = {
   inputLabel: 'Object with a customers table (customer_id, name, email)',
   url: 'https://leetcode.com/problems/drop-duplicate-rows/',
   complexity: 'O(n) time and O(n) space for n rows, with one map lookup per row. The visualization caps the table at 14 rows.',
+  question: "Remove duplicate rows so that only the first row for each email remains.",
+  approaches: [
+    { name: "Keep first occurrence", intuition: "Track seen emails and drop any later row whose email has appeared.", time: "O(n)", space: "O(n)" },
+    { name: "Sort and compare neighbours", intuition: "Sort by email and drop adjacent duplicates, keeping the earliest.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Repeated emails', input: sample([customer(101, 'Priya', 'priya@mail.test'), customer(102, 'Tomas', 'tomas@mail.test'), customer(103, 'Priyanka', 'priya@mail.test'), customer(104, 'Wen', 'wen@mail.test'), customer(105, 'Tom', 'tomas@mail.test'), customer(106, 'Priya R', 'priya@mail.test')]) },
     { label: 'Every email differs', input: sample([customer(7, 'Noor', 'noor@mail.test'), customer(8, 'Sami', 'sami@mail.test'), customer(9, 'Ines', 'ines@mail.test')]) },

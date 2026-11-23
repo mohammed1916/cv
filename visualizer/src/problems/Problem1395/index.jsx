@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'Ratings (JSON object with rating)',
   url: 'https://leetcode.com/problems/count-number-of-teams/',
   complexity: 'O(n²) time and O(1) extra space for n soldiers. The visualization caps input at 50 soldiers.',
+  question: "Count triples of soldiers with strictly increasing or decreasing ratings.",
+  approaches: [
+    { name: "Middle soldier counting", intuition: "Fix the middle soldier and count smaller and larger ratings on each side.", time: "O(n^2)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Mixed', input: '{"rating":[2,5,3,4,1]}' },
     { label: 'No team', input: '{"rating":[2,1,3]}' },

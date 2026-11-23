@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON {"s": "dcfgbcdef"}',
   url: 'https://leetcode.com/problems/length-of-the-longest-alphabetical-continuous-substring/',
   complexity: 'O(n) time and O(1) extra space.',
+  question: "Find the length of the longest substring in which each letter follows the previous letter in the alphabet.",
+  approaches: [
+    { name: "Run length scan", intuition: "Track the current run of consecutive letters and keep the longest.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example', input: '{"s":"dcfgbcdef"}' },
     { label: 'Short', input: '{"s":"bcdz"}' },

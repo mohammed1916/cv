@@ -8,6 +8,10 @@ const definition = {
   inputLabel: 'Object with root1, root2 (level-order arrays with null) and target',
   url: 'https://leetcode.com/problems/two-sum-bsts/description/',
   complexity: 'O(n + m) time and O(n + m) space for trees with n and m nodes. The visualization caps each tree at 15 entries in its level-order array; the draft does not state an exact official bound.',
+  question: "Decide whether two binary search trees contain two values that sum to a target.",
+  approaches: [
+    { name: "In-order lists and two pointers", intuition: "Flatten each tree in order into a sorted list, then move two pointers toward the target.", time: "O(n + m)", space: "O(n + m)" },
+  ],
   examples: [
     { label: 'Pair found', input: '{"root1":[5,3,8],"root2":[2,1,6],"target":11}' },
     { label: 'No pair', input: '{"root1":[5,3,8],"root2":[2,1,6],"target":20}' },

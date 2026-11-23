@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with a level-order tree, for example {"tree":[4,8,5,0,1]}',
   url: 'https://leetcode.com/problems/count-nodes-equal-to-average-of-subtree/',
   complexity: 'O(n) time and O(h) stack space. The visualization caps input at 15 nodes.',
+  question: "Count the nodes whose value equals the average of the values in their subtree, using integer division.",
+  approaches: [
+    { name: "Post-order sums and counts", intuition: "Return the subtree sum and size from each child, and compare the average at each node.", time: "O(n)", space: "O(h)" },
+  ],
   examples: [
     { label: 'Own: lopsided tree', input: '{"tree":[9,3,null,7,2]}' },
     { label: 'Single node', input: '{"tree":[1]}' },

@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON: {"nums": [...]}',
   url: 'https://leetcode.com/problems/concatenate-array-with-reverse/',
   complexity: 'O(n) time for the output of length 2n.',
+  question: "Given an array, return it followed by a copy of itself in reverse order.",
+  approaches: [
+    { name: "Copy then reverse append", intuition: "Copy the values in order, then append them again from last to first.", time: "O(n)", space: "O(n) for the output" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"nums":[1,2,3]}' },
     { label: 'Example 2', input: '{"nums":[1]}' },

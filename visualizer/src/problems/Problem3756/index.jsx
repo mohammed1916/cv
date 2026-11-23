@@ -15,6 +15,11 @@ const definition = {
   inputLabel: 'Object with s (digits) and queries ([l, r] pairs)',
   url: 'https://leetcode.com/problems/concatenate-non-zero-digits-and-multiply-by-sum-ii/',
   complexity: 'O(m + q) time after the prefix arrays, with products kept modulo 1000000007. The visualization caps s at 20 digits.',
+  question: "For each query, read the nonzero digits in a window as one number and multiply by their sum, modulo 1000000007.",
+  approaches: [
+    { name: "Prefix arrays with powers of ten", intuition: "Precompute prefix values so each query is answered from a few subtractions and products.", time: "O(m + q)", space: "O(m)" },
+    { name: "Scan each window", intuition: "Read each window's digits for every query.", time: "O(m * q)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example', input: '{"s":"3014","queries":[[0,2],[1,3]]}' },
     { label: 'Longer', input: '{"s":"907060","queries":[[0,5],[2,4]]}' },

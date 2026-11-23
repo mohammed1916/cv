@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON object with s: 1 to 20 lowercase letters',
   url: 'https://leetcode.com/problems/trim-trailing-vowels/',
   complexity: 'O(n) time for a string of length n. The visualization caps s at 20 characters.',
+  question: "Remove trailing vowels from a string.",
+  approaches: [
+    { name: "Walk backwards", intuition: "Walk from the end and drop vowels until the first non-vowel.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example', input: '{"s":"idea"}' },
     { label: 'No vowels at end', input: '{"s":"bcd"}' },

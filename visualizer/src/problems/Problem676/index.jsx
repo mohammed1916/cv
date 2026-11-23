@@ -12,6 +12,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Words and queries (JSON object)',
   url: 'https://leetcode.com/problems/implement-magic-dictionary/',
   complexity: 'Building costs O(total letters) for the words; each query costs O(length²) in the worst case using set membership per pattern.',
+  question: "Decide whether a word can be changed into a dictionary word by changing exactly one letter.",
+  approaches: [
+    { name: "Wildcard buckets", intuition: "Store each word with each position replaced by a wildcard, then look up the query's wildcard forms.", time: "O(L)", space: "O(total chars)" },
+  ],
   examples: [
     { label: 'One change', input: '{"words":["cart","dog"],"queries":["card","cart","dig"]}' },
     { label: 'Near words', input: '{"words":["tea","team"],"queries":["teem","tead","team"]}' },

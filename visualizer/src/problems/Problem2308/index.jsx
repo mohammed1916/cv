@@ -22,6 +22,10 @@ const examples = [{
 }]
 
 const definition = {
+  question: "Using a genders table, order users so that the genders alternate as evenly as possible.",
+  approaches: [
+    { name: "Rank within each gender", intuition: "Number the users inside each gender group, then sort by that rank and by gender.", time: "O(n log n)", space: "O(n)" },
+  ],
   number: meta.number,
   phases, parse: parseInput, build: buildTrace, code, sql, python, inputLabel,
   url: `https://leetcode.com/problems/${meta.slug}/`,

@@ -12,6 +12,11 @@ const definition = {
   inputLabel: 'JSON object with n and m, each from 1 to 1000, for example {"n":10,"m":3}',
   url: 'https://leetcode.com/problems/divisible-and-non-divisible-sums-difference/',
   complexity: 'O(1) time with the closed form. The visualization shows up to 1000 numbers.',
+  question: "Compute the difference between the sum of numbers from 1 to n that are not divisible by m and the sum of those that are.",
+  approaches: [
+    { name: "Closed-form sums", intuition: "The total of 1 to n minus twice the sum of multiples of m gives the answer, and multiples of m have a formula.", time: "O(1)", space: "O(1)" },
+    { name: "Loop over numbers", intuition: "Check each number from 1 to n and accumulate the two sums.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Thirteen by five', input: '{"n":13,"m":5}' },
     { label: 'No multiples', input: '{"n":5,"m":6}' },

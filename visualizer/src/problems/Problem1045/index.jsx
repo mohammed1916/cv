@@ -3,6 +3,10 @@ import { meta } from './meta'
 import { buildTrace, parseInput, code, sql, python, phases, examples, complexity, inputLabel } from './algorithm'
 
 const definition = {
+  question: "Find customers who bought every product in the product list.",
+  approaches: [
+    { name: "Join and group in SQL", intuition: "Count distinct products per customer and keep customers whose count equals the total number of products.", time: "O(n + m)", space: "O(c)" },
+  ],
   number: meta.number,
   phases, parse: parseInput, build: buildTrace, code, sql, python, inputLabel,
   url: `https://leetcode.com/problems/${meta.slug}/`,

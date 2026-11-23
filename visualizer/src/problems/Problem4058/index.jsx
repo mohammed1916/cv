@@ -18,6 +18,10 @@ const definition = {
   inputLabel: 'JSON array of integers, e.g. [3, 1, 4, 1, 5]',
   url: 'https://leetcode.com/problems/maximum-pulse-value-after-one-subarray-rotation/',
   complexity: 'O(n) time and O(n) space for the prefix sums. The visualization caps the array at 16 values; the official limit is 100000.',
+  question: "Find the maximum pulse value after one left rotation of a segment, where alternating signs decide the pulse.",
+  approaches: [
+    { name: "Prefix sums with best left end", intuition: "A rotation only changes the two ends, so for each right end use the best earlier left end.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Rotation helps', input: '[1, 2]' },
     { label: 'No rotation', input: '[5, 1]' },

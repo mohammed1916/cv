@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with string s of letters and stars (JSON)',
   url: 'https://leetcode.com/problems/removing-stars-from-a-string/',
   complexity: 'O(n) time and O(n) space.',
+  question: "Repeatedly remove a letter together with the star before it, and return what is left.",
+  approaches: [
+    { name: "Stack", intuition: "Push letters onto a stack and pop when a star appears.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Pairs', input: '{"s":"ab*c*d"}' },
     { label: 'Cascade', input: '{"s":"xy**z"}' },

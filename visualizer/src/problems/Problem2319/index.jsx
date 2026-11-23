@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON object: {"grid": [[...], ...]} square matrix',
   url: 'https://leetcode.com/problems/check-if-matrix-is-x-matrix/',
   complexity: 'One pass over the n by n cells: O(n^2) time. The visualization caps the matrix at 6 by 6.',
+  question: "Decide whether a square matrix is an X-matrix: its diagonals are non-zero and every other cell is zero.",
+  approaches: [
+    { name: "Check each cell", intuition: "Visit every cell once and check its value against whether it lies on a diagonal.", time: "O(n^2)", space: "O(1)" },
+  ],
   examples: [
     { label: 'X-matrix', input: '{"grid":[[2,0,0,1],[0,3,1,0],[0,5,2,0],[4,0,0,2]]}' },
     { label: 'Not X', input: '{"grid":[[5,7,0],[0,3,1],[0,5,0]]}' },

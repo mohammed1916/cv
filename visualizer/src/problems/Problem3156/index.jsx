@@ -14,6 +14,10 @@ const examples = [
   ]
 
 const definition = {
+  question: "From a tasks table, report each employee's merged working hours and the peak number of overlapping tasks.",
+  approaches: [
+    { name: "Merge intervals and sweep events", intuition: "Merge overlapping tasks so shared time counts once, and sweep sorted start and end events for the concurrency peak.", time: "O(n log n)", space: "O(n)" },
+  ],
   number: meta.number,
   phases, parse: parseInput, build: buildTrace, code, sql, python, inputLabel,
   url: `https://leetcode.com/problems/${meta.slug}/`,

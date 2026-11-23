@@ -9,6 +9,10 @@ const definition = {
   inputLabel: 'Object with purchases ([user_id, time_stamp, amount] rows), start, end and minAmount',
   url: 'https://leetcode.com/problems/the-users-that-are-eligible-for-discount/',
   complexity: 'O(n) time and O(u) space for n purchases and u distinct users, since each purchase is read once. The sample caps the input at 12 rows.',
+  question: "Find the users who are eligible for a discount, with at least one purchase that meets the minimum amount.",
+  approaches: [
+    { name: "Filter then distinct users", intuition: "Keep the qualifying purchases and count each user once.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Sample interval', input: '{"purchases":[[7,10,30],[3,12,15],[7,15,25],[3,40,90],[9,11,20],[7,33,5],[9,18,40],[3,22,10]],"start":10,"end":25,"minAmount":30}' },
     { label: 'Nobody qualifies', input: '{"purchases":[[1,5,10]],"start":1,"end":9,"minAmount":11}' },

@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with nums array (JSON)',
   url: 'https://leetcode.com/problems/find-the-maximum-number-of-marked-indices/',
   complexity: 'O(n log n) time for sorting, O(n) for the scan. The visualization caps input at 20 values.',
+  question: "Pair indices so that the smaller value is at most half the other, and maximise the number of marked indices.",
+  approaches: [
+    { name: "Sort then pair from the middle", intuition: "Sort the values, then pair the smaller half with the larger half in order.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"nums":[3,5,2,4]}' },
     { label: 'Example 2', input: '{"nums":[9,2,5,4]}' },

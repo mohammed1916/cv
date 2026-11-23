@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Satisfaction values (JSON array)',
   url: 'https://leetcode.com/problems/reducing-dishes/',
   complexity: 'O(n log n) time for the sort, then one linear pass. O(n) extra space for the sorted copy.',
+  question: "Choose which dishes to cook and in which order to maximize the like-time total.",
+  approaches: [
+    { name: "Sort and take prefixes", intuition: "Sort dishes high to low and keep adding while the running total stays positive.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Mixed', input: '[4, -2, 6, -1]' },
     { label: 'All negative', input: '[-3, -5]' },

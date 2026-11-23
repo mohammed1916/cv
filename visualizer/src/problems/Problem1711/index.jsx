@@ -14,6 +14,10 @@ const definition = {
   complexity,
   inputLabel: 'JSON array of meal values (0 to 2^20)',
   url: 'https://leetcode.com/problems/count-good-meals/',
+  question: "Count pairs of meals whose deliciousness values sum to a power of two.",
+  approaches: [
+    { name: "Hash count over powers", intuition: "For each value, look up each power of two minus that value in a count map.", time: "O(n log V)", space: "O(n)" },
+  ],
 }
 
 export default function Problem1711Visualizer() {

@@ -14,6 +14,10 @@ const definition = {
   complexity,
   inputLabel: 'Object with n (2 to 10 in this visual) and edges: the n-1 pairs of a tree',
   url: 'https://leetcode.com/problems/count-subtrees-with-maximum-distance-between-cities/',
+  question: "Count the subsets of cities in a tree that stay connected, grouped by the largest distance between two cities in the subset.",
+  approaches: [
+    { name: "Enumerate connected subsets", intuition: "Try every subset, keep the connected ones, and record the diameter of each.", time: "O(2^n * n^2) in this form", space: "O(n^2)" },
+  ],
 }
 
 export default function Problem1617Visualizer() {

@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON object: { "messages": [...], "senders": [...] }',
   url: 'https://leetcode.com/problems/sender-with-largest-word-count/',
   complexity: 'O(total characters) time and O(senders) space.',
+  question: "Given messages and their senders, find the sender who has written the most words, breaking ties by the larger name.",
+  approaches: [
+    { name: "Hash map of totals", intuition: "Add each message's word count to its sender's total, then pick the best sender with the tie-break.", time: "O(total characters)", space: "O(senders)" },
+  ],
   examples: [
     { label: 'Three senders', input: '{"messages":["Hello team","Ready now","See you soon"],"senders":["Ana","Ben","Cruz"]}' },
     { label: 'Two senders', input: '{"messages":["Quiet room","Lunch soon"],"senders":["Dev","Eli"]}' },

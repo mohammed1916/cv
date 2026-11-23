@@ -16,6 +16,10 @@ const definition = {
   inputLabel: 'Graph and operations (JSON)',
   url: 'https://leetcode.com/problems/design-graph-with-shortest-path-calculator/',
   complexity: 'Each shortestPath costs O(E log V). The visualization caps input at 6 nodes and 10 operations.',
+  question: "Design a weighted directed graph that supports adding edges and returning the shortest path cost between two nodes.",
+  approaches: [
+    { name: "Dijkstra per query", intuition: "Run Dijkstra's algorithm from the source on each query using the current edges.", time: "O(E log V) per query", space: "O(V + E)" },
+  ],
   examples: [
     { label: 'Example', input: '{"n":4,"edges":[[0,2,5],[0,1,2],[1,2,1],[3,0,3]],"operations":[["shortestPath",3,2],["shortestPath",0,3],["addEdge",[1,3,4]],["shortestPath",0,3]]}' },
     { label: 'Smallest graph: unreachable', input: '{"n":2,"edges":[],"operations":[["shortestPath",0,1]]}' },

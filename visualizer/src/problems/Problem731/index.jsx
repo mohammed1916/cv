@@ -14,6 +14,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Bookings (JSON array of [start, end))',
   url: 'https://leetcode.com/problems/my-calendar-ii/',
   complexity: 'O(n) per booking for this list version; ordered maps give O(log n) plus overlap work.',
+  question: "Accept a booking only if no point is covered by three or more bookings.",
+  approaches: [
+    { name: "Overlap list", intuition: "Track the overlaps of existing bookings and refuse a new booking that touches any overlap.", time: "O(n) per booking", space: "O(n)" },
+  ],
   examples: [
     { label: 'Triple refused', input: '[[10,20],[50,60],[10,40],[5,15],[5,10],[25,55]]' },
     { label: 'Single booking', input: '[[0,1]]' },

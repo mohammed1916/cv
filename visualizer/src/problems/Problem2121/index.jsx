@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Integer array as JSON (e.g. [2,5,2,4,5])',
   url: 'https://leetcode.com/problems/intervals-between-identical-elements/',
   complexity: 'O(n) time after grouping (hash map), O(n) space.',
+  question: "For each position in an array, sum the distances to every other position that holds the same value.",
+  approaches: [
+    { name: "Prefix sums per value", intuition: "Group the positions of each value and use running prefix sums so each position's distance total is computed from its neighbours in the group.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Two repeated values', input: '[2,5,2,4,5]' },
     { label: 'All different', input: '[1,2,3]' },

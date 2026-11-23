@@ -6,6 +6,10 @@ const definition = {
   inputLabel: 'Digit string',
   url: 'https://leetcode.com/problems/find-longest-awesome-substring/',
   complexity: 'O(n * 10) time and O(n) space: one pass, with eleven mask lookups per position.',
+  question: "Find the longest substring that can be rearranged into a palindrome with at most one odd digit.",
+  approaches: [
+    { name: "Prefix parity mask", intuition: "Track the parity of digit counts as a bitmask and compare each prefix with the masks ten positions away.", time: "O(n * 10)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Palindrome core', input: '1221' },
     { label: 'Mixed digits', input: '2024' },

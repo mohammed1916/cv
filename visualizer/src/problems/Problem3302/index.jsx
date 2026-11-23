@@ -17,6 +17,10 @@ const definition = {
   inputLabel: 'word1 and word2 (JSON object)',
   url: 'https://leetcode.com/problems/find-the-lexicographically-smallest-valid-sequence/',
   complexity: 'O(n + m) time and O(n + m) space for word1 length n and word2 length m. The visualization caps word1 at 30 characters.',
+  question: "Find the lexicographically smallest subsequence-like sequence of indices of word1 that matches word2 with at most one mismatch.",
+  approaches: [
+    { name: "Greedy with precomputed suffix matches", intuition: "Scan word1 greedily, and from a precomputed suffix table decide whether the rest of word2 can still be matched.", time: "O(n + m)", space: "O(n + m)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"word1": "bzcdbc", "word2": "bcd"}' },
     { label: 'Example 2', input: '{"word1": "zzmmp", "word2": "mp"}' },

@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'JSON object with nums, for example {"nums":[1,1,1,1,2,3,5,1]}',
   url: 'https://leetcode.com/problems/longest-fibonacci-subarray/',
   complexity: 'O(n) time and O(1) extra space. The visualization caps the array at 12 values.',
+  question: "Find the longest subarray that forms a Fibonacci-like run.",
+  approaches: [
+    { name: "Extend or restart", intuition: "Scan once, extending the current run when the next value fits and restarting otherwise.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"nums":[1,1,1,1,2,3,5,1]}' },
     { label: 'Example 2', input: '{"nums":[5,2,7,9,16]}' },

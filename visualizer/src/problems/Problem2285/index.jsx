@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with n (2 to 7 cities) and roads (pairs of city numbers)',
   url: 'https://leetcode.com/problems/maximum-total-importance-of-roads/',
   complexity: 'O(n log n + m) time for the sort and the road sum. The visualization caps input at 7 cities and 12 roads.',
+  question: "Assign the values 1 to n to cities so that the sum of the values at both ends of every road is as large as possible.",
+  approaches: [
+    { name: "Give big values to busy cities", intuition: "Count the roads at each city and assign the largest values to the cities with the most roads.", time: "O(n log n + m)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Five cities, five roads', input: '{"n":5,"roads":[[0,1],[1,2],[2,4],[0,3],[3,4]]}' },
     { label: 'Four cities, three roads', input: '{"n":4,"roads":[[0,2],[1,3],[0,3]]}' },

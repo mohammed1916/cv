@@ -11,6 +11,10 @@ const definition = {
   inputLabel: 'Length n (1 to 40)',
   url: 'https://leetcode.com/problems/count-good-numbers/',
   complexity: 'O(log n) multiplications for each power. The visualization caps n at 40 so the bits fit on screen.',
+  question: "Count strings of a given length in which digits at even positions are even primes and digits at odd positions are primes.",
+  approaches: [
+    { name: "Fast exponentiation", intuition: "Multiply the choices for even and odd positions using modular fast exponentiation.", time: "O(log n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Length 1', input: '1' },
     { label: 'Length 4', input: '4' },

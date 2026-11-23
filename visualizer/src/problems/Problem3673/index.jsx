@@ -17,7 +17,12 @@ const reasoning = [
   'Closed sessions are never zombies, however old. The comparison is inclusive, so exactly 30 idle minutes counts when the threshold is 30.',
 ]
 
-const definition = { number: meta.number, phases, parse: parseInput, build: buildTrace, code, python, sql, inputLabel, complexity, examples }
+const definition = {
+  question: "List the open sessions that have been idle for at least a threshold.",
+  approaches: [
+    { name: "Scan the session rows", intuition: "Compute each open session's idle time and keep those at or above the threshold.", time: "O(s)", space: "O(s)" },
+  ],
+  number: meta.number, phases, parse: parseInput, build: buildTrace, code, python, sql, inputLabel, complexity, examples }
 
 function StageRail({ phases, active }) {
   return <ol aria-label="SQL stages" style={{ display: 'flex', gap: 8, flexWrap: 'wrap', listStyle: 'none', padding: 0 }}>

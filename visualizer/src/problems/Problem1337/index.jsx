@@ -3,6 +3,11 @@ import RecordStateTable from '../../components/shared/RecordStateTable'
 import { buildTrace, parseInput, code, python, phases, examples } from './algorithm'
 
 const definition = {
+  question: "Return the indices of the k rows with the fewest soldiers, in order of strength.",
+  approaches: [
+    { name: "Count and sort", intuition: "Count soldiers in each row, then sort rows by count and index.", time: "O(m log m + mn)", space: "O(m)" },
+    { name: "Binary search per row", intuition: "Each row is sorted, so binary search finds its soldier count quickly.", time: "O(m log n + m log m)", space: "O(m)" },
+  ],
   number: '1337', phases, parse: parseInput, build: buildTrace, code, python, examples,
   inputLabel: 'Object with mat and k (JSON)',
   url: 'https://leetcode.com/problems/the-k-weakest-rows-in-a-matrix/',

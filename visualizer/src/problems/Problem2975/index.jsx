@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with "m", "n", "h_fences" and "v_fences", JSON',
   url: 'https://leetcode.com/problems/maximum-square-area-by-removing-fences-from-a-field/',
   complexity: 'O(h squared + v squared) time for the gap sets. The visualization caps each side at 10 and four fences per direction.',
+  question: "Find the largest square field that can be formed by removing some fences from a rectangular field.",
+  approaches: [
+    { name: "Common gap sets", intuition: "Collect every distance between fences (including borders) in both directions, and take the largest distance in common.", time: "O(h^2 + v^2)", space: "O(h^2 + v^2)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"m":4,"n":3,"h_fences":[2,3],"v_fences":[2]}' },
     { label: 'Example 2', input: '{"m":6,"n":7,"h_fences":[2],"v_fences":[4]}' },

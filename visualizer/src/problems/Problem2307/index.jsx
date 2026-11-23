@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON {"equations": [["a","b"],["b","c"],["a","c"]], "values": [2, 3, 6]}',
   url: 'https://leetcode.com/problems/check-for-contradictions-in-equations/',
   complexity: 'O(E * alpha(V)) time with union-find and path compression, where E is the number of equations and V the number of names.',
+  question: "Given equations of the form a divided by b equals a value, decide whether any of them contradict each other.",
+  approaches: [
+    { name: "Weighted union-find", intuition: "Store each variable's ratio to its root and check that every new equation fits the ratios already known.", time: "O(E * alpha(V))", space: "O(V)" },
+  ],
   examples: [
     { label: 'Consistent', input: '{"equations":[["a","b"],["b","c"],["a","c"]],"values":[2,3,6]}' },
     { label: 'Contradiction', input: '{"equations":[["a","b"],["b","c"],["a","c"]],"values":[2,3,5]}' },

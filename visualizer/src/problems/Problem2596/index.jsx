@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON object with grid (n by n, values 0 to n squared minus 1)',
   url: 'https://leetcode.com/problems/check-knight-tour-configuration/',
   complexity: 'O(n^2) time and space. The visualization caps the grid at 7 by 7.',
+  question: "Check whether a grid is a valid knight's tour starting from the top-left corner.",
+  approaches: [
+    { name: "Verify each knight move", intuition: "Visit cells in the numbered order and confirm each step is a knight's move.", time: "O(n^2)", space: "O(n^2)" },
+  ],
   examples: [
     { label: 'Valid tour', input: '{"grid":[[0,11,16,5,20],[17,4,19,10,15],[12,1,8,21,6],[3,18,23,14,9],[24,13,2,7,22]]}' },
     { label: 'Not a tour', input: '{"grid":[[0,3,6],[5,8,1],[2,7,4]]}' },

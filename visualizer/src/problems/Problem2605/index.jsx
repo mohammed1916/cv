@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Two digit lists as JSON: {"nums1": [...], "nums2": [...]}',
   url: 'https://leetcode.com/problems/form-smallest-number-from-two-digit-arrays/',
   complexity: 'O(1) time for at most nine digits per list, and O(n + m) to build the sets.',
+  question: "Given two arrays of distinct digits, form the smallest number that uses at least one digit from each array.",
+  approaches: [
+    { name: "Set intersection then pairs", intuition: "If a digit is shared, it is the answer; otherwise combine the smallest digit from each array in the smaller order.", time: "O(1)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Four and three digits', input: '{"nums1":[9,1,6,3],"nums2":[2,7,5]}' },
     { label: 'Single digit against five', input: '{"nums1":[8],"nums2":[1,4,9,6,2]}' },

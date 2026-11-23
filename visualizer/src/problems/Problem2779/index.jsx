@@ -13,6 +13,11 @@ const definition = {
   inputLabel: 'JSON object with nums and k',
   url: 'https://leetcode.com/problems/maximum-beauty-of-an-array-after-applying-operation/',
   complexity: 'O(n log n) time for the sort and O(n) for the window. The visualization caps input at 12 values.',
+  question: "Find the largest number of values that can all fall within a common range after each value may shift by at most k.",
+  approaches: [
+    { name: "Sort and sliding window", intuition: "After sorting, the best group is a contiguous window whose spread is at most twice k.", time: "O(n log n)", space: "O(n)" },
+    { name: "Brute force over pairs", intuition: "For each starting value, count values within the allowed range.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Five values, k of four', input: '{"nums":[9,4,12,0,7],"k":4}' },
     { label: 'Equal values', input: '{"nums":[1,1,1,1],"k":10}' },

@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON array of 2 to 12 integers from 0 to 10^9',
   url: 'https://leetcode.com/problems/maximum-xor-of-subsequences/',
   complexity: 'O(n * bits) for the basis. Every subsequence XOR lies in the span, and the best pair XOR is the largest span element.',
+  question: "Find the largest XOR value that a subsequence of the array can produce.",
+  approaches: [
+    { name: "Linear basis", intuition: "Build a linear basis over GF(2); the largest subsequence XOR is the largest element of its span.", time: "O(n * bits)", space: "O(bits)" },
+  ],
   examples: [
     { label: 'Zeros around a peak', input: '[0,5,0,1000000000]' },
     { label: 'Two values, descending', input: '[7,3]' },

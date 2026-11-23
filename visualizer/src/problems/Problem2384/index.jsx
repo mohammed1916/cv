@@ -17,6 +17,10 @@ const definition = {
   inputLabel: 'String num of decimal digits (JSON object)',
   url: 'https://leetcode.com/problems/largest-palindromic-number/',
   complexity: 'O(n + 10) time for n digits. The visualization caps input at 30 digits.',
+  question: "Build the largest palindrome that can be made from a string of digits, without leading zeros.",
+  approaches: [
+    { name: "Count digits and mirror", intuition: "Count digits, place pairs symmetrically from the largest down, and put the largest odd leftover in the centre.", time: "O(n + 10)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Mixed digits', input: '{"num":"444947137"}' },
     { label: 'Only zeros', input: '{"num":"00009"}' },

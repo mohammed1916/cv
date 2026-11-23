@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Positive values (JSON array)',
   url: 'https://leetcode.com/problems/minimum-subsequence-in-non-increasing-order/',
   complexity: 'O(n log n) time for the sort, then one pass over the sorted values. O(n) extra space.',
+  question: "Pick the smallest group of numbers whose sum is more than the sum of the rest.",
+  approaches: [
+    { name: "Greedy by largest", intuition: "Sort descending and take numbers until the taken sum is larger than the rest.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Small', input: '[2, 7, 5, 1]' },
     { label: 'Equal values', input: '[3, 3, 3, 3]' },

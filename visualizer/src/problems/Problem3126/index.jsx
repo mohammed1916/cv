@@ -17,6 +17,10 @@ const examples = [
 ]
 
 const definition = {
+  question: "From a server events table, total the whole days of matched sessions across all servers, where each stop closes the most recent open start.",
+  approaches: [
+    { name: "Pair starts and stops in time order", intuition: "Walk each server's events in time order, close the latest open start on each stop, and add the matched seconds.", time: "O(e log e)", space: "O(e)" },
+  ],
   number: meta.number,
   phases, parse: parseInput, build: buildTrace, code, sql, python, inputLabel,
   url: `https://leetcode.com/problems/${meta.slug}/`,

@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'Object with nums and forbidden (equal-length integer arrays)',
   url: 'https://leetcode.com/problems/minimum-swaps-to-avoid-forbidden-values/description/',
   complexity: 'O(n) time and O(n) space with hash maps. The visualization caps the length at 12.',
+  question: "Swap positions of an array until no index holds a value forbidden for it, using as few swaps as possible.",
+  approaches: [
+    { name: "Count conflicts and pair swaps", intuition: "Count the conflicting values and pair mismatched positions to swap them directly.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"nums":[1,1,2],"forbidden":[1,2,2]}' },
     { label: 'Example 2', input: '{"nums":[3,3,3,1],"forbidden":[3,1,1,3]}' },

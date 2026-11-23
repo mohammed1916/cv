@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'Object with nums and requests (JSON)',
   url: 'https://leetcode.com/problems/maximum-sum-obtained-of-any-permutation/',
   complexity: 'O(n log n + m + n) time and O(n) space. The visualization caps input at 10 values and 8 requests.',
+  question: "Pick a permutation that maximises the sum of the subarray products assigned to each request.",
+  approaches: [
+    { name: "Difference array of coverage", intuition: "Mark request starts and ends in a difference array, then pair the largest values with the largest counts.", time: "O(n log n + m + n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Six values with a full range', input: '{"nums":[9,1,4,7,2,8],"requests":[[0,5],[3,3]]}' },
     { label: 'Overlapping single range', input: '{"nums":[0,15,8],"requests":[[1,1],[0,2],[2,2]]}' },

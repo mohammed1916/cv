@@ -8,6 +8,10 @@ const definition = {
   inputLabel: 'Letters (JSON object with s)',
   url: 'https://leetcode.com/problems/increasing-decreasing-string/',
   complexity: 'O(n) time and O(1) extra space for the 26 letter counts. The visualization accepts up to 200 letters.',
+  question: "Build a string by repeatedly taking letters in increasing and then decreasing order.",
+  approaches: [
+    { name: "Letter counts with alternating passes", intuition: "Count letters, then take the next available letter in each direction.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Short', input: '{"s":"aab"}' },
     { label: 'Four each', input: '{"s":"aaaabbbbcccc"}' },

@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with nums1, a list of distinct integers',
   url: 'https://leetcode.com/problems/construct-uniform-parity-array-i/',
   complexity: 'O(n) time and O(n) space for the constructed array.',
+  question: "Build an array in which every position keeps or changes its number so that the result has one shared parity.",
+  approaches: [
+    { name: "Parity pattern construction", intuition: "Choose each position's value so that the whole result shares one parity.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Mixed', input: '{"nums1":[5,8,11]}' },
     { label: 'All even', input: '{"nums1":[6,10]}' },

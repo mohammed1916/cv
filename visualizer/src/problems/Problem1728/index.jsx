@@ -11,6 +11,10 @@ const definition = {
   inputLabel: 'An object with grid, catJump and mouseJump, for example {"grid": ["M.C...F"], "catJump": 1, "mouseJump": 4}',
   url: 'https://leetcode.com/problems/cat-and-mouse-ii/',
   complexity: 'O((rows * cols)^2 * moves) states. The visualization caps the board at 8 by 8.',
+  question: "A cat and a mouse move on a grid with a food item and obstacles; decide whether the mouse can win.",
+  approaches: [
+    { name: "Retrograde game search", intuition: "Track positions and turns, and propagate wins and losses backward from the terminal states.", time: "O((rows * cols)^2 * moves)", space: "O((rows * cols)^2)" },
+  ],
   examples: [
     { label: 'Wall in the middle', input: '{"grid":["C..F","..#.","..M."],"catJump":2,"mouseJump":1}' },
     { label: 'Own: 3 by 3 with a wall', input: '{"grid":["M..",".C#","..F"],"catJump":1,"mouseJump":2}' },

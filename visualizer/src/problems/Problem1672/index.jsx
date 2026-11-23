@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Customers as JSON array of balance lists',
   url: 'https://leetcode.com/problems/richest-customer-wealth/',
   complexity: 'O(m * n) time for m customers with n bank balances each, and O(1) extra space beyond the running totals.',
+  question: "Find the largest total balance held by a single customer across all their accounts.",
+  approaches: [
+    { name: "Sum each row", intuition: "Sum each customer's balances and keep the largest total.", time: "O(m * n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Sample A', input: '[[4,4],[10,1],[3,3,3]]' },
     { label: 'Single bank', input: '[[5],[0,0],[9,2,2]]' },

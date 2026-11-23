@@ -17,6 +17,11 @@ const definition = {
   inputLabel: 'Object with obj and fn (positive, negative, even, odd, string, number, boolean, null, truthy, isArray)',
   url: 'https://leetcode.com/problems/deep-object-filter/',
   complexity: 'O(v) time and O(d) extra stack for v values and depth d, plus the copied output. The official input can reach 100000 characters; this page caps it at 60 values and containers and offers named predicates in place of a typed function.',
+  question: "Recursively remove values from nested arrays and objects that fail a predicate, dropping containers that become empty.",
+  approaches: [
+    { name: "Recursive filter", intuition: "Filter each child, keep it when something remains, and rebuild the container.", time: "O(v)", space: "O(d) stack plus output" },
+    { name: "Iterative walk with a work stack", intuition: "Process nested values with an explicit stack to avoid deep recursion.", time: "O(v)", space: "O(v)" },
+  ],
   examples: [
     { label: 'Removal cascades', input: '{"obj":{"id":7,"tags":["new","old",3],"meta":{"size":-2,"owner":{"age":-1}}},"fn":"positive"}' },
     { label: 'Array positions close up', input: '{"obj":[1,[4,-4,[8]],"x",[3],{"a":6,"b":5}],"fn":"even"}' },

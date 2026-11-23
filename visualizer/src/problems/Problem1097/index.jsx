@@ -5,6 +5,10 @@ import SqlStages from './SqlStages'
 import './SqlStages.css'
 
 const definition = {
+  question: "For each install date, count the players and the share who returned the next day.",
+  approaches: [
+    { name: "Join and group in SQL", intuition: "Join activity to install dates and check whether each player has a next-day login.", time: "O(n)", space: "O(n)" },
+  ],
   number: meta.number,
   phases, parse: parseInput, build: buildTrace, code, sql, python, inputLabel,
   url: `https://leetcode.com/problems/${meta.slug}/`,

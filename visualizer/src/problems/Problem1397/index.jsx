@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON object: n (1-4), s1, s2 (length n, lowercase), evil (1-3 letters)',
   url: 'https://leetcode.com/problems/find-all-good-strings/',
   complexity: 'O(n * m * 26) time with m the length of evil. The visualization caps n at 4.',
+  question: "Count strings of a given length in a range that do not contain a forbidden substring.",
+  approaches: [
+    { name: "Digit DP with KMP automaton", intuition: "Track the match length with the forbidden string and the range bounds.", time: "O(n m 26)", space: "O(n m)" },
+  ],
   examples: [
     { label: 'Own: three letters, evil ca', input: '{"n":3,"s1":"abc","s2":"bcd","evil":"ca"}' },
     { label: 'Zero', input: '{"n":2,"s1":"ab","s2":"ab","evil":"a"}' },

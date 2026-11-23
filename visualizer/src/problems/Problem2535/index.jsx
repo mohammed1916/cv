@@ -16,6 +16,10 @@ const definition = {
   inputLabel: 'Array object (JSON, e.g. {"nums": [1, 15, 6, 3]})',
   url: 'https://leetcode.com/problems/difference-between-element-sum-and-digit-sum-of-an-array/',
   complexity: 'O(n * d) time for n numbers with at most d digits each, O(1) extra space. The visualization caps the array at 2000 numbers.',
+  question: "Return the absolute difference between the sum of the numbers and the sum of all their digits.",
+  approaches: [
+    { name: "Single scan", intuition: "Add each number to one sum and each of its digits to another.", time: "O(n * d)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Nonzero difference', input: '{"nums": [1,15,6,3]}' },
     { label: 'Equal totals', input: '{"nums": [1,2,3,4]}' },

@@ -8,6 +8,10 @@ const definition = {
   inputLabel: 'Answer key of T and F, and k (JSON)',
   url: 'https://leetcode.com/problems/maximize-the-confusion-of-an-exam/',
   complexity: 'O(n) time for each of the two letters, with a sliding window and O(1) extra space.',
+  question: "Find the longest run of answers in an exam with at most k changes so that either all answers become true or all become false.",
+  approaches: [
+    { name: "Sliding window for each answer", intuition: "Slide a window and keep the largest window where the minority answer count is at most k.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Three of one', input: '{"answerKey":"TFTFT","k":1}' },
     { label: 'Two flips', input: '{"answerKey":"FFFTFT","k":2}' },

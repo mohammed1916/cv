@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'JSON {"stones": [0,2,5,6,7]}',
   url: 'https://leetcode.com/problems/frog-jump-ii/',
   complexity: 'O(n) time and O(1) extra space for n stones. The visualization caps stones at 12.',
+  question: "A frog jumps across stones in a row, alternating jumps forward and back, and you want the smallest possible maximum jump.",
+  approaches: [
+    { name: "Largest skip-one gap", intuition: "The best route visits every second stone, so the answer is the largest gap between stones two apart.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"stones":[0,2,5,6,7]}' },
     { label: 'Example 2', input: '{"stones":[0,3,9]}' },

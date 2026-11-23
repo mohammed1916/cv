@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with a Listens list (user_id, song_id, day) and a Friendship list (user1_id, user2_id)',
   url: 'https://leetcode.com/problems/leetcodify-similar-friends/',
   complexity: 'O(s * u^2) in the worst case for s song-day groups with u listeners, plus a sort of the friend pairs.',
+  question: "Find pairs of users who share at least three songs on the same day and are not already listed as similar in the other order.",
+  approaches: [
+    { name: "Self join and count", intuition: "Join listens to listens on the same song and day, count shared songs per pair, and keep pairs with three or more.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Sample', input: sampleText },
     { label: 'One listen, no friends', input: '{"Listens":[{"user_id":1,"song_id":10,"day":"d1"}],"Friendship":[]}' },

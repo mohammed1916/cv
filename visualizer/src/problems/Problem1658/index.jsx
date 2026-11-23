@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Object with nums and x (JSON)',
   url: 'https://leetcode.com/problems/minimum-operations-to-reduce-x-to-zero/',
   complexity: 'O(n) time and O(1) extra space: a sliding window finds the longest middle block whose sum is total minus x.',
+  question: "Remove elements from the two ends so that the removed sum is exactly x, using the fewest removals.",
+  approaches: [
+    { name: "Longest middle window", intuition: "Find the longest subarray whose sum equals the total minus x, using a sliding window.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Ends sum to x', input: '{"nums":[2,3,1,5,4],"x":6}' },
     { label: 'Middle block', input: '{"nums":[4,1,3,2,5],"x":6}' },

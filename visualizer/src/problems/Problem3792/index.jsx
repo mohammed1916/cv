@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with n (1 to 8 in this visualization)',
   url: 'https://leetcode.com/problems/sum-of-increasing-product-blocks/',
   complexity: 'O(n^2) time and O(1) extra space: block k has k integers, and n blocks hold about n squared over two integers in total.',
+  question: "Build blocks of growing length from consecutive integers, multiply each block, and add the products modulo a prime.",
+  approaches: [
+    { name: "Build each block directly", intuition: "Multiply the integers of each block in turn and add the results.", time: "O(n^2)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Four blocks', input: '{"n":4}' },
     { label: 'Six blocks', input: '{"n":6}' },

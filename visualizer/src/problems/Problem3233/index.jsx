@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with integers l and r (1 <= l <= r <= 200)',
   url: 'https://leetcode.com/problems/find-the-count-of-numbers-which-are-not-special/',
   complexity: 'O(sqrt(r) * sqrt(r)) time with trial division. The visualization caps r at 200.',
+  question: "Count the numbers in a range that are not special, where a special number has exactly three divisors.",
+  approaches: [
+    { name: "Count squares of primes", intuition: "A number has exactly three divisors when it is the square of a prime, so the special numbers are the prime squares in range.", time: "O(sqrt(r) * sqrt(r))", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example', input: '{"l":1,"r":10}' },
     { label: 'Short', input: '{"l":5,"r":8}' },

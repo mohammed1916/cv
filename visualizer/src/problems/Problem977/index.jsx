@@ -9,6 +9,11 @@ const definition = {
   inputLabel: 'Object with nums: a list of integers sorted from smallest to largest',
   url: 'https://leetcode.com/problems/squares-of-a-sorted-array/',
   complexity: 'O(n) time with two pointers and O(n) space for the result.',
+  question: "Return the squares of a sorted array, also sorted.",
+  approaches: [
+    { name: "Two pointers from the ends", intuition: "The largest square is at one end, so fill the result from the back with the larger of the two end squares.", time: "O(n)", space: "O(n)" },
+    { name: "Square then sort", intuition: "Square every value and sort the result.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Negatives on the left', input: JSON.stringify({ nums: [-6, -4, 1, 2, 5] }) },
     { label: 'All positive', input: JSON.stringify({ nums: [2, 3, 7] }) },

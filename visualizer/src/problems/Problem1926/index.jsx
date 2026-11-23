@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON object with maze (rows of . empty and + wall) and entrance [row, col]',
   url: 'https://leetcode.com/problems/nearest-exit-from-entrance-in-maze/',
   complexity: 'O(m·n) time and space: each empty cell is queued at most once.',
+  question: "Find the fewest steps from an entrance cell to the nearest empty border cell in a maze.",
+  approaches: [
+    { name: "Breadth-first search", intuition: "Expand outward from the entrance one step at a time; the first border cell reached is the nearest exit.", time: "O(m n)", space: "O(m n)" },
+  ],
   examples: [
     { label: 'Exit one step away', input: '{"maze":["+.+","...","+.+"],"entrance":[1,1]}' },
     { label: 'Walled in', input: '{"maze":["+++","+.+","+++"],"entrance":[1,1]}' },

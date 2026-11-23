@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with variables ([a, b, c, m] rows) and target (JSON)',
   url: 'https://leetcode.com/problems/double-modular-exponentiation/',
   complexity: 'O(n log max(b, c)) time for n variables. The visualization caps n at 6.',
+  question: "Find the indices where a two-level modular exponentiation equals a target value.",
+  approaches: [
+    { name: "Direct evaluation", intuition: "Compute the inner power modulo 10, then the outer power modulo m, for each item and compare with the target.", time: "O(n log max)", space: "O(answer)" },
+  ],
   examples: [
     { label: 'Two rows, target eight', input: '{"variables":[[2,5,3,7],[4,1,6,2]],"target":8}' },
     { label: 'No match', input: '{"variables":[[39,3,1000,1000]],"target":17}' },

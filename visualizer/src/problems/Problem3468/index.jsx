@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with original and bounds (JSON)',
   url: 'https://leetcode.com/problems/find-the-number-of-copy-arrays/',
   complexity: 'O(n) time and O(1) space. The visualization caps the array at 10 values.',
+  question: "Count the arrays that match a pattern of differences and fall inside given bounds.",
+  approaches: [
+    { name: "DP over allowed values", intuition: "Track how many ways each value can appear at each position within the bounds.", time: "O(n * range)", space: "O(range)" },
+  ],
   examples: [
     { label: 'Three elements, mixed bounds', input: '{"original":[4,-2,7],"bounds":[[1,6],[-3,0],[5,9]]}' },
     { label: 'Two equal elements', input: '{"original":[10,10],"bounds":[[0,20],[9,11]]}' },

@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with s (1 to 16 lowercase letters)',
   url: 'https://leetcode.com/problems/optimal-partition-of-string/',
   complexity: 'O(n) time with a set of at most 26 letters. The visualization caps input at 16 letters.',
+  question: "Split a string into the fewest substrings in which every letter appears at most once.",
+  approaches: [
+    { name: "Greedy with a set", intuition: "Extend the current substring until a letter repeats, then start a new one.", time: "O(n)", space: "O(26)" },
+  ],
   examples: [
     { label: 'Mixed', input: '{"s":"kqmkwq"}' },
     { label: 'Repeats', input: '{"s":"ttttt"}' },

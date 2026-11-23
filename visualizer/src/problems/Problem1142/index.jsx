@@ -4,6 +4,10 @@ import { buildTrace, parseInput, code, sql, python, phases, inputLabel, complexi
 import { meta } from './meta'
 
 const definition = {
+  question: "Compute the average number of sessions per user over a 30-day window.",
+  approaches: [
+    { name: "Join and group in SQL", intuition: "Count distinct sessions per user in the window, then divide by the number of active users.", time: "O(n)", space: "O(n)" },
+  ],
   number: meta.number,
   phases,
   parse: parseInput,

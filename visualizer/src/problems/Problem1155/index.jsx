@@ -11,6 +11,10 @@ const definition = {
   python,
   inputLabel: 'Dice, faces and target as JSON: [dice, faces, target]',
   complexity: 'O(dice × target × faces) time with O(target) memory. The trace accepts dice up to 8, faces up to 8, and target up to 40.',
+  question: "Count the ways that a set of dice with a given number of faces can add up to a target total.",
+  approaches: [
+    { name: "Dice-by-sum table", intuition: "Extend the number of ways for one more die by trying each face value against the previous totals.", time: "O(dice x target x faces)", space: "O(target)" },
+  ],
   examples: [
     { label: 'Three two-faced dice', input: '[3,2,4]' },
     { label: 'Single die', input: '[1,6,4]' },

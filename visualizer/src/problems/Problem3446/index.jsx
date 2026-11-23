@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON object: {"grid": [[...], ...]} square matrix',
   url: 'https://leetcode.com/problems/sort-matrix-by-diagonals/',
   complexity: 'Each diagonal is sorted once, so the work is about n^2 log n. The visualization caps the matrix at 6 by 6.',
+  question: "Sort each diagonal of a square matrix in a chosen direction.",
+  approaches: [
+    { name: "Sort each diagonal", intuition: "Collect each diagonal, sort it in the required direction, then write it back.", time: "O(n^2 log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"grid":[[1,7,3],[9,8,2],[4,5,6]]}' },
     { label: 'Two by two', input: '{"grid":[[1,2],[3,4]]}' },

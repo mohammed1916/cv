@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Snail input (e.g. {"arr":[1,2,3,4,5,6],"rowsCount":2,"colsCount":3})',
   url: "https://leetcode.com/problems/snail-traversal/description/",
   complexity: "O(rowsCount × colsCount) time and output space, one write per array value. The visualization caps the grid at 8 × 8 and the array at 64 values.",
+  question: "Given a 1D array and sizes for a 2D grid, reshape the array into rows and columns in snail order, or return an empty array when the sizes do not match.",
+  approaches: [
+    { name: "Fill by spiral walk", intuition: "Walk the grid in a spiral, reversing the direction when a row or column is reached, and place the values in order.", time: "O(rows * cols)", space: "O(rows * cols)" },
+  ],
   examples: [
     { label: "3 by 2 snail fill", input: '{"arr":[4,5,6,7,8,9],"rowsCount":3,"colsCount":2}' },
     { label: "One row", input: '{"arr":[1,2,3,4],"rowsCount":1,"colsCount":4}' },

@@ -8,6 +8,10 @@ const definition = {
   inputLabel: 'Range object with low and high (JSON)',
   url: 'https://leetcode.com/problems/sequential-digits/',
   complexity: 'O(1) candidate count per length: at most 45 candidates are built for values up to 10^9.',
+  question: "Return all integers in a range whose digits increase by exactly one from left to right.",
+  approaches: [
+    { name: "Enumerate sequential windows", intuition: "Build every sequence of consecutive digits for each length and keep those in range.", time: "O(1) candidates per length", space: "O(1)" },
+  ],
   examples: [
     { label: 'Three-digit range', input: '{"low":200,"high":400}' },
     { label: 'Mixed lengths', input: '{"low":2000,"high":4500}' },

@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with caption (lowercase letters, 1 to 12)',
   url: 'https://leetcode.com/problems/minimum-cost-good-caption/',
   complexity: 'O(n * 26 * 3) states with a 26-letter choice each. The visualization caps the caption at 12 letters.',
+  question: "Make a caption from letters with the lowest cost, where runs of the same letter must be at least three long.",
+  approaches: [
+    { name: "DP over last letter and run length", intuition: "Store the cheapest cost for each last letter and run length capped at three.", time: "O(n * 26 * 3)", space: "O(26 * 3)" },
+  ],
   examples: [
     { label: 'Invented mix', input: '{"caption":"abc"}' },
     { label: 'Two letters', input: '{"caption":"aab"}' },

@@ -18,6 +18,10 @@ const definition = {
   inputLabel: 'A nonnegative integer (e.g. 89)',
   url: 'https://leetcode.com/problems/confusing-number/description/',
   complexity: 'O(d) time and O(1) extra space for d decimal digits. The visualization caps the input at 9 digits; the official numeric bound is not verified.',
+  question: "Decide whether a number turns into a different valid number when every digit is rotated 180 degrees.",
+  approaches: [
+    { name: "Digit mapping and reverse compare", intuition: "Map each digit to its rotation, build the rotated number from the last digit backward, and compare with the original.", time: "O(d)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Confusing', input: '89' },
     { label: 'Rotates to itself', input: '1001' },

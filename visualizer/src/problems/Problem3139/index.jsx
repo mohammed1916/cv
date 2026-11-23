@@ -19,6 +19,10 @@ const definition = {
   inputLabel: 'Object with nums, cost1 and cost2',
   url: 'https://leetcode.com/problems/minimum-cost-to-equalize-array/',
   complexity: 'O(n) per candidate target, with a constant number of candidates. The visualization caps nums at 12 values and each value at 60; the official limit is 10^5 values up to 10^6.',
+  question: "Find the fewest operations that make every value in an array equal to a common target, where each operation changes one value by one.",
+  approaches: [
+    { name: "Try a few candidate targets", intuition: "The best target is close to the largest value, so only a constant number of candidate targets need costing.", time: "O(n) per candidate", space: "O(1)" },
+  ],
   examples: [
     { label: 'Two values', input: '{"nums":[9,4],"cost1":4,"cost2":3}' },
     { label: 'Pairs pay off', input: '{"nums":[2,7,7,5],"cost1":3,"cost2":2}' },

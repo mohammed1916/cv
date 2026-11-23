@@ -14,6 +14,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Bookings (JSON array of [start, end))',
   url: 'https://leetcode.com/problems/my-calendar-i/',
   complexity: 'O(n) per booking for this list scan; a balanced ordered set gives O(log n).',
+  question: "Accept a half-open booking only if it overlaps no existing booking.",
+  approaches: [
+    { name: "Linear overlap scan", intuition: "Check the new booking against every stored interval; touching ends are allowed.", time: "O(n) per booking", space: "O(n)" },
+  ],
   examples: [
     { label: 'One clash', input: '[[10,20],[15,25],[20,30]]' },
     { label: 'Touching ends', input: '[[1,2],[2,3],[3,4],[1,3]]' },

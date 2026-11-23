@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Tree (JSON object with n, edges, good)',
   url: 'https://leetcode.com/problems/maximum-subgraph-score-in-a-tree/',
   complexity: 'O(n^2) time, one tree walk per root. The visualization caps n at 12.',
+  question: "Find the largest score of a connected subgraph in a tree whose nodes carry values.",
+  approaches: [
+    { name: "Root at each node", intuition: "Root the tree at each node and add a child subtree only when its best connected score is positive.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Path with good leaves', input: '{"n":5,"edges":[[0,1],[1,2],[1,3],[3,4]],"good":[1,0,1,0,1]}' },
     { label: 'Chain with middle good', input: '{"n":3,"edges":[[0,2],[2,1]],"good":[0,1,0]}' },

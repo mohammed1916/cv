@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'JSON object with word1 and word2',
   url: 'https://leetcode.com/problems/count-substrings-that-can-be-rearranged-to-contain-a-string-ii/',
   complexity: 'O(n * 26) time with one sliding window. The visualization caps word1 at 16 letters and word2 at 5.',
+  question: "Count substrings of word1 that contain every letter of word2 at least as often as word2 does, for longer inputs.",
+  approaches: [
+    { name: "Sliding window with counts", intuition: "Grow the right end until the window is valid, then count every longer end at once by moving the left end.", time: "O(n * 26)", space: "O(26)" },
+  ],
   examples: [
     { label: 'Match in the middle', input: '{"word1":"tuvw","word2":"uv"}' },
     { label: 'Repeated letter pattern', input: '{"word1":"oooooooo","word2":"ooo"}' },

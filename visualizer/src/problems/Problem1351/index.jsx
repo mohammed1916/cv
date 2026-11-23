@@ -3,6 +3,10 @@ import MatrixGrid from '../../components/shared/MatrixGrid'
 import { buildTrace, parseInput, code, python, phases, examples } from './algorithm'
 
 const definition = {
+  question: "Count negative numbers in a matrix whose rows and columns are sorted.",
+  approaches: [
+    { name: "Staircase walk", intuition: "Start at the top-right and move left or down, counting the negatives in each column.", time: "O(m + n)", space: "O(1)" },
+  ],
   number: '1351', phases, parse: parseInput, build: buildTrace, code, python, examples,
   inputLabel: 'Sorted grid as a JSON array of rows',
   url: 'https://leetcode.com/problems/count-negative-numbers-in-a-sorted-matrix/',

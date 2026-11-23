@@ -13,6 +13,11 @@ const definition = {
   inputLabel: 'String (JSON object with lowercase s)',
   url: 'https://leetcode.com/problems/minimum-insertion-steps-to-make-a-string-palindrome/',
   complexity: 'O(n^2) time and space. The visualization caps input at 10 letters.',
+  question: "Find the fewest letters to insert so the string reads the same backwards.",
+  approaches: [
+    { name: "Interval DP", intuition: "Use the best answer for shorter substrings, matching ends when the letters agree.", time: "O(n^2)", space: "O(n^2)" },
+    { name: "Longest common subsequence with reverse", intuition: "The letters that do not need insertion form a common subsequence with the reversed string.", time: "O(n^2)", space: "O(n^2)" },
+  ],
   examples: [
     { label: 'Mostly there', input: '{"s":"mbadm"}' },
     { label: 'Already close', input: '{"s":"zzazz"}' },

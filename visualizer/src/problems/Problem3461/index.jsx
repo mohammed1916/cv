@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON object with s (digit string, 3 to 30 digits)',
   url: 'https://leetcode.com/problems/check-if-digits-are-equal-in-string-after-operations-i/',
   complexity: 'O(n^2) time for the rounds. The visualization caps s at 30 digits.',
+  question: "Repeatedly replace a digit string by pairwise sums mod 10 until two digits remain, then check whether they are equal.",
+  approaches: [
+    { name: "Simulate the rounds", intuition: "Apply each round directly to the digit string until two digits are left.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"s":"3902"}' },
     { label: 'Example 2', input: '{"s":"34789"}' },

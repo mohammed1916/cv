@@ -10,6 +10,10 @@ const definition = {
   inputLabel: 'Lowercase letters (1 to 50)',
   url: 'https://leetcode.com/problems/count-substrings-with-only-one-distinct-letter/',
   complexity: 'O(n) time and O(1) extra space: one pass keeps the current run length and the running total.',
+  question: "Count the substrings made from one repeated letter.",
+  approaches: [
+    { name: "Run lengths", intuition: "For each run of identical letters of length k, add k(k+1)/2 substrings.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Mixed runs', input: 'aaabb' },
     { label: 'Distinct', input: 'abc' },

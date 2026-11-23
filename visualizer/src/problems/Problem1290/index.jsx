@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with head array of 0 and 1 bits (JSON)',
   url: 'https://leetcode.com/problems/convert-binary-number-in-a-linked-list-to-integer/',
   complexity: 'O(n) time and O(1) extra space.',
+  question: "Convert a binary number stored in a linked list to its integer value.",
+  approaches: [
+    { name: "Shift and add", intuition: "Shift the running value left and add each bit as you walk the list.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"head":[1,0,1]}' },
     { label: 'Example 2', input: '{"head":[0]}' },

@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with "nums" and "queries" (indices into nums), JSON',
   url: 'https://leetcode.com/problems/closest-equal-element-queries/',
   complexity: 'O(n + q times k) time for n values, q queries and k equal values. The visualization caps input at 10 values and 10 queries.',
+  question: "For queries about a circular array, find the distance to the nearest equal value.",
+  approaches: [
+    { name: "Group indices by value", intuition: "Group positions by value and binary search for the nearest neighbour of each query.", time: "O(n + q k)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Five values, three queries', input: '{"nums":[4,1,7,7,2],"queries":[0,3,4]}' },
     { label: 'Example 2', input: '{"nums":[1,2,1,2],"queries":[0,1,2,3]}' },

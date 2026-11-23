@@ -11,6 +11,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Tree (LeetCode level-order JSON array, up to 127 items)',
   url: 'https://leetcode.com/problems/print-binary-tree/',
   complexity: 'O(n) placements; the matrix has (height + 1) × (2^(height+1) − 1) cells.',
+  question: "Print a binary tree as a grid of its nodes, with each level's children centred between their parents.",
+  approaches: [
+    { name: "Recursive column halving", intuition: "Split the column range in half at each level so every node is centred between its children.", time: "O(h 2^h)", space: "O(h 2^h)" },
+  ],
   examples: [
     { label: 'Two levels', input: '[1,2]' },
     { label: 'Three levels', input: '[4,2,7,1,null,6]' },

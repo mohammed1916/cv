@@ -21,6 +21,10 @@ const definition = {
   inputLabel: 'JSON object with n, edges [[a, b]] and label',
   url: 'https://leetcode.com/problems/longest-palindromic-path-in-graph/',
   complexity: 'Each state is (end, end, visited set), so the work is O(n^2 * 2^n * n^2) in the worst case. The official limit is n <= 14.',
+  question: "In a graph with letter labels, find the longest path whose letters read the same forwards and backwards.",
+  approaches: [
+    { name: "Expand from both ends", intuition: "Grow palindromes outward from two endpoints at once, tracking the set of visited nodes.", time: "O(n^2 * 2^n * n^2)", space: "O(n^2 * 2^n)" },
+  ],
   examples: [
     { label: 'Path with repeated letter', input: '{"n":4,"edges":[[0,1],[1,2],[2,3]],"label":"abca"}' },
     { label: 'Triangle with three letters', input: '{"n":3,"edges":[[0,1],[1,2],[0,2]],"label":"xyz"}' },

@@ -22,6 +22,10 @@ const definition = {
   inputLabel: 'Object with nums and queries (integers from 1 to 9, up to 8 each)',
   url: "https://leetcode.com/problems/maximum-number-of-removal-queries-that-can-be-processed-i/",
   complexity: "O(m * n^2) time in this layered search for m queries and n numbers, since each query layer may branch from every front index; O(n) states per layer. The visualization caps both lists at 8 values.",
+  question: "Find the maximum number of removal queries that can be processed while keeping the array feasible.",
+  approaches: [
+    { name: "Layered reachable states", intuition: "Track the reachable removal intervals query by query and keep the largest prefix that can still be processed.", time: "O(q\u00b7n^2)", space: "O(n^2)" },
+  ],
   examples: [
     { label: "Both ends help", input: '{"nums":[1,3,2,5,4],"queries":[2,3,1,4]}' },
     { label: "Blocked early", input: '{"nums":[2,1,3],"queries":[5,1]}' },

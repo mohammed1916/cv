@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with n, edges and nums',
   url: 'https://leetcode.com/problems/sum-of-perfect-square-ancestors/',
   complexity: 'O(n * sqrt(max value)) for the square-free parts plus O(n) for the tree walk.',
+  question: "Count the ancestors of each node in a tree whose values are perfect squares after reduction, summing the counts.",
+  approaches: [
+    { name: "Square-free parts and tree walk", intuition: "Reduce each value to its square-free part, then walk up each tree path to count matches.", time: "O(n sqrt(max value) + n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example', input: '{"n":4,"edges":[[0,3],[3,1],[0,2]],"nums":[2,8,2,18]}' },
     { label: 'Path', input: '{"n":3,"edges":[[0,2],[2,1]],"nums":[8,2,18]}' },

@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON: {"nums": [...], "k": k, "mul": mul}',
   url: 'https://leetcode.doocs.org/en/lc/3974/',
   complexity: 'O(n log n) time for sorting, and O(1) extra space beyond the sorted copy. The visualization caps nums at 8 entries.',
+  question: "Choose k elements and pair them with multipliers to maximise the total.",
+  approaches: [
+    { name: "Sort and pair largest with largest", intuition: "Sort the values and the multipliers, then pair the largest with the largest.", time: "O(n log n)", space: "O(1) beyond the sorted copy" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"nums":[6,1,2,9],"k":3,"mul":2}' },
     { label: 'Example 2', input: '{"nums":[3,7,5,2],"k":2,"mul":4}' },

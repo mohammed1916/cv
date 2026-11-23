@@ -17,6 +17,10 @@ const definition = {
   inputLabel: 'k (JSON object)',
   url: 'https://leetcode.com/problems/find-the-k-th-character-in-string-game-i/',
   complexity: 'O(k) time and O(k) space for the built prefix. The visualization caps k at 500.',
+  question: "Find the k-th character of a string that grows by repeatedly appending the next letter of each character's shift.",
+  approaches: [
+    { name: "Build the string until length k", intuition: "Repeatedly append the shifted copy of the current string until its length reaches k, then read the character.", time: "O(k)", space: "O(k)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"k": 7}' },
     { label: 'Example 2', input: '{"k": 12}' },

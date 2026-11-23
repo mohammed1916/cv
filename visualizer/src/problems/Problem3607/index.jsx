@@ -9,6 +9,10 @@ const definition = {
   inputLabel: 'Object with c, connections and queries ([1, x] checks station x, [2, x] shuts it down)',
   url: 'https://leetcode.com/problems/power-grid-maintenance/',
   complexity: 'O((c + n + q) α(c)) time and O(c) space, since each pointer passes each station at most once across the whole run. Official limits reach 100000 stations and 200000 queries; the drawing caps c at 16 and queries at 20.',
+  question: "A power grid has stations joined by cables; process maintenance and shutdown queries and report the operational stations.",
+  approaches: [
+    { name: "Union-find with pointers", intuition: "Group connected stations with union-find, and keep a pointer to the smallest online station in each component.", time: "O((c + n + q) alpha(c))", space: "O(c)" },
+  ],
   examples: [
     { label: 'Three grids', input: '{"c":7,"connections":[[2,5],[5,7],[1,3],[4,6]],"queries":[[1,5],[2,2],[1,2],[2,5],[2,7],[1,7],[1,1],[2,3],[1,3],[2,1],[1,3]]}' },
     { label: 'No cables, repeat shutdown', input: '{"c":4,"connections":[],"queries":[[2,2],[2,2],[1,2],[1,4]]}' },

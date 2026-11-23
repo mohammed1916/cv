@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON object with nums (power-of-two length)',
   url: 'https://leetcode.com/problems/min-max-game/',
   complexity: 'O(n) time, since each pass halves the list. The visualization caps the list at 32 values.',
+  question: "Repeatedly build a new list by taking pairs of values and alternating min and max until a single value remains.",
+  approaches: [
+    { name: "Iterative halving", intuition: "Each pass halves the list, applying min to even positions and max to odd positions, until one value is left.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Own: eight values', input: '{"nums":[6,1,9,3,3,2,7,4]}' },
     { label: 'Own: two values', input: '{"nums":[42,7]}' },

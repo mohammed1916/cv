@@ -34,7 +34,13 @@ const examples = [
   { label: 'Long run: 14 projects', input: '{"Project":[{"project_id":1,"employee_id":1,"workload":23},{"project_id":2,"employee_id":3,"workload":25},{"project_id":3,"employee_id":1,"workload":15},{"project_id":4,"employee_id":3,"workload":3},{"project_id":5,"employee_id":1,"workload":29},{"project_id":6,"employee_id":3,"workload":7},{"project_id":7,"employee_id":1,"workload":17},{"project_id":8,"employee_id":3,"workload":5},{"project_id":9,"employee_id":1,"workload":27},{"project_id":10,"employee_id":3,"workload":19},{"project_id":11,"employee_id":1,"workload":19},{"project_id":12,"employee_id":3,"workload":7},{"project_id":13,"employee_id":1,"workload":27},{"project_id":14,"employee_id":3,"workload":15}],"Employees":[{"employee_id":1,"name":"Dev1","team":"core"},{"employee_id":2,"name":"Dev2","team":"web"},{"employee_id":3,"name":"Dev3","team":"core"},{"employee_id":4,"name":"Dev4","team":"web"}]}' },
 ]
 
-const definition = { number: meta.number, phases, parse: parseInput, build: buildTrace, code, sql, python, inputLabel, complexity, examples }
+const definition = { number: meta.number, phases, parse: parseInput, build: buildTrace, code, sql, python, inputLabel, complexity, examples,
+  question: "Find the employees whose workload is above the average workload of their team.",
+  approaches: [
+    { name: "Team average then filter", intuition: "Compute each team's average workload, then keep the employees above it.", time: "O(n)", space: "O(n)" },
+    { name: "Window average", intuition: "Use a window function that returns each team's average beside each row.", time: "O(n log n)", space: "O(n)" },
+  ],
+}
 
 function RowTable({ step }) {
   const { columns, rows } = step

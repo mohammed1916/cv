@@ -7,6 +7,11 @@ const definition = {
   inputLabel: 'Unique binary strings of length n (JSON)',
   url: 'https://leetcode.com/problems/find-unique-binary-string/',
   complexity: 'O(n) time and O(n) extra space for the answer, with n strings of length n.',
+  question: "Given n distinct binary strings of length n, return a binary string of length n that is not in the list.",
+  approaches: [
+    { name: "Diagonal flip", intuition: "Flip the i-th bit of the i-th string; the result differs from every string at one position.", time: "O(n^2)", space: "O(n)" },
+    { name: "Enumerate and check", intuition: "Generate binary strings in order and return the first one not in a set.", time: "O(2^n * n)", space: "O(2^n)" },
+  ],
   examples: [
     { label: 'Two rows', input: '["10","11"]' },
     { label: 'Three rows', input: '["000","111","010"]' },

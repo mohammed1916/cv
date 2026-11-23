@@ -14,6 +14,10 @@ const definition = {
   complexity,
   inputLabel: 'Object with lowLimit and highLimit (the ball numbers, inclusive)',
   url: 'https://leetcode.com/problems/maximum-number-of-balls-in-a-box/',
+  question: "Balls numbered in a range go into boxes by the sum of their digits; find the largest number of balls in any box.",
+  approaches: [
+    { name: "Count by digit sum", intuition: "Count each ball's digit-sum box in a map and keep the maximum.", time: "O(n * digits)", space: "O(boxes)" },
+  ],
 }
 
 export default function Problem1742Visualizer() {

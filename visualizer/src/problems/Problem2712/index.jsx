@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Binary string of 1 to 30 characters (JSON string)',
   url: 'https://leetcode.com/problems/minimum-cost-to-make-all-characters-equal/',
   complexity: 'O(n) time and O(1) extra space. The visualization caps input at 30 characters.',
+  question: "Given a binary string, make all characters equal by flipping prefixes or suffixes at the lowest cost.",
+  approaches: [
+    { name: "Pay at each boundary", intuition: "Add the cost of a flip at each position where adjacent characters differ.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Own: seven bits mixed', input: '"1100101"' },
     { label: 'Own: three ones in a run', input: '"0001110"' },

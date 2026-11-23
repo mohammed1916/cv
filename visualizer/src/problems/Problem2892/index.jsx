@@ -8,6 +8,11 @@ const definition = {
   inputLabel: 'Object with nums (positive integers) and k, e.g. {"nums":[2,3,4],"k":12}',
   url: 'https://leetcode.com/problems/minimizing-array-after-replacing-pairs-with-their-product/',
   complexity: 'O(n) time and O(1) extra space: each value is visited once and only the open group product is kept. The visualization caps nums at 20 values up to 1000 with k up to 10^6; official bounds were not verified for this teaching version.',
+  question: "Repeatedly replace adjacent pairs with their product when the product stays within a limit, and find the smallest length that can remain.",
+  approaches: [
+    { name: "Greedy group with running product", intuition: "Extend the current group while the product stays within the limit, and start a new group when it would overflow.", time: "O(n)", space: "O(1)" },
+    { name: "Dynamic programming over splits", intuition: "Try every grouping of consecutive values.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Mixed run', input: '{"nums":[2,3,4,5,6],"k":30}' },
     { label: 'Large value stands alone', input: '{"nums":[9,1,8,7,1],"k":8}' },

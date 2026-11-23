@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with n, languages (one list per user) and friendships (1-based pairs)',
   url: 'https://leetcode.com/problems/minimum-number-of-people-to-teach/',
   complexity: 'O(F * L + n * U) time for F friendships, L languages per user and U needy users. The visualization caps the input size.',
+  question: "Teach one language to the fewest users so every friendship has a shared language.",
+  approaches: [
+    { name: "Count needy users per language", intuition: "For each friendship without a shared language, count the needy users; teach the language that covers the most.", time: "O(F * L + n * U)", space: "O(n * L)" },
+  ],
   examples: [
     { label: 'Three languages, four users', input: '{"n":3,"languages":[[2],[3],[1,3],[2]],"friendships":[[1,4],[2,3],[1,3]]}' },
     { label: 'Already shared', input: '{"n":3,"languages":[[1,3],[2],[1,2],[3]],"friendships":[[1,3],[2,3]]}' },

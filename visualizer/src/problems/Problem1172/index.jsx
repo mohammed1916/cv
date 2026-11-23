@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON {"capacity": n, "operations": [push | pop | popAtStack], "arguments": [...]}',
   url: 'https://leetcode.com/problems/dinner-plate-stacks/',
   complexity: 'O(log n) per push and popAtStack with a min heap of stacks that have room. The visualization caps input at 15 operations.',
+  question: "Design a set of stacks with a fixed capacity that can push to the leftmost non-full stack and pop from a chosen index.",
+  approaches: [
+    { name: "Min-heap of non-full stacks", intuition: "Track stacks that still have room in a min-heap so pushes go to the leftmost open one.", time: "O(log n) per operation", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example', input: '{"capacity":3,"operations":["push","push","push","push","popAtStack","pop","push","popAtStack","pop","pop"],"arguments":[[4],[6],[8],[9],[1],[],[7],[0],[],[]]}' },
     { label: 'Pop from empty stacks', input: '{"capacity":1,"operations":["pop"],"arguments":[[]]}' },

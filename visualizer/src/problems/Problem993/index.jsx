@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Tree (JSON level order) with x and y: {"arr": [...], "x": n, "y": n}',
   url: 'https://leetcode.com/problems/cousins-in-binary-tree/',
   complexity: 'O(n) time and O(n) space for the walk. The visualization caps input at 15 nodes.',
+  question: "Decide whether two given nodes in a binary tree are cousins, meaning they share a depth but have different parents.",
+  approaches: [
+    { name: "DFS recording depth and parent", intuition: "Walk the tree once, recording each target's depth and parent, then compare.", time: "O(n)", space: "O(h)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"arr":[1,2,3,4],"x":4,"y":3}' },
     { label: 'Example 2', input: '{"arr":[1,2,3,null,4,null,5],"x":5,"y":4}' },

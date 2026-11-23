@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'Painting JSON with n and cost (n × 3)',
   url: 'https://leetcode.com/problems/paint-house-iv/',
   complexity: 'O(n) time and O(1) extra space for n houses, since each mirror pair has six color states. The visualization caps n at 12.',
+  question: "Paint a row of houses with six colours so that mirror-paired houses follow a rule, and find the minimum cost.",
+  approaches: [
+    { name: "Six-state pass", intuition: "Process each mirror pair once while keeping the best cost for each of six colour states.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Four houses', input: '{"n":4,"cost":[[1,4,2],[3,1,5],[2,6,1],[4,2,3]]}' },
     { label: 'Six houses', input: '{"n":6,"cost":[[5,1,3],[2,6,4],[1,2,7],[3,3,1],[6,2,2],[4,1,5]]}' },

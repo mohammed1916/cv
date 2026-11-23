@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with nums, p and queries ([value, k] pairs)',
   url: 'https://leetcode.com/problems/power-update-after-k-th-largest-insertion-i/',
   complexity: 'O(q * n) time with sorted-list insertion and O(n) space. This version does not use the note\'s "difference below ten" promise; the same insertion and selection is correct without it. The visualization caps nums at 8 values and queries at 6.',
+  question: "After each insertion into a list, raise p to the power of the k-th largest value, modulo 1000000007, and report the results.",
+  approaches: [
+    { name: "Sorted list with modular power", intuition: "Keep values sorted, read the k-th largest with duplicates counted, and apply fast modular exponentiation.", time: "O(q x n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Small run', input: '{"nums":[6,2],"p":5,"queries":[[1,2],[7,1],[4,3]]}' },
     { label: 'Repeated value', input: '{"nums":[0],"p":4,"queries":[[0,2],[9,1]]}' },

@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Object with cities and roads [a, b, cost] (JSON)',
   url: 'https://leetcode.com/problems/connecting-cities-with-minimum-cost/',
   complexity: 'O(m log m) time to sort m roads, plus near-constant union-find work per road. The visualization caps the input at 8 cities and 20 roads.',
+  question: "Choose roads that connect all cities at the smallest total cost.",
+  approaches: [
+    { name: "Kruskal with union-find", intuition: "Sort roads by cost and add each road that joins two separate components.", time: "O(m log m)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Triangle', input: '{"cities":3,"roads":[[1,2,4],[2,3,2],[1,3,9]]}' },
     { label: 'Unreachable city', input: '{"cities":4,"roads":[[1,2,3],[3,4,4]]}' },

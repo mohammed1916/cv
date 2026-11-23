@@ -8,6 +8,10 @@ const definition = {
   inputLabel: 'Object with nums: one value once, one value twice, the rest three times',
   url: 'https://leetcode.com/problems/once-twice/',
   complexity: 'O(n) time with two passes and O(1) extra space: six integers. The official length is up to 100,000; the visualization caps nums at 24 entries.',
+  question: "In an array where every value appears once, twice, or three times, find the values that appear exactly once and exactly twice.",
+  approaches: [
+    { name: "Bit counting by position", intuition: "Count set bits in each position modulo 3 and rebuild the single and double values from the leftover bits.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Shared bits cancel', input: '{"nums":[5,9,7,9,7,9]}' },
     { label: 'No shared bits', input: '{"nums":[12,6,12,12,1,6]}' },

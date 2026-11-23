@@ -16,6 +16,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, pythonLineMap, inputLabel: 'Array nums (JSON)',
   url: 'https://leetcode.com/problems/minimum-operations-to-make-array-non-decreasing/',
   complexity: 'The solver uses O(n) time and O(1) extra space. This visualization stores O(n) events and cumulative offsets, not a full array copy per step.',
+  question: "Find the fewest suffix increments needed so that an integer array never decreases from one position to the next.",
+  approaches: [
+    { name: "Charge each adjacent drop", intuition: "Add up the adjacent drops; the total is the cost, and the increments follow from the drops.", time: "O(n)", space: "O(1)" },
+  ],
   examples: authoredExamples0,
 }
 function MinimumIncrementCost() {

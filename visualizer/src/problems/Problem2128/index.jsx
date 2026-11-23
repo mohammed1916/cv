@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Binary grid as JSON rows (e.g. [[1,0],[0,1]])',
   url: 'https://leetcode.com/problems/remove-all-ones-with-row-and-column-flips/',
   complexity: 'O(m * n) time and O(n) extra space for m rows of length n. The visualization caps the grid at 6 x 6 so every row can be compared on screen.',
+  question: "Decide whether a grid can be made all zeros by repeatedly flipping whole rows and whole columns.",
+  approaches: [
+    { name: "Normalise each row", intuition: "Flip each row so its first cell is zero; then the grid is clearable exactly when every row equals the first row or its complement.", time: "O(m * n)", space: "O(m * n)" },
+  ],
   examples: [
     { label: 'Complementary rows', input: '[[1,0],[0,1]]' },
     { label: 'Mismatched rows', input: '[[1,0,1],[1,1,0]]' },

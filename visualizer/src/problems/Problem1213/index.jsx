@@ -2,6 +2,10 @@ import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import { buildTrace, parseInput, code, python, phases, inputLabel, complexity, examples } from './algorithm'
 
 const definition = {
+  question: "Return the values that appear in all three sorted arrays.",
+  approaches: [
+    { name: "Three pointers", intuition: "Advance the pointer at the smallest value and report when all three pointers match.", time: "O(n1 + n2 + n3)", space: "O(1)" },
+  ],
   phases, parse: parseInput, build: buildTrace, code, python, inputLabel, complexity, examples,
   url: 'https://leetcode.com/problems/intersection-of-three-sorted-arrays/',
 }

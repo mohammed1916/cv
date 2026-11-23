@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON {"costs": [...], "k": hires, "candidates": pool size}',
   url: 'https://leetcode.com/problems/total-cost-to-hire-k-workers/',
   complexity: 'O(k log c) time with two heaps of candidates, where c is the pool size. The visualization caps input at 10 workers.',
+  question: "Hire k workers, where each round picks the cheapest worker from the front or back candidate pools.",
+  approaches: [
+    { name: "Two heaps for the ends", intuition: "Keep a min heap for the front candidates and another for the back, and pop the cheaper of the two tops each round.", time: "O(k log c)", space: "O(c)" },
+  ],
   examples: [
     { label: 'Seven workers, two candidates', input: '{"costs":[5,12,9,3,15,7,4],"k":3,"candidates":2}' },
     { label: 'Five workers, three candidates', input: '{"costs":[6,1,8,2,10],"k":2,"candidates":3}' },

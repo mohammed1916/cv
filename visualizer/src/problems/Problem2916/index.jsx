@@ -13,6 +13,11 @@ const definition = {
   inputLabel: 'Object with nums, a list of 1 to 8 integers from 1 to 100',
   url: 'https://leetcode.com/problems/subarrays-distinct-element-sum-of-squares-ii/',
   complexity: 'This reference scans every subarray: O(n^2) time with a set per left end. The visualization caps nums at 8 values.',
+  question: "Sum the squares of the distinct-value counts over all subarrays of an array, modulo a large prime, for a large input.",
+  approaches: [
+    { name: "Contribution counting with segment tree", intuition: "Track how each distinct-count square changes as the right end moves, using a segment tree over left ends.", time: "O(n log n)", space: "O(n)" },
+    { name: "Fix the left end and extend", intuition: "For each left end, extend and track distinct values.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"nums":[3,1,3,2]}' },
     { label: 'Example 2', input: '{"nums":[5,9,9,5]}' },

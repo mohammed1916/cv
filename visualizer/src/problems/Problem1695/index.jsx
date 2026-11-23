@@ -14,6 +14,10 @@ const definition = {
   complexity,
   inputLabel: 'JSON array of positive integers',
   url: 'https://leetcode.com/problems/maximum-erasure-value/',
+  question: "Remove one subarray with no repeated values, maximising the sum of the kept values.",
+  approaches: [
+    { name: "Sliding window with a set", intuition: "Extend the right end while values are unique; shrink from the left past a duplicate.", time: "O(n)", space: "O(n)" },
+  ],
 }
 
 export default function Problem1695Visualizer() {

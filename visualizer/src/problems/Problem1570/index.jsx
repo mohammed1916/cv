@@ -8,6 +8,10 @@ const definition = {
   inputLabel: 'Object with vectors a and b (JSON)',
   url: 'https://leetcode.com/problems/dot-product-of-two-sparse-vectors/',
   complexity: 'O(n) time and O(k) space, where k is the number of nonzero entries stored from a.',
+  question: "Compute the dot product of two sparse vectors.",
+  approaches: [
+    { name: "Store nonzero entries", intuition: "Keep only the nonzero entries of one vector and multiply them by matching entries of the other.", time: "O(n)", space: "O(k)" },
+  ],
   examples: [
     { label: 'Sparse overlap', input: '{"a":[0,4,0,-2,1],"b":[3,0,1,2,0]}' },
     { label: 'No overlap', input: '{"a":[5,0,0],"b":[0,0,2]}' },

@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with basket1 and basket2 (equal-length arrays, 1 to 4 entries, costs 1 to 5)',
   url: 'https://leetcode.com/problems/rearranging-fruits/',
   complexity: 'O(n log n) time for the sort of the surplus costs. The visualization caps input at 4 fruits per basket.',
+  question: "Swap fruits between two baskets, each swap costing the smaller of the two fruit costs, so the baskets match; minimise total cost.",
+  approaches: [
+    { name: "Count and sort surplus costs", intuition: "Find the fruits that must move, sort their costs, and route the cheapest ones through the cheapest swap.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Four fruits, mixed costs', input: '{"basket1":[4,2,5,1],"basket2":[3,3,1,5]}' },
     { label: 'Two fruits', input: '{"basket1":[2,2],"basket2":[5,1]}' },

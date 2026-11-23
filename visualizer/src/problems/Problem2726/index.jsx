@@ -2,6 +2,10 @@ import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import * as model from './algorithm'
 
 const definition = {
+  question: "Design a calculator object where operations can be chained, returning the object after each step.",
+  approaches: [
+    { name: "Return this from each method", intuition: "Each method changes the stored value and returns the calculator itself.", time: "O(1) per call", space: "O(1)" },
+  ],
   phases: model.PHASES, parse: model.parseInput, build: model.buildTrace, code: model.code, python: model.python,
   inputLabel: model.INPUT_LABEL, url: model.URL, complexity: model.COMPLEXITY, examples: model.EXAMPLES,
 }

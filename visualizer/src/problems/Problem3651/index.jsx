@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Grid and teleport limit {"grid", "k"} (JSON)',
   url: 'https://leetcode.com/problems/minimum-cost-path-with-teleportations/',
   complexity: 'O(k * (m n)^2) time in this layered form. The visualization caps the grid at 4 by 4 and k at 2.',
+  question: "Find the minimum cost to reach the bottom-right cell of a grid using at most k teleports.",
+  approaches: [
+    { name: "Layered DP", intuition: "Build one layer per teleport count and relax moves within each layer.", time: "O(k * (mn)^2)", space: "O(k * mn)" },
+  ],
   examples: [
     { label: 'Teleport', input: '{"grid":[[1,9],[1,1]],"k":1}' },
     { label: 'No teleport', input: '{"grid":[[0,5,1],[2,2,2]],"k":0}' },

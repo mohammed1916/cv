@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'List of positive integers (e.g. [6,10,15,7])',
   url: 'https://leetcode.com/problems/minimum-split-into-subarrays-with-gcd-greater-than-one/',
   complexity: 'O(n log V) time and O(n) space for n elements up to V, since each gcd step is logarithmic. The visualization caps the input at 10 values up to 60; a value of 1 gives -1.',
+  question: "Split an array into the fewest contiguous pieces so that every piece has a gcd greater than one.",
+  approaches: [
+    { name: "Greedy extension", intuition: "Keep extending the current piece while the running gcd stays above one, and cut when it would fall to one.", time: "O(n log V)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Mixed', input: '[6,10,15,7,9]' },
     { label: 'Blocked by one', input: '[12,18,1,8]' },

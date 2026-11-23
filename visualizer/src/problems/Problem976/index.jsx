@@ -8,6 +8,10 @@ const definition = {
   inputLabel: 'Object with sides: a list of stick lengths',
   url: 'https://leetcode.com/problems/largest-perimeter-triangle/',
   complexity: 'O(n log n) for the sort, then one pass over the sorted lengths.',
+  question: "Choose three lengths from an array that form a non-degenerate triangle, and return the largest perimeter.",
+  approaches: [
+    { name: "Sort and check neighbours", intuition: "After sorting in descending order, the first consecutive triple that forms a triangle gives the largest perimeter.", time: "O(n log n)", space: "O(1) extra" },
+  ],
   examples: [
     { label: 'First triple works', input: JSON.stringify({ sides: [5, 2, 4] }) },
     { label: 'Long side too big', input: JSON.stringify({ sides: [1, 3, 2, 12] }) },

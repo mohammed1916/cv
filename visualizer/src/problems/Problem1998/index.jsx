@@ -8,6 +8,10 @@ const definition = {
   inputLabel: 'Positive integers (JSON)',
   url: 'https://leetcode.com/problems/gcd-sort-of-an-array/',
   complexity: 'Factorisation by trial division plus near-constant union-find operations on the primes.',
+  question: "Decide whether an array can be sorted by swapping elements whose values share a common divisor greater than one.",
+  approaches: [
+    { name: "Union-find over prime factors", intuition: "Connect each value to its prime factors, then check that sorted positions lie in the same component.", time: "O(n log V)", space: "O(V)" },
+  ],
   examples: [
     { label: 'Shared factor', input: '[6,9,4,8]' },
     { label: 'Isolated one', input: '[1,3,2]' },

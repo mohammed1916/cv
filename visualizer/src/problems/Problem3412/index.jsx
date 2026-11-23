@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON object with s: 1 to 12 lowercase letters',
   url: 'https://leetcode.com/problems/find-mirror-score-of-a-string/',
   complexity: 'O(n) time for a string of length n. The visualization caps s at 12 letters.',
+  question: "Pair each letter with its mirror letter across the alphabet and total the scores of the matched pairs in a string.",
+  approaches: [
+    { name: "Single left-to-right scan", intuition: "Keep the latest unmatched position for each letter and look up the mirror letter as you go.", time: "O(n)", space: "O(26)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"s":"aczzx"}' },
     { label: 'No pairs', input: '{"s":"abcdef"}' },

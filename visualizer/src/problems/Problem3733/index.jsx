@@ -13,6 +13,11 @@ const definition = {
   inputLabel: 'Object with d (two delivery counts) and r (two recharge periods)',
   url: 'https://leetcode.com/problems/minimum-time-to-complete-all-deliveries/description/',
   complexity: 'O(T) checks with O(1) arithmetic each, where T is the answer; the visualization stops at 1000.',
+  question: "Find the smallest total time at which two drones, each blocked on multiples of its recharge period, can both finish their deliveries in free hours.",
+  approaches: [
+    { name: "Linear search over total time", intuition: "Test each total time T in turn, counting each drone's free hours and the hours where at least one drone is free.", time: "O(T) checks with O(1) arithmetic", space: "O(1)" },
+    { name: "Binary search on total time", intuition: "Feasibility only improves as T grows, so the first feasible T can be found by halving the search range.", time: "O(log max) checks", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example', input: '{"d":[2,2],"r":[2,2]}' },
     { label: 'Mixed periods', input: '{"d":[1,1],"r":[2,3]}' },

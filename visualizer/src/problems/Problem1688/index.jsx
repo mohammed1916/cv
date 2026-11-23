@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Number of teams',
   url: 'https://leetcode.com/problems/count-of-matches-in-tournament/',
   complexity: 'O(log n) rounds, each O(1), so O(log n) time overall. The simulation could also be replaced by n - 1 directly.',
+  question: "Count the matches needed to decide a winner in a knockout tournament.",
+  approaches: [
+    { name: "Round simulation", intuition: "Each round pairs teams and carries an odd team forward; each match removes one team.", time: "O(log n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Nine teams', input: '9' },
     { label: 'Twenty teams', input: '20' },

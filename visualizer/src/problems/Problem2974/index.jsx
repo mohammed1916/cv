@@ -12,6 +12,11 @@ const definition = {
   inputLabel: 'JSON object with an even-length integer array nums (values 1 to 100)',
   url: 'https://leetcode.com/problems/minimum-number-game/',
   complexity: 'O(n log n) time for the sort. The visualization caps the array at twenty values.',
+  question: "Simulate a game where Alice and Bob alternately remove and append the smallest and largest pairs from a list.",
+  approaches: [
+    { name: "Sort and swap pairs", intuition: "Sort the values and swap each adjacent pair to replicate the order in which they are played.", time: "O(n log n)", space: "O(n)" },
+    { name: "Priority queue simulation", intuition: "Simulate the game with a min-heap, popping the smallest value each turn.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"nums":[5,4,2,3]}' },
     { label: 'Example 2', input: '{"nums":[2,5]}' },

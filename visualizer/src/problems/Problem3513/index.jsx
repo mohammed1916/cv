@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'A permutation of 1 to n (JSON object with nums)',
   url: 'https://leetcode.com/problems/number-of-unique-xor-triplets-i/',
   complexity: 'O(log n) time after reading the input. The visualization caps the permutation at 12 entries.',
+  question: "Count the distinct XOR values that triplets from a permutation can produce.",
+  approaches: [
+    { name: "Bit-length formula", intuition: "Read the answer from the bit length of the largest value.", time: "O(log n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Three', input: '{"nums":[1,2,3]}' },
     { label: 'Four', input: '{"nums":[3,1,4,2]}' },

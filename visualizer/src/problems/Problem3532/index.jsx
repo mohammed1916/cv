@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'n, sorted nums, max_diff and queries as JSON, e.g. {"n": 2, "nums": [1,3], "max_diff": 1, "queries": [[0,0],[0,1]]}',
   url: 'https://leetcode.com/problems/path-existence-queries-in-a-graph-i/',
   complexity: 'O(n + q) time after the sort, since pieces are runs of consecutive sorted values.',
+  question: "Answer queries about whether two nodes in a graph are connected through edges below a weight limit.",
+  approaches: [
+    { name: "Union-find over sorted values", intuition: "Sort the values and merge the groups that are close enough.", time: "O(n + q)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"n": 2, "nums": [1,3], "max_diff": 1, "queries": [[0,0],[0,1]]}' },
     { label: 'Example 2', input: '{"n": 4, "nums": [2,5,6,8], "max_diff": 2, "queries": [[0,1],[0,2],[1,3],[2,3]]}' },

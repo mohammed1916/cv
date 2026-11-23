@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Board (JSON array of rows, 0 = empty)',
   url: 'https://leetcode.com/problems/candy-crush/',
   complexity: 'O(rows * cols) per round, with at most one round per cleared layer.',
+  question: "Simulate crushing runs of three equal candies on a board until the board is stable.",
+  approaches: [
+    { name: "Repeat crush and fall", intuition: "Mark runs of three or more equal candies, drop the rest, and repeat until nothing is marked.", time: "O(rounds mn)", space: "O(mn)" },
+  ],
   examples: [
     { label: 'Two rounds', input: '[[1,2,3,4],[1,5,5,5],[2,3,4,4],[2,3,4,4]]' },
     { label: 'Column', input: '[[3,1],[3,2],[3,1],[1,2]]' },

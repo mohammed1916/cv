@@ -16,6 +16,10 @@ const definition = {
   inputLabel: 'Input [rows, cols, rStart, cStart] (JSON)',
   url: 'https://leetcode.com/problems/spiral-matrix-iii/',
   complexity: 'O(max(rows, cols)^2) time: the spiral may wander outside the grid but visits each of rows*cols cells once.',
+  question: "Walk a spiral from a starting cell on an unbounded grid until every cell of an R by C grid is visited; return the visiting order.",
+  approaches: [
+    { name: "Spiral with growing steps", intuition: "Walk in the order right, down, left, up, lengthening the step every two turns and recording cells inside the grid.", time: "O(max(R, C)^2)", space: "O(R * C)" },
+  ],
   examples: [
     { label: '1x4 from (0,0)', input: '[1,4,0,0]' },
     { label: '5x6 from (1,4)', input: '[5,6,1,4]' },

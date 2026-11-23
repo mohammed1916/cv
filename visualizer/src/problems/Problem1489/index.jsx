@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON object with n and edges as [a, b, weight] triples',
   url: 'https://leetcode.com/problems/find-critical-and-pseudo-critical-edges-in-minimum-spanning-tree/',
   complexity: 'O(E^2 * α(n)) after sorting, for E edges. The visualization caps input at 6 vertices and 8 edges.',
+  question: "Find the edges whose removal or forced inclusion changes the weight of a minimum spanning tree.",
+  approaches: [
+    { name: "Kruskal with edge tests", intuition: "Compute the base MST weight, then test each edge by forcing or removing it.", time: "O(E^2 * alpha(n))", space: "O(n)" },
+  ],
   examples: [
     { label: 'Four vertices, five edges', input: '{"n":4,"edges":[[0,1,4],[1,2,2],[2,3,5],[0,3,3],[1,3,1]]}' },
     { label: 'Square', input: '{"n":4,"edges":[[0,1,1],[1,2,1],[2,3,1],[0,3,1]]}' },

@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'An object with s and k, for example {"s": "abba", "k": 2}',
   url: 'https://leetcode.com/problems/smallest-palindromic-rearrangement-ii/',
   complexity: 'O(n * 26) block counts with big integers. The visualization caps s at 60 letters.',
+  question: "Find the k-th smallest palindrome that can be formed by rearranging a string's letters.",
+  approaches: [
+    { name: "Factorial counting", intuition: "Count arrangements with multinomial coefficients and pick the k-th one letter by letter.", time: "O(n * 26)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Five letters, k three', input: '{"s":"lovol","k":3}' },
     { label: 'Four letters, k five', input: '{"s":"mnnm","k":5}' },

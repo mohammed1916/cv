@@ -8,6 +8,11 @@ const definition = {
   inputLabel: 'Object with products (each row has name, quantity and price; null means missing)',
   url: 'https://leetcode.com/problems/fill-missing-data/',
   complexity: 'O(n) time for n rows, O(n) for the mask. The visualization shows up to 12 rows; the method itself has no such limit.',
+  question: "Fill missing quantity values in a product table with zero.",
+  approaches: [
+    { name: "Mask then assign", intuition: "Build a mask of missing quantities and set those entries to zero.", time: "O(n)", space: "O(n)" },
+    { name: "Fill missing values in one call", intuition: "Use a fill-missing operation on the quantity column.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Some missing', input: '{"products":[{"name":"Kettle","quantity":null,"price":42},{"name":"Lantern","quantity":7,"price":18},{"name":"Tent","quantity":null,"price":260},{"name":"Compass","quantity":0,"price":25}]}' },
     { label: 'Nothing missing', input: '{"products":[{"name":"Rope","quantity":3,"price":12},{"name":"Stove","quantity":0,"price":95}]}' },

@@ -18,6 +18,10 @@ const definition = {
   inputLabel: 'Object with nums (whole numbers from 1 to 20) and k',
   url: 'https://leetcode.com/problems/maximum-frequency-score-of-a-subarray/',
   complexity: 'O(n) window steps with O(log f) modular powers each, using a hash map of counts, for n numbers and window length k. The visualization caps nums at 12 values from 1 to 20; the official limits are larger.',
+  question: "Score each window of length k by summing each value's frequency raised to a power, and return the largest score.",
+  approaches: [
+    { name: "Sliding window with counts", intuition: "Slide the window, updating only the frequency of the value that enters and the one that leaves.", time: "O(n log f)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Repeated run', input: '{"nums":[2,2,1,2,3],"k":3}' },
     { label: 'Two values', input: '{"nums":[5,1,5,1,5,2],"k":4}' },

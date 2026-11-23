@@ -20,6 +20,10 @@ const definition = {
   inputLabel: 'Object with s and t (e.g. {"s":"abc","t":"def"})',
   url: "https://leetcode.com/problems/equalize-strings-by-adding-or-removing-characters-at-ends/",
   complexity: "O(|s| × |t|) time and space for the run table. The visualization accepts strings of 1 to 12 lowercase letters; the bounds shown are this visualization's own limits. The answer assumes a shared piece must be contiguous in both strings.",
+  question: "Find the fewest add or remove operations at the ends of two strings that make them equal.",
+  approaches: [
+    { name: "Longest shared piece table", intuition: "A kept piece must be contiguous in both strings, so a table of matching runs gives the longest shared piece and the cost follows.", time: "O(|s| * |t|)", space: "O(|s| * |t|)" },
+  ],
   examples: [
     { label: "Shared core", input: '{"s":"xxhelloyy","t":"hello"}' },
     { label: "Nothing shared", input: '{"s":"abc","t":"xyz"}' },

@@ -12,6 +12,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Array answers (JSON, up to 200)',
   url: 'https://leetcode.com/problems/rabbits-in-forest/',
   complexity: 'O(n) time and O(k) space for k distinct answers.',
+  question: "Find the fewest rabbits that could be in a forest given each answer about the colour of others.",
+  approaches: [
+    { name: "Group by answer", intuition: "Group rabbits giving the same answer into colour groups of size answer plus one and count the minimum.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: '[1,1,2] -> 5', input: '[1,1,2]' },
     { label: '[10,10,10] -> 11', input: '[10,10,10]' },

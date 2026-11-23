@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Input ["encoded", k] (JSON)',
   url: 'https://leetcode.com/problems/decoded-string-at-index/',
   complexity: 'O(|s|) time and O(1) space; the decoded string, possibly astronomically long, is never built.',
+  question: "A string is decoded by repeating prefixes for digits; find the k-th letter of the decoded string without building it.",
+  approaches: [
+    { name: "Length then reverse walk", intuition: "Compute the decoded length, then walk backwards, reducing k modulo the length at each repeat.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'leet2code3', input: '["leet2code3", 10]' },
     { label: 'ha22', input: '["ha22", 5]' },

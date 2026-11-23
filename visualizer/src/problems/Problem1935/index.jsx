@@ -11,6 +11,10 @@ const definition = {
   inputLabel: 'JSON object with text (words separated by single spaces) and broken (distinct letters)',
   url: 'https://leetcode.com/problems/maximum-number-of-words-you-can-type/',
   complexity: 'O(total length) time using a set of broken letters.',
+  question: "Count the words in a sentence that can be typed when some letters are broken.",
+  approaches: [
+    { name: "Set lookup per word", intuition: "Store broken letters in a set and count words with no broken letter.", time: "O(total length)", space: "O(26)" },
+  ],
   examples: [
     { label: 'Mixed words', input: '{"text":"tree sun gold","broken":"xq"}' },
     { label: 'All broken', input: '{"text":"red blue","broken":"e"}' },

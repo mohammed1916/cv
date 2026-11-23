@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON descriptions as [parent, child, isLeft], e.g. [[1,2,1],[1,3,0],[2,4,1]]',
   url: 'https://leetcode.com/problems/create-binary-tree-from-descriptions/',
   complexity: 'O(n) time and O(n) space for n descriptions. The page caps descriptions at 9 and values at 15.',
+  question: "Build a binary tree from a list of parent, child, and left-or-right descriptions, and return its root.",
+  approaches: [
+    { name: "Node map and parentless root", intuition: "Create each node once in a map, attach children as described, and the root is the only node that never appears as a child.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Three levels', input: '[[1,2,1],[1,3,0],[2,4,1]]' },
     { label: 'Single link', input: '[[5,6,0]]' },

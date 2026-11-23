@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'A JSON string of lowercase letters, for example "banana"',
   url: 'https://leetcode.com/problems/longest-duplicate-substring/',
   complexity: 'O(n log n) expected time with a rolling hash and a binary search on length. The visualization caps input at 30 letters.',
+  question: "Find the longest substring that appears at least twice, possibly overlapping.",
+  approaches: [
+    { name: "Binary search with rolling hash", intuition: "If a substring of length L repeats, so does every shorter one; binary search the length and test for repeated hashes.", time: "O(n log n) expected", space: "O(n)" },
+  ],
   examples: [
     { label: 'Banana', input: '"banana"' },
     { label: 'Repeats', input: '"abab"' },

@@ -16,6 +16,10 @@ const definition = {
   inputLabel: 'Object with source and target as [row, column] from 1 to 8',
   url: 'https://leetcode.com/problems/minimum-bishop-moves-to-reach-target/',
   complexity: 'O(64 * 4 * 8) time and O(64) space: a fixed-size breadth-first search over the board.',
+  question: "Find the fewest bishop diagonal slides from a source square to a target square.",
+  approaches: [
+    { name: "Breadth-first search over the board", intuition: "Spread outward one diagonal slide at a time; the first wave to reach the target gives the fewest moves.", time: "O(64 x 4 x 8)", space: "O(64)" },
+  ],
   examples: [
     { label: 'Two moves', input: '{"source":[3,2],"target":[6,7]}' },
     { label: 'Different colours', input: '{"source":[1,1],"target":[2,3]}' },

@@ -13,6 +13,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Sorted array nums (JSON)',
   url: 'https://leetcode.com/problems/split-array-into-consecutive-subsequences/',
   complexity: 'O(n) expected time with hash maps for counts and run tails.',
+  question: "Decide whether a sorted array can be split into subsequences of at least three consecutive values.",
+  approaches: [
+    { name: "Greedy run extension", intuition: "Extend an existing run when possible; otherwise start a new run of three consecutive values.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Two runs', input: '[1,2,3,3,4,5]' },
     { label: 'Extend', input: '[1,2,3,3,4,4,5,5]' },

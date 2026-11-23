@@ -27,6 +27,10 @@ const definition = {
   inputLabel: 'Object with Boxes ({ box_id, chest_id or null, apple_count, orange_count }) and Chests ({ chest_id, apple_count, orange_count }) lists',
   url: 'https://leetcode.com/problems/count-apples-and-oranges',
   complexity: 'O(n + m) with a lookup of chests by id, for n boxes and m chests.',
+  question: "Count the apples and oranges inside each chest by matching box ids to chest ids.",
+  approaches: [
+    { name: "Lookup by id", intuition: "Index the chests by id, then add each box's counts to its chest.", time: "O(n + m)", space: "O(m)" },
+  ],
   examples: [
     { label: 'Example', input: '{"Boxes":[{"box_id":1,"chest_id":1,"apple_count":2,"orange_count":1},{"box_id":2,"chest_id":null,"apple_count":4,"orange_count":0},{"box_id":3,"chest_id":2,"apple_count":1,"orange_count":1},{"box_id":4,"chest_id":1,"apple_count":0,"orange_count":2}],"Chests":[{"chest_id":1,"apple_count":3,"orange_count":0},{"chest_id":2,"apple_count":0,"orange_count":5}]}' },
   { label: 'Empty tables', input: '{"Boxes":[],"Chests":[]}' },

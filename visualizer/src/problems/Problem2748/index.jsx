@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with nums (JSON list of positive integers)',
   url: 'https://leetcode.com/problems/number-of-beautiful-pairs/',
   complexity: 'O(n * 9) time with ten digit counters. The visualization caps input at 10 values.',
+  question: "Given an array, count the pairs whose first and last digits share a greatest common divisor of one.",
+  approaches: [
+    { name: "Digit counters", intuition: "Count the first and last digit of each value and combine pairs of digit classes.", time: "O(n * 9)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Five values', input: '{"nums":[2,5,1,4]}' },
     { label: 'Two-digit', input: '{"nums":[11,21,12]}' },

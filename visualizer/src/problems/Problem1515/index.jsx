@@ -11,6 +11,10 @@ const definition = {
   inputLabel: 'Object with positions, a list of [x, y] pairs (JSON)',
   url: 'https://leetcode.com/problems/best-position-for-a-service-centre/',
   complexity: 'O(n * iterations) time with a fixed iteration count. The visualization caps input at 8 points.',
+  question: "Find a point that minimises the total distance to a set of fixed points.",
+  approaches: [
+    { name: "Weiszfeld iteration", intuition: "Repeatedly move to the distance-weighted average of the points until it settles.", time: "O(n * iterations)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Square', input: '{"positions":[[0,0],[0,2],[2,0],[2,2]]}' },
     { label: 'Two points', input: '{"positions":[[0,0],[10,0]]}' },

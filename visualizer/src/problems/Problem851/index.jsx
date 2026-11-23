@@ -17,6 +17,10 @@ const definition = {
   inputLabel: 'Object {richer, quiet} (JSON)',
   url: 'https://leetcode.com/problems/loud-and-rich/',
   complexity: 'O(n + r) time and O(n + r) space with memoization. The visualization caps n at 20 and r at 40.',
+  question: "Given who is richer than whom and each person's quietness, find for each person the quietest person who is at least as rich.",
+  approaches: [
+    { name: "DFS with memo over richer edges", intuition: "From each person, search the people who are at least as rich and keep the quietest, reusing results.", time: "O(n + E)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Chain of richer people', input: '{"richer":[[1,0],[2,1]],"quiet":[5,2,8]}' },
     { label: 'Two separate pairs', input: '{"richer":[[0,2],[3,1]],"quiet":[9,4,6,1]}' },

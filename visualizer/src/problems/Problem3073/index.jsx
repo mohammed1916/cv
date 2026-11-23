@@ -18,6 +18,10 @@ const definition = {
   inputLabel: "JSON array of integers",
   url: "https://leetcode.com/problems/maximum-increasing-triplet-value/",
   complexity: "O(n^2) time and O(1) extra space for n values, as the visualization scans each middle index. With no increasing triplet the answer is -1. The visualization caps the array at 20 values from 0 to 100.",
+  question: "Find the maximum value of an increasing triplet, scoring each triplet from its values.",
+  approaches: [
+    { name: "Prefix and suffix scans", intuition: "Scan from the left and right to record the best value on each side, then combine them at each middle index.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: "Triplet found", input: "[5, 2, 8, 1, 6, 9]" },
     { label: "No increasing triplet", input: "[9, 8, 7]" },

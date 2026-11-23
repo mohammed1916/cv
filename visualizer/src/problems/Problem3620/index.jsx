@@ -9,6 +9,10 @@ const definition = {
   inputLabel: 'Object with edges ([from, to, cost]), online (one boolean per node) and budget k',
   url: `https://leetcode.com/problems/${meta.slug}/`,
   complexity: 'O((n + m) log m) time: one linear pass over the graph for each of the O(log m) floors tried. The official limits allow 50000 nodes and 100000 edges; the visualization caps the graph at 10 nodes and 20 edges.',
+  question: "Find the largest cheapest edge on a route whose total cost stays at most k, ignoring edges that touch offline nodes.",
+  approaches: [
+    { name: "Binary search the floor", intuition: "Binary search the edge cost floor, and for each floor run a shortest-cost pass over the topological order.", time: "O((n + m) log m)", space: "O(n + m)" },
+  ],
   examples: [
     { label: 'Trade-off', input: '{"edges":[[0,1,8],[0,2,4],[1,3,6],[2,3,9],[1,4,2],[3,5,5],[4,5,7],[2,4,6]],"online":[true,true,true,true,true,true],"k":18}' },
     { label: 'Offline shortcut', input: '{"edges":[[0,1,9],[1,3,9],[0,2,3],[2,3,5]],"online":[true,false,true,true],"k":20}' },

@@ -4,6 +4,10 @@ import { StackLane } from '../../components/shared/AlgorithmStatePrimitives'
 import { buildTrace, parseInput, code, python, phases, examples } from './algorithm'
 
 const definition = {
+  question: "Replace each element with the greatest value to its right, and the last element with minus one.",
+  approaches: [
+    { name: "Suffix maximum", intuition: "Scan from the right while keeping the largest value seen so far.", time: "O(n)", space: "O(1) extra" },
+  ],
   number: '1299', phases, parse: parseInput, build: buildTrace, code, python, examples,
   inputLabel: 'Array of integers (JSON)',
   url: 'https://leetcode.com/problems/replace-elements-with-greatest-element-on-right-side/',

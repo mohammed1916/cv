@@ -13,6 +13,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Points (JSON [[x,y],...])',
   url: 'https://leetcode.com/problems/minimum-area-rectangle/',
   complexity: 'O(n^2) time and O(n) space. The visualization caps input at 30 points.',
+  question: "Find the smallest area of an axis-aligned rectangle whose four corners are all given points.",
+  approaches: [
+    { name: "Diagonal pairs with a point set", intuition: "For each pair of points as a diagonal, check whether the other two corners exist in a hash set.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Square plus interior point', input: '[[1,1],[1,3],[3,1],[3,3],[2,2]]' },
     { label: 'Two rectangles', input: '[[0,0],[0,2],[4,0],[4,2],[1,5]]' },

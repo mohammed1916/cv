@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with nums (amounts) and colors (same length)',
   url: 'https://leetcode.com/problems/house-robber-v/',
   complexity: 'O(n) time and O(n) space for the two-state table.',
+  question: "Rob houses in a row when neighbours of the same colour cannot both be robbed, maximising the total.",
+  approaches: [
+    { name: "Two-state dynamic programme", intuition: "Track the best total with the current house robbed and with it skipped.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Colour break', input: '{"nums":[3,7,5,2],"colors":[1,1,3,3]}' },
     { label: 'Run of one colour', input: '{"nums":[5,8,2,7],"colors":[3,3,3,4]}' },

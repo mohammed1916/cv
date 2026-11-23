@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON object with upper, lower and colsum (entries 0, 1 or 2)',
   url: 'https://leetcode.com/problems/reconstruct-a-2-row-binary-matrix/',
   complexity: 'O(n) time and O(n) space for n columns. The visualization caps n at 20.',
+  question: "Build a two-row binary matrix from column sums and a required total of ones in each row.",
+  approaches: [
+    { name: "Greedy column assignment", intuition: "Give columns with sum two to both rows, then fill the remaining ones from the rows that still need them.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Mixed column sums', input: '{"upper":4,"lower":3,"colsum":[1,2,1,2,0,1]}' },
     { label: 'Example 2', input: '{"upper":2,"lower":3,"colsum":[2,1,1,1]}' },

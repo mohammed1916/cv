@@ -10,6 +10,10 @@ const definition = {
   inputLabel: 'Two numbers (JSON strings)',
   url: 'https://leetcode.com/problems/equal-rational-numbers/',
   complexity: 'O(1) big-integer arithmetic on the digit lengths.',
+  question: "Decide whether two strings with optional repeating parts represent the same rational number.",
+  approaches: [
+    { name: "Convert to fractions", intuition: "Turn each decimal with its repeating part into an exact fraction and compare by cross multiplication.", time: "O(1)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Equal', input: '{"s":"0.(52)","t":"0.5(25)"}' },
     { label: 'Not equal', input: '{"s":"0.(6)","t":"0.(9)"}' },

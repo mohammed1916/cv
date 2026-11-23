@@ -13,6 +13,11 @@ const definition = {
   inputLabel: 'Object with coins, a pair of distinct primes, e.g. {"coins":[5,7]}',
   url: 'https://leetcode.com/problems/most-expensive-item-that-can-not-be-bought/',
   complexity: 'O(a * b) time and O(a * b) space for the marking table. The visualization caps each prime at 17, so the grid has at most 289 costs.',
+  question: "Find the largest value that cannot be formed from non-negative combinations of two prime numbers.",
+  approaches: [
+    { name: "Reachability table up to the product", intuition: "Mark every value reachable from the two primes up to their product, then report the largest unreachable value.", time: "O(a\u00b7b)", space: "O(a\u00b7b)" },
+    { name: "Closed form", intuition: "For coprime values the answer is a\u00b7b - a - b.", time: "O(1)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Five and seven', input: '{"coins":[5,7]}' },
     { label: 'Three and eleven', input: '{"coins":[3,11]}' },

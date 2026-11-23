@@ -14,6 +14,11 @@ const definition = {
   inputLabel: 'JSON object {"nums1": [...], "nums2": [...], "x": integer}',
   url: 'https://leetcode.com/problems/minimum-time-to-make-array-sum-at-most-x/',
   complexity: 'O(n^2) time for the reduction table. The visualization caps input at 8 indexes.',
+  question: "Find the fewest seconds needed to bring the array sum to at most x, where each second adds growth to every element and one chosen element can be zeroed.",
+  approaches: [
+    { name: "Sort by growth and dynamic programming", intuition: "Order indexes by growth; for each count of zeroing operations, keep the best reduction, then test each time.", time: "O(n^2)", space: "O(n)" },
+    { name: "Try every time with a greedy choice", intuition: "For each time, greedily zero the largest current values.", time: "O(n^2 log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Four pairs, target nine', input: '{"nums1":[1,5,4,7],"nums2":[3,2,6,1],"x":9}' },
     { label: 'Impossible', input: '{"nums1": [1, 2, 3], "nums2": [3, 3, 3], "x": 4}' },

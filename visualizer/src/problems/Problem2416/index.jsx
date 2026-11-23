@@ -8,6 +8,10 @@ const definition = {
   inputLabel: 'Object with words (JSON list of lowercase strings)',
   url: 'https://leetcode.com/problems/sum-of-prefix-scores-of-strings/',
   complexity: 'O(total length) time and space for the trie. The visualization caps input at 6 words of up to 6 letters.',
+  question: "For each word, count the words in the list that have it as a prefix, including itself.",
+  approaches: [
+    { name: "Prefix trie counts", intuition: "Insert all words into a trie and count how many words pass through each node.", time: "O(total length)", space: "O(total length)" },
+  ],
   examples: [
     { label: 'Own: three words and one letter', input: '{"words":["xyz","yz","q"]}' },
     { label: 'Single word', input: '{"words":["abcd"]}' },

@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with arrivals: [carId, roadId, direction] triples',
   url: 'https://leetcode.com/problems/traffic-light-controlled-intersection/',
   complexity: 'O(1) per car. The concurrent version uses a lock so only one road holds the light at a time.',
+  question: "Control a traffic light at a crossing so that cars from each road pass safely.",
+  approaches: [
+    { name: "Lock-based green phase", intuition: "Hold a lock for the current green road and switch only when no car is crossing.", time: "O(1) per car", space: "O(1)" },
+  ],
   examples: [
     { label: 'Two roads', input: '{"arrivals":[[1,1,1],[2,1,2],[3,2,3],[4,2,4],[5,1,1]]}' },
     { label: 'Single car', input: '{"arrivals":[[7,1,1]]}' },

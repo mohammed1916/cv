@@ -4,6 +4,10 @@ import { StackLane } from '../../components/shared/AlgorithmStatePrimitives'
 import { buildTrace, parseInput, codeLines, python, pythonLineMap, phases, examples } from './algorithm'
 
 const definition = {
+  question: "Count students who are doing homework at a given time.",
+  approaches: [
+    { name: "Interval check", intuition: "Count students whose start and end bracket the query time.", time: "O(n)", space: "O(1)" },
+  ],
   number: '1450', phases, parse: parseInput, build: buildTrace, code: codeLines, python, pythonLineMap, examples,
   inputLabel: 'Object with start, end and query (JSON)',
   url: 'https://leetcode.com/problems/number-of-students-doing-homework-at-a-given-time/',

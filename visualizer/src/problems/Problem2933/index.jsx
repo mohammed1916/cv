@@ -9,6 +9,10 @@ const definition = {
   inputLabel: 'Object with access_times, a list of [name, HHMM] records',
   url: 'https://leetcode.com/problems/high-access-employees/',
   complexity: 'O(n log n) time to sort the times and O(n) space for the groups, for n records (up to 100).',
+  question: "Find the employees who used the access system three or more times within one hour, given their access times.",
+  approaches: [
+    { name: "Group, sort and check triples", intuition: "Group times by employee, sort them, and check whether any three consecutive times span less than 60 minutes.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Under 60 vs exactly 60', input: '{"access_times":[["mia","0910"],["leo","1305"],["mia","0950"],["leo","1405"],["mia","0935"],["leo","1335"]]}' },
     { label: 'Midnight does not wrap', input: '{"access_times":[["zed","2340"],["zed","0010"],["zed","2355"]]}' },

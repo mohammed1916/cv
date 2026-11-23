@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Matrix of integers from -100 to 100 as JSON, e.g. {"matrix": [[1,2],[3,4]]}',
   url: 'https://leetcode.com/problems/rank-transform-of-a-matrix/',
   complexity: 'O(m * n log(m * n)) time for the sort plus near-linear union-find work per value group. The visualization caps the matrix at 5 by 5.',
+  question: "Replace each matrix value with its rank, where equal values share a rank and ranks respect row and column order.",
+  approaches: [
+    { name: "Sort and union equal values", intuition: "Process values in increasing order and union cells that share a row or column, using union-find.", time: "O(mn log(mn))", space: "O(mn)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"matrix": [[1,2],[3,4]]}' },
     { label: 'Ties', input: '{"matrix": [[7,7],[7,7]]}' },

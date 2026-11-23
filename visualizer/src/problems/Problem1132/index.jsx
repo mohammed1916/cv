@@ -4,6 +4,10 @@ import { buildTrace, parseInput, code, sql, python, phases, inputLabel, complexi
 import { meta } from './meta'
 
 const definition = {
+  question: "Compute the average daily percentage of reported spam posts that were removed.",
+  approaches: [
+    { name: "Join and group in SQL", intuition: "Count distinct reported and removed posts per day, then average the daily percentages.", time: "O(n)", space: "O(n)" },
+  ],
   number: meta.number,
   phases,
   parse: parseInput,

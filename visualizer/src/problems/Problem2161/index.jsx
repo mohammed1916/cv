@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON object with nums and pivot',
   url: 'https://leetcode.com/problems/partition-array-according-to-given-pivot/',
   complexity: 'O(n) time with three buckets; O(n) extra space.',
+  question: "Reorder an array so that values smaller than a pivot come first, then values equal to it, then larger values, keeping each group's order.",
+  approaches: [
+    { name: "Three stable buckets", intuition: "Place each value into one of three lists in order, then join them.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Equal and both sides', input: '{"nums":[4,-2,8,4,0,-5],"pivot":4}' },
     { label: 'Nothing equal', input: '{"nums":[3,9,1],"pivot":5}' },

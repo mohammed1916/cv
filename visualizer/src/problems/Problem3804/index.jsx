@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Array (JSON object with nums)',
   url: 'https://leetcode.com/problems/number-of-centered-subarrays/',
   complexity: 'O(n^2) time with a set per start. The visualization caps n at 30.',
+  question: "Count the subarrays whose sum equals one of the values inside them.",
+  approaches: [
+    { name: "Grow from each start", intuition: "Extend each subarray from every start while recording the values seen so far.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"nums":[-1,1,0]}' },
     { label: 'Example 2', input: '{"nums":[2,-3]}' },

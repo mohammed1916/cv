@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON object with nums (1 to 40 values from 1 to 50), k and x, for example {"nums":[1,1,2,2,3,4,2,3],"k":6,"x":2}',
   url: 'https://leetcode.com/problems/find-x-sum-of-all-k-long-subarrays-ii/',
   complexity: 'O((n - k + 1) * k log k) time for the per-window sort. The statement allows far larger arrays; the visualization caps nums at 40 values.',
+  question: "For each window of k values, compute the sum of the top x most frequent values, for larger arrays.",
+  approaches: [
+    { name: "Sort each window", intuition: "Sort each window by frequency and value, keep the top entries, and sum them.", time: "O((n - k + 1) * k log k)", space: "O(k)" },
+  ],
   examples: [
     { label: 'Six entries, k four', input: '{"nums":[8,8,3,12,5,1],"k":4,"x":2}' },
     { label: 'Largest allowed x', input: '{"nums":[20,30,10],"k":3,"x":3}' },

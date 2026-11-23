@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON with s and t, e.g. {"s":"leetcode","t":"coats"}',
   url: 'https://leetcode.com/problems/minimum-number-of-steps-to-make-two-strings-anagram-ii/',
   complexity: 'O(n + m) time to count and O(26) to compare. The visualization caps each string at 16 letters.',
+  question: "Find the fewest letter additions to either string that make the two strings anagrams of each other.",
+  approaches: [
+    { name: "Letter count differences", intuition: "Count the letters in each string; the answer is the total absolute difference in each letter's count.", time: "O(n + m)", space: "O(26)" },
+  ],
   examples: [
     { label: 'Mixed', input: '{"s":"leetcode","t":"coats"}' },
     { label: 'Anagrams', input: '{"s":"night","t":"thing"}' },

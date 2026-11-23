@@ -19,6 +19,11 @@ const definition = {
   inputLabel: 'Object with prices and profits lists, e.g. {"prices":[9,1,5,3,8,7],"profits":[2,6,4,7,1,5]}',
   url: 'https://leetcode.com/problems/maximum-profitable-triplets-with-increasing-prices-ii/',
   complexity: 'O(n log n) time and O(n) space with two Fenwick max trees over compressed prices. The visualization caps the list at 12 entries with values from -30 to 30; the official variant is larger.',
+  question: "Find the largest profit of a triplet of indices with strictly increasing prices, for large inputs.",
+  approaches: [
+    { name: "Two Fenwick max trees", intuition: "Compress prices, then query the best left and best right profits for each middle index in logarithmic time.", time: "O(n log n)", space: "O(n)" },
+    { name: "Scan each middle index", intuition: "For each middle index, scan both sides for the best profit.", time: "O(n^2)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Interior peak', input: '{"prices":[9,1,5,3,8,7],"profits":[2,6,4,7,1,5]}' },
     { label: 'No increase', input: '{"prices":[6,6,6],"profits":[1,2,3]}' },

@@ -12,6 +12,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Array (JSON array of integers from 0 to 49,999)',
   url: 'https://leetcode.com/problems/degree-of-an-array/',
   complexity: 'O(n) time and O(d) space for the d distinct values.',
+  question: "Find the shortest contiguous slice that has the same degree as the whole array.",
+  approaches: [
+    { name: "First and last index map", intuition: "Record the first and last position of each value and count frequencies to pick the shortest slice.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Tie for degree', input: '[3,1,3,2,1,3,4]' },
     { label: 'Single peak', input: '[5,5,2,5,9]' },

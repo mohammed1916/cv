@@ -17,6 +17,10 @@ const definition = {
   inputLabel: 'JSON: {"s": "abc", "t": "bac"}',
   url: "https://leetcode.com/problems/permutation-difference-between-two-strings/",
   complexity: "O(n) time and O(1) extra space, since the alphabet has at most 26 letters.",
+  question: "Compute the permutation difference between two strings in which each letter appears at most once.",
+  approaches: [
+    { name: "Index maps", intuition: "Record the position of each letter in both strings, then add up the absolute differences.", time: "O(n)", space: "O(1) for the alphabet" },
+  ],
   examples: [{ label: 'Three letters, reordered', input: '{"s":"qmx","t":"xmq"}' },
     { label: "Single letter", input: "{\"s\":\"a\",\"t\":\"a\"}" },
     { label: "Reversed order", input: "{\"s\":\"abc\",\"t\":\"cba\"}" },

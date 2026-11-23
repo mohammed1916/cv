@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON object with ranks and cars',
   url: 'https://leetcode.com/problems/minimum-time-to-repair-cars/',
   complexity: 'O(m log(min rank * cars^2)) time for m mechanics. The visualization caps input at 4 mechanics and 10 cars.',
+  question: "Mechanics with ranks repair cars; find the least time that lets all cars be repaired.",
+  approaches: [
+    { name: "Binary search on time", intuition: "Test whether a time is enough for the mechanics to repair all cars, using the rank formula.", time: "O(m log(min rank * cars^2))", space: "O(1)" },
+  ],
   examples: [
     { label: 'Three mechanics, five cars', input: '{"ranks":[6,2,7],"cars":5}' },
     { label: 'Equal mechanics, eight cars', input: '{"ranks":[3,3,3,3],"cars":8}' },

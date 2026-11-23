@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'Object with nums (digits 0 to 9) and k',
   url: 'https://leetcode.com/problems/valid-subarrays-with-exactly-one-peak/',
   complexity: 'O(n) time and O(n) space: one scan marks the peaks and each peak is handled once with its neighbouring peaks. The visualization caps nums at 14 values.',
+  question: "Count the subarrays whose only peak lies within k positions of both ends.",
+  approaches: [
+    { name: "Peak ownership windows", intuition: "Each peak owns the positions between its neighbouring peaks, clipped to k on each side.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Two peaks', input: '{"nums":[1,3,2,4,1,5,0],"k":1}' },
     { label: 'Flat run', input: '{"nums":[2,2,2,2],"k":3}' },

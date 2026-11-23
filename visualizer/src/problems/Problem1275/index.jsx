@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Object with moves as [row, column] pairs (JSON)',
   url: 'https://leetcode.com/problems/find-winner-on-a-tic-tac-toe-game/',
   complexity: 'O(1) per move: only the lines through the newest mark are checked on a fixed 3 by 3 board.',
+  question: "Find the winner of a tic-tac-toe game from its sequence of moves, or report a draw or pending game.",
+  approaches: [
+    { name: "Check lines through the last move", intuition: "After each move, check only the row, column and diagonals through that cell.", time: "O(1) per move", space: "O(1)" },
+  ],
   examples: [
     { label: 'Diagonal win', input: '{"moves":[[0,0],[2,0],[1,1],[2,1],[2,2]]}' },
     { label: 'Column win for B', input: '{"moves":[[0,0],[0,1],[2,2],[1,1],[2,0],[2,1]]}' },

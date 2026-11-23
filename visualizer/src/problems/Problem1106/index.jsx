@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with expression (JSON)',
   url: 'https://leetcode.com/problems/parsing-a-boolean-expression/',
   complexity: 'O(n) time and O(n) stack depth for n characters. The visualization caps input at 60 characters.',
+  question: "Evaluate a boolean expression using and, or, not and nested parentheses.",
+  approaches: [
+    { name: "Stack evaluation", intuition: "Push operands and operators; at each closing parenthesis, reduce the group using its operator.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"expression":"!(f)"}' },
     { label: 'Nested', input: '{"expression":"|(&(t,f,t),!(t))"}' },

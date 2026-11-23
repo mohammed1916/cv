@@ -15,6 +15,11 @@ const definition = {
   inputLabel: 'Object {target, startFuel, stations} (JSON, up to 25 stations)',
   url: 'https://leetcode.com/problems/minimum-number-of-refueling-stops/',
   complexity: 'O(n log n) with a max-heap of passed stations.',
+  question: "A car needs to reach a target with fuel; stations along the way give fuel. Find the fewest refuelling stops.",
+  approaches: [
+    { name: "Greedy with a max-heap", intuition: "Drive as far as fuel allows; when stuck, take the largest fuel passed so far from the heap.", time: "O(n log n)", space: "O(n)" },
+    { name: "DP over stops", intuition: "Track the furthest distance reachable with each number of stops.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Three stations, fueled', input: '{"target":500,"startFuel":100,"stations":[[100,120],[250,80],[400,60]]}' },
     { label: 'No stations needed', input: '{"target":1,"startFuel":1,"stations":[]}' },

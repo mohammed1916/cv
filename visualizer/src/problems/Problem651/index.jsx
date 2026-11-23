@@ -12,6 +12,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Number of key presses n (JSON integer, 1–50)',
   url: 'https://leetcode.com/problems/4-keys-keyboard/',
   complexity: 'O(n²) time for the nested scan, with O(n) extra space for the table.',
+  question: "Find the most A characters that can appear after n presses of a four-key keyboard.",
+  approaches: [
+    { name: "DP over ending copy blocks", intuition: "Track the best count after each press, treating the last few presses as a copy-and-paste block.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Small', input: '3' },
     { label: 'Copy wins', input: '7' },

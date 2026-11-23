@@ -11,6 +11,10 @@ const definition = {
   inputLabel: 'JSON object with eventTime, startTime and endTime',
   url: 'https://leetcode.com/problems/reschedule-meetings-for-maximum-free-time-ii/',
   complexity: 'O(n^2) time for n meetings. The visualization caps input at 8 meetings.',
+  question: "Move one meeting to a better time slot to maximize the largest free stretch in the day.",
+  approaches: [
+    { name: "Try each meeting", intuition: "Remove each meeting, then test all places it could go and measure the free gaps.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Invented short day', input: '{"eventTime":6,"startTime":[0,2],"endTime":[1,4]}' },
     { label: 'Invented three meetings', input: '{"eventTime":10,"startTime":[0,7,9],"endTime":[1,8,10]}' },

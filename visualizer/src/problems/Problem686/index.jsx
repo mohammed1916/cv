@@ -11,6 +11,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Strings (JSON object with a and b)',
   url: 'https://leetcode.com/problems/repeated-string-match/',
   complexity: 'O(|a| · k + |b| · k) time for k = ⌈|b| / |a|⌉ + 1 copies, with the built-in substring search.',
+  question: "Find the fewest copies of a string that must be concatenated for another string to be a substring.",
+  approaches: [
+    { name: "Repeat until long enough", intuition: "Repeat the string until its length reaches the target length plus one copy, then check the substring.", time: "O(n m)", space: "O(m)" },
+  ],
   examples: [
     { label: 'Overlap', input: '{"a":"xyz","b":"zxyzx"}' },
     { label: 'Exact fit', input: '{"a":"pq","b":"qpq"}' },

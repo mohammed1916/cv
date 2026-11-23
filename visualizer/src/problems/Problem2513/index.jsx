@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with divisor1, divisor2 (2 to 10) and uniqueCnt1, uniqueCnt2 (1 to 8) (JSON)',
   url: 'https://leetcode.com/problems/minimize-the-maximum-of-two-arrays/',
   complexity: 'O(log(uniqueCnt1 + uniqueCnt2)) time with constant counting work per probe.',
+  question: "Find the smallest possible maximum value for two disjoint sets of positive integers that avoid each other's divisors.",
+  approaches: [
+    { name: "Binary search on the maximum", intuition: "Test whether a candidate maximum leaves enough values for each array, with the shared values counted once.", time: "O(log(uniqueCnt1 + uniqueCnt2))", space: "O(1)" },
+  ],
   examples: [
     { label: 'Coprime divisors 5 and 7', input: '{"divisor1":5,"divisor2":7,"uniqueCnt1":4,"uniqueCnt2":3}' },
     { label: 'Divisor 4 is a multiple of 2', input: '{"divisor1":2,"divisor2":4,"uniqueCnt1":1,"uniqueCnt2":6}' },

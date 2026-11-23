@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'JSON object with nums, for example {"nums":[4,2,5,3,5]}',
   url: 'https://leetcode.com/problems/make-array-non-decreasing/',
   complexity: 'O(n) time and O(n) space. The visualization caps the array at 12 values.',
+  question: "Merge adjacent values in an array so that the result is non-decreasing with the fewest merges.",
+  approaches: [
+    { name: "Monotonic stack", intuition: "Keep a stack of merged values and merge while the top is larger than the next.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"nums":[4,2,5,3,5]}' },
     { label: 'Example 2', input: '{"nums":[1,2,3]}' },

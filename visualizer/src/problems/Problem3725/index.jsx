@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON object with mat, for example {"mat":[[1,2],[3,4]]}',
   url: 'https://leetcode.com/problems/count-ways-to-choose-coprime-integers-from-rows/',
   complexity: 'O(V * (m * n + sqrt V)) time for largest value V. The visualization caps the matrix at 4 by 4.',
+  question: "Count ways to choose values from matrix rows whose greatest common divisor is 1.",
+  approaches: [
+    { name: "Scan values with gcd", intuition: "Scan values in each row and count the combinations whose gcd is 1.", time: "O(V * (m * n + sqrt V))", space: "O(V)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"mat":[[1,2],[3,4]]}' },
     { label: 'Example 2', input: '{"mat":[[2,2],[2,2]]}' },

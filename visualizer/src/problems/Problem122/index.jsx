@@ -19,6 +19,10 @@ const definition = {
   inputLabel: "Prices (JSON object, e.g. {\"prices\": [7,1,5,3,6,4]})",
   url: "https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/",
   complexity: "O(n) time and O(1) space for n prices. The visualization caps the trace at 60 prices.",
+  question: "Find the largest profit from as many buy and sell trades as you like.",
+  approaches: [
+    { name: "Sum of rises", intuition: "Add every positive day-to-day price increase.", time: "O(n)", space: "O(1)" },
+  ],
   examples: getExamples("best-time-to-buy-and-sell-stock-ii").map(({ label, input }) => ({ label, input: JSON.stringify({ prices: JSON.parse(input) }) })),
 };
 

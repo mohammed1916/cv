@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Object with colors and queries (JSON)',
   url: 'https://leetcode.com/problems/shortest-distance-to-target-color/',
   complexity: 'O(n + q log n) time: grouping the positions is one pass, and each query is a binary search over one color list.',
+  question: "For each query colour and position, find the distance to the nearest position with that colour.",
+  approaches: [
+    { name: "Group by colour and binary search", intuition: "Store sorted positions for each colour and binary search the nearest one per query.", time: "O(n + q log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Mixed', input: '{"colors":[1,1,2,1,3,2,2,3,3],"queries":[[1,3],[2,2],[6,1],[4,2]]}' },
     { label: 'Missing', input: '{"colors":[1,1,1],"queries":[[0,2],[2,1]]}' },

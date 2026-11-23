@@ -22,6 +22,10 @@ const examples = [{
 }]
 
 const definition = {
+  question: "Using employees and their logged sessions, find the employees whose logged time is less than the hours they need.",
+  approaches: [
+    { name: "Group sessions and compare", intuition: "Sum the session times per employee and compare with the needed hours.", time: "O(n + m)", space: "O(n)" },
+  ],
   number: meta.number,
   phases, parse: parseInput, build: buildTrace, code, sql, python, inputLabel,
   url: `https://leetcode.com/problems/${meta.slug}/`,

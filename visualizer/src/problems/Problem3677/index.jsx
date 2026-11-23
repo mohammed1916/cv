@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Integer n from 0 to 10^15',
   url: 'https://leetcode.com/problems/count-binary-palindromic-numbers/',
   complexity: 'O(log^2 n) time: each of the O(log n) bit lengths is counted by binary search.',
+  question: "Count the binary palindromes from 1 up to n.",
+  approaches: [
+    { name: "Count by bit length", intuition: "Count palindromes for each bit length with binary search over the lengths.", time: "O(log^2 n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '9' },
     { label: 'Zero', input: '0' },

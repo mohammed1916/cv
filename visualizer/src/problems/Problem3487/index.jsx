@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON array of integers (1 to 12 entries)',
   url: 'https://leetcode.com/problems/maximum-unique-subarray-sum-after-deletion/',
   complexity: 'O(n) time and O(n) space. The visualization caps the input at 12 values.',
+  question: "Delete any elements from an array to maximize the sum of the remaining distinct values.",
+  approaches: [
+    { name: "Sum distinct positives", intuition: "Keep each distinct value once and take the sum of the positive values.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '[3,-2,3,5]' },
     { label: 'Example 2', input: '[-4,-1,-7]' },

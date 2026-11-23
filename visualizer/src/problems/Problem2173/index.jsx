@@ -8,6 +8,10 @@ const definition = {
   inputLabel: 'Matches as JSON: {"matches":[{"player_id","match_day","result"}]}',
   url: 'https://leetcode.com/problems/longest-winning-streak/',
   complexity: 'One ordering of the matches, then one pass per player: O(m log m) for m matches, plus a linear walk.',
+  question: "Find the longest run of consecutive wins for each player in a match results table.",
+  approaches: [
+    { name: "Gaps and islands with row numbers", intuition: "Number each player's matches and group consecutive wins by subtracting the row number from the match index, then take the longest group.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Sample matches', input: JSON.stringify(sample) },
     { label: 'No matches', input: '{"matches":[]}' },

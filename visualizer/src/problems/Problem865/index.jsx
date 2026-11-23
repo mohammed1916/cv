@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Level-order tree (JSON, null for missing, up to 30 nodes)',
   url: 'https://leetcode.com/problems/smallest-subtree-with-all-the-deepest-nodes/',
   complexity: 'O(n) time, O(h) recursion space; every node is processed once.',
+  question: "Return the smallest subtree that contains every deepest node of a binary tree.",
+  approaches: [
+    { name: "Post-order depth and LCA", intuition: "Return each subtree's depth and its root; if both children reach the same depth, the current node is the answer.", time: "O(n)", space: "O(h)" },
+  ],
   examples: [
     { label: 'Seven-node tree', input: '[5,3,8,1,4,null,9]' },
     { label: 'Single node', input: '[1]' },

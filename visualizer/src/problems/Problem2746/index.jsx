@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON object {"words": array of 1 to 8 lowercase strings}',
   url: 'https://leetcode.com/problems/decremental-string-concatenation/',
   complexity: 'O(n * 26 * 26) time, since only the first and last letter of each state matter. The visualization caps input at 8 words.',
+  question: "Given words, choose the order of concatenations that leaves the shortest final string, where merging drops a shared boundary letter.",
+  approaches: [
+    { name: "DP on first and last letters", intuition: "Track the shortest result for each first and last letter, since only those matter when joining.", time: "O(n * 26 * 26)", space: "O(26 * 26)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"words": ["aa", "ab", "bc"]}' },
     { label: 'Example 2', input: '{"words": ["ab", "b"]}' },

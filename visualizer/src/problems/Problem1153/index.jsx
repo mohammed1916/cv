@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with str1 and str2 of equal length (e.g. {"str1":"abcd","str2":"bcda"})',
   url: 'https://leetcode.com/problems/string-transforms-into-another-string/',
   complexity: 'O(n) time and O(1) extra space beyond the 26-letter alphabet for strings of length n. The visualization caps each string at 12 letters; the official bounds were not verified.',
+  question: "Decide whether str1 can be turned into str2 by repeatedly replacing every copy of one letter with another letter.",
+  approaches: [
+    { name: "Consistent letter mapping", intuition: "Each letter of str1 must always become the same letter of str2, and a spare unused letter is needed to break cycles.", time: "O(n)", space: "O(1) beyond the alphabet" },
+  ],
   examples: [
     { label: 'Possible', input: '{"str1":"abcd","str2":"bcda"}' },
     { label: 'Conflict', input: '{"str1":"aab","str2":"bcc"}' },

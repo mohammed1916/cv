@@ -16,6 +16,10 @@ const definition = {
   inputLabel: 'Object with nums (integers from 0 to 1000)',
   url: 'https://leetcode.com/problems/count-bowl-subarrays/',
   complexity: 'O(n^2) time and O(1) extra space. The visualization caps nums at 30 values.',
+  question: "Count the bowl-shaped subarrays of an array.",
+  approaches: [
+    { name: "Expand from each left end", intuition: "From each left end, extend right and count the subarrays that form a bowl shape.", time: "O(n^2)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example', input: '{"nums":[5,1,2,6]}' },
     { label: 'Equal ends', input: '{"nums":[2,1,2]}' },

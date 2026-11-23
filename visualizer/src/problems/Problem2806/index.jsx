@@ -24,6 +24,11 @@ const definition = {
   inputLabel: "Object with purchaseAmount (JSON), e.g. {\"purchaseAmount\":37}",
   url: "https://leetcode.com/problems/account-balance-after-rounded-purchase/",
   complexity: "O(1) time and O(1) space. The input is a single integer from 0 to 100.",
+  question: "Given a purchase amount, find the account balance left after rounding the purchase to the nearest multiple of ten, starting from 100.",
+  approaches: [
+    { name: "Shift then floor", intuition: "Add 5 so that halves round up, floor to the nearest ten, and subtract from 100.", time: "O(1)", space: "O(1)" },
+    { name: "Compare candidates", intuition: "Check the two neighbouring multiples of ten and pick the closer one.", time: "O(1)", space: "O(1)" },
+  ],
   examples: [
   {
     "label": "Round down",

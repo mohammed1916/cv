@@ -11,6 +11,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Distinct integers (JSON array)',
   url: 'https://leetcode.com/problems/maximum-binary-tree/',
   complexity: 'O(n²) time in the worst case (a sorted array), O(n log n) on average, and O(n) space for the tree.',
+  question: "Build a maximum binary tree from an array in which each node is the maximum of its range.",
+  approaches: [
+    { name: "Monotonic stack", intuition: "Maintain a decreasing stack of nodes; each new value becomes the parent of smaller values it displaces.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Mixed', input: '[5,1,4,2]' },
     { label: 'Descending', input: '[9,8,7]' },

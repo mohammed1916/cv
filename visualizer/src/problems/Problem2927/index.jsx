@@ -13,6 +13,11 @@ const definition = {
   inputLabel: 'Object with n and limit, e.g. {"n":5,"limit":2}',
   url: 'https://leetcode.com/problems/distribute-candies-among-children-iii/',
   complexity: 'O(min(n, limit)) time and O(1) space: one band per value of the first child. The visualization caps n and limit at 30.',
+  question: "Count the ways to split n candies among three children when no child may receive more than a limit.",
+  approaches: [
+    { name: "Enumerate first child", intuition: "Loop over the first child's share and count the valid range for the other two in closed form.", time: "O(min(n, limit))", space: "O(1)" },
+    { name: "Inclusion-exclusion", intuition: "Count all splits, then subtract those where one child exceeds the limit.", time: "O(1)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Tight limit', input: '{"n":5,"limit":2}' },
     { label: 'Loose limit', input: '{"n":3,"limit":3}' },

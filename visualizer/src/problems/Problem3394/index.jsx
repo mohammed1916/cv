@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with n (2 to 12) and rectangles as [startX, startY, endX, endY]',
   url: 'https://leetcode.com/problems/check-if-grid-can-be-cut-into-sections/',
   complexity: 'O(m log m) time for m rectangles, one sort per axis. The visualization caps input at 12 rectangles.',
+  question: "Decide whether a grid can be cut into sections by horizontal or vertical lines so that each section holds rectangles from one group.",
+  approaches: [
+    { name: "Sort per axis", intuition: "Sort the rectangles by each axis and check whether a cut separates them into at least three sections.", time: "O(m log m)", space: "O(m)" },
+  ],
   examples: [
     { label: 'Two overlapping rectangles', input: '{"n":5,"rectangles":[[0,0,3,2],[2,1,5,4]]}' },
     { label: 'Single strip', input: '{"n":3,"rectangles":[[0,1,1,3]]}' },

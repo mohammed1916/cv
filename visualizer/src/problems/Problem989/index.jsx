@@ -8,6 +8,10 @@ const definition = {
   inputLabel: 'Object with num: a list of decimal digits, and k: a whole number from 0 to 99999',
   url: 'https://leetcode.com/problems/add-to-array-form-of-integer/',
   complexity: 'O(max(n, log k)) time: one step per digit position. The result has one extra digit at most.',
+  question: "Add an integer k to a number given as an array of digits and return the digits of the sum.",
+  approaches: [
+    { name: "Digit addition from the right", intuition: "Add digits from the least significant end, carrying the excess to the next position.", time: "O(max(n, log k))", space: "O(max(n, log k))" },
+  ],
   examples: [
     { label: 'Carry across zeros', input: JSON.stringify({ num: [3, 0, 0, 7], k: 95 }) },
     { label: 'Long carry chain', input: JSON.stringify({ num: [9, 9, 8], k: 13 }) },

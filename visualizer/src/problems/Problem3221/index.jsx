@@ -13,6 +13,10 @@ const definition = {
   inputLabel: "Array of non-negative integers (e.g. [3,0,8,2,6])",
   url: "https://leetcode.com/problems/maximum-array-hopping-score-ii/",
   complexity: "O(n log n) time and O(n) space: each landing index binary searches the hull of earlier lines, and each line enters and leaves the hull at most once. The visualization caps the array at 10 values from 0 to 100; the official limit is larger.",
+  question: "Find the maximum hopping score for a larger array, where a hop from i to j scores the value at j times the distance.",
+  approaches: [
+    { name: "Convex hull of earlier lines", intuition: "Each landing index queries the upper hull of earlier lines by binary search, and each line enters and leaves the hull once.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: "Spread values", input: "[3,0,8,2,6]" },
     { label: "Two values", input: "[5,9]" },

@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON object with n from 1 to 1000, for example {"n":13}',
   url: 'https://leetcode.com/problems/hexadecimal-and-hexatrigesimal-conversion/',
   complexity: 'O(log n) digits for each conversion.',
+  question: "Concatenate the hexadecimal form of n squared with the base-36 form of n cubed.",
+  approaches: [
+    { name: "Convert each part", intuition: "Convert n squared to base 16 and n cubed to base 36, then concatenate the two strings.", time: "O(log n)", space: "O(log n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"n":13}' },
     { label: 'Example 2', input: '{"n":1}' },

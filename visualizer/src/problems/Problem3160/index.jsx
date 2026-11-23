@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Limit and queries as JSON: {"limit": n, "queries": [[ball, color], ...]}',
   url: 'https://leetcode.com/problems/find-the-number-of-distinct-colors-among-the-balls/',
   complexity: 'O(1) time per query with two hash maps, and O(q) total time. The visualization caps input at 30 queries.',
+  question: "Track how many distinct colours are present after a sequence of ball repaints.",
+  approaches: [
+    { name: "Two count maps", intuition: "Each repaint changes at most two counts, so the colour counts update in constant time per query.", time: "O(1) per query", space: "O(q)" },
+  ],
   examples: [
     { label: 'Limit six, three queries', input: '{"limit":6,"queries":[[6,2],[1,1],[4,3]]}' },
     { label: 'Limit eight, four queries', input: '{"limit":8,"queries":[[8,4],[0,4],[7,1],[3,9]]}' },

@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with nums (nondecreasing) and k (e.g. {"nums":[1,2,2,3,3,4],"k":3})',
   url: 'https://leetcode.com/problems/divide-array-into-increasing-sequences/',
   complexity: 'O(n) time and O(n) space for n values, counting equal values with a hash map. The visualization caps the input at 16 values, values from 0 to 1000 and k up to 16; the official bounds were not verified.',
+  question: "Decide whether a sorted array can be split into disjoint increasing sequences, each of length at least k.",
+  approaches: [
+    { name: "Largest equal group check", intuition: "Count the largest group of equal values; the split is possible exactly when that group times k fits within the array length.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Possible', input: '{"nums":[2,3,5,7,8,9,11,12],"k":2}' },
     { label: 'Impossible', input: '{"nums":[1,1,1,2,3],"k":2}' },

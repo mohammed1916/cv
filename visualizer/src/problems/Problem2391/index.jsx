@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'An object with garbage (2 to 8 houses of M, P or G) and travel (one time per road)',
   url: 'https://leetcode.com/problems/minimum-amount-of-time-to-collect-garbage/',
   complexity: 'O(n * 3) time with prefix sums of travel times. The visualization caps input at 8 houses.',
+  question: "Given garbage trucks and the houses they pick up, find the minimum total time to collect all garbage.",
+  approaches: [
+    { name: "Pickup time plus prefix travel", intuition: "Count pickup time per type, and add the travel distance up to the last house holding each type.", time: "O(3n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Mixed houses', input: '{"garbage":["MP","G","PP","M"],"travel":[1,2,5]}' },
     { label: 'Only glass', input: '{"garbage":["GG","G","G"],"travel":[4,1]}' },

@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Date as JSON: {"date": "yyyy-mm-dd"}',
   url: 'https://leetcode.com/problems/convert-date-to-binary/',
   complexity: 'O(1) time, since each field has at most 12 binary digits.',
+  question: "Convert a date given as year, month and day into its binary representation fields.",
+  approaches: [
+    { name: "Convert each field", intuition: "Convert the year, month and day separately to binary and join them with dashes.", time: "O(1)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Leap day (illustrative)', input: '{"date":"2024-02-29"}' },
     { label: 'Single-digit month and day (illustrative)', input: '{"date":"1999-07-04"}' },

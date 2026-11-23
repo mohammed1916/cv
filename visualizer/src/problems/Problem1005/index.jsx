@@ -8,6 +8,10 @@ const definition = {
   inputLabel: 'Object with nums and k (JSON)',
   url: 'https://leetcode.com/problems/maximize-sum-of-array-after-k-negations/',
   complexity: 'O(n log n) time for the sort, and O(n) space for the working copy.',
+  question: "Negate exactly k elements, allowing the same element to be negated more than once, so that the array sum is as large as possible.",
+  approaches: [
+    { name: "Sort by magnitude, then fix parity", intuition: "Flip negatives from the smallest magnitude first; if flips remain, spend an odd count on the smallest value.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Flips then parity', input: '{"nums":[3,-7,-2,6],"k":3}' },
     { label: 'Odd leftover', input: '{"nums":[5,-1,2],"k":2}' },

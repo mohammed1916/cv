@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with factors, prices (equal-length lists) and budget',
   url: 'https://leetcode.com/problems/maximum-number-of-items-from-sale-i/',
   complexity: 'O(n * budget) time and O(budget) space for n types. The visualization caps types at 8 and budget at 60.',
+  question: "With a budget, choose item types and copies so that the total number of items, including grants, is as large as possible.",
+  approaches: [
+    { name: "Budget knapsack with grants", intuition: "Count the grants each type earns, then fill a budget table choosing first copies and extra copies.", time: "O(n x budget)", space: "O(budget)" },
+  ],
   examples: [
     { label: 'Divisor chain', input: '{"factors":[2,4,3,8],"prices":[3,5,2,4],"budget":12}' },
     { label: 'Tight budget', input: '{"factors":[1,6,2],"prices":[4,1,3],"budget":7}' },

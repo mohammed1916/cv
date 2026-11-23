@@ -14,6 +14,11 @@ const definition = {
   inputLabel: 'JSON array of node values (e.g. [12, 5, 19]); 0 to 12 values',
   url: 'https://leetcode.com/problems/reverse-linked-list/',
   complexity: 'O(n) time and O(1) extra space: three pointers, one pass.',
+  question: "Reverse a singly linked list.",
+  approaches: [
+    { name: "Iterative pointer reversal", intuition: "Walk the list and point each node back to the previous one.", time: "O(n)", space: "O(1)" },
+    { name: "Recursive reversal", intuition: "Reverse the rest of the list first, then attach the current node to its end.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Long list with repeated values', input: '[12,5,19,5,3,14,8,21,6]' },
     { label: 'Two nodes', input: '[7,13]' },

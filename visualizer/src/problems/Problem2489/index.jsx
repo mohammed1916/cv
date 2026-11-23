@@ -18,6 +18,10 @@ const definition = {
   inputLabel: 'Object with s, num1 and num2 (binary s, positive ratio parts)',
   url: 'https://leetcode.com/problems/number-of-substrings-with-fixed-ratio/',
   complexity: 'O(n) expected time and O(n) space for a binary string of length n, using a hash map of prefix keys. The visualization caps s at 40 characters and each ratio part at 9; the official limits are larger. The statement is taken as zeros : ones = num1 : num2.',
+  question: "Count substrings of a binary string whose ones and zeros are in a fixed ratio.",
+  approaches: [
+    { name: "Prefix keys in a hash map", intuition: "Turn each prefix into a key that two prefixes share when the substring between them has the right ratio.", time: "O(n) expected", space: "O(n)" },
+  ],
   examples: [
     { label: 'Two zeros per one', input: '{"s":"1001101","num1":2,"num2":1}' },
     { label: 'Balanced pairs', input: '{"s":"0011101","num1":2,"num2":3}' },

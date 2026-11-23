@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with n, the order of the Fibonacci tree',
   url: 'https://leetcode.com/problems/subtree-removal-game-with-fibonacci-tree/',
   complexity: 'Time O(n) and space O(n) for the branch values, using the Sprague-Grundy idea that a removal game splits into independent branches XORed together. The visualization draws the tree up to order 6 and accepts orders from 1 to 100; the text gives no official bound, which is not verified here.',
+  question: "Decide the winner of a removal game on a Fibonacci tree, where players remove subtrees by taking turns.",
+  approaches: [
+    { name: "Bottom-up DP over orders", intuition: "Build the win result for each Fibonacci tree order from smaller orders.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Order four', input: '{"n":4}' },
     { label: 'Order nine', input: '{"n":9}' },

@@ -21,6 +21,10 @@ const definition = {
   inputLabel: 'Object with sensor1 and sensor2 (equal-length lists)',
   url: 'https://leetcode.com/problems/faulty-sensor/',
   complexity: 'O(n^2) time and O(n) space for readings of length n, checked by trying every dropped index for both sensors. The visualization caps each reading at 10 values from 0 to 99.',
+  question: "Two sensors give readings; one reading is faulty for one sensor. Identify which sensor is faulty.",
+  approaches: [
+    { name: "Try each dropped index", intuition: "For each sensor, try dropping each index and check whether the other readings then match.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Sensor 2 faulty', input: '{"sensor1":[1,2,3,4,5],"sensor2":[1,2,4,5,6]}' },
     { label: 'Ambiguous', input: '{"sensor1":[7,7,7],"sensor2":[7,7,7]}' },

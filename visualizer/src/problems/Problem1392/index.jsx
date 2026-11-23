@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Lowercase string as JSON, 1 to 40 characters',
   url: 'https://leetcode.com/problems/longest-happy-prefix/',
   complexity: 'O(n) time and O(n) space for the prefix function.',
+  question: "Find the longest prefix of a string that is also a suffix, excluding the whole string.",
+  approaches: [
+    { name: "Prefix function", intuition: "Compute the KMP prefix table and read its final value.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Prefix border chain', input: '"bdbdabd"' },
     { label: 'Two blocks of aab', input: '"aabaab"' },

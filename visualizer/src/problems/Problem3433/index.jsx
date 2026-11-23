@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON object with numberOfUsers and events [type, timestamp, value]',
   url: 'https://leetcode.com/problems/count-mentions-per-user/',
   complexity: 'O(e log e + e * u) time for e events and u users. The visualization caps input at 20 events.',
+  question: "Process timed events about messages and users going offline, and count how many mentions each user received.",
+  approaches: [
+    { name: "Sort then scan", intuition: "Sort events by time with offline events first on ties, then apply each event in order.", time: "O(e log e + e u)", space: "O(u)" },
+  ],
   examples: [
     { label: 'HERE after return', input: '{"numberOfUsers":2,"events":[["MESSAGE","10","id1 id0"],["OFFLINE","11","0"],["MESSAGE","71","HERE"]]}' },
     { label: 'Still offline', input: '{"numberOfUsers":2,"events":[["OFFLINE","10","0"],["MESSAGE","12","HERE"]]}' },

@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Two strings (JSON object with s1 and s2)',
   url: 'https://leetcode.com/problems/minimum-ascii-delete-sum-for-two-strings/',
   complexity: 'O(m * n) time and O(m * n) space for the table.',
+  question: "Find the lowest total ASCII value of characters deleted to make two strings equal.",
+  approaches: [
+    { name: "LCS-style DP", intuition: "Compare prefixes of both strings and pay the ASCII value of any character that is skipped.", time: "O(mn)", space: "O(mn)" },
+  ],
   examples: [
     { label: 'Gap', input: '{"s1":"tree","s2":"tea"}' },
     { label: 'Swap', input: '{"s1":"cab","s2":"abc"}' },

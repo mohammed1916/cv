@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with root (level order, distinct values 1 to n) and queries (JSON)',
   url: 'https://leetcode.com/problems/height-of-binary-tree-after-subtree-removal-queries/',
   complexity: 'O(n) time for all queries after one pass. The visualization caps the tree at 15 nodes.',
+  question: "For each query that removes a subtree, report the height of the tree that remains.",
+  approaches: [
+    { name: "Best depth per level", intuition: "Record the two deepest branches through each node, so the height after removing a node is found from the other branch at its level.", time: "O(n) for all queries", space: "O(n)" },
+  ],
   examples: [
     { label: 'Five nodes', input: '{"root":[1,2,3,4,5],"queries":[2,4,3,1]}' },
     { label: 'Chain', input: '{"root":[1,null,2,null,3],"queries":[2,3]}' },

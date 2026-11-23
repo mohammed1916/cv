@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON object with num (0 to 3000) and k (0 to 9)',
   url: 'https://leetcode.com/problems/sum-of-numbers-with-units-digit-k/',
   complexity: 'O(1) time, since at most ten counts are tried. The visualization caps num at 3000.',
+  question: "Find the smallest count of positive numbers that all end in digit k and add up to num.",
+  approaches: [
+    { name: "Try counts up to ten", intuition: "The units digit repeats every ten numbers, so try each count from one to ten and check the total's last digit.", time: "O(1)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Own: 1000 with k 3', input: '{"num":1000,"k":3}' },
     { label: 'Impossible', input: '{"num":37,"k":2}' },

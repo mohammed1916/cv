@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object {commands, obstacles} (JSON)',
   url: 'https://leetcode.com/problems/walking-robot-simulation/',
   complexity: 'O(total steps + obstacles) time, O(obstacles) space. The visualization caps commands at 30 with moves of 1 to 9.',
+  question: "A robot moves on a grid with turn and move commands, stopping before obstacles; find the largest squared distance it reaches from the origin.",
+  approaches: [
+    { name: "Simulate with an obstacle set", intuition: "Apply each command step by step, stopping at obstacles, and track the maximum squared distance.", time: "O(commands + obstacles)", space: "O(obstacles)" },
+  ],
   examples: [
     { label: 'One turn around a wall', input: '{"commands":[2,-1,2,-2,1],"obstacles":[[1,3]]}' },
     { label: 'Two left turns', input: '{"commands":[3,-2,-2,4],"obstacles":[]}' },

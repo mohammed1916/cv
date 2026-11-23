@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with s (digits, up to 30)',
   url: 'https://leetcode.com/problems/good-indices-in-a-digit-string/',
   complexity: 'O(n * L) time for a string of length n, where L is the digit count of the largest index. The visualization caps s at 30 digits.',
+  question: "Find the indices whose decimal digits appear exactly at that position in a digit string.",
+  approaches: [
+    { name: "Write and compare each index", intuition: "Write each index in decimal and check whether those digits end at its position.", time: "O(n * L)", space: "O(L)" },
+  ],
   examples: [
     { label: 'Zero and one', input: '{"s":"0110"}' },
     { label: 'Two digit index', input: '{"s":"01234567810"}' },

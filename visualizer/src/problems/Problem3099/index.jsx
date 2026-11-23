@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON object with x from 1 to 100, for example {"x":18}',
   url: 'https://leetcode.com/problems/harshad-number/',
   complexity: 'O(d) time for d digits.',
+  question: "Return the digit sum of x when x is divisible by its digit sum, and -1 otherwise.",
+  approaches: [
+    { name: "Digit sum then remainder", intuition: "Add the digits, then test the remainder of x against that sum.", time: "O(d) for d digits", space: "O(1)" },
+  ],
   examples: [
     { label: 'Harshad', input: '{"x":18}' },
     { label: 'Not Harshad', input: '{"x":23}' },

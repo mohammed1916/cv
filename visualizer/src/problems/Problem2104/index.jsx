@@ -12,6 +12,11 @@ const definition = {
   inputLabel: 'Integer array as JSON (e.g. [1,3,2])',
   url: 'https://leetcode.com/problems/sum-of-subarray-ranges/',
   complexity: 'O(n) time and O(n) space with monotonic stacks; the visualization draws the boundaries of each element.',
+  question: "Add up the range (maximum minus minimum) of every contiguous subarray.",
+  approaches: [
+    { name: "Monotonic stacks", intuition: "Each value is the maximum (or minimum) of the subarrays bounded by its nearest greater (or smaller) neighbours, so its contribution is a product of two gaps.", time: "O(n)", space: "O(n)" },
+    { name: "Check every subarray", intuition: "Scan each start and extend the end while tracking the running max and min.", time: "O(n^2)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Short array', input: '[1,3,2]' },
     { label: 'Repeated values', input: '[4,4,-1,2]' },

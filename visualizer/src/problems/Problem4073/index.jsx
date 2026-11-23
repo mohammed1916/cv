@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with n (integer from 1 to 10^15)',
   url: "https://leetcode.com/problems/count-good-strings/",
   complexity: "O(log n) multiplications of 2 by 2 matrices (fast doubling), each on numbers below the modulus. A good string is one whose maximal runs all have odd length, which gives the count 2 times F(n). The official bounds are as stated in the draft and are not independently verified.",
+  question: "Count strings of a given length in which every run of equal letters has odd length.",
+  approaches: [
+    { name: "Fibonacci reduction with fast doubling", intuition: "The count reduces to Fibonacci numbers, computed by fast doubling in logarithmic steps.", time: "O(log n)", space: "O(log n)" },
+  ],
   examples: [
     { label: "One letter", input: '{"n":1}' },
     { label: "Three letters", input: '{"n":3}' },

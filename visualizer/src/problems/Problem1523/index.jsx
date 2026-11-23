@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Object with low and high (JSON)',
   url: 'https://leetcode.com/problems/count-odd-numbers-in-an-interval-range/',
   complexity: 'O(1) time and O(1) space: two floor divisions replace any loop over the interval.',
+  question: "Count odd numbers in an inclusive range.",
+  approaches: [
+    { name: "Formula", intuition: "The count of odd numbers up to a value is a floor division by two.", time: "O(1)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Mixed bounds', input: '{"low":3,"high":7}' },
     { label: 'Even low', input: '{"low":8,"high":10}' },

@@ -3,6 +3,10 @@ import View from './View'
 import { buildTrace, parseInput, code, python, pythonLineMap, phases, examples, complexity } from './algorithm.js'
 
 const definition = {
+  question: "Rearrange the spaces between words so that the gaps are as equal as possible.",
+  approaches: [
+    { name: "Count spaces and share them", intuition: "Count the spaces, share them equally between the gaps and put the remainder at the end.", time: "O(n)", space: "O(n)" },
+  ],
   number: '1592',
   parse: parseInput,
   build: buildTrace,

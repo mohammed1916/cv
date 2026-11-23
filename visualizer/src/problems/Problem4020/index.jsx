@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Building and requests (JSON object with n and requests)',
   url: 'https://leetcode.doocs.org/en/lc/4020/',
   complexity: 'O(k) time for k requests and O(1) extra space.',
+  question: "Add up the floors the elevator crosses while serving requests in order.",
+  approaches: [
+    { name: "Sequential sum", intuition: "Add the distance between consecutive floors along the request order.", time: "O(k)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"n":6,"requests":[5,0,3,3]}' },
     { label: 'Example 2', input: '{"n":4,"requests":[3,3,1]}' },

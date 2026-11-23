@@ -16,6 +16,10 @@ const definition = {
   inputLabel: 'Operations (JSON array)',
   url: 'https://leetcode.com/problems/max-stack/',
   complexity: 'O(n) per popMax with a plain array, which the visualization uses. The visualization caps input at 30 operations.',
+  question: "Implement a stack that can also report and remove its largest value.",
+  approaches: [
+    { name: "Stack with ordered backup", intuition: "Keep values in a stack and a sorted structure of the largest, preferring the most recent of equal values.", time: "O(log n) per operation", space: "O(n)" },
+  ],
   examples: [
     { label: 'Mixed', input: '[["push",4],["push",9],["push",2],["peekMax"],["popMax"],["top"],["pop"],["peekMax"]]' },
     { label: 'Tied maxima', input: '[["push",2],["push",2],["popMax"],["top"]]' },

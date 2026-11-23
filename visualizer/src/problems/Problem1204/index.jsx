@@ -6,6 +6,10 @@ const definition = {
   inputLabel: 'Queue as JSON',
   url: 'https://leetcode.com/problems/last-person-to-fit-in-the-bus/',
   complexity: 'One running sum over the queue in boarding order.',
+  question: "Find the name of the last passenger who can board a bus without exceeding its weight limit, in a queue.",
+  approaches: [
+    { name: "Running weight sum", intuition: "Add weights in boarding order until the next person would exceed the limit.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Sample queue', input: JSON.stringify(sample) },
     { label: 'Single person in the queue', input: '{\"queue\":[{\"person_id\":1,\"person_name\":\"Ada\",\"weight\":400,\"turn\":1}]}' },

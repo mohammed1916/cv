@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON object with bottom, top and special (distinct floors)',
   url: 'https://leetcode.com/problems/maximum-consecutive-floors-without-special-floors/',
   complexity: 'O(s log s) time for s special floors, O(s) space. The visualization caps the range at 61 floors.',
+  question: "Given a floor range and a list of special floors, find the longest run of consecutive floors that contain no special floor.",
+  approaches: [
+    { name: "Sort and measure gaps", intuition: "Sort the special floors and check the gap between each pair of neighbours, including the two ends.", time: "O(s log s)", space: "O(s)" },
+  ],
   examples: [
     { label: 'Two special floors', input: '{"bottom":4,"top":12,"special":[9,6]}' },
     { label: 'Special at both ends', input: '{"bottom":2,"top":8,"special":[2,8]}' },

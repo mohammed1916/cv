@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with n, edges and queries (JSON)',
   url: 'https://leetcode.com/problems/find-weighted-median-node-in-tree/',
   complexity: 'O(path length) per query with this climbing method. The visualization caps n at 8.',
+  question: "In a tree with weighted nodes, find the node that serves as the weighted median for each query.",
+  approaches: [
+    { name: "Climb from the query node", intuition: "Walk from the query node toward the root, accumulating weights until the weighted median is reached.", time: "O(path length) per query", space: "O(n)" },
+  ],
   examples: [
     { label: 'Star around node one', input: '{"n":4,"edges":[[0,1,5],[1,2,3],[1,3,8]],"queries":[[2,3],[0,3]]}' },
     { label: 'Path through node zero', input: '{"n":3,"edges":[[2,0,4],[0,1,6]],"queries":[[1,2]]}' },

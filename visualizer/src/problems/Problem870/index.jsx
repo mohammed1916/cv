@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'Object {nums1, nums2} (JSON, up to 30 elements)',
   url: 'https://leetcode.com/problems/advantage-shuffle/',
   complexity: 'O(n log n) for the sorts, O(n) for the single sweep.',
+  question: "Permute nums1 to maximise the number of positions where nums1 is greater than nums2 at that index.",
+  approaches: [
+    { name: "Greedy matching", intuition: "For each value of nums2 in order, use the smallest card that beats it, or the smallest card otherwise.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Four elements', input: '{"nums1":[4,9,3,6],"nums2":[5,2,7,1]}' },
     { label: 'Repeated values', input: '{"nums1":[8,8,2],"nums2":[6,6,9]}' },

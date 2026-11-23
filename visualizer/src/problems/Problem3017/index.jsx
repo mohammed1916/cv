@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with n, x and y (houses 1 to n, 2 to 12 in this trace)',
   url: 'https://leetcode.com/problems/count-the-number-of-houses-at-a-certain-distance-ii/',
   complexity: 'O(n^2) time in this trace, using the three-way shortest distance for each pair. The contest limit needs an O(n) counting method.',
+  question: "Count the pairs of houses at each distance in a long street graph with one extra link.",
+  approaches: [
+    { name: "Pairwise distance count", intuition: "For each pair take the shortest of the direct path and the two routes through the extra link, and add to that distance.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"n":7,"x":2,"y":6}' },
     { label: 'Example 2', input: '{"n":6,"x":1,"y":4}' },

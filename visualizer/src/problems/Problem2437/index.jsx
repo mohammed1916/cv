@@ -15,6 +15,11 @@ const definition = {
   inputLabel: 'JSON object with time as hh:mm, using digits or ? in each place, for example {"time":"?5:00"}',
   url: 'https://leetcode.com/problems/number-of-valid-clock-times/',
   complexity: 'O(1) time, since the search covers 24 hours and 60 minutes.',
+  question: "Count the clock times in 24-hour hh:mm format that match a pattern where some digits are unknown question marks.",
+  approaches: [
+    { name: "Count hours and minutes separately", intuition: "The hour and minute parts are independent, so count the valid hours and valid minutes and multiply.", time: "O(1)", space: "O(1)" },
+    { name: "Brute force every time", intuition: "Test all 1440 times of the day against the pattern.", time: "O(1)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Own: 1?:4?', input: '{"time":"1?:4?"}' },
     { label: 'Own: ??:3?', input: '{"time":"??:3?"}' },

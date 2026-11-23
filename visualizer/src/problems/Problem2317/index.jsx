@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with nums (values 0 to 15), for example {"nums":[3,2,4,6]}',
   url: 'https://leetcode.com/problems/maximum-xor-after-operations/',
   complexity: 'O(n) time and O(1) extra space.',
+  question: "Given an array, apply an operation any number of times and return the maximum possible bitwise XOR of all elements.",
+  approaches: [
+    { name: "OR of all values", intuition: "Each bit set in any value can be kept, so the answer is the bitwise OR of all values.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Own: three values with zero', input: '{"nums":[0,15,7]}' },
     { label: 'Own: six values with repeats', input: '{"nums":[4,4,12,0,1,8]}' },

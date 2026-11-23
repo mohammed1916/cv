@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Tree as JSON: roads, seats',
   url: 'https://leetcode.com/problems/minimum-fuel-cost-to-report-to-the-capital/',
   complexity: 'O(n) time and O(n) space for the depth-first walk. The visualization caps input at 10 cities.',
+  question: "Cars in each city travel to the capital and each car holds a set number of seats; find the minimum total fuel.",
+  approaches: [
+    { name: "Subtree counting", intuition: "Walk the tree from the capital and count how many representatives arrive at each city.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Two branches', input: '{"roads":[[1,0],[2,0],[3,2],[4,2]],"seats":3}' },
     { label: 'Star with a long arm', input: '{"roads":[[0,1],[0,2],[0,3],[3,4],[4,5],[4,6]],"seats":4}' },

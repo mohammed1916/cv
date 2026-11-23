@@ -11,6 +11,10 @@ const definition = {
   inputLabel: 'JSON {"n": 2-7, "requirements": [[end, count], ...]}',
   url: 'https://leetcode.com/problems/count-the-number-of-inversions/',
   complexity: 'O(n^3) time for this table-based DP with n up to 7 in the visualization; the prefix-sum version is O(n^2 * max inversions).',
+  question: "Count the permutations of a given length that satisfy a set of inversion-count requirements at prefix positions.",
+  approaches: [
+    { name: "Table over inversions per position", intuition: "Each new value adds exactly k inversions for k from zero to its position, and prefix requirements filter the table.", time: "O(n^3)", space: "O(n * max inversions)" },
+  ],
   examples: [
     { label: 'Five elements, one end', input: '{"n":5,"requirements":[[4,2]]}' },
     { label: 'Six elements, two ends', input: '{"n":6,"requirements":[[5,4],[2,1]]}' },

@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with nums (1 to 30 values, 1 to 255) and k (1 to 255), e.g. {"nums":[1,2,3],"k":2}',
   url: 'https://leetcode.com/problems/shortest-subarray-with-or-at-least-k-ii/',
   complexity: 'O(n * log V) time and O(log V) space for the bit counts. The visualization caps the input at 30 values.',
+  question: "Find the shortest subarray whose bitwise OR is at least k, for larger inputs.",
+  approaches: [
+    { name: "Sliding window with per-bit counts", intuition: "Track how many values in the window set each bit, so the OR updates when values enter or leave the window.", time: "O(n * log V)", space: "O(log V)" },
+  ],
   examples: [
     { label: 'Two values, k 15', input: '{"nums":[6,9],"k":15}' },
     { label: 'Four values, k 64', input: '{"nums":[100,7,64,3],"k":64}' },

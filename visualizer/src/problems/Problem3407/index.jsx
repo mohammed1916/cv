@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with s and p = prefix*suffix (lowercase, one star)',
   url: 'https://leetcode.com/problems/substring-matching-pattern/',
   complexity: 'O(n * m) time with direct string search. The visualization caps s at 20 characters.',
+  question: "Decide whether a pattern with one wildcard appears in a string.",
+  approaches: [
+    { name: "Split on the wildcard and search", intuition: "Split the pattern at the wildcard and check that both parts appear in order in the string.", time: "O(n * m)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Prefix and suffix around a star', input: '{"s":"abacabad","p":"ab*ad"}' },
     { label: 'No match', input: '{"s":"xzz","p":"x*y"}' },

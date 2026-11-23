@@ -12,6 +12,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Word (JSON string of lowercase letters)',
   url: 'https://leetcode.com/problems/valid-palindrome-ii/',
   complexity: 'O(n) time and O(1) extra space: at most two linear checks after the first mismatch.',
+  question: "Decide whether a string becomes a palindrome after removing at most one character.",
+  approaches: [
+    { name: "Two pointers with one skip", intuition: "Compare from both ends; on the first mismatch, try skipping either side once.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'One drop', input: '"racecarx"' },
     { label: 'Mirror pair', input: '"abcdba"' },

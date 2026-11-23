@@ -9,6 +9,10 @@ const definition = {
   inputLabel: 'Object with Drivers (driver_id, name, accidents), Vehicles (vehicle_id, driver_id, fuel_type) and Trips (trip_id, vehicle_id, distance, rating)',
   url: 'https://leetcode.com/problems/find-top-performing-driver/',
   complexity: 'O(t log t) for t trips: one pass joins each trip to its vehicle, then each fuel type is sorted once. The visualization caps the tables at 12 trips.',
+  question: "For each fuel type, find the driver with the highest total score across trips.",
+  approaches: [
+    { name: "Join, aggregate and rank", intuition: "Join trips to vehicles, sum the scores per driver and fuel type, then keep the top driver per fuel type.", time: "O(t log t)", space: "O(t)" },
+  ],
   examples: [
     { label: 'Two fuel types', input: sample },
     { label: 'One driver', input: oneFuel },

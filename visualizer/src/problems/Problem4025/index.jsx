@@ -13,6 +13,10 @@ const definition = {
   inputLabel: "Object with period, green (one green time per light) and arrivals, e.g. {\"period\":12,\"green\":[4,9],\"arrivals\":[3,7,14,20]}",
   url: "https://leetcode.com/problems/minimize-the-maximum-waiting-time-at-synchronized-traffic-lights/",
   complexity: "O(a) time for a arrivals after finding the longest green time. The visualization caps arrivals at 12.",
+  question: "For a traffic light with arrivals, find the longest green time and how long each car waits.",
+  approaches: [
+    { name: "Single pass over arrivals", intuition: "Find the longest green window, then simulate the wait for each arrival.", time: "O(a)", space: "O(1)" },
+  ],
   examples: [
     { label: "Two lights", input: "{\"period\":12,\"green\":[4,9],\"arrivals\":[3,10,14,22]}" },
     { label: "Single light", input: "{\"period\":10,\"green\":[3],\"arrivals\":[5]}" },

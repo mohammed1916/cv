@@ -18,6 +18,10 @@ const definition = {
   inputLabel: 'JSON object with nums (e.g. {"nums": [13, 25, 83, 77]})',
   url: "https://leetcode.com/problems/separate-the-digits-in-an-array/",
   complexity: "O(n * d) time and O(n * d) space for n numbers with at most d digits each. The visualization caps nums at 20 values.",
+  question: "Replace each number with its digits in order, keeping the original order of the numbers.",
+  approaches: [
+    { name: "Split each number", intuition: "Convert each number to its digits and append them in order.", time: "O(n * d)", space: "O(n * d)" },
+  ],
   examples: [
     { label: "[13,25,83,77]", input: '{"nums": [13, 25, 83, 77]}' },
     { label: 'Single value', input: '{"nums":[1]}' },

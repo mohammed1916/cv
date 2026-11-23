@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with coins (array of positive integers) and target',
   url: 'https://leetcode.com/problems/minimum-number-of-coins-to-be-added/',
   complexity: 'O(n log n) time for the sort, plus one step per coin or added coin. The visualization caps input at 8 coins and target 60.',
+  question: "Find the fewest coins to add so that every value up to a target can be formed from the coins.",
+  approaches: [
+    { name: "Greedy reach extension", intuition: "Sort the coins and extend the reachable range; when a gap appears, add the coin reach + 1.", time: "O(n log n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Three coin values, target 25', input: '{"coins":[3,7,12],"target":25}' },
     { label: 'Repeated coin value four', input: '{"coins":[4,4,9,15],"target":30}' },

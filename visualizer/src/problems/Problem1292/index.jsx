@@ -8,6 +8,10 @@ const definition = {
   inputLabel: 'Matrix and threshold (JSON)',
   url: 'https://leetcode.com/problems/maximum-side-length-of-a-square-with-sum-less-than-or-equal-to-threshold/',
   complexity: 'O(m * n) time after O(m * n) prefix sums: each cell only tries to grow the best side by one step at a time.',
+  question: "Find the largest square of an all-value matrix whose sum stays within a threshold.",
+  approaches: [
+    { name: "Prefix sums and side search", intuition: "Use prefix sums to test square sums in constant time while growing the side.", time: "O(m x n)", space: "O(m x n)" },
+  ],
   examples: [
     { label: 'Growing block', input: '{"mat":[[1,1,3],[1,2,4],[2,2,2]],"threshold":6}' },
     { label: 'Nothing fits', input: '{"mat":[[2,2],[2,2]],"threshold":1}' },

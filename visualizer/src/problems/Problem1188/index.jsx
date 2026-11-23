@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with capacity and ops: ["enqueue", value] or ["dequeue"]',
   url: 'https://leetcode.com/problems/design-bounded-blocking-queue/',
   complexity: 'O(1) per call in this replay. The visualization caps the input at 20 calls.',
+  question: "Design a bounded queue that blocks producers when full and consumers when empty, safe for concurrent use.",
+  approaches: [
+    { name: "Mutex with conditions", intuition: "Guard the queue with one lock and wait on two conditions, one for space and one for items.", time: "O(1) per call", space: "O(capacity)" },
+  ],
   examples: [
     { label: 'Full queue', input: '{"capacity":2,"ops":[["enqueue",1],["enqueue",2],["enqueue",3],["dequeue"],["enqueue",3],["dequeue"],["dequeue"],["dequeue"]]}' },
     { label: 'Single enqueue', input: '{"capacity":1,"ops":[["enqueue",9]]}' },

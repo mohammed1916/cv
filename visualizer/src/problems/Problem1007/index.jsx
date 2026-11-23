@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with tops and bottoms (JSON)',
   url: 'https://leetcode.com/problems/minimum-domino-rotations-for-equal-row/',
   complexity: 'O(n) time and O(1) auxiliary state for n dominoes, because only two candidates are checked.',
+  question: "Given pairs of domino halves, find the fewest rotations that make one value appear on every top half or every bottom half.",
+  approaches: [
+    { name: "Test two candidate values", intuition: "Only the values on the first domino can work; for each, count the dominoes that lack it on top or bottom and keep the cheaper side.", time: "O(n)", space: "O(1)" },
+  ],
   examples: authoredExamples,
 }
 

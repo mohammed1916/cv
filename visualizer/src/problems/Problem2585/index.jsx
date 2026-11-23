@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Input (JSON object with target and types as [count, marks] pairs)',
   url: 'https://leetcode.com/problems/number-of-ways-to-earn-points/',
   complexity: 'O(types * target * count) time and O(target) space. The visualization caps target at 30, counts at 8, and types at 4.',
+  question: "Count the ways to score exactly the target points from question types, each type having a count and a point value.",
+  approaches: [
+    { name: "Bounded knapsack", intuition: "Add each type in turn, letting each one contribute up to its count of questions.", time: "O(types * target * count)", space: "O(target)" },
+  ],
   examples: [
     { label: 'Three kinds, target 13', input: '{"target":13,"types":[[5,3],[2,6],[4,2]]}' },
     { label: 'Example 2', input: '{"target":5,"types":[[8,1],[8,2],[8,5]]}' },

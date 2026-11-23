@@ -15,6 +15,11 @@ const definition = {
   inputLabel: "sx, sy, fx, fy, t (e.g. {\"sx\": 2, \"sy\": 4, \"fx\": 7, \"fy\": 7, \"t\": 6})",
   url: "https://leetcode.com/problems/determine-if-a-cell-is-reachable-at-a-given-time/",
   complexity: "O(1) time and O(1) space.",
+  question: "Decide whether a grid cell can be reached from a start cell in exactly the given number of steps, where a step must move to a neighbouring cell.",
+  approaches: [
+    { name: "Distance and parity check", intuition: "Compute the Chebyshev distance; the cell is reachable when the time is at least that distance and the remaining steps can be spent without changing parity.", time: "O(1)", space: "O(1)" },
+    { name: "Breadth-first search", intuition: "Search by steps from the start and check whether the cell appears at the target time.", time: "O(time * cells)", space: "O(cells)" },
+  ],
   examples: [
     { label: "Example 1", input: "{\"sx\": 2, \"sy\": 4, \"fx\": 7, \"fy\": 7, \"t\": 6}" },
     { label: "Example 2", input: "{\"sx\": 3, \"sy\": 1, \"fx\": 7, \"fy\": 3, \"t\": 3}" },

@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with strictly increasing nums and queries ([start, end] pairs)',
   url: 'https://leetcode.com/problems/minimum-cost-to-move-between-indices/',
   complexity: 'O(q * n^2) time for q queries on n indices with a simple selection scan. The visualization caps nums at 12 values.',
+  question: "For each query, find the cheapest way to travel between two indices when direct jumps cost by value gap and neighbour hops cost one.",
+  approaches: [
+    { name: "Cheapest-route selection scan", intuition: "Link each index to its nearest neighbour by value, then repeatedly settle the cheapest unsettled index and relax its edges.", time: "O(q x n^2) with a simple scan", space: "O(n)" },
+  ],
   examples: [
     { label: 'Spread gaps', input: '{"nums":[2,3,7,10,20],"queries":[[0,4],[4,1]]}' },
     { label: 'Tight cluster', input: '{"nums":[1,2,4],"queries":[[2,0],[0,2]]}' },

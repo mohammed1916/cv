@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Strings (JSON array)',
   url: 'https://leetcode.com/problems/delete-columns-to-make-sorted-iii/',
   complexity: 'O(rows * columns^2) time. The visualization caps the grid at 6 rows and 10 columns.',
+  question: "Remove the fewest columns from a string array so that the remaining rows are in lexicographic order.",
+  approaches: [
+    { name: "Longest chain of kept columns", intuition: "Find the longest sequence of columns that stay sorted for every row, using a DP over pairs of columns.", time: "O(m^2 * n)", space: "O(m)" },
+  ],
   examples: [
     { label: 'Two rows, four columns', input: '["cbad","adcb"]' },
     { label: 'Descending', input: '["edcba"]' },

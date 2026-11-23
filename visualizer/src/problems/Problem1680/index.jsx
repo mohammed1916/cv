@@ -8,6 +8,10 @@ const definition = {
   inputLabel: 'Upper limit n (whole number from 1 to 60)',
   url: `https://leetcode.com/problems/${meta.slug}/`,
   complexity: 'O(n) time and O(1) space: one update per number, with the width kept as a single counter.',
+  question: "Concatenate the binary forms of 1 through n and return the value modulo 1e9 + 7.",
+  approaches: [
+    { name: "Shift and add", intuition: "Shift the running value left by the bit length of each number, then add the number.", time: "O(n log n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Four', input: '4' },
     { label: 'Nine', input: '9' },

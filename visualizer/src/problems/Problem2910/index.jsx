@@ -18,6 +18,11 @@ const definition = {
   inputLabel: 'JSON object with key nums (e.g. {"nums": [3,2,3,2,3]})',
   url: "https://leetcode.com/problems/minimum-number-of-groups-to-create-a-valid-assignment/",
   complexity: "O(D * m) time for D distinct values and smallest count m, plus O(n) counting. The visualization caps nums at 50 elements.",
+  question: "Group values so that each group holds equal values and group sizes differ by at most one, and find the fewest groups.",
+  approaches: [
+    { name: "Frequency counts and smallest group size", intuition: "Try each possible smallest group size, and check whether every frequency can be split into groups of those sizes.", time: "O(D * m)", space: "O(D)" },
+    { name: "Greedy splitting by frequency", intuition: "Split each frequency as evenly as possible into groups.", time: "O(D)", space: "O(D)" },
+  ],
   examples: [
     { label: "Example 1", input: '{"nums": [3,2,3,2,3]}' },
     { label: "Example 2", input: '{"nums": [10,10,10,3,1,1]}' },

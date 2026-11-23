@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with n, edges, s and queries',
   url: 'https://leetcode.com/problems/palindromic-path-queries-in-a-tree/',
   complexity: 'Each query walks one path and counts its letters. The visual caps n at 12.',
+  question: "Answer path palindrome queries on a tree while letters are updated between queries.",
+  approaches: [
+    { name: "Walk each path", intuition: "Walk the tree path for each query and count letter parities along it.", time: "O(path length) per query", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example', input: '{"n":4,"edges":[[0,1],[1,2],[1,3]],"s":"aabb","queries":["query 2 3","update 1 c","query 0 3"]}' },
     { label: 'Star', input: '{"n":3,"edges":[[0,1],[0,2]],"s":"xyz","queries":["query 1 2","update 0 y","query 1 2"]}' },

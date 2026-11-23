@@ -18,6 +18,10 @@ const definition = {
   phases, parse: parseInput, build: buildTrace, code, sql, python, inputLabel,
   url: `https://leetcode.com/problems/${meta.slug}/`,
   complexity, examples,
+  question: "Recommend pages that a user's friends like but the user does not yet like, counting how many friends like each recommendation.",
+  approaches: [
+    { name: "Join friends then group", intuition: "Join friendships to likes, filter out pages the user already likes, then group by page.", time: "O(n log n)", space: "O(n)" },
+  ],
 }
 
 function Rows({ columns = [], rows = [] }) {

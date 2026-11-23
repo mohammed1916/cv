@@ -9,6 +9,10 @@ const definition = {
   inputLabel: 'Object with courses and relations [before, after] (JSON)',
   url: 'https://leetcode.com/problems/parallel-courses/',
   complexity: 'O(n + r) time and space for n courses and r relations. The visualization caps the input at 10 courses and 15 relations.',
+  question: "Find the fewest semesters needed to take all courses when courses with prerequisites can be taken in parallel.",
+  approaches: [
+    { name: "Topological layers", intuition: "Each semester takes every course whose prerequisites are done; count the layers.", time: "O(n + r)", space: "O(n + r)" },
+  ],
   examples: [
     { label: 'Chain of three', input: '{"courses":3,"relations":[[1,2],[2,3]]}' },
     { label: 'Diamond', input: '{"courses":4,"relations":[[1,2],[1,3],[2,4],[3,4]]}' },

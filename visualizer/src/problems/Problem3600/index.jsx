@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with n, edges as [u, v, s, must] and k (JSON)',
   url: 'https://leetcode.com/problems/maximize-spanning-tree-stability-with-upgrades/',
   complexity: 'O(c * m * alpha) for c candidate thresholds. The visualization caps n at 6 and edges at 8.',
+  question: "Choose up to k edge upgrades so that the spanning tree of the graph has the largest possible minimum stability.",
+  approaches: [
+    { name: "Binary search the threshold", intuition: "Test whether a stability threshold is reachable by checking spanning connectivity with union-find.", time: "O(c * m * alpha)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Path with two required links', input: '{"n":4,"edges":[[0,1,5,1],[1,2,7,0],[2,3,2,1]],"k":2}' },
     { label: 'Zero picks', input: '{"n":3,"edges":[[0,2,9,0],[2,1,4,1]],"k":0}' },

@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON string of E (enter) and L (leave) letters, 1 to 50 long',
   url: 'https://leetcode.com/problems/minimum-number-of-chairs-in-a-waiting-room/',
   complexity: 'O(n) time and O(1) extra space.',
+  question: "Find the fewest chairs needed in a waiting room, given a sequence of arrivals and departures.",
+  approaches: [
+    { name: "Running peak count", intuition: "Each arrival raises the count and each departure lowers it, and the highest running value is the answer.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '"EEELLE"' },
     { label: 'Example 2', input: '"EELLEE"' },

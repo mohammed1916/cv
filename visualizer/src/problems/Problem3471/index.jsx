@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with nums and window length k (JSON)',
   url: 'https://leetcode.com/problems/find-the-largest-almost-missing-integer/',
   complexity: 'O(n * k) time with direct window scans. The visualization caps nums at 20 values.',
+  question: "Find the largest value that appears in exactly one subarray window of a fixed length k.",
+  approaches: [
+    { name: "Count windows per value", intuition: "For each value, count the windows of length k that contain it.", time: "O(n k)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Largest unique window', input: '{"nums":[3,9,2,1,7],"k":3}' },
     { label: 'Single window', input: '{"nums":[3,9,7,2,1,7],"k":4}' },

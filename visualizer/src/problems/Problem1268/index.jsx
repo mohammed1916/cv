@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Object with products and searchWord (JSON)',
   url: 'https://leetcode.com/problems/search-suggestions-system/',
   complexity: 'Sorting costs O(n log n). Each prefix scans the sorted list until three matches are found.',
+  question: "After each typed character, suggest up to three products that start with the typed prefix.",
+  approaches: [
+    { name: "Sort and prefix scan", intuition: "Sort the products, then scan from the first match for each prefix, stopping after three.", time: "O(n log n + n x L)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Shared start', input: '{"products":["bear","bell","beach","bead"],"searchWord":"be"}' },
     { label: 'Dead end', input: '{"products":["cat","car"],"searchWord":"cow"}' },

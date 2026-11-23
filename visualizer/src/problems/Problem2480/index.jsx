@@ -57,6 +57,10 @@ const definition = {
   python,
   inputLabel: 'JSON object with an elements table',
   complexity: 'Quadratic in the number of metals times nonmetals: every metal is checked against every nonmetal once.',
+  question: "Pair up metal and nonmetal elements according to the bonding rule in the table to list the bonded pairs.",
+  approaches: [
+    { name: "Cross join and filter", intuition: "Compare every metal with every nonmetal and keep the pairs that satisfy the bonding rule.", time: "O(M * N)", space: "O(output)" },
+  ],
   examples: [
     { label: 'Teaching sample', input: JSON.stringify(SAMPLE) },
     { label: 'Single metal and nonmetal', input: '{"elements":[{"symbol":"Na","type":"Metal","electrons":1},{"symbol":"Cl","type":"Nonmetal","electrons":7}]}' },

@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Array of integers 1 to 5 (JSON array, up to 12 entries)',
   url: 'https://leetcode.com/problems/count-elements-with-maximum-frequency/',
   complexity: 'O(n) time and O(n) space. The visualization caps input at 12 entries.',
+  question: "Count the array elements whose value has the maximum frequency.",
+  approaches: [
+    { name: "Frequency count", intuition: "Count the frequency of each value, find the maximum, and add the counts of values that reach it.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Eight values up to five', input: '[3,1,4,1,5,2,4,2]' },
     { label: 'All distinct', input: '[1,2,3,4,5]' },

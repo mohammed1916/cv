@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'JSON object with nums1, nums2 and queries',
   url: 'https://leetcode.com/problems/handling-sum-queries-after-update/',
   complexity: 'O((n + q) log n) time. The visualization caps nums1 at 10 values and queries at 8.',
+  question: "Process queries that flip bits of one array over a range, add to a running total, or report the sum.",
+  approaches: [
+    { name: "Segment tree with lazy flips", intuition: "Store counts of ones in a segment tree and flip whole ranges lazily.", time: "O((n + q) log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Five bits, mixed updates', input: '{"nums1":[0,1,1,0,1],"nums2":[2,0,3,1,4],"queries":[[1,0,4],[3,0,0],[2,3,0],[3,0,0]]}' },
     { label: 'Two flips', input: '{"nums1":[0,0],"nums2":[1,0],"queries":[[1,0,1],[2,2,0],[3,0,0],[1,0,0],[2,1,0],[3,0,0]]}' },

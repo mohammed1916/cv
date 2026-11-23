@@ -12,6 +12,11 @@ const definition = {
   inputLabel: 'Array (JSON object with nums)',
   url: 'https://leetcode.com/problems/longest-alternating-subarray-after-removing-at-most-one-element/',
   complexity: 'O(n^2) time for this teaching version (one scan per removal). The visualization caps input at 30 values.',
+  question: "Find the longest alternating subarray after removing at most one element.",
+  approaches: [
+    { name: "Try each removal", intuition: "Scan the array once for each single deletion and track the longest alternating run.", time: "O(n^2)", space: "O(n)" },
+    { name: "Prefix and suffix runs", intuition: "Track alternating runs from both sides and join them across one removed element.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"nums":[2,1,3,2]}' },
     { label: 'Example 2', input: '{"nums":[3,2,1,2,3,2,1]}' },

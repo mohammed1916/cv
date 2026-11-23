@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Object with mat (JSON)',
   url: 'https://leetcode.com/problems/special-positions-in-a-binary-matrix/',
   complexity: 'O(m * n) time and O(m + n) extra space for the row and column tallies.',
+  question: "Count the special positions in a binary matrix: ones that are alone in their row and column.",
+  approaches: [
+    { name: "Row and column tallies", intuition: "Count the ones in each row and column, then check each one.", time: "O(m * n)", space: "O(m + n)" },
+  ],
   examples: [
     { label: 'Diagonal pair', input: '{"mat":[[0,1],[1,0]]}' },
     { label: 'Full row', input: '{"mat":[[1,1],[0,0]]}' },

@@ -4,6 +4,10 @@ import { StackLane } from '../../components/shared/AlgorithmStatePrimitives'
 import { buildTrace, parseInput, code, python, phases, examples } from './algorithm'
 
 const definition = {
+  question: "Find the last moment an ant falls off a plank when ants move in both directions.",
+  approaches: [
+    { name: "Ants pass through each other", intuition: "Treat collisions as passing, so the answer is the furthest distance an ant must travel to an edge.", time: "O(n)", space: "O(1)" },
+  ],
   number: '1503', phases, parse: parseInput, build: buildTrace, code, python, examples,
   inputLabel: 'Object with length, left and right (JSON)',
   url: 'https://leetcode.com/problems/last-moment-before-all-ants-fall-out-of-a-plank/',

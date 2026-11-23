@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Sentences, hotness and typed text (JSON)',
   url: 'https://leetcode.com/problems/design-search-autocomplete-system/',
   complexity: 'Each character scans the stored sentences. The visualization caps input at 10 sentences and 40 characters.',
+  question: "Suggest the three most frequent sentences that share the typed prefix, and save sentences when a terminator is typed.",
+  approaches: [
+    { name: "Trie with hot ranking", intuition: "Store sentences in a trie with counts, and collect the top three under the typed prefix.", time: "O(L) per character typed", space: "O(total chars)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"sentences":["i love you","island","ironman","i love leetcode"],"times":[5,3,2,2],"typed":"i a#"}' },
     { label: 'Saving', input: '{"sentences":["abc","abd"],"times":[1,1],"typed":"abd#ab"}' },

@@ -22,6 +22,10 @@ const examples = [{
 }]
 
 const definition = {
+  question: "For each city, find the earliest day on which the maximum recorded degree appeared.",
+  approaches: [
+    { name: "Sort within each city", intuition: "Sort the readings in each city by degree descending and day ascending, then keep the first row.", time: "O(n log n)", space: "O(n)" },
+  ],
   number: meta.number,
   phases, parse: parseInput, build: buildTrace, code, sql, python, inputLabel,
   url: `https://leetcode.com/problems/${meta.slug}/`,

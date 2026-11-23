@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Grid and k (JSON object with grid of digits 0 to 9, up to 5 by 5, and k from 1 to 10)',
   url: 'https://leetcode.com/problems/paths-in-matrix-whose-sum-is-divisible-by-k/',
   complexity: 'O(m * n * k) time with one count per remainder. The visualization caps the grid at 5 by 5 and k at 10.',
+  question: "Count the paths from the top left to the bottom right of a grid whose sums are divisible by k.",
+  approaches: [
+    { name: "DP over remainders", intuition: "Track how many paths reach each cell with each remainder mod k, and extend them with the next cell.", time: "O(m * n * k)", space: "O(m * n * k)" },
+  ],
   examples: [
     { label: 'Three-by-three grid', input: '{"grid":[[7,2,4],[1,8,5],[3,6,9]],"k":4}' },
     { label: 'Single cell', input: '{"grid":[[0,0]],"k":5}' },

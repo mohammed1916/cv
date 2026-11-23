@@ -12,6 +12,11 @@ const definition = {
   inputLabel: 'Object with n, m, k, source and destination (one-based [row, column]), e.g. {"n":3,"m":4,"k":3,"source":[1,1],"destination":[2,3]}',
   url: 'https://leetcode.com/problems/number-of-ways-to-reach-destination-in-the-grid/',
   complexity: 'O(k) time and O(1) space, because the grid is summarised by four class counts. The visualization caps the grid at 8 x 8 and k at 12; the sums are taken modulo 1000000007. Source and destination are one-based [row, column] cells, and a move may jump any distance along a row or column.',
+  question: "Count the ways to reach a destination cell on a grid with obstacles in exactly k moves, where moves are restricted to certain directions.",
+  approaches: [
+    { name: "Count by cell class", intuition: "Cells fall into four classes by relation to the destination, so track counts for the classes over k moves.", time: "O(k)", space: "O(1)" },
+    { name: "Dynamic programming over cells", intuition: "Track the number of ways to reach each cell after each move.", time: "O(k n m)", space: "O(n m)" },
+  ],
   examples: [
     { label: 'Diagonal source', input: '{"n":3,"m":4,"k":3,"source":[1,1],"destination":[2,3]}' },
     { label: 'Same cell', input: '{"n":2,"m":2,"k":2,"source":[1,2],"destination":[1,2]}' },

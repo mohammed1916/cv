@@ -16,6 +16,10 @@ const definition = {
   inputLabel: 'Operations (LeetCode JSON: names, args)',
   url: 'https://leetcode.com/problems/rle-iterator/',
   complexity: 'Amortised O(1) per call: the pointer only moves forward over each run once. O(len(encoding)) space.',
+  question: "Implement an iterator over a run-length encoded array where next(n) skips n elements and returns the last one skipped.",
+  approaches: [
+    { name: "Pointer into runs", intuition: "Keep an index into the encoded pairs and the remaining count of the current run, consuming runs as needed.", time: "O(1) amortised per run", space: "O(1)" },
+  ],
   examples: [
     { label: 'Official', input: '[["RLEIterator","next","next","next","next"],[[[3,8,0,9,2,5]],[2],[1],[1],[2]]]' },
     { label: 'Single run', input: '[["RLEIterator","next","next","next"],[[[5,1]],[2],[2],[2]]]' },

@@ -5,6 +5,10 @@ import SqlStages from './SqlStages'
 import './SqlStages.css'
 
 const definition = {
+  question: "List books with few recent sales within a window, excluding books with more sales than the threshold.",
+  approaches: [
+    { name: "Join and group in SQL", intuition: "Total each book's orders inside the window and filter by the threshold.", time: "O(b + o)", space: "O(b)" },
+  ],
   number: meta.number,
   phases, parse: parseInput, build: buildTrace, code, sql, python, inputLabel,
   url: `https://leetcode.com/problems/${meta.slug}/`,

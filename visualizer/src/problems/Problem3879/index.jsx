@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'Object with tree: level-order values with null for empty slots',
   url: 'https://leetcode.com/problems/maximum-distinct-path-sum-in-a-binary-tree/',
   complexity: 'O(n^2) time and O(n) space: each start node drives one depth first search over the tree. The visualization caps the tree at 12 nodes.',
+  question: "Find the largest sum of a simple downward path in a binary tree whose values are all distinct.",
+  approaches: [
+    { name: "Depth-first search from every node", intuition: "Grow simple paths from every node and refuse any path that repeats a value.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Mixed signs', input: '{"tree":[4,-2,6,1,null,5,-7]}' },
     { label: 'Repeated values', input: '{"tree":[1,1,1]}' },

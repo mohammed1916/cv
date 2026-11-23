@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Coins grid (JSON object with coins rows of integers from -10 to 10, up to 5 by 5)',
   url: 'https://leetcode.com/problems/maximum-amount-of-money-robot-can-earn/',
   complexity: 'O(m * n) time with three states per cell. The visualization caps the grid at 5 by 5.',
+  question: "Move a robot from corner to corner of a grid picking up coins, where some cells hold robbers it may neutralize.",
+  approaches: [
+    { name: "Three-state DP", intuition: "Store the best total per cell for each count of neutralizations used so far.", time: "O(m n)", space: "O(m n)" },
+  ],
   examples: [
     { label: 'Official', input: '{"coins":[[0,1,-1],[1,-2,3],[2,-3,4]]}' },
     { label: 'All positive', input: '{"coins":[[10,10,10],[10,10,10]]}' },

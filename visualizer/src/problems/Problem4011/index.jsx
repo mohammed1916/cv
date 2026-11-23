@@ -14,6 +14,10 @@ const definition = {
   inputLabel: "Object with nums, a and b, e.g. {\"nums\":[1,2,3,4],\"a\":1,\"b\":1}",
   url: "https://leetcode.com/problems/count-subarrays-with-even-odd-ratio-i/",
   complexity: "O(n^2) time and O(1) extra space.",
+  question: "Count subarrays whose even and odd elements satisfy a ratio limit.",
+  approaches: [
+    { name: "Left-end scan", intuition: "Fix each left end, extend to the right, and count the qualifying subarrays.", time: "O(n^2)", space: "O(1)" },
+  ],
   examples: [
     { label: "Small ratio", input: "{\"nums\":[1,2,3,4],\"a\":1,\"b\":1}" },
     { label: "Mixed values", input: "{\"nums\":[2,5,4,7,6],\"a\":2,\"b\":3}" },

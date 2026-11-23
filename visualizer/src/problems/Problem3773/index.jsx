@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with s (lowercase letters)',
   url: 'https://leetcode.com/problems/maximum-number-of-equal-length-runs/',
   complexity: 'O(n) time and O(n) space for a string of length n. The visualization caps s at 30 characters.',
+  question: "Split a string into maximal runs of equal letters and report how many runs share the most common length.",
+  approaches: [
+    { name: "Group runs and tally lengths", intuition: "Cut the string into maximal runs and count how many have each length.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Mostly singles', input: '{"s":"pqrsttuuu"}' },
     { label: 'Pairs and triples', input: '{"s":"xxyyzzzaaaab"}' },

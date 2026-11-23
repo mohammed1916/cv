@@ -13,6 +13,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Board 2x3 (JSON)',
   url: 'https://leetcode.com/problems/sliding-puzzle/',
   complexity: 'At most 6! = 720 states with up to 3 neighbours each: O(6! * 6) time, O(6!) space.',
+  question: "Find the fewest moves to solve a 2 by 3 sliding puzzle.",
+  approaches: [
+    { name: "Breadth-first search over 720 states", intuition: "Search the board states level by level from the start to the solved board.", time: "O(720)", space: "O(720)" },
+  ],
   examples: [
     { label: '[[1,2,3],[4,0,5]] -> 1', input: '[[1,2,3],[4,0,5]]' },
     { label: '[[1,2,3],[5,4,0]] -> -1', input: '[[1,2,3],[5,4,0]]' },

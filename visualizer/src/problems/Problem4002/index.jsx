@@ -13,6 +13,10 @@ const definition = {
   inputLabel: "Object with n and k, e.g. {\"n\":6,\"k\":3}",
   url: "https://leetcode.com/problems/count-valid-sequences/",
   complexity: "O(k log MOD) time for the binomial coefficients and O(1) extra space. The visualization caps n at 30.",
+  question: "Count the ordered splits of a total, excluding the splits whose parts are all odd.",
+  approaches: [
+    { name: "Total minus all-odd splits", intuition: "Count all ordered splits, then subtract the all-odd splits found through parity and binomial coefficients.", time: "O(k log MOD)", space: "O(1)" },
+  ],
   examples: [
     { label: "Two parts", input: "{\"n\":4,\"k\":2}" },
     { label: "Three parts", input: "{\"n\":6,\"k\":3}" },

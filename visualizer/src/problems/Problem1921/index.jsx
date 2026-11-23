@@ -11,6 +11,10 @@ const definition = {
   inputLabel: 'JSON object with dist and speed arrays (e.g. {"dist":[1,3,4],"speed":[1,1,1]})',
   url: 'https://leetcode.com/problems/eliminate-maximum-number-of-monsters/',
   complexity: 'O(n log n) time to sort the arrival minutes; the scan is linear.',
+  question: "Shoot monsters one per minute so that as many as possible reach you before they arrive.",
+  approaches: [
+    { name: "Arrival times then sort", intuition: "Compute each monster's arrival minute, sort, and stop at the first time that is not reachable in time.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'All eliminated', input: '{"dist":[1,3,4],"speed":[1,1,1]}' },
     { label: 'Second monster too early', input: '{"dist":[1,1,2,3],"speed":[1,1,1,1]}' },

@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Box (JSON object with word and numFriends)',
   url: 'https://leetcode.com/problems/find-the-lexicographically-largest-string-from-the-box-i/',
   complexity: 'O(n^2) time for comparing windows, O(n) space. The visualization caps input at 20 letters.',
+  question: "Find the lexicographically largest string that can be formed from a word, using the box rule for the number of friends.",
+  approaches: [
+    { name: "Compare every window", intuition: "Compare the candidate windows of the word and keep the largest.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Seven letters, three friends', input: '{"word":"abcdefg","numFriends":3}' },
     { label: 'Own: abcab, two friends', input: '{"word":"abcab","numFriends":2}' },

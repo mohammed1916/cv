@@ -3,6 +3,10 @@ import MatrixGrid from '../../components/shared/MatrixGrid'
 import { buildTrace, parseInput, code, python, phases, examples } from './algorithm'
 
 const definition = {
+  question: "Support updates to a rectangle of a grid and reads of single cells.",
+  approaches: [
+    { name: "Direct grid update", intuition: "Write each update straight into the rectangle and answer each read from the cell.", time: "O(r * c) per update", space: "O(r * c)" },
+  ],
   number: '1476', phases, parse: parseInput, build: buildTrace, code, python, examples,
   inputLabel: 'Object with rectangle and ops (JSON)',
   url: 'https://leetcode.com/problems/subrectangle-queries/',

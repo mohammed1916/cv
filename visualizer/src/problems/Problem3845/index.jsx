@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with nums and k',
   url: 'https://leetcode.com/problems/maximum-subarray-xor-with-bounded-range/',
   complexity: 'The inner loop stops early once the range exceeds k. The visual caps the array at 12 values.',
+  question: "Find the largest XOR of a subarray whose maximum and minimum differ by at most k.",
+  approaches: [
+    { name: "Extend windows with early stop", intuition: "From each start, extend the window while max minus min stays within k, recording the largest running XOR.", time: "O(n^2)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example', input: '{"nums":[3,6,1,4],"k":3}' },
     { label: 'Tight range', input: '{"nums":[5,5,9,5],"k":0}' },

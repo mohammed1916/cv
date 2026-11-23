@@ -10,6 +10,10 @@ const definition = {
   python,
   inputLabel: 'Lowercase letters',
   complexity: 'O(26 × n) time with O(26) counts. The trace accepts up to 40 letters.',
+  question: "Find the longest run of one repeated letter that can be made by swapping two characters inside a string.",
+  approaches: [
+    { name: "Run windows per letter", intuition: "For each letter, slide a window that tolerates one foreign character and track its best length, capped by the letter's total count.", time: "O(26 x n)", space: "O(26)" },
+  ],
   examples: [
     { label: 'One misplaced letter', input: 'aabaa' },
     { label: 'All distinct', input: 'abcdef' },

@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON: {"lights": [...]}',
   url: 'https://leetcode.doocs.org/en/lc/3964/',
   complexity: 'O(n) time and O(n) extra space. The visualization caps the road at 8 positions.',
+  question: "Place the fewest bulbs along a road so every position is lit, each bulb lighting its own position and reach beyond it.",
+  approaches: [
+    { name: "Greedy leftmost unlit position", intuition: "Find the leftmost unlit position and place a bulb one step to its right, lighting it and the most ground beyond.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"lights":[0,0,0,0]}' },
     { label: 'Example 2', input: '{"lights":[0,0,0,2,0]}' },

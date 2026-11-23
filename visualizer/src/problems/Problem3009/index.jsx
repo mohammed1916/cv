@@ -21,6 +21,10 @@ const definition = {
   inputLabel: "Array y of 2 to 12 heights, adjacent values different (e.g. [2,5,1,4])",
   url: "https://leetcode.com/problems/maximum-number-of-intersections-on-the-chart/",
   complexity: "O(k * n) time for k distinct heights and n points, since each candidate line is checked against every point and segment; O(n) space. The visualization caps n at 12 points.",
+  question: "Find the height that makes a horizontal line cross the most line segments in a chart.",
+  approaches: [
+    { name: "Candidate heights", intuition: "Test each distinct height and each midpoint between neighbouring heights, counting crossings.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: "Zigzag", input: "[2,5,1,4,3]" },
     { label: "Two points", input: "[7,4]" },

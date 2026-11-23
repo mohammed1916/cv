@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with words and target (JSON)',
   url: 'https://leetcode.com/problems/minimum-number-of-valid-strings-to-form-target-ii/',
   complexity: 'O(total word length + m * L) time, where m is the target length and L is the longest word. The visualization caps sizes.',
+  question: "Split a target string into the fewest valid strings, where each piece is a prefix of one of the given words, for larger inputs.",
+  approaches: [
+    { name: "Prefix matching with a trie", intuition: "Use a trie of the words so each target position finds the longest matching prefixes quickly.", time: "O(total word length + m * L)", space: "O(total word length)" },
+  ],
   examples: [
     { label: 'Three words, shared letters', input: '{"words":["xy","yz","zx"],"target":"xyzzx"}' },
     { label: 'Overlapping', input: '{"words":["abababab","ab"],"target":"ababaababa"}' },

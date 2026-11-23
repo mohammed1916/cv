@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON object with startAt, moveCost, pushCost and targetSeconds',
   url: 'https://leetcode.com/problems/minimum-cost-to-set-cooking-time/',
   complexity: 'O(100) candidates, each with at most four digits; O(1) time and space.',
+  question: "Find the lowest cost of entering digits on a microwave so that the display shows a given cooking time.",
+  approaches: [
+    { name: "Try every valid minutes and seconds pair", intuition: "Each target time has a small set of minute and second pairs that produce it; compare the digit cost of each.", time: "O(1)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Ten minutes', input: '{"startAt":1,"moveCost":2,"pushCost":1,"targetSeconds":600}' },
     { label: 'Ninety seconds', input: '{"startAt":4,"moveCost":3,"pushCost":2,"targetSeconds":90}' },

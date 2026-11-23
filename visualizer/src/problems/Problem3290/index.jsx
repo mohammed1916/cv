@@ -19,6 +19,10 @@ const definition = {
   inputLabel: "JSON object with keys a (length 4) and b (e.g. {\"a\": [3, 2, 5, 6], \"b\": [2, -6, 4, -5, -3, 2, -7]})",
   url: "https://leetcode.com/problems/maximum-multiplication-score/",
   complexity: "O(4 * n) time with a 5 by (n + 1) table, for n up to 20 in the visualization.",
+  question: "Multiply values from two lists in an order that keeps the indices increasing, maximising the total score.",
+  approaches: [
+    { name: "Dynamic programming table", intuition: "Let each cell hold the best score using the first i values and the first j multipliers, and fill the table one row at a time.", time: "O(4 * n)", space: "O(n)" },
+  ],
   examples: [
     { label: "Invented sequence", input: "{\"a\": [1, -2, 3, 4], \"b\": [5, -1, 2, -3, 4, 6]}" },
     { label: "Example 2", input: "{\"a\": [-1, 4, 5, -2], \"b\": [-5, -1, -3, -2, -4]}" },

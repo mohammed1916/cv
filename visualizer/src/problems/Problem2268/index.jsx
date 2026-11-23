@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Lowercase word (e.g. apple)',
   url: 'https://leetcode.com/problems/minimum-number-of-keypresses/',
   complexity: 'O(n + k log k) time for n letters and k distinct letters, with O(1) extra space for the 26-letter alphabet. The visualization caps the word at 26 letters; the draft does not verify the official length bound.',
+  question: "Assign the lowercase letters to keys with a limited number of slots per key, minimising the total presses for a given text.",
+  approaches: [
+    { name: "Greedy by frequency", intuition: "Give the most frequent letters the cheapest slots, using nine keys with up to three presses each.", time: "O(26 log 26)", space: "O(1)" },
+  ],
   examples: [
     { label: 'apple', input: 'banana' },
     { label: 'Full alphabet', input: 'abcdefghijklmnopqrstuvwxyz' },

@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON object with initial_energy, initial_experience, energy and experience (1 to 8 opponents)',
   url: 'https://leetcode.com/problems/minimum-hours-of-training-to-win-a-competition/',
   complexity: 'O(n) time for n opponents. The visualization caps opponents at 8.',
+  question: "Find the minimum hours of training needed to beat all opponents, given your energy and experience.",
+  approaches: [
+    { name: "Greedy sum of needs", intuition: "Add the energy and experience needed for each opponent in turn and keep the largest shortfall.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Own: three opponents', input: '{"initial_energy":4,"initial_experience":6,"energy":[2,5,1],"experience":[3,1,4]}' },
     { label: 'Already strong', input: '{"initial_energy":2,"initial_experience":4,"energy":[1],"experience":[3]}' },

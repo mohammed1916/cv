@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with num (a string of digits, at most 20 characters)',
   url: 'https://leetcode.com/problems/remove-trailing-zeros-from-a-string/',
   complexity: 'O(n) time. The end pointer only moves left, and the string is never rebuilt until the end.',
+  question: "Given a numeric string, remove all trailing zeros.",
+  approaches: [
+    { name: "Pointer from the end", intuition: "Move a pointer left past zeros and return the prefix.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Trailing zeros', input: '{"num":"5020700"}' },
     { label: 'Zeros in the middle only', input: '{"num":"1009"}' },

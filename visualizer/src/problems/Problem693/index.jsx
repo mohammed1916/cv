@@ -12,6 +12,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Positive integer (JSON)',
   url: 'https://leetcode.com/problems/binary-number-with-alternating-bits/',
   complexity: 'O(b) time for b bits and O(b) space for the binary string.',
+  question: "Check whether a number's binary digits alternate between zero and one.",
+  approaches: [
+    { name: "Shift and XOR", intuition: "Shifting the number and XORing with itself leaves all ones exactly when the bits alternate.", time: "O(1)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Alternating', input: '21' },
     { label: 'Repeated pair', input: '11' },

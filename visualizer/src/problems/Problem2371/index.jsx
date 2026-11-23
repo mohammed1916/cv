@@ -12,6 +12,10 @@ const definition = {
   inputLabel: "Grid of distinct integers (e.g. [[5,2],[1,6]])",
   url: "https://leetcode.com/problems/minimize-maximum-value-in-a-grid/description/",
   complexity: "O(mn log(mn)) time for the sort and O(mn) space for an m x n grid. The visualization caps the grid at 6 x 6 with values 1 to 100.",
+  question: "Fill a grid with distinct values, respecting the order of values in each row and column, so that the largest value is as small as possible.",
+  approaches: [
+    { name: "Sort cells and assign per row and column", intuition: "Assign values from smallest to largest, each cell getting one more than the larger of its row and column maximums.", time: "O(mn log(mn))", space: "O(mn)" },
+  ],
   examples: [
     { label: "Example", input: "[[5,2],[1,6]]" },
     { label: "Single row", input: "[[7,3,9]]" },

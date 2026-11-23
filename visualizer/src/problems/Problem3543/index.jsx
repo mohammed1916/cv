@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with n, edges, k and t (JSON)',
   url: 'https://leetcode.com/problems/maximum-weighted-k-edge-path/',
   complexity: 'O(k * m * t) time for the reachable totals. The visualization caps n at 8 and edges at 12.',
+  question: "Find a path of k edges in a weighted directed graph with the largest total weight.",
+  approaches: [
+    { name: "DP over reachable totals", intuition: "Track reachable total weights for each node and step count.", time: "O(k m t)", space: "O(n t)" },
+  ],
   examples: [
     { label: 'Two routes into node 1', input: '{"n":4,"edges":[[0,2,4],[2,1,1],[0,3,2],[3,1,5]],"k":2,"t":6}' },
     { label: 'Chain with one step budget', input: '{"n":5,"edges":[[0,1,3],[1,2,2],[2,4,6]],"k":1,"t":7}' },

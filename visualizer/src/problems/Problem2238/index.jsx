@@ -18,6 +18,10 @@ const definition = {
   number: meta.number,
   phases, parse: parseInput, build: buildTrace, code, sql, python, inputLabel,
   url: `https://leetcode.com/problems/${meta.slug}/`,
+  question: "Count how many times each driver was a passenger in a rides table.",
+  approaches: [
+    { name: "Left join counts", intuition: "Take the distinct drivers and left-join the rides on the passenger id, then count the matches per driver.", time: "O(n log n)", space: "O(n)" },
+  ],
   complexity, examples,
 }
 

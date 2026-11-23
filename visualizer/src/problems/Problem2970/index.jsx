@@ -18,6 +18,11 @@ const definition = {
   inputLabel: 'JSON object: {"nums": [8, 7, 6, 6]}',
   url: "https://leetcode.com/problems/count-the-number-of-incremovable-subarrays-i/",
   complexity: "O(n) time and O(1) extra space after the two scans. The visualization caps n at 50 and values at 1000.",
+  question: "Count the subarrays whose removal leaves a strictly increasing array.",
+  approaches: [
+    { name: "Prefix and suffix runs with pointers", intuition: "Find the longest increasing prefix and suffix, then merge them with two pointers to count valid removal intervals.", time: "O(n)", space: "O(1)" },
+    { name: "Check every subarray", intuition: "Remove each subarray and test whether the rest is strictly increasing.", time: "O(n^3)", space: "O(1)" },
+  ],
   examples: [
     { label: "Example 1", input: '{"nums": [8, 7, 6, 6]}' },
     { label: "Example 2", input: '{"nums": [6, 5, 7, 8]}' },

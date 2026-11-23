@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with grid (square array, at most 5 by 5)',
   url: 'https://leetcode.com/problems/maximum-score-from-grid-operations/description/',
   complexity: 'Brute force over (n + 1)^n height choices, each scored in O(n^2). The visualization caps n at 5.',
+  question: "Choose the height of each column in a grid so that the total score of white cells is maximised.",
+  approaches: [
+    { name: "Try every height combination", intuition: "Each column is one height, so every combination of heights is scored on a small grid.", time: "O((n + 1)^n * n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Small', input: '{"grid":[[0,0,0],[0,2,0],[3,0,0]]}' },
     { label: 'Two columns', input: '{"grid":[[4,6],[4,6]]}' },

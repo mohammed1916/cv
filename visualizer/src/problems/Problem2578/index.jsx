@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with num (2 to 8 digits as a string, no leading zero)',
   url: 'https://leetcode.com/problems/split-with-minimum-sum/',
   complexity: 'O(d log d) time for d digits, from the sort.',
+  question: "Split the digits of a number into two numbers so that their sum is as small as possible.",
+  approaches: [
+    { name: "Sort and deal alternately", intuition: "Sort the digits and deal them alternately into the two numbers.", time: "O(d log d)", space: "O(d)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"num":"4325"}' },
     { label: 'Example 2', input: '{"num":"10"}' },

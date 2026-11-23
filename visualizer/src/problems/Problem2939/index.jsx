@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with a, b (0 to 255) and n (1 to 8) (JSON)',
   url: 'https://leetcode.com/problems/maximum-xor-product/',
   complexity: 'O(n) time. The product is computed with exact integers before the modulus.',
+  question: "Given a, b and n, find x below 2^n that maximises the product of the two XORs (a XOR x) and (b XOR x).",
+  approaches: [
+    { name: "Greedy by bit", intuition: "Decide each bit from the top, choosing the value that keeps the larger factor on the side where the gap requires it.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Three steps from 11 and 4', input: '{"a":11,"b":4,"n":3}' },
     { label: 'Six steps, larger second value', input: '{"a":9,"b":15,"n":6}' },

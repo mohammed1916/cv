@@ -9,6 +9,10 @@ const definition = {
   inputLabel: 'Object with flowers (integer beauty values, with a repeated value)',
   url: 'https://leetcode.com/problems/maximize-the-beauty-of-the-garden/',
   complexity: 'O(n) time with one pass over the flowers and a map keyed by beauty value, plus O(n) for the prefix sums. The visualization caps the garden at 12 flowers.',
+  question: "Remove flowers so that the remaining garden has the largest beauty, under the garden's validity rules.",
+  approaches: [
+    { name: "Prefix sums and best map", intuition: "Track the best prefix sum for each value and combine it with later values.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Keep positives', input: '{"flowers":[3,-5,3,4,3]}' },
     { label: 'Skip negatives', input: '{"flowers":[5,-9,5]}' },

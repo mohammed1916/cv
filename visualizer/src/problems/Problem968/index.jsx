@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'Tree (JSON level order)',
   url: 'https://leetcode.com/problems/binary-tree-cameras/',
   complexity: 'O(n) time and O(h) stack space. The visualization caps input at 15 nodes.',
+  question: "Place the fewest cameras on a binary tree so that every node is watched; a camera watches its parent, itself and its children.",
+  approaches: [
+    { name: "Greedy post-order states", intuition: "Give each subtree one of three states (needs a camera, has a camera, watched without one) and place cameras when a child is unwatched.", time: "O(n)", space: "O(h)" },
+  ],
   examples: [
     { label: 'Seven-node tree', input: '[1,2,3,4,null,null,5]' },
     { label: 'Left-leaning chain', input: '[2,1,null,3]' },

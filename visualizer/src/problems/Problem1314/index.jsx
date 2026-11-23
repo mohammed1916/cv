@@ -3,6 +3,11 @@ import MatrixGrid from '../../components/shared/MatrixGrid'
 import { code, python, parseInput, buildTrace, phases, examples } from './algorithm'
 
 const definition = {
+  question: "Replace each cell of a matrix with the sum of the square block of radius k around it.",
+  approaches: [
+    { name: "2D prefix sums", intuition: "Build a table of prefix sums, then read any block with four lookups.", time: "O(mn)", space: "O(mn)" },
+    { name: "Direct block sum", intuition: "Add up each block cell by cell for every position.", time: "O(mn k^2)", space: "O(mn)" },
+  ],
   number: '1314', phases, parse: parseInput, build: buildTrace, code, python, examples,
   inputLabel: 'Matrix and k (JSON object)',
   url: 'https://leetcode.com/problems/matrix-block-sum/',

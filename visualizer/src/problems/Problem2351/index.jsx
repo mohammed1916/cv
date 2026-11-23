@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Letters as JSON: {"s": "..."}',
   url: 'https://leetcode.com/problems/first-letter-to-appear-twice/',
   complexity: 'O(n) time and O(1) extra space for the 26-letter set. The visualization caps input at 50 letters.',
+  question: "Find the first letter in a string that appears for the second time.",
+  approaches: [
+    { name: "Seen set", intuition: "Walk the string and return the first letter already in the seen set.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Own: hello and tea', input: '{"s":"hellotea"}' },
     { label: 'Own: xyzyq', input: '{"s":"xyzyq"}' },

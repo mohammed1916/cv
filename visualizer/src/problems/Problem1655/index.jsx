@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Orders (JSON object with nums as values and quantity as demands)',
   url: 'https://leetcode.com/problems/distribute-repeating-integers/',
   complexity: 'O(distinct * 3^m) time with m customers. The visualization caps input at 8 values and 4 customers.',
+  question: "Assign values to customers so each customer receives all of the quantity they ask for from one value, and check whether every demand can be met.",
+  approaches: [
+    { name: "Subset DP over customers", intuition: "Count value frequencies, then mark which customer subsets each value can serve.", time: "O(distinct * 3^m)", space: "O(3^m)" },
+  ],
   examples: [
     { label: 'Two customers, five values', input: '{"nums":[1,2,2,6,7],"quantity":[2,1]}' },
     { label: 'Three customers, repeated value', input: '{"nums":[5,5,8,3],"quantity":[1,2,1]}' },

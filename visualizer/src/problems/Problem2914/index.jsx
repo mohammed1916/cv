@@ -16,6 +16,11 @@ const definition = {
   inputLabel: 'JSON object with key s (e.g. {"s": "1001"})',
   url: "https://leetcode.com/problems/minimum-number-of-changes-to-make-binary-string-beautiful/",
   complexity: "O(n) time and O(1) extra space for string length n. The visualization caps s at 50 characters.",
+  question: "Find the fewest bit flips needed to make a binary string beautiful, meaning each pair of positions forms a valid block.",
+  approaches: [
+    { name: "Pair scan", intuition: "Process the string in pairs and flip one character in each mismatched pair.", time: "O(n)", space: "O(1)" },
+    { name: "Dynamic programming", intuition: "Track the best cost for each choice of pair value.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: "Example 1", input: '{"s": "1001"}' },
     { label: "Example 2", input: '{"s": "10"}' },

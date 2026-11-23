@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Pizza rows and piece count (JSON)',
   url: 'https://leetcode.com/problems/number-of-ways-of-cutting-a-pizza/',
   complexity: 'O(k * rows * cols * (rows + cols)) time with O(rows * cols) table space per layer, using prefix sums for apple counts.',
+  question: "Count the ways to cut a pizza into k pieces each containing at least one apple.",
+  approaches: [
+    { name: "Dynamic programming with prefix counts", intuition: "Use apple counts over rectangles to decide whether a cut is valid.", time: "O(k rows cols (rows + cols))", space: "O(rows cols)" },
+  ],
   examples: [
     { label: 'Two pieces', input: '{"pizza":["..A","A..",".A."],"k":2}' },
     { label: 'Three pieces', input: '{"pizza":["..A","A..",".A."],"k":3}' },

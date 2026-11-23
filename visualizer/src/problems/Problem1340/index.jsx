@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with arr (1 to 12 values) and d',
   url: 'https://leetcode.com/problems/jump-game-v/',
   complexity: 'O(n * d) time and O(n) memory with memoization. The visualization caps input at 12 values.',
+  question: "Find the longest chain of jumps from one index, where jumps stay inside a range and go to lower values.",
+  approaches: [
+    { name: "Memoized depth-first search", intuition: "Store the best chain length from each index and reuse it.", time: "O(n d)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Seven values, jump up to three', input: '{"arr":[12,30,7,25,18,4,9],"d":3}' },
     { label: 'Flat', input: '{"arr":[3,3,3,3,3],"d":3}' },

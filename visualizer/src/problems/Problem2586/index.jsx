@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'An object with words (1 to 10 lowercase words) and queries ([l, r] pairs)',
   url: 'https://leetcode.com/problems/count-the-number-of-vowel-strings-in-range/',
   complexity: 'O(n + q) time after building the running counts. The visualization caps input at 10 words and 10 queries.',
+  question: "Count the words in an index range that start and end with a vowel, for each query.",
+  approaches: [
+    { name: "Running counts", intuition: "Build a prefix count of valid words, then subtract for each query range.", time: "O(n + q)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"words":["aba","bcb","ece","aa","e"],"queries":[[0,2],[1,4],[1,1]]}' },
     { label: 'Example 2', input: '{"words":["a","e","i"],"queries":[[0,2],[0,1],[2,2]]}' },

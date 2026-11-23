@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Two lists as JSON: {"nums1": [...], "nums2": [...]}',
   url: 'https://leetcode.com/problems/number-of-ways-where-square-of-number-is-equal-to-product-of-two-numbers/',
   complexity: 'O(n^2 + m^2) time and O(m^2) space for the product table. The visualization caps each list at 8 values.',
+  question: "Count triples where the square of one number equals the product of two others.",
+  approaches: [
+    { name: "Product map", intuition: "Count the products of every pair and look up each square in the map.", time: "O(n^2 + m^2)", space: "O(m^2)" },
+  ],
   examples: [
     { label: 'Three and four values', input: '{"nums1":[7,3,6],"nums2":[4,9,2,8]}' },
     { label: 'Repeated square factors', input: '{"nums1":[4,6],"nums2":[9,6,6]}' },

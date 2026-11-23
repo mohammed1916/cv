@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Binary array of 1 to 12 entries, for example [0,1,1,0,1]',
   url: 'https://leetcode.com/problems/minimum-operations-to-make-binary-array-elements-equal-to-one-ii/',
   complexity: 'O(n) time and O(1) extra space. The visualization caps the array at 12 entries.',
+  question: "Find the fewest suffix flips needed to make every value in a binary array equal to one.",
+  approaches: [
+    { name: "Track the current flip state", intuition: "A suffix flip reaches every later value, so the scan tracks whether the suffix is flipped now and flips when a zero appears.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Five entries, mixed', input: '[0,1,1,0,0]' },
     { label: 'Four entries, one run', input: '[1,1,0,1]' },

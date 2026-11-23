@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with characters (sorted letters) and combination_length (JSON)',
   url: 'https://leetcode.com/problems/iterator-for-combination/',
   complexity: 'O(k) work per next() call, plus O(n choose k) total output. The visualization caps input at 6 characters.',
+  question: "Design an iterator over all combinations of a given length from a sorted string.",
+  approaches: [
+    { name: "Ordered combination generation", intuition: "Generate the combinations in lexicographic order and step through them one at a time.", time: "O(k) per call", space: "O(n choose k)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"characters":"abc","combination_length":2}' },
     { label: 'Four letters', input: '{"characters":"abcd","combination_length":3}' },

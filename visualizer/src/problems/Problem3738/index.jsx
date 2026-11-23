@@ -12,6 +12,11 @@ const definition = {
   inputLabel: 'Array of integers from -20 to 20 (JSON)',
   url: 'https://leetcode.com/problems/longest-non-decreasing-subarray-after-replacing-at-most-one-element/',
   complexity: 'O(n) time and O(n) space. The visualization caps the array at 14 values.',
+  question: "Find the longest non-decreasing subarray after replacing at most one element of the array.",
+  approaches: [
+    { name: "Left and right runs joined at a gap", intuition: "Measure the non-decreasing run ending at each index and the run starting after it, then join them across one replaced value.", time: "O(n)", space: "O(n)" },
+    { name: "Sliding window with one allowed break", intuition: "Grow a window while it has at most one place where the order drops.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Mixed sign values', input: '[-20,15,0,7]' },
     { label: 'Example 2', input: '[1,3,2,4]' },

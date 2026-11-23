@@ -23,7 +23,12 @@ const examples = [
   { label: 'Long run: 16 policies', input: '{"Fraud":[{"policy_id":1,"state":"CA","fraud_score":46},{"policy_id":2,"state":"NY","fraud_score":72},{"policy_id":3,"state":"CA","fraud_score":40},{"policy_id":4,"state":"NY","fraud_score":72},{"policy_id":5,"state":"CA","fraud_score":22},{"policy_id":6,"state":"NY","fraud_score":87},{"policy_id":7,"state":"CA","fraud_score":87},{"policy_id":8,"state":"NY","fraud_score":77},{"policy_id":9,"state":"CA","fraud_score":77},{"policy_id":10,"state":"NY","fraud_score":43},{"policy_id":11,"state":"CA","fraud_score":9},{"policy_id":12,"state":"NY","fraud_score":51},{"policy_id":13,"state":"CA","fraud_score":79},{"policy_id":14,"state":"NY","fraud_score":63},{"policy_id":15,"state":"CA","fraud_score":86},{"policy_id":16,"state":"NY","fraud_score":37}]}' },
 ]
 
-const definition = { number: meta.number, phases, parse: parseInput, build: buildTrace, code, sql, python, inputLabel, complexity, examples }
+const definition = { number: meta.number, phases, parse: parseInput, build: buildTrace, code, sql, python, inputLabel, complexity, examples,
+  question: "Find the fraud policies in the top five percent by score within each state.",
+  approaches: [
+    { name: "Rank then keep top share", intuition: "Rank policies inside each state by score and keep the ones within the top five percent of the group size.", time: "O(n log n)", space: "O(n)" },
+  ],
+}
 
 function RowTable({ step }) {
   const { columns, rows } = step

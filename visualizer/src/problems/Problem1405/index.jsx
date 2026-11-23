@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Letter budgets as a JSON object',
   url: 'https://leetcode.com/problems/longest-happy-string/',
   complexity: 'O(n) rounds for n output letters, with a fixed three-letter check each round. O(n) extra space for the output.',
+  question: "Build the longest string using limited counts of three letters with no three in a row.",
+  approaches: [
+    { name: "Greedy by remaining counts", intuition: "Each step add the letter with the most remaining count that does not break the rule.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Balanced', input: '{"a": 2, "b": 2, "c": 1}' },
     { label: 'One dominant', input: '{"a": 1, "b": 1, "c": 7}' },

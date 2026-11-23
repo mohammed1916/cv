@@ -12,6 +12,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'ghosts and target (JSON)',
   url: 'https://leetcode.com/problems/escape-the-ghosts/',
   complexity: 'O(g) time, O(1) extra space. Visualization limited to 20 ghosts and |coordinate| <= 20.',
+  question: "Given ghost positions and your target on a grid, decide whether you can reach the target before any ghost can.",
+  approaches: [
+    { name: "Manhattan distance comparison", intuition: "A ghost can reach the target in its Manhattan distance; you escape only if no ghost is at most as close as you are.", time: "O(g) for g ghosts", space: "O(1)" },
+  ],
   examples: [
     { label: 'Escape (true)', input: '{"ghosts":[[1,0],[0,3]],"target":[0,1]}' },
     { label: 'Blocked (false)', input: '{"ghosts":[[1,0]],"target":[2,0]}' },

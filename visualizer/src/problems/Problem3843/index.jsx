@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Array (JSON object with nums)',
   url: 'https://leetcode.com/problems/first-element-with-unique-frequency/',
   complexity: 'O(n) time and O(n) space. The visualization caps input at 30 values.',
+  question: "Find the first value in an array whose frequency is unique among all frequencies.",
+  approaches: [
+    { name: "Count frequencies of frequencies", intuition: "Count each value, then count how many values share each count; the first value with a unique count wins.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"nums":[20,10,30,30]}' },
     { label: 'Example 2', input: '{"nums":[20,20,10,30,30,30]}' },

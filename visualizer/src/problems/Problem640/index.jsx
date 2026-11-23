@@ -11,6 +11,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Equation (JSON string with one =)',
   url: 'https://leetcode.com/problems/solve-the-equation/',
   complexity: 'O(n) time for an equation of length n, with constant extra space.',
+  question: "Solve a linear equation written with x on both sides, returning x or reporting that it has no single solution.",
+  approaches: [
+    { name: "Collect coefficients", intuition: "Gather x-terms and constants from both sides, then solve a x = b.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Unique root', input: '"2x+3=7"' },
     { label: 'Contradiction', input: '"x+1=x+4"' },

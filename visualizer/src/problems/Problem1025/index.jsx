@@ -3,6 +3,11 @@ import { meta } from './meta'
 import { buildTrace, parseInput, code, python, phases, examples, complexity, inputLabel } from './algorithm'
 
 const definition = {
+  question: "Two players alternately remove a proper divisor of a number from it; decide whether the first player wins.",
+  approaches: [
+    { name: "Dynamic programming over values", intuition: "A number is winning when some proper divisor leaves a losing number for the opponent; fill the table from small values upward.", time: "O(n^1.5)", space: "O(n)" },
+    { name: "Parity rule", intuition: "Even numbers win for the first player, because an odd number is always left behind by a legal move from an even one.", time: "O(1)", space: "O(1)" },
+  ],
   number: meta.number,
   phases, parse: parseInput, build: buildTrace, code, python, inputLabel,
   url: `https://leetcode.com/problems/${meta.slug}/`,

@@ -14,6 +14,11 @@ const definition = {
   inputLabel: 'Two arrays as JSON: {"nums1": [...], "nums2": [...]}',
   url: 'https://leetcode.com/problems/find-common-elements-between-two-arrays/',
   complexity: 'O(n + m) time and O(n + m) space with two sets. The visualization caps each array at 20 numbers.',
+  question: "For two arrays, count the elements of each array that also appear in the other array.",
+  approaches: [
+    { name: "Hash sets", intuition: "Build a set from each array and count the elements of one array that are in the other set.", time: "O(n + m)", space: "O(n + m)" },
+    { name: "Sort and two pointers", intuition: "Sort both arrays and walk them together to find shared values.", time: "O((n + m) log(n + m))", space: "O(1) extra" },
+  ],
   examples: [
     { label: 'Four and five values', input: '{"nums1":[6,2,6,1],"nums2":[4,4,7,9,2]}' },
     { label: 'Repeated values in both lists', input: '{"nums1":[8,8,3],"nums2":[5,12,5,1]}' },

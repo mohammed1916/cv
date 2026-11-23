@@ -14,6 +14,10 @@ const definition = {
   complexity,
   inputLabel: 'Object with candies (count per type) and queries ([type, day, cap] triples)',
   url: 'https://leetcode.com/problems/can-you-eat-your-favorite-candy-on-your-favorite-day/',
+  question: "For each query, answer whether you can eat a favourite candy on a favourite day while eating at most a daily cap.",
+  approaches: [
+    { name: "Prefix sums and range check", intuition: "Prefix sums give the candies before each type, and a range check decides each query.", time: "O(n + q)", space: "O(n)" },
+  ],
 }
 
 export default function Problem1744Visualizer() {

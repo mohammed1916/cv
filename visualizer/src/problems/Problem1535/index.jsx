@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Distinct values and win target (JSON object)',
   url: 'https://leetcode.com/problems/find-the-winner-of-an-array-game/',
   complexity: 'O(n + k) time and O(n) space: the line is simulated duel by duel until one champion reaches k wins.',
+  question: "Find the winner of a line game where the champion must win k consecutive duels.",
+  approaches: [
+    { name: "Simulate duels", intuition: "Play the duels in order, keep the current champion and count its wins until it reaches k.", time: "O(n + k)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Sample A', input: '{"arr":[1,4,2,3],"k":2}' },
     { label: 'Long streak', input: '{"arr":[5,1,3,2],"k":3}' },

@@ -10,6 +10,11 @@ const definition = {
   inputLabel: 'Object with departments and students (small sample tables)',
   url: 'https://leetcode.com/problems/students-with-invalid-departments/',
   complexity: 'With a set of department ids, each student is checked in constant time: O(s + d).',
+  question: "List students whose department id does not exist in the department table.",
+  approaches: [
+    { name: "Set lookup", intuition: "Store the valid department ids and check each student against them.", time: "O(s + d)", space: "O(d)" },
+    { name: "Left join with null check", intuition: "Join and keep students with no matching department.", time: "O(s + d)", space: "O(s + d)" },
+  ],
   examples: [
     { label: 'Example', input: '{"departments":[{"id":1,"name":"Physics"},{"id":2,"name":"Biology"},{"id":3,"name":"History"}],"students":[{"id":10,"name":"Ivy","department_id":1},{"id":11,"name":"Jun","department_id":null},{"id":12,"name":"Kai","department_id":4},{"id":13,"name":"Lea","department_id":2},{"id":14,"name":"Max","department_id":9}]}' },
     { label: 'All valid', input: '{"departments":[{"id":1,"name":"Math"}],"students":[{"id":5,"name":"Ora","department_id":1}]}' },

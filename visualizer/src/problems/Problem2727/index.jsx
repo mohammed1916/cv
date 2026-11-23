@@ -12,6 +12,10 @@ const definition = {
   inputLabel: "JSON object or array (e.g. {\"a\":null})",
   url: "https://leetcode.com/problems/is-object-empty/",
   complexity: "O(1) time for the count of a list and O(k) time to count k keys of an object. The visualization caps the top level at 12 keys or elements; the page keeps the input small for teaching.",
+  question: "Write a function that returns true if an object has no own keys, and false otherwise.",
+  approaches: [
+    { name: "Check for keys", intuition: "Check whether the list of own keys is empty.", time: "O(1)", space: "O(1)" },
+  ],
   examples: [
     { label: "Empty object", input: "{}" },
     { label: "Null value is a key", input: '{"a":null}' },

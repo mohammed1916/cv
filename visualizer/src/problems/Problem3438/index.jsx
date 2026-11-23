@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Digits (JSON object with s)',
   url: 'https://leetcode.com/problems/find-valid-pair-of-adjacent-digits-in-string/',
   complexity: 'O(n) time and O(1) extra space for ten digit counts. The visualization caps input at 40 digits.',
+  question: "Find the first pair of adjacent digits in a string where each digit appears exactly its own value's count in the string.",
+  approaches: [
+    { name: "Count then scan", intuition: "Count how often each digit appears, then check adjacent pairs against those counts.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"s":"2523533"}' },
     { label: 'Example 2', input: '{"s":"221"}' },

@@ -10,6 +10,10 @@ const definition = {
   inputLabel: 'Object with nums: up to 12 integers from 1 to 9, and k: from 1 to 9',
   url: 'https://leetcode.com/problems/subarrays-with-k-different-integers/',
   complexity: 'O(n) per pass with two passes, each pointer moving only forward. O(n) space for the counts.',
+  question: "Count the subarrays that contain exactly k different integers.",
+  approaches: [
+    { name: "At most k minus at most k - 1", intuition: "Count subarrays with at most k distinct values using a sliding window, and subtract the count for at most k - 1.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Two distinct values', input: JSON.stringify({ nums: [2, 1, 2, 3, 1], k: 2 }) },
     { label: 'Three distinct values', input: JSON.stringify({ nums: [4, 5, 4, 6, 5], k: 3 }) },

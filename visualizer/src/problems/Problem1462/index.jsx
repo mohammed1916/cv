@@ -12,6 +12,11 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Courses (JSON with n, prerequisites, queries)',
   url: 'https://leetcode.com/problems/course-schedule-iv/',
   complexity: 'O(n^3 + q) time and O(n^2) space for the transitive closure. Visualization limited to 8 courses and 12 prerequisites.',
+  question: "Given prerequisite pairs, answer whether one course must be finished before another.",
+  approaches: [
+    { name: "Floyd-Warshall closure", intuition: "Mark each course reachable through every intermediate course, then answer each query by lookup.", time: "O(n^3 + q)", space: "O(n^2)" },
+    { name: "Per-query DFS", intuition: "Run a search from each query course and stop when the target is found.", time: "O(q * (n + e))", space: "O(n + e)" },
+  ],
   examples: [
     { label: 'false, true', input: '{"n":2,"prerequisites":[[1,0]],"queries":[[0,1],[1,0]]}' },
     { label: 'true, true', input: '{"n":3,"prerequisites":[[1,2],[1,0],[2,0]],"queries":[[1,0],[1,2]]}' },

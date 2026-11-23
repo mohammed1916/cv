@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with an intervals list of [start, end, weight] triples',
   url: 'https://leetcode.com/problems/maximum-score-of-non-overlapping-intervals/description/',
   complexity: 'Brute force over index sets of size up to 4; the visualization caps the input at 10 intervals.',
+  question: "Choose intervals that do not overlap, up to a limit, to maximize a score, breaking ties by index order.",
+  approaches: [
+    { name: "Search over index sets", intuition: "Depth-first search over subsets of up to four intervals, skipping any that overlap.", time: "O(n^4)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example', input: '{"intervals":[[1,2,4],[2,3,1],[4,6,3],[5,7,2]]}' },
     { label: 'Tie', input: '{"intervals":[[1,1,5],[2,2,5],[3,3,1]]}' },

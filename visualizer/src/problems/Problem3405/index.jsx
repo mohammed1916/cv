@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Parameters (JSON object with n, m, and k)',
   url: 'https://leetcode.com/problems/count-the-number-of-arrays-with-k-matching-adjacent-elements/',
   complexity: 'O(n * k + log n) time. The visualization caps n at 10 and m at 6.',
+  question: "Count arrays of length n with values from 1 to m that have exactly k positions where adjacent values match.",
+  approaches: [
+    { name: "Dynamic programming table", intuition: "Fill a table over the number of positions and matches, using the count of ways for each prefix.", time: "O(n * k + log n)", space: "O(n * k)" },
+  ],
   examples: [
     { label: 'Equal run', input: '{"n":3,"m":4,"k":2}' },
     { label: 'Two values', input: '{"n":3,"m":2,"k":0}' },

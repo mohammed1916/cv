@@ -8,6 +8,10 @@ const definition = {
   inputLabel: 'Array of integers (JSON)',
   url: 'https://leetcode.com/problems/maximum-length-of-subarray-with-positive-product/',
   complexity: 'O(n) time and O(1) extra space: one pass that keeps two running lengths.',
+  question: "Find the longest subarray whose product is positive.",
+  approaches: [
+    { name: "Two running lengths", intuition: "Track the longest positive and negative product lengths that end at each position.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Mixed signs', input: '[2,-3,4,-1,5]' },
     { label: 'Zero splits', input: '[3,-1,-2,0,5,-4]' },

@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'Cities and roads as JSON, e.g. {"n": 3, "connections": [[1,0],[1,2]]}',
   url: 'https://leetcode.com/problems/reorder-routes-to-make-all-paths-lead-to-the-city-zero/',
   complexity: 'O(n) time and space, one visit per city.',
+  question: "Count the roads to reverse so that every city can reach city 0.",
+  approaches: [
+    { name: "DFS from city 0", intuition: "Walk the undirected road map from city 0 and count the edges that point away from the root.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Single path of seven', input: '{"n":7,"connections":[[6,2],[2,4],[4,1],[1,5],[5,0],[0,3]]}' },
     { label: 'Path with a detour', input: '{"n":4,"connections":[[0,2],[2,3],[3,1]]}' },

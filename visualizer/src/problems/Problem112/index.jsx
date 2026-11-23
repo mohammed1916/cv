@@ -22,6 +22,10 @@ const definition = {
   inputLabel: 'Object with root and target_sum (e.g. {"root":[5,4,8,11,null,13,4],"target_sum":22})',
   url: "https://leetcode.com/problems/path-sum/",
   complexity: "O(n) time and O(h) recursion depth for n nodes. The visualization accepts up to 15 entries.",
+  question: "Decide whether a root-to-leaf path in a binary tree has a given sum.",
+  approaches: [
+    { name: "DFS subtracting along the path", intuition: "Subtract each node's value from the target as you go down; a leaf with zero remaining succeeds.", time: "O(n)", space: "O(h)" },
+  ],
   examples: authoredExamples.map(example => ({ label: example.label, input: JSON.stringify({ root: example.root, target_sum: example.targetSum }) })),
 };
 

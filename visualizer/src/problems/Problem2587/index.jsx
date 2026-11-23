@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON object with nums: 1 to 12 integers from -10 to 10',
   url: 'https://leetcode.com/problems/rearrange-array-to-maximize-prefix-score/',
   complexity: 'O(n log n) time for n numbers. The visualization caps the array at 12.',
+  question: "Reorder an array to maximise the number of prefix sums that stay positive.",
+  approaches: [
+    { name: "Sort descending then count", intuition: "Sort the values from largest to smallest and count how many prefix sums remain positive.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"nums":[2,-1,0,1,-3,3,-3]}' },
     { label: 'Example 2', input: '{"nums":[-2,-3,0]}' },

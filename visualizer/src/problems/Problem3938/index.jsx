@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON array of rows (2 to 8 rows and columns, values -100 to 100)',
   url: 'https://leetcode.com/problems/maximum-path-intersection-sum-in-a-grid/',
   complexity: 'Column-by-column DP over pairs of entry rows: O(rows^4 * cols) time in this direct form. The visualization caps the grid at 8 by 8.',
+  question: "Two walkers start from a grid corner and move in opposite vertical directions; maximise the sum of cells they both visit.",
+  approaches: [
+    { name: "Column-by-column DP over row pairs", intuition: "Track both walkers' entry rows column by column and score only the cells they share.", time: "O(rows^4 x cols)", space: "O(rows^2) per column" },
+  ],
   examples: [
     { label: 'Three by four', input: '[[1,-2,3,0],[4,5,-6,2],[-1,7,8,1]]' },
     { label: 'Two by three', input: '[[-1,4,2],[3,-5,6]]' },

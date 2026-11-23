@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with a sentence s (JSON)',
   url: 'https://leetcode.com/problems/count-anagrams/',
   complexity: 'O(n * k) time where n is the length and k the number of words. The visualization caps the sentence at 40 characters and 6 words.',
+  question: "Count the anagrams of a sentence formed by permuting letters within each word, modulo a prime.",
+  approaches: [
+    { name: "Factorial counts per word", intuition: "For each word, count permutations as a factorial divided by repeated-letter factorials, then multiply.", time: "O(n * k)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Two words', input: '{"s":"ab cd"}' },
     { label: 'Repeated letters', input: '{"s":"aab bc"}' },

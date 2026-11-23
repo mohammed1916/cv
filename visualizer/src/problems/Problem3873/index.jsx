@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with points (distinct [x, y] pairs)',
   url: 'https://leetcode.com/problems/maximum-points-activated-with-one-addition/',
   complexity: 'Joining groups costs near-linear time in the number of points. The visual caps the input at 12 points.',
+  question: "Pick one new point to add so that the number of activated points is as large as possible.",
+  approaches: [
+    { name: "Union-find on labels", intuition: "Join the x-label and y-label of each point, then combine the two largest component sizes plus one.", time: "Near-linear", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example', input: '{"points":[[0,0],[0,5],[7,5],[9,9]]}' },
     { label: 'Two singles', input: '{"points":[[0,0],[1,1]]}' },

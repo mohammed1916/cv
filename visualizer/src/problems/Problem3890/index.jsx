@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Limit (JSON object with n)',
   url: 'https://leetcode.com/problems/integers-with-multiple-sum-of-two-cubes/',
   complexity: 'About (cube root of n) squared pairs are enumerated. The visualization caps n at 5000.',
+  question: "Find the integers that can be written as a sum of two cubes in at least two ways, up to a limit.",
+  approaches: [
+    { name: "Enumerate cube pairs", intuition: "Enumerate every pair of cubes up to the limit, count each sum, and keep sums reached at least twice.", time: "O(n^(2/3))", space: "O(n^(2/3))" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"n":4104}' },
     { label: 'Example 2', input: '{"n":578}' },

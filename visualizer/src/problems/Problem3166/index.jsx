@@ -13,6 +13,10 @@ const examples = [
   ]
 
 const definition = {
+  question: "From a parking transactions table, compute each lot's total minutes and the hourly rate for each car and lot.",
+  approaches: [
+    { name: "Sum minutes per car and lot", intuition: "Add up the minutes and fees per car and per lot, then derive the hourly rate and the lot with the most minutes.", time: "O(n log n)", space: "O(n)" },
+  ],
   number: meta.number,
   phases, parse: parseInput, build: buildTrace, code, sql, python, inputLabel,
   url: `https://leetcode.com/problems/${meta.slug}/`,

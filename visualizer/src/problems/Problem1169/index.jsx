@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON {"transactions": ["name,time,amount,city", ...]}',
   url: "https://leetcode.com/problems/invalid-transactions/description/",
   complexity: "O(n^2) time and O(n) space for n transactions. The visualization caps n at 50.",
+  question: "List the transactions that are invalid because of an amount limit or a suspicious pair of nearby transactions in different cities.",
+  approaches: [
+    { name: "Pairwise check per name", intuition: "Group transactions by name and compare each pair within a 60-minute window in a different city.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: "Large amount", input: '{"transactions":["mia,5,1500,oslo","mia,900,20,oslo"]}' },
     { label: "Close trips", input: '{"transactions":["ren,10,300,kyoto","ren,40,200,kyoto","ren,100,400,lima"]}' },

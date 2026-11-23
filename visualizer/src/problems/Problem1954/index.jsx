@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Needed apples (1 to 1000000000)',
   url: 'https://leetcode.com/problems/minimum-garden-perimeter-to-collect-enough-apples/',
   complexity: 'O(log K) probes for a search over half-sides up to K = 100000, each probe a constant-time formula.',
+  question: "Find the smallest garden perimeter that holds at least a required number of apples on a square plot.",
+  approaches: [
+    { name: "Binary search on the side", intuition: "A square with half-side k holds 2k(k+1)(2k+1) apples, so binary search the smallest k that is enough.", time: "O(log n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Thirteen apples', input: '13' },
     { label: 'One apple', input: '1' },

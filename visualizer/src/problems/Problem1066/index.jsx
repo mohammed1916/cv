@@ -19,6 +19,10 @@ const definition = {
   inputLabel: 'Object with workers and bikes lists of [x, y] points',
   url: 'https://leetcode.com/problems/campus-bikes-ii/description/',
   complexity: 'O(2^M * M) time for M bikes and O(2^M) space, using a bitmask over bikes. The visualization caps input at 6 workers, 8 bikes and coordinates 0 to 20; the official bounds are not verified.',
+  question: "Assign workers to bikes so that the total Manhattan distance is as small as possible.",
+  approaches: [
+    { name: "Bitmask DP over bikes", intuition: "Process workers in order; the state is the set of bikes already taken, and each worker takes a free bike.", time: "O(2^M * M)", space: "O(2^M)" },
+  ],
   examples: [
     { label: 'Two workers', input: '{"workers":[[1,1],[4,3]],"bikes":[[0,4],[5,0],[3,3]]}' },
     { label: 'Three workers', input: '{"workers":[[2,2],[6,1],[0,5]],"bikes":[[1,3],[4,4],[7,0],[3,6]]}' },

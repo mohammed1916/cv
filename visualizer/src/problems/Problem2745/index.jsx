@@ -18,6 +18,10 @@ const definition = {
   inputLabel: "JSON object with keys x, y, z (e.g. {\"x\": 2, \"y\": 5, \"z\": 1})",
   url: "https://leetcode.com/problems/construct-the-longest-new-string/",
   complexity: "O(x * y) states with O(1) transitions here, plus the AB fill; the closed form 2 * (2 * min(x, y) + z) + (2 if x != y else 0) gives the same answer.",
+  question: "Given counts of three strings, construct the longest string made of them that avoids three equal letters in a row.",
+  approaches: [
+    { name: "Greedy alternation", intuition: "Take pairs that alternate between the two blocks and add the third string when it can be placed.", time: "O(1)", space: "O(1)" },
+  ],
   examples: [
     { label: "Example 1", input: "{\"x\": 2, \"y\": 5, \"z\": 1}" },
     { label: "Example 2", input: "{\"x\": 3, \"y\": 2, \"z\": 2}" },

@@ -15,6 +15,10 @@ const definition = {
   url: `https://leetcode.com/problems/${meta.slug}/`,
   complexity: 'O(M log M) for M medal rows, from grouping per user and sorting each user contest list. The visualizer caps each table at 12 rows.',
   examples,
+  question: "Find users who won three gold medals or medals in three consecutive contests.",
+  approaches: [
+    { name: "Group and window", intuition: "Group medals per user, count gold medals, and check for three consecutive contests.", time: "O(M log M)", space: "O(M)" },
+  ],
 }
 
 function Rows({ columns = [], rows = [] }) {

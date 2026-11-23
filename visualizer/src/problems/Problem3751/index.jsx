@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON object with num1 and num2, for example {"num1":120,"num2":130}',
   url: 'https://leetcode.com/problems/total-waviness-of-numbers-in-range-i/',
   complexity: 'O((num2 - num1 + 1) * d) time for d digits. The visualization caps the range at 301 numbers.',
+  question: "Add up the waviness, the count of peaks and valleys among interior digits, over all numbers in a range.",
+  approaches: [
+    { name: "Check each number", intuition: "Look at every interior digit of each number in the range and count the turns.", time: "O(range * d)", space: "O(d)" },
+  ],
   examples: [
     { label: 'Small range from four to twelve', input: '{"num1":4,"num2":12}' },
     { label: 'Range near the top limit', input: '{"num1":99990,"num2":100000}' },

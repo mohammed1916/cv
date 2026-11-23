@@ -20,6 +20,10 @@ const definition = {
   number: meta.number,
   phases, parse: parseInput, build: buildTrace, code, sql, python, inputLabel,
   url: `https://leetcode.com/problems/${meta.slug}/`,
+  question: "Order two columns of a table independently, pairing the sorted values by position.",
+  approaches: [
+    { name: "Row numbers per column", intuition: "Number the rows of each column in sorted order and join the two lists by their position.", time: "O(n log n)", space: "O(n)" },
+  ],
   complexity, examples,
 }
 

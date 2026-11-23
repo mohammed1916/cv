@@ -12,6 +12,11 @@ const definition = {
   inputLabel: 'Grid and k (JSON)',
   url: 'https://leetcode.com/problems/count-submatrices-with-top-left-element-and-sum-less-than-k/',
   complexity: 'O(m * n) time and space. The visualization caps input at 6 by 6.',
+  question: "Count submatrices that start at the top-left corner and whose sum is less than k.",
+  approaches: [
+    { name: "2D prefix sums", intuition: "Compute prefix sums over the grid and count the top-left submatrices with a sum below k.", time: "O(mn)", space: "O(mn)" },
+    { name: "Brute force submatrices", intuition: "Sum each submatrix directly.", time: "O(m^2n^2)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example', input: '{"grid":[[1,1],[1,1]],"k":2}' },
     { label: 'All zeros', input: '{"grid":[[0,0],[0,0]],"k":0}' },

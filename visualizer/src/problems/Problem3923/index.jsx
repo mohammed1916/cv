@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with points (distinct triples) and target (a triple), coordinates 0 to 6',
   url: 'https://leetcode.com/problems/minimum-generations-to-target-point/',
   complexity: 'Each generation scans pairs of known triples; at most 7^3 = 343 distinct triples exist, so the search is bounded. The visualization shows every pair as a chip.',
+  question: "Starting from given triples, generate new triples from pairs of known ones, and report the fewest generations needed to reach a target.",
+  approaches: [
+    { name: "Generation-by-generation expansion", intuition: "Grow the reachable set one generation at a time from floored midpoints of distinct pairs until the target appears.", time: "Each generation scans known pairs; at most 343 triples", space: "O(distinct triples)" },
+  ],
   examples: [
     { label: 'Midpoint reach', input: '{"points":[[0,0,0],[6,6,6]],"target":[3,3,3]}' },
     { label: 'Second generation', input: '{"points":[[0,0,0],[6,0,0]],"target":[1,0,0]}' },

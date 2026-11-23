@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON object with nums (integers 1 to 4) and k (0 to 3)',
   url: 'https://leetcode.com/problems/find-the-maximum-length-of-a-good-subsequence-ii/',
   complexity: 'O(n * k * V) time for V distinct values here, and O(V * k) space. The visualization caps input at 12 entries.',
+  question: "Find the longest good subsequence with at most a limited number of value changes, for larger inputs.",
+  approaches: [
+    { name: "Best chain per value", intuition: "Group chains by value, so a new number only needs the best chain of its own value and of other values with one fewer change.", time: "O(n * k * V)", space: "O(V * k)" },
+  ],
   examples: [
     { label: 'Five values, k two', input: '{"nums":[3,3,1,4,2],"k":2}' },
     { label: 'No changes', input: '{"nums":[1,2,3,4,1],"k":0}' },

@@ -4,6 +4,10 @@ import { meta } from './meta'
 import { buildTrace, parseInput, code, python, phases, examples, complexity, inputLabel } from './algorithm'
 
 const definition = {
+  question: "Given a method that can be called on an object without it existing ahead of time, return a proxy that records each call's method name.",
+  approaches: [
+    { name: "Proxy handler", intuition: "Intercept property access with a proxy, returning a function for any name.", time: "O(1)", space: "O(1)" },
+  ],
   number: meta.number,
   phases, parse: parseInput, build: buildTrace, code, python, inputLabel, complexity, examples,
   url: `https://leetcode.com/problems/${meta.slug}/`,

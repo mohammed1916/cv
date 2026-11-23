@@ -12,6 +12,11 @@ const definition = {
   inputLabel: 'Object with s and k',
   url: 'https://leetcode.com/problems/count-k-subsequences-of-a-string-with-maximum-beauty/',
   complexity: 'O(n + sigma log sigma) time for n characters over an alphabet of size sigma.',
+  question: "Count the subsequences of length k whose letters have the maximum possible total beauty.",
+  approaches: [
+    { name: "Frequency grouping with combinations", intuition: "Sort letter frequencies; the beauty is set by the k-th largest frequency, and ties are chosen with binomial coefficients.", time: "O(n + sigma log sigma)", space: "O(sigma)" },
+    { name: "Enumerate subsequences", intuition: "Enumerate all subsequences of length k and compare beauty.", time: "exponential", space: "O(k)" },
+  ],
   examples: [
     { label: 'Example', input: '{"s":"wwwtxxyy","k":2}' },
     { label: 'Tied letters', input: '{"s":"gggeeff","k":2}' },

@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Cards as JSON: {"cards": [...]}',
   url: 'https://leetcode.com/problems/minimum-consecutive-cards-to-pick-up/',
   complexity: 'O(n) time and O(n) space for the last-seen table. The visualization caps input at 20 cards.',
+  question: "Find the shortest run of consecutive cards that contains two cards with the same value.",
+  approaches: [
+    { name: "Last occurrence map", intuition: "Scan the cards and, for each card, compare its index with the last index where the same value appeared.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Own: seven cards with repeats', input: '{"cards":[8,2,8,5,1,9,0]}' },
     { label: 'Own: three cards with a zero', input: '{"cards":[99,0,42]}' },

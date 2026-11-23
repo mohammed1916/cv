@@ -20,6 +20,10 @@ const definition = {
   inputLabel: 'Object with word and numFriends (e.g. {"word":"dbca","numFriends":2})',
   url: "https://leetcode.com/problems/find-the-lexicographically-largest-string-from-the-box-ii/",
   complexity: "O(n) time and O(1) extra space: the two candidate starts only move forward. Every part from every split has length at most n - numFriends + 1 once the best suffix is trimmed. The visualization caps word at 12 letters.",
+  question: "Find the lexicographically largest string that can be formed from a word, using the box rule for the number of friends, for longer words.",
+  approaches: [
+    { name: "Two candidate starts", intuition: "Only two start positions can produce the largest string, so compare those and move them forward.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: "Two friends", input: '{"word":"dbca","numFriends":2}' },
     { label: "Repeated letters", input: '{"word":"gggg","numFriends":2}' },

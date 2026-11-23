@@ -12,6 +12,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Roots and sentence (JSON object)',
   url: 'https://leetcode.com/problems/replace-words/',
   complexity: 'O(total characters) time with a hash set; each word scans at most its own length of prefixes.',
+  question: "Replace each word in a sentence with the shortest dictionary root that it starts with.",
+  approaches: [
+    { name: "Trie prefix lookup", intuition: "Insert roots into a trie and walk each word, stopping at the first root end.", time: "O(total chars)", space: "O(total chars)" },
+  ],
   examples: [
     { label: 'Two roots', input: '{"dictionary":["ca","ar"],"sentence":"car arrive cat"}' },
     { label: 'Longer root', input: '{"dictionary":["tree","tr","go"],"sentence":"trees go trace"}' },

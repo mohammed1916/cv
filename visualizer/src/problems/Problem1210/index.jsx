@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON object with grid (square, 0 empty, 1 blocked)',
   url: 'https://leetcode.com/problems/minimum-moves-to-reach-target-with-rotations/',
   complexity: 'O(n^2) states with O(1) moves each. The visualization caps the board at 6 by 6.',
+  question: "Find the fewest moves for a snake on a grid to reach the bottom-right cell in a horizontal or vertical position.",
+  approaches: [
+    { name: "Breadth-first over snake states", intuition: "Each state is the tail cell and orientation; search by fewest moves with rotation allowed.", time: "O(n^2)", space: "O(n^2)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"grid":[[0,0,0,0,0,1],[1,1,0,0,1,0],[0,0,1,0,1,0],[1,1,0,0,0,1],[1,1,1,0,0,1],[1,1,1,0,0,0]]}' },
     { label: 'Open board', input: '{"grid":[[0,0],[0,0]]}' },

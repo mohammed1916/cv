@@ -14,6 +14,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Shop (JSON with price, special and needs)',
   url: 'https://leetcode.com/problems/shopping-offers/',
   complexity: 'Exponential in the worst case, but each distinct remaining-needs vector is solved once thanks to the memo.',
+  question: "Buy exactly the required quantity of each item at the lowest total cost, using single prices and special bundles.",
+  approaches: [
+    { name: "Memoised search over needs", intuition: "Recursively try each bundle that does not exceed the remaining needs, caching the best cost per remaining-needs state.", time: "O(states * offers)", space: "O(states)" },
+  ],
   examples: [
     { label: 'One bundle', input: '{"price":[3,4],"special":[[2,1,6]],"needs":[2,2]}' },
     { label: 'Overbuy trap', input: '{"price":[5,2],"special":[[1,1,4]],"needs":[1,3]}' },

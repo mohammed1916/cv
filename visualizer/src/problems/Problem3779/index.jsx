@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON list of 1 to 12 integers',
   url: 'https://leetcode.com/problems/minimum-number-of-operations-to-have-distinct-elements/',
   complexity: 'O(n) time with a hash set per check. The loop runs at most n / 3 + 1 times.',
+  question: "Count how many times the first three elements must be removed until the array has no repeated value.",
+  approaches: [
+    { name: "Repeat removals with a set", intuition: "Check for repeats with a hash set and drop the first three elements each round.", time: "O(n) per check, at most n / 3 + 1 checks", space: "O(n)" },
+  ],
   examples: [
     { label: 'Repeat at the front', input: '[5, 1, 5, 7, 2]' },
     { label: 'All distinct', input: '[10, 20, 30, 40]' },

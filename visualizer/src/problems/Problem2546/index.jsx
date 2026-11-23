@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with s and target, equal-length binary strings, e.g. {"s":"1010","target":"0110"}',
   url: 'https://leetcode.com/problems/apply-bitwise-operations-to-make-strings-equal/',
   complexity: 'O(n) time and O(1) extra space. The visualization caps the length at 12 characters.',
+  question: "Decide whether one binary string can become another by applying the allowed bitwise operations.",
+  approaches: [
+    { name: "Check ones and equality", intuition: "Equal strings need no change, and otherwise the presence of a one decides the outcome.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Own: six bits', input: '{"s":"110010","target":"001101"}' },
     { label: 'Own: four bits', input: '{"s":"0101","target":"1100"}' },

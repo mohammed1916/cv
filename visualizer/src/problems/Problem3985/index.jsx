@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Numbers (JSON object with nums)',
   url: 'https://leetcode.com/problems/palindromic-subarray-sum/',
   complexity: 'O(n²) time with prefix sums and O(n) space in this version. The visualization caps input at 12 numbers.',
+  question: "Find the largest sum among all palindromic subarrays.",
+  approaches: [
+    { name: "Expand around centres", intuition: "Grow each palindrome outward from its centre and keep the largest sum, using prefix sums.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Pair', input: '{"nums":[10,10]}' },
     { label: 'Long', input: '{"nums":[7,1,2,1,7,3,4,3,4]}' },

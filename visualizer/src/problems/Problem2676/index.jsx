@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with wait (ms) and calls (sorted list of call times in ms)',
   url: 'https://leetcode.com/problems/throttle/',
   complexity: 'O(calls) time. The model stores one pending call, the latest one.',
+  question: "Write a throttle that runs a function at most once per wait time, using the latest call's arguments.",
+  approaches: [
+    { name: "Store the latest call and a timer", intuition: "When a call arrives during the wait, save its arguments and run them when the timer fires.", time: "O(calls)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Burst then a late call', input: '{"wait":100,"calls":[0,40,90,260]}' },
     { label: 'Spaced calls', input: '{"wait":50,"calls":[0,60,130]}' },

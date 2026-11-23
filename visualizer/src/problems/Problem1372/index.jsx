@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Level-order binary tree (JSON object with tree)',
   url: 'https://leetcode.com/problems/longest-zigzag-path-in-a-binary-tree/',
   complexity: 'O(n) time and O(h) recursion space. The visualization caps the tree at 15 nodes.',
+  question: "Find the longest zigzag path in a binary tree.",
+  approaches: [
+    { name: "Depth-first with direction", intuition: "Carry the last direction taken and extend the zigzag when it alternates.", time: "O(n)", space: "O(h)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"tree":[1,null,1,1,1,null,null,1,1,null,1]}' },
     { label: 'Example 2', input: '{"tree":[1,1,1,null,1,null,null,1,1,null,1]}' },

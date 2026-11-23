@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with s (digits) and k (JSON)',
   url: 'https://leetcode.com/problems/restore-the-array/',
   complexity: 'O(n^2) time and O(n) space. The visualization caps s at 12 digits and k at 10000.',
+  question: "Count the ways to split a digit string into numbers no larger than k with no leading zeros.",
+  approaches: [
+    { name: "Dynamic programming on split points", intuition: "Count splits ending at each position from the valid shorter lengths.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Own: digits 2468, k 5', input: '{"s":"2468","k":5}' },
     { label: 'Five digits, cap 300', input: '{"s":"90817","k":300}' },

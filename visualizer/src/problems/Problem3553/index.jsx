@@ -24,6 +24,10 @@ const definition = {
   inputLabel: 'Object with n, edges [u,v,w] (tree) and queries [a,b,c]',
   url: 'https://leetcode.com/problems/minimum-weighted-subgraph-with-the-required-paths-ii/',
   complexity: 'O(n + q * n) time in this walk-up version, O(n) space. The visualization caps n at 8.',
+  question: "Find the minimum weight of a subgraph that connects a set of required paths in a tree.",
+  approaches: [
+    { name: "Tree walk up", intuition: "Walk up from each endpoint to the lowest common ancestor and sum the weights.", time: "O(n + q n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Path', input: '{"n":3,"edges":[[0,1,2],[1,2,3]],"queries":[[0,2,1]]}' },
     { label: 'Star', input: '{"n":4,"edges":[[0,1,1],[0,2,2],[0,3,4]],"queries":[[1,2,3]]}' },

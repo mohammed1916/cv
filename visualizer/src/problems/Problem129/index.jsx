@@ -23,6 +23,10 @@ const definition = {
   inputLabel: "Level-order digits (JSON object, e.g. {\"root\": [4,9,0,5,1]})",
   url: "https://leetcode.com/problems/sum-root-to-leaf-numbers/",
   complexity: "O(n) time and O(h) stack space for n nodes. The visualization caps the array at 15 slots.",
+  question: "Sum all root-to-leaf numbers in a binary tree.",
+  approaches: [
+    { name: "Depth-first accumulation", intuition: "Carry the number formed so far down the tree and add it at each leaf.", time: "O(n)", space: "O(h)" },
+  ],
   examples: getExamples("sum-root-to-leaf-numbers").map(({ label, input }) => ({ label, input: JSON.stringify({ root: JSON.parse(input) }) })),
 };
 

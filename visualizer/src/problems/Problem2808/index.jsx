@@ -18,6 +18,11 @@ const definition = {
   inputLabel: "nums (e.g. {\"nums\": [1,2,1,2]})",
   url: "https://leetcode.com/problems/minimum-seconds-to-equalize-a-circular-array/",
   complexity: "O(n) time and O(n) space. The visualization caps the array at 50 items.",
+  question: "On a circular array, find the fewest seconds needed to make all values equal, where each second every element can take a neighbour's value.",
+  approaches: [
+    { name: "Per value, measure largest gap", intuition: "For each value, the time is governed by the largest circular gap between its occurrences.", time: "O(n)", space: "O(n)" },
+    { name: "Simulate spreading", intuition: "Repeatedly replace each element with a neighbour's value until all match.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: "Example 1", input: "{\"nums\": [1, 2, 1, 2]}" },
     { label: "Example 2", input: "{\"nums\": [2, 1, 3, 3, 2]}" },

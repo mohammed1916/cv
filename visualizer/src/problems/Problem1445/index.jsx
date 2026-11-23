@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'Object with a Sales list of { sale_date, fruit, sold_num } rows',
   url: 'https://leetcode.com/problems/apples-oranges/',
   complexity: 'O(n) to group the rows, plus a sort of the distinct dates.',
+  question: "For each date, subtract the number of oranges sold from the number of apples sold.",
+  approaches: [
+    { name: "Conditional sum by date", intuition: "Use a conditional sum per fruit and subtract, grouped by date.", time: "O(n + d log d)", space: "O(d)" },
+  ],
   examples: [
     { label: 'Example', input: '{"Sales":[{"sale_date":"2020-06-01","fruit":"apples","sold_num":15},{"sale_date":"2020-05-30","fruit":"oranges","sold_num":8},{"sale_date":"2020-06-02","fruit":"oranges","sold_num":5},{"sale_date":"2020-05-30","fruit":"apples","sold_num":10},{"sale_date":"2020-06-01","fruit":"oranges","sold_num":15},{"sale_date":"2020-06-02","fruit":"apples","sold_num":20}]}' },
     { label: 'One sale', input: '{"Sales":[{"sale_date":"2020-01-01","fruit":"apples","sold_num":0}]}' },

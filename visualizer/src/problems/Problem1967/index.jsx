@@ -11,6 +11,10 @@ const definition = {
   inputLabel: 'JSON object with patterns and word (e.g. {"patterns":["ab","cd","a"],"word":"xaby"})',
   url: 'https://leetcode.com/problems/number-of-strings-that-appear-as-substrings-in-word/',
   complexity: 'O(p * m * n) with a naive substring test, where p patterns of length up to m are searched in a word of length n. The visualization caps sizes at 8 patterns and 30 characters.',
+  question: "Count the patterns that appear as contiguous substrings of a word.",
+  approaches: [
+    { name: "Substring check per pattern", intuition: "Check each pattern against the word with a substring search.", time: "O(p * n * m)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Two found', input: '{"patterns":["ab","cd","a"],"word":"xaby"}' },
     { label: 'None found', input: '{"patterns":["z"],"word":"abc"}' },

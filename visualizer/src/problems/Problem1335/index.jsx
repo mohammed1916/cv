@@ -3,6 +3,10 @@ import { DPTable } from '../../components/shared/AlgorithmStatePrimitives'
 import { buildTrace, parseInput, code, python, phases, examples } from './algorithm'
 
 const definition = {
+  question: "Split jobs into d days in order and minimize the total of each day's hardest job.",
+  approaches: [
+    { name: "Day-by-day DP", intuition: "Store the best cost for each job prefix and number of days, using the maximum of the last segment.", time: "O(d n^2)", space: "O(d n)" },
+  ],
   number: '1335', phases, parse: parseInput, build: buildTrace, code, python, examples,
   inputLabel: 'Object with jobDifficulty and d (JSON)',
   url: 'https://leetcode.com/problems/minimum-difficulty-of-a-job-schedule/',

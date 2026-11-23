@@ -20,6 +20,10 @@ const definition = {
   inputLabel: 'JSON array of integers, e.g. [3, 1, 4, 1, 5]',
   url: 'https://leetcode.com/problems/count-shadow-pairs-i/description/',
   complexity: 'O(n^2) time and O(1) extra space in this scan. The visualization caps the array at 16 values; the official limit is 100000.',
+  question: "Count the rising index pairs whose middle values all stay at or above the left value.",
+  approaches: [
+    { name: "Pairwise scan", intuition: "Check each rising pair for a blocking smaller middle value.", time: "O(n^2)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Smaller value blocks', input: '[2, 1, 3]' },
     { label: 'Equal values pass', input: '[3, 5, 3, 7]' },

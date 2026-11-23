@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON object with nums (1 to 40 values from 1 to 50) and k, for example {"nums":[1,2,3,4,3,2,5],"k":3}',
   url: 'https://leetcode.com/problems/find-the-power-of-k-size-subarrays-ii/',
   complexity: 'O(n) time with one run counter. The visualization caps nums at 40 values.',
+  question: "For each window of k consecutive values, report its maximum if the values rise by exactly one each step, otherwise -1, for large arrays.",
+  approaches: [
+    { name: "Run length counter", intuition: "Track how long the current run of consecutive increasing values is; a window is good when its run reaches k.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Six values, k three', input: '{"nums":[6,2,20,11,11,3],"k":3}' },
     { label: 'Eight ones, k eight', input: '{"nums":[1,1,1,1,1,1,1,1],"k":8}' },

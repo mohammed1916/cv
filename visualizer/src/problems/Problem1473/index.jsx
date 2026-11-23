@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with houses, cost, m, n and target (JSON)',
   url: 'https://leetcode.com/problems/paint-house-iii/',
   complexity: 'O(m * target * n^2) time and O(target * n) space. The visualization caps m at 6 and n at 3.',
+  question: "Paint houses so that they form exactly a target number of neighbourhoods at the lowest cost.",
+  approaches: [
+    { name: "DP over house, colour and neighbourhood count", intuition: "Each house either extends the colour of its left neighbour or starts a new neighbourhood with another colour.", time: "O(m * target * n^2)", space: "O(target * n)" },
+  ],
   examples: [
     { label: 'Two pre-painted houses', input: '{"houses":[1,0,0,0,2],"cost":[[3,6],[8,2],[5,4],[1,9],[7,3]],"m":5,"n":2,"target":3}' },
     { label: 'Example 2', input: '{"houses":[1,0,0],"cost":[[1,1],[1,1],[1,1]],"m":3,"n":2,"target":1}' },

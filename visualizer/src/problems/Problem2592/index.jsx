@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Array of 1 to 12 integers from 0 to 99 (JSON)',
   url: 'https://leetcode.com/problems/maximize-greatness-of-an-array/',
   complexity: 'O(n log n) for the sort and one linear scan. The visualization caps input at 12 values.',
+  question: "Permute an array so that as many positions as possible hold a value strictly greater than the original.",
+  approaches: [
+    { name: "Sort then greedy two pointers", intuition: "Sort the values and match each small value with the next larger one.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Six values with ties', input: '[12,8,20,5,5,30]' },
     { label: 'Include zero and max', input: '[0,99,7]' },

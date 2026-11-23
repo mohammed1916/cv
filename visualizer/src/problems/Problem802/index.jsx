@@ -18,6 +18,11 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Adjacency list graph (JSON)',
   url: 'https://leetcode.com/problems/find-eventual-safe-states/',
   complexity: 'O(V + E) time and space with the reversed-graph topological peel.',
+  question: "Return the nodes from which every walk leads to a terminal node, sorted in increasing order.",
+  approaches: [
+    { name: "Reverse graph and peel", intuition: "Nodes with no outgoing edges are safe; removing safe nodes from the reverse graph frees their predecessors whose remaining out-degree hits zero.", time: "O(V + E)", space: "O(V + E)" },
+    { name: "DFS with three colours", intuition: "Mark nodes as unvisited, in progress, or safe, and detect cycles during the walk.", time: "O(V + E)", space: "O(V)" },
+  ],
   examples: [
     { label: 'Cycle among four nodes', input: '[[1],[2,3],[],[0,2]]' },
     { label: 'Two acyclic chains', input: '[[1,2],[2],[],[4],[5],[]]' },

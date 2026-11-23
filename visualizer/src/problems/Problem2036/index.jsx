@@ -8,6 +8,10 @@ const definition = {
   inputLabel: 'Integer array (JSON)',
   url: 'https://leetcode.com/problems/maximum-alternating-subarray-sum/',
   complexity: 'O(n) time and O(1) extra space: two running states.',
+  question: "Find the largest sum of a subarray whose adjacent elements alternate in sign by addition and subtraction.",
+  approaches: [
+    { name: "Kadane with alternating signs", intuition: "Track the best alternating sum ending at each position, flipping the sign of each added value.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Dip and rise', input: '[5,-2,4,1]' },
     { label: 'Single large', input: '[-1,9,-3]' },

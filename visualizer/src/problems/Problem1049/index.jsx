@@ -10,6 +10,10 @@ const definition = {
   inputLabel: 'Stone weights as a JSON array, such as [5,3,9,4]',
   url: 'https://leetcode.com/problems/last-stone-weight-ii/',
   complexity: 'O(n * S) time and O(S) space, where S is the total weight. The table only covers sums up to half the total.',
+  question: "Split stones into two groups so that the difference of their weight sums is as small as possible.",
+  approaches: [
+    { name: "Subset sum table", intuition: "Find the reachable sums up to half the total; the reachable sum closest to half gives the smallest difference.", time: "O(n * S)", space: "O(S)" },
+  ],
   examples: [
     { label: 'Uneven split', input: '[5,3,9,4]' },
     { label: 'Perfect split', input: '[10,10]' },

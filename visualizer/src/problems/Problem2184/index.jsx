@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON with height, width and bricks, e.g. {"height":2,"width":3,"bricks":[1,2]}',
   url: 'https://leetcode.com/problems/number-of-ways-to-build-sturdy-brick-wall/',
   complexity: 'Layouts grow with the width, so the cost is the number of layouts squared per row. The page caps width at 10, height at 3 and bricks at 4 widths.',
+  question: "Count the ways to build a wall of a given height and width from bricks, where no seam line runs straight through the whole wall.",
+  approaches: [
+    { name: "Row patterns and compatibility dynamic programming", intuition: "List the valid rows of brick widths, mark which pairs of rows share no seam, and count walls row by row.", time: "O(h * p^2)", space: "O(p)" },
+  ],
   examples: [
     { label: 'Two rows', input: '{"height":2,"width":3,"bricks":[1,2]}' },
     { label: 'Four width', input: '{"height":1,"width":4,"bricks":[1,2]}' },

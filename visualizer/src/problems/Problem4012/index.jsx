@@ -22,6 +22,10 @@ const definition = {
   inputLabel: 'Object with tasks (durations) and shifts (budgets)',
   url: 'https://leetcode.com/problems/count-of-unfinished-tasks-after-each-shift/',
   complexity: 'O(n + m) time for n tasks and m shifts, since each task pointer only moves forward within a pass. The visualization caps tasks at 8 and shifts at 12.',
+  question: "Feed a shift budget through a queue of tasks, carrying partial progress forward, and count the tasks still unfinished after each shift.",
+  approaches: [
+    { name: "Queue with carried progress", intuition: "Pass the budget through the tasks in order, carrying partial progress forward.", time: "O(n + m)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Carry over', input: '{"tasks":[2,3],"shifts":[1,4,2]}' },
     { label: 'Early finish', input: '{"tasks":[5],"shifts":[5,5]}' },

@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with rows and cols (e.g. {"rows":3,"cols":4})',
   url: 'https://leetcode.com/problems/create-grid-with-exactly-one-path/',
   complexity: 'O(m * n) time and space for the grid and the path counts.',
+  question: "Build a grid whose only right-and-down route from top-left to bottom-right is a single corridor.",
+  approaches: [
+    { name: "Corridor construction and route counting", intuition: "Open the top row and right column, wall off the other cells, and count routes to confirm exactly one.", time: "O(m x n)", space: "O(m x n)" },
+  ],
   examples: [
     { label: 'Three by four', input: '{"rows":3,"cols":4}' },
     { label: 'Single row', input: '{"rows":1,"cols":5}' },

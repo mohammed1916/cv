@@ -11,6 +11,10 @@ const definition = {
   inputLabel: 'Object with entries ([shop, movie, price]) and ops (search, rent, drop, report)',
   url: 'https://leetcode.com/problems/design-movie-rental-system/',
   complexity: 'Each operation touches sorted lists with binary-search insertion and removal, so a search or report reads only the front five entries.',
+  question: "Design a movie rental system that tracks copies by movie and shop, supports renting and returning, and reports the cheapest unrented copies.",
+  approaches: [
+    { name: "Sorted sets per movie and a global rented set", intuition: "Keep each movie's unrented copies in price order and one global ordered set for rented copies, updating both on each call.", time: "O(log n) per call", space: "O(n)" },
+  ],
   examples: [
     { label: 'Search, rent, report', input: '{"entries":[[0,4,8],[0,5,9],[1,4,6],[2,4,2]],"ops":[["search",4],["rent",2,4],["report"],["drop",2,4],["search",4]]}' },
     { label: 'Five shops', input: '{"entries":[[0,7,10],[1,7,9],[2,7,8],[3,7,7],[4,7,6],[5,7,5]],"ops":[["search",7],["rent",5,7],["search",7]]}' },

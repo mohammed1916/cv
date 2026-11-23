@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'JSON: {"n": n}',
   url: 'https://leetcode.com/problems/sum-of-primes-between-number-and-its-reverse/',
   complexity: 'O(R * sqrt(R)) time with R at most 1000 for trial division, and O(1) extra space.',
+  question: "Reverse the digits of a number and add up the primes in the range between the two values.",
+  approaches: [
+    { name: "Trial division over the range", intuition: "Reverse the digits, then test each value in the range by trial division up to its square root.", time: "O(R x sqrt(R))", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"n":13}' },
     { label: 'Example 2', input: '{"n":10}' },

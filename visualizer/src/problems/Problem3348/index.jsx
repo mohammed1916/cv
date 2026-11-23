@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with num (digit string) and t',
   url: 'https://leetcode.com/problems/smallest-divisible-digit-product-ii/description/',
   complexity: 'Teaching model: prefix scan with memoised fewest-digit counts over exponent vectors. The visualization caps t at 1000000.',
+  question: "Find the smallest number divisible by t, with digits whose product uses the same digits as num, from num and t.",
+  approaches: [
+    { name: "Prefix scan with memoised counts", intuition: "Scan the digits of the prefix and memoise the fewest digits needed for each exponent vector.", time: "Teaching model", space: "Teaching model" },
+  ],
   examples: [
     { label: 'Raise a digit', input: '{"num":"3579","t":30}' },
     { label: 'Already fits', input: '{"num":"2468","t":64}' },

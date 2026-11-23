@@ -9,6 +9,10 @@ const definition = {
   inputLabel: 'Object with grid: rows of -1 (obstacle), 0 (empty), 1 (start) and 2 (end), at most 12 squares',
   url: 'https://leetcode.com/problems/unique-paths-iii/',
   complexity: 'Exponential in the number of empty squares in the worst case, since every walk is tried. The grid is capped at 12 squares here.',
+  question: "On a grid with a start, an end and obstacles, count the paths from start to end that visit every empty square exactly once.",
+  approaches: [
+    { name: "Backtracking with visited marks", intuition: "Walk each open neighbour, mark cells as visited, and count a path only when it ends at the target after covering all empty cells.", time: "exponential, bounded by the small board", space: "O(board size)" },
+  ],
   examples: [
     { label: 'Ring around the middle', input: JSON.stringify({ grid: [[1, 0, 0], [0, 0, 0], [0, 0, 2]] }) },
     { label: 'Open two-row board', input: JSON.stringify({ grid: [[1, 0, 0], [0, 0, 2]] }) },

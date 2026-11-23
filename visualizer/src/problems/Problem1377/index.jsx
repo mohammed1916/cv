@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'JSON object with n, edges (a tree), t and target',
   url: 'https://leetcode.doocs.org/en/lc/1377/',
   complexity: 'O(n) time and O(n) space for the breadth-first search.',
+  question: "Find the probability that a frog is at a target vertex after a fixed number of seconds.",
+  approaches: [
+    { name: "Breadth-first probability split", intuition: "Share each vertex's probability equally among unvisited children, level by level.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Five-vertex tree, three seconds', input: '{"n":5,"edges":[[1,2],[1,3],[3,4],[3,5]],"t":3,"target":5}' },
     { label: 'Branch below vertex two', input: '{"n":6,"edges":[[1,2],[2,3],[2,4],[4,5],[4,6]],"t":1,"target":5}' },

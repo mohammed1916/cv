@@ -13,6 +13,11 @@ const definition = {
   inputLabel: 'JSON array in level order, null for a missing child',
   url: 'https://leetcode.com/problems/populating-next-right-pointers-in-each-node-ii/description/',
   complexity: 'O(n) time and O(w) extra space for n nodes and maximum width w. The visualization caps the tree at 30 nodes.',
+  question: "Connect each node of a binary tree to its right neighbour on the same level, for a tree with arbitrary shape.",
+  approaches: [
+    { name: "Level-order with dummy head", intuition: "Walk each level as a linked list and link the next pointers while building the next level.", time: "O(n)", space: "O(w)" },
+    { name: "Linked-list traversal", intuition: "Use already connected next pointers on the previous level to avoid a queue.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Uneven tree', input: '[4,2,9,1,null,null,6,3]' },
     { label: 'Gap in the middle', input: '[5,3,8,1,null,null,9]' },

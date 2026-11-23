@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Password of 1 to 60 letters, digits, or the symbols ! @ # $',
   url: 'https://leetcode.com/problems/password-strength/',
   complexity: 'O(n) time and O(1) extra space for n characters, since only 64 characters are possible. The visualization caps the password at 60 characters.',
+  question: "Score a password by adding each distinct character's class weight: lowercase 1, uppercase 2, digit 3, and a listed symbol 5.",
+  approaches: [
+    { name: "Distinct-character scoring", intuition: "Track seen characters in a set and add each new character's class weight once.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Mixed classes', input: 'aAbB11!!' },
     { label: 'Repeats', input: 'Zz9@9@' },

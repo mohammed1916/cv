@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with costs, capacity and budget',
   url: 'https://leetcode.com/problems/maximum-capacity-within-budget/',
   complexity: 'O(n^2) for this visual trace; the same idea with a pointer gives O(n log n) overall.',
+  question: "Pick machines within a budget to maximise capacity, where a machine can be paired with any cheaper machine.",
+  approaches: [
+    { name: "Sort by cost and use prefix best", intuition: "Sort by cost so each machine's cheaper partners form a prefix, then pair each machine with the best affordable prefix.", time: "O(n^2) in this trace; O(n log n) with a pointer", space: "O(n)" },
+  ],
   examples: [
     { label: 'Pairs', input: '{"costs":[6,2,9,4],"capacity":[3,7,2,5],"budget":10}' },
     { label: 'Too expensive', input: '{"costs":[5,5],"capacity":[3,4],"budget":5}' },

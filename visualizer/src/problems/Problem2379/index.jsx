@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON object with blocks (letters W and B) and k, for example {"blocks":"WBBWWBBWBW","k":7}',
   url: 'https://leetcode.com/problems/minimum-recolors-to-get-k-consecutive-black-blocks/',
   complexity: 'O(n) time and O(1) extra space. The visualization caps blocks at 40 characters.',
+  question: "Find the fewest recolours needed so that a row of blocks has a run of k black blocks in a row.",
+  approaches: [
+    { name: "Sliding window", intuition: "Slide a window of length k and track the fewest white blocks inside it.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Own: eight blocks, k 4', input: '{"blocks":"WBBWBBWW","k":4}' },
     { label: 'Already black', input: '{"blocks":"WBWBBBW","k":2}' },

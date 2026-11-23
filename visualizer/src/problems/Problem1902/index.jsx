@@ -19,6 +19,10 @@ const definition = {
   inputLabel: 'JSON list of distinct integers, in insertion order',
   url: 'https://leetcode.com/problems/depth-of-bst-given-insertion-order/',
   complexity: 'O(n * h) time and O(n) space, where h is the height of the tree built so far; a worst-case chain makes this O(n^2). The visualization caps the list at 15 values from 0 to 99.',
+  question: "Insert values in the given order into an empty binary search tree and report the depth of the tree.",
+  approaches: [
+    { name: "Insert with parent depth", intuition: "Walk down from the root for each value, keeping the depth, and record the deepest level reached.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Balanced', input: '[4,2,6,1,3,5,7]' },
     { label: 'Zigzag', input: '[1,3,2]' },

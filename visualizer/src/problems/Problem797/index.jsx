@@ -16,6 +16,11 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'DAG adjacency list (JSON)',
   url: 'https://leetcode.com/problems/all-paths-from-source-to-target/',
   complexity: 'O(2^n * n) worst case for n nodes (output-bound). Visualization limited to 10 nodes.',
+  question: "In a directed acyclic graph with n nodes, list every path from node 0 to node n - 1.",
+  approaches: [
+    { name: "DFS with backtracking", intuition: "Walk every outgoing edge from the current node, record the path when the target is reached, and step back.", time: "O(2^n * n) output-bound", space: "O(n) recursion plus output" },
+    { name: "BFS carrying paths", intuition: "Queue partial paths and emit the ones that end at the target.", time: "O(2^n * n)", space: "O(2^n * n)" },
+  ],
   examples: [
     { label: '4 nodes, 2 paths', input: '[[1,2],[3],[3],[]]' },
     { label: '5 nodes, 5 paths', input: '[[4,3,1],[3,2,4],[3],[4],[]]' },

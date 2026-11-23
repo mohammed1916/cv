@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Object with s (JSON)',
   url: 'https://leetcode.com/problems/minimum-deletions-to-make-string-balanced/',
   complexity: 'O(n) time and O(1) space: one scan keeps the cheapest balanced cost and the count of earlier b characters.',
+  question: "Delete the fewest characters so that all a's come before all b's.",
+  approaches: [
+    { name: "One scan with running cost", intuition: "Track the cheapest cost so far and the count of b's seen, updating at each character.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Mixed string', input: '{"s":"abbaabb"}' },
     { label: 'Starts with b', input: '{"s":"bbaa"}' },

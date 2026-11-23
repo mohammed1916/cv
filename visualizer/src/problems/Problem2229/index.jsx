@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'JSON {"nums": [1, 3, 4, 2]}',
   url: 'https://leetcode.com/problems/check-if-an-array-is-consecutive/',
   complexity: 'O(n) time and O(n) space for n values. The visualization caps arrays at 40 values from 0 to 100.',
+  question: "Check whether an array holds distinct integers that form one consecutive run.",
+  approaches: [
+    { name: "Set and range check", intuition: "The values must be distinct and their maximum minus minimum must equal the length minus one.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Consecutive', input: '{"nums":[4,2,5,3]}' },
     { label: 'Gap', input: '{"nums":[7,9]}' },

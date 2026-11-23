@@ -11,6 +11,10 @@ const definition = {
   inputLabel: 'Object with nums (JSON list of positive integers)',
   url: 'https://leetcode.com/problems/split-the-array-to-make-coprime-products/',
   complexity: 'O(n * sqrt(M)) time for n values up to M, using trial division. The visualization caps input at 10 values.',
+  question: "Find the smallest index where the prefix product and suffix product share no common factor.",
+  approaches: [
+    { name: "Track primes by position", intuition: "Record the last position of each prime on the right, and find the earliest valid split.", time: "O(n sqrt(M))", space: "O(primes)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"nums":[4,7,8,15,3,5]}' },
     { label: 'Example 2', input: '{"nums":[4,7,15,8]}' },

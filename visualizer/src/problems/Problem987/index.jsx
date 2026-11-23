@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Tree (JSON level order)',
   url: 'https://leetcode.com/problems/vertical-order-traversal-of-a-binary-tree/',
   complexity: 'O(n log n) time for the sort. The visualization caps input at 15 nodes.',
+  question: "Group the nodes of a binary tree by column from left to right, sorting each column by depth and then value.",
+  approaches: [
+    { name: "Coordinates then sort", intuition: "Record each node's column and depth, then sort by column, depth and value.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Seven-node tree with negatives', input: '[2,-5,4,null,-9,6,null]' },
     { label: 'Ties', input: '[1,2,3,4,6,5,7]' },

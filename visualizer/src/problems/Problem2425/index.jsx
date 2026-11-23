@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with nums1 and nums2, for example {"nums1":[2,1,3],"nums2":[10,2,5,0]}',
   url: 'https://leetcode.com/problems/bitwise-xor-of-all-pairings/',
   complexity: 'O(n + m) time and O(1) extra space.',
+  question: "Find the bitwise XOR of all pairings, where each element of one array is paired with each element of the other.",
+  approaches: [
+    { name: "Parity of lengths", intuition: "Each element of one array appears once per element of the other, so only the parity of the lengths matters.", time: "O(n + m)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Odd nums2', input: '{"nums1":[4,1,2,7],"nums2":[3,8,5]}' },
     { label: 'Two by two', input: '{"nums1":[6,1],"nums2":[2,9]}' },

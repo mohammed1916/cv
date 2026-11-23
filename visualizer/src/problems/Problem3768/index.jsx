@@ -12,6 +12,11 @@ const definition = {
   inputLabel: 'Array (JSON object with nums and k)',
   url: 'https://leetcode.com/problems/minimum-inversion-count-in-subarrays-of-fixed-length/',
   complexity: 'O(n * k^2) time in this visualization, which compares every pair in each window. The visualization caps n at 20.',
+  question: "For each fixed-length window, count its inversions and report the smallest count.",
+  approaches: [
+    { name: "Pairwise count per window", intuition: "Count the inverted pairs in each window directly.", time: "O(n * k^2)", space: "O(1)" },
+    { name: "Sliding window with a Fenwick tree", intuition: "Update the inversion count as values enter and leave the window.", time: "O(n log k)", space: "O(k)" },
+  ],
   examples: [
     { label: 'Five values, k three', input: '{"nums":[5,1,4,2,3],"k":3}' },
     { label: 'Reversed', input: '{"nums":[5,3,2,1],"k":4}' },

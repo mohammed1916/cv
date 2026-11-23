@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with nums (1 to 10 values from 0 to 32767)',
   url: "https://leetcode.com/problems/lexicographically-largest-power-array/",
   complexity: "This trace picks each position by scanning the pool, so it costs O(n^2) time with O(n) space; each pick is checked against 15 bits. The visualization caps the array at 10 values. The official limit of 50000 elements needs a faster selection (for example, counting equal values) that is not shown here, and the bounds are not verified in this draft.",
+  question: "Build the lexicographically largest arrangement of the values so that each run of unbroken set bits lasts as long as possible.",
+  approaches: [
+    { name: "Greedy bit-run placement", intuition: "At each position take the candidate that keeps the most still-unbroken bits set, so earlier positions are as large as possible.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: "Small mix", input: '{"nums":[1,2,3]}' },
     { label: "High bits", input: '{"nums":[24576,16384,8192,16384]}' },

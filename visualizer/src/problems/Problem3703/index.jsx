@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with s (parentheses) and k',
   url: 'https://leetcode.com/problems/remove-k-balanced-substrings/',
   complexity: 'O(n * k) time: each push compares the top 2k symbols.',
+  question: "Remove k-balanced substrings from a parenthesis string, repeatedly.",
+  approaches: [
+    { name: "Stack of symbols", intuition: "Push symbols onto a stack and remove a group whenever k matching pairs appear at the top.", time: "O(n * k)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example', input: '{"s":"(()())((","k":1}' },
     { label: 'Nested', input: '{"s":"(((())))","k":2}' },

@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON object with tasks: up to 12 [actual, minimum] pairs',
   url: 'https://leetcode.com/problems/minimum-initial-energy-to-finish-tasks/',
   complexity: 'O(n log n) time for n tasks. The visualization caps tasks at 12.',
+  question: "Order tasks so the starting energy is as small as possible, where each task needs a minimum energy to start and then spends its cost.",
+  approaches: [
+    { name: "Sort by slack", intuition: "Sort tasks by minimum minus actual cost, then accumulate the largest energy needed.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"tasks":[[1,2],[2,4],[4,8]]}' },
     { label: 'Example 2', input: '{"tasks":[[1,3],[2,4],[10,11],[10,12],[8,9]]}' },

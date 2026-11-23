@@ -16,6 +16,10 @@ const definition = {
   inputLabel: 'Exactly ten decimal digits, e.g. 4321098765 or "0123456789"',
   url: 'https://leetcode.com/problems/minimum-rotations-to-dial-a-number-i/',
   complexity: 'O(n) time and O(1) extra space for the ten-digit string.',
+  question: "Find the fewest rotations needed to dial a number on a circular ten-digit dial starting from zero.",
+  approaches: [
+    { name: "Shorter circular direction per digit", intuition: "For each digit, take the shorter direction around the dial and pay one step per digit.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Descending', input: '9876543210' },
     { label: 'Repeats', input: '5511225599' },

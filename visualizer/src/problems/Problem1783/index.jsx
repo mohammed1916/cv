@@ -14,6 +14,10 @@ const definition = {
   phases, parse: parseInput, build: buildTrace, code, sql, python, inputLabel,
   url: `https://leetcode.com/problems/${meta.slug}/`,
   complexity, examples,
+  question: "Find the players who have won more than one grand slam title.",
+  approaches: [
+    { name: "Stack then group", intuition: "Stack the four winner columns, count each player, and keep those with more than one title.", time: "O(n)", space: "O(players)" },
+  ],
 }
 
 const CELL = { border: '1px solid var(--border)', padding: '3px 8px', color: 'var(--text)', fontFamily: 'monospace' }

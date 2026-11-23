@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Lowercase word (e.g. bza)',
   url: 'https://leetcode.com/problems/minimum-time-to-type-word-using-special-typewriter/',
   complexity: 'O(n) time for a word of n letters, with constant work per letter.',
+  question: "Find the minimum time needed to type a word on a circular typewriter where each letter costs the shorter way around plus one press.",
+  approaches: [
+    { name: "Circular distance sum", intuition: "Sum the shorter circular distance between consecutive letters, plus one press for each letter.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Short word', input: 'abc' },
     { label: 'Wraps around', input: 'bza' },

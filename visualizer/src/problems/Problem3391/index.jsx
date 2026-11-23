@@ -10,6 +10,10 @@ const definition = {
   inputLabel: 'Object with n and calls, for example ["setCell",0,1,2] or ["largestMatrix"]',
   url: 'https://leetcode.com/problems/design-a-3d-binary-matrix-with-efficient-layer-tracking/',
   complexity: 'Setting or clearing is O(log m) for m heap entries. A query discards each out-of-date entry once, so it is O(log m) amortized. The visualization limits n to 6 and calls to 24; the class handles n up to 100.',
+  question: "Design a 3D binary matrix that supports setting and clearing cells and reports the first layer that has a set cell.",
+  approaches: [
+    { name: "Lazy heap of layers", intuition: "Keep a min-heap of layers with set cells, and discard the stale entries when a query arrives.", time: "O(log m)", space: "O(m)" },
+  ],
   examples: [
     { label: 'Tie, then an old entry', input: '{"n":3,"calls":[["setCell",2,0,1],["setCell",1,1,1],["setCell",1,2,2],["largestMatrix"],["setCell",2,2,0],["largestMatrix"],["unsetCell",2,2,0],["largestMatrix"]]}' },
     { label: 'Repeats and an empty grid', input: '{"n":2,"calls":[["largestMatrix"],["setCell",0,1,1],["setCell",0,1,1],["largestMatrix"],["unsetCell",0,1,1],["unsetCell",0,1,1],["largestMatrix"]]}' },

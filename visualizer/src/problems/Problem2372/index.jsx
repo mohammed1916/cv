@@ -3,6 +3,10 @@ import { meta } from './meta'
 import { buildTrace, parseInput, code, sql, python, phases, examples, complexity, inputLabel } from './algorithm'
 
 const definition = {
+  question: "Using sales and salesperson tables, compute how much each salesperson influences the total.",
+  approaches: [
+    { name: "Join and aggregate", intuition: "Join the tables, aggregate each salesperson's totals, and compare them with the overall total.", time: "O(n)", space: "O(n)" },
+  ],
   number: meta.number,
   phases, parse: parseInput, build: buildTrace, code, sql, python, inputLabel,
   url: `https://leetcode.com/problems/${meta.slug}/`,

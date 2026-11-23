@@ -17,6 +17,10 @@ const definition = {
   inputLabel: "JSON object with nums",
   url: "https://leetcode.com/problems/find-the-sum-of-encrypted-integers/",
   complexity: "O(n * d) time and O(1) extra space for n numbers with d digits each. The visualization caps nums at 50 values.",
+  question: "Encrypt each integer by replacing its digits with the largest digit, then sum the results.",
+  approaches: [
+    { name: "Digit scan", intuition: "For each number, find its largest digit and repeat it for every digit position.", time: "O(total digits)", space: "O(1)" },
+  ],
   examples: [
     { label: "Example 1", input: '{"nums":[14,9,302]}' },
     { label: "Example 2", input: '{"nums":[523,7,95]}' },

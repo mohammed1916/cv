@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with nums and queries ([l, r] pairs)',
   url: 'https://leetcode.com/problems/maximum-xor-score-subarray-queries/description/',
   complexity: 'O(n^2 + q) time and O(n^2) space. The visualization caps nums at 12 values.',
+  question: "Answer queries about the maximum XOR score over subarrays in a given range.",
+  approaches: [
+    { name: "Table over all subarrays", intuition: "Compute the XOR score of every subarray from smaller ones, then answer each query from the table.", time: "O(n^2 + q)", space: "O(n^2)" },
+  ],
   examples: [
     { label: 'Example', input: '{"nums":[3,6,10,1],"queries":[[0,1],[1,3],[0,3]]}' },
     { label: 'Short', input: '{"nums":[4,4,9],"queries":[[0,2],[1,1]]}' },

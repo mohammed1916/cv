@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Board (JSON object with board rows of digits, X, S and E)',
   url: 'https://leetcode.com/problems/number-of-paths-with-max-score/',
   complexity: 'O(n^2) time with three predecessors per cell. The visualization caps the board at 5 by 5.',
+  question: "Find the largest score and the number of paths achieving it from the top-left to the bottom-right of a board.",
+  approaches: [
+    { name: "Grid DP with counts", intuition: "Keep the best score and path count for each cell from its three predecessors.", time: "O(n^2)", space: "O(n^2)" },
+  ],
   examples: [
     { label: 'Official', input: '{"board":["E23","2X2","12S"]}' },
     { label: 'Blocked', input: '{"board":["E11","XXX","11S"]}' },

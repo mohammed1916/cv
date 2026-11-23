@@ -4,6 +4,10 @@ import { buildTrace, parseInput, code, python, phases, examples, complexity, inp
 import { Sequence, Vars } from './SeqKit'
 
 const definition = {
+  question: "Find the fewest decrements that make an array alternate between peaks and valleys.",
+  approaches: [
+    { name: "Two patterns, cheaper one wins", intuition: "Try lowering even positions or odd positions; price each pattern and keep the cheaper.", time: "O(n)", space: "O(1)" },
+  ],
   number: meta.number,
   phases, parse: parseInput, build: buildTrace, code, python, inputLabel, complexity, examples,
   url: `https://leetcode.com/problems/${meta.slug}/`,

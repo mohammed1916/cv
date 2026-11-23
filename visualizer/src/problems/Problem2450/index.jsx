@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with s (binary string) and k (window length)',
   url: 'https://leetcode.com/problems/number-of-distinct-binary-strings-after-applying-operations/',
   complexity: 'O(n - k) time with the power-of-two count, since the windows are linearly independent over GF(2). The visualization caps s at 12 bits.',
+  question: "Count the distinct binary strings reachable from s by repeatedly flipping a window of length k.",
+  approaches: [
+    { name: "Count free positions over GF(2)", intuition: "Each window is a vector over GF(2), and the reachable set is a coset of their span, so count the powers of two.", time: "O(n - k)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Mixed', input: '{"s":"101101","k":3}' },
     { label: 'Whole string', input: '{"s":"0000","k":4}' },

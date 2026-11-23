@@ -14,6 +14,11 @@ const definition = {
   inputLabel: 'Object with hp, damage and requirement (equal-length lists)',
   url: 'https://leetcode.com/problems/total-score-of-dungeon-runs/',
   complexity: 'O(n^2) time with O(1) extra space for the simulation shown. A prefix-sum and Fenwick approach can be faster for large n.',
+  question: "Sum the points from every starting room of a dungeon run, where health changes as rooms are entered.",
+  approaches: [
+    { name: "Simulate each starting room", intuition: "Walk the rooms from each start, updating health and scoring a point when the requirement is met.", time: "O(n^2)", space: "O(1)" },
+    { name: "Prefix sums with a Fenwick tree", intuition: "Turn each start into a threshold count over prefix values.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Mixed', input: '{"hp":10,"damage":[2,3,4],"requirement":[5,4,1]}' },
     { label: 'One room', input: '{"hp":3,"damage":[5],"requirement":[1]}' },

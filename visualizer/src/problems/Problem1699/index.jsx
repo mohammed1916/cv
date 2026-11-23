@@ -33,6 +33,10 @@ const definition = {
   inputLabel: 'Object with a Calls list of { from_id, to_id, duration } rows',
   url: 'https://leetcode.com/problems/number-of-calls-between-two-persons/',
   complexity: 'O(n) pass over the calls, with one running total per unordered pair.',
+  question: "Count the calls between each unordered pair of people in a call log.",
+  approaches: [
+    { name: "Hash map of pairs", intuition: "Normalise each pair so the smaller id comes first and count it in a map.", time: "O(n)", space: "O(p)" },
+  ],
   examples: [
     { label: 'Example', input: '{"Calls":[{"from_id":1,"to_id":2,"duration":60},{"from_id":2,"to_id":1,"duration":30},{"from_id":3,"to_id":4,"duration":100},{"from_id":4,"to_id":3,"duration":40},{"from_id":3,"to_id":4,"duration":10}]}' },
   { label: 'Single call', input: '{"Calls":[{"from_id":5,"to_id":6,"duration":120}]}' },

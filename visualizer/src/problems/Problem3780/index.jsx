@@ -12,6 +12,11 @@ const definition = {
   inputLabel: 'Numbers (JSON object with nums)',
   url: 'https://leetcode.com/problems/maximum-sum-of-three-numbers-divisible-by-three/',
   complexity: 'O(n log n) time for sorting the groups. The visualization caps n at 20.',
+  question: "Pick three numbers whose sum is divisible by three and is as large as possible.",
+  approaches: [
+    { name: "Group by remainder", intuition: "Only the top three of one remainder group or one from each group can form the best triple.", time: "O(n log n)", space: "O(n)" },
+    { name: "Remainder dynamic programme", intuition: "Track the best sum for each remainder while scanning.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"nums":[4,2,3,1]}' },
     { label: 'Example 2', input: '{"nums":[2,1,5]}' },

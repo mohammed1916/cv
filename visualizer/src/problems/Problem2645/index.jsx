@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'JSON object with word, made of the letters a, b and c',
   url: 'https://leetcode.com/problems/minimum-additions-to-make-valid-string/',
   complexity: 'O(n) time and O(1) extra space. The visualization caps the word at 40 letters.',
+  question: "Given a string, add the fewest letters so that it can be formed by concatenating the three letters abc in the required order.",
+  approaches: [
+    { name: "Greedy subsequence match", intuition: "Scan the word and count missing letters in each abc block.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"word":"aabcbc"}' },
     { label: 'Example 2', input: '{"word":"abcabcababcc"}' },

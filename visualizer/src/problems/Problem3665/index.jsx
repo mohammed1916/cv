@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with grid (rows of 0 and 1, start and finish empty)',
   url: 'https://leetcode.com/problems/twisted-mirror-path-count/',
   complexity: 'One DP pass over the cells. Each reflection chain moves down or right, so it stays within m + n steps.',
+  question: "Count the paths through a grid with mirrors that reflect the moves.",
+  approaches: [
+    { name: "Row-order DP with reflections", intuition: "Fill a count table in row order, redirecting each path at mirror cells.", time: "O(m * n)", space: "O(m * n)" },
+  ],
   examples: [
     { label: 'Centre mirror', input: '{"grid":[[0,0,0],[0,1,0],[0,0,0]]}' },
     { label: 'Two rows', input: '{"grid":[[0,0],[1,0]]}' },

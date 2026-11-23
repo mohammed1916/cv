@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with bulbs (integers from 1 to 100)',
   url: 'https://leetcode.com/problems/toggle-light-bulbs/',
   complexity: 'O(n + 100) time and O(100) space. The visualization caps bulbs at 20 entries.',
+  question: "Report which bulbs are on after each entry flips one bulb, starting with all bulbs off.",
+  approaches: [
+    { name: "Count flips per bulb", intuition: "Count how many times each bulb is flipped; odd counts mean on.", time: "O(n + 100)", space: "O(100)" },
+  ],
   examples: [
     { label: 'Example', input: '{"bulbs":[10,30,20,10,20,40]}' },
     { label: 'Repeats cancel', input: '{"bulbs":[5,5]}' },

@@ -25,6 +25,10 @@ const definition = {
   phases, parse: parseInput, build: buildTrace, code, sql, python, inputLabel,
   url: `https://leetcode.com/problems/${meta.slug}/`,
   complexity, examples,
+  question: "Find the managers of the department with the most staff.",
+  approaches: [
+    { name: "Count staff then filter managers", intuition: "Count staff per department, keep the largest departments, and return their managers.", time: "O(n)", space: "O(d)" },
+  ],
 }
 
 function Rows({ columns = [], rows = [] }) {

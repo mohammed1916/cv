@@ -18,6 +18,11 @@ const definition = {
   inputLabel: "JSON object with key nums, a permutation of 1..n (e.g. {\"nums\": [1, 3, 2, 4, 5]})",
   url: "https://leetcode.com/problems/count-increasing-quadruplets/",
   complexity: "O(n^3) in this visualization for n up to 12; the standard solution is O(n^2) with a Fenwick tree (LeetCode allows n up to 4000).",
+  question: "Count quadruples of indices with increasing values in the required order.",
+  approaches: [
+    { name: "Triple loop", intuition: "Check every quadruple of indices directly.", time: "O(n^3)", space: "O(1)" },
+    { name: "Fenwick tree for middle pairs", intuition: "For each middle pair, count the matching outer values with a Fenwick tree.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: "Example 1", input: "{\"nums\": [1, 3, 2, 4, 5]}" },
     { label: "Example 2", input: "{\"nums\": [1, 2, 3, 4]}" },

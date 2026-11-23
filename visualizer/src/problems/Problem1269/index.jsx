@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with steps and arr_len (JSON)',
   url: 'https://leetcode.com/problems/number-of-ways-to-stay-in-the-same-place-after-some-steps/',
   complexity: 'O(steps * arr_len) time and space. The visualization caps both inputs at 12.',
+  question: "Count the ways to stay at the same position after a number of steps in an array.",
+  approaches: [
+    { name: "DP over position", intuition: "Track the number of ways to be at each position after each step.", time: "O(steps x arr_len)", space: "O(arr_len)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"steps":3,"arr_len":2}' },
     { label: 'Example 2', input: '{"steps":4,"arr_len":2}' },

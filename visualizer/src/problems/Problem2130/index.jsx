@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Node values in order as a JSON array (even length)',
   url: 'https://leetcode.com/problems/maximum-twin-sum-of-a-linked-list/',
   complexity: 'O(n) time and O(1) extra space with two pointers on the list.',
+  question: "Find the largest sum of paired values in a linked list of even length, where node i pairs with node n - 1 - i.",
+  approaches: [
+    { name: "Pair from both ends", intuition: "Copy the values into an array and add the two values at each end moving inward.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Four nodes', input: '[9,1,7,3]' },
     { label: 'Six nodes', input: '[4,2,2,3,7,1]' }, { label: "Two nodes", input: "[1,2]" }, { label: "Equal values", input: "[5,5,5,5]" }, { label: "Largest values", input: "[100000,100000,100000,100000,100000,100000,100000,100000,100000,100000,100000,100000,100000,100000,100000,100000,100000,100000,100000,100000,100000,100000,100000,100000,100000,100000,100000,100000,100000,100000,100000,100000,100000,100000,100000,100000,100000,100000,100000,100000]" }, { label: "Long run: 40 nodes", input: "[73567,20680,93726,69931,92635,40117,7686,89451,68334,2800,44489,93293,60623,48179,53209,21498,23401,92231,96335,29723,49342,19632,69847,34585,56227,65474,37449,93090,66344,56849,93027,98945,55520,9610,90394,3593,73338,613,4375,94753]" },

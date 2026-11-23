@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Target (JSON integer)',
   url: 'https://leetcode.com/problems/reach-a-number/',
   complexity: 'O(sqrt(|target|)) steps; the visualization caps |target| at 20,000.',
+  question: "Find the fewest steps of increasing length, each step left or right, that land exactly on a target.",
+  approaches: [
+    { name: "Triangular sum with parity", intuition: "Add 1, 2, 3, ... until the sum reaches the target with matching parity.", time: "O(sqrt target)", space: "O(1)" },
+  ],
   examples: [{ label: 'Example 1', input: '2' }, { label: 'Example 2', input: '3' }, { label: 'Negative', input: '-10' }, { label: 'Parity fix', input: '5' }, { label: 'Single step', input: '1' }, { label: 'Largest target', input: '20000' }, { label: 'Long run: -19999', input: '-19999' }],
 }
 

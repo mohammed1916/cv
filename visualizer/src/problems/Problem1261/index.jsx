@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with contaminated tree (level order, all -1) and targets (JSON)',
   url: 'https://leetcode.com/problems/find-elements-in-a-contaminated-binary-tree/',
   complexity: 'O(n) time to recover the values, then O(1) per lookup in a set. The visualization caps the tree at 15 nodes.',
+  question: "Recover the values of a contaminated binary tree and answer whether a target value is present.",
+  approaches: [
+    { name: "Recover then set lookup", intuition: "Rebuild each node's value from its parent, storing the values in a set for fast lookup.", time: "O(n) + O(1) per lookup", space: "O(n)" },
+  ],
   examples: [
     { label: 'Right child only', input: '{"tree":[-1,null,-1],"targets":[1,2]}' },
     { label: 'Full five', input: '{"tree":[-1,-1,-1,-1,-1],"targets":[1,3,5]}' },

@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with n, edges and queries (JSON)',
   url: 'https://leetcode.com/problems/count-pairs-of-nodes/',
   complexity: 'O(E log E + Q(n + E)) time in this version. The visualization caps n at 8.',
+  question: "For each query, count node pairs whose combined number of incident edges exceeds the query value.",
+  approaches: [
+    { name: "Sorted degrees with two pointers", intuition: "Sort the degrees, count pairs with two pointers, and correct for edges shared by a pair.", time: "O(E log E + Q (n + E))", space: "O(n + E)" },
+  ],
   examples: [
     { label: 'Two queries on six nodes', input: '{"n":6,"edges":[[1,2],[2,3],[4,5],[5,6],[1,6],[2,6]],"queries":[2,5,0]}' },
     { label: 'Parallel edges', input: '{"n":2,"edges":[[1,2],[1,2]],"queries":[1,2]}' },

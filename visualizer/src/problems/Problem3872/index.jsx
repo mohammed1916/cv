@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Array (JSON object with nums)',
   url: 'https://leetcode.com/problems/longest-arithmetic-sequence-after-changing-at-most-one-element/',
   complexity: 'O(n^3) time for this teaching version. The visualization caps input at 30 values.',
+  question: "Find the longest arithmetic sequence that becomes arithmetic after changing at most one element.",
+  approaches: [
+    { name: "Check each window with each drop", intuition: "For each window, try dropping each position and check whether the rest share one integer step.", time: "O(n^3)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"nums":[9,7,5,10,1]}' },
     { label: 'Example 2', input: '{"nums":[1,2,6,7]}' },

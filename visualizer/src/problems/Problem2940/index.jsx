@@ -14,6 +14,11 @@ const definition = {
   inputLabel: 'JSON {"heights": [6,4,8,5,2,7], "queries": [[0,1],[2,4]]}',
   url: 'https://leetcode.com/problems/find-building-where-alice-and-bob-can-meet/',
   complexity: 'O(n) scan per query in this visualization. The full problem uses offline sorting with a Fenwick tree for O((n + q) log n).',
+  question: "For each query pair of buildings, find the leftmost building to the right of both that is taller than both.",
+  approaches: [
+    { name: "Scan right per query", intuition: "For each query, scan rightward from the later index until a taller building is found.", time: "O(n\u00b7q)", space: "O(1)" },
+    { name: "Sparse table with binary search", intuition: "Precompute range maxima and binary search for the first taller building to the right.", time: "O((n + q) log n)", space: "O(n log n)" },
+  ],
   examples: [
     { label: 'Scan right of Bob', input: '{"heights":[3,7,2,5,9,4],"queries":[[0,2],[2,5],[4,3],[1,1]]}' },
     { label: 'Mixed queries', input: '{"heights":[4,9,1,6,2,8],"queries":[[2,0],[1,4],[3,5]]}' },

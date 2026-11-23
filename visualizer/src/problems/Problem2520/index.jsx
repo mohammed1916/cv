@@ -17,6 +17,10 @@ const definition = {
   inputLabel: 'Number object (JSON, e.g. {"num": 363})',
   url: 'https://leetcode.com/problems/count-the-digits-that-divide-a-number/',
   complexity: 'O(log num) time and O(1) space. The visualization accepts num up to 10^9 without zero digits.',
+  question: "Count the digits of num that divide num.",
+  approaches: [
+    { name: "Check each digit", intuition: "Take each digit by repeated division and test whether it divides num.", time: "O(log num)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Single digit', input: '{"num": 7}' },
     { label: 'Repeated digit', input: '{"num": 363}' },

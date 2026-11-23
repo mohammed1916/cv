@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON object with differences, lower and upper',
   url: 'https://leetcode.com/problems/count-the-hidden-sequences/',
   complexity: 'O(n) time for n differences; O(1) extra space (the trace keeps every offset for display).',
+  question: "Count how many hidden sequences fit a list of differences and a range of allowed values.",
+  approaches: [
+    { name: "Range of prefix sums", intuition: "The hidden values are a starting value plus prefix sums of the differences, so the starting value must keep the whole sequence in range.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Span fits twice', input: '{"differences":[2,-1,3],"lower":0,"upper":6}' },
     { label: 'Too wide', input: '{"differences":[5,5],"lower":0,"upper":4}' },

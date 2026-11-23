@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'A whole number written as digits (for example 4096)',
   url: 'https://leetcode.com/problems/count-odd-letters-from-number/',
   complexity: 'O(d) time for d digits, since each spelled word has at most five letters, and O(1) space for the 26 parities. The visualization accepts up to nine digits.',
+  question: "Count how many of the English letter spellings of a string of digits have an odd count of letters overall.",
+  approaches: [
+    { name: "Parity per letter", intuition: "Track the parity of each letter across the spelled digit words and count the letters whose parity is odd.", time: "O(d)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Four digits', input: '4096' },
     { label: 'Mixed digits', input: '70271' },

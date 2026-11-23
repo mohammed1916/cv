@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with groups (one label per node) and edges ([u, v] pairs)',
   url: "https://leetcode.com/problems/total-sum-of-interaction-cost-in-tree-groups-ii/",
   complexity: "O(n * g) time for n nodes and g distinct groups, using one count table per node. The visualization caps the tree at 12 nodes; the official bounds are not verified in this draft.",
+  question: "Sum, over every tree edge, the same-group pairs of nodes that the edge separates.",
+  approaches: [
+    { name: "Subtree group counts", intuition: "For each node, count group sizes below it, and add each edge's charges.", time: "O(n x g)", space: "O(n x g)" },
+  ],
   examples: [
     { label: "Path of five", input: '{"groups":[1,2,1,2,1],"edges":[[0,1],[1,2],[2,3],[3,4]]}' },
     { label: "Star of one group", input: '{"groups":[3,3,3,3],"edges":[[0,1],[0,2],[0,3]]}' },

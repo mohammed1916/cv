@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON object with a 0/1 grid',
   url: 'https://leetcode.com/problems/disconnect-path-in-a-binary-matrix-by-at-most-one-flip/',
   complexity: 'O(L * mn) time for a route of length L, since each candidate triggers one search. The visualization caps the grid at 7 by 7.',
+  question: "Decide whether flipping at most one cell can disconnect every path from the top-left to the bottom-right of a binary matrix.",
+  approaches: [
+    { name: "Find a route, then test cells", intuition: "Find one route and test whether flipping each of its cells cuts every path.", time: "O(L * mn)", space: "O(mn)" },
+  ],
   examples: [
     { label: 'Single route', input: '{"grid":[[1,1,1]]}' },
     { label: 'Two routes', input: '{"grid":[[1,1],[1,1]]}' },

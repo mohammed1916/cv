@@ -17,6 +17,10 @@ const definition = {
   inputLabel: "JSON array holding a permutation of 1 to n",
   url: "https://leetcode.com/problems/find-the-index-of-permutation/",
   complexity: "O(n^2) time and O(n) extra space for a permutation of n values, as the visualization counts unused values directly. The visualization caps the permutation at 8 values; the modulus 1000000007 is applied at every step.",
+  question: "Return the position of a permutation among all permutations of its values in lexicographic order, modulo 1000000007.",
+  approaches: [
+    { name: "Count smaller unused values", intuition: "At each position, count the unused values smaller than the current one and weight them by the factorial of the remaining length.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: "Middle of three", input: "[2, 1, 3]" },
     { label: "Five values", input: "[4, 2, 5, 1, 3]" },

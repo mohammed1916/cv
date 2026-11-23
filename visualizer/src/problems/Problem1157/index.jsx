@@ -13,6 +13,11 @@ const definition = {
   inputLabel: 'JSON object: arr (values 0-9) and queries [left, right, threshold]',
   url: 'https://leetcode.com/problems/online-majority-element-in-subarray/',
   complexity: 'O(q * n) time for this counting visualization. The visualization caps input at 12 values and 6 queries.',
+  question: "Answer queries that ask for the value occurring more than half of a range, or report that none exists.",
+  approaches: [
+    { name: "Count each query directly", intuition: "Count the value of interest inside the range and compare the count to the threshold.", time: "O(q x n)", space: "O(1)" },
+    { name: "Boyer-Moore candidate with segment tree", intuition: "A segment tree merges candidate and count pairs so each range yields a single candidate to verify.", time: "O(log n) per query after preprocessing", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example', input: '{"arr":[1,1,2,2,1,1],"queries":[[0,5,4],[0,3,3],[2,3,2]]}' },
     { label: 'Single element', input: '{"arr":[4],"queries":[[0,0,1]]}' },

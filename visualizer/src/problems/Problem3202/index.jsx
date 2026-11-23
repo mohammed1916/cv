@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON object with nums (integers 1 to 9) and k (1 to 5)',
   url: 'https://leetcode.com/problems/find-the-maximum-length-of-valid-subsequence-ii/',
   complexity: 'O(n^2) time and O(n * k) space. The visualization caps input at 10 entries.',
+  question: "Find the length of the longest valid subsequence in which every neighbouring pair sum has the same remainder modulo k.",
+  approaches: [
+    { name: "Dynamic programming on remainders", intuition: "For each end index and remainder, store the longest chain that uses that remainder.", time: "O(n^2)", space: "O(n * k)" },
+  ],
   examples: [
     { label: 'Four values, k two', input: '{"nums":[2,5,7,4],"k":2}' },
     { label: 'Modulo 3', input: '{"nums":[1,2,3],"k":3}' },

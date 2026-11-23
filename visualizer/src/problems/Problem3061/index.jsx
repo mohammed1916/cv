@@ -9,6 +9,11 @@ const definition = {
   inputLabel: 'Object with a Heights table of id and height rows',
   url: `https://leetcode.com/problems/${meta.slug}/`,
   complexity: 'O(n log n) to order the rows for the window functions, then O(n) work and O(n) space. This page draws up to 24 rows.',
+  question: "Compute how much rain water is trapped between bars of given heights.",
+  approaches: [
+    { name: "Prefix and suffix maxima", intuition: "Compute the highest bar to the left and right of each position and add the water above the bar.", time: "O(n)", space: "O(n)" },
+    { name: "Two pointers", intuition: "Move two pointers inward while tracking the highest bar seen from each side.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Two pools', input: '{"Heights":[{"id":1,"height":4},{"id":2,"height":1},{"id":3,"height":2},{"id":4,"height":5},{"id":5,"height":0},{"id":6,"height":3},{"id":7,"height":1}]}' },
     { label: 'Shuffled rows', input: '{"Heights":[{"id":3,"height":0},{"id":1,"height":2},{"id":5,"height":3},{"id":2,"height":1},{"id":4,"height":1}]}' },

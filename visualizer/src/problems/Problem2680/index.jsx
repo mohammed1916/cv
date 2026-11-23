@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with nums (1 to 12 values, 1 to 100) and k (0 to 6), e.g. {"nums":[12,9],"k":1}',
   url: 'https://leetcode.com/problems/maximum-or/',
   complexity: 'O(n) time and O(n) space for the prefix and suffix tables. The visualization caps the input at 12 values.',
+  question: "Given an array, return the maximum bitwise OR achievable after doubling one element at most k times.",
+  approaches: [
+    { name: "Prefix and suffix ORs", intuition: "For each element, OR everything to its left, the element doubled, and everything to its right.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Five values, k four', input: '{"nums":[8,30,14,21,5],"k":4}' },
     { label: 'Equal values, k zero', input: '{"nums":[50,50,50],"k":0}' },

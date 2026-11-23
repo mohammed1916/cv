@@ -9,6 +9,10 @@ const definition = {
   inputLabel: 'Object with s and t (lowercase strings)',
   url: 'https://leetcode.com/problems/count-pairs-of-equal-substrings-with-minimum-difference/',
   complexity: 'O(n * m) time and O(1) extra space for strings of lengths n and m, because every start pair is checked once. A single matching letter is enough to witness a pair. The visualization caps each string at 10 letters.',
+  question: "Count pairs of substrings with equal contents and the smallest possible length difference.",
+  approaches: [
+    { name: "Compare every start pair", intuition: "Check every pair of start positions and extend while the characters match.", time: "O(n * m)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Diagonal gap', input: '{"s":"abcd","t":"bcde"}' },
     { label: 'Reversed', input: '{"s":"ab","t":"ba"}' },

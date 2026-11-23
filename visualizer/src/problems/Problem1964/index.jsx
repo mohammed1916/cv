@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON array of obstacle heights (e.g. [1,2,3,2])',
   url: 'https://leetcode.com/problems/find-the-longest-valid-obstacle-course-at-each-position/',
   complexity: 'O(n log n) time: one binary search per obstacle over the tails list.',
+  question: "For each position, find the longest chain of non-decreasing obstacle heights ending there.",
+  approaches: [
+    { name: "Patience sorting tails", intuition: "Keep the smallest tail of each length and replace the first tail taller than the current obstacle with binary search.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Dip and rise', input: '[1,2,3,2]' },
     { label: 'Mixed', input: '[5,1,5,5,1]' },

@@ -20,6 +20,10 @@ const definition = {
   inputLabel: 'Object with workers and bikes lists of [x, y] points',
   url: 'https://leetcode.com/problems/campus-bikes/description/',
   complexity: 'O(M * N log(M * N)) time for M workers and N bikes, from sorting all pairs; O(M * N) space. The visualization caps input at 6 workers, 8 bikes and coordinates 0 to 20; the official bounds are not verified.',
+  question: "Assign each worker a distinct bike by nearest Manhattan distance, breaking ties by worker then bike index.",
+  approaches: [
+    { name: "Sort all pairs, then greedy pick", intuition: "Sort every worker-bike pair by distance and indices, and take each pair whose worker and bike are both still free.", time: "O(M N log(M N))", space: "O(M N)" },
+  ],
   examples: [
     { label: 'Two workers', input: '{"workers":[[1,1],[4,3]],"bikes":[[0,4],[5,0],[3,3]]}' },
     { label: 'Three workers', input: '{"workers":[[2,2],[6,1],[0,5]],"bikes":[[1,3],[4,4],[7,0],[3,6]]}' },

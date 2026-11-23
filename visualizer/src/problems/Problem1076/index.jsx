@@ -6,6 +6,10 @@ import FrequencyCountTable from '../../components/shared/FrequencyCountTable'
 import './SqlStages.css'
 
 const definition = {
+  question: "Find the project with the most employees; ties include every project with that count.",
+  approaches: [
+    { name: "Join and group in SQL", intuition: "Count employees per project, then keep the projects matching the largest count.", time: "O(n)", space: "O(p)" },
+  ],
   number: meta.number,
   phases, parse: parseInput, build: buildTrace, code, sql, python, inputLabel,
   url: `https://leetcode.com/problems/${meta.slug}/`,

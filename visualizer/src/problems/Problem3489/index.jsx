@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'Object with nums and queries ([l, r, val] triples)',
   url: 'https://leetcode.com/problems/zero-array-transformation-iv/',
   complexity: 'O(k * n * cap) time for k queries, n indices and cap = max(nums); the visualization caps the sizes.',
+  question: "Decide whether a sequence of range-decrement queries can reduce an array to zero.",
+  approaches: [
+    { name: "Subset-sum per index", intuition: "For each index, check whether its target is a subset sum of the covering queries' values.", time: "O(k n cap)", space: "O(n cap)" },
+  ],
   examples: [
     { label: 'Example', input: '{"nums":[1,0,1],"queries":[[0,2,1],[2,2,2]]}' },
     { label: 'Needs three', input: '{"nums":[3,1],"queries":[[0,0,1],[0,0,2],[1,1,1]]}' },

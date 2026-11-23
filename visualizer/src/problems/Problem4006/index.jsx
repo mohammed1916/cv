@@ -14,6 +14,10 @@ const definition = {
   inputLabel: "Object with a binary string s, e.g. {\"s\":\"1011000\"}",
   url: "https://leetcode.com/problems/count-valid-prefixes/",
   complexity: "O(n) time and O(1) extra space.",
+  question: "Count the balanced prefixes of a binary string.",
+  approaches: [
+    { name: "Prefix balance scan", intuition: "Extend the prefix one character at a time and count the prefixes that balance.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: "Mixed string", input: "{\"s\":\"1011000\"}" },
     { label: "Three ones", input: "{\"s\":\"111000\"}" },

@@ -12,6 +12,11 @@ const definition = {
   inputLabel: 'JSON object with n from 1 to 1000, for example {"n":8}',
   url: 'https://leetcode.com/problems/find-the-pivot-integer/',
   complexity: 'O(n) time for this scan. The visualization caps n at 1000.',
+  question: "Find an integer x where the sum from 1 to x equals the sum from x to n, or return -1.",
+  approaches: [
+    { name: "Running totals", intuition: "Scan candidates while tracking the prefix sum and the remaining sum.", time: "O(n)", space: "O(1)" },
+    { name: "Closed form", intuition: "The condition reduces to x squared equal to n(n+1)/2, so check that directly.", time: "O(1)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Own: n equals 11', input: '{"n":11}' },
     { label: 'No pivot', input: '{"n":4}' },

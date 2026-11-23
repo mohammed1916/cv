@@ -12,6 +12,10 @@ const definition = {
   inputLabel: "Array of positive integers (e.g. [4,3,2,1,2,3,1])",
   url: "https://leetcode.com/problems/merge-operations-to-turn-array-into-a-palindrome/description/",
   complexity: "O(n) time and O(1) extra space for n values. The visualization caps the array at 12 values of at most 100.",
+  question: "Find the fewest merge operations that turn an array into a palindrome, where a merge replaces two adjacent values with their sum.",
+  approaches: [
+    { name: "Two pointers", intuition: "Compare the ends and merge the smaller side, moving the pointers inward.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: "Example", input: "[4,3,2,1,2,3,1]" },
     { label: "Already palindrome", input: "[1,2,1]" },

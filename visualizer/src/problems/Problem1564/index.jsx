@@ -5,6 +5,10 @@ import WarehouseBarsView from './WarehouseBarsView'
 import { buildTrace, parseInput, code, python, phases, examples } from './algorithm'
 
 const definition = {
+  question: "Put as many boxes as possible into a warehouse of varying heights.",
+  approaches: [
+    { name: "Sort and greedy fill", intuition: "Sort the boxes and the room heights, then place the smallest boxes first in the rooms that fit.", time: "O(n log n)", space: "O(n)" },
+  ],
   number: '1564', phases, parse: parseInput, build: buildTrace, code, python, examples,
   inputLabel: 'Object with boxes and warehouse (JSON)',
   url: 'https://leetcode.com/problems/put-boxes-into-the-warehouse-i/',

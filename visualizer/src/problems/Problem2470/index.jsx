@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'JSON {"nums": [3, 6, 2, 7, 1], "k": 6}',
   url: 'https://leetcode.com/problems/number-of-subarrays-with-lcm-equal-to-k/',
   complexity: 'O(n^2 log V) time and O(1) extra space. A value that does not divide k ends the inner loop.',
+  question: "Count contiguous subarrays whose least common multiple equals k.",
+  approaches: [
+    { name: "Extend from each start", intuition: "From each start, extend the subarray and stop once a value fails to divide k.", time: "O(n^2 log V)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Three mixed values', input: '{"nums":[9,1,5],"k":4}' },
     { label: 'Pair', input: '{"nums":[2,4],"k":4}' },

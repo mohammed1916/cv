@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Array of positive integers (JSON)',
   url: 'https://leetcode.com/problems/find-numbers-with-even-number-of-digits/',
   complexity: 'O(n * d) time where d is the digit count (at most 6 here), and O(1) extra space.',
+  question: "Count how many numbers in an array have an even number of digits.",
+  approaches: [
+    { name: "Digit count", intuition: "Count the digits of each number and test whether the count is even.", time: "O(n x d)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Mixed lengths', input: '[12,345,2,6,7896]' },
     { label: 'Four-digit heavy', input: '[555,901,482,1771]' },

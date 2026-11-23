@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Words (JSON object with a words array)',
   url: 'https://leetcode.com/problems/longest-word-in-dictionary/',
   complexity: 'O(n log n + total letters) for sorting and set lookups.',
+  question: "Find the longest word that can be built one letter at a time from other words in the list.",
+  approaches: [
+    { name: "Set of buildable words", intuition: "Keep words whose every prefix is also buildable, and pick the longest, smallest among ties.", time: "O(total chars)", space: "O(total chars)" },
+  ],
   examples: [
     { label: 'Chain', input: '{"words":["m","ma","mat","mate","matter","mad"]}' },
     { label: 'Gap', input: '{"words":["k","kn","knot","kno","knight"]}' },

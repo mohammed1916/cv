@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with nums and cost of the same length (values 1 to 50, costs 1 to 100)',
   url: 'https://leetcode.com/problems/minimum-cost-to-make-array-equal/',
   complexity: 'O(n log n) time with the sort; the weighted median is found in one pass.',
+  question: "Each change of an element costs its price, and you want all elements equal; find the minimum total cost.",
+  approaches: [
+    { name: "Weighted median", intuition: "The best common value is a weighted median of the elements, so sort and find the point where half the weight lies on each side.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Four items with costs', input: '{"nums":[5,9,3,7],"cost":[6,2,8,5]}' },
     { label: 'Equal', input: '{"nums":[2,2,2],"cost":[4,1,9]}' },

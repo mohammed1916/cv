@@ -4,6 +4,10 @@ import { buildTrace, parseInput, code, python, phases, examples, complexity, inp
 import { Sequence, Vars } from './SeqKit'
 
 const definition = {
+  question: "Find the largest pair sum below a limit K from an array of integers.",
+  approaches: [
+    { name: "Sort and two pointers", intuition: "Sort the values, move the pointers inward, and record each sum below the limit.", time: "O(n log n)", space: "O(1) extra" },
+  ],
   number: meta.number, phases, parse: parseInput, build: buildTrace, code, python, inputLabel,
   url: `https://leetcode.com/problems/${meta.slug}/`, complexity, examples,
 }

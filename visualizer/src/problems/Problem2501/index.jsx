@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Numbers as JSON: {"nums": [...]}',
   url: 'https://leetcode.com/problems/longest-square-streak-in-an-array/',
   complexity: 'O(n log log M) time for n values up to M, using a hash set. The visualization caps values at 1000.',
+  question: "Find the longest chain where each next value is the square of the previous one, with length at least two.",
+  approaches: [
+    { name: "Hash set chain walk", intuition: "For each value, follow the squares that exist in a set and record the longest chain.", time: "O(n log log M)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"nums":[4,3,6,16,8,2]}' },
     { label: 'Example 2', input: '{"nums":[2,3,5,6,7]}' },

@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'JSON: {"occupiedIntervals": [[s, e], ...], "freeStart": a, "freeEnd": b}',
   url: 'https://leetcode.com/problems/filter-occupied-intervals/',
   complexity: 'O(n log n) time for sorting, and O(n) extra space. The visualization caps the input at 8 intervals on 1 to 16.',
+  question: "Remove busy intervals from a window and report the free gaps that remain.",
+  approaches: [
+    { name: "Merge then subtract", intuition: "Merge touching busy intervals, then cut the free window out of each merged block.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"occupiedIntervals":[[3,5],[6,9],[9,12],[13,15]],"freeStart":8,"freeEnd":14}' },
     { label: 'Example 2', input: '{"occupiedIntervals":[[1,4],[2,6],[8,8]],"freeStart":5,"freeEnd":7}' },

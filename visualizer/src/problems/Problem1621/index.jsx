@@ -11,6 +11,10 @@ const definition = {
   inputLabel: 'Points and segments (JSON object with n points and k segments)',
   url: 'https://leetcode.com/problems/number-of-sets-of-k-non-overlapping-line-segments/',
   complexity: 'O((n + k) * k) time for the binomial table. The visualization caps n at 12 and k at 6.',
+  question: "Count the ways to place k non-overlapping segments on n points along a line.",
+  approaches: [
+    { name: "Binomial table", intuition: "Count placements as choosing endpoints with Pascal's triangle.", time: "O((n + k) * k)", space: "O(n * k)" },
+  ],
   examples: [
     { label: 'Three points', input: '{"n":3,"k":1}' },
     { label: 'Four points', input: '{"n":4,"k":2}' },

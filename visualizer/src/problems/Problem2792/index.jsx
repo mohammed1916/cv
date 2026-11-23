@@ -16,6 +16,11 @@ const definition = {
   inputLabel: 'Object with tree (level order, null for a gap) and k',
   url: 'https://leetcode.com/problems/count-nodes-that-are-great-enough/',
   complexity: 'O(n^2) time in the worst case, because each node rescans the values below it, and O(n) extra space for the value lists along the recursion. The visualization caps the tree at 15 nodes with values from -99 to 99 and k from 0 to 15; the official bounds are not restated here.',
+  question: "Count the nodes in a binary tree whose subtree holds at least k values smaller than their own value.",
+  approaches: [
+    { name: "Collect subtree values recursively", intuition: "Gather each subtree's values and count how many are smaller than the node.", time: "O(n^2) worst case", space: "O(n)" },
+    { name: "Merge sorted lists bottom-up", intuition: "Keep sorted subtree lists and use binary search to count smaller values at each node.", time: "O(n^2) worst case, often less", space: "O(n)" },
+  ],
   examples: [
     { label: 'Mixed tree', input: '{"tree":[4,2,6,1,3,5,7],"k":2}' },
     { label: 'Sparse tree', input: '{"tree":[5,1,8,null,4,9,null],"k":1}' },

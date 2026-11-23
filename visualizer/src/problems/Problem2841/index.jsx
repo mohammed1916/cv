@@ -14,6 +14,11 @@ const definition = {
   inputLabel: 'JSON object with nums (1 to 40 values from 1 to 100), m and k, for example {"nums":[2,6,7,3,1,7],"m":3,"k":4}',
   url: 'https://leetcode.com/problems/maximum-sum-of-almost-unique-subarray/',
   complexity: 'O(n) time with a tally of the window. The visualization caps nums at 40 values.',
+  question: "Find the largest sum of a subarray of length k that contains at least m distinct values.",
+  approaches: [
+    { name: "Fixed-size sliding window with counts", intuition: "Slide a window of length k, maintaining a frequency map and the distinct count and the window sum.", time: "O(n)", space: "O(n)" },
+    { name: "Check each window", intuition: "Build each window of length k and count its distinct values.", time: "O(n k)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Seven values, m of two', input: '{"nums":[5,1,6,2,6,3,6],"m":2,"k":5}' },
     { label: 'No window', input: '{"nums":[1,2,1,2,1,2,1],"m":3,"k":3}' },

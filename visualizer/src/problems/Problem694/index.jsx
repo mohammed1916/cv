@@ -12,6 +12,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Grid (JSON array of 0/1 row strings)',
   url: 'https://leetcode.com/problems/number-of-distinct-islands/',
   complexity: 'O(R · C · log) time for the sorted island keys and O(R · C) space.',
+  question: "Count the distinct shapes among the islands of a grid.",
+  approaches: [
+    { name: "Shape signature set", intuition: "Record each island as a depth-first walk from its first cell, and count the distinct walks.", time: "O(mn)", space: "O(mn)" },
+  ],
   examples: [
     { label: 'Two shapes', input: '["11000","11011","00011","00100"]' },
     { label: 'Same shape', input: '["1100","1000","0011","0001"]' },

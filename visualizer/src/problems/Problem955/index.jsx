@@ -13,6 +13,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'strs (JSON array of equal-length strings)',
   url: 'https://leetcode.com/problems/delete-columns-to-make-sorted-ii/',
   complexity: 'O(n * m) time, O(n) space. The visualization caps input at 10 strings of length 12.',
+  question: "Remove the fewest columns so that the rows read in lexicographic order from top to bottom.",
+  approaches: [
+    { name: "Keep columns that keep order", intuition: "Scan columns left to right and keep one whenever it does not break the order of any still-tied pair of rows.", time: "O(n * m)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Three rows, unsorted columns', input: '["dab","ffb","cdd"]' },
     { label: 'Descending columns', input: '["zzz","yyy","xxa"]' },

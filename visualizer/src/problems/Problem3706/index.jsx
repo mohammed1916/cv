@@ -11,6 +11,10 @@ const definition = {
   inputLabel: "List of lowercase words (e.g. [\"sun\",\"moon\"])",
   url: "https://leetcode.com/problems/maximum-distance-between-unequal-words-in-array-ii/",
   complexity: "O(n) time and O(1) extra space: one pass after locating the first word unlike words[0]. Built for larger inputs than the first variant; the visualization caps the list at 12 words.",
+  question: "Find the largest distance between two positions in an array whose words are unequal.",
+  approaches: [
+    { name: "Track the first differing index", intuition: "Track the first index that differs from words[0] and compare each position against it.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: "Early partner", input: "[\"sun\",\"sun\",\"moon\",\"sun\"]" },
     { label: "Alternating runs", input: "[\"a\",\"b\",\"b\",\"b\",\"a\",\"a\",\"b\"]" },

@@ -40,6 +40,11 @@ const definition = {
   inputLabel: 'Object with parent (parent[0] = -1, parents come earlier) and s (letters a to e)',
   url: 'https://leetcode.com/problems/find-subtree-sizes-after-changes/',
   complexity: 'O(n) time and space with the iterative DFS: each node and edge is handled a constant number of times. The visualization caps the tree at 10 nodes.',
+  question: "Move each node under its nearest ancestor with the same letter, then report every subtree size in the new tree.",
+  approaches: [
+    { name: "Iterative DFS with the latest ancestor per letter", intuition: "Keep the latest node for each letter on the current path. Entering a node reads its new parent; leaving it restores the previous entry and adds its size to that parent.", time: "O(n)", space: "O(n)" },
+    { name: "Walk up the ancestors for each node", intuition: "For each node, climb its ancestors to find the nearest match, then sum subtree sizes from the resulting tree.", time: "O(n * h)", space: "O(n)" },
+  ],
   goal: {
     summary: 'Move every node under its nearest ancestor with the same letter, then report each node\'s subtree size in the new tree.',
     requirement: [

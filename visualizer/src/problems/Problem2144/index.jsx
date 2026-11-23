@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Candy costs as a JSON array',
   url: 'https://leetcode.com/problems/minimum-cost-of-buying-candies-with-discount/',
   complexity: 'O(n log n) time for the sort; O(n) space for the sorted copy.',
+  question: "Find the smallest cost to buy all candies when every third candy in a chosen group is free if it costs no more than the two bought before it.",
+  approaches: [
+    { name: "Sort and skip every third", intuition: "Sort the prices from highest to lowest and make every third one free.", time: "O(n log n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Two groups', input: '[4,8,2,6,1,9,3]' },
     { label: 'Exactly one group', input: '[10,3,7]' },

@@ -18,6 +18,10 @@ const definition = {
   phases, parse: parseInput, build: buildTrace, code, sql, python, inputLabel,
   url: `https://leetcode.com/problems/${meta.slug}/`,
   complexity, examples,
+  question: "List the orders whose largest quantity is above the average of the largest quantity per order across all orders.",
+  approaches: [
+    { name: "Per-order averages then compare", intuition: "Compute each order's average quantity, take the maximum, and keep orders whose maximum exceeds it.", time: "O(n log n)", space: "O(n)" },
+  ],
 }
 
 function Rows({ columns = [], rows = [] }) {

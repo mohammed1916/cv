@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with nums and queries (JSON)',
   url: 'https://leetcode.com/problems/sorted-gcd-pair-queries/',
   complexity: 'O(n^2 log n) time for n numbers, since every pair is stored and sorted. The visualization caps n at 10.',
+  question: "Sort the pairwise gcd values of an array and answer queries about the sorted list.",
+  approaches: [
+    { name: "Store and sort all pairs", intuition: "Compute the gcd of every pair, sort the results, and read the answers for each query.", time: "O(n^2 log n)", space: "O(n^2)" },
+  ],
   examples: [
     { label: 'Four values, two queries', input: '{"nums":[7,3,9,4],"queries":[1,4]}' },
     { label: 'Example 2', input: '{"nums":[4,3,12,8],"queries":[0,4]}' },

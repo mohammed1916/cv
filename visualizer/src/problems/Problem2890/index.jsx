@@ -10,6 +10,11 @@ const definition = {
   inputLabel: 'Object with report (rows with product and quarter_1 to quarter_4)',
   url: 'https://leetcode.com/problems/reshape-data-melt/',
   complexity: 'O(r) time and space for r rows, since each row yields exactly four long rows. The visualization caps report at 8 rows.',
+  question: "Reshape a wide sales table with one column per quarter into a long table with one row per product and quarter.",
+  approaches: [
+    { name: "Loop over quarter columns", intuition: "For each quarter column and product row, emit one long row.", time: "O(r)", space: "O(r)" },
+    { name: "Melt operation", intuition: "Unpivot the quarter columns into two columns in a single call.", time: "O(r)", space: "O(r)" },
+  ],
   examples: [
     { label: 'Three products', input: JSON.stringify({ report: [row('Kite', 12, 40, 75, 9), row('Lantern', 310, 0, 58, 144), row('Compass', 66, 91, 23, 180)] }) },
     { label: 'One product', input: JSON.stringify({ report: [row('Hammock', 7, 7, 52, 3)] }) },

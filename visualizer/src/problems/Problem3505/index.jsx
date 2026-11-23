@@ -9,6 +9,10 @@ const definition = {
   inputLabel: 'Object with nums, x (window size) and k (window count)',
   url: 'https://leetcode.com/problems/minimum-operations-to-make-elements-within-k-subarrays-equal/',
   complexity: 'About O(n log x) comparisons for the windows, plus list shifts of up to x items per step that heaps would remove, then O(nk) for the table. The official length is up to 100000; the visualization caps nums at 13 entries.',
+  question: "Make all values inside each window of k subarrays equal using the fewest changes.",
+  approaches: [
+    { name: "Window table DP", intuition: "Combine window costs with a DP over the number of subarrays.", time: "O(n k)", space: "O(n k)" },
+  ],
   examples: [
     { label: 'Two windows of three', input: '{"nums":[4,9,1,-3,7,7,2,12,5,0],"x":3,"k":2}' },
     { label: 'Even window size, exact fit', input: '{"nums":[1,5,2,8],"x":2,"k":2}' },

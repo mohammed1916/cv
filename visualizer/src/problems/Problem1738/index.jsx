@@ -14,6 +14,10 @@ const definition = {
   complexity,
   inputLabel: 'Object with matrix (rows of integers) and k (1-indexed rank)',
   url: 'https://leetcode.com/problems/find-kth-largest-xor-coordinate-value/',
+  question: "Find the k-th largest value of prefix XORs over a grid's rectangles.",
+  approaches: [
+    { name: "Prefix XOR then sort", intuition: "Build the two-dimensional prefix XOR values, collect them, and sort to pick the k-th largest.", time: "O(mn log(mn))", space: "O(mn)" },
+  ],
 }
 
 export default function Problem1738Visualizer() {

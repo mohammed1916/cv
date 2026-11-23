@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with operations and arguments (JSON), for example {"operations":["record","totalScore"],"arguments":[[1,98],[1,1]]}',
   url: 'https://leetcode.com/problems/design-exam-scores-tracker/',
   complexity: 'record is O(1) and totalScore is O(log n) with prefix sums and binary search. The visualization scans the list and caps the calls at 12.',
+  question: "Design an exam score tracker that records scores and answers total score queries over a time range.",
+  approaches: [
+    { name: "Prefix sums with binary search", intuition: "Record scores into a sorted list of prefix sums and use binary search for queries.", time: "O(log n) per query", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"operations":["record","totalScore","record","totalScore","totalScore","totalScore","totalScore"],"arguments":[[1,98],[1,1],[5,99],[1,3],[1,5],[3,4],[2,5]]}' },
     { label: 'Single record', input: '{"operations":["record","totalScore"],"arguments":[[1,5],[1,1]]}' },

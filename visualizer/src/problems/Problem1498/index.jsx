@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Object with nums and target (JSON)',
   url: 'https://leetcode.com/problems/number-of-subsequences-that-satisfy-the-given-sum-condition/',
   complexity: 'O(n log n) time for the sort, then O(n) two-pointer time, with O(n) space for powers of two.',
+  question: "Count non-empty subsequences whose smallest and largest values sum to at most the target.",
+  approaches: [
+    { name: "Sort and two pointers", intuition: "Sort, then for each smallest value count the valid largest values with precomputed powers of two.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Sample A', input: '{"nums":[2,6,4,1,9],"target":8}' },
     { label: 'Equal values', input: '{"nums":[1,1,1],"target":2}' },

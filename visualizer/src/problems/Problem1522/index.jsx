@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with children (ordered child indices per node; node 0 is the root)',
   url: 'https://leetcode.com/problems/diameter-of-n-ary-tree/description/',
   complexity: 'O(n) time and O(h) recursion depth for n nodes. The visualization caps the tree at 12 nodes.',
+  question: "Find the diameter of an N-ary tree, the longest path between two nodes.",
+  approaches: [
+    { name: "DFS returning depth", intuition: "Each node combines its two deepest children into a candidate diameter.", time: "O(n)", space: "O(h)" },
+  ],
   examples: [
     { label: 'Diameter 5', input: '{"children":[[1,2,3],[4,5],[],[6],[],[],[7],[]]}' },
     { label: 'Single node', input: '{"children":[[]]}' },

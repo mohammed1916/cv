@@ -14,6 +14,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Numbers and k (JSON object)',
   url: 'https://leetcode.com/problems/partition-to-k-equal-sum-subsets/',
   complexity: 'Exponential in the worst case (about k^n placements), pruned by sorting and skipping equal buckets; practical for the 16-number limit here.',
+  question: "Decide whether an array can be split into k subsets with equal sums.",
+  approaches: [
+    { name: "Backtracking with bucket filling", intuition: "Fill buckets with the largest numbers first, backtracking when a placement cannot complete the split.", time: "O(k 2^n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Three buckets', input: '{"nums":[4,3,2,3,5,2,1],"k":4}' },
     { label: 'Impossible', input: '{"nums":[1,2,3,4],"k":3}' },

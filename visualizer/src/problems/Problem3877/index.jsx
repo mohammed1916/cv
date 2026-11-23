@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Array and target (JSON object with nums and target)',
   url: 'https://leetcode.com/problems/minimum-removals-to-achieve-target-xor/',
   complexity: 'O(n * X) time where X is the number of distinct XOR values reached. The visualization caps input at 14 values.',
+  question: "Remove the fewest elements so that the XOR of the remaining elements equals a target.",
+  approaches: [
+    { name: "Largest kept subset per XOR", intuition: "Keep, for each XOR value reached, the largest subset that produces it.", time: "O(n * X)", space: "O(X)" },
+  ],
   examples: [
     { label: 'Five values, target thirteen', input: '{"nums":[7,2,9,4,6],"target":13}' },
     { label: 'Unreachable', input: '{"nums":[2,4],"target":1}' },

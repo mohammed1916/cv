@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'JSON array of integers from 1 to 50',
   url: 'https://leetcode.com/problems/smallest-missing-integer-greater-than-sequential-prefix-sum/',
   complexity: 'O(n) time and O(n) space for the set of values, plus the search for the missing integer.',
+  question: "Find the smallest positive integer that is missing and at least the sum of the longest sequential prefix.",
+  approaches: [
+    { name: "Sequential prefix then set check", intuition: "Find the longest prefix of consecutive increments, sum it, then count up from that sum until a missing value is found.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Run then gap', input: '[4,5,6,9,2]' },
     { label: 'Run of one', input: '[7,3,8]' },

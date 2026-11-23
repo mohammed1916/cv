@@ -9,6 +9,10 @@ const definition = {
   inputLabel: 'Object with n (people from 1 to n) and trust: a list of [a, b] pairs meaning a trusts b',
   url: 'https://leetcode.com/problems/find-the-town-judge/',
   complexity: 'O(n + t) for n people and t trust pairs, with two counters per person.',
+  question: "Find the town judge: the one person trusted by everyone else who trusts nobody.",
+  approaches: [
+    { name: "In-degree and out-degree count", intuition: "The judge has no outgoing trust and n - 1 incoming trust, so count both degrees in one pass.", time: "O(n + trust)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Everyone trusts four', input: JSON.stringify({ n: 4, trust: [[1, 4], [2, 4], [3, 4]] }) },
     { label: 'Two trust each other', input: JSON.stringify({ n: 3, trust: [[1, 2], [2, 1], [3, 2]] }) },

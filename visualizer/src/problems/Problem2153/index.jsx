@@ -20,6 +20,10 @@ const definition = {
   number: meta.number,
   phases, parse: parseInput, build: buildTrace, code, sql, python, inputLabel,
   url: `https://leetcode.com/problems/${meta.slug}/`,
+  question: "For each passenger, find the bus number they board, where buses fill up to capacity in arrival order.",
+  approaches: [
+    { name: "Sequence numbers and cumulative capacity", intuition: "Number the buses in arrival order and give passengers to the earliest buses with spare seats.", time: "O(n log n)", space: "O(n)" },
+  ],
   complexity, examples,
 }
 

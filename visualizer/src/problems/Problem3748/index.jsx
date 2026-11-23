@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with nums and queries ([l, r] pairs)',
   url: 'https://leetcode.com/problems/count-stable-subarrays/',
   complexity: 'O(n * q) time for this trace, which scans each query segment directly.',
+  question: "For each query range, count the subarrays that are non-decreasing.",
+  approaches: [
+    { name: "Extend runs inside each query", intuition: "Scan each query segment and add the length of the current non-decreasing run at every index.", time: "O(n * q)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example', input: '{"nums":[2,4,1,3],"queries":[[0,2],[1,3]]}' },
     { label: 'Sorted run', input: '{"nums":[1,2,2,1],"queries":[[0,3]]}' },

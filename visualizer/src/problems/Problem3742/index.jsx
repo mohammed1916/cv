@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON object with grid and k, for example {"grid":[[0,1],[2,0]],"k":1}',
   url: 'https://leetcode.com/problems/maximum-path-score-in-a-grid/',
   complexity: 'O(m * n * k) time. The visualization caps the grid at 4 by 4 and k at 12.',
+  question: "Find the best score of a right-and-down path across a grid whose total cost stays within a budget k.",
+  approaches: [
+    { name: "Cell and cost table", intuition: "For each cell and each total cost so far, keep the best score that reaches it.", time: "O(m * n * k)", space: "O(m * n * k)" },
+  ],
   examples: [
     { label: 'Two rows, one cell at two', input: '{"grid":[[0,1,2],[2,0,1]],"k":3}' },
     { label: 'Own: two by three, k 2', input: '{"grid":[[0,2,1],[1,1,0]],"k":2}' },

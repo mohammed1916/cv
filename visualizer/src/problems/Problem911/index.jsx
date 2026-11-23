@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object {persons, times, queries} (JSON)',
   url: 'https://leetcode.com/problems/online-election/',
   complexity: 'O(n) construction and O(log n) per query. Inputs are capped at 60 votes and 40 queries.',
+  question: "Given votes with times, answer queries for the leading candidate at a given time, where ties go to the most recent leader.",
+  approaches: [
+    { name: "Precomputed leaders and binary search", intuition: "Record the leader after each vote and binary search the last vote at or before each query time.", time: "O(n + q log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"persons":[0,1,1,0,0,1,0],"times":[0,5,10,15,20,25,30],"queries":[3,12,25,15,24,8]}' },
     { label: 'Tie goes to latest', input: '{"persons":[0,1,0,1],"times":[1,2,3,4],"queries":[1,2,3,4,10]}' },

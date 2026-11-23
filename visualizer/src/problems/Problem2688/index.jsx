@@ -20,6 +20,10 @@ const examples = [{
 const reasoning = 'Every pair of purchases by the same user is compared. A later purchase within seven days of an earlier one makes the user active, so user 1 (5 days) and user 4 (exactly 7 days) are active, user 2 (8 days) is not, and user 3 (two purchases on the same day) is active because a repeat on the same day is within seven days.'
 
 const definition = {
+  question: "Given a table of user activity, find users who were active on at least two consecutive days.",
+  approaches: [
+    { name: "Pair rows by date", intuition: "Compare each row with the next day for the same user to detect runs of length two.", time: "O(n^2)", space: "O(n)" },
+  ],
   number: meta.number,
   phases, parse: parseInput, build: buildTrace, code, sql, python, inputLabel,
   url: `https://leetcode.com/problems/${meta.slug}/`,

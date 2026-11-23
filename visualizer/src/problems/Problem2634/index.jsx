@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'JSON object with arr (up to 10 whole numbers) and fn ("aboveIndex", "positive" or "even")',
   url: 'https://leetcode.com/problems/filter-elements-from-array/',
   complexity: 'O(n) time and O(n) space for the kept list.',
+  question: "Given an array and a filter function, return only the elements for which the filter returns a truthy value.",
+  approaches: [
+    { name: "Filter loop", intuition: "Keep each element when the predicate accepts it, preserving order.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Above index', input: '{"arr":[4,1,9,0,12]}' },
     { label: 'Positive', input: '{"arr":[3,-2,0,7],"fn":"positive"}' },

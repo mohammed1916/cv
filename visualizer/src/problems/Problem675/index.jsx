@@ -12,6 +12,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Forest (JSON matrix: 0 blocked, 1 open, above 1 a tree)',
   url: 'https://leetcode.com/problems/cut-off-trees-for-golf-event/',
   complexity: 'O(t · m · n) time for t trees on an m × n grid, one BFS per leg.',
+  question: "Cut every tree in a forest in height order and report the total walking steps, or -1 if a tree is unreachable.",
+  approaches: [
+    { name: "Sort by height and BFS between trees", intuition: "Sort the trees and BFS from one to the next, summing shortest distances.", time: "O(cells^2)", space: "O(cells)" },
+  ],
   examples: [
     { label: 'Two trees', input: '[[1,2,3],[0,0,4],[7,6,5]]' },
     { label: 'Blocked', input: '[[2,3,0],[0,0,4],[7,6,5]]' },

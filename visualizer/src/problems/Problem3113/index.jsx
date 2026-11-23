@@ -14,6 +14,11 @@ const definition = {
   inputLabel: 'JSON array of 1 to 12 integers from 1 to 20',
   url: 'https://leetcode.com/problems/find-the-number-of-subarrays-where-boundary-elements-are-maximum/',
   complexity: 'O(n^2) time and O(1) extra space in this direct version, so the visualization stays readable. Larger inputs use a monotonic stack.',
+  question: "Count subarrays whose first and last elements both equal the largest element of that subarray.",
+  approaches: [
+    { name: "Check every pair of ends", intuition: "For each pair of end positions, compare the end values with the maximum of the range.", time: "O(n^2)", space: "O(1)" },
+    { name: "Monotonic stack", intuition: "A stack of previous greater values gives each element's span, which counts the qualifying subarrays in one pass.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Repeated peak', input: '[2,5,2,5,1]' },
     { label: 'All equal', input: '[3,3,3]' },

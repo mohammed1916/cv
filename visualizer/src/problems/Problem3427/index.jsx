@@ -12,6 +12,11 @@ const definition = {
   inputLabel: 'Array (JSON array of 1 to 12 integers from 1 to 1000)',
   url: 'https://leetcode.com/problems/sum-of-variable-length-subarrays/',
   complexity: 'O(n * maximum window) time for this visualization. A prefix-sum solution runs in O(n).',
+  question: "For each index, sum the values in a window that reaches a set distance to its left and right.",
+  approaches: [
+    { name: "Sum each window", intuition: "Add the values in every window directly.", time: "O(n * w)", space: "O(1)" },
+    { name: "Prefix sums", intuition: "Precompute running totals so each window sum is one subtraction.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Four values in any order', input: '[120,45,300,7]' },
     { label: 'Five spread values', input: '[999,1,500,250,750]' },

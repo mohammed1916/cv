@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'An object with n, edges and price, for example {"n": 3, "edges": [[0,1],[1,2]], "price": [1,1,1]}',
   url: 'https://leetcode.com/problems/difference-between-maximum-and-minimum-price-sum/',
   complexity: 'O(n^2) in this walk-through, one walk per root. The visualization caps n at 15.',
+  question: "In a tree with node prices, find the largest difference between the maximum and minimum price paths over each root.",
+  approaches: [
+    { name: "Walk from each root", intuition: "From each root, walk the tree to find the path with the largest and smallest price sums.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Path with varied prices', input: '{"n":5,"edges":[[0,2],[2,4],[4,1],[1,3]],"price":[9,4,12,7,20]}' },
     { label: 'Star around node 0', input: '{"n":4,"edges":[[0,3],[0,1],[0,2]],"price":[6,50,2,2]}' },

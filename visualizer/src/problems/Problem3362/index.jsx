@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'Object with nums and queries ([l, r] pairs, JSON)',
   url: 'https://leetcode.com/problems/zero-array-transformation-iii/',
   complexity: 'O((n + q) log q) time with a heap. The visualization caps n at 6 and q at 7.',
+  question: "Find the largest number of queries that can be removed while the array still becomes all zeros.",
+  approaches: [
+    { name: "Greedy with a heap", intuition: "Process indices in order and pick the query with the furthest end among those that start before the index.", time: "O((n + q) log q)", space: "O(q)" },
+  ],
   examples: [
     { label: 'Four values, three ranges', input: '{"nums":[3,0,4,1],"queries":[[0,1],[2,3],[1,3]]}' },
     { label: 'Six values, whole range', input: '{"nums":[2,2,0,4,1,3],"queries":[[0,5]]}' },

@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON object with n and m, each from 1 to 100000, for example {"n":3,"m":2}',
   url: 'https://leetcode.com/problems/alice-and-bob-playing-flower-game/',
   complexity: 'O(1) time. The visualization shows the fields in the first direction.',
+  question: "Count the pairs of positions on a circular grid where one is odd and the other is even on the boundary.",
+  approaches: [
+    { name: "Parity counting", intuition: "Count the odd and even positions on each side, then combine them in the two opposite parity pairings.", time: "O(1)", space: "O(1)" },
+  ],
   examples: [
     { label: 'n five, m two', input: '{"n":5,"m":2}' },
     { label: 'Seven and seven, equal inputs', input: '{"n":7,"m":7}' },

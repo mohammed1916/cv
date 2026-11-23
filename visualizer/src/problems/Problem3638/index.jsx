@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'Object with weight',
   url: 'https://leetcode.com/problems/maximum-balanced-shipments/',
   complexity: 'O(n) time and O(1) space. The official length reaches 100000; this page caps weight at 40 parcels so every bar stays readable.',
+  question: "Count the maximum number of balanced shipments that can be cut from a line of parcels.",
+  approaches: [
+    { name: "Greedy scan", intuition: "Scan left to right, raising the peak and shipping as soon as a balanced run is complete.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Three shipments', input: '{"weight":[7,2,9,9,6,3,8,1]}' },
     { label: 'Equal weights do not count', input: '{"weight":[5,5,5,2,5,5]}' },

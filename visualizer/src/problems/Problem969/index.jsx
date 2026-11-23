@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Permutation (JSON array)',
   url: 'https://leetcode.com/problems/pancake-sorting/',
   complexity: 'O(n^2) time to find and flip. At most 2n flips are used. The visualization caps input at 12 values.',
+  question: "Sort an array using only prefix reversals, and return the sequence of reversal sizes.",
+  approaches: [
+    { name: "Place the largest value at the end", intuition: "Bring each largest remaining value to the front with one flip, then flip it into its final position.", time: "O(n^2)", space: "O(n) output" },
+  ],
   examples: [
     { label: 'Four values, shuffled', input: '[2,4,1,3]' },
     { label: 'Sorted', input: '[1,2,3]' },

@@ -12,6 +12,11 @@ const definition = {
   inputLabel: 'Three strings (JSON object with a, b and c)',
   url: 'https://leetcode.com/problems/shortest-string-that-contains-three-strings/',
   complexity: 'O(1) orders, each merge O(n^2) for n total letters. The visualization caps each string at 6 letters.',
+  question: "Find the shortest string that contains three given strings as substrings, merging overlaps where possible.",
+  approaches: [
+    { name: "Try all orders with pairwise merging", intuition: "The optimal string comes from merging the three strings in some order, with maximal overlaps at each step.", time: "O(1) orders times O(n^2)", space: "O(n)" },
+    { name: "Brute force over candidate strings", intuition: "Enumerate candidate supersequences of increasing length until one contains all three.", time: "exponential in the worst case", space: "O(n)" },
+  ],
   examples: [
     { label: 'Three-letter words, one repeated', input: '{"a":"dcb","b":"bdc","c":"ddd"}' },
     { label: 'Mixed lengths, one letter', input: '{"a":"x","b":"yz","c":"xyzx"}' },

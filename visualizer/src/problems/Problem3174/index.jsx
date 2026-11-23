@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'A JSON string of letters and digits, for example "ab12c"',
   url: 'https://leetcode.com/problems/clear-digits/',
   complexity: 'O(n) time and O(n) space. The visualization caps input at 40 characters.',
+  question: "Remove each digit together with the closest letter to its left, and return the remaining letters.",
+  approaches: [
+    { name: "Stack of surviving letters", intuition: "Push letters as they are read, and let each digit pop the top letter once.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'One digit between letters', input: '"xy9z"' },
     { label: 'Mixed', input: '"ab12c"' },

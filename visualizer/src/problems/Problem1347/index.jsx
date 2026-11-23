@@ -5,6 +5,10 @@ import { StackLane } from '../../components/shared/AlgorithmStatePrimitives'
 import { buildTrace, parseInput, code, python, phases, examples } from './algorithm'
 
 const definition = {
+  question: "Find the fewest character changes that make two strings anagrams of each other.",
+  approaches: [
+    { name: "Letter count difference", intuition: "Count letters in both strings and add the surplus of each letter.", time: "O(n)", space: "O(1)" },
+  ],
   number: '1347', phases, parse: parseInput, build: buildTrace, code, python, examples,
   inputLabel: 'Object with strings s and t of equal length (JSON)',
   url: 'https://leetcode.com/problems/minimum-number-of-steps-to-make-two-strings-anagram/',

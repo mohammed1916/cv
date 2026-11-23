@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with rows and cols (grid size, from 1 to 6)',
   url: 'https://leetcode.com/problems/minimum-cost-path-with-alternating-directions-i/',
   complexity: 'O(m * n) states with a heap gives O(m * n log(m * n)) time; this traced version selects by scanning, so it runs in O((m * n)^2) for the visualization, which caps each side at 6.',
+  question: "In a grid, find the minimum cost path from the top-left to the bottom-right cell where the allowed moves alternate between two directions.",
+  approaches: [
+    { name: "Priority search", intuition: "Settle the cheapest cell each time and extend it with the alternating moves that the path must follow.", time: "O(mn log(mn))", space: "O(mn)" },
+  ],
   examples: [
     { label: 'Three by three', input: '{"rows":3,"cols":3}' },
     { label: 'Narrow strip', input: '{"rows":2,"cols":4}' },

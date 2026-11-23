@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Digits, a and b (JSON object with s, a, b)',
   url: 'https://leetcode.com/problems/lexicographically-smallest-string-after-applying-operations/',
   complexity: 'Number of reachable strings times n. The visualization caps s at 8 digits.',
+  question: "From a digit string, repeatedly add a value to the odd positions or rotate the string, and return the smallest string reachable.",
+  approaches: [
+    { name: "Explore reachable strings", intuition: "Generate every string reachable by the two operations and keep the lexicographically smallest.", time: "O(reachable * n)", space: "O(reachable)" },
+  ],
   examples: [
     { label: 'Own: 3814, a 4, b 2', input: '{"s":"3814","a":4,"b":2}' },
     { label: 'Own: 9001, a 7, b 3', input: '{"s":"9001","a":7,"b":3}' },

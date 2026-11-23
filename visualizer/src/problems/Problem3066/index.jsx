@@ -12,6 +12,11 @@ const definition = {
   inputLabel: 'JSON {"nums": [...], "k": threshold}',
   url: 'https://leetcode.com/problems/minimum-operations-to-exceed-threshold-value-ii/',
   complexity: 'O(n log n + ops log n) time with a min heap. The visualization caps input at 8 numbers and threshold 30.',
+  question: "Find the minimum number of operations that combine the two smallest values until every value is at least k.",
+  approaches: [
+    { name: "Min-heap combine", intuition: "Repeatedly pop the two smallest values, push 2x + y, and count the operations until the smallest value reaches k.", time: "O(n log n)", space: "O(n)" },
+    { name: "Two sorted queues", intuition: "Sort the values and combine the smallest pairs using a second queue of new values.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Four values, k six', input: '{"nums":[9,4,7,1],"k":6}' },
     { label: 'Three values, k twelve', input: '{"nums":[6,13,25],"k":12}' },

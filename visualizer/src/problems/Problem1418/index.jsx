@@ -11,6 +11,10 @@ const definition = {
   inputLabel: 'JSON array of [customer, table, food] orders',
   url: 'https://leetcode.com/problems/display-table-of-food-orders-in-a-restaurant/',
   complexity: 'O(n log n) time for n orders, from sorting the distinct foods and tables; the table itself has one cell per table and food.',
+  question: "Build a table with a row per table number and a column per food, showing counts.",
+  approaches: [
+    { name: "Sort and count", intuition: "Sort the foods and table numbers, then count orders in each cell.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Sample', input: JSON.stringify([['Ana', '3', 'Soup'], ['Ben', '1', 'Bread'], ['Cy', '3', 'Bread'], ['Dee', '10', 'Soup'], ['Eli', '1', 'Soup']]) },
     { label: 'Single table', input: JSON.stringify([['Ann', '5', 'Tea'], ['Bo', '5', 'Tea']]) },

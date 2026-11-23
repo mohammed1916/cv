@@ -16,6 +16,10 @@ const examples = [
 ]
 
 const definition = {
+  question: "From users and purchases tables, total the spending of each membership group for each week of a month, showing empty weeks as zero.",
+  approaches: [
+    { name: "Full grid then left join", intuition: "Build every week and membership pair first, then attach only the matching purchases so empty pairs still appear.", time: "O(u + p)", space: "O(u + p)" },
+  ],
   number: meta.number,
   phases, parse: parseInput, build: buildTrace, code, sql, python, inputLabel,
   url: `https://leetcode.com/problems/${meta.slug}/`,

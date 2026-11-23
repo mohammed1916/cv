@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with val, left, right and random arrays (node 0 is the root; -1 means null)',
   url: 'https://leetcode.com/problems/clone-binary-tree-with-random-pointer/description/',
   complexity: 'O(n) time and O(n) space for n nodes, using a map from original to copy. The visualization caps the tree at 10 nodes with values from 0 to 9;',
+  question: "Deep-copy a binary tree whose nodes also have a random pointer.",
+  approaches: [
+    { name: "Map from original to copy", intuition: "Create every copy first, record it in a map, then link children and random pointers through the map.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Random pointers', input: '{"val":[3,5,9],"left":[1,-1,-1],"right":[2,-1,-1],"random":[2,0,-1]}' },
     { label: 'Self pointer', input: '{"val":[7],"left":[-1],"right":[-1],"random":[0]}' },

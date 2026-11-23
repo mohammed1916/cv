@@ -13,6 +13,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Array (JSON array of integers, up to 30)',
   url: 'https://leetcode.com/problems/number-of-longest-increasing-subsequence/',
   complexity: 'O(n²) time and O(n) space for the two tables.',
+  question: "Count the longest strictly increasing subsequences of an array.",
+  approaches: [
+    { name: "LIS DP with counts", intuition: "Track the length and number of longest subsequences ending at each index.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Ties', input: '[2,4,3,5,4,7,2]' },
     { label: 'Flat', input: '[6,6,6,6]' },

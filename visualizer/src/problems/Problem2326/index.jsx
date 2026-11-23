@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON object: {"m": rows, "n": columns, "head": [...]}',
   url: 'https://leetcode.com/problems/spiral-matrix-iv/',
   complexity: 'Each cell is written once: O(m n) time. The visualization caps the matrix at 6 by 6.',
+  question: "Fill an m by n matrix in spiral order with the values of a linked list, and fill the rest with minus one.",
+  approaches: [
+    { name: "Boundary walk", intuition: "Walk the matrix boundary inward, turning at each edge, and place the list values in order.", time: "O(m * n)", space: "O(m * n)" },
+  ],
   examples: [
     { label: 'Six values on 2 by 3', input: '{"m":2,"n":3,"head":[1,2,3,4,5,6]}' },
     { label: 'Short list', input: '{"m":1,"n":4,"head":[1,2]}' },

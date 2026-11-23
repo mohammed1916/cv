@@ -11,6 +11,10 @@ const definition = {
   inputLabel: 'JSON: {"n": n, "k": k}',
   url: 'https://leetcode.com/problems/valid-binary-strings-with-cost-limit/',
   complexity: 'O(2^n) time in the worst case, since the output itself can be that large. The visualization caps n at 8.',
+  question: "Generate binary strings of length n that never place two ones next to each other and whose cost stays within a limit.",
+  approaches: [
+    { name: "Backtracking with cost pruning", intuition: "Build strings position by position and prune any branch whose cost already exceeds the limit.", time: "O(2^n) worst case", space: "O(n) recursion" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"n":3,"k":1}' },
     { label: 'Example 2', input: '{"n":1,"k":0}' },

@@ -3,6 +3,10 @@ import { StackLane } from '../../components/shared/AlgorithmStatePrimitives'
 import { buildTrace, parseInput, code, python, pythonLineMap, phases, examples } from './algorithm'
 
 const definition = {
+  question: "Decide whether a circle and an axis-aligned rectangle overlap.",
+  approaches: [
+    { name: "Closest point to centre", intuition: "Find the closest point of the rectangle to the circle centre and compare its distance to the radius.", time: "O(1)", space: "O(1)" },
+  ],
   number: '1401', phases, parse: parseInput, build: buildTrace, code, python, pythonLineMap, examples,
   inputLabel: 'Circle and rectangle as a JSON object',
   url: 'https://leetcode.com/problems/circle-and-rectangle-overlapping/',

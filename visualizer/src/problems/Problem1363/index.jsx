@@ -3,6 +3,10 @@ import RecordStateTable from '../../components/shared/RecordStateTable'
 import { buildTrace, parseInput, code, python, pythonLineMap, examples } from './algorithm'
 
 const definition = {
+  question: "Form the largest number from given digits that is divisible by three.",
+  approaches: [
+    { name: "Greedy with digit counts", intuition: "Remove the smallest digits needed to make the digit sum divisible by three, then sort the rest.", time: "O(n)", space: "O(1)" },
+  ],
   phases: [
     { id: 'count', label: 'Count', description: 'Count each digit and find the digit-sum remainder.' },
     { id: 'drop', label: 'Fix remainder', description: 'Drop the fewest smallest digits that fix the remainder mod 3.' },

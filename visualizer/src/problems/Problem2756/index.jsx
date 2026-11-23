@@ -15,6 +15,10 @@ const definition = {
   pythonLineMap: Object.fromEntries(code.map(line => [line.line, line.line])),
   inputLabel: 'Object with values (0 to 9, up to 12 entries) and k (batch size, 1 to 4)',
   complexity: 'O(n) time and O(n/k) space for the batch sums.',
+  question: "Split values into consecutive batches of at most k items and report each batch sum.",
+  approaches: [
+    { name: "Running sum per batch", intuition: "Walk the values once, adding to the open batch and closing it when it is full.", time: "O(n)", space: "O(n / k)" },
+  ],
   goal: {
     summary: 'Split the values into consecutive batches of at most k items and report each batch sum. This is similar in spirit to a premium LeetCode problem, not its statement.',
     requirement: [

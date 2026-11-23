@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with s, encCost and flatCost',
   url: 'https://leetcode.com/problems/minimum-cost-to-partition-a-binary-string/',
   complexity: 'Each segment is priced once with memoisation, so the work is about the number of segments. The visual caps s at 16 characters.',
+  question: "Partition a binary string into pieces at the lowest total cost, where each piece is priced flat or split into halves.",
+  approaches: [
+    { name: "Memoised recursion over halves", intuition: "Recursively halve each segment and take the cheaper of the flat cost or the sum of its halves.", time: "O(segments)", space: "O(segments)" },
+  ],
   examples: [
     { label: 'Example', input: '{"s":"1100","encCost":2,"flatCost":1}' },
     { label: 'Halves win', input: '{"s":"0110","encCost":3,"flatCost":2}' },

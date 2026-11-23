@@ -19,6 +19,11 @@ const definition = {
   inputLabel: 'JSON {"s":"100011001","k":3}',
   url: "https://leetcode.com/problems/shortest-and-lexicographically-smallest-beautiful-string/",
   complexity: "O(n) time and O(n) space for the best substring. The visualization caps s at 100 characters.",
+  question: "Find the shortest binary substring that contains exactly k ones, choosing the lexicographically smallest when lengths tie.",
+  approaches: [
+    { name: "Sliding window with ones count", intuition: "Grow the window until it has k ones, then shrink from the left while keeping k ones, recording the best substring.", time: "O(n)", space: "O(n)" },
+    { name: "Check every substring", intuition: "Try every substring and keep the shortest with exactly k ones.", time: "O(n^2)", space: "O(1)" },
+  ],
   examples: [
     { label: "Own: seven bits, k 2", input: '{"s":"0110101","k":2}' },
     { label: "Own: 1100 with k 1", input: '{"s":"1100","k":1}' },

@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with points (2 to 8 integer [x, y] pairs)',
   url: 'https://leetcode.com/problems/maximum-partition-factor/',
   complexity: 'Binary search over distinct distances with a bipartiteness check per probe. The visualization caps the point count at 8.',
+  question: "Find the largest partition factor, the minimum distance between two groups of points, over all splits.",
+  approaches: [
+    { name: "Binary search with bipartite check", intuition: "Binary search the distance and check whether the points can be split into two groups.", time: "O(n^2 log n)", space: "O(n^2)" },
+  ],
   examples: [
     { label: 'Four points', input: '{"points":[[0,0],[3,1],[1,4],[4,4]]}' },
     { label: 'Three points', input: '{"points":[[1,1],[1,4],[7,2]]}' },

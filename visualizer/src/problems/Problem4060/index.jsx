@@ -12,6 +12,11 @@ const definition = {
   inputLabel: 'Object with l and r (integers, 1 <= l <= r <= 10^12)',
   url: "https://leetcode.com/problems/count-evenly-good-integers/",
   complexity: "O(D * 10) time for D digits, to count up to one bound; the answer is the difference of two such counts. The bound 10^12 used here is a visualization choice, and the official range is not verified in this draft.",
+  question: "Count the integers up to a bound that satisfy the evenly-good digit rule.",
+  approaches: [
+    { name: "Digit DP over prefixes", intuition: "Walk the digits of the bound, tracking the parity of even digits and whether the prefix is still tight; add every smaller prefix whose remaining digits can finish the count.", time: "O(d)", space: "O(1)" },
+    { name: "Brute-force check", intuition: "Test every integer up to the bound directly; simple but too slow for large bounds.", time: "O(N d)", space: "O(1)" },
+  ],
   examples: [
     { label: "First ten", input: '{"l":1,"r":10}' },
     { label: "Three digits", input: '{"l":100,"r":250}' },

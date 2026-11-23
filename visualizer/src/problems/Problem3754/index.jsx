@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with n (integer from 0 to 10^9)',
   url: 'https://leetcode.com/problems/concatenate-non-zero-digits-and-multiply-by-sum-i/',
   complexity: 'O(d) time for d decimal digits.',
+  question: "Build a number from the nonzero digits of n in order, then multiply it by the digit sum of n.",
+  approaches: [
+    { name: "Single digit scan", intuition: "Append each nonzero digit to the result while summing all digits.", time: "O(d)", space: "O(d)" },
+  ],
   examples: [
     { label: 'Example', input: '{"n":10203}' },
     { label: 'Trailing zeros', input: '{"n":1000}' },

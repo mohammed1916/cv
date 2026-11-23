@@ -17,6 +17,10 @@ const definition = {
   inputLabel: 'JSON object: {"words": ["leet", "code"], "x": "e"}',
   url: "https://leetcode.com/problems/find-words-containing-character/",
   complexity: "O(total length of words) time and O(n) space for n words. The visualization caps input at 50 words of up to 50 letters.",
+  question: "Return the indices of the words that contain a given character.",
+  approaches: [
+    { name: "Linear scan", intuition: "Check each word for the character and record its index when found.", time: "O(total length)", space: "O(answer)" },
+  ],
   examples: [
     { label: 'Letter in two of three words', input: '{"words":["abc","xyz","ax"],"x":"a"}' },
     { label: "Second example", input: '{"words": ["abc", "bcd", "aaaa", "cbc"], "x": "a"}' },

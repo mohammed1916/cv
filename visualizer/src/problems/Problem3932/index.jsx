@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON: {"l": l, "r": r, "k": k}',
   url: 'https://leetcode.com/problems/count-k-th-roots-in-a-range/',
   complexity: 'O(r^(1/k)) time for k at least 2, and O(1) for k = 1. The visualization caps r at 200.',
+  question: "Count the integers x whose k-th power lies inside a given range.",
+  approaches: [
+    { name: "Power enumeration with early stop", intuition: "Raise x = 1, 2, ... to the k-th power and stop once the power passes the upper bound.", time: "O(r^(1/k))", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"l":1,"r":9,"k":3}' },
     { label: 'Example 2', input: '{"l":8,"r":30,"k":2}' },

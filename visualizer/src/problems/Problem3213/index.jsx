@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON object {"target": string, "words": [...], "costs": [...]}',
   url: 'https://leetcode.com/problems/construct-string-with-minimum-cost/',
   complexity: 'O(n * w * L) time for n target letters, w words and word length L. The visualization caps the target at 20 letters.',
+  question: "Build a target string from the cheapest set of words, where each word can be reused and costs a fixed amount.",
+  approaches: [
+    { name: "Shortest path over prefixes", intuition: "The cheapest way to build a prefix extends a shorter settled prefix by one matching word.", time: "O(n * w * L)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Six letters, four words', input: '{"target":"nnopqr","words":["nop","qr","nn","opq"],"costs":[3,8,1,20]}' },
     { label: 'Repeated word', input: '{"target": "aaaa", "words": ["a"], "costs": [2]}' },

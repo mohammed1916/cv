@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Digit sums (JSON object with digit_sum)',
   url: 'https://leetcode.com/problems/count-non-decreasing-arrays-with-given-digit-sums/',
   complexity: 'O(n * 5001) time with digit sums cached per value. The visualization caps input at 6 positions.',
+  question: "Count non-decreasing arrays whose digit sums match given values.",
+  approaches: [
+    { name: "Table of ways per value", intuition: "Walk the positions with a table of ways per value, letting each value inherit the running total of smaller values.", time: "O(n * 5001)", space: "O(5001)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"digit_sum":[25,1]}' },
     { label: 'Example 2', input: '{"digit_sum":[1]}' },

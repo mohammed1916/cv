@@ -19,6 +19,11 @@ const definition = {
   inputLabel: 'Values | pos (e.g. "[3, 2, 0, -4] | pos = 1")',
   url: "https://leetcode.com/problems/linked-list-cycle-ii/",
   complexity: "O(n) time and O(1) extra space for n nodes. The visualization caps the list at 40 nodes; the official limit is 10,000.",
+  question: "Find the node where a linked list cycle begins.",
+  approaches: [
+    { name: "Fast and slow then reset", intuition: "After the meeting point, a pointer from the head meets the slow pointer at the cycle start.", time: "O(n)", space: "O(1)" },
+    { name: "Visited set", intuition: "Return the first node seen twice.", time: "O(n)", space: "O(n)" },
+  ],
   examples: getExamplesOr("linked-list-cycle-ii", []).map((example) => ({
     label: example.label,
     input: example.input ?? JSON.stringify(example.values ?? { nodes: example.nodes, pos: example.pos }),

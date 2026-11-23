@@ -12,6 +12,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Courses (JSON array of [duration, lastDay])',
   url: 'https://leetcode.com/problems/course-schedule-iii/',
   complexity: 'O(n log n) time with a heap (the visualization scans for the maximum, so it is O(n²) for display). O(n) space.',
+  question: "Schedule the most courses on one processor, each course with a duration and a deadline.",
+  approaches: [
+    { name: "Sort by deadline with max-heap swap", intuition: "Take courses in deadline order; when one overruns, drop the longest course taken so far.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Classic', input: '[[100,200],[200,1300],[1000,1250],[2000,3200]]' },
     { label: 'One fits', input: '[[1,2]]' },

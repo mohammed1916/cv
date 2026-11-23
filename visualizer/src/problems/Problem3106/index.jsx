@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with s (lowercase, 1 to 30 letters) and k (0 to 100)',
   url: 'https://leetcode.com/problems/lexicographically-smallest-string-after-operations-with-constraint/',
   complexity: 'O(26 * n) time with the cost computed directly for each letter.',
+  question: "Build the lexicographically smallest string reachable by changing letters within a cyclic-distance budget, where the budget is shared across positions.",
+  approaches: [
+    { name: "Greedy from left to right", intuition: "Each position takes the smallest letter whose cyclic distance still fits the remaining budget, because earlier positions dominate.", time: "O(26 * n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"s":"azb","k":1}' },
     { label: 'Example 2', input: '{"s":"mnop","k":3}' },

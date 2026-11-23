@@ -13,6 +13,11 @@ const definition = {
   inputLabel: 'Words as JSON: {"words": [...]}',
   url: 'https://leetcode.com/problems/count-pairs-of-similar-strings/',
   complexity: 'O(n * L log L) time for n words of length L, and O(n) space. The visualization caps input at 12 words.',
+  question: "Count pairs of words that are made of the same set of letters.",
+  approaches: [
+    { name: "Key by letter set", intuition: "Map each word to a key of its distinct letters, then count the pairs within each key.", time: "O(n * L log L)", space: "O(n)" },
+    { name: "Pairwise comparison", intuition: "Compare every pair of words by their letter sets.", time: "O(n^2 * L)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"words":["aba","aabb","abcd","bac","aabc"]}' },
     { label: 'Example 2', input: '{"words":["aabb","ab","ba"]}' },

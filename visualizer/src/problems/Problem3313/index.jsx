@@ -18,6 +18,10 @@ const definition = {
   inputLabel: 'Object with n and edges (e.g. {"n":4,"edges":[[0,1],[1,2],[1,3]]})',
   url: "https://leetcode.com/problems/find-the-last-marked-nodes-in-tree/",
   complexity: "O(n) time and O(n) space: three breadth-first searches, then one comparison per node. The visualization accepts up to 12 nodes.",
+  question: "In a tree, find the last nodes to be marked when marking spreads from a node, as a pair of endpoints.",
+  approaches: [
+    { name: "Three breadth-first searches", intuition: "Find a diameter with two breadth-first searches, then compare each node's distance to the two ends.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: "Branching tree", input: '{"n":6,"edges":[[0,1],[1,2],[1,3],[3,4],[3,5]]}' },
     { label: "Star", input: '{"n":4,"edges":[[0,1],[0,2],[0,3]]}' },

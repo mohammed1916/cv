@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Grid of parentheses (JSON object with grid rows of ( and ), up to 6 by 6)',
   url: 'https://leetcode.com/problems/check-if-there-is-a-valid-parentheses-string-path/',
   complexity: 'O(m * n * (m + n)) time, since a balance never exceeds the path length. The visualization caps the grid at 6 by 6.',
+  question: "Check whether a grid contains a path from top-left to bottom-right that reads a valid parentheses string.",
+  approaches: [
+    { name: "Dynamic programming over reachable balances", intuition: "Each cell keeps the set of balances reachable along a path into it, and the grid is valid when the end reaches zero.", time: "O(m * n * (m + n))", space: "O(m * n * (m + n))" },
+  ],
   examples: [
     { label: 'Valid path', input: '{"grid":["(()",")()"]}' },
     { label: 'Wrong start', input: '{"grid":[")(","()"]}' },

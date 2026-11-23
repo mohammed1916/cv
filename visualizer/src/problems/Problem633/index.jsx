@@ -12,6 +12,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Target c (JSON integer)',
   url: 'https://leetcode.com/problems/sum-of-square-numbers/',
   complexity: 'O(√c) time and O(1) extra space.',
+  question: "Decide whether a non-negative integer can be written as the sum of two perfect squares.",
+  approaches: [
+    { name: "Two pointers on square roots", intuition: "Move pointers inward from 0 and sqrt(c), comparing the sum of squares to the target.", time: "O(sqrt c)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Pair found', input: '13' },
     { label: 'Two equal squares', input: '8' },

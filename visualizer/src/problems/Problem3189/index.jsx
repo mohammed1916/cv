@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with n and rooks (e.g. {"n":3,"rooks":[[0,0],[0,1],[2,2]]})',
   url: "https://leetcode.com/problems/minimum-moves-to-get-a-peaceful-board/",
   complexity: "O(n log n) time for the two sorts and O(n) space for the sorted axes. The visualization caps the board at 8 by 8. Each rook moves one square at a time; the rows and columns are fixed independently, so the total is the sum of the two axis costs.",
+  question: "Find the fewest moves to place rooks on a board so that no two rooks attack each other.",
+  approaches: [
+    { name: "Match sorted rows and columns", intuition: "Rows and columns can be fixed independently, so the rook with the i-th smallest row goes to the i-th smallest target.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: "Two rooks share a row", input: '{"n":3,"rooks":[[0,0],[0,1],[2,2]]}' },
     { label: "Single rook", input: '{"n":1,"rooks":[[0,0]]}' },

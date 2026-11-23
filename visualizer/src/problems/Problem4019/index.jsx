@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with s (lowercase letters) and k (maximum distance)',
   url: "https://leetcode.com/problems/merge-close-characters-ii/",
   complexity: "Each pass scans up to n times k pairs and a round can delete one character, so the simple simulation costs O(n^2 * k) time in the worst case. The visualization caps s at 16 letters; the official bounds are not verified in this draft.",
+  question: "Repeatedly remove the right letter of the leftmost equal pair that sits within distance k, until no close pair remains.",
+  approaches: [
+    { name: "Repeated leftmost-pair removal", intuition: "Find the leftmost close equal pair, delete its right letter, and repeat on the shorter string.", time: "O(n^2 x k) worst case", space: "O(n)" },
+  ],
   examples: [
     { label: "Adjacent pair", input: '{"s":"aab","k":1}' },
     { label: "Far end matches", input: '{"s":"abca","k":3}' },

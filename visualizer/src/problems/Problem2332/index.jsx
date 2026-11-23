@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'JSON object with buses, passengers and capacity',
   url: 'https://leetcode.com/problems/the-latest-time-to-catch-a-bus/',
   complexity: 'O(n log n + m log m) time for the sorts, O(1) extra space for the walk.',
+  question: "Given bus and passenger arrival times and bus capacity, find the latest time you can arrive and still board a bus.",
+  approaches: [
+    { name: "Sort and walk", intuition: "Sort both lists, walk the buses in order with passengers, and try just before each passenger's time.", time: "O(n log n + m log m)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Three buses, capacity 2', input: '{"buses":[9,15,40],"passengers":[10,14,40,41,12],"capacity":2}' },
     { label: 'Two buses, capacity 4', input: '{"buses":[30,60],"passengers":[28,29,31,59,61,62],"capacity":4}' },

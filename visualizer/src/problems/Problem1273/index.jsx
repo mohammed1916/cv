@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with parent (parent[0] = -1 for the root) and value arrays',
   url: 'https://leetcode.com/problems/delete-tree-nodes/description/',
   complexity: 'O(n) time and O(n) space for n nodes. The visualization caps the tree at 12 nodes and values from -9 to 9; the draft does not verify the official bounds.',
+  question: "Delete the tree nodes whose subtree sums to zero, and count the remaining nodes.",
+  approaches: [
+    { name: "Post-order subtree sums", intuition: "Compute each subtree's sum bottom-up and drop subtrees whose sum is zero.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Partial deletion', input: '{"parent":[-1,0,0,1,1],"value":[4,1,-1,0,2]}' },
     { label: 'Whole subtree gone', input: '{"parent":[-1,0,1,1],"value":[7,2,-2,0]}' },

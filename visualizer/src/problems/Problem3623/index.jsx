@@ -28,6 +28,10 @@ const definition = {
   inputLabel: 'List of distinct [x, y] points',
   url: 'https://leetcode.com/problems/count-number-of-trapezoids-i/',
   complexity: 'O(n) time with a hash map of heights. The visualization caps the point list at 8.',
+  question: "Count horizontal trapezoids formed by pairs of points that share the same height.",
+  approaches: [
+    { name: "Count pairs by height", intuition: "Count points at each height and combine the pairs of heights into trapezoids.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Four scattered points', input: '[[0,0],[2,1],[1,3],[4,4]]' },
     { label: 'Two heights', input: '[[0,0],[1,0],[0,1],[1,1]]' },

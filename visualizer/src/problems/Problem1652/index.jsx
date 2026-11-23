@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Object with code and k (JSON)',
   url: 'https://leetcode.com/problems/defuse-the-bomb/',
   complexity: 'O(n * |k|) time with O(n) output: each position sums up to |k| neighbours from the unchanged input.',
+  question: "Replace each element with the sum of the next k elements, or the previous |k| elements when k is negative, wrapping around the array.",
+  approaches: [
+    { name: "Sum each window", intuition: "Sum the window directly for each position from the unchanged input.", time: "O(n * |k|)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Forward window', input: '{"code":[6,1,3,8],"k":2}' },
     { label: 'Backward window', input: '{"code":[2,9,4],"k":-1}' },

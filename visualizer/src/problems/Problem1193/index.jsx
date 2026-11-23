@@ -13,6 +13,10 @@ const definition = {
   python,
   inputLabel,
   complexity,
+  question: "Report monthly counts and amounts of transactions per country, both overall and approved.",
+  approaches: [
+    { name: "Group by month and country", intuition: "Group the transactions by month and country, then count and sum the approved ones.", time: "O(n)", space: "O(groups)" },
+  ],
   examples,
 }
 

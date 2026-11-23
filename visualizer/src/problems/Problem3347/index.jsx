@@ -11,6 +11,10 @@ const definition = {
   inputLabel: 'JSON object: nums (1-30 each), k (0-10) and numOperations',
   url: 'https://leetcode.com/problems/maximum-frequency-of-an-element-after-performing-operations-ii/',
   complexity: 'O(c * n) time for c candidate targets. The visualization caps input at 10 numbers; the same counting idea with sorted arrays and binary search scales further.',
+  question: "Find the largest frequency of any value after adding at most k to each number, for larger inputs.",
+  approaches: [
+    { name: "Counting with sorted arrays", intuition: "Sort the values and count the numbers that reach each candidate with binary search.", time: "O(c * n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Invented spread', input: '{"nums":[2,6,7],"k":1,"numOperations":2}' },
     { label: 'Equal values', input: '{"nums":[2,2,9,9,9],"k":3,"numOperations":0}' },

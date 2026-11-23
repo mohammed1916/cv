@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with n and ranges (e.g. {"n":12,"ranges":[[3,5],[1,2],[8,8]]})',
   url: "https://leetcode.com/problems/find-maximal-uncovered-ranges/",
   complexity: "O(k log k) time for k covered ranges, dominated by the sort; the sweep itself is O(k). O(k) extra space for the sorted copy and the gap list. The visualization caps n at 30 and ranges at 12 pairs. Ranges are read as inclusive on both ends, and a gap that touches or overlaps another covered range is not reported.",
+  question: "Given a range of positive integers and a list of covered intervals, return the maximal uncovered ranges.",
+  approaches: [
+    { name: "Sort and sweep", intuition: "Sort the covered intervals by start, and emit the gaps between the covered region and the range.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: "Gap before, between and after", input: '{"n":12,"ranges":[[3,5],[1,2],[8,8]]}' },
     { label: "Fully covered", input: '{"n":6,"ranges":[[0,5]]}' },

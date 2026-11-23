@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'String and prefix length (JSON object with s and k)',
   url: 'https://leetcode.com/problems/reverse-string-prefix/',
   complexity: 'O(k) time and O(n) space.',
+  question: "Reverse the first k characters of a string.",
+  approaches: [
+    { name: "Swap from both ends", intuition: "Swap pairs of characters from the two ends of the prefix inward.", time: "O(k)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Seven letters, k three', input: '{"s":"lattice","k":3}' },
     { label: 'Own: banana, k 2', input: '{"s":"banana","k":2}' },

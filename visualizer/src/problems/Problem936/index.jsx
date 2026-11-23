@@ -12,6 +12,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Object {stamp, target} (JSON)',
   url: 'https://leetcode.com/problems/stamping-the-sequence/',
   complexity: 'O(n * (n - m + 1) * m) worst case time. The visualization caps the target at 30 characters.',
+  question: "Given a target string and a stamp, find a sequence of stamps that prints the target starting from all question marks.",
+  approaches: [
+    { name: "Greedy reverse stamping", intuition: "Find each place where the stamp matches the target and turn it into question marks, repeating until none fit.", time: "O(n * m)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Short stamp twice', input: '{"stamp":"ab","target":"aabab"}' },
     { label: 'Stamp overlapping itself', input: '{"stamp":"xyz","target":"xxyzyz"}' },

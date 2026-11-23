@@ -18,6 +18,11 @@ const definition = {
   inputLabel: "nums (JSON object with nums, 3 to 30 integers)",
   url: "https://leetcode.com/problems/maximum-value-of-an-ordered-triplet-i/",
   complexity: "O(n) time and O(1) space. The visualization caps the array at 30 elements.",
+  question: "Find the largest value of (nums[i] minus nums[j]) times nums[k] for indices i less than j less than k, or 0 if all are negative.",
+  approaches: [
+    { name: "Single pass with running best values", intuition: "Keep the best prefix value and the best difference so far; each new value can complete the triplet.", time: "O(n)", space: "O(1)" },
+    { name: "Check every triplet", intuition: "Try each triplet of indices.", time: "O(n^3)", space: "O(1)" },
+  ],
   examples: [
     { label: "Example 1", input: '{"nums":[12,6,1,2,7]}' },
     { label: "Example 2", input: '{"nums":[1,10,3,4,19]}' },

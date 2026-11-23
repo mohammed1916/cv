@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON object with n, m, h_bars and v_bars',
   url: 'https://leetcode.com/problems/maximize-area-of-square-hole-in-grid/',
   complexity: 'O(b log b) time for b bars. The visualization caps the grid at eight rows and columns.',
+  question: "Find the largest square hole that can be made by removing horizontal and vertical bars from a grid.",
+  approaches: [
+    { name: "Longest consecutive bar run", intuition: "Sort each set of bars and take the longest run of consecutive positions; the side is the smaller run plus one.", time: "O(h log h + v log v)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"n":2,"m":1,"h_bars":[2,3],"v_bars":[2]}' },
     { label: 'Example 2', input: '{"n":2,"m":3,"h_bars":[2,3],"v_bars":[2,4]}' },

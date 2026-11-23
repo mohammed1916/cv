@@ -44,6 +44,10 @@ function renderReasoning() {
 
 const definition = {
   phases, parse: parseInput, build: buildTrace, code, python, sql,
+  question: "Pivot a product table so each store becomes its own column, with the price for each product in that store.",
+  approaches: [
+    { name: "Conditional column per store", intuition: "Enumerate the stores in sorted order, then build each output row with one conditional column per store.", time: "O(s * p)", space: "O(s)" },
+  ],
   inputLabel, complexity, examples,
 }
 

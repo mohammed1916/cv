@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Integer n from 10 to 1000000000',
   url: 'https://leetcode.com/problems/maximum-product-of-two-digits/',
   complexity: 'O(d) time and O(1) space for d digits.',
+  question: "Find the largest product of two digits from a number.",
+  approaches: [
+    { name: "Top two digits", intuition: "Find the two largest digits and multiply them.", time: "O(d)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '31' },
     { label: 'Example 2', input: '22' },

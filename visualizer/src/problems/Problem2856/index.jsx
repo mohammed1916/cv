@@ -13,6 +13,11 @@ const definition = {
   inputLabel: 'Object with a sorted nums array (JSON)',
   url: 'https://leetcode.com/problems/minimum-array-length-after-pair-removals/',
   complexity: 'O(n) time and O(n) space for the tally. The visualization caps input at 30 values.',
+  question: "Repeatedly remove pairs of adjacent-by-value elements that are equal, and return the minimum length that can remain.",
+  approaches: [
+    { name: "Most frequent value versus the rest", intuition: "Pairs can only cancel different values, so the remainder is either the parity of the length or the excess of the most frequent value.", time: "O(n)", space: "O(n)" },
+    { name: "Stack simulation", intuition: "Pair cancellations greedily with a stack when they differ.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Balanced', input: '{"nums":[1,3,4,9]}' },
     { label: 'Dominant', input: '{"nums":[1,1,1,1,2,3]}' },

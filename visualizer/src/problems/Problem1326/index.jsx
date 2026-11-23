@@ -14,6 +14,11 @@ const definition = {
   inputLabel: 'Object with n and ranges (n plus 1 values, each 0 to 10)',
   url: 'https://leetcode.com/problems/minimum-number-of-taps-to-open-to-water-a-garden/',
   complexity: 'O(n log n) time for the sort of tap spans. The visualization caps n at 20.',
+  question: "Find the fewest taps that cover a garden from one end to the other.",
+  approaches: [
+    { name: "Greedy farthest reach", intuition: "Track the farthest point each tap can cover and jump to the best one in each segment.", time: "O(n log n)", space: "O(n)" },
+    { name: "Interval DP", intuition: "Store the fewest taps needed to reach each position.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Six taps', input: '{"n":6,"ranges":[1,0,2,0,3,1,0]}' },
     { label: 'Own: 2 cells, first is one', input: '{"n":2,"ranges":[1,0,2]}' },

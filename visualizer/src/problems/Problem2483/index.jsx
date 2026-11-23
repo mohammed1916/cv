@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'An object with customers: 1 to 12 characters, each Y or N',
   url: 'https://leetcode.com/problems/minimum-penalty-for-a-shop/',
   complexity: 'O(n) time and O(1) extra space. The visualization caps input at 12 characters.',
+  question: "Choose a closing hour so that the penalty for early closing and late customers is as small as possible.",
+  approaches: [
+    { name: "Running penalty", intuition: "Start from closing at hour 0 and update the penalty as each hour passes, keeping the lowest value.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Own: six customers', input: '{"customers":"YNNYYN"}' },
     { label: 'Own: five customers', input: '{"customers":"YYYNY"}' },

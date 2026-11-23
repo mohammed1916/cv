@@ -21,6 +21,11 @@ const definition = {
   inputLabel: 'Object with a and b (e.g. {"a":1,"b":20})',
   url: 'https://leetcode.com/problems/count-numbers-with-unique-digits-ii/',
   complexity: 'O(d * 10) time and O(1) extra space for d digits of b. The visualization caps b at 99999; the statement bounds in the source still need checking before publication.',
+  question: "Count the integers in a range that have all distinct digits.",
+  approaches: [
+    { name: "Digit counting", intuition: "Count numbers with distinct digits by length and prefix using falling factorial counts.", time: "O(log N)", space: "O(1)" },
+    { name: "Enumerate numbers", intuition: "Check every integer in the range for distinct digits.", time: "O(N log N)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Small range', input: '{"a":1,"b":20}' },
     { label: 'Around one hundred', input: '{"a":100,"b":120}' },

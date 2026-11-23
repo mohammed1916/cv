@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Object with parent, gates ([red, blue, white] per node) and queries ([aNode, aCard, bNode, bCard], card 0 is blue and 1 is red)',
   url: 'https://leetcode.com/problems/distinct-gate-paths-to-lca/',
   complexity: 'O((n + q) log n) time and O(n log n) space, with counts taken modulo 1000000007. The official limits are 20000 nodes and queries; the visualization caps at 15 nodes and 6 queries.',
+  question: "In a rooted tree with coloured gates, count the distinct gate-passing routes from nodes to the lowest common ancestor for each query.",
+  approaches: [
+    { name: "Binary lifting with path counts", intuition: "Lift over ancestors and combine route counts along the way, with results taken modulo 1000000007.", time: "O((n + q) log n)", space: "O(n log n)" },
+  ],
   examples: [
     { label: 'Branching tree', input: '{"parent":[-1,0,0,1,1,2],"gates":[[0,0,0],[2,1,1],[1,0,2],[1,2,1],[0,3,2],[2,2,0]],"queries":[[3,1,4,0],[5,0,4,1],[3,0,1,1]]}' },
     { label: 'Long chain with big jumps', input: '{"parent":[-1,0,1,2,3,4],"gates":[[1,1,1],[2,1,3],[1,4,1],[3,0,2],[2,2,2],[1,3,1]],"queries":[[5,1,0,0],[5,0,2,1]]}' },

@@ -17,6 +17,10 @@ const definition = {
   inputLabel: "Hidden 30-bit integer n as JSON",
   url: "https://leetcode.com/problems/guess-the-number-using-bitwise-questions-ii/",
   complexity: "O(30) oracle calls and O(1) extra space for a 30-bit number. The oracle mutates the hidden value, so the algorithm uses only the counts it returns.",
+  question: "Recover a hidden 30-bit number using only oracle queries that report how many chosen bit positions match across the hidden value.",
+  approaches: [
+    { name: "Bit by bit from oracle counts", intuition: "Each oracle call reveals one bit position through how the count changes, so each bit is decided from a fixed number of queries.", time: "O(30) oracle calls", space: "O(1)" },
+  ],
   examples: [
     { label: "Some bits set", input: "1024" },
     { label: "Every bit set", input: "1073741823" },

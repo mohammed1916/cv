@@ -18,6 +18,11 @@ const definition = {
   inputLabel: "JSON object with key grid, a rectangular matrix of non-negative integers (e.g. {\"grid\": [[2, 1, 0], [1, 0, 0]]})",
   url: "https://leetcode.com/problems/minimum-number-of-visited-cells-in-a-grid/",
   complexity: "O(m * n * (m + n)) in this visualization for grids up to 8 by 8; LeetCode allows up to 10^5 cells with a segment tree or union-find approach.",
+  question: "Given a grid where each cell allows jumps of limited length, find the minimum number of visited cells needed to reach the bottom-right corner, or -1 if impossible.",
+  approaches: [
+    { name: "Dynamic programming with monotone stacks", intuition: "Compute the cost of each cell from cells it can jump to, keeping per-row and per-column structures for fast lookup.", time: "O(mn log)", space: "O(mn)" },
+    { name: "Breadth-first search", intuition: "Expand from the start level by level, pruning cells that have already been reached.", time: "O(mn * max)", space: "O(mn)" },
+  ],
   examples: [
     { label: "Example 1", input: "{\"grid\": [[3, 4, 2, 1], [4, 2, 3, 1], [2, 1, 0, 0], [2, 4, 0, 0]]}" },
     { label: "Example 2", input: "{\"grid\": [[3, 4, 2, 1], [4, 2, 1, 1], [2, 1, 1, 0], [3, 4, 1, 0]]}" },

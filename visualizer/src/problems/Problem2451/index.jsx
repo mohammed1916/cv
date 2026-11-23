@@ -16,6 +16,10 @@ const definition = {
   inputLabel: 'JSON {"words": ["adc","wzy","abc"]}',
   url: 'https://leetcode.com/problems/odd-string-difference/',
   complexity: 'O(n * L) time and O(n * L) space for n words of length L. The visualization caps input at 10 words of up to 8 letters.',
+  question: "Several words share the same difference array signature except one; find that odd word.",
+  approaches: [
+    { name: "Tally difference arrays", intuition: "Compute each word's difference array, count how often each appears, and return the word whose array is unique.", time: "O(n * L)", space: "O(n * L)" },
+  ],
   examples: [
     { label: 'Own: four-letter words', input: '{"words":["mnop","nopq","qwer","ghij"]}' },
     { label: 'Own: three letter words', input: '{"words":["abc","bcd","ace","bdf","axz"]}' },

@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Grid of 0 (water) and 1 (land) as JSON, e.g. {"grid": [[0,1],[1,0]]}',
   url: 'https://leetcode.com/problems/number-of-enclaves/',
   complexity: 'O(m * n) time and space. The visualization caps the grid at 8 by 8.',
+  question: "Count land cells in a grid that cannot walk off the grid border through land.",
+  approaches: [
+    { name: "Flood fill from the border", intuition: "Mark all land reachable from border land; the unmarked land cells are the enclaves.", time: "O(m * n)", space: "O(m * n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"grid": [[0,0,0,0],[1,0,1,0],[0,1,1,0],[0,0,0,0]]}' },
     { label: 'Example 2', input: '{"grid": [[0,1,1,0],[0,0,1,0],[0,0,1,0],[0,0,0,0]]}' },

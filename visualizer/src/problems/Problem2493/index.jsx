@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with n and edges, nodes labelled 1 to n (JSON)',
   url: 'https://leetcode.com/problems/divide-nodes-into-the-maximum-number-of-groups/',
   complexity: 'O(n * (n + E)) time with O(n + E) space. The visualization caps nodes at 6.',
+  question: "Place nodes into level groups so every edge joins neighbouring levels, and maximise the number of groups.",
+  approaches: [
+    { name: "Breadth-first layering", intuition: "From each node, layer the component by distance and check that no edge joins one layer to itself.", time: "O(n * (n + E))", space: "O(n + E)" },
+  ],
   examples: [
     { label: 'Path of five nodes', input: '{"n":5,"edges":[[5,1],[1,3],[3,2],[2,4]]}' },
     { label: 'Triangle', input: '{"n":3,"edges":[[1,2],[2,3],[3,1]]}' },

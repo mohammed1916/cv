@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with windows and activations (e.g. {"windows":4,"activations":[2,1,2,3]})',
   url: "https://leetcode.com/problems/alt-and-tab-simulation/",
   complexity: "O(n * m) time for n windows and m activations, because each activation searches and moves within a list of n windows. The visualization caps windows at 10 and activations at 30. Windows start as 1 to n in order, since the source gives no starting list.",
+  question: "Simulate Alt and Tab window switching, moving each activated window to the front and reporting the order after each activation.",
+  approaches: [
+    { name: "Move-to-front list", intuition: "Keep windows from most to least recent, and each activation moves that window to the front.", time: "O(n * m)", space: "O(n)" },
+  ],
   examples: [
     { label: "Repeat and switch", input: '{"windows":4,"activations":[2,1,2,3]}' },
     { label: "Single window", input: '{"windows":1,"activations":[1,1]}' },

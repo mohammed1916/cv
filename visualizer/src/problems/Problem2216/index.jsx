@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON array of integers, e.g. [1,1,2,3,5]',
   url: 'https://leetcode.com/problems/minimum-deletions-to-make-array-beautiful/',
   complexity: 'O(n) time and O(n) space for the kept list. The page caps the array at 14 values from 0 to 5.',
+  question: "Find the fewest deletions needed to make an array beautiful: even length and no equal neighbours at even indices.",
+  approaches: [
+    { name: "Greedy keep", intuition: "Scan left to right, keeping a value only when it differs from the last kept value at an even position, and remove one more if the length is odd.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Leading pair', input: '[1,1,2,3,5]' },
     { label: 'Two pairs', input: '[1,1,2,2,3,3]' },

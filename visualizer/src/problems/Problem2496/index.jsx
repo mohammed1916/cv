@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Strings (JSON object with strs)',
   url: 'https://leetcode.com/problems/maximum-value-of-a-string-in-an-array/',
   complexity: 'O(total length) time and O(1) extra space. The visualization caps input at 20 strings.',
+  question: "Each string has a value equal to its length if it is numeric, otherwise its letter count; find the largest value.",
+  approaches: [
+    { name: "Single pass", intuition: "Compute each string's value and keep the largest one.", time: "O(total length)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"strs":["alic3","bob","3","4","00000"]}' },
     { label: 'Leading zeros', input: '{"strs":["1","01","001","0001"]}' },

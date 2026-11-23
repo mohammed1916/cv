@@ -13,6 +13,11 @@ const definition = {
   inputLabel: 'JSON object with nums, for example {"nums":[12,21,45,33,54]}',
   url: 'https://leetcode.com/problems/minimum-absolute-distance-between-mirror-pairs/',
   complexity: 'O(n) expected time with a hash map. The visualization caps the array at 12 values.',
+  question: "Find the smallest index gap between a pair of values where one is the reverse of the other.",
+  approaches: [
+    { name: "Latest index per reversed value", intuition: "Scan left to right and remember the latest index of each value, so each mirror match gives its closest gap.", time: "O(n) expected", space: "O(n)" },
+    { name: "Compare every pair", intuition: "Check each pair of indices directly.", time: "O(n^2)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"nums":[12,21,45,33,54]}' },
     { label: 'Example 3', input: '{"nums":[21,120]}' },

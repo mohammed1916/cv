@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'JSON object with source, target, original, changed and cost',
   url: 'https://leetcode.com/problems/minimum-cost-to-convert-string-ii/',
   complexity: 'O(m^3 + n^2 * m) time for m distinct rule strings and length n. The visualization caps rules at 6 pairs.',
+  question: "Find the minimum cost to convert one string into another when conversions can replace whole substrings.",
+  approaches: [
+    { name: "Floyd-Warshall on unique strings plus prefix DP", intuition: "Connect the distinct substrings with conversion costs, run Floyd-Warshall, then use a DP over prefixes of the strings.", time: "O(m^3 + n\u00b7L)", space: "O(m^2)" },
+  ],
   examples: [
     { label: 'Two pieces', input: '{"source":"abab","target":"caca","original":["ab"],"changed":["ca"],"cost":[3]}' },
     { label: 'Chain', input: '{"source":"aba","target":"cbc","original":["a","b"],"changed":["b","c"],"cost":[2,5]}' },

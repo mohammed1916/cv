@@ -10,6 +10,10 @@ const definition = {
   number: meta.number,
   phases, parse: parseInput, build: buildTrace, code, sql, python, inputLabel,
   url: `https://leetcode.com/problems/${meta.slug}/`,
+  question: "Remove a customer's type 1 orders whenever that customer also placed a type 0 order, keeping every other row.",
+  approaches: [
+    { name: "Qualifying customer set", intuition: "Collect the customers who placed a type 0 order, then keep each row unless it is type 1 and its customer is in that set.", time: "O(n)", space: "O(c)" },
+  ],
   complexity, examples,
 }
 

@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Digit string (e.g. 1234)',
   url: 'https://leetcode.com/problems/number-of-ways-to-separate-numbers/',
   complexity: 'O(n²) table cells with prefix sums and one string comparison per cell. The visualization caps the string at 12 digits.',
+  question: "Count the ways to split a digit string into a non-decreasing sequence of positive numbers without leading zeros.",
+  approaches: [
+    { name: "LCP table and prefix sums", intuition: "Use the longest common prefix of suffixes to compare adjacent pieces, then count splits with prefix sums.", time: "O(n^2)", space: "O(n^2)" },
+  ],
   examples: [
     { label: 'Four digits', input: '1234' },
     { label: 'Leading zero inside', input: '1003' },

@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'nums1 and nums2 (JSON object)',
   url: 'https://leetcode.com/problems/maximum-length-of-repeated-subarray/',
   complexity: 'O(m * n) time and O(m * n) space for the table.',
+  question: "Find the length of the longest subarray that appears in both arrays.",
+  approaches: [
+    { name: "Diagonal DP", intuition: "Track the length of the common run ending at each pair of positions.", time: "O(mn)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Shared run', input: '{"nums1":[4,5,6,7],"nums2":[5,6,9,4,5,6]}' },
     { label: 'Double', input: '{"nums1":[2,2,8],"nums2":[8,2,2,2]}' },

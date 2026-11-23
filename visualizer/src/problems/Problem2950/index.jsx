@@ -13,6 +13,11 @@ const definition = {
   inputLabel: 'Object with a lowercase word, e.g. {"word":"kitchen"}',
   url: 'https://leetcode.com/problems/number-of-divisible-substrings/',
   complexity: 'O(9 n) time and O(n) space: each of the nine averages is one pass with a hash map of running values. The visualization caps the word at 30 letters.',
+  question: "Count substrings whose weighted letter sum is divisible by each allowed divisor, using letter groups as weights.",
+  approaches: [
+    { name: "Prefix sums per divisor", intuition: "For each divisor, keep running weights and count earlier equal running values with a hash map.", time: "O(9n)", space: "O(n)" },
+    { name: "Enumerate substrings", intuition: "Check each substring's weighted sum directly.", time: "O(n^2)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Mixed letters', input: '{"word":"kitchen"}' },
     { label: 'Repeated letter', input: '{"word":"aaaa"}' },

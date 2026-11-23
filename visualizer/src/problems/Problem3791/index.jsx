@@ -12,6 +12,11 @@ const definition = {
   inputLabel: 'Range (JSON object with low and high)',
   url: 'https://leetcode.com/problems/number-of-balanced-integers-in-a-range/',
   complexity: 'O(range * digits) time in this visualization. The problem allows values up to 10^15, which needs digit dynamic programming. The visualization caps the range at 301 values.',
+  question: "Count the integers in a range whose digits at odd positions and even positions have equal sums.",
+  approaches: [
+    { name: "Digit-by-digit count over the range", intuition: "Check each integer in the range by its digit sums.", time: "O(range * d)", space: "O(d)" },
+    { name: "Digit dynamic programme", intuition: "Count digit patterns that balance the two sums.", time: "O(d * states)", space: "O(states)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"low":2000,"high":2019}' },
     { label: 'Example 2', input: '{"low":1100,"high":1199}' },

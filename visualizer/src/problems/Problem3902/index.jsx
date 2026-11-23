@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'Object with tree: level-order values with null for empty slots',
   url: 'https://leetcode.com/problems/zigzag-level-sum-of-binary-tree/',
   complexity: 'O(n) time and O(n) space: each node is visited once to build the levels, then each level is read at most once. The visualization caps the tree at 12 nodes.',
+  question: "Walk a binary tree level by level, alternating left-to-right and right-to-left, and report each level's sum until the pattern breaks.",
+  approaches: [
+    { name: "Level traversal with direction flags", intuition: "Breadth-first search by level; on alternating levels read children in the opposite order.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Missing left first', input: '{"tree":[1,2,3,4,null,null,5]}' },
     { label: 'Mixed shape', input: '{"tree":[6,3,9,2,4,null,8,1,null,null,7]}' },

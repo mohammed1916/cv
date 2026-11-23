@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Costs (JSON object with cost as a rectangular matrix of costs from 0 to 100)',
   url: 'https://leetcode.com/problems/minimum-cost-to-connect-two-groups-of-points/',
   complexity: 'O(m * 2^n * n) time and O(2^n) space. The visualization caps each group at 4 points.',
+  question: "Connect two groups of points with the cheapest set of edges so that every point is linked.",
+  approaches: [
+    { name: "Bitmask DP over covered points", intuition: "Each state is the set of second-group points already covered; extend it with each first-group point.", time: "O(m * 2^n * n)", space: "O(2^n)" },
+  ],
   examples: [
     { label: 'Two by two', input: '{"cost":[[15,96],[36,2]]}' },
     { label: 'One by two', input: '{"cost":[[1,9]]}' },

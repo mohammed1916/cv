@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with nums1 and nums2',
   url: 'https://leetcode.com/problems/minimum-cost-to-equalize-arrays-using-swaps/',
   complexity: 'Counting values is linear in the array length, with a small table per distinct value. The visual caps the arrays at 10 values.',
+  question: "Make two arrays equal with the fewest swaps across them, or report that it is impossible.",
+  approaches: [
+    { name: "Count surpluses per value", intuition: "Count each value across both arrays, reject odd totals, and sum the positive surpluses.", time: "O(n)", space: "O(distinct)" },
+  ],
   examples: [
     { label: 'Example', input: '{"nums1":[1,1,2],"nums2":[2,3,3]}' },
     { label: 'Impossible', input: '{"nums1":[1],"nums2":[2]}' },

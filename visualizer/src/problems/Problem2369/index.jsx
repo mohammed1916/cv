@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with nums, 2 to 10 values from 1 to 6 (JSON)',
   url: 'https://leetcode.com/problems/check-if-there-is-a-valid-partition-for-the-array/',
   complexity: 'O(n) time and O(n) space for n values. The visualization caps input at 10 values.',
+  question: "Decide whether an array can be split into valid partitions made of equal pairs or triples of consecutive equal or increasing values.",
+  approaches: [
+    { name: "Partition DP", intuition: "Track whether each prefix can be validly partitioned using the last two or three values.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Own: four values', input: '{"nums":[2,6,1,3]}' },
     { label: 'Own: five values', input: '{"nums":[5,5,2,6,1]}' },

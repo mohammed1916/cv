@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Balances (JSON object with balance)',
   url: 'https://leetcode.com/problems/minimum-moves-to-balance-circular-array/',
   complexity: 'O(n log n) time for sorting people by distance. The visualization caps n at 12.',
+  question: "Balance a circular array by moving people between positions, paying one move per unit of distance.",
+  approaches: [
+    { name: "Nearest surplus first", intuition: "Fill the single deficit from the nearest surplus around the circle, sorted by distance.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"balance":[5,1,-4]}' },
     { label: 'Example 2', input: '{"balance":[1,2,-5,2]}' },

@@ -20,6 +20,10 @@ const definition = {
   inputLabel: "Lowercase letters",
   url: "https://leetcode.com/problems/make-string-anti-palindrome/",
   complexity: "O(n^3 * 26) time in the worst case with memoised feasibility, and O(n^2) extra space for n letters. Odd lengths and impossible strings return the sentinel '-1'. The visualization caps the string at 12 lowercase letters.",
+  question: "Rearrange the letters of a lowercase string so that no mirrored pair of positions holds equal letters, or report -1 when that cannot be done.",
+  approaches: [
+    { name: "Greedy placement with feasibility check", intuition: "Fill the positions in order, choosing the smallest letter whose remaining copies still allow a valid completion.", time: "O(n^3 * 26)", space: "O(n^2)" },
+  ],
   examples: [
     { label: "Pairs can differ", input: "aabb" },
     { label: "Smallest arrangement", input: "bcaa" },

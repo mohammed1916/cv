@@ -13,6 +13,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Grid board (JSON, n x n, n up to 20)',
   url: 'https://leetcode.com/problems/transform-to-chessboard/',
   complexity: 'O(n^2) time to build masks and O(n) extra space.',
+  question: "Find the fewest row and column swaps that turn a binary grid into a chessboard.",
+  approaches: [
+    { name: "Bitmask row and column analysis", intuition: "Rows and columns are analysed independently as bitmasks: each must be one of two complements, balanced and alternating.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: '4x4 -> 2', input: '[[0,1,1,0],[0,1,1,0],[1,0,0,1],[1,0,0,1]]' },
     { label: '2x2 -> 0', input: '[[0,1],[1,0]]' },

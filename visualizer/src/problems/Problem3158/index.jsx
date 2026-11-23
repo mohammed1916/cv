@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with nums (values 1 to 50), for example {"nums":[1,2,1,3]}',
   url: 'https://leetcode.com/problems/find-the-xor-of-numbers-which-appear-twice/',
   complexity: 'O(n) time and O(n) space for the counts.',
+  question: "Return the XOR of all values that appear exactly twice in an array.",
+  approaches: [
+    { name: "Count then XOR qualifying values", intuition: "Count each value first, then XOR each value that appears exactly twice once.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"nums":[1,2,1,3]}' },
     { label: 'Example 2', input: '{"nums":[1,2,2,1]}' },

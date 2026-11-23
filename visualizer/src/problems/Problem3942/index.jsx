@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON array holding each value from 0 to n minus 1 once (n up to 8)',
   url: 'https://leetcode.com/problems/minimum-operations-to-sort-a-permutation/',
   complexity: 'O(n) states per breadth-first level in this direct form, with at most 2n reachable arrangements. The visualization caps the permutation at 8 values.',
+  question: "Using whole-array reversal and left rotation, find the fewest operations that sort a permutation.",
+  approaches: [
+    { name: "Breadth-first search over arrangements", intuition: "Explore arrangements reachable by reversing or rotating, level by level, until sorted order appears.", time: "O(n) states per level, at most 2n reachable", space: "O(n)" },
+  ],
   examples: [
     { label: 'Rotated', input: '[2, 3, 0, 1]' },
     { label: 'Impossible', input: '[0, 2, 1, 3]' },

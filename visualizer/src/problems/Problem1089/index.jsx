@@ -4,6 +4,10 @@ import { Sequence, Vars } from './SeqKit'
 import './SeqKit.css'
 
 const definition = {
+  question: "Duplicate each zero in an array in place, shifting the rest right and keeping the length fixed.",
+  approaches: [
+    { name: "Count zeros, then write backward", intuition: "Count how far the final array extends, then write from the end so no unread value is overwritten.", time: "O(n)", space: "O(1)" },
+  ],
   number: '1089',
   phases,
   parse: parseInput,

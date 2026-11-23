@@ -12,6 +12,11 @@ const definition = {
   inputLabel: 'JSON object with nums, 1 to 20 integers from 1 to 100, for example {"nums":[2,5,9]}',
   url: 'https://leetcode.com/problems/sum-of-floored-pairs/',
   complexity: 'O(M log M) time for largest value M. The visualization caps values at 100.',
+  question: "Sum the floor of every quotient of two numbers taken from the array, counting ordered pairs and repeats.",
+  approaches: [
+    { name: "Count values then sum multiples", intuition: "Count each value, then for each distinct divisor add its contribution to every multiple using prefix counts.", time: "O(M log M)", space: "O(M)" },
+    { name: "Pairwise division", intuition: "Divide every ordered pair directly and add the floors.", time: "O(n^2)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"nums":[2,5,9]}' },
     { label: 'Equal values', input: '{"nums":[7,7,7,7,7,7,7]}' },

@@ -9,6 +9,10 @@ const definition = {
   inputLabel: 'Object with SecretSanta, a list of rows with giver_id, receiver_id and gift_value',
   url: 'https://leetcode.com/problems/find-circular-gift-exchange-chains/',
   complexity: 'With g gifts, each of the g walks takes at most g hops, so O(g²) time and rows. The visualization draws at most 12 gifts.',
+  question: "Find the circular chains of gift exchanges in a secret Santa setup.",
+  approaches: [
+    { name: "Walk each gift's chain", intuition: "From each gift, follow the receivers until the chain returns, recording each one that closes.", time: "O(g^2)", space: "O(g)" },
+  ],
   examples: [
     { label: 'Loop of four and a swap', input: table([[3, 8, 15], [8, 6, 10], [6, 11, 5], [11, 3, 12], [20, 21, 9], [21, 20, 16]]) },
     { label: 'Equal loops merge', input: table([[1, 2, 10], [2, 1, 30], [5, 6, 25], [6, 5, 15]]) },

@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 's and goal (JSON object)',
   url: 'https://leetcode.com/problems/buddy-strings/',
   complexity: 'O(n) time and O(n) space for the letter set.',
+  question: "Decide whether swapping two letters in string s can make it equal to goal.",
+  approaches: [
+    { name: "Length, duplicate and mismatch check", intuition: "Equal strings need a repeated letter; otherwise the strings must differ in exactly two positions that cross-match.", time: "O(n)", space: "O(26)" },
+  ],
   examples: [
     { label: 'Cross swap', input: '{"s":"tenor","goal":"notre"}' },
     { label: 'Repeat', input: '{"s":"lemon","goal":"lemon"}' },

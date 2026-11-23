@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with arriveAlice, leaveAlice, arriveBob, leaveBob as MM-DD',
   url: 'https://leetcode.com/problems/count-days-spent-together/',
   complexity: 'O(1) time and space, using the fixed month lengths of a non-leap year.',
+  question: "Given two people's stay dates in a non-leap year, count the days they are both there.",
+  approaches: [
+    { name: "Overlap of day numbers", intuition: "Convert the dates to day numbers and take the overlap of the two ranges.", time: "O(1)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Overlap', input: '{"arriveAlice":"08-15","leaveAlice":"08-18","arriveBob":"08-16","leaveBob":"08-19"}' },
     { label: 'No overlap', input: '{"arriveAlice":"10-01","leaveAlice":"10-31","arriveBob":"11-01","leaveBob":"12-31"}' },

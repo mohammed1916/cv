@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON object with row, col and cells (1-based), e.g. {"row":2,"col":2,"cells":[[1,1],[2,1],[1,2],[2,2]]}',
   url: 'https://leetcode.com/problems/last-day-where-you-can-still-cross/',
   complexity: 'O(log n) probes, each a breadth-first search over the grid: O(R·C·log n) in total.',
+  question: "Find the last day on which land still connects the top and bottom of a grid when cells are flooded one per day.",
+  approaches: [
+    { name: "Binary search with BFS", intuition: "Binary search the day, and check each candidate with a breadth-first search over land cells.", time: "O(RC log(RC))", space: "O(RC)" },
+  ],
   examples: [
     { label: 'Two by two', input: '{"row":2,"col":2,"cells":[[1,1],[2,1],[1,2],[2,2]]}' },
     { label: 'Three by three', input: '{"row":3,"col":3,"cells":[[2,2],[2,1],[2,3]]}' },

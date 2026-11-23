@@ -12,6 +12,11 @@ const definition = {
   inputLabel: 'Object with nums (integers from -9 to 9)',
   url: 'https://leetcode.com/problems/maximize-subarray-sum-after-removing-all-occurrences-of-one-element/description/',
   complexity: 'O(n * d) time for n values with d distinct values. The visualization caps nums at 10 values.',
+  question: "Delete every copy of one chosen value from an array, then find the largest sum of a contiguous run of what remains.",
+  approaches: [
+    { name: "Try each removal", intuition: "Run Kadane's best-run scan once per distinct value, skipping that value.", time: "O(n * d)", space: "O(1)" },
+    { name: "Keep everything", intuition: "Run Kadane once on the untouched array as the baseline to beat.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Invented list', input: JSON.stringify({ nums: [-3, 2, -2, -1, 3, -2, 3] }) },
     { label: 'Negative edge', input: JSON.stringify({ nums: [-4, -1, -2] }) },

@@ -20,6 +20,11 @@ const definition = {
   phases, parse: parseInput, build: buildTrace, code, sql, python, inputLabel,
   url: `https://leetcode.com/problems/${meta.slug}/`,
   complexity, examples,
+  question: "Find the viewers who later became streamers, and count how many streams each one has after their first session.",
+  approaches: [
+    { name: "First session then count later streams", intuition: "Take each user's first session, and count their streamer sessions that start after it.", time: "O(n log n)", space: "O(n)" },
+    { name: "Self-join", intuition: "Join sessions to later streamer sessions of the same user.", time: "O(n^2)", space: "O(n)" },
+  ],
 }
 
 function Rows({ columns = [], rows = [] }) {

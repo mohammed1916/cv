@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON with nums and k, e.g. {"nums":[1,7,2],"k":3}',
   url: 'https://leetcode.com/problems/maximize-the-topmost-element-after-k-moves/',
   complexity: 'O(min(n, k)) time and O(1) extra space. The page caps the pile at 10 values and k at 12.',
+  question: "Maximise the top element of a pile after exactly k moves that remove or restore the top element.",
+  approaches: [
+    { name: "Case analysis on k", intuition: "Check whether the pile can be emptied and refilled, and compare the best element that can be exposed with the element left after k moves.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Mixed pile', input: '{"nums":[1,7,2],"k":3}' },
     { label: 'Single value, even moves', input: '{"nums":[2],"k":2}' },

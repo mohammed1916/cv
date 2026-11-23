@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'String s (JSON)',
   url: 'https://leetcode.com/problems/partition-labels/',
   complexity: 'O(n) time, O(26) extra space; the visualization caps the string at 200 characters.',
+  question: "Split a string into the most parts so that each letter appears in only one part.",
+  approaches: [
+    { name: "Last occurrence window", intuition: "Cut the string at every point where the window contains all occurrences of its letters.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [{ label: 'One long block', input: '"xyzxyzzz"' }, { label: 'Block of seven, then one', input: '"mnopqmnr"' }, { label: 'One letter', input: '"aaaa"' }, { label: 'Single letter', input: '"a"' }, { label: 'Nested letters stay together', input: '"abba"' }, { label: 'Repeating blocks', input: '"abcabc"' }, { label: 'Long run: 200 letters', input: '"rhjrebeghtzogvqowgwwasugkrjlkzfehkqdlygkluockmzgeldadavsottvwwncptcvblrknfzgfzgopuwidlpshekvlvewmojdtsncearqriwgdjkyweeenntzbwyscimhchutklegtyhatyhqopkzlmzrcvxoytyjkenzpcskethiyxeieardatwlciuqlkrbdyjn"' }],
 }
 

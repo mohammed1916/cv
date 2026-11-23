@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'Permutation and m (JSON object with arr and m)',
   url: 'https://leetcode.com/problems/find-latest-group-of-size-m/',
   complexity: 'O(n) time and O(n) space for a permutation of length n. The visualization caps input at 50 bits.',
+  question: "Find the last step at which a group of ones of exactly length m exists.",
+  approaches: [
+    { name: "Run lengths at each step", intuition: "Track the run lengths on each side of a newly set bit and count runs of length m.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Size 1', input: '{"arr":[3,5,1,2,4],"m":1}' },
     { label: 'Size 2 never', input: '{"arr":[3,1,5,4,2],"m":2}' },

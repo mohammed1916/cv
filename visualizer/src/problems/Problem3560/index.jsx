@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Object with n, m and k',
   url: 'https://leetcode.com/problems/find-minimum-log-transportation-cost/',
   complexity: 'O(1) time and space. The compare step shows at most 8 sample cuts to explain the choice; the solution itself does not loop.',
+  question: "Choose cut lengths for log pieces so that the transport cost is minimal.",
+  approaches: [
+    { name: "Compare sample cuts", intuition: "Test a small set of evenly spread cut lengths and keep the cheapest.", time: "O(1)", space: "O(1)" },
+  ],
   examples: [
     { label: 'One long log', input: '{"n":3,"m":13,"k":9}' },
     { label: 'Both fit', input: '{"n":7,"m":7,"k":7}' },

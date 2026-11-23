@@ -12,6 +12,11 @@ const definition = {
   inputLabel: 'Object with a tasks array of { value, delay } entries',
   url: 'https://leetcode.com/problems/parallel-execution-of-promises-for-individual-results-retrieval/',
   complexity: 'O(n log n) here because the visual sorts tasks by delay. The real work is O(n).',
+  question: "Run a list of promises concurrently and collect their results in their original order.",
+  approaches: [
+    { name: "Start all and await in order", intuition: "Start every task at once and await each result in the input order.", time: "O(n) overlapping work", space: "O(n)" },
+    { name: "Sequential awaiting", intuition: "Await one task after another; correct but slower.", time: "O(total time)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Out of order', input: '{"tasks":[{"value":"slow","delay":90},{"value":"fast","delay":10},{"value":"mid","delay":40}]}' },
     { label: 'Single task', input: '{"tasks":[{"value":"only","delay":0}]}' },

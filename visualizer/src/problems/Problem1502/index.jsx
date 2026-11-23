@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Object with arr (JSON)',
   url: 'https://leetcode.com/problems/can-make-arithmetic-progression-from-sequence/',
   complexity: 'O(n log n) time for the sort and O(n) for the gap check, with O(n) space for the sorted copy.',
+  question: "Decide whether the values can be rearranged into an arithmetic progression.",
+  approaches: [
+    { name: "Sort and check gaps", intuition: "Sort the values and check that every adjacent gap is the same.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Shuffled', input: '{"arr":[7,1,5,9,3]}' },
     { label: 'Uneven gap', input: '{"arr":[4,1,9,2]}' },

@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Numbers as JSON: {"nums": [...]}',
   url: 'https://leetcode.com/problems/max-sum-of-a-pair-with-equal-sum-of-digits/',
   complexity: 'O(n * d) time for n numbers of at most d digits, and O(n) space. The visualization caps input at 20 numbers.',
+  question: "Find the largest sum of two numbers whose digit sums are equal.",
+  approaches: [
+    { name: "Best number per digit sum", intuition: "Keep the largest number seen for each digit sum, and combine each new number with the best earlier one.", time: "O(n * d)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Own: four squares-like values', input: '{"nums":[9,4,25,16]}' },
     { label: 'Own: three values', input: '{"nums":[6,30,2]}' },

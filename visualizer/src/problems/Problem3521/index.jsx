@@ -42,6 +42,10 @@ const definition = {
   inputLabel: 'Object with product_info and product_purchases lists',
   url: 'https://leetcode.com/problems/find-product-recommendation-pairs/description/',
   complexity: 'O(p^2 * r) time for p products and r purchases in this small trace. Grouping buyers first keeps the pair checks simple.',
+  question: "From purchase records, list pairs of products that many buyers bought together.",
+  approaches: [
+    { name: "Group then pair", intuition: "Group purchases by buyer and count product pairs.", time: "O(p^2 r)", space: "O(p^2)" },
+  ],
   examples: [
     {
       label: 'Sample',

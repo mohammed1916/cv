@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON object with transactions: 1 to 8 [cost, cashback] pairs (cost 1 to 20, cashback 0 to 20)',
   url: 'https://leetcode.com/problems/minimum-money-required-before-transactions/',
   complexity: 'O(n) time for n transactions. The visualization caps transactions at 8.',
+  question: "Find the least money needed at the start so that every transaction can be completed in some order.",
+  approaches: [
+    { name: "Greedy by net loss", intuition: "Sort transactions by the cost minus the cashback and handle the largest shortfalls first.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Mixed', input: '{"transactions":[[4,2],[1,3],[6,6]]}' },
     { label: 'Pure loss', input: '{"transactions":[[7,1],[3,0]]}' },

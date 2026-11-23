@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON {"vals": [2, 2, 1], "edges": [[0,1],[1,2]]}',
   url: 'https://leetcode.com/problems/number-of-good-paths/',
   complexity: 'O(n log n) time for the sort and union-find with small-to-large maps. The visualization caps the tree at 10 nodes.',
+  question: "Count the good paths in a tree, where a path is good when its endpoints have equal values and nothing in between is larger.",
+  approaches: [
+    { name: "Union-find merging by value", intuition: "Process nodes by value and union neighbours with smaller values, counting pairs with the same value in each group.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example', input: '{"vals":[2,2,1],"edges":[[0,1],[1,2]]}' },
     { label: 'Chain', input: '{"vals":[3,1,3,2],"edges":[[0,1],[1,2],[2,3]]}' },

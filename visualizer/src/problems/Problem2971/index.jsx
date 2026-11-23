@@ -18,6 +18,10 @@ const definition = {
   inputLabel: "JSON object: {\"nums\": [...]} (3 to 50 sides for this view)",
   url: "https://leetcode.com/problems/find-polygon-with-the-largest-perimeter/",
   complexity: "O(n log n) time for the sort, O(1) extra space. The visualization caps nums at 50 values; LeetCode allows up to 100000.",
+  question: "Find the largest perimeter of a polygon that can be formed from the given side lengths.",
+  approaches: [
+    { name: "Sort and check from the largest side", intuition: "Sort the sides and find the largest side that is smaller than the sum of all other sides.", time: "O(n log n)", space: "O(1)" },
+  ],
   examples: [
     { label: "Four sides", input: "{\"nums\": [4, 9, 5, 6]}" },
     { label: "Too long a side", input: "{\"nums\": [2, 2, 9]}" },

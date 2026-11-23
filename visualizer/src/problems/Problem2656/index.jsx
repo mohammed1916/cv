@@ -18,6 +18,10 @@ const definition = {
   inputLabel: 'JSON object with nums and k (e.g. {"nums": [4,9,2,9,6], "k": 4})',
   url: "https://leetcode.com/problems/maximum-sum-with-exactly-k-elements/",
   complexity: "O(n + k) time and O(1) extra space. The visualization caps nums and k at 100.",
+  question: "Given an array and k, choose exactly k elements to maximize the sum after adding one to the chosen value each time.",
+  approaches: [
+    { name: "Repeatedly take the maximum", intuition: "Pick the largest value k times, adding one each time and putting it back.", time: "O(k)", space: "O(1)" },
+  ],
   examples: [
     { label: "nums = [4,9,2,9,6], k = 4 (repeated maximum)", input: '{"nums": [4, 9, 2, 9, 6], "k": 4}' },
     { label: "nums = [20,20,20,20,4], k = 6 (tied block)", input: '{"nums": [20, 20, 20, 20, 4], "k": 6}' },

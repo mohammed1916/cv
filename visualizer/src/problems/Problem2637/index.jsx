@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with delay, limit and value (milliseconds)',
   url: 'https://leetcode.com/problems/promise-time-limit/',
   complexity: 'O(1) bookkeeping. The visualization only models the timing race, not the user function.',
+  question: "Given a promise and a time limit, return a promise that resolves with the result if it finishes in time, or rejects with a timeout error otherwise.",
+  approaches: [
+    { name: "Race with a timer", intuition: "Race the promise against a timer that rejects when the limit passes.", time: "O(1)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Finishes in time', input: '{"delay":30,"limit":80,"value":"ready"}' },
     { label: 'Too slow', input: '{"delay":120,"limit":50,"value":"late"}' },

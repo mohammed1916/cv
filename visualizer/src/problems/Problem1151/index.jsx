@@ -4,6 +4,10 @@ import { buildTrace, parseInput, code, python, phases, examples, complexity, inp
 import { Sequence, Vars } from './SeqKit'
 
 const definition = {
+  question: "Find the fewest swaps needed to group all ones together in a binary array.",
+  approaches: [
+    { name: "Sliding window of ones count", intuition: "Slide a window the size of the total number of ones and keep the most ones inside it.", time: "O(n)", space: "O(1)" },
+  ],
   number: meta.number,
   phases, parse: parseInput, build: buildTrace, code, python, inputLabel, complexity, examples,
   url: `https://leetcode.com/problems/${meta.slug}/`,

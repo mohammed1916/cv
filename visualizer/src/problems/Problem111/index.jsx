@@ -22,6 +22,11 @@ const definition = {
   inputLabel: "Level-order array (e.g. [3,9,20,null,null,15,7])",
   url: "https://leetcode.com/problems/minimum-depth-of-binary-tree/",
   complexity: "O(n) time and O(h) recursion depth for n nodes. The visualization accepts up to 15 entries.",
+  question: "Return the number of nodes on the shortest root-to-leaf path of a binary tree.",
+  approaches: [
+    { name: "Recursive minimum depth", intuition: "A node's depth is one more than its shallower child, unless it has only one child.", time: "O(n)", space: "O(h)" },
+    { name: "Level-order search", intuition: "Stop at the first level that contains a leaf.", time: "O(n)", space: "O(n)" },
+  ],
   examples: getExamples("minimum-depth-of-binary-tree").map(example => ({ label: example.label, input: JSON.stringify(example.arr) })),
 };
 

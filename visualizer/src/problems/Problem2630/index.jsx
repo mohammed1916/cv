@@ -9,6 +9,10 @@ const definition = {
   inputLabel: 'Object with fn ("add", "merge" or "list"), calls, and optional objects. "@name" is the one shared object called name; every literal {} or [] is a new object.',
   url: 'https://leetcode.com/problems/memoize-ii/',
   complexity: 'Each call costs O(a) map lookups for a arguments, and the cache holds at most one node per argument passed overall. The visualization caps input at 14 calls of 4 arguments.',
+  question: "Memoize a function with a cache that handles arguments by identity, so nested argument structures are stored in a tree of lookups.",
+  approaches: [
+    { name: "Tree of argument maps", intuition: "Walk a map per argument; the final node stores the result for that exact argument list.", time: "O(a) per call", space: "O(calls * a)" },
+  ],
   examples: [
     { label: 'Order and length matter', input: '{"fn":"add","calls":[[3,4],[4,3],[3,4],[3],[3,4,0]]}' },
     { label: 'Shared vs new objects', input: '{"fn":"merge","objects":{"cart":{"apples":2}},"calls":[["@cart",{"pears":1}],["@cart",{"pears":1}],["@cart","@cart"],["@cart","@cart"]]}' },

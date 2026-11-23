@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'An object with arr (1 to 12 integers from 1 to 12) and target (1 to 12)',
   url: 'https://leetcode.com/problems/find-two-non-overlapping-sub-arrays-each-with-target-sum/',
   complexity: 'O(n) time with a hash map of prefix sums. The visualization caps arr at 12 entries.',
+  question: "Find two non-overlapping subarrays that each sum to a target, minimising the total length.",
+  approaches: [
+    { name: "Prefix sums with a map", intuition: "Store the shortest window ending before each index in a map keyed by prefix sum, then combine windows.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Five values, target five', input: '{"arr":[6,2,6,1,2],"target":5}' },
     { label: 'Repeated nines', input: '{"arr":[9,9,3,3,7],"target":9}' },

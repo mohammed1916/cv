@@ -29,6 +29,10 @@ const definition = {
   inputLabel: "Object with nums (JSON), e.g. {\"nums\":[3,2,1,4]}",
   url: "https://leetcode.com/problems/neither-minimum-nor-maximum/",
   complexity: "O(n) time and O(1) extra space. The visualization caps input at 100 values, the official limit.",
+  question: "Given an array of distinct numbers, return any number that is neither the minimum nor the maximum, or -1 if none exists.",
+  approaches: [
+    { name: "Scan for min and max", intuition: "Find the minimum and maximum, then return the first value that is neither.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
   {
     "label": "Example 1",

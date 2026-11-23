@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with text and replacements ([key, value] pairs; use %key% for references)',
   url: 'https://leetcode.com/problems/apply-substitutions/',
   complexity: 'O(L + V) time and space, where L is the text length and V the total length of the replacement values: each key is expanded once and its result is memoised. The visualization caps the text at 40 characters and six keys.',
+  question: "Expand references inside a text where each key is replaced by its value, without cycles.",
+  approaches: [
+    { name: "Memoized expansion", intuition: "Split text into literals and references, then expand each key once and cache its result.", time: "O(L + V)", space: "O(L + V)" },
+  ],
   examples: [
     { label: 'Two levels', input: '{"text":"a%bc%d","replacements":[["bc","x%y%"],["y","zz"]]}' },
     { label: 'Shared key', input: '{"text":"%q%-%q%","replacements":[["q","ab"]]}' },

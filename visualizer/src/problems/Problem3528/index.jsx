@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON array of [source, target, factor] conversions (1 to 15 rows)',
   url: 'https://leetcode.com/problems/unit-conversion-i/',
   complexity: 'O(n) time and O(n) space for n units. The visualization caps the input at 15 conversions.',
+  question: "Convert units through a tree of conversion factors, from a root unit to every other unit.",
+  approaches: [
+    { name: "Breadth-first walk", intuition: "Walk from unit 0 outward, multiplying factors along each edge.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Branch from unit zero', input: '[[0,2,3],[2,1,4],[0,3,2]]' },
     { label: 'Example 2', input: '[[0,1,3],[0,2,2],[2,3,4],[2,4,5]]' },

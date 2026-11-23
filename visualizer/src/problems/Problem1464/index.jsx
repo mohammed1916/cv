@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Values as a JSON array',
   url: 'https://leetcode.com/problems/maximum-product-of-two-elements-in-an-array/',
   complexity: 'O(n) time and O(1) extra space: one pass keeps the two largest values.',
+  question: "Find the maximum value of (a - 1) times (b - 1) over two distinct elements of an array.",
+  approaches: [
+    { name: "Track the two largest", intuition: "One scan keeps the largest and second largest values, then forms the product.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Sample', input: '[3,4,5,2]' },
     { label: 'Tie', input: '[1,5,4,5]' },

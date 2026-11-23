@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with queries ([x, y] points) and k (JSON)',
   url: 'https://leetcode.com/problems/k-th-nearest-obstacle-queries/',
   complexity: 'O(q log k) time for q queries. The visualization caps the input at 8 queries.',
+  question: "Answer queries about the k-th nearest obstacle to the origin after each insertion.",
+  approaches: [
+    { name: "Sorted distances and selection", intuition: "Keep the distances in order and read the k-th entry for each query.", time: "O(q log k)", space: "O(q)" },
+  ],
   examples: [
     { label: 'Points spread both ways', input: '{"queries":[[-6,9],[0,0],[10,-3]],"k":4}' },
     { label: 'Two points, k one', input: '{"queries":[[7,-7],[-2,8]],"k":1}' },

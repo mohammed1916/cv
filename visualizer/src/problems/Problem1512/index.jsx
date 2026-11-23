@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Array of integers (JSON)',
   url: 'https://leetcode.com/problems/number-of-good-pairs/',
   complexity: 'O(n) expected time and O(n) space: one pass with a count for each value already seen.',
+  question: "Count pairs of equal values with the first index smaller than the second.",
+  approaches: [
+    { name: "Count map", intuition: "Each value adds the number of earlier equal values to the answer.", time: "O(n) expected", space: "O(n)" },
+  ],
   examples: [
     { label: 'Sample A', input: '[4,2,4,4,2,9]' },
     { label: 'All equal', input: '[7,7,7,7]' },

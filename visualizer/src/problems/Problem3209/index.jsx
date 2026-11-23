@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with nums (1 to 20 values, 0 to 63) and k (0 to 63), e.g. {"nums":[1,1,2],"k":1}',
   url: 'https://leetcode.com/problems/number-of-subarrays-with-and-value-of-k/',
   complexity: 'O(n * log V) time and O(log V) space for the AND groups. The visualization caps the input at 20 values.',
+  question: "Count subarrays whose bitwise AND equals k, summed over all subarrays.",
+  approaches: [
+    { name: "Group subarrays by AND value", intuition: "Subarrays ending at one index have few distinct AND values, so each group keeps how many subarrays produce it.", time: "O(n * log V)", space: "O(log V)" },
+  ],
   examples: [
     { label: 'Four values, k three', input: '{"nums":[7,3,12,5],"k":3}' },
     { label: 'Three values, k eight', input: '{"nums":[9,18,4],"k":8}' },

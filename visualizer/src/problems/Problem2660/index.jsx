@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON object with player1 and player2 (pins per turn)',
   url: 'https://leetcode.com/problems/determine-the-winner-of-a-bowling-game/',
   complexity: 'O(n) time and O(1) extra space. The visualization caps each game at 10 turns.',
+  question: "Given two players' bowling scores, return the winner, with the score doubled for pins hit after a strike in the previous two turns.",
+  approaches: [
+    { name: "Single pass with a bonus check", intuition: "Score each turn, doubling it when a strike occurred in one of the two previous turns.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"player1":[4,10,7,9],"player2":[6,5,2,3]}' },
     { label: 'Tie', input: '{"player1":[1,2],"player2":[1,2]}' },

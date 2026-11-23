@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'List of distinct two-letter lowercase words, JSON',
   url: 'https://leetcode.com/problems/find-maximum-number-of-string-pairs/',
   complexity: 'O(n) time with a hash set of two-letter words. The visualization caps input at 12 words.',
+  question: "Given an array of distinct two-letter words, count the pairs where one word is the reverse of the other.",
+  approaches: [
+    { name: "Hash set lookup", intuition: "Store each word and check whether its reverse was already seen.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Five distinct pairs', input: '["ax","yz","mm","pq","ka"]' },
     { label: 'One word only', input: '["zq"]' },

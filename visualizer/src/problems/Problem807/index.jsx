@@ -14,6 +14,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Square grid (JSON)',
   url: 'https://leetcode.com/problems/max-increase-to-keep-city-skyline/',
   complexity: 'O(n^2) time, O(n) extra space.',
+  question: "Raise building heights in a grid without changing the skyline seen from any side, and maximise the total increase.",
+  approaches: [
+    { name: "Row and column caps", intuition: "Each building can rise to the smaller of its row maximum and column maximum, so take those maxima and sum the safe increases.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Three by three skyline', input: '[[3,8,2],[6,1,7],[4,9,5]]' },
     { label: 'Flat city', input: '[[0,0,0],[0,0,0],[0,0,0]]' },

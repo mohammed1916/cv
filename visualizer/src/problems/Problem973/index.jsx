@@ -8,6 +8,11 @@ const definition = {
   inputLabel: 'Object with points: a list of [x, y] pairs, and k: how many to keep',
   url: 'https://leetcode.com/problems/k-closest-points-to-origin/',
   complexity: 'O(n log n) to sort the distances. A selection method could reach O(n) on average.',
+  question: "Return the k points nearest to the origin.",
+  approaches: [
+    { name: "Sort by squared distance", intuition: "Compare squared distances to avoid square roots, sort, and keep the first k.", time: "O(n log n)", space: "O(n)" },
+    { name: "Quickselect", intuition: "Partition by distance until the k nearest are on the left.", time: "O(n) average", space: "O(1) extra" },
+  ],
   examples: [
     { label: 'Nearest of two', input: JSON.stringify({ points: [[4, 1], [-2, -2]], k: 1 }) },
     { label: 'Three points, keep two', input: JSON.stringify({ points: [[2, 6], [-5, 1], [4, -4]], k: 2 }) },

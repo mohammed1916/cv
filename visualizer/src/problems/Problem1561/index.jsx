@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Object with piles (JSON)',
   url: 'https://leetcode.com/problems/maximum-number-of-coins-you-can-get/',
   complexity: 'O(n log n) time for the sort and O(n) space for the sorted copy; the rounds then read every third pile.',
+  question: "Pick piles of coins in triples so that you get the maximum number of coins.",
+  approaches: [
+    { name: "Sort and take the middle", intuition: "Sort the piles and take the second largest of each top triple.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Six piles', input: '{"piles":[9,1,5,3,8,2]}' },
     { label: 'Repeated values', input: '{"piles":[2,4,1,2,7,8]}' },

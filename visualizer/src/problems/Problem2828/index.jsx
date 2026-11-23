@@ -17,6 +17,11 @@ const definition = {
   inputLabel: "words and s (e.g. {\"words\": [\"alice\",\"bob\",\"charlie\"], \"s\": \"abc\"})",
   url: "https://leetcode.com/problems/check-if-a-string-is-an-acronym-of-words/",
   complexity: "O(n) time and O(1) extra space, where n is the number of words.",
+  question: "Check whether a string equals the first letters of a list of words, in order.",
+  approaches: [
+    { name: "Compare first letters", intuition: "Build the initials and compare with the string.", time: "O(n)", space: "O(n)" },
+    { name: "Walk both in lockstep", intuition: "Compare each word's first character with the string position without building anything.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: "Example 1", input: "{\"words\": [\"alice\", \"bob\", \"charlie\"], \"s\": \"abc\"}" },
     { label: "Example 2", input: "{\"words\": [\"an\", \"apple\"], \"s\": \"a\"}" },

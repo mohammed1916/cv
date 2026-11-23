@@ -14,6 +14,10 @@ const definition = {
   phases, parse: parseInput, build: buildTrace, code, sql, python, inputLabel,
   url: `https://leetcode.com/problems/${meta.slug}/`,
   complexity, examples,
+  question: "Turn one wide row per product into one row per product and store, skipping missing prices.",
+  approaches: [
+    { name: "Union of store columns", intuition: "Union one row per store, skipping null prices.", time: "O(n * stores)", space: "O(n)" },
+  ],
 }
 
 const CELL = { border: '1px solid var(--border)', padding: '3px 8px', color: 'var(--text)', fontFamily: 'monospace' }

@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'JSON object with durations (whole milliseconds, 1 to 8 values)',
   url: 'https://leetcode.com/problems/sleep/',
   complexity: 'O(n log n) time to order n timers, O(n) extra space.',
+  question: "Write a sleep function that returns a promise resolving after the given number of milliseconds.",
+  approaches: [
+    { name: "Promise with a timer", intuition: "Wrap setTimeout in a promise that resolves when the timer fires.", time: "O(1)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Distinct', input: '{"durations":[300,100,200]}' },
     { label: 'Ties', input: '{"durations":[50,50,10]}' },

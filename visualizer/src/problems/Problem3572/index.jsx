@@ -14,6 +14,11 @@ const definition = {
   inputLabel: 'Object with x and y arrays of equal length 3 to 30, for example {"x":[1,2,1,3,2],"y":[5,6,4,7,9]}',
   url: 'https://leetcode.com/problems/maximize-ysum-by-picking-a-triplet-of-distinct-xvalues/',
   complexity: 'O(n log n) time for the ranking. The visualization caps the arrays at 30 entries.',
+  question: "Choose three entries with pairwise distinct x values so that the sum of their y values is as large as possible.",
+  approaches: [
+    { name: "Best y per x", intuition: "Keep only the largest y for each x, rank those entries by y, and take the top three.", time: "O(n log n)", space: "O(n)" },
+    { name: "Try every triple", intuition: "Check every triple and skip any triple that repeats an x value.", time: "O(n^3)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"x":[1,2,1,3,2],"y":[5,6,4,7,9]}' },
     { label: 'Example 2', input: '{"x":[1,1,2,3],"y":[10,2,30,20]}' },

@@ -18,6 +18,10 @@ const definition = {
   inputLabel: 'Object with array (values are shown hidden in the visual), e.g. {"array":[1,1,2,1]}',
   url: 'https://leetcode.com/problems/find-the-index-of-the-large-integer/',
   complexity: 'O(log n) comparisons and O(1) extra space for n elements, since each comparison discards half of the window. The visualization caps the array at 20 elements.',
+  question: "Find the index of the one large integer using a comparison oracle.",
+  approaches: [
+    { name: "Binary search on halves", intuition: "Compare the sums of the two halves of the window to find which half holds the large value.", time: "O(log n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Large value at the end', input: '{"array":[5,5,5,5,5,8]}' },
     { label: 'Odd leftover', input: '{"array":[2,2,2,4,2]}' },

@@ -19,6 +19,10 @@ const definition = {
   inputLabel: 'JSON object: {"word": "acab"}',
   url: "https://leetcode.com/problems/minimum-operations-to-make-character-frequencies-equal/",
   complexity: "O(n^3 * 26) time in this DP for word length n, and O(n^2) space per letter. The visualization accepts words up to 24 characters.",
+  question: "Find the fewest operations that make all letter frequencies in a word equal, where each operation changes one letter.",
+  approaches: [
+    { name: "Dynamic programming over letters", intuition: "For each target frequency, compute the cheapest way to make every letter count match it.", time: "O(n^3 * 26)", space: "O(n^2)" },
+  ],
   examples: [
     { label: "Short mix", input: '{"word": "abbcc"}' },
     { label: "Repeated pair", input: '{"word": "xxyy"}' },

@@ -18,6 +18,10 @@ const definition = {
   inputLabel: 'JSON {"queries": ["cat","dog"], "dictionary": ["cot","fog"]}',
   url: 'https://leetcode.com/problems/words-within-two-edits-of-dictionary/',
   complexity: 'O(q * d * L) time and O(q) extra space for q queries, d dictionary words and word length L. The visualization caps each list at 8 words of up to 8 letters.',
+  question: "For each query word, list the dictionary words that differ from it by at most two letter changes.",
+  approaches: [
+    { name: "Compare each query with each word", intuition: "Count mismatched letters for every query and dictionary pair, keeping the words with at most two.", time: "O(q * d * L)", space: "O(q)" },
+  ],
   examples: [
     { label: 'Example', input: '{"queries":["cat","dog","sun"],"dictionary":["cot","fog","zzz"]}' },
     { label: 'Far', input: '{"queries":["abc"],"dictionary":["xyz"]}' },

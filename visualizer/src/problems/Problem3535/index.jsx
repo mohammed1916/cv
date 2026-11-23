@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with n, conversions ([a, b, f] triples) and queries ([a, b] pairs)',
   url: 'https://leetcode.com/problems/unit-conversion-ii/',
   complexity: 'O(n + q) time after one breadth first search, with exact BigInt fractions. The visualization caps n at 8 units and queries at 6; the answer is p times the modular inverse of q modulo 1000000007.',
+  question: "Convert units through a tree of factors and answer fraction queries exactly.",
+  approaches: [
+    { name: "Breadth-first walk with fractions", intuition: "Walk the tree, keeping exact fractions, and reduce each answer modulo the prime.", time: "O(n + q)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Chain', input: '{"n":4,"conversions":[[0,1,2],[1,2,3],[1,3,5]],"queries":[[2,0],[0,3],[3,2]]}' },
     { label: 'Two units', input: '{"n":2,"conversions":[[0,1,3]],"queries":[[0,1],[1,0]]}' },

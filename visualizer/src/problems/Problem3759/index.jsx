@@ -15,6 +15,11 @@ const definition = {
   inputLabel: 'Object with nums (integers 0 to 99) and k',
   url: 'https://leetcode.com/problems/count-elements-with-at-least-k-greater-values/',
   complexity: 'O(n^2) in this trace, which compares each element with every other element. Sorting would reduce it to O(n log n).',
+  question: "Count the elements that have at least k other elements strictly greater than them.",
+  approaches: [
+    { name: "Compare every pair", intuition: "Compare each element with every other element and count the greater ones.", time: "O(n^2)", space: "O(1)" },
+    { name: "Sort and read the k-th value", intuition: "Sort the values in descending order and check the position k from the top.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example', input: '{"nums":[1,2,3,4,5],"k":2}' },
     { label: 'k zero', input: '{"nums":[4,4,1],"k":0}' },

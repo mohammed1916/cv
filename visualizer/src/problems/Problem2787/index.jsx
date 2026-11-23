@@ -12,6 +12,11 @@ const definition = {
   inputLabel: 'JSON object: n (1-60) and x (1-5)',
   url: 'https://leetcode.com/problems/ways-to-express-an-integer-as-sum-of-powers/',
   complexity: 'O(n * n^(1/x)) time and O(n) space. The visualization caps n at 60.',
+  question: "Count the ways to write n as a sum of distinct positive integers each raised to the power x.",
+  approaches: [
+    { name: "0/1 knapsack over powers", intuition: "Each base can be used at most once, so process bases and update sums from high to low.", time: "O(n * n^(1/x))", space: "O(n)" },
+    { name: "Recursive search over bases", intuition: "Choose or skip each base recursively, pruning when the remainder becomes negative.", time: "exponential in the worst case", space: "O(n^(1/x))" },
+  ],
   examples: [
     { label: 'Squares', input: '{"n":10,"x":2}' },
     { label: 'Linear', input: '{"n":4,"x":1}' },

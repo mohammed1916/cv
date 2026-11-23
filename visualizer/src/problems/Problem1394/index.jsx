@@ -5,6 +5,10 @@ import { StackLane } from '../../components/shared/AlgorithmStatePrimitives'
 import { buildTrace, parseInput, code, python, phases, examples } from './algorithm'
 
 const definition = {
+  question: "Find the largest value whose frequency equals the value itself.",
+  approaches: [
+    { name: "Count map", intuition: "Count frequencies, then keep values whose count matches.", time: "O(n + k log k)", space: "O(k)" },
+  ],
   number: '1394', phases, parse: parseInput, build: buildTrace, code, python, examples,
   inputLabel: 'Object with arr (JSON)',
   url: 'https://leetcode.com/problems/find-lucky-integer-in-an-array/',

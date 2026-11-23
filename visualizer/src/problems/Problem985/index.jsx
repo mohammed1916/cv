@@ -10,6 +10,10 @@ const definition = {
   inputLabel: 'Object with nums (up to 10 integers) and queries: [value, index] pairs',
   url: 'https://leetcode.com/problems/sum-of-even-numbers-after-queries/',
   complexity: 'O(n + q) time: one pass to start the total, then constant work for each query.',
+  question: "Apply a list of additions to an array and report the sum of even values after each addition.",
+  approaches: [
+    { name: "Running even total", intuition: "Remove the old value from the running even sum if it was even, add the new value if it is even, and report the total.", time: "O(q)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Three queries', input: JSON.stringify({ nums: [5, 2, 6, 9], queries: [[3, 0], [4, 2], [-6, 1]] }) },
     { label: 'Parity flips', input: JSON.stringify({ nums: [7, 4, 1], queries: [[1, 0], [2, 1], [-4, 1]] }) },

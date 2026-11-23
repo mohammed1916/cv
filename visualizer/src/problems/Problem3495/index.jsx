@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with a ranges list of [l, r] pairs',
   url: 'https://leetcode.com/problems/minimum-operations-to-make-array-elements-zero/',
   complexity: 'O(sum of range lengths * log4(max value)) time for this visualizer, with O(1) extra space per range.',
+  question: "Find the fewest operations to make every value in a set of ranges zero, where each operation divides a value by four.",
+  approaches: [
+    { name: "Digit counts per range", intuition: "Count the base-4 digits in each range and take the larger of the two bounds.", time: "O(sum of lengths * log)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example', input: '{"ranges":[[3,7],[10,12]]}' },
     { label: 'Single range', input: '{"ranges":[[1,5]]}' },

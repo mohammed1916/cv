@@ -23,6 +23,10 @@ const definition = {
   inputLabel: 'String s | wordDict (e.g. "catsanddog | cat, cats, and, sand, dog")',
   url: "https://leetcode.com/problems/word-break-ii/",
   complexity: "Exponential in the worst case for the number of sentences; the memo shares suffix results. The visualization caps string length at 20, matching the official maximum.",
+  question: "List every sentence that splits a string into dictionary words.",
+  approaches: [
+    { name: "Memoized backtracking", intuition: "Store the sentences for each suffix and reuse them.", time: "O(n^2 + output)", space: "O(n + output)" },
+  ],
   examples: getExamplesOr("word-break-ii", []).map((example) => ({
     label: example.label,
     input: example.input ?? JSON.stringify(example.values ?? { nodes: example.nodes, pos: example.pos }),

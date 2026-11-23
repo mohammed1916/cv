@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON: {"value": [...], "decay": [...], "m": m}',
   url: 'https://leetcode.doocs.org/en/lc/3971/',
   complexity: 'O(m log n) time with a heap, and O(n) extra space. The visualization caps m at 12.',
+  question: "Each index's gain shrinks every time it is picked; choose m picks to maximise total value.",
+  approaches: [
+    { name: "Greedy with a max-heap", intuition: "Repeatedly take the largest current gain while it remains positive.", time: "O(m log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"value":[6,5,4],"decay":[2,1,1],"m":4}' },
     { label: 'Example 2', input: '{"value":[7,2,2],"decay":[3,2,1],"m":2}' },

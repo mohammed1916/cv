@@ -3,6 +3,10 @@ import IndexedSequence from '../../components/shared/IndexedSequence'
 import { buildTrace, parseInput, code, python, pythonLineMap, phases, examples } from './algorithm'
 
 const definition = {
+  question: "Insert values into an array at given indices and return the final array.",
+  approaches: [
+    { name: "Direct insertion", intuition: "Insert each value at its index as the operations are applied.", time: "O(n^2)", space: "O(n)" },
+  ],
   number: '1389', phases, parse: parseInput, build: buildTrace, code, python, pythonLineMap, examples,
   inputLabel: 'Object with nums and index (JSON)',
   url: 'https://leetcode.com/problems/create-target-array-in-the-given-order/',

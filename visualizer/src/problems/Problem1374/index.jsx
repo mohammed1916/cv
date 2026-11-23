@@ -8,6 +8,10 @@ const definition = {
   inputLabel: 'Length (JSON object with n)',
   url: 'https://leetcode.com/problems/generate-a-string-with-characters-that-have-odd-counts/',
   complexity: 'O(n) time and O(n) space for the output. The visualization accepts n up to 500.',
+  question: "Build a string of length n where every letter appears an odd number of times.",
+  approaches: [
+    { name: "Fill one letter then pad", intuition: "Use one letter for all but one position, then add a letter for the last position.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Odd n', input: '{"n":7}' },
     { label: 'Even n', input: '{"n":6}' },

@@ -8,6 +8,10 @@ const definition = {
   inputLabel: 'Scores and k (JSON)',
   url: 'https://leetcode.com/problems/minimum-difference-between-highest-and-lowest-of-k-scores/',
   complexity: 'O(n log n) time for the sort and O(n) for the window; O(n) extra space for the sorted copy.',
+  question: "Pick k scores from a list so that the gap between the highest and lowest chosen score is as small as possible.",
+  approaches: [
+    { name: "Sort and sliding window", intuition: "Sort the scores and slide a window of size k, keeping the smallest spread.", time: "O(n log n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'One score', input: '{"nums":[50],"k":1}' },
     { label: 'Four of six', input: '{"nums":[15,3,27,9,12,30],"k":4}' },

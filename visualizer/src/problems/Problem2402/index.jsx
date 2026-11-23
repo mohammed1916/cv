@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON {"n": rooms, "meetings": [[start, end], ...]}',
   url: 'https://leetcode.com/problems/meeting-rooms-iii/',
   complexity: 'O(m log m + m log n) time with heaps for the free rooms and the busy rooms. The visualization caps input at 5 rooms and 10 meetings.',
+  question: "Given meetings and rooms, find the room that hosts the most meetings.",
+  approaches: [
+    { name: "Two heaps simulation", intuition: "Keep one heap of free rooms and one heap of busy rooms by end time, and assign each meeting to a free room if available.", time: "O(m log m + m log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Tight rooms', input: '{"n":2,"meetings":[[0,4],[1,2],[3,6],[5,7]]}' },
     { label: 'Three rooms', input: '{"n":3,"meetings":[[1,9],[2,5],[3,4],[6,8],[10,12]]}' },

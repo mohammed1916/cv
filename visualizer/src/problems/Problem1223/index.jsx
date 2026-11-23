@@ -6,6 +6,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'Object with n and rollMax (JSON)',
   complexity: 'O(n * 6 * maximum limit) time, using run-length rows for each face.',
+  question: "Count the roll sequences of a die where no face repeats more than a given number of times in a row.",
+  approaches: [
+    { name: "Run-length DP", intuition: "Track counts by last face and current run length, and extend or switch faces each roll.", time: "O(n x 6 x limit)", space: "O(6 x limit)" },
+  ],
   examples: [
     { label: 'Different limits', input: '{"n":9,"rollMax":[1,3,2,4,2,3]}' },
     { label: 'One roll', input: '{"n":1,"rollMax":[1,2,3,4,5,6]}' },

@@ -8,6 +8,10 @@ const definition = {
   inputLabel: 'Integer array (JSON)',
   url: 'https://leetcode.com/problems/minimum-number-of-operations-to-make-array-continuous/',
   complexity: 'O(n log n) time for the sort and O(n) for the two-pointer window.',
+  question: "Find the fewest operations that make an array continuous, where each value is replaced by another so the set is a consecutive run.",
+  approaches: [
+    { name: "Sort and sliding window", intuition: "Sort the distinct values and keep the largest window in which values fit a run of the array's length.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Already spread', input: '[10,11,12,13]' },
     { label: 'Gap', input: '[1,2,4,9,10]' },

@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'poured, query_row and query_glass (JSON object)',
   url: 'https://leetcode.com/problems/champagne-tower/',
   complexity: 'O(query_row^2) time and O(query_row) extra space per row.',
+  question: "Pour a units of champagne into the top glass of a pyramid; overflow splits equally to the two glasses below, so return how much is in a chosen glass.",
+  approaches: [
+    { name: "Row-by-row simulation", intuition: "Process each row, keep each glass at most 1, and split the excess equally into the two glasses beneath.", time: "O(row^2)", space: "O(row)" },
+  ],
   examples: [
     { label: 'Two units', input: '{"poured":2,"query_row":1,"query_glass":0}' },
     { label: 'Deep', input: '{"poured":6,"query_row":3,"query_glass":1}' }, { label: 'Nothing poured', input: '{"poured":0,"query_row":0,"query_glass":0}' }, { label: 'Equal split at row 1', input: '{"poured":3,"query_row":1,"query_glass":1}' }, { label: 'Edge glass of row 99', input: '{"poured":100000,"query_row":99,"query_glass":0}' }, { label: 'Long run: middle glass of row 99', input: '{"poured":100000,"query_row":99,"query_glass":50}' },

@@ -40,6 +40,11 @@ const definition = {
         <text x="150" y="118" textAnchor="middle" fontSize="11" fill="#c0392b">3 ≠ 4 → false</text>
       </svg>
     ),
+  question: "Given the roots of two binary trees, decide whether they have the same shape and the same value at every position.",
+  approaches: [
+    { name: "Recursive comparison", intuition: "Compare the two roots, then recurse into the left pair and the right pair. Any mismatch in shape or value ends the search.", time: "O(min(n, m))", space: "O(h) recursion depth" },
+    { name: "Iterative comparison with a stack", intuition: "The same pairwise check, driven by an explicit stack of node pairs instead of recursion.", time: "O(min(n, m))", space: "O(h) stack entries" },
+  ],
   goal: {"summary": "Decide whether two binary trees are identical: same shape and the same value at every matching position.", "requirement": ["Each tree is given as level-order values, with null for a missing child.", "Return true only if both trees have the same shape and equal values at every node.", "Two empty trees are the same. A tree and an empty tree are different.", "Input limit used by this visualizer: up to 15 entries per tree."], "example": "p = [1, 2, 3] and q = [1, 2, 4]. The shapes match, but the right child values are 3 and 4, so the answer is false."},
   url: "https://leetcode.com/problems/same-tree/",
   complexity: "O(min(n, m)) time and O(h) recursion depth for the two trees. The visualization accepts up to 15 entries per tree.",

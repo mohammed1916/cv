@@ -6,6 +6,10 @@ const definition = {
   inputLabel: 'Object with obj, path (keys), action ("set" or "call") and method for calls',
   url: 'https://leetcode.com/problems/make-object-immutable/',
   complexity: 'O(n) to wrap every nested object and array once. Each refused attempt does one lookup along its path.',
+  question: "Write a function that returns a deep-immutable version of an object, where attempts to change it are ignored or refused.",
+  approaches: [
+    { name: "Recursive proxy wrapper", intuition: "Wrap each nested object and array in a proxy that refuses writes.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Set a key in a nested object', input: '{"obj":{"a":1,"b":{"c":2}},"path":["b","c"],"action":"set"}' },
     { label: 'Index write into an array', input: '{"obj":{"list":[1,2]},"path":["list",0],"action":"set"}' },

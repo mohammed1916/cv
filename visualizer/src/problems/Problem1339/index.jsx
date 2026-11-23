@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Level-order binary tree of values 1 to 20 (JSON object with tree)',
   url: 'https://leetcode.com/problems/maximum-product-of-splitted-binary-tree/',
   complexity: 'O(n) time and O(n) space. The visualization caps the tree at 15 nodes.',
+  question: "Cut one edge of a binary tree to maximize the product of the two resulting sums.",
+  approaches: [
+    { name: "Subtree sums", intuition: "Compute each subtree sum once, then the best cut uses the subtree that balances the total.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"tree":[1,2,3,4,5,6]}' },
     { label: 'Example 2', input: '{"tree":[1,null,2,3,4,null,null,5,6]}' },

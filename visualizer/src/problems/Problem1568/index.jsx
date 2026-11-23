@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON grid of 0 (water) and 1 (land) rows',
   url: 'https://leetcode.com/problems/minimum-number-of-days-to-disconnect-island/',
   complexity: 'O(R * C) time and space for the grid. The visualization caps the grid at 6 by 6.',
+  question: "Find the minimum number of days needed to disconnect the land cells of a grid.",
+  approaches: [
+    { name: "Articulation points", intuition: "Use Tarjan's low-link search to find cut cells; a single cut or zero land is the answer.", time: "O(R * C)", space: "O(R * C)" },
+  ],
   examples: [
     { label: 'Two by two', input: '[[1,1],[1,1]]' },
     { label: 'Cut cell', input: '[[1,1,0],[0,1,0],[0,1,1]]' },

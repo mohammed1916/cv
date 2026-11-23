@@ -12,6 +12,11 @@ const definition = {
   inputLabel: 'JSON object with minutes from 1 to 200, for example {"minutes":3}',
   url: 'https://leetcode.com/problems/count-total-number-of-colored-cells/',
   complexity: 'O(minutes) time for the visualization. The closed form 2n^2 - 2n + 1 runs in O(1).',
+  question: "Count the colored cells after n minutes, where each minute colours the outer ring of a growing square.",
+  approaches: [
+    { name: "Add ring sizes minute by minute", intuition: "Each minute adds a ring of cells, so keep a running total.", time: "O(minutes)", space: "O(1)" },
+    { name: "Closed form", intuition: "The total is 2n squared minus 2n plus 1, so evaluate it directly.", time: "O(1)", space: "O(1)" },
+  ],
   examples: [
     { label: 'One minute', input: '{"minutes":1}' },
     { label: 'Three minutes', input: '{"minutes":3}' },

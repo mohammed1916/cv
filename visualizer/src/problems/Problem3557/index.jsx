@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with word (JSON)',
   url: 'https://leetcode.com/problems/find-maximum-number-of-non-intersecting-substrings/',
   complexity: 'O(n^2) time and O(n) space. The visualization caps the word at 14 letters.',
+  question: "Find the largest number of non-intersecting substrings chosen from a word.",
+  approaches: [
+    { name: "DP over positions", intuition: "Keep the best count for each prefix, adding a substring when it fits.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"word":"abcdeafdef"}' },
     { label: 'Example 2', input: '{"word":"bcdaaaab"}' },

@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'JSON: {"nums": [...], "p": p, "queries": [[index, value], ...]}',
   url: 'https://leetcode.com/problems/good-subsequence-queries/',
   complexity: 'Each query costs O(n times the number of distinct gcd values). The visualization caps n at 8.',
+  question: "For each query prime p, decide whether some subset of the multiples of p has gcd exactly p using fewer than n elements.",
+  approaches: [
+    { name: "Smallest subset per gcd", intuition: "Track the fewest chosen multiples that reach each gcd value, then read the entry for p.", time: "O(n x distinct gcd values) per query", space: "O(distinct gcd values)" },
+  ],
   examples: [
     { label: 'Four values, two updates', input: '{"nums":[12,5,30,8],"p":3,"queries":[[1,9],[3,40]]}' },
     { label: 'Eight equal values, big p', input: '{"nums":[2,2,2,2,2,2,2,2],"p":30,"queries":[[0,60]]}' },

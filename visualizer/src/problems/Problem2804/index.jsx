@@ -12,6 +12,11 @@ const definition = {
   inputLabel: 'Object with arr (array of values)',
   url: 'https://leetcode.com/problems/array-prototype-foreach/',
   complexity: 'O(n) time for an array of n elements, plus the cost of each callback.',
+  question: "Implement a method that calls a callback on each element of an array, passing the element, its index and the array.",
+  approaches: [
+    { name: "Indexed loop", intuition: "Loop over indexes and call the callback with the value, index and array.", time: "O(n) plus callback cost", space: "O(1)" },
+    { name: "Recursive walk", intuition: "Process one element and recurse on the rest; clear but uses stack depth.", time: "O(n) plus callback cost", space: "O(n)" },
+  ],
   examples: [
     { label: 'Three values', input: '{"arr":[3,1,4]}' },
     { label: 'Mixed', input: '{"arr":["x",true,null]}' },

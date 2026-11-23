@@ -20,6 +20,11 @@ const definition = {
   inputLabel: "nums and k (e.g. {\"nums\": [8,3,9,3,8], \"k\": 2})",
   url: "https://leetcode.com/problems/apply-operations-to-maximize-score/",
   complexity: "O(n sqrt(max) + n log n) time and O(n) space. The visualization caps n at 50 items.",
+  question: "Apply a limited number of operations to maximize a score built from products of prime-based scores of chosen elements.",
+  approaches: [
+    { name: "Greedy by largest values with prime scores", intuition: "Compute each element's prime score, sort the values, and multiply the largest eligible values as many times as allowed.", time: "O(n sqrt(max) + n log n)", space: "O(n)" },
+    { name: "Exhaustive over element choices", intuition: "Try every combination of operations on elements to find the best score.", time: "exponential", space: "O(n)" },
+  ],
   examples: [
     { label: "Example 1", input: "{\"nums\": [8, 3, 9, 3, 8], \"k\": 2}" },
     { label: "Example 2", input: "{\"nums\": [19, 12, 14, 6, 10, 18], \"k\": 3}" },

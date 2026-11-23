@@ -11,6 +11,10 @@ const definition = {
   inputLabel: 'n in millilitres (JSON integer)',
   url: 'https://leetcode.com/problems/soup-servings/',
   complexity: 'O(units^2) states with a memo, and the units are capped at 200 by the closed-form stop.',
+  question: "Two soups start with n millilitres each; each turn one of four portions is chosen with equal chance, and you must return the probability that soup A empties first, counting a tie as one half.",
+  approaches: [
+    { name: "Memoised DP over volumes", intuition: "The state is the pair of remaining volumes in units. Cap n once it is large enough that the answer is effectively 1, then recurse on the four portions.", time: "O(n^2) states", space: "O(n^2) memo" },
+  ],
   examples: [
     { label: 'Small', input: '100' },
     { label: 'Medium', input: '300' },

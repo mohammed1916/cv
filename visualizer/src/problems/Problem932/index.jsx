@@ -12,6 +12,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'n (JSON integer)',
   url: 'https://leetcode.com/problems/beautiful-array/',
   complexity: 'O(n) time and space (the array doubles each round). The visualization caps n at 200.',
+  question: "Build a permutation of 1 to n in which no middle value is the average of two other values.",
+  approaches: [
+    { name: "Odd and even split", intuition: "If a valid array exists for half the size, map it to the odd numbers and to the even numbers, then concatenate.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [{ label: 'Example 1', input: '4' }, { label: 'Example 2', input: '5' }, { label: 'n = 11', input: '11' },
     { label: 'Smallest n = 1', input: '1' },
     { label: 'Largest n = 200', input: '200' },

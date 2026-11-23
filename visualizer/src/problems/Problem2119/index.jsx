@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Whole number from 0 to 1000000',
   url: 'https://leetcode.com/problems/a-number-after-a-double-reversal/',
   complexity: 'O(d) time for d digits; O(1) extra space.',
+  question: "Decide whether reversing a number twice gives back the original number.",
+  approaches: [
+    { name: "Trailing zero check", intuition: "Reversing drops the trailing zeros of a number, so a double reversal changes it only when the number ends in zero.", time: "O(digits)", space: "O(1)" },
+  ],
   examples: [
     { label: 'No trailing zero', input: '1234' },
     { label: 'Trailing zero lost', input: '4090' },

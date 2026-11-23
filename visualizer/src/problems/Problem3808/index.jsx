@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with a reactions list of user_id, content_id and reaction',
   url: 'https://leetcode.com/problems/find-emotionally-consistent-users/',
   complexity: 'O(r) to count r reaction rows, plus a sort of the kept users.',
+  question: "Find users with at least five reactions whose most common reaction is at least 60 percent of their total.",
+  approaches: [
+    { name: "Count reactions per user", intuition: "Group reactions by user, filter by count and share, and rank by the share.", time: "O(r) plus a sort", space: "O(r)" },
+  ],
   examples: [
     { label: 'Sample', input: sampleText },
     { label: 'One reaction', input: '{"reactions":[{"user_id":1,"content_id":1,"reaction":"like"}]}' },

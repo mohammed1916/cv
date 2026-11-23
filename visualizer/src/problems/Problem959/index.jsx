@@ -8,6 +8,10 @@ const definition = {
   inputLabel: 'Object with a grid: a list of square rows made of /, backslash and spaces',
   url: 'https://leetcode.com/problems/regions-cut-by-slashes/',
   complexity: 'O(n^2) cells and triangles, with near-constant work per union in the disjoint-set forest.',
+  question: "Count the regions created by slashes and backslashes written in each cell of an n by n grid.",
+  approaches: [
+    { name: "Union-find over cell triangles", intuition: "Split each cell into four triangles, join them according to the slash, and join neighbouring cells across shared edges.", time: "O(n^2 alpha)", space: "O(n^2)" },
+  ],
   examples: [
     { label: 'Diagonal slashes', input: JSON.stringify({ grid: ['  /', ' / ', '/  '] }) },
     { label: 'Open board', input: JSON.stringify({ grid: ['   ', '   ', '   '] }) },

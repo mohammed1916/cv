@@ -12,6 +12,11 @@ const definition = {
   inputLabel: 'Object with n, edges [u, v, w] and queries [a, b] (JSON)',
   url: 'https://leetcode.com/problems/minimum-edge-weight-equilibrium-queries-in-a-tree/',
   complexity: 'O(n + q * path length) time in this direct climb. The visualization caps the tree at 10 nodes.',
+  question: "Answer queries about the minimum number of edge weight changes needed so all edges on a tree path share the same weight.",
+  approaches: [
+    { name: "Path counts with LCA", intuition: "For a path, the answer is its length minus the largest count of one weight, computed using prefix counts from the root and the lowest common ancestor.", time: "O(n log n + q log n)", space: "O(n log n)" },
+    { name: "Walk each query path", intuition: "Collect weights along each path and count them directly.", time: "O(q n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Five-node tree, three queries', input: '{"n":5,"edges":[[0,2,4],[2,1,6],[1,3,2],[1,4,9]],"queries":[[0,4],[3,4],[2,2]]}' },
     { label: "Two nodes", input: "{\"n\":2,\"edges\":[[0,1,5]],\"queries\":[[0,1]]}" },

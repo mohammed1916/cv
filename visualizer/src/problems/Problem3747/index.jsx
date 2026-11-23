@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'JSON object with n, for example {"n":10}',
   url: 'https://leetcode.com/problems/count-distinct-integers-after-removing-zeros/',
   complexity: 'O(d) time for d digits of n. The visualization accepts n up to 10^15.',
+  question: "Count the distinct integers from 1 to n that remain after every zero digit is removed from them.",
+  approaches: [
+    { name: "Count zero-free numbers up to n", intuition: "Each zero-free number maps to itself, so the answer counts zero-free numbers at most n using the digits of n.", time: "O(d)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"n":10}' },
     { label: 'Example 2', input: '{"n":3}' },

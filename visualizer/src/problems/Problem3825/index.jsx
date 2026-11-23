@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Numbers (JSON object with nums)',
   url: 'https://leetcode.com/problems/longest-strictly-increasing-subsequence-with-non-zero-bitwise-and/',
   complexity: 'O(n^2 * bits) time, since each index keeps at most one length per AND value. The visualization caps n at 10.',
+  question: "Find the longest strictly increasing subsequence whose elements have a nonzero bitwise AND.",
+  approaches: [
+    { name: "Length per AND value", intuition: "For each ending index, keep the longest increasing run for every AND value it can produce.", time: "O(n^2 * bits)", space: "O(n * bits)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"nums":[5,4,7]}' },
     { label: 'Example 2', input: '{"nums":[2,3,6]}' },

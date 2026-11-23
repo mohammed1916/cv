@@ -21,6 +21,10 @@ const definition = {
   inputLabel: 'Object with text and words (non-empty strings)',
   url: 'https://leetcode.com/problems/index-pairs-of-a-string/description/',
   complexity: 'O(n * W * L) time for text length n, W words and longest word length L, plus a sort of the pairs; O(p) space for p pairs. The visualization caps text at 30 characters, 8 words and 10 characters per word; the official bounds are not verified.',
+  question: "Find every substring of a text that matches a word in a list, and return the index pairs sorted.",
+  approaches: [
+    { name: "Check each start and word", intuition: "For each start position and each word, compare the text; collect the pairs and sort them.", time: "O(n * W * L + p log p)", space: "O(p)" },
+  ],
   examples: [
     { label: 'Three words', input: '{"text":"abracadabra","words":["abra","cad","ra"]}' },
     { label: 'Overlapping', input: '{"text":"aaaa","words":["aa"]}' },

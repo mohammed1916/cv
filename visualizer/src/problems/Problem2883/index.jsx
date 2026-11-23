@@ -7,6 +7,11 @@ const definition = {
   inputLabel: 'Object with students: rows of student_id, name (null when missing) and age',
   url: 'https://leetcode.com/problems/drop-missing-data/',
   complexity: 'O(r) time and space for r rows. The visualization caps the table at 14 rows.',
+  question: "Remove rows that have a missing name from a table.",
+  approaches: [
+    { name: "Boolean mask filter", intuition: "Build a mask of present names and keep the rows where it is true.", time: "O(n)", space: "O(n)" },
+    { name: "Row-by-row copy", intuition: "Copy each row whose name is present into a new table.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Two gaps', input: '{"students":[{"student_id":501,"name":"Noor","age":11},{"student_id":502,"name":null,"age":13},{"student_id":507,"name":"Tomas","age":12},{"student_id":510,"name":null,"age":15},{"student_id":514,"name":"Ines","age":10}]}' },
     { label: 'Empty text is not missing', input: '{"students":[{"student_id":61,"name":"","age":17},{"student_id":62,"name":null,"age":16},{"student_id":63,"name":"Kofi","age":18}]}' },

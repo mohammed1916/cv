@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON object with candies (flavour numbers) and k',
   url: 'https://leetcode.com/problems/number-of-unique-flavors-after-sharing-k-candies/',
   complexity: 'O(n) time with a sliding window and a count per flavour; O(number of flavours) space.',
+  question: "Find how many flavours remain after Alice gives away one block of k consecutive candies, choosing the block that leaves the most flavours.",
+  approaches: [
+    { name: "Sliding window of flavour counts", intuition: "Keep a count of each flavour outside the window and track how many flavours still have a positive count as the window slides.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Give away a middle block', input: '{"candies":[1,2,2,3,1],"k":2}' },
     { label: 'Repeats on both sides', input: '{"candies":[4,4,5,4,4],"k":2}' },

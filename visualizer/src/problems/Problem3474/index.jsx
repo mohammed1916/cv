@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'Object with str1 (T and F letters) and str2 (lowercase letters)',
   url: 'https://leetcode.com/problems/lexicographically-smallest-generated-string/',
   complexity: 'Roughly O(n * m) time for the constraint sweeps. The visualization caps str1 at 8 letters and str2 at 4.',
+  question: "Build the lexicographically smallest string that satisfies a pattern of match and mismatch constraints.",
+  approaches: [
+    { name: "Greedy fill then fix", intuition: "Fill positions greedily, then repair the positions that break a constraint.", time: "O(n m)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Mixed', input: '{"str1":"TFTF","str2":"ab"}' },
     { label: 'Impossible', input: '{"str1":"TTF","str2":"ab"}' },

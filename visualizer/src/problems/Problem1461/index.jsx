@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Object with s and k (JSON)',
   url: 'https://leetcode.com/problems/check-if-a-string-contains-all-binary-codes-of-size-k/',
   complexity: 'O(n * k) time for a string of length n: each window is built and inserted into a set once.',
+  question: "Check whether every binary string of length k appears as a substring of a given binary string.",
+  approaches: [
+    { name: "Sliding window into a set", intuition: "Collect every length-k window in a set and compare its size with 2 to the power k.", time: "O(n * k)", space: "O(n * k) for the window set" },
+  ],
   examples: [
     { label: 'All two-bit codes', input: '{"s":"00110110","k":2}' },
     { label: 'Missing 00', input: '{"s":"0110","k":2}' },

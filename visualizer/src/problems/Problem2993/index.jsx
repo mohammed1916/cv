@@ -20,6 +20,10 @@ const definition = {
   phases, parse: parseInput, build: buildTrace, code, sql, python, inputLabel,
   url: `https://leetcode.com/problems/${meta.slug}/`,
   complexity, examples,
+  question: "For November 2023, total each Friday's purchases grouped by week of the month.",
+  approaches: [
+    { name: "Filter then group", intuition: "Select November Fridays, sum purchases by date, and label each date with its week of the month.", time: "O(n)", space: "O(n)" },
+  ],
 }
 
 function Rows({ columns = [], rows = [] }) {

@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'An object with decimal strings l and r and a base b, for example {"l": "23", "r": "28", "b": 8}',
   url: 'https://leetcode.doocs.org/en/lc/3519/',
   complexity: 'O(d * b) digit steps with binomial lookups, for d base-b digits. The visualization caps input at 30 decimal digits.',
+  question: "Count the numbers up to a bound in a given base whose digits never decrease.",
+  approaches: [
+    { name: "Digit walk with binomials", intuition: "Count multisets for shorter lengths, then walk the bound's digits with binomial coefficients.", time: "O(d b)", space: "O(d)" },
+  ],
   examples: [
     { label: 'Two-digit to three-digit, base three', input: '{"l":"47","r":"113","b":3}' },
     { label: 'Single value in base seven', input: '{"l":"5","r":"5","b":7}' },

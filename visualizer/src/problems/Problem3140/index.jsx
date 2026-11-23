@@ -14,6 +14,10 @@ const examples = [
   ]
 
 const definition = {
+  question: "From a cinema table of seats, report the longest runs of consecutive free seats with their first seat, last seat and length.",
+  approaches: [
+    { name: "Group by seat id minus row number", intuition: "Adjacent free seats share the same seat id minus row number, so grouping by that value gives each block.", time: "O(n log n)", space: "O(n)" },
+  ],
   number: meta.number,
   phases, parse: parseInput, build: buildTrace, code, sql, python, inputLabel,
   url: `https://leetcode.com/problems/${meta.slug}/`,

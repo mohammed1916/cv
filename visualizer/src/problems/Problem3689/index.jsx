@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with nums and k',
   url: 'https://leetcode.com/problems/maximum-total-subarray-value-i/',
   complexity: 'O(n) time for the maximum and minimum, O(1) extra space.',
+  question: "Pick values from an array to maximize a total value across k selections.",
+  approaches: [
+    { name: "Extremes", intuition: "Take the largest and smallest values, which gives the best total value for the selection.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example', input: '{"nums":[4,-2,7,1],"k":3}' },
     { label: 'Flat', input: '{"nums":[5,5],"k":2}' },

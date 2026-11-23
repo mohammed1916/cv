@@ -12,6 +12,11 @@ const definition = {
   inputLabel: 'Object with nums1 and nums2 of equal length (JSON)',
   url: 'https://leetcode.com/problems/longest-non-decreasing-subarray-from-two-arrays/',
   complexity: 'O(n) time and O(n) space for the table. The visualization caps n at 10.',
+  question: "Find the longest non-decreasing subarray that can be formed by choosing each position from either of two arrays.",
+  approaches: [
+    { name: "Two-state dynamic programming", intuition: "Track the best run ending at each index when taking the value from nums1 or from nums2, and extend a run only when the order holds.", time: "O(n)", space: "O(n)" },
+    { name: "Rolling variables", intuition: "The DP only looks one step back, so keep just the two previous states.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Three pairs, no ties', input: '{"nums1":[5,1,6],"nums2":[2,4,1]}' },
     { label: 'Six pairs with repeats', input: '{"nums1":[9,9,4,1,7,3],"nums2":[9,2,4,1,8,3]}' },

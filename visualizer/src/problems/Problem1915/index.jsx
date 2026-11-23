@@ -11,6 +11,10 @@ const definition = {
   inputLabel: 'Word of letters a to j (e.g. abab)',
   url: 'https://leetcode.com/problems/number-of-wonderful-substrings/',
   complexity: 'O(n · 10) time: each position checks its own mask and the ten masks one bit away. Space is 2^10 counters.',
+  question: "Count substrings in which at most one letter appears an odd number of times.",
+  approaches: [
+    { name: "Prefix parity masks", intuition: "Store the parity mask of each prefix; a substring is wonderful when its two prefix masks differ in at most one bit.", time: "O(n * 10)", space: "O(1024)" },
+  ],
   examples: [
     { label: 'Two letters', input: 'ab' },
     { label: 'Repeats', input: 'abab' },

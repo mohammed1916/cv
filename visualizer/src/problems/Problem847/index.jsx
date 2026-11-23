@@ -17,6 +17,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Graph adjacency list (JSON)',
   url: 'https://leetcode.com/problems/shortest-path-visiting-all-nodes/',
   complexity: 'O(2^n * n * deg) time and O(2^n * n) space. Visualization cap: 7 nodes.',
+  question: "Find the shortest walk that visits every node of a connected undirected graph, where nodes may be revisited.",
+  approaches: [
+    { name: "BFS over node and visited set", intuition: "Each state is a node plus the set of visited nodes as a bitmask; the first time every node is visited gives the answer.", time: "O(n^2 * 2^n)", space: "O(n * 2^n)" },
+  ],
   examples: [
     { label: 'Path of four nodes', input: '[[1,2],[0],[0,3],[2]]' },
     { label: 'Star with a tail', input: '[[1,2,3],[0],[0],[0,4],[3]]' },

@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'Object with n (buildings) and requests ([from, to] pairs, JSON)',
   url: 'https://leetcode.com/problems/maximum-number-of-achievable-transfer-requests/',
   complexity: 'O(2^m * (m + n)) time for m requests. The visualization caps m at 8.',
+  question: "Find the largest number of transfer requests that can be granted without changing any building's count.",
+  approaches: [
+    { name: "Backtracking over requests", intuition: "Try granting or refusing each request, undo a grant when a branch fails, and keep the best count.", time: "O(2^m * (m + n))", space: "O(m)" },
+  ],
   examples: [
     { label: 'Four transfers', input: '{"n":5,"requests":[[0,3],[3,1],[4,2],[2,0]]}' },
     { label: 'Example 3', input: '{"n":4,"requests":[[0,3],[3,1],[1,0],[2,1]]}' },

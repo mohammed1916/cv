@@ -21,6 +21,10 @@ const definition = {
   inputLabel: "Integer from 1 to 3999 (e.g. 1994)",
   url: "https://leetcode.com/problems/integer-to-roman/",
   complexity: "O(1) time and O(1) space for the fixed value table; the output has at most 15 symbols for 1 to 3999.",
+  question: "Convert an integer from 1 to 3999 into its Roman numeral form.",
+  approaches: [
+    { name: "Greedy by value table", intuition: "Take the largest value that fits from a table of symbol pairs, repeatedly.", time: "O(1)", space: "O(1)" },
+  ],
   examples: getExamples("integer-to-roman").map(example => ({ label: example.label, input: String(example.num) })),
 };
 

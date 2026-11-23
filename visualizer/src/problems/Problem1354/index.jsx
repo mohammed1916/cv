@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON {"target": [...]} with values 1 to 12',
   url: 'https://leetcode.com/problems/construct-target-array-with-multiple-sums/',
   complexity: 'O(n log n + steps * log n) time, where steps grow like the logarithm of the values. The visualization caps input at 5 values.',
+  question: "Decide whether a target array can be built by repeatedly replacing the largest value with the sum of all values.",
+  approaches: [
+    { name: "Reverse with max-heap", intuition: "Undo the steps by repeatedly taking the largest value and subtracting the others.", time: "O(steps log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"target":[9,3,5]}' },
     { label: 'Example 2', input: '{"target":[1,1,1,2]}' },

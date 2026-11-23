@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Object with arr and k (JSON)',
   url: 'https://leetcode.com/problems/kth-missing-positive-number/',
   complexity: 'O(log n) time and O(1) space: binary search on the non-decreasing count of missing positives.',
+  question: "Find the k-th positive integer that is missing from a sorted array.",
+  approaches: [
+    { name: "Binary search on missing counts", intuition: "The count of missing values before an index is arr[i] minus i plus one, which is monotonic, so search it.", time: "O(log n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Gap early', input: '{"arr":[2,3,4,7,11],"k":5}' },
     { label: 'Before first', input: '{"arr":[5,6,7],"k":2}' },

@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'JSON object with grid (square, 0 open, 1 blocked)',
   url: 'https://leetcode.com/problems/shortest-path-in-binary-matrix/',
   complexity: 'O(n^2) time and space for an n by n grid. The visualization caps the grid at 8 by 8.',
+  question: "Find the shortest 8-directional path of open cells from the top-left to the bottom-right of a grid.",
+  approaches: [
+    { name: "BFS by layers", intuition: "Expand the frontier one step at a time; the first time the target is reached gives the shortest length.", time: "O(n^2)", space: "O(n^2)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"grid":[[0,1],[1,0]]}' },
     { label: 'Example 2', input: '{"grid":[[0,0,0],[1,1,0],[1,1,0]]}' },

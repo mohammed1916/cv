@@ -17,6 +17,10 @@ const definition = {
   inputLabel: 'JSON object with a products list (product_id, product_name, description)',
   url: 'https://leetcode.com/problems/find-products-with-valid-serial-numbers/description/',
   complexity: 'O(n) scans for n products. The serial shape is a knowledge-derived teaching pattern, not the official one.',
+  question: "From a table of product descriptions, keep those containing a serial number in a fixed format.",
+  approaches: [
+    { name: "Pattern filter", intuition: "Test each description against the serial pattern with boundary checks.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example', input: '{"products":[{"product_id":1,"product_name":"Lamp","description":"Warm light, serial SN-2024-AB inside"},{"product_id":2,"product_name":"Desk","description":"Old model SN-2024-ABC"},{"product_id":3,"product_name":"Chair","description":"Spare part SN-1234-XY."},{"product_id":4,"product_name":"Shelf","description":"Reference xSN-1234-XY"}]}' },
     { label: 'No match', input: '{"products":[{"product_id":7,"product_name":"Rug","description":"No serial here"}]}' },

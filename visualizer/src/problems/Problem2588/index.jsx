@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON object with nums (up to 20 values from 0 to 255)',
   url: 'https://leetcode.com/problems/count-the-number-of-beautiful-subarrays/',
   complexity: 'O(n) expected time with a hash map of prefix counts, O(n) space.',
+  question: "Count the subarrays whose values xor to zero.",
+  approaches: [
+    { name: "Prefix xor counts", intuition: "Count how often each prefix xor has appeared, so each match adds a subarray.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"nums": [4,3,1,2,4]}' },
     { label: 'Example 2', input: '{"nums": [1,10,4]}' },

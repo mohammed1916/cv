@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Tree as JSON: n, edges, has_apple',
   url: 'https://leetcode.com/problems/minimum-time-to-collect-all-apples-in-a-tree/',
   complexity: 'O(n) time and O(n) space for the adjacency list and recursion. The visualization caps input at 12 vertices.',
+  question: "Find the fewest edges to walk on a tree that collects every apple and returns to the root.",
+  approaches: [
+    { name: "Depth-first cost", intuition: "Count the edges that lead to a subtree with an apple, counting each edge twice.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"n":7,"edges":[[0,1],[0,2],[1,4],[1,5],[2,3],[2,6]],"has_apple":[false,false,true,false,true,true,false]}' },
     { label: 'Example 2', input: '{"n":5,"edges":[[0,1],[1,2],[0,3],[3,4]],"has_apple":[false,false,false,false,false]}' },

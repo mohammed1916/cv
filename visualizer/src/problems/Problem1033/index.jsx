@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with three distinct stone positions a, b and c (1 to 30)',
   url: 'https://leetcode.com/problems/moving-stones-until-consecutive/',
   complexity: 'O(1) time and space: a few comparisons on three sorted positions.',
+  question: "Given three stone positions, return the minimum and maximum number of moves needed to make them consecutive.",
+  approaches: [
+    { name: "Gap counting", intuition: "After sorting, the maximum is the total empty gaps; the minimum depends on which of the two gaps is smaller.", time: "O(1)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Stones at 1, 9 and 14', input: '{"a":9,"b":1,"c":14}' },
     { label: 'Stones at 4, 12 and 21', input: '{"a":12,"b":4,"c":21}' },

@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with nums, k and m',
   url: 'https://leetcode.com/problems/count-subarrays-with-k-distinct-integers/',
   complexity: 'Each start extends to the right, so the visual costs O(n^2) with small counts. The visual caps the array at 12 values.',
+  question: "Count subarrays with exactly k distinct integers, where each value has a minimum count.",
+  approaches: [
+    { name: "Extend from each left end", intuition: "Grow the right end from each left end while checking the distinct count and per-value minimums.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example', input: '{"nums":[4,4,1,4,1],"k":2,"m":2}' },
     { label: 'Repeats', input: '{"nums":[1,1,1],"k":1,"m":2}' },

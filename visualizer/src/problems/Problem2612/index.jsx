@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with n, p, banned and k (JSON)',
   url: 'https://leetcode.com/problems/minimum-reverse-operations/',
   complexity: 'O(n * k) time for this visualization, which caps n at 12. Efficient solutions use sorted sets per parity.',
+  question: "Given an array and a position of a one, find the minimum number of reverse operations needed to move that one to every reachable target index, with each reversal taking a fixed window size.",
+  approaches: [
+    { name: "BFS over reachable positions", intuition: "Use breadth-first search over positions that can be reached in one reversal, grouping by parity with sorted sets.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Seven positions, k four', input: '{"n":7,"p":2,"banned":[0,5],"k":4}' },
     { label: 'Window 1', input: '{"n":4,"p":2,"banned":[0,1,3],"k":1}' },

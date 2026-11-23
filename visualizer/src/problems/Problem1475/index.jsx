@@ -4,6 +4,10 @@ import { StackLane } from '../../components/shared/AlgorithmStatePrimitives'
 import { buildTrace, parseInput, code, python, phases, examples } from './algorithm'
 
 const definition = {
+  question: "Apply each item's discount, where the discount is the next price that is equal or lower.",
+  approaches: [
+    { name: "Monotonic stack", intuition: "Keep indices with pending prices; when a lower or equal price arrives, it is the discount for those indices.", time: "O(n)", space: "O(n)" },
+  ],
   number: '1475', phases, parse: parseInput, build: buildTrace, code, python, examples,
   inputLabel: 'Prices as a JSON array',
   url: 'https://leetcode.com/problems/final-prices-with-a-special-discount-in-a-shop/',

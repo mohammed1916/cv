@@ -11,6 +11,10 @@ const definition = {
   inputLabel: 'JSON object with nums and k (e.g. {"nums":[10,20,5],"k":1})',
   url: 'https://leetcode.com/problems/minimum-total-space-wasted-with-k-resizing-operations/',
   complexity: 'O(k · n²) time with a table of (k + 1) by n cells. The visualization caps n at 8.',
+  question: "Choose at most k resizing operations for a sequence of daily demands so that the total unused capacity is minimal.",
+  approaches: [
+    { name: "DP over segments", intuition: "Split the days into at most k + 1 consecutive blocks, sizing each block to its largest demand.", time: "O(n^2 k)", space: "O(n k)" },
+  ],
   examples: [
     { label: 'One resize', input: '{"nums":[10,20,5],"k":1}' },
     { label: 'No resize', input: '{"nums":[10,20],"k":0}' },

@@ -4,6 +4,10 @@ import { meta } from './meta'
 import { buildTrace, parseInput, code, python, pythonLineMap, phases, examples, complexity, inputLabel } from './algorithm'
 
 const definition = {
+  question: "Given range bookings that add seats to flights, return the total seats booked on each flight.",
+  approaches: [
+    { name: "Difference array with prefix sum", intuition: "Add seats at each range start and subtract them after the end, then accumulate.", time: "O(bookings + n)", space: "O(n)" },
+  ],
   number: meta.number, phases, parse: parseInput, build: buildTrace, code, python, pythonLineMap,
   inputLabel, url: `https://leetcode.com/problems/${meta.slug}/`, complexity, examples,
 }

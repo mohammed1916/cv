@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON with n, artifacts and dig, e.g. {"n":3,"artifacts":[[0,0,0,0],[0,1,1,2]],"dig":[[0,0],[1,1]]}',
   url: 'https://leetcode.com/problems/count-artifacts-that-can-be-extracted/',
   complexity: 'O(d + total artifact area) time with a hash set of dug cells. The page caps the grid at 6 by 6 and artifacts at 5.',
+  question: "Count the rectangular artifacts that can be fully uncovered after a set of dig operations.",
+  approaches: [
+    { name: "Count dug cells per artifact", intuition: "Mark the dug cells in a grid, then count an artifact as extractable when all of its cells are dug.", time: "O(n * area + d)", space: "O(m * n)" },
+  ],
   examples: [
     { label: 'Mixed', input: '{"n":3,"artifacts":[[0,0,0,0],[0,1,1,2]],"dig":[[0,0],[0,1],[1,1],[1,2]]}' },
     { label: 'Buried', input: '{"n":2,"artifacts":[[0,0,1,1]],"dig":[[0,0],[1,1]]}' },

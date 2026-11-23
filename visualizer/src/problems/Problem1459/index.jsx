@@ -16,6 +16,10 @@ const definition = {
   inputLabel: 'Object with a Points list of { id, x_value, y_value } rows',
   url: 'https://leetcode.com/problems/rectangles-area/',
   complexity: 'O(p^2) pairs for p points, plus a sort of the rectangles found.',
+  question: "Decide whether a set of points contains four points that are corners of an axis-parallel rectangle, and total their areas.",
+  approaches: [
+    { name: "Pair as opposite corners", intuition: "Test every pair of points as diagonal corners and keep those that form a rectangle with positive area.", time: "O(p^2) pairs", space: "O(p)" },
+  ],
   examples: [
     { label: 'Example', input: '{"Points":[{"id":1,"x_value":1,"y_value":1},{"id":2,"x_value":3,"y_value":4},{"id":3,"x_value":1,"y_value":4},{"id":4,"x_value":3,"y_value":1},{"id":5,"x_value":2,"y_value":2}]}' },
     { label: 'Corner pair', input: '{"Points":[{"id":1,"x_value":0,"y_value":0},{"id":2,"x_value":0,"y_value":5},{"id":3,"x_value":4,"y_value":0}]}' },

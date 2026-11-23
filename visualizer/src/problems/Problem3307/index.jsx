@@ -17,6 +17,10 @@ const definition = {
   inputLabel: 'k and operations (JSON object)',
   url: 'https://leetcode.com/problems/find-the-k-th-character-in-string-game-ii/',
   complexity: 'O(m) time and O(1) extra space for m operations (m at most 100). The visualization shows the full operation list.',
+  question: "Find the k-th character after applying a list of operations that each append a shifted copy of the string.",
+  approaches: [
+    { name: "Track the length through operations", intuition: "Track the length and the operation that covers position k, then walk back through the operations.", time: "O(m)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"k": 7, "operations": [1, 0, 1]}' },
     { label: 'Example 2', input: '{"k": 11, "operations": [1, 1, 0, 1]}' },

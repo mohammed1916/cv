@@ -17,6 +17,11 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Flights problem (JSON)',
   url: 'https://leetcode.com/problems/cheapest-flights-within-k-stops/',
   complexity: 'O(E k log(E k)) time worst case; visualization limited to 10 cities and 30 flights.',
+  question: "Find the cheapest price from a source city to a destination using at most k stops, or report that no route exists.",
+  approaches: [
+    { name: "Dijkstra with stop count", intuition: "Explore states ordered by cost, carrying the number of flights used, and stop expanding beyond k stops.", time: "O(E k log(E k))", space: "O(E k)" },
+    { name: "Bellman-Ford rounds", intuition: "Relax every flight once per allowed stop, using the previous round's prices so each round adds one flight.", time: "O(k E)", space: "O(n)" },
+  ],
   examples: [
     { label: 'k=1 -> 700', input: '{"n":4,"flights":[[0,1,100],[1,2,100],[2,0,100],[1,3,600],[2,3,200]],"src":0,"dst":3,"k":1}' },
     { label: 'k=1 -> 200', input: '{"n":3,"flights":[[0,1,100],[1,2,100],[0,2,500]],"src":0,"dst":2,"k":1}' },

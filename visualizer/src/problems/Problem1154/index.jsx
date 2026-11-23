@@ -12,6 +12,10 @@ const definition = {
   python,
   inputLabel: 'Date as YYYY-MM-DD',
   complexity: 'O(1) time and space: at most eleven month lengths are added.',
+  question: "Given a date in a year, return which day of that year it is.",
+  approaches: [
+    { name: "Sum month lengths", intuition: "Add the days of every earlier month, leap-year February included, then add the day of month.", time: "O(1)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Common year, mid-year', input: '2023-07-04' },
     { label: 'Leap March', input: '2024-03-01' },

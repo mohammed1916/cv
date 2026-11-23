@@ -13,7 +13,12 @@ const examples = [
     { label: 'Long run: 12 orders', input: '{"orders":[[1,3,8],[2,28,13],[3,3,18],[4,28,23],[5,3,4],[6,28,9],[7,3,14],[8,28,19],[9,3,0],[10,28,5],[11,3,10],[12,28,15]]}' },
 ]
 
-const definition = { number: meta.number, phases, parse: parseInput, build: buildTrace, code, python, inputLabel, complexity, examples }
+const definition = {
+  question: "Using order rows, find the golden hour customers who meet an order threshold inside a fixed hour window.",
+  approaches: [
+    { name: "Count per customer", intuition: "Count each customer's orders inside the window and keep those that meet the threshold.", time: "O(r)", space: "O(c)" },
+  ],
+  number: meta.number, phases, parse: parseInput, build: buildTrace, code, python, inputLabel, complexity, examples }
 
 function StageRail({ phases, active }) {
   return <ol aria-label="SQL stages" style={{ display: 'flex', gap: 8, flexWrap: 'wrap', listStyle: 'none', padding: 0 }}>

@@ -22,6 +22,10 @@ const definition = {
   inputLabel: "Strictly increasing array (e.g. [-10,-3,0,5,9])",
   url: "https://leetcode.com/problems/convert-sorted-array-to-binary-search-tree/",
   complexity: "O(n) time and O(log n) recursion depth for n values. The visualization accepts up to 15 values.",
+  question: "Build a height-balanced binary search tree from a sorted array.",
+  approaches: [
+    { name: "Recursive middle split", intuition: "Use the middle value as the root and build the left and right halves recursively.", time: "O(n)", space: "O(log n)" },
+  ],
   examples: getExamples("convert-sorted-array-to-binary-search-tree").map(example => ({ label: example.label, input: JSON.stringify(example.arr) })),
 };
 

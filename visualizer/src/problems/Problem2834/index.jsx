@@ -13,6 +13,11 @@ const definition = {
   inputLabel: 'Object with n and target (JSON), n from 1 to 20, target from 1 to 40',
   url: 'https://leetcode.com/problems/find-the-minimum-possible-sum-of-a-beautiful-array/',
   complexity: 'O(n * target) with the simple membership test. The visualization caps n at 20.',
+  question: "Build a sorted array of distinct positive numbers of a given length with no two values summing to a target, and return the smallest possible sum.",
+  approaches: [
+    { name: "Greedy with membership test", intuition: "Take the smallest candidate whose partner is not yet chosen.", time: "O(n target)", space: "O(n)" },
+    { name: "Closed-form pairing", intuition: "The smallest values come in pairs around half the target, so the sum has a formula.", time: "O(1)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Five items, target eight', input: '{"n":5,"target":8}' },
     { label: 'Seven items, larger target', input: '{"n":7,"target":20}' },

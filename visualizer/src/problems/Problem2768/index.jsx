@@ -11,6 +11,11 @@ const definition = {
   inputLabel: 'Object with "m", "n" and "coordinates" ([row, column] pairs), JSON',
   url: 'https://leetcode.com/problems/number-of-black-blocks/',
   complexity: 'O(k) time for k black cells, plus O(m times n) to count the blocks. The visualization caps the grid at 8 by 8.',
+  question: "Given black cells on a grid, count how many 2 by 2 blocks contain exactly 0, 1, 2, 3 or 4 black cells.",
+  approaches: [
+    { name: "Count only blocks touched by black cells", intuition: "Each black cell lies in at most four blocks, so increment counts only for those blocks; blocks with no black cell are the remainder.", time: "O(k)", space: "O(k)" },
+    { name: "Scan every block of the grid", intuition: "Check each 2 by 2 block directly and tally its black cells.", time: "O(m n)", space: "O(1) extra" },
+  ],
   examples: [
     { label: 'One black cell, 2 by 5 grid', input: '{"m":2,"n":5,"coordinates":[[1,4]]}' },
     { label: 'Scattered cells, 5 by 3 grid', input: '{"m":5,"n":3,"coordinates":[[0,1],[3,0],[4,2],[2,2]]}' },

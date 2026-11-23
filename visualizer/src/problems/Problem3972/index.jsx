@@ -21,6 +21,10 @@ const definition = {
   inputLabel: 'Object with nums (integers) and x (a digit from 0 to 9)',
   url: 'https://leetcode.com/problems/valid-subarrays-with-matching-sum-digits-ii/',
   complexity: 'O(n^2) time and O(1) extra space in this trace, checking each subarray sum directly. The visualization caps nums at 12 entries with values from -9 to 9.',
+  question: "Count the subarrays whose positive sum has the same first and last digit.",
+  approaches: [
+    { name: "Direct subarray sums", intuition: "Check each subarray's sum and compare its first and last digits.", time: "O(n^2)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Digit three', input: '{"nums":[1,2,3],"x":3}' },
     { label: 'Mixed signs', input: '{"nums":[3,-1,4,2],"x":4}' },

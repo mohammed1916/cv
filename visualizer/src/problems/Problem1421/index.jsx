@@ -16,6 +16,10 @@ const definition = {
   inputLabel: 'Object with NPV and Queries lists of { id, year } and { id, year, npv } rows',
   url: 'https://leetcode.com/problems/npv-queries/',
   complexity: 'O(q) lookups after an O(n) map build, where n is the NPV row count and q the query count.',
+  question: "Look up the net present value for each query by id and year, using zero when none exists.",
+  approaches: [
+    { name: "Left join with default", intuition: "Join queries to the NPV table and replace missing values with zero.", time: "O(n + q)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example', input: '{"NPV":[{"id":1,"year":2018,"npv":100},{"id":2,"year":2019,"npv":40}],"Queries":[{"id":1,"year":2018},{"id":1,"year":2019},{"id":2,"year":2019}]}' },
     { label: 'All missing', input: '{"NPV":[],"Queries":[{"id":7,"year":2021}]}' },

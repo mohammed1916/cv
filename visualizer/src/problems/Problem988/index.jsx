@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Tree of letter values 0-25 (JSON level order)',
   url: 'https://leetcode.com/problems/smallest-string-starting-from-leaf/',
   complexity: 'O(n * h) time for string building. The visualization caps input at 15 nodes.',
+  question: "Return the lexicographically smallest string formed by reading a path from some leaf up to the root.",
+  approaches: [
+    { name: "DFS building strings upward", intuition: "Build the string from each leaf up to the root and keep the smallest candidate.", time: "O(n * depth)", space: "O(depth) plus candidates" },
+  ],
   examples: [
     { label: 'Seven letters, two columns', input: '[4,6,15,null,1,20,9]' },
     { label: 'Prefix', input: '[1,0,null,1]' },

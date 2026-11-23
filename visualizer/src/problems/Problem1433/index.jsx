@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Object with first and second (JSON)',
   url: 'https://leetcode.com/problems/check-if-a-string-can-break-another-string/',
   complexity: 'O(n log n) time for the two sorts, then O(n) for the dominance checks.',
+  question: "Decide whether one string can be rearranged to be at least as large, letter by letter, as another.",
+  approaches: [
+    { name: "Sort and compare", intuition: "Sort both strings and compare each position.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'First can break second', input: '{"first":"abc","second":"xya"}' },
     { label: 'Neither breaks', input: '{"first":"abe","second":"acd"}' },

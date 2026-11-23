@@ -8,6 +8,10 @@ const definition = {
   inputLabel: 'Object with edges, nums and k',
   url: 'https://leetcode.com/problems/subtree-inversion-sum-ii/',
   complexity: 'O(n · k) time and space, since each node keeps two rows of k + 1 entries and each merge scans one row. Officially n reaches 50000 and k reaches 50; the visualization caps n at 14.',
+  question: "In a tree rooted at node 0, invert nodes so that any two inverted nodes are at least k edges apart, maximising the total value.",
+  approaches: [
+    { name: "Tree DP with distance states", intuition: "For each node keep rows indexed by distance to the nearest inverted ancestor, and merge children.", time: "O(n x k)", space: "O(n x k)" },
+  ],
   examples: [
     { label: 'Siblings fit', input: '{"edges":[[0,1],[0,2],[1,3],[1,4]],"nums":[2,-7,-4,3,-6],"k":3}' },
     { label: 'Nested flips', input: '{"edges":[[0,1],[1,2],[2,3]],"nums":[-3,1,-1,-8],"k":2}' },

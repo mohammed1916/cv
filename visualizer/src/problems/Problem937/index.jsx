@@ -13,6 +13,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Logs (JSON array of strings)',
   url: 'https://leetcode.com/problems/reorder-data-in-log-files/',
   complexity: 'O(n log n * m) time for n logs of length m. The visualization caps input at 30 logs.',
+  question: "Reorder log lines so letter logs come first, sorted by content and then identifier, with digit logs kept in their original order.",
+  approaches: [
+    { name: "Custom comparator sort", intuition: "Compare letter logs by their content, then their identifier; keep digit logs in place.", time: "O(M log N)", space: "O(N)" },
+  ],
   examples: [
     { label: 'Mixed digit and letter logs', input: '["dig1 8 1 5 1","let1 art can","let2 own kit dig","let3 art zero"]' },
     { label: 'Same words, different ids', input: '["a1 9 2 3 1","g1 act car","zo4 4 7","ab1 off key dog","a8 act zoo"]' },

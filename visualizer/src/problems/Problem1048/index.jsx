@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with words (JSON array of strings)',
   url: 'https://leetcode.com/problems/longest-string-chain/',
   complexity: 'O(n * L^2) time with a map lookup per deletion, for n words of length L. The visualization caps input at 8 words of up to 6 letters.',
+  question: "Find the longest chain of words in which each word is the previous one with one letter inserted.",
+  approaches: [
+    { name: "DP by length with hash lookup", intuition: "Sort by length; for each word try deleting each letter and look up the best chain ending at the shorter word.", time: "O(n * L^2)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"words":["a","b","ba","bca","bda","bdca"]}' },
     { label: 'Example 2', input: '{"words":["xbc","pcxbcf","xb","cxbc","pcxbc"]}' },

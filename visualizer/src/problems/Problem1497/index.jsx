@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Object with arr (even length) and k (JSON)',
   url: 'https://leetcode.com/problems/check-if-array-pairs-are-divisible-by-k/',
   complexity: 'O(n + k) time and O(k) space: one pass counts remainder classes, then one pass checks the classes.',
+  question: "Decide whether the array can be split into pairs whose sums are divisible by k.",
+  approaches: [
+    { name: "Remainder counting", intuition: "Count how many values fall in each remainder class and match classes r and k minus r.", time: "O(n + k)", space: "O(k)" },
+  ],
   examples: [
     { label: 'Sample A', input: '{"arr":[2,4,1,5,3,9],"k":6}' },
     { label: 'Odd self-pair', input: '{"arr":[1,2,3,4],"k":4}' },

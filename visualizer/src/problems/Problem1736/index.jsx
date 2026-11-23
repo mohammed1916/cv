@@ -14,6 +14,10 @@ const definition = {
   complexity,
   inputLabel: 'JSON string HH:MM where any digit may be ?',
   url: 'https://leetcode.com/problems/latest-time-by-replacing-hidden-digits/',
+  question: "Replace the hidden digits of a time string to get the latest valid time.",
+  approaches: [
+    { name: "Greedy digit by digit", intuition: "Pick each hidden digit as large as the time limits allow.", time: "O(1)", space: "O(1)" },
+  ],
 }
 
 export default function Problem1736Visualizer() {

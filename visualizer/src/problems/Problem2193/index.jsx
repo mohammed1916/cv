@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Lowercase letters, e.g. aabb',
   url: 'https://leetcode.com/problems/minimum-number-of-moves-to-make-palindrome/',
   complexity: 'O(n^2) time in the worst case for the match search and the swaps, and O(n) space. The page caps the string at 12 letters.',
+  question: "Find the fewest adjacent swaps needed to turn a string into a palindrome.",
+  approaches: [
+    { name: "Greedy matching from the outside in", intuition: "For the leftmost character, find its matching character from the right, bring it to the far end by swaps, and continue inward.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Two pairs', input: 'aabb' },
     { label: 'One odd letter', input: 'zyxzy' },

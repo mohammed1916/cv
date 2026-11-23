@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'Object with tasks (integers 1 to 20) and space (1 to 20)',
   url: 'https://leetcode.com/problems/task-scheduler-ii/',
   complexity: 'O(n) time and O(k) space for n tasks with k distinct types.',
+  question: "Given tasks in order with a gap requirement between repeated tasks of the same type, find the minimum number of days needed.",
+  approaches: [
+    { name: "Track last day per type", intuition: "Schedule each task at the earliest day after its type's last run and the next day.", time: "O(n)", space: "O(k)" },
+  ],
   examples: [
     { label: 'Five tasks, space 6', input: '{"tasks":[3,1,4,1,5],"space":6}' },
     { label: 'Tight', input: '{"tasks":[5,5,5],"space":1}' },

@@ -12,6 +12,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Parameters (JSON object with n and k)',
   url: 'https://leetcode.com/problems/beautiful-arrangement-ii/',
   complexity: 'O(n) time and O(n) space for the output.',
+  question: "Build a permutation of 1 to n whose adjacent differences contain exactly k distinct values.",
+  approaches: [
+    { name: "Zig-zag between range ends", intuition: "Alternate between the two ends of an unused range to produce k distinct differences, then finish in order.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Three distinct', input: '{"n":3,"k":1}' },
     { label: 'Two distinct', input: '{"n":3,"k":2}' },

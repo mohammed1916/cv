@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with nums (JSON list of positive integers)',
   url: 'https://leetcode.com/problems/number-of-different-subsequences-gcds/',
   complexity: 'O(M log M) time for largest value M, after building the presence set. The visualization caps values at 30.',
+  question: "Count the distinct gcd values of the non-empty subsequences of an array.",
+  approaches: [
+    { name: "Presence set and divisor check", intuition: "For each candidate gcd, check whether the multiples present in the set have a gcd of exactly that value.", time: "O(M log M)", space: "O(M)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"nums":[6,10,3]}' },
     { label: 'Example 2', input: '{"nums":[5,15,40,5,6]}' },

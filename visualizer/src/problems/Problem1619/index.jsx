@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Object with arr, 20, 40 integers from 0 to 1000 (JSON)',
   url: 'https://leetcode.com/problems/mean-of-array-after-removing-some-elements/',
   complexity: 'O(n log n) time for the sort and O(n) for the sum, with O(n) extra space for the sorted copy.',
+  question: "Remove the smallest 5 percent and the largest 5 percent of an array, then return the mean of what remains.",
+  approaches: [
+    { name: "Sort and trim", intuition: "Sort the values, drop both ends, and average the middle.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Twenty values', input: JSON.stringify({ arr: [4, 9, 1, 7, 3, 8, 2, 6, 5, 0, 100, 12, 11, 10, 13, 14, 15, 16, 17, 18] }) },
     { label: 'Flat values', input: JSON.stringify({ arr: Array(20).fill(7) }) },

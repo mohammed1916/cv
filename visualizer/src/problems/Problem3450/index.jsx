@@ -17,6 +17,10 @@ const definition = {
   inputLabel: 'JSON object with a students list (student_id, bench_id)',
   url: 'https://leetcode.com/problems/maximum-students-on-a-single-bench/description/',
   complexity: 'O(n) time for n rows with a hash set for the pairs. The rule is a knowledge-derived teaching version.',
+  question: "From a seating table, find the largest number of distinct students sitting on one bench.",
+  approaches: [
+    { name: "Group and count", intuition: "Group rows by bench, count distinct students in each group, and take the largest count.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example', input: '{"students":[{"student_id":1,"bench_id":"A"},{"student_id":2,"bench_id":"A"},{"student_id":1,"bench_id":"A"},{"student_id":3,"bench_id":"B"},{"student_id":4,"bench_id":"B"},{"student_id":2,"bench_id":"B"},{"student_id":5,"bench_id":"C"}]}' },
     { label: 'Empty', input: '{"students":[]}' },

@@ -11,6 +11,10 @@ const definition = {
   inputLabel: 'JSON: {"l": l, "r": r, "k": k}',
   url: 'https://leetcode.doocs.org/en/lc/3966/',
   complexity: 'O(d * 10 * 10 * 2) time per bound for d digits, with memoization. The visualization caps r at 5000.',
+  question: "Count the integers in a range that satisfy a digit rule involving the previous digit.",
+  approaches: [
+    { name: "Digit DP with memoization", intuition: "Count numbers up to each bound with states for position, previous digit, and tightness, then subtract to get the range.", time: "O(d x 10 x 10 x 2) per bound", space: "O(d x 10 x 2)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"l":10,"r":15,"k":1}' },
     { label: 'Example 2', input: '{"l":201,"r":204,"k":2}' },

@@ -9,6 +9,10 @@ const definition = {
   inputLabel: 'Object with nums: a list of integers',
   url: 'https://leetcode.com/problems/maximum-width-ramp/',
   complexity: 'O(n) time: each position is pushed and popped at most once. O(n) space for the stack.',
+  question: "Find the largest distance j - i with i < j and nums[i] at most nums[j].",
+  approaches: [
+    { name: "Monotonic stack and sweep from the right", intuition: "Keep decreasing candidates for the left side in a stack, then sweep from the right to find the furthest partner.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Ramp across the middle', input: JSON.stringify({ nums: [5, 1, 7, 2, 0, 6, 3] }) },
     { label: 'Two dips', input: JSON.stringify({ nums: [4, 9, 2, 7, 1, 8, 3, 6] }) },

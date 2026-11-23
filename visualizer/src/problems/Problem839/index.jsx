@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Strings (JSON array of anagrams of equal length)',
   url: 'https://leetcode.com/problems/similar-string-groups/',
   complexity: 'O(n^2 * L) time for n strings of length L, with union-find for the groups.',
+  question: "Two strings are similar if they are equal or differ at exactly two positions that swap; count the groups formed by similarity.",
+  approaches: [
+    { name: "Union-find over strings", intuition: "Join every similar pair of strings in a union-find structure and count the remaining groups.", time: "O(n^2 * L)", space: "O(n)" },
+  ],
   examples: [
     { label: 'One group', input: '["abc","acb","bac","cba"]' },
     { label: 'Swap chain', input: '["abcd","bacd","bcad","dbca"]' },

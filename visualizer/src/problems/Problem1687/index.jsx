@@ -16,6 +16,10 @@ const definition = {
   inputLabel: 'Object with boxes [[port, weight], ...], ports_count, max_boxes, max_weight',
   url: 'https://leetcode.com/problems/delivering-boxes-from-storage-to-ports/',
   complexity: 'O(n * min(n, max_boxes)) time and O(n) space. The visualization caps input at 8 boxes.',
+  question: "Deliver boxes to ports with trips limited by weight and box count, minimising the number of trips.",
+  approaches: [
+    { name: "Windowed DP with prefix sums", intuition: "Compute the cheapest cost over the boxes in a sliding window, using prefix sums.", time: "O(n * min(n, max boxes))", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"boxes":[[1,1],[2,1],[1,1]],"ports_count":2,"max_boxes":3,"max_weight":3}' },
     { label: 'Example 2', input: '{"boxes":[[1,2],[3,3],[3,1],[3,1],[2,4]],"ports_count":3,"max_boxes":3,"max_weight":6}' },

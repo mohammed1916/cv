@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Object with arr (JSON)',
   url: 'https://leetcode.com/problems/sum-of-all-odd-length-subarrays/',
   complexity: 'O(n) time and O(1) extra space: each value is weighted by its coverage count.',
+  question: "Sum all subarrays of odd length.",
+  approaches: [
+    { name: "Contribution count", intuition: "Each value appears in a fixed number of odd-length subarrays, so weight it by that count.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Sample A', input: '{"arr":[2,1,3]}' },
     { label: 'Mixed signs', input: '{"arr":[-4,5,-1,2]}' },

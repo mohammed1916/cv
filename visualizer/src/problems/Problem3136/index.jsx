@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON object with word: 1 to 20 characters from letters, digits, @, # and $',
   url: 'https://leetcode.com/problems/valid-word/',
   complexity: 'O(n) time for a word of length n. The visualization caps words at 20 characters.',
+  question: "Decide whether a word is valid: long enough, made only of allowed characters, and containing at least one vowel and one consonant.",
+  approaches: [
+    { name: "Single scan with flags", intuition: "Reject at the first disallowed character, and track vowel and consonant flags during the same pass.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Valid', input: '{"word":"234Adas"}' },
     { label: 'Missing vowel', input: '{"word":"b3"}' },

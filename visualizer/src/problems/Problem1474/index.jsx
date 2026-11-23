@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with list (node values in order), m and n (positive integers)',
   url: 'https://leetcode.com/problems/delete-n-nodes-after-m-nodes-of-a-linked-list/description/',
   complexity: 'O(L) time and O(1) extra pointers for a list of L nodes; the Python export builds nodes first. The visualization caps the list at 20 nodes, values at 0 to 99, and m and n at 10.',
+  question: "Remove blocks of n nodes after every m kept nodes in a linked list.",
+  approaches: [
+    { name: "Single pointer walk", intuition: "Walk the list, keep m nodes, then unlink the next n nodes.", time: "O(L)", space: "O(1) extra pointers" },
+  ],
   examples: [
     { label: 'Keep 2, delete 3', input: '{"list":[4,8,15,16,23,42,7,9],"m":2,"n":3}' },
     { label: 'Alternate', input: '{"list":[1,2,3,4,5,6,7,8,9,10],"m":1,"n":1}' },

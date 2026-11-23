@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'JSON object with s (a beautiful string) and k (4 to 26)',
   url: 'https://leetcode.doocs.org/en/lc/2663/',
   complexity: 'O(n * k) time in this build, O(n) extra space.',
+  question: "Given a string and a bound, find the lexicographically smallest beautiful string of the same length that is greater than the input.",
+  approaches: [
+    { name: "Greedy from the right", intuition: "Increment the rightmost position that can change without repetition, and fill the rest with the smallest valid letters.", time: "O(n * k)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Four letters, no palindromes', input: '{"s":"abcdbca","k":4}' },
     { label: 'Reverse alphabet, k six', input: '{"s":"fedcba","k":6}' },

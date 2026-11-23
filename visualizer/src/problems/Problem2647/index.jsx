@@ -9,6 +9,10 @@ const definition = {
   inputLabel: 'Object with n, the side length (1 to 12 here)',
   url: 'https://leetcode.com/problems/color-the-triangle-red/',
   complexity: 'Listing the seeds takes O(n²) time. The sweeps are shown only to prove the seeds work and cost at most O(n⁴). The official limit on n is 1000; the drawing caps n at 12.',
+  question: "Given a triangle of integers, color cells red so the rule holds, then return the number of ways to do so, and show the seeds that work.",
+  approaches: [
+    { name: "Enumerate seeds then sweep", intuition: "Find starting cells that can color the triangle, then sweep outward to fill the rest.", time: "O(n^2)", space: "O(n^2)" },
+  ],
   examples: [
     { label: 'Side 6', input: '{"n":6}' },
     { label: 'Single cell', input: '{"n":1}' },

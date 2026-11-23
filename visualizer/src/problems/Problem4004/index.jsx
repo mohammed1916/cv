@@ -9,6 +9,10 @@ const definition = {
   inputLabel: 'Object with balance (integers around the circle)',
   url: 'https://leetcode.com/problems/minimum-moves-to-balance-circular-array-ii/',
   complexity: 'Each round saturates a supply, a need or an undone edge, so rounds stay near O(n), and each search is at worst O(n^2). That is O(n^3) at worst for the official limit of 1000 people; the visualization shows up to 12.',
+  question: "People stand in a circle with integer balances, and one move hands one unit to an adjacent person; find the fewest moves so nobody is negative.",
+  approaches: [
+    { name: "Round-based saturation", intuition: "Each round saturates a supply, a need, or an undone edge, and each round runs a search over the remaining edges.", time: "O(n^3) worst case", space: "O(n)" },
+  ],
   examples: [
     { label: 'Two sources', input: '{"balance":[6,-2,-3,1,-1,-1]}' },
     { label: 'A later unit reroutes', input: '{"balance":[3,-2,0,0,2,-3]}' },

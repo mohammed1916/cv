@@ -8,6 +8,10 @@ const definition = {
   inputLabel: 'Points as a JSON array of [x, y] pairs',
   url: 'https://leetcode.com/problems/minimum-time-visiting-all-points/',
   complexity: 'O(n) time for n points, checking each consecutive leg once. O(1) extra space.',
+  question: "Find the minimum number of seconds to visit all points in order, moving one step diagonally or straight each second.",
+  approaches: [
+    { name: "Max of coordinate gaps", intuition: "Each leg costs the larger of the horizontal and vertical distances.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Three points', input: '[[0,0],[3,1],[1,5]]' },
     { label: 'Diagonal', input: '[[-2,2],[2,-2]]' },

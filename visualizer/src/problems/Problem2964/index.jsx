@@ -12,6 +12,11 @@ const definition = {
   inputLabel: 'Object with nums and d, e.g. {"nums":[1,2,3,4,5],"d":3}',
   url: 'https://leetcode.com/problems/number-of-divisible-triplet-sums/',
   complexity: 'O(n d) time and O(d) extra space for the remainder table, since each number updates three sizes across d remainders. The visualization caps the list at 10 entries and d at 10.',
+  question: "Count the triples of positions whose values sum to a multiple of d.",
+  approaches: [
+    { name: "Residue DP", intuition: "Track counts of chosen values by residue mod d and by how many values have been picked, up to three.", time: "O(n\u00b7d)", space: "O(d)" },
+    { name: "Brute force triples", intuition: "Check every triple of positions directly.", time: "O(n^3)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Counting five', input: '{"nums":[1,2,3,4,5],"d":3}' },
     { label: 'Equal values', input: '{"nums":[1,1,1,1],"d":3}' },

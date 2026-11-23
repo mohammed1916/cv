@@ -8,6 +8,10 @@ const definition = {
   inputLabel: 'Even number of people (e.g. 6)',
   url: 'https://leetcode.com/problems/handshakes-that-dont-cross/description/',
   complexity: 'O(n^2) time and O(n) space in the number of pairs, with arithmetic modulo 1000000007. The visualization caps the people at 20; the draft does not state an exact official bound.',
+  question: "Count ways to pair up 2n people around a circle with handshakes that never cross.",
+  approaches: [
+    { name: "Interval DP with Catalan split", intuition: "Person 0 shakes hands with one partner, which splits the rest into two independent sides.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Four people', input: '4' },
     { label: 'Six people', input: '6' },

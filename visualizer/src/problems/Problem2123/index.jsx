@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Binary grid as JSON rows (e.g. [[1,1],[1,1]])',
   url: 'https://leetcode.com/problems/minimum-operations-to-remove-adjacent-ones-in-matrix/',
   complexity: 'O(V * E) time for the augmenting-path matching, where V is the number of ones and E the adjacent pairs; O(V + E) space. The visualization caps the grid at 6 x 6 so the bipartite graph stays drawable.',
+  question: "Find the fewest operations needed to remove every cell containing a 1 in a grid, where each operation removes a connected group of ones.",
+  approaches: [
+    { name: "Bipartite matching", intuition: "Colour cells by the parity of row plus column; adjacent ones lie on opposite sides, so the answer is the maximum matching between the two sides.", time: "O(V * E)", space: "O(V + E)" },
+  ],
   examples: [
     { label: 'Full 3 x 3', input: '[[1,1,1],[1,1,1],[1,1,1]]' },
     { label: 'Diagonal only', input: '[[1,0],[0,1]]' },

@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with nums (positive integers) and k (2 to 12)',
   url: 'https://leetcode.com/problems/minimum-operations-to-make-array-modulo-alternating-i/',
   complexity: 'O(k * n + k^2) time and O(k) space for n values and modulus k. The visualization caps the array at 12 values.',
+  question: "Change array values with the fewest operations so that values at even and odd positions use residues that differ modulo k.",
+  approaches: [
+    { name: "Residue pricing per parity class", intuition: "Price each residue class separately for even and odd positions, then combine the cheapest pair of distinct residues.", time: "O(k x n + k^2)", space: "O(k)" },
+  ],
   examples: [
     { label: 'Residues three', input: '{"nums":[7,4,9,2,5],"k":3}' },
     { label: 'Residues four', input: '{"nums":[10,11,20,21],"k":4}' },

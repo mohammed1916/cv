@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Binary string (JSON)',
   url: 'https://leetcode.com/problems/number-of-unique-good-subsequences/',
   complexity: 'O(n) time and O(1) space: two running counts and a flag.',
+  question: "Count the distinct non-empty subsequences of a binary string that contain no leading zero, excluding the lone zero.",
+  approaches: [
+    { name: "DP over last occurrence", intuition: "Track counts ending in each digit and update them using the last occurrence of each digit.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Leading zero', input: '{"binary":"001"}' },
     { label: 'Ones and zeros', input: '{"binary":"1011"}' },

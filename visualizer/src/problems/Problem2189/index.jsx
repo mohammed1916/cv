@@ -16,6 +16,10 @@ const definition = {
   inputLabel: 'Object with n (e.g. {"n":14})',
   url: "https://leetcode.com/problems/number-of-ways-to-build-house-of-cards/",
   complexity: "O(n * sqrt(n)) time and O(n) space for n cards: there are about sqrt(2n / 3) row sizes, and each one updates n totals. Results are taken modulo 1000000007. The visualization caps n at 40.",
+  question: "Count the ways to build a house of cards with exactly n cards, where each row has fewer triangles than the row below.",
+  approaches: [
+    { name: "Subset sum over distinct row sizes", intuition: "A row of t triangles uses 3t - 1 cards, and each row size can be used at most once, so count the subsets that use exactly n cards.", time: "O(n * sqrt n)", space: "O(n)" },
+  ],
   examples: [
     { label: "Eight cards", input: '{"n":8}' },
     { label: "Fourteen cards", input: '{"n":14}' },

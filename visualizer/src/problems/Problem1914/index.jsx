@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON object with grid (even rows and columns) and k (e.g. {"grid":[[1,2],[3,4]],"k":1})',
   url: 'https://leetcode.com/problems/cyclically-rotating-a-grid/',
   complexity: 'O(m·n) time: each cell is moved once per layer pass, with k taken modulo the ring length.',
+  question: "Rotate every layer of a grid counter-clockwise by a given number of steps, where each ring is treated as a cycle.",
+  approaches: [
+    { name: "Peel rings and rotate by modulo", intuition: "Split the grid into concentric rings, then rotate each ring by k modulo its length.", time: "O(m n)", space: "O(m n)" },
+  ],
   examples: [
     { label: 'Two by two', input: '{"grid":[[1,2],[3,4]],"k":1}' },
     { label: 'Four by four', input: '{"grid":[[1,2,3,4],[5,6,7,8],[9,10,11,12],[13,14,15,16]],"k":1}' },

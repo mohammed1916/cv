@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON array of 1 to 20 integers',
   url: 'https://leetcode.com/problems/count-indices-with-opposite-parity/',
   complexity: 'O(n^2) time and O(n) space for n values. The visualization caps the array at 20 values.',
+  question: "For each index, count the later values whose parity differs from its own value.",
+  approaches: [
+    { name: "Forward scan", intuition: "For each index, scan forward and tally later values of opposite parity.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Mixed values', input: '[4, 7, 2, 9, 6]' },
     { label: 'Short run', input: '[5, 2, 8]' },

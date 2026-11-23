@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with word (1 to 30 capital letters)',
   url: 'https://leetcode.com/problems/minimum-distance-to-type-a-word-using-two-fingers/',
   complexity: 'O(n * 26) states, each with two choices. The visualization caps the word at 30 letters.',
+  question: "Find the least total distance to type a word using two fingers on a keypad.",
+  approaches: [
+    { name: "Memoized two-finger DP", intuition: "State is the word position and the other finger's letter, and each step moves one finger.", time: "O(26 n^2)", space: "O(26 n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"word":"CAKE"}' },
     { label: 'Example 2', input: '{"word":"HAPPY"}' },

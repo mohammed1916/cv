@@ -14,6 +14,11 @@ const definition = {
   complexity,
   inputLabel: 'Integer n from 1 to 50 (string length)',
   url: 'https://leetcode.com/problems/count-sorted-vowel-strings/',
+  question: "Count sorted strings of a given length built from five vowels.",
+  approaches: [
+    { name: "Length-by-length DP", intuition: "Extend strings one position at a time, keeping counts per last vowel.", time: "O(n * 5)", space: "O(5)" },
+    { name: "Stars and bars", intuition: "Choose the separators with a binomial coefficient.", time: "O(1)", space: "O(1)" },
+  ],
 }
 
 export default function Problem1641Visualizer() {

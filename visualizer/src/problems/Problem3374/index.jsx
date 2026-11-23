@@ -8,6 +8,10 @@ const definition = {
   inputLabel: 'Object with a content table (content_id, content_text)',
   url: 'https://leetcode.com/problems/first-letter-capitalization-ii/description/',
   complexity: 'Teaching model: one lowercase pass and one regex-style pass per row. Visualization caps the table at 12 rows.',
+  question: "Capitalize words in each text row, using the stated rules for hyphens and spacing.",
+  approaches: [
+    { name: "One pass per row", intuition: "Lower-case each row, then capitalize each letter that starts a word or follows a hyphen.", time: "O(total length)", space: "O(total length)" },
+  ],
   examples: [
     { label: 'Example', input: '{"content":[{"content_id":4,"content_text":"data-DRIVEN design"},{"content_id":1,"content_text":"x-RAY VISION"},{"content_id":2,"content_text":"x2-plans now"}]}' },
     { label: 'Hyphen run', input: '{"content":[{"content_id":5,"content_text":"top-OF-the list"}]}' },

@@ -13,6 +13,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Deque and operations (JSON object with k and ops)',
   url: 'https://leetcode.com/problems/design-circular-deque/',
   complexity: 'O(1) time per operation and O(k) space for the fixed ring.',
+  question: "Implement a fixed-size circular deque with insertion and removal at both ends.",
+  approaches: [
+    { name: "Ring buffer with moving head", intuition: "Move the head backward or forward around a fixed ring so both ends are O(1).", time: "O(1) per operation", space: "O(k)" },
+  ],
   examples: [
     { label: 'Both ends', input: '{"k":3,"ops":[["insertLast",1],["insertFront",2],["insertFront",3],["getRear"],["isFull"],["deleteLast"],["insertFront",4],["getFront"]]}' },
     { label: 'Empty', input: '{"k":2,"ops":[["getFront"],["deleteFront"],["isEmpty"]]}' },

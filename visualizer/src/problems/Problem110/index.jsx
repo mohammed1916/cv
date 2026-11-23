@@ -22,6 +22,10 @@ const definition = {
   inputLabel: "Level-order array (e.g. [3,9,20,null,null,15,7])",
   url: "https://leetcode.com/problems/balanced-binary-tree/",
   complexity: "O(n) time and O(h) recursion depth for n nodes. The visualization accepts up to 15 entries.",
+  question: "Decide whether a binary tree is height-balanced, so that subtree heights differ by at most one everywhere.",
+  approaches: [
+    { name: "Post-order height check", intuition: "Return each subtree height and a failure marker; stop as soon as one subtree is unbalanced.", time: "O(n)", space: "O(h)" },
+  ],
   examples: getExamples("balanced-binary-tree").map(example => ({ label: example.label, input: JSON.stringify(example.arr) })),
 };
 

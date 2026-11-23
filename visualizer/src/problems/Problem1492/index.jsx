@@ -7,6 +7,11 @@ const definition = {
   inputLabel: 'Object with n and k (JSON)',
   url: 'https://leetcode.com/problems/the-kth-factor-of-n/',
   complexity: 'O(n) time and O(1) extra space for the scan, or O(sqrt n) with paired divisors when a faster method is needed.',
+  question: "Return the k-th smallest divisor of n, or -1 if there are fewer than k.",
+  approaches: [
+    { name: "Divisor scan", intuition: "Count divisors upward from 1 and stop at the k-th.", time: "O(n)", space: "O(1)" },
+    { name: "Paired divisors up to sqrt(n)", intuition: "Each divisor below the square root pairs with n divided by it.", time: "O(sqrt n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Twelve, third', input: '{"n":12,"k":3}' },
     { label: 'Seven, second', input: '{"n":7,"k":2}' },

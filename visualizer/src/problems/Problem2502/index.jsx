@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'JSON {"n": 10, "ops": [["allocate", 1, 1], ["free", 1]]}',
   url: 'https://leetcode.com/problems/design-memory-allocator/',
   complexity: 'Each allocate scans the memory once and each free scans it once, so each operation is O(n). The visualization keeps the plain array form, so memory is O(n).',
+  question: "Design a memory allocator that gives the leftmost free block of a size and frees blocks by ID.",
+  approaches: [
+    { name: "Linear scan of memory", intuition: "Each allocate scans for the first run of free cells, and each free clears the cells with that ID.", time: "O(n) per operation", space: "O(n)" },
+  ],
   examples: [
     { label: 'Reuse a freed gap', input: '{"n":6,"ops":[["allocate",2,5],["allocate",2,6],["allocate",2,7],["free",6],["allocate",2,8]]}' },
     { label: 'Fragmented', input: '{"n":5,"ops":[["allocate",2,1],["allocate",2,2],["free",1],["allocate",3,3]]}' },

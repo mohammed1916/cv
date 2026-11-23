@@ -16,6 +16,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Object {grid, hits} (JSON)',
   url: 'https://leetcode.com/problems/bricks-falling-when-hit/',
   complexity: 'O(R*C + H) union-find operations, near-linear with path compression and union by size.',
+  question: "Given a grid of bricks and a list of hits, count how many bricks fall after each hit, where bricks connected to the top fall too.",
+  approaches: [
+    { name: "Reverse time with union-find", intuition: "Remove all hit bricks first, then add them back in reverse order; each restored brick joins the component attached to the roof, and the gain is the change in its size.", time: "O(R C + H) with near-constant union operations", space: "O(R C)" },
+  ],
   examples: [
     { label: 'Hit a middle brick', input: '{"grid":[[1,1,0],[1,1,1],[0,1,1]],"hits":[[0,1]]}' },
     { label: 'Two hits on separate bricks', input: '{"grid":[[1,0,1],[1,1,1]],"hits":[[1,2],[0,0]]}' },

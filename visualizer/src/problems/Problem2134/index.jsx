@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Circular array of 0s and 1s as JSON',
   url: 'https://leetcode.com/problems/minimum-swaps-to-group-all-1s-together-ii/',
   complexity: 'O(n) time with a sliding window over the circle; O(1) extra space.',
+  question: "Find the fewest swaps needed to group all ones into one block, where the array is treated as a circle.",
+  approaches: [
+    { name: "Sliding window over the circle", intuition: "The ones gather into some circular window of length k (the number of ones); the answer is k minus the largest count of ones in such a window.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Wraps around', input: '[1,0,1,0,1,0,0,1]' },
     { label: 'Already grouped', input: '[0,1,1,1,0]' },

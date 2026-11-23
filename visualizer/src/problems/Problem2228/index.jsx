@@ -18,6 +18,10 @@ const definition = {
   number: meta.number,
   phases, parse: parseInput, build: buildTrace, code, sql, python, inputLabel,
   url: `https://leetcode.com/problems/${meta.slug}/`,
+  question: "Find the users who made two purchases within seven days of each other.",
+  approaches: [
+    { name: "Self join on purchases", intuition: "Join the purchase table to itself on the user and keep the pairs of different purchases that are at most seven days apart.", time: "O(n log n)", space: "O(n)" },
+  ],
   complexity, examples,
 }
 

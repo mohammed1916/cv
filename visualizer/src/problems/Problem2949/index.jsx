@@ -13,6 +13,11 @@ const definition = {
   inputLabel: 'Object with s (lowercase letters) and k (integer from 1 to 1000)',
   url: 'https://leetcode.com/problems/count-beautiful-substrings-ii/',
   complexity: 'O(n) expected time with a hash map of prefix keys. The visualization caps s at 20 letters.',
+  question: "Count beautiful substrings where vowel and consonant counts match and their product is divisible by k, for large strings.",
+  approaches: [
+    { name: "Prefix state counting", intuition: "Store prefix balances with the position modulo a minimal period, and count matching earlier states in one pass.", time: "O(n)", space: "O(n)" },
+    { name: "Enumerate substrings", intuition: "Check every substring directly against the rule.", time: "O(n^2)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Vowels and consonants', input: '{"s":"xaybe","k":2}' },
     { label: 'Balanced run', input: '{"s":"aeibc","k":1}' },

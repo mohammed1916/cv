@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with nums (1 to 10 house values, 1 to 20) and k (JSON)',
   url: 'https://leetcode.com/problems/house-robber-iv/',
   complexity: 'O(n log(max value)) time. The visualization caps the input at 10 houses.',
+  question: "Rob houses with no two adjacent; minimise the largest cost among robbed houses while robbing at least k.",
+  approaches: [
+    { name: "Binary search on capability", intuition: "Test whether a capability lets a greedy scan rob at least k houses.", time: "O(n log(max value))", space: "O(1)" },
+  ],
   examples: [
     { label: 'Six houses, k three', input: '{"nums":[15,4,11,6,2,9],"k":3}' },
     { label: 'Equal houses, k two', input: '{"nums":[7,7,7,7],"k":2}' },

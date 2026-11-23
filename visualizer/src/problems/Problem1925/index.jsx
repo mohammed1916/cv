@@ -11,6 +11,10 @@ const definition = {
   inputLabel: 'Bound n (1 to 12)',
   url: 'https://leetcode.com/problems/count-square-sum-triples/',
   complexity: 'O(n²) pairs with an integer square-root test each. The visualization caps n at 12.',
+  question: "Count ordered pairs of integers a and b up to n whose squares sum to a perfect square c squared with c at most n.",
+  approaches: [
+    { name: "Pairs with square check", intuition: "Try every pair and test whether the sum of squares is a perfect square no greater than n squared.", time: "O(n^2)", space: "O(1)" },
+  ],
   examples: [
     { label: 'n = 5', input: '5' },
     { label: 'n = 10', input: '10' },

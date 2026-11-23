@@ -10,6 +10,10 @@ const definition = {
   inputLabel: 'Object with n and edges ([u, v, weight] with weight 0 or 1)',
   url: 'https://leetcode.com/problems/incremental-even-weighted-cycle-queries/',
   complexity: 'Near-linear union-find work per edge with parity labels. The visual caps n at 10 and edges at 14.',
+  question: "Add weighted edges one at a time and keep each edge only when every cycle keeps an even weight sum.",
+  approaches: [
+    { name: "Union-find with parity", intuition: "Track parity labels in a union-find so each new edge is checked in near-constant time.", time: "Near-linear", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example', input: '{"n":4,"edges":[[0,1,0],[2,1,1],[3,1,0],[0,3,1]]}' },
     { label: 'Even triangle', input: '{"n":4,"edges":[[1,0,1],[2,1,1],[3,2,0]]}' },

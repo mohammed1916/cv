@@ -2,6 +2,10 @@ import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import { buildTrace, parseInput, code, python, phases, inputLabel, complexity, examples } from './algorithm'
 
 const definition = {
+  question: "Decide whether a car with a fixed capacity can carry all passengers on trips with pick-up and drop-off stops.",
+  approaches: [
+    { name: "Difference array sweep", intuition: "Add passengers at each pick-up stop and subtract them at drop-off, then accumulate along the stops and compare with capacity.", time: "O(t + S)", space: "O(S)" },
+  ],
   number: '1094',
   phases,
   parse: parseInput,

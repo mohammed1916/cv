@@ -25,6 +25,10 @@ const definition = {
   inputLabel: 'JSON object with n, edges [[u, v, time]] and k',
   url: 'https://leetcode.com/problems/minimum-time-for-k-connected-components/',
   complexity: 'O(m log m) for sorting plus near-linear union-find work. The visualization caps input at 12 nodes.',
+  question: "Find the least time at which removing edges from a graph in increasing weight order leaves at least k connected components.",
+  approaches: [
+    { name: "Add edges back in time order", intuition: "Sort the edges by weight and add them back with union-find until the component count reaches the target.", time: "O(m log m)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Four-node cycle, two picks', input: '{"n":4,"edges":[[0,1,5],[1,2,3],[2,3,8],[0,3,6]],"k":2}' },
     { label: 'One road, one pick', input: '{"n":3,"edges":[[0,1,7]],"k":1}' },

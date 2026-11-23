@@ -3,6 +3,11 @@ import IndexedSequence from '../../components/shared/IndexedSequence'
 import * as model from './algorithm'
 
 const definition = {
+  question: "Find the last index of a target value in a sorted array, returning -1 when it is absent.",
+  approaches: [
+    { name: "Binary search for the upper bound", intuition: "Find the first position past every value at most target, then step back one and check it matches.", time: "O(log n)", space: "O(1)" },
+    { name: "Linear scan from the right", intuition: "Walk from the end and return the first match.", time: "O(n)", space: "O(1)" },
+  ],
   phases: model.PHASES, parse: model.parseInput, build: model.buildTrace, code: model.code, python: model.python,
   inputLabel: model.INPUT_LABEL, url: model.URL, complexity: model.COMPLEXITY, examples: model.EXAMPLES,
 }

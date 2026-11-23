@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Grid (JSON array of 0/1 rows)',
   url: 'https://leetcode.com/problems/number-of-corner-rectangles/',
   complexity: 'O(m^2 * n) time for m rows and n columns, and O(1) extra space.',
+  question: "Count rectangles whose four corners are all ones in a binary grid.",
+  approaches: [
+    { name: "Row pair counting", intuition: "For each pair of rows, count the columns where both have ones, and add the pairs of those columns.", time: "O(m^2 n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Three rows', input: '[[1,0,1,1],[1,1,0,1],[1,1,1,1]]' },
     { label: 'Sparse', input: '[[0,1],[1,0],[1,1]]' },

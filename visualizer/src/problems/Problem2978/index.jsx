@@ -64,6 +64,10 @@ const definition = {
   inputLabel,
   complexity,
   examples,
+  question: "Return the coordinate pairs that have a mirror pair across the diagonal, including repeated points on the diagonal.",
+  approaches: [
+    { name: "Count points then self-join mirror", intuition: "Count each point, join each point with its mirror, and keep the pairs that are present.", time: "O(n)", space: "O(n)" },
+  ],
 }
 
 function Table({ columns, rows }) {

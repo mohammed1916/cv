@@ -13,6 +13,11 @@ const definition = {
   inputLabel: 'Two sorted lists as JSON, e.g. {"nums1": [1,2,3], "nums2": [2,4]}',
   url: 'https://leetcode.com/problems/minimum-common-value/',
   complexity: 'O(m + n) time and O(1) extra space.',
+  question: "Given two sorted arrays, return the smallest value present in both, or -1.",
+  approaches: [
+    { name: "Two pointers", intuition: "Advance the pointer at the smaller value until both point to the same value.", time: "O(m + n)", space: "O(1)" },
+    { name: "Hash set", intuition: "Store one array in a set and scan the other for the first match.", time: "O(m + n)", space: "O(min(m, n))" },
+  ],
   examples: [
     { label: 'Merge with a repeat', input: '{"nums1":[1,4,9,9],"nums2":[2,6,6]}' },
     { label: 'Interleaved lists', input: '{"nums1":[10,20,30],"nums2":[5,25,35,45,55]}' },

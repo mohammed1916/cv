@@ -16,6 +16,10 @@ const definition = {
   inputLabel: 'Object with Variables ({ name, value }) and Expressions ({ left_operand, operator, right_operand })',
   url: 'https://leetcode.com/problems/evaluate-boolean-expression/',
   complexity: 'O(e) lookups after an O(v) dictionary build, for v variables and e expressions.',
+  question: "Evaluate a list of comparisons between variables and report true or false.",
+  approaches: [
+    { name: "Join variables then compare", intuition: "Join the expression to the variable table twice and compare the values.", time: "O(e + v)", space: "O(v)" },
+  ],
   examples: [
     { label: 'Example', input: '{"Variables":[{"name":"x","value":66},{"name":"y","value":77}],"Expressions":[{"left_operand":"x","operator":">","right_operand":"y"},{"left_operand":"x","operator":"<","right_operand":"y"},{"left_operand":"y","operator":"=","right_operand":"y"}]}' },
     { label: 'Equal values', input: '{"Variables":[{"name":"a","value":3},{"name":"b","value":3}],"Expressions":[{"left_operand":"a","operator":"=","right_operand":"b"}]}' },

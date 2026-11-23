@@ -16,6 +16,10 @@ const definition = {
   inputLabel: 'Grid isInfected (JSON)',
   url: 'https://leetcode.com/problems/contain-virus/',
   complexity: 'O((mn)^2) worst case: each day scans the whole grid and there are at most mn days. Capped at 20 x 20.',
+  question: "Contain a virus spreading over a grid by walling off the most threatened region each day.",
+  approaches: [
+    { name: "Simulate daily containment", intuition: "Each day wall off the region that threatens the most cells, then let the others spread.", time: "O(days mn)", space: "O(mn)" },
+  ],
   examples: [
     { label: 'Three by three checker', input: '[[1,0,1],[0,1,0],[1,1,1]]' },
     { label: 'Own: 3 by 4 with holes', input: '[[0,1,1,0],[1,1,0,1],[1,0,1,1]]' },

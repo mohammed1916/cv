@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'prices and fee (JSON object)',
   url: 'https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/',
   complexity: 'O(n) time and O(1) extra space when only the latest pair is kept. The table here keeps every day to show the states.',
+  question: "Maximise profit from buying and selling stock when each transaction pays a fee.",
+  approaches: [
+    { name: "Hold or cash state DP", intuition: "Track the best profit while holding and while in cash, paying the fee on each sale.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Two swings', input: '{"prices":[4,6,3,9,5,8],"fee":1}' },
     { label: 'Fee wins', input: '{"prices":[2,4,3,6],"fee":3}' },

@@ -22,6 +22,10 @@ function layout(root) {
 }
 
 const definition = {
+  question: "Decide whether a linked list appears as a downward path starting at some tree node.",
+  approaches: [
+    { name: "Start at every node", intuition: "From each tree node, try to match the list along child links.", time: "O(N min(L, H))", space: "O(H)" },
+  ],
   phases: [
     { id: 'scan', label: 'Scan tree', description: 'Visit each tree node as a possible start of the list.' },
     { id: 'match', label: 'Match', description: 'Follow children while the values match the list.' },

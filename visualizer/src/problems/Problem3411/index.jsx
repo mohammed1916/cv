@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with nums (JSON)',
   url: 'https://leetcode.com/problems/maximum-subarray-with-equal-products/',
   complexity: 'O(n^2) time with exact arithmetic. The visualization caps n at 30.',
+  question: "Find the longest contiguous run whose product equals the product of its greatest common divisor and least common multiple.",
+  approaches: [
+    { name: "Extend from each start", intuition: "Grow a window to the right while tracking product, gcd and lcm, and record matches.", time: "O(n^2)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"nums":[1,2,1,2,1,1,1]}' },
     { label: 'Example 2', input: '{"nums":[2,3,4,5,6]}' },

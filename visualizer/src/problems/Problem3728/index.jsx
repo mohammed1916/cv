@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON object with nums, for example {"nums":[9,3,3,3,9]}',
   url: 'https://leetcode.com/problems/stable-subarrays-with-equal-boundary-and-interior-sum/',
   complexity: 'O(n) expected time with a hash map. The visualization caps the array at 12 values.',
+  question: "Count stable subarrays whose boundary values equal their interior sum.",
+  approaches: [
+    { name: "Prefix sums with a hash map", intuition: "Record prefix sums with a hash map and count matching right boundaries.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"nums":[9,3,3,3,9]}' },
     { label: 'Example 3', input: '{"nums":[-4,4,0,0,-8,-4]}' },

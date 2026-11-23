@@ -15,6 +15,10 @@ const definition = {
   complexity,
   inputLabel: 'JSON array of Followers rows: user_id (the user followed) and follower_id',
   url: 'https://leetcode.com/problems/find-followers-count/',
+  question: "For each user, count how many followers they have.",
+  approaches: [
+    { name: "Group and count", intuition: "Group the follow rows by user and count the followers.", time: "O(n)", space: "O(users)" },
+  ],
 }
 
 export default function Problem1729Visualizer() {

@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON with n and edges, e.g. {"n":5,"edges":[[0,1],[1,2],[2,0],[2,3],[3,4]]}',
   url: 'https://leetcode.com/problems/distance-to-a-cycle-in-undirected-graph/',
   complexity: 'O(n + m) time with leaf peeling and one multi-source BFS. The page caps the graph at 9 nodes.',
+  question: "For each node in a connected graph with exactly one cycle, find the distance to the nearest cycle node.",
+  approaches: [
+    { name: "Peel leaves, then breadth-first search", intuition: "Remove leaves repeatedly to find the cycle, then run a breadth-first search from the cycle outward.", time: "O(V + E)", space: "O(V + E)" },
+  ],
   examples: [
     { label: 'Triangle with tail', input: '{"n":5,"edges":[[0,1],[1,2],[2,0],[2,3],[3,4]]}' },
     { label: 'Plain triangle', input: '{"n":3,"edges":[[0,1],[1,2],[2,0]]}' },

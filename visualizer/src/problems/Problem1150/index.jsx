@@ -4,6 +4,10 @@ import { buildTrace, parseInput, code, python, phases, examples, complexity, inp
 import { Sequence, Vars } from './SeqKit'
 
 const definition = {
+  question: "Decide whether a target is a majority element in a sorted array, appearing more than half the time.",
+  approaches: [
+    { name: "Binary search for boundaries", intuition: "Find the first and last positions of the target by binary search and compare their gap with half the length.", time: "O(log n)", space: "O(1)" },
+  ],
   number: meta.number,
   phases, parse: parseInput, build: buildTrace, code, python, inputLabel, complexity, examples,
   url: `https://leetcode.com/problems/${meta.slug}/`,

@@ -7,6 +7,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'Object with coordinates (JSON)',
   complexity: 'O(n) time and O(1) extra space: one cross product per point.',
+  question: "Decide whether a set of points lies on one straight line.",
+  approaches: [
+    { name: "Cross product check", intuition: "Fix the direction from the first two points and check every other point has zero cross product.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Diagonal line', input: '{"coordinates":[[-6,-9],[-2,-1],[0,3],[3,9],[7,17],[10,23]]}' },
     { label: 'Vertical line', input: '{"coordinates":[[4,-3],[4,0],[4,8]]}' },

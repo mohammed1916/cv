@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'JSON {"nums": [4,9,2,11,6], "space": 3}',
   url: 'https://leetcode.com/problems/destroy-sequential-targets/',
   complexity: 'O(n) expected time with a hash map of remainders, for n targets. The visualization caps nums at 20 values.',
+  question: "Pick a seed from the targets so that the most targets can be reached by adding a fixed space; return the smallest such seed.",
+  approaches: [
+    { name: "Group by remainder", intuition: "Targets reachable from one seed share its remainder modulo the space, so count remainders in a hash map and pick the largest group.", time: "O(n) expected", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"nums":[4,9,2,11,6],"space":3}' },
     { label: 'Example 2', input: '{"nums":[5,8,13],"space":4}' },

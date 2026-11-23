@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with a season_stats table (season_id, team_id, team_name, matches_played, wins, draws, losses, goals_for, goals_against)',
   url: 'https://leetcode.com/problems/premier-league-table-ranking-iii/',
   complexity: 'O(n log n) for the sort. The compare steps show an insertion sort so each tie-break is visible; the database may sort differently but reaches the same order. The visualization caps the table at 12 rows.',
+  question: "Rank teams in a league table for a season, where ties are broken by the stated rules.",
+  approaches: [
+    { name: "Sort then tie-break", intuition: "Sort the rows by points and tie-breakers, using an insertion sort so each comparison is visible.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Every tie-break', input: sample([
       team(2031, 1, 'Harbour Town', 20, 9, 9, 66, 40), team(2031, 2, 'Ironbridge', 21, 6, 11, 60, 41),

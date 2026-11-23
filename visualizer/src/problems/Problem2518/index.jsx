@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON object: nums (1-5 each) and k',
   url: 'https://leetcode.com/problems/number-of-great-partitions/',
   complexity: 'O(n * total) time and O(total) space. The visualization caps input at 10 numbers.',
+  question: "Count the ways to split an array into two groups whose sums are both at least k, modulo a prime.",
+  approaches: [
+    { name: "Knapsack over sums", intuition: "Count ways to reach each subset sum, then combine sums that leave both groups large enough.", time: "O(n * total)", space: "O(total)" },
+  ],
   examples: [
     { label: 'Repeats with k four', input: '{"nums":[6,1,9,3,3],"k":4}' },
     { label: 'Too small', input: '{"nums":[3,3,3],"k":4}' },

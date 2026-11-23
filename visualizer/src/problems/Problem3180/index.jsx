@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Reward values as JSON array (1 to 12, up to 8 values)',
   url: 'https://leetcode.com/problems/maximum-total-reward-using-operations-i/',
   complexity: 'O(n * S) time for total S, which is at most 2 times the largest value in the official problem. The visualization caps the input at 8 values.',
+  question: "Find the maximum total reward from taking rewards in increasing order, where each reward can be taken once and only when the running total is below it.",
+  approaches: [
+    { name: "Knapsack over reachable sums", intuition: "The reachable totals behave like a 0 or 1 knapsack over sums, so each reward extends the reachable set once.", time: "O(n * S)", space: "O(S)" },
+  ],
   examples: [
     { label: 'Four rewards, two values', input: '[3,9,3,9]' },
     { label: 'Five rewards, mixed', input: '[11,2,8,5,1]' },

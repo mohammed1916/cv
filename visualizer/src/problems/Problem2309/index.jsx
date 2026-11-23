@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with "s" (English letters), JSON',
   url: 'https://leetcode.com/problems/greatest-english-letter-in-upper-and-lower-case/',
   complexity: 'O(n + 26) time and O(1) extra space. The visualization caps s at 30 letters.',
+  question: "Return the greatest letter that appears in both upper and lower case in a string.",
+  approaches: [
+    { name: "Seen set", intuition: "Record each letter, then check from z down to a for a letter whose two cases are both seen.", time: "O(n + 26)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Own: mixed case word', input: '{"s":"HeLLoWorld"}' },
     { label: 'Own: capitals then lower', input: '{"s":"ABCdef"}' },

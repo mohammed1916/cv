@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON object: cost (nine integers for digits 1-9) and target',
   url: 'https://leetcode.com/problems/form-largest-integer-with-digits-that-add-up-to-target/',
   complexity: 'O(9 * target) time and O(target) space. The visualization caps target at 15.',
+  question: "Form the largest number from digit costs that adds up exactly to a target.",
+  approaches: [
+    { name: "Dynamic programming on cost", intuition: "Store the best digit string for each cost, then take the largest.", time: "O(9 target)", space: "O(target)" },
+  ],
   examples: [
     { label: 'Varied digit costs', input: '{"cost":[2,7,4,9,1,6,3,8,5],"target":12}' },
     { label: 'Impossible', input: '{"cost":[2,4,6,2,4,6,4,4,4],"target":5}' },

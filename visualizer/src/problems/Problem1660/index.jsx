@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with root (level-order list) and bad [from, to], e.g. {"root":[1,2,3,4,5,6,7],"bad":[2,3]}',
   url: "https://leetcode.com/problems/correct-a-binary-tree/",
   complexity: "O(n) time and O(n) space for n nodes. The visualization caps the tree at 15 nodes.",
+  question: "A binary tree has one node whose right child points to the wrong node on the same level; repair the tree.",
+  approaches: [
+    { name: "Level scan with seen set", intuition: "Walk each level left to right and cut the pointer that goes to a node already seen on that level.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: "Depth one", input: '{"root":[1,2,3,4,5,6,7],"bad":[2,3]}' },
     { label: "Depth two", input: '{"root":[1,2,3,4,5,6,7],"bad":[4,5]}' },

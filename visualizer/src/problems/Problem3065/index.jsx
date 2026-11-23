@@ -17,6 +17,10 @@ const definition = {
   inputLabel: "JSON object with nums and k",
   url: "https://leetcode.com/problems/minimum-operations-to-exceed-threshold-value-i/",
   complexity: "O(n) time and O(1) extra space. The visualization caps nums at 50 values.",
+  question: "Count the operations needed to make every value at least k by removing the values below k.",
+  approaches: [
+    { name: "Count values below threshold", intuition: "Count each value that is smaller than k.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: "Example 1", input: '{"nums":[4,12,8,1,9],"k":8}' },
     { label: "Example 2", input: '{"nums":[5,6,7,2],"k":6}' },

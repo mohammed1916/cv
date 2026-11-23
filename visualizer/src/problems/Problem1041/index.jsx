@@ -10,6 +10,10 @@ const definition = {
   inputLabel: 'Instruction string made of G, L and R (for example GRGRG)',
   url: 'https://leetcode.com/problems/robot-bounded-in-circle/',
   complexity: 'O(n) time and O(1) extra space for an instruction string of length n. Four passes are simulated.',
+  question: "Decide whether a robot repeating a string of moves and turns stays inside some circle forever.",
+  approaches: [
+    { name: "Simulate four passes", intuition: "After four repetitions the robot is bounded exactly when it returns to the origin; simulate four passes and check.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Turns back', input: 'GRGRG' },
     { label: 'Drifts', input: 'RGL' },

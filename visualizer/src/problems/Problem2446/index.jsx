@@ -9,6 +9,10 @@ const definition = {
   inputLabel: 'Object with event1 and event2 as ["HH:MM", "HH:MM"]',
   url: 'https://leetcode.com/problems/determine-if-two-events-have-conflict/',
   complexity: 'O(1) time and space.',
+  question: "Two events are given as time intervals; decide whether they share at least one moment.",
+  approaches: [
+    { name: "Compare endpoints", intuition: "Two intervals share a moment exactly when each one starts no later than the other ends.", time: "O(1)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Shared minute', input: '{"event1":["01:15","02:00"],"event2":["02:00","03:00"]}' },
     { label: 'Apart', input: '{"event1":["10:00","11:00"],"event2":["14:00","15:00"]}' },

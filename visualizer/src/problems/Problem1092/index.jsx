@@ -3,6 +3,10 @@ import DPDependencyView from '../../components/shared/DPDependencyView'
 import { buildTrace, parseInput, code, python, phases, inputLabel, complexity, examples } from './algorithm'
 
 const definition = {
+  question: "Return the shortest string that contains both given strings as subsequences.",
+  approaches: [
+    { name: "LCS table, then merge", intuition: "Fill the longest common subsequence table, then walk it to merge the two strings.", time: "O(n * m)", space: "O(n * m)" },
+  ],
   phases,
   parse: parseInput, build: buildTrace, code, python,
   inputLabel,

@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with s (JSON)',
   url: 'https://leetcode.com/problems/resulting-string-after-adjacent-removals/',
   complexity: 'O(n) time and O(n) space. The visualization caps s at 20 letters.',
+  question: "Repeatedly remove adjacent consecutive letters from a string and report what remains.",
+  approaches: [
+    { name: "Stack cancellation", intuition: "Push letters onto a stack and pop when the top is a consecutive neighbour.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"s":"abc"}' },
     { label: 'Example 2', input: '{"s":"adcb"}' },

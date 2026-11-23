@@ -8,6 +8,10 @@ const definition = {
   inputLabel: 'Object with a products table (product_id, product_name, description)',
   url: 'https://leetcode.com/problems/find-products-with-three-consecutive-digits/description/',
   complexity: 'Teaching model: one pattern test per row. Visualization caps the table at 12 rows.',
+  question: "From a table of products, keep the product descriptions that contain three consecutive digits.",
+  approaches: [
+    { name: "Row-by-row pattern test", intuition: "Check each row's text for a run of three digits and keep the matches.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example', input: '{"products":[{"product_id":1,"product_name":"Pen","description":"Blue ink 123 pack"},{"product_id":2,"product_name":"Mug","description":"Holds 12 oz"},{"product_id":3,"product_name":"Card","description":"Code 9876"},{"product_id":4,"product_name":"Lamp","description":"Warm light, 2 bulbs"},{"product_id":5,"product_name":"Clip","description":"Batch 007"}]}' },
     { label: 'Two digits only', input: '{"products":[{"product_id":8,"product_name":"Tag","description":"Size 12"}]}' },

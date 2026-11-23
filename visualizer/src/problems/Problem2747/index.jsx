@@ -43,6 +43,10 @@ const definition = {
   inputLabel: "Object with n, logs, x, queries (JSON), e.g. {\"n\":3,\"logs\":[[1,3],[2,6],[1,5]],\"x\":5,\"queries\":[10,11]}",
   url: "https://leetcode.com/problems/count-zero-request-servers/",
   complexity: "O(queries * logs) time for this visualization, which caps input at 10 servers, 10 logs and 10 queries. The official limit is 10^5 for each.",
+  question: "Given server request logs and queries, count the servers that received no requests in each time window.",
+  approaches: [
+    { name: "Sort and sliding window", intuition: "Sort requests and queries, then count distinct servers within each window.", time: "O(n log n + q log q)", space: "O(n)" },
+  ],
   examples: [
   {
     "label": "Window slides",

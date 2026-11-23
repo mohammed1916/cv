@@ -13,6 +13,11 @@ const definition = {
   inputLabel: 'Object with grid, a rectangular list of integers from 1 to 1000000000',
   url: 'https://leetcode.com/problems/construct-product-matrix/',
   complexity: 'O(n * m) time and space. The visualization caps the grid at 12 cells.',
+  question: "Build a matrix where each cell holds the product of all other cells in the grid, taken modulo a number.",
+  approaches: [
+    { name: "Prefix and suffix products", intuition: "Multiply the values before each position and after each position, then combine.", time: "O(n m)", space: "O(n m)" },
+    { name: "Divide the total product", intuition: "Compute the total product and divide out each value; this fails with zero or modular inverses.", time: "O(n m)", space: "O(1) extra" },
+  ],
   examples: [
     { label: 'Two by two', input: '{"grid":[[2,5],[7,3]]}' },
     { label: 'Modulus hit', input: '{"grid":[[12345,6]]}' },

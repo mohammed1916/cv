@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON object with skills (distinct) and k',
   url: 'https://leetcode.com/problems/find-the-first-player-to-win-k-games-in-a-row/',
   complexity: 'O(n * k) games, since the strongest player must win within n rounds. The visualization caps n at 12 and k at 20.',
+  question: "Find the first player to win k games in a row when players queue up and the stronger player wins each game.",
+  approaches: [
+    { name: "Simulate the queue", intuition: "The first two players play, the stronger stays at the front, and the loser goes to the back.", time: "O(n * k)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Four distinct skills', input: '{"skills":[12,40,25,8],"k":2}' },
     { label: 'Three players, k three', input: '{"skills":[70,15,44],"k":3}' },

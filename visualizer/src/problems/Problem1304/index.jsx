@@ -4,6 +4,10 @@ import { StackLane } from '../../components/shared/AlgorithmStatePrimitives'
 import { buildTrace, parseInput, code, python, phases, examples } from './algorithm'
 
 const definition = {
+  question: "Return n distinct integers whose sum is zero.",
+  approaches: [
+    { name: "Mirrored pairs", intuition: "Pick k and -k for each pair and add a zero when n is odd.", time: "O(n)", space: "O(n)" },
+  ],
   number: '1304', phases, parse: parseInput, build: buildTrace, code, python, examples,
   inputLabel: 'Count n (JSON object)',
   url: 'https://leetcode.com/problems/find-n-unique-integers-sum-up-to-zero/',

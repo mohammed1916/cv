@@ -2,6 +2,10 @@ import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import * as model from './algorithm'
 
 const definition = {
+  question: "Wrap a callback-style function so that calling it returns a promise that resolves with the result or rejects with the error.",
+  approaches: [
+    { name: "Promise constructor with a callback handler", intuition: "Create a promise and pass a handler to the function that resolves on success and rejects on error.", time: "O(1) per call", space: "O(1)" },
+  ],
   phases: model.PHASES, parse: model.parseInput, build: model.buildTrace, code: model.code, python: model.python,
   inputLabel: model.INPUT_LABEL, url: model.URL, complexity: model.COMPLEXITY, examples: model.EXAMPLES,
 }

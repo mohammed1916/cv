@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with locations, start, finish, fuel',
   url: 'https://leetcode.com/problems/count-all-possible-routes/',
   complexity: 'O(n^2 * fuel) time and O(n * fuel) memory. The visualization caps input at 8 cities and 20 fuel.',
+  question: "Count the routes from a start city to a finish city using at most the available fuel.",
+  approaches: [
+    { name: "Memoised DP over city and fuel", intuition: "Count routes from each city with each fuel amount and reuse the stored counts.", time: "O(n^2 * fuel)", space: "O(n * fuel)" },
+  ],
   examples: [
     { label: 'Five cities, fuel 18', input: '{"locations":[12,6,20,9,15],"start":0,"finish":3,"fuel":18}' },
     { label: 'Three cities, backwards trip', input: '{"locations":[8,30,11],"start":1,"finish":0,"fuel":9}' },

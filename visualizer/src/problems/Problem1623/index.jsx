@@ -12,6 +12,10 @@ const definition = {
   phases, parse: parseInput, build: buildTrace, code, python, sql,
   inputLabel: INPUT_LABEL,
   complexity: COMPLEXITY,
+  question: "Given three school member lists, list every triplet that has one member from each school.",
+  approaches: [
+    { name: "Three-way join", intuition: "Join the three school tables and keep rows where all three values are present.", time: "O(a * b * c) worst case", space: "O(output)" },
+  ],
   examples: [{ label: 'Sample', input: EXAMPLE },
     { label: "One student per school", input: "{\"SchoolA\":[{\"student_id\":1,\"student_name\":\"Ada\"}],\"SchoolB\":[{\"student_id\":2,\"student_name\":\"Bo\"}],\"SchoolC\":[{\"student_id\":3,\"student_name\":\"Cy\"}]}" },
     { label: "Same id at two schools", input: "{\"SchoolA\":[{\"student_id\":1,\"student_name\":\"Ada\"}],\"SchoolB\":[{\"student_id\":1,\"student_name\":\"Ada\"},{\"student_id\":2,\"student_name\":\"Bo\"}],\"SchoolC\":[{\"student_id\":3,\"student_name\":\"Cy\"}]}" },

@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'Numbers (JSON object with nums)',
   url: 'https://leetcode.com/problems/sum-of-integers-with-maximum-digit-range/',
   complexity: 'O(n log M) time and O(1) extra space, where M is the largest number. The visualization caps input at 12 numbers.',
+  question: "Find each number's digit range, then add up the numbers that reach the largest range.",
+  approaches: [
+    { name: "Digit extremes, then sum", intuition: "Find each number's largest and smallest digit, and sum the numbers with the largest difference.", time: "O(n log M)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"nums":[5724,111,350]}' },
     { label: 'Example 2', input: '{"nums":[90,900]}' },

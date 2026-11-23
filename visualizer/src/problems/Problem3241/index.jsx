@@ -19,6 +19,10 @@ const definition = {
   inputLabel: 'Tree edges (JSON, e.g. {"edges": [[0,1],[0,2]]})',
   url: "https://leetcode.com/problems/time-taken-to-mark-all-nodes/",
   complexity: "O(n) time and O(n) space with two passes over a rooted tree. The visualization accepts at most 12 nodes.",
+  question: "Find, for each node of a tree, the time at which it is marked, where marking spreads from neighbours.",
+  approaches: [
+    { name: "Two passes over a rooted tree", intuition: "A pass down computes the best times from children, and a pass up gives each node its answer.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: "Three nodes", input: '{"edges": [[0,1],[1,2]]}' },
     { label: "Two nodes", input: '{"edges": [[0,1]]}' },

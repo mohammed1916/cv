@@ -19,6 +19,10 @@ const definition = {
   inputLabel: 'Object with integer n (JSON)',
   url: 'https://leetcode.com/problems/next-special-palindrome-number/',
   complexity: 'Scans candidates one at a time after n. The visualization caps n at 5000.',
+  question: "Find the smallest special palindrome number that is greater than n.",
+  approaches: [
+    { name: "Scan forward from n", intuition: "Test each candidate after n until a special palindrome is found.", time: "O(answer - n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"n":2}' },
     { label: 'Example 2', input: '{"n":33}' },

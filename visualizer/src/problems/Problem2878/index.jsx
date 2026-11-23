@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with columns and data (rows)',
   url: 'https://leetcode.com/problems/get-the-size-of-a-dataframe/',
   complexity: 'O(1) once the table is known; counting its rows and columns is direct.',
+  question: "Return the number of rows and columns of a table as a pair.",
+  approaches: [
+    { name: "Read the shape", intuition: "The table's shape already gives both counts.", time: "O(1)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Three by two', input: '{"columns":["id","name"],"data":[[1,"a"],[2,"b"],[3,"c"]]}' },
     { label: "One column, one row", input: "{\"columns\":[\"id\"],\"data\":[[1]]}" },

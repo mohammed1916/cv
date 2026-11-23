@@ -3,6 +3,10 @@ import { meta } from './meta'
 import { buildTrace, parseInput, code, python, phases, examples, complexity, inputLabel } from './algorithm'
 
 const definition = {
+  question: "Write an integer in base negative two.",
+  approaches: [
+    { name: "Repeated division with remainders", intuition: "Take the parity as the next digit, then divide by -2 with the remainder adjusted to stay in range.", time: "O(log n)", space: "O(log n)" },
+  ],
   number: meta.number,
   phases, parse: parseInput, build: buildTrace, code, python, inputLabel,
   url: `https://leetcode.com/problems/${meta.slug}/`,

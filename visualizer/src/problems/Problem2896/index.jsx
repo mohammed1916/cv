@@ -13,6 +13,11 @@ const definition = {
   inputLabel: 'JSON object {"s1": binary, "s2": binary, "x": integer}',
   url: 'https://leetcode.com/problems/apply-operations-to-make-two-strings-equal/',
   complexity: 'O(n) time with two carry states per position. The visualization caps input at 12 digits.',
+  question: "Find the minimum cost to make two binary strings equal using two kinds of flip operations with different costs.",
+  approaches: [
+    { name: "Dynamic programming with carry state", intuition: "Scan positions while tracking whether a pending flip is carried forward, choosing the cheaper option at each mismatch.", time: "O(n)", space: "O(1)" },
+    { name: "Greedy pairing of mismatches", intuition: "Pair consecutive mismatched positions and pay the cheaper cost per pair.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Five digits, x of three', input: '{"s1":"10110","s2":"01001","x":3}' },
     { label: 'Impossible', input: '{"s1": "10110", "s2": "00011", "x": 4}' },

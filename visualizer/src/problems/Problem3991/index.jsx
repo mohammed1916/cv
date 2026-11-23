@@ -21,6 +21,10 @@ const definition = {
   inputLabel: 'Object with nums (a permutation) and pre (allowed prefix lengths)',
   url: 'https://leetcode.com/problems/sort-array-using-prefix-reversals/',
   complexity: 'O(n! * |pre| * n) time and O(n!) space for a breadth-first search over arrangements. The visualization caps nums at 6 entries, so at most 720 arrangements are explored.',
+  question: "Sort a permutation by reversing prefixes of allowed lengths, using the fewest reversals.",
+  approaches: [
+    { name: "Breadth-first search over arrangements", intuition: "Explore arrangements level by level until the sorted order is reached.", time: "O(n! x |pre| x n)", space: "O(n!)" },
+  ],
   examples: [
     { label: 'Two swap', input: '{"nums":[1,0,2,3],"pre":[2,4]}' },
     { label: 'Two steps', input: '{"nums":[2,0,1],"pre":[2,3]}' },

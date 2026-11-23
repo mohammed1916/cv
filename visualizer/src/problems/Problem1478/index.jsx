@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'Houses (JSON object with houses as positions and k mailboxes)',
   url: 'https://leetcode.com/problems/allocate-mailboxes/',
   complexity: 'O(n^3 + k * n^2) time and O(n^2) space. The visualization caps input at 8 houses.',
+  question: "Place k mailboxes along a street so that the total distance from every house to its nearest mailbox is minimal.",
+  approaches: [
+    { name: "Median cost DP", intuition: "Price each run of houses at its median and combine runs with a DP over mailbox count.", time: "O(n^3 + k * n^2)", space: "O(n^2)" },
+  ],
   examples: [
     { label: 'Five houses', input: '{"houses":[1,4,8,10,20],"k":3}' },
     { label: 'Five houses, two boxes', input: '{"houses":[2,3,5,12,18],"k":2}' },

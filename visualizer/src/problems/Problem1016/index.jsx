@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Binary string and n (JSON object with s and n)',
   url: 'https://leetcode.com/problems/binary-string-with-substrings-representing-1-to-n/',
   complexity: 'O(n * s) time with simple substring checks. The visualization caps s at 40 characters and n at 40.',
+  question: "Decide whether the binary form of every integer from 1 to n appears as a substring of a given binary string.",
+  approaches: [
+    { name: "Substring check per value", intuition: "For each value, test whether its binary text occurs in the string using a direct substring search.", time: "O(n * s)", space: "O(s)" },
+  ],
   examples: [
     { label: 'Own: 1101001 covers 1 to 5', input: '{"s":"1101001","n":5}' },
     { label: 'Own: 6 missing from 1010', input: '{"s":"1010","n":6}' },

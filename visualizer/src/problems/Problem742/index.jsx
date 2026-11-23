@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Tree (JSON level order) and k',
   url: 'https://leetcode.com/problems/closest-leaf-in-a-binary-tree/',
   complexity: 'O(n) time and space. The visualization caps input at 30 nodes.',
+  question: "Find the leaf closest to a given target node in a binary tree, measured along tree edges.",
+  approaches: [
+    { name: "BFS over parent-linked graph", intuition: "Treat parent links as edges and search outward from the target until the first leaf appears.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"arr":[1,3,2],"k":1}' },
     { label: 'Deeper leaf', input: '{"arr":[1,2,3,4,null,null,null,5],"k":2}' },

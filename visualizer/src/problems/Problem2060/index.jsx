@@ -19,6 +19,10 @@ const definition = {
   inputLabel: 'Object with s1 and s2 (encoded strings)',
   url: 'https://leetcode.com/problems/check-if-an-original-string-exists-given-two-encoded-strings/',
   complexity: 'The search keeps each (position in s1, position in s2, difference) state once. The visualization caps each string at 40 characters.',
+  question: "Decide whether an original string exists that could produce both given encoded strings, where digits stand for skipped letters.",
+  approaches: [
+    { name: "Parse options and match with DP", intuition: "Expand each encoded string into parse options and match them position by position with a DP over pending skips.", time: "O(n m L)", space: "O(n m)" },
+  ],
   examples: [
     { label: 'Fits', input: '{"s1":"a4b","s2":"5b"}' },
     { label: 'Does not fit', input: '{"s1":"abc","s2":"dffe"}' },

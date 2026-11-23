@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'JSON {"grid": [[...], ...], "queries": [...]} with values 0 to 9',
   url: 'https://leetcode.com/problems/maximum-number-of-points-from-grid-queries/',
   complexity: 'O(mn log(mn) + q log q) time, since each cell enters the heap once and queries are sorted. The visualization caps the grid at 4 by 4.',
+  question: "For each query value, count the cells reachable from the top-left through cells below that value.",
+  approaches: [
+    { name: "Min heap expansion", intuition: "Process queries in increasing order and grow the reachable region with a min heap of cell values.", time: "O(mn log(mn) + q log q)", space: "O(mn)" },
+  ],
   examples: [
     { label: 'Three queries', input: '{"grid":[[2,4,6],[3,8,1],[5,2,9]],"queries":[4,7,3]}' },
     { label: 'Blocked start', input: '{"grid":[[5,2,1],[1,1,2]],"queries":[3]}' },

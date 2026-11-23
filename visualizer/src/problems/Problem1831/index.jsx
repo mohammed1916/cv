@@ -15,6 +15,10 @@ const definition = {
   url: `https://leetcode.com/problems/${meta.slug}/`,
   complexity: 'O(n log n) for the sort, or O(n) with a per-day hash map of maxima. The visualizer caps the table at 12 rows.',
   examples,
+  question: "For each calendar day, keep every transaction tied for that day's largest amount.",
+  approaches: [
+    { name: "Group max per day", intuition: "Group by day, find the maximum, and keep all rows tied with it.", time: "O(n log n)", space: "O(n)" },
+  ],
 }
 
 function Rows({ columns = [], rows = [] }) {

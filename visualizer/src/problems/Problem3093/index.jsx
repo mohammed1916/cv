@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with words_container and words_query (JSON lists of lowercase strings)',
   url: 'https://leetcode.com/problems/longest-common-suffix-queries/',
   complexity: 'O(total length) time and space for the trie. The visualization caps input at 6 words each.',
+  question: "For each query word, pick the word in a list that shares the longest common suffix with it, breaking ties by shorter length and then earlier position.",
+  approaches: [
+    { name: "Trie over reversed words", intuition: "Reverse each word so a common suffix becomes a common prefix, then the deepest shared trie node gives the answer.", time: "O(total length)", space: "O(total length)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"words_container":["apple","pale","ple"],"words_query":["le","ale","zz"]}' },
     { label: "Single letter words", input: "{\"words_container\":[\"a\"],\"words_query\":[\"a\"]}" },

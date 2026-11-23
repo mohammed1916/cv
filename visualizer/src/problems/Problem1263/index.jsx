@@ -11,6 +11,10 @@ const definition = {
   inputLabel: 'Board rows (JSON array of strings with #, ., S, B, T)',
   url: 'https://leetcode.com/problems/minimum-moves-to-move-a-box-to-their-target-location/',
   complexity: 'O(R * C * R * C) states with O(1) work each. The visualization caps the board at 6 by 6.',
+  question: "Move a box to a target cell by pushing it, with the fewest pushes and player moves.",
+  approaches: [
+    { name: "0-1 breadth-first search", intuition: "Walking costs nothing and pushing costs one, so use a deque to keep the fewest pushes first.", time: "O((R x C)^2)", space: "O((R x C)^2)" },
+  ],
   examples: [
     { label: 'Example 1', input: '["######","#T...#","#.B..#","#..S.#","######"]' },
     { label: 'One push', input: '["#####","#TB.#","#S..#","#####"]' },

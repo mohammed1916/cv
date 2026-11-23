@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'Object with coins (0 or 1 per node) and edges (JSON)',
   url: 'https://leetcode.com/problems/collect-coins-in-a-tree/',
   complexity: 'O(n) time. The visualization caps the tree at 8 nodes.',
+  question: "Given a tree with coins on some nodes, collect all coins and return to the start with the fewest edge moves, where collecting is allowed within distance two.",
+  approaches: [
+    { name: "Peel leaves without coins", intuition: "Repeatedly remove leaves that have no coin, then trim two more layers; the remaining edges are walked twice.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Path with coins at both ends', input: '{"coins":[1,0,0,0,0,1],"edges":[[0,1],[1,2],[2,3],[3,4],[4,5]]}' },
     { label: 'Star', input: '{"coins":[0,0,1,0,0],"edges":[[0,1],[1,2],[1,3],[3,4]]}' },

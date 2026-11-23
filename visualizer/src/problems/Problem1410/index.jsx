@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Text to decode',
   url: 'https://leetcode.com/problems/html-entity-parser/',
   complexity: 'O(n) time and O(n) output space: every character is examined a constant number of times.',
+  question: "Replace HTML entities in a string with the characters they stand for.",
+  approaches: [
+    { name: "Single scan with lookup", intuition: "Walk the string and replace any entity that matches a known name.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Escaped ampersand', input: '&amp;lt;' },
     { label: 'Mixed text', input: 'Tom &amp; Jerry &lt;3 &unknown;' },

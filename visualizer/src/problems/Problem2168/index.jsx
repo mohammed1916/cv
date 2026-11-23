@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Digit string, e.g. 1212',
   url: 'https://leetcode.com/problems/unique-substrings-with-equal-digit-frequency/',
   complexity: 'O(n^2) windows with a constant-size digit check each. The visualization caps the string at 12 digits.',
+  question: "Count distinct substrings where every digit that appears has the same frequency.",
+  approaches: [
+    { name: "Enumerate substrings with a hash set", intuition: "Check the digit counts of every substring and store each qualifying one in a set to remove duplicates.", time: "O(n^2 * 10)", space: "O(n^2)" },
+  ],
   examples: [
     { label: 'Alternating', input: '1212' },
     { label: 'Mixed run', input: '12321' },

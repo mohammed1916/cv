@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON object with root (level-order array of a perfect tree)',
   url: 'https://leetcode.com/problems/reverse-odd-levels-of-binary-tree/',
   complexity: 'O(n) time and O(n) space for the level-order copy. The visualization caps input at 15 nodes.',
+  question: "In a perfect binary tree, reverse the node values on every odd level.",
+  approaches: [
+    { name: "Level order with reversal", intuition: "Walk the tree level by level, collect the nodes, and reverse the values on odd levels.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Own: seven node tree', input: '{"root":[9,4,6,1,2,8,3]}' },
     { label: 'Own: three node tree', input: '{"root":[5,0,1]}' },

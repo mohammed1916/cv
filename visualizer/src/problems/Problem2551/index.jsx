@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'JSON object with weights and k (number of bags)',
   url: 'https://leetcode.com/problems/put-marbles-in-bags/',
   complexity: 'O(n log n) time for the sort, O(n) space for the cut costs.',
+  question: "Split an array into k bags by cutting adjacent pairs, and find the difference between the most and least costly splits.",
+  approaches: [
+    { name: "Sort adjacent cut costs", intuition: "Sort the cut costs of adjacent pairs and take the smallest and largest k minus one costs.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Five marbles, two bags', input: '{"weights":[5,9,2,14,7],"k":2}' },
     { label: 'Single bag', input: '{"weights":[40,10,30,20],"k":1}' },

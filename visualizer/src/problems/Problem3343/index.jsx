@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with num, a digit string (JSON)',
   url: 'https://leetcode.com/problems/count-number-of-balanced-permutations/',
   complexity: 'O(10 * L * (L / 2) * sum) time for L digits. The visualization caps num at 10 digits.',
+  question: "Count permutations of a digit string whose even-position digits sum to the same total as the odd-position digits.",
+  approaches: [
+    { name: "Count by digit counts", intuition: "Choose how many of each digit go to the even positions, then count arrangements with combinatorics.", time: "O(10 * L * (L / 2) * sum)", space: "O(L * sum)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"num":"123"}' },
     { label: 'Repeated digits', input: '{"num":"11"}' },

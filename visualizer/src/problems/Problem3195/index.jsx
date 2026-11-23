@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Binary grid as JSON array of rows (1 to 6 by 1 to 6)',
   url: 'https://leetcode.com/problems/find-the-minimum-area-to-cover-all-ones-i/',
   complexity: 'O(R * C) time over the grid, O(1) extra space.',
+  question: "Find the smallest rectangle area that covers every 1 in a binary grid.",
+  approaches: [
+    { name: "Bounding box of the ones", intuition: "A single rectangle covers every 1 exactly when it reaches the top, bottom, left and right extremes of the 1s.", time: "O(R * C)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Two rows, three columns', input: '[[0,1,0],[1,0,0]]' },
     { label: 'Corner', input: '[[1,0],[0,0]]' },

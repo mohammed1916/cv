@@ -14,6 +14,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Digits (JSON array of 4)',
   url: 'https://leetcode.com/problems/largest-time-for-given-digits/',
   complexity: 'O(4!) = O(1) time and space.',
+  question: "From four digits, form the largest valid 24-hour time, or return an empty string when none exists.",
+  approaches: [
+    { name: "Try all permutations", intuition: "Test each arrangement of the four digits and keep the largest valid time.", time: "O(1)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Four distinct digits', input: '[2,7,5,1]' },
     { label: 'Single one, three zeros', input: '[1,0,0,0]' },

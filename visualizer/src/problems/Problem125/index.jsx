@@ -22,6 +22,10 @@ const definition = {
   inputLabel: "Text (JSON object, e.g. {\"s\": \"A man, a plan, a canal: Panama\"})",
   url: "https://leetcode.com/problems/valid-palindrome/",
   complexity: "O(n) time and O(1) extra space for n characters. The visualization caps the text at 60 characters.",
+  question: "Decide whether a string is a palindrome after ignoring non-alphanumeric characters and case.",
+  approaches: [
+    { name: "Two pointers", intuition: "Move a pointer from each end, skipping non-alphanumeric characters, and compare the lowercase letters.", time: "O(n)", space: "O(1)" },
+  ],
   examples: getExamples("valid-palindrome").map(({ label, s }) => ({ label, input: JSON.stringify({ s }) })),
 };
 

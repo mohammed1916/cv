@@ -8,6 +8,10 @@ const definition = {
   inputLabel: 'JSON {"n": 4}',
   url: 'https://leetcode.com/problems/minimum-cuts-to-divide-a-circle/',
   complexity: 'O(1) time and O(1) space.',
+  question: "Cut a circle into the given number of equal sectors using the fewest straight cuts.",
+  approaches: [
+    { name: "Case rule", intuition: "One sector needs no cut, an even count needs half as many cuts, and an odd count needs as many cuts as sectors.", time: "O(1)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Own: n equals 9', input: '{"n":9}' },
     { label: 'Own: n equals 7', input: '{"n":7}' },

@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with mountainHeight (1 to 12) and workerTimes (1 to 4 values, 1 to 8) (JSON)',
   url: 'https://leetcode.com/problems/minimum-number-of-seconds-to-make-mountain-height-zero/',
   complexity: 'O(log(time bound) * workers * sqrt(time bound)) time. The visualization caps the input at 4 workers.',
+  question: "Find the least number of seconds needed for workers with given times to reduce a mountain to height zero.",
+  approaches: [
+    { name: "Binary search on time", intuition: "Binary search the total time; for each candidate, count how far each worker can get within it.", time: "O(log(T) * workers * sqrt(T))", space: "O(1)" },
+  ],
   examples: [
     { label: 'Two workers, height seven', input: '{"mountainHeight":7,"workerTimes":[1,4]}' },
     { label: 'Three workers, height three', input: '{"mountainHeight":3,"workerTimes":[6,6,2]}' },

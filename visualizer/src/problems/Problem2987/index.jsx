@@ -25,6 +25,10 @@ const definition = {
   phases, parse: parseInput, build: buildTrace, code, sql, python, inputLabel,
   url: `https://leetcode.com/problems/${meta.slug}/`,
   complexity, examples,
+  question: "Find the cities whose average listing price is above the overall average.",
+  approaches: [
+    { name: "Overall and per-city averages", intuition: "Compute the overall average, then compare each city's average with it.", time: "O(n)", space: "O(cities)" },
+  ],
 }
 
 function Rows({ columns = [], rows = [] }) {

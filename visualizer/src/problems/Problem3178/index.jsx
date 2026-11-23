@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON object with n (children) and k (seconds)',
   url: 'https://leetcode.com/problems/find-the-child-who-has-the-ball-after-k-seconds/',
   complexity: 'O(k) time for the simulation. The visualization caps k at 200.',
+  question: "Find which child holds the ball after k seconds when the ball bounces between the first and last child of a line of children.",
+  approaches: [
+    { name: "Simulate the reflection", intuition: "The ball walks to one end and back, so the path repeats every 2(n - 1) seconds and the simulation reverses at each end.", time: "O(k)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Five children, nine seconds', input: '{"n":5,"k":9}' },
     { label: 'Three children, twelve seconds', input: '{"n":3,"k":12}' },

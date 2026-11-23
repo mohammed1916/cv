@@ -18,6 +18,10 @@ const definition = {
   inputLabel: "Object with road and budget",
   url: "https://leetcode.com/problems/maximum-number-of-potholes-that-can-be-fixed/",
   complexity: "O(r log r) time for r runs, dominated by sorting the runs by length, and O(r) extra space. The visualization caps the road at 24 characters and the budget at 60.",
+  question: "Given a road with pothole runs and a repair budget, find the most potholes that can be fixed.",
+  approaches: [
+    { name: "Fill the budget with longest runs first", intuition: "Each run costs its length plus one, so repairing the longest runs first gives the most fixed potholes for the budget.", time: "O(r log r)", space: "O(r)" },
+  ],
   examples: [
     { label: "Two runs fixed", input: "{\"road\":\"xx.xxxx.x\",\"budget\":5}" },
     { label: "Partial last run", input: "{\"road\":\"xxxxx.xxxx\",\"budget\":8}" },

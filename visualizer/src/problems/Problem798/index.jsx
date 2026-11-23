@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Array nums (JSON)',
   url: 'https://leetcode.com/problems/smallest-rotation-with-highest-score/',
   complexity: 'O(n) time, O(n) space. Visualization limited to 30 elements.',
+  question: "Choose a rotation of the array that maximises the number of elements at or before their index afterwards, and return the smallest such rotation.",
+  approaches: [
+    { name: "Difference array over rotations", intuition: "Each element is good for a contiguous range of rotations; add that range with a difference array and take the best prefix sum.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Shuffled four', input: '[2,0,1,3]' },
     { label: 'Repeated values, six entries', input: '[3,3,0,1,2,0]' },

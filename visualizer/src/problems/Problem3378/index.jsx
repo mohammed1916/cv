@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON {"nums": [...unique integers 1 to 30], "threshold": limit}',
   url: 'https://leetcode.com/problems/count-connected-components-in-lcm-graph/',
   complexity: 'O(n^2 log V) time for the pair checks with union-find. The visualization caps input at 8 numbers.',
+  question: "Count the connected components in a graph where two numbers are linked when their least common multiple is at most a threshold.",
+  approaches: [
+    { name: "Union-find over all pairs", intuition: "Check every pair and union the numbers whose least common multiple is within the threshold.", time: "O(n^2 log V)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"nums":[2,3,4,6],"threshold":8}' },
     { label: 'Four distinct values', input: '{"nums":[9,4,17,26],"threshold":30}' },

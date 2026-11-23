@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Sentence of words',
   url: 'https://leetcode.com/problems/rearrange-words-in-a-sentence/',
   complexity: 'O(w^2 + total letters) time for w words, using insertion sort so equal lengths keep their order.',
+  question: "Reorder the words of a sentence by length, keeping the original order for ties.",
+  approaches: [
+    { name: "Stable sort by length", intuition: "Sort words by length with a stable method, then capitalize the first word.", time: "O(w^2 + letters)", space: "O(w)" },
+  ],
   examples: [
     { label: 'Mixed lengths', input: 'Reading books keeps minds bright' },
     { label: 'Tie order', input: 'Tiny cat sat' },

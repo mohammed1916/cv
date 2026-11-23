@@ -11,6 +11,10 @@ const definition = {
   inputLabel: 'Grid (JSON object with m, n and penalty)',
   url: 'https://leetcode.doocs.org/en/lc/4003/',
   complexity: 'O(mn log(mn)) time with a heap. The visualization caps the grid at 16 cells.',
+  question: "Find the cheapest path across a grid where breaking the alternating direction rule costs a penalty.",
+  approaches: [
+    { name: "Dijkstra over cell and parity states", intuition: "Search over cell and action-parity states, adding the penalty when the rule is broken.", time: "O(mn log(mn))", space: "O(mn)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"m":2,"n":2,"penalty":[[5,3],[1,4]]}' },
     { label: 'Example 3', input: '{"m":2,"n":3,"penalty":[[2,6,1],[3,0,5]]}' },

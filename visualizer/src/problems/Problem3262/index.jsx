@@ -10,6 +10,10 @@ const definition = {
   inputLabel: 'Object with EmployeeShifts rows (shift_id, employee_id, start_time, end_time in minutes)',
   url: 'https://leetcode.com/problems/find-overlapping-shifts/description/',
   complexity: 'O(s^2) pair checks for s shifts. The visualization caps the table at 12 shifts.',
+  question: "Among a set of shifts with start and end times, count the overlapping minutes that qualify under the rules of the problem.",
+  approaches: [
+    { name: "Pairwise shift checks", intuition: "Compare every pair of shifts and count the minutes where their time ranges overlap.", time: "O(s^2)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Mixed shifts', input: mixed },
     { label: 'Touching only', input: touching },

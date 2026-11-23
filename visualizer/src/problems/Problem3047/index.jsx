@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Rectangles as JSON [[x1, y1, x2, y2], ...]',
   url: 'https://leetcode.com/problems/find-the-largest-area-of-square-inside-two-rectangles/',
   complexity: 'O(k^2) time for k rectangles, O(1) extra space. The visualization caps input at 8 rectangles.',
+  question: "Find the largest square that fits inside the overlap of two axis-aligned rectangles, taken over every pair.",
+  approaches: [
+    { name: "Pairwise overlap", intuition: "For each pair, take the overlap width and height, and use the smaller side to form the square.", time: "O(n^2)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Overlap', input: '[[1,1,3,3],[2,2,4,4]]' },
     { label: 'Wide strip', input: '[[0,0,10,2],[1,0,9,10]]' },

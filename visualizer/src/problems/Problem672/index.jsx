@@ -10,6 +10,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Bulbs and presses (JSON object with n and presses)',
   url: 'https://leetcode.com/problems/bulb-switcher-ii/',
   complexity: 'O(presses · 4 · 2ⁿ) for this visualization; the official problem has a closed form that depends only on min(n, 3) and min(presses, 3).',
+  question: "Count the distinct light patterns reachable with exactly m presses of four bulb-switch buttons.",
+  approaches: [
+    { name: "State enumeration", intuition: "Enumerate the distinct states reachable for the press count, using the periodicity of the buttons.", time: "O(1)", space: "O(1)" },
+  ],
   examples: [
     { label: 'One bulb, one press', input: '{"n":1,"presses":1}' },
     { label: 'Two bulbs, one press', input: '{"n":2,"presses":1}' },

@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Object with a names list (JSON)',
   url: 'https://leetcode.com/problems/making-file-names-unique/',
   complexity: 'About O(n) expected time with hash sets and maps, plus the length of any suffix search for repeated names.',
+  question: "Give each file name a unique version by appending the smallest suffix not yet used.",
+  approaches: [
+    { name: "Next-suffix map", intuition: "Remember the next suffix to try for each base name and bump it on collision.", time: "O(n) expected", space: "O(n)" },
+  ],
   examples: [
     { label: 'Repeated doc', input: '{"names":["doc","doc","doc","doc"]}' },
     { label: 'Mixed names', input: '{"names":["notes","todo","notes","notes","todo"]}' },

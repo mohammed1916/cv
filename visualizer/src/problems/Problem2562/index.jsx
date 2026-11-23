@@ -19,6 +19,10 @@ const definition = {
   inputLabel: 'JSON object with nums (e.g. {"nums": [7, 52, 2, 4]})',
   url: "https://leetcode.com/problems/find-the-array-concatenation-value/",
   complexity: "O(n) time and O(1) extra space for n = nums.length. The visualization caps nums at 40 values.",
+  question: "Concatenate pairs of values taken from both ends of an array and sum the concatenated values.",
+  approaches: [
+    { name: "Two pointers from the ends", intuition: "Pair the first and last values, move inward, and add each pair's concatenation.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: "[7,52,2,4]", input: '{"nums": [7, 52, 2, 4]}' },
     { label: "[5,14,13,8,12]", input: '{"nums": [5, 14, 13, 8, 12]}' },

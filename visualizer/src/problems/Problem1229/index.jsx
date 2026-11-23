@@ -8,6 +8,10 @@ const definition = {
   inputLabel: 'Object with slots1, slots2 ([start, end] pairs) and duration',
   url: 'https://leetcode.com/problems/meeting-scheduler/description/',
   complexity: 'O(n log n + m log m) time for the sorts, then O(n + m) for the pointer walk. The visualization caps each person at 10 slots; the draft does not state an exact official bound.',
+  question: "Find the earliest common free slot of at least a given length for two people.",
+  approaches: [
+    { name: "Sort and two pointers", intuition: "Sort both availability lists and advance past whichever slot ends first.", time: "O(n log n + m log m)", space: "O(1) extra" },
+  ],
   examples: [
     { label: 'Found later', input: '{"slots1":[[10,40],[70,130]],"slots2":[[0,12],[62,80]],"duration":9}' },
     { label: 'Immediate', input: '{"slots1":[[1,5]],"slots2":[[2,9]],"duration":3}' },

@@ -17,6 +17,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Object {routes, source, target} (JSON)',
   url: 'https://leetcode.com/problems/bus-routes/',
   complexity: 'O(total stops across routes) time and space; each bus is boarded once and each stop enqueued once.',
+  question: "Given bus routes, find the fewest buses needed to travel from a source stop to a target stop.",
+  approaches: [
+    { name: "BFS over buses", intuition: "Map each stop to the buses that serve it; move between buses that share a stop, counting each bus taken.", time: "O(total route length)", space: "O(total route length)" },
+  ],
   examples: [
     { label: 'Two transfers to stop 8', input: '{"routes":[[1,4,7],[4,9],[7,8,9]],"source":1,"target":8}' },
     { label: 'Separate networks', input: '{"routes":[[2,3],[5,6,7]],"source":2,"target":6}' },

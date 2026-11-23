@@ -4,6 +4,10 @@ import { StackLane } from '../../components/shared/AlgorithmStatePrimitives'
 import { buildTrace, parseInput, code, python, phases, examples } from './algorithm'
 
 const definition = {
+  question: "Decide whether a grid of street tiles has a valid path from top-left to bottom-right.",
+  approaches: [
+    { name: "Breadth-first over cells", intuition: "Move only through openings that match on both sides, visiting each cell once.", time: "O(mn)", space: "O(mn)" },
+  ],
   number: '1391', phases, parse: parseInput, build: buildTrace, code, python, examples,
   inputLabel: 'Object with a grid of street types 1 to 6 (JSON)',
   url: 'https://leetcode.com/problems/check-if-there-is-a-valid-path-in-a-grid/',

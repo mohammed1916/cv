@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'Object {words1, words2} (JSON)',
   url: 'https://leetcode.com/problems/word-subsets/',
   complexity: 'O(total letters in words1 and words2) with a 26-letter count table. Inputs are capped at 30 words of 10 letters.',
+  question: "Find the words in list A that contain every letter needed by all words of list B with at least their multiplicity.",
+  approaches: [
+    { name: "Maximum letter counts", intuition: "Combine the words of B into one maximum count per letter, then test each word of A against it.", time: "O(total length)", space: "O(26)" },
+  ],
   examples: [
     { label: 'Three words, two letters', input: '{"words1":["bread","tea","jam"],"words2":["a","e"]}' },
     { label: 'Example 2', input: '{"words1":["amazon","apple","facebook","google","leetcode"],"words2":["l","e"]}' },

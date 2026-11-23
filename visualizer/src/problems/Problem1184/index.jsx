@@ -10,6 +10,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, pythonLineMap, phases,
   inputLabel: 'Edge lengths, start and destination (JSON object)',
   complexity: 'O(n) time and O(1) extra space for n edges. The trace keeps one frame per edge scan.',
+  question: "Find the shorter of the two distances between two bus stops on a circular route.",
+  approaches: [
+    { name: "One direction plus total", intuition: "Sum the distances in one direction and take the smaller of it and total minus it.", time: "O(n)", space: "O(1)" },
+  ],
   examples: authoredExamples0,
 };
 

@@ -18,6 +18,10 @@ const definition = {
   inputLabel: 'Input JSON: {"head": [...], "k": 2}',
   url: "https://leetcode.com/problems/swapping-nodes-in-a-linked-list/",
   complexity: "O(n) time and O(1) extra space for n nodes. The visualization caps the list at 30 nodes.",
+  question: "Swap the values of the k-th node from the start and the k-th node from the end of a linked list.",
+  approaches: [
+    { name: "Two pointers", intuition: "Find the k-th node from the front, then move a second pointer from the front to the k-th node from the end.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: "Example 1", input: JSON.stringify({ head: [1, 2, 3, 4, 5], k: 2 }) },
     { label: "Example 2", input: JSON.stringify({ head: [7, 9, 6, 6, 7, 8, 3, 0, 9, 5], k: 5 }) },

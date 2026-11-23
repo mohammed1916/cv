@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'JSON object with s, a string of digits',
   url: 'https://leetcode.com/problems/find-the-longest-semi-repetitive-substring/',
   complexity: 'O(n) time and O(1) extra space. The visualization caps input at 20 digits.',
+  question: "Given a digit string, find the longest substring that has at most one pair of adjacent equal digits.",
+  approaches: [
+    { name: "Sliding window", intuition: "Expand the window while it has at most one equal adjacent pair, and shrink it when a second appears.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"s":"52233"}' },
     { label: 'Two pairs', input: '{"s":"1111111"}' },

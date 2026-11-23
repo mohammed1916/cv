@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with a grid of positive integers (JSON)',
   url: 'https://leetcode.com/problems/select-cells-in-grid-with-maximum-score/',
   complexity: 'O(V * 2^R * R) time for V distinct values and R rows. The visualization caps the grid at 4 by 4 with values up to 20.',
+  question: "Choose cells from a grid, at most one per row, with distinct values, to maximise the total score.",
+  approaches: [
+    { name: "Bitmask over rows", intuition: "Process the distinct values and track which rows are already used with a bitmask, keeping the best score for each mask.", time: "O(V * 2^R * R)", space: "O(2^R)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"grid":[[1,2,3],[4,3,2],[1,1,1]]}' },
     { label: 'One row', input: '{"grid":[[8,7,6]]}' },

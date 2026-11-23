@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON object with nums (1 to 12 values from 0 to 100) and k (0 to 100)',
   url: 'https://leetcode.com/problems/partition-array-such-that-maximum-difference-is-k/',
   complexity: 'O(n log n) time for n values. The visualization caps values at 12.',
+  question: "Split a list into the fewest groups so that the values in each group differ by at most a given k.",
+  approaches: [
+    { name: "Sort and greedy grouping", intuition: "Sort the values and start a new group whenever the next value is more than k above the first value of the current group.", time: "O(n log n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Six values, k 5', input: '{"nums":[8,3,14,1,9,6],"k":5}' },
     { label: 'Equal values', input: '{"nums":[2,2,4,5],"k":0}' },

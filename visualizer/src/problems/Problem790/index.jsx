@@ -12,6 +12,11 @@ const definition = {
   inputLabel: 'n (JSON integer)',
   url: 'https://leetcode.com/problems/domino-and-tromino-tiling/',
   complexity: 'O(n) time and O(n) space with the table; O(1) space is also possible.',
+  question: "Count the ways to tile a 2 by n board with dominoes and L-shaped trominoes, modulo 1000000007.",
+  approaches: [
+    { name: "Linear recurrence table", intuition: "Build dp[i] from the last two values and the one three columns back, since the patterns repeat in that way.", time: "O(n)", space: "O(n) table" },
+    { name: "Rolling state", intuition: "Keep only the last three values of the recurrence.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Width four', input: '4' },
     { label: 'Width seven', input: '7' }, { label: 'Width one', input: '1' }, { label: 'Width two', input: '2' }, { label: 'Long run: width 60', input: '60' },

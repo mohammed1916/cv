@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Sequence (JSON object with n, restrictions, diff)',
   url: 'https://leetcode.com/problems/find-maximum-value-in-a-constrained-sequence/',
   complexity: 'O(n) time for two passes. The visualization caps n at 30.',
+  question: "Find the largest value that a constrained sequence can take at any position, given step limits.",
+  approaches: [
+    { name: "Propagate caps forward and backward", intuition: "Spread each position cap through the step limits in both directions, then take the largest cap.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Four values, two caps', input: '{"n":4,"restrictions":[[1,5],[3,2]],"diff":[2,3,1]}' },
     { label: 'Three values, one cap', input: '{"n":3,"restrictions":[[2,7]],"diff":[1,4]}' },

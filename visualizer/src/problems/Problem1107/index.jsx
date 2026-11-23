@@ -5,6 +5,10 @@ import SqlStages from './SqlStages'
 import './SqlStages.css'
 
 const definition = {
+  question: "Count, for each day in a window, how many users logged in for the first time that day.",
+  approaches: [
+    { name: "Join and group in SQL", intuition: "Find each user's first login date and count the users per date.", time: "O(n + u log u)", space: "O(u)" },
+  ],
   number: meta.number,
   phases, parse: parseInput, build: buildTrace, code, sql, python, inputLabel,
   url: `https://leetcode.com/problems/${meta.slug}/`,

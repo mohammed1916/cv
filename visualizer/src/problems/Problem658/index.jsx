@@ -11,6 +11,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Sorted array, k and x (JSON object)',
   url: 'https://leetcode.com/problems/find-k-closest-elements/',
   complexity: 'O(log(n − k) + k) time: a binary search for the left end, then copying the window.',
+  question: "Pick the k numbers from a sorted list closest to a target value.",
+  approaches: [
+    { name: "Binary search on window start", intuition: "Binary search for the start of the best window of length k.", time: "O(log(n-k) + k)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Middle', input: '{"arr":[1,3,5,7,9,11],"k":3,"x":6}' },
     { label: 'Left edge', input: '{"arr":[2,4,6,8],"k":2,"x":-5}' },

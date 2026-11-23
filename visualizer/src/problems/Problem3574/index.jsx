@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with nums and k (JSON)',
   url: 'https://leetcode.com/problems/maximize-subarray-gcd-score/',
   complexity: 'O(n^2 * k * states) time for the reachable (doublings, gcd) pairs. The visualization caps n at 8.',
+  question: "For an array and a limit k, find the best subarray score, where the score is its length times its gcd after up to k doubling operations.",
+  approaches: [
+    { name: "Extend each start", intuition: "From each start index, extend right while tracking the reachable (doublings used, gcd) pairs.", time: "O(n^2 * k * states)", space: "O(k * states)" },
+  ],
   examples: [
     { label: 'Four values, pick three', input: '{"nums":[12,4,9,30],"k":3}' },
     { label: 'Single value', input: '{"nums":[42],"k":1}' },

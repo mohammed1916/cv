@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with n, the number of rolls (JSON)',
   url: 'https://leetcode.com/problems/number-of-distinct-roll-sequences/',
   complexity: 'O(n * 6 * 49) time and O(49) space in this trace; the answer is kept modulo 1000000007. The visualization caps n at 10.',
+  question: "Count the distinct sequences of n dice rolls that obey rules about which values can follow each other.",
+  approaches: [
+    { name: "DP over last two rolls", intuition: "Track counts by the last roll and the roll before it, adding allowed transitions each step.", time: "O(n * 6 * 49)", space: "O(49)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"n":1}' },
     { label: 'Own: six positions', input: '{"n":6}' },

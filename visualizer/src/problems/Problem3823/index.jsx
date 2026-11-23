@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'String (JSON object with s)',
   url: 'https://leetcode.com/problems/reverse-letters-then-special-characters-in-a-string/',
   complexity: 'O(n) time and O(n) space. The visualization caps input at 30 characters.',
+  question: "Reverse the letters among letter positions, then reverse the special characters among their own positions.",
+  approaches: [
+    { name: "Two index lists", intuition: "Record each class's positions, reverse each class's contents, and place them back.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Mixed', input: '{"s":"ab-cd"}' },
     { label: 'Two specials', input: '{"s":"a!b@c"}' },

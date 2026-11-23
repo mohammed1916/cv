@@ -15,6 +15,10 @@ const definition = {
   url: `https://leetcode.com/problems/${meta.slug}/`,
   complexity: 'O(T + M log T) for T teams and M matches, from one pass over the sides and a sort of the teams. The visualizer caps each table at 12 rows.',
   examples,
+  question: "Using a match table of scores, compute each team's points, wins, draws, losses and goal figures and list the teams in a set order.",
+  approaches: [
+    { name: "Union both sides then group", intuition: "Turn each match into one row per team (home and away), compute points with a CASE, then group by team.", time: "O(m + t log t)", space: "O(t)" },
+  ],
 }
 
 function Rows({ columns = [], rows = [] }) {

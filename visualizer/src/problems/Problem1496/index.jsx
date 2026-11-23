@@ -3,6 +3,10 @@ import { StackLane } from '../../components/shared/AlgorithmStatePrimitives'
 import { buildTrace, parseInput, code, python, phases, examples } from './algorithm'
 
 const definition = {
+  question: "Decide whether a walk of unit moves crosses its own path.",
+  approaches: [
+    { name: "Visited-position set", intuition: "Record each position and stop when a move lands on a recorded one.", time: "O(n)", space: "O(n)" },
+  ],
   number: '1496', phases, parse: parseInput, build: buildTrace, code, python, examples,
   inputLabel: 'Object with a path string (JSON)',
   url: 'https://leetcode.com/problems/path-crossing/',

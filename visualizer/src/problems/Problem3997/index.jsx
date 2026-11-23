@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Level-order array of a complete tree (e.g. [4,6,2,3,1,5,7])',
   url: 'https://leetcode.com/problems/count-dominant-nodes-in-a-binary-tree/',
   complexity: 'O(n) time and O(n) space for n nodes. The visualization caps the tree at 15 nodes.',
+  question: "Count the nodes whose value equals the largest value in their subtree.",
+  approaches: [
+    { name: "Bottom-up subtree maximum", intuition: "Compute each subtree's maximum from the leaves upward and test each node.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Mixed tree', input: '[4,6,2,3,1,5,7]' },
     { label: 'Equal values', input: '[9,9,9]' },

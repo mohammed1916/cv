@@ -12,6 +12,11 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Damaged permutation (JSON array)',
   url: 'https://leetcode.com/problems/set-mismatch/',
   complexity: 'O(n) time and O(n) space for the counters.',
+  question: "Find the number that appears twice and the number that is missing from an array holding 1 to n.",
+  approaches: [
+    { name: "Count table", intuition: "Count occurrences and report the value with count two and the value with count zero.", time: "O(n)", space: "O(n)" },
+    { name: "XOR and sum difference", intuition: "Combine the array with 1..n to separate the duplicate and missing values.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Repeat and gap', input: '[3,1,3,4]' },
     { label: 'Two items', input: '[2,2]' },

@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with nums1, nums2 (equal length) and queries ([x, y] pairs)',
   url: 'https://leetcode.com/problems/maximum-sum-queries/',
   complexity: 'O((n + q) log(n + q)) time with a monotonic frontier and binary search in the full version. This visualization uses a linear frontier scan and caps n at 8 and q at 6.',
+  question: "Given two arrays and queries about pairs of indices, return the maximum sum that satisfies each query's bounds.",
+  approaches: [
+    { name: "Sorted frontier with binary search", intuition: "Sort the queries and keep a monotonic frontier of candidate pairs, using binary search for each query.", time: "O((n + q) log(n + q))", space: "O(n + q)" },
+  ],
   examples: [
     { label: 'Three points, three queries', input: '{"nums1":[6,2,7,3],"nums2":[1,8,4,5],"queries":[[3,4],[6,1],[1,9]]}' },
     { label: 'Equal points', input: '{"nums1":[5,5],"nums2":[5,5],"queries":[[5,5],[6,1]]}' },

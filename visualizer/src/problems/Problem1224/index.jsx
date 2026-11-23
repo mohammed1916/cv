@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Array of integers 1 to 5 (JSON array, up to 12 entries)',
   url: 'https://leetcode.com/problems/maximum-equal-frequency/',
   complexity: 'O(n) time and O(n) space. The visualization caps input at 12 entries.',
+  question: "Find the longest prefix of an array where removing one element makes all counts equal.",
+  approaches: [
+    { name: "Count of counts", intuition: "Track each value's frequency and how many values share each frequency to test the prefix.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Balanced three counts', input: '[2,2,3,3,1,1,1]' },
     { label: 'Three equal groups', input: '[1,1,1,2,2,2]' },

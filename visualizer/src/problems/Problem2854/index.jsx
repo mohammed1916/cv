@@ -57,6 +57,11 @@ const examples = [
 ]
 
 const definition = {
+  question: "Using a table of daily steps, compute a rolling average over the most recent three days for each date.",
+  approaches: [
+    { name: "Sort by date and rolling window", intuition: "Sort the rows by date and average over a window of three rows ending at each date.", time: "O(n log n)", space: "O(n)" },
+    { name: "Self join on date ranges", intuition: "Join each date to the dates within the past two days and average.", time: "O(n^2) worst case", space: "O(n)" },
+  ],
   number: meta.number,
   phases,
   parse: parseInput,

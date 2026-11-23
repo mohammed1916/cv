@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'JSON {"nums": [1, 2, 3, 3, 2, 2]}',
   url: 'https://leetcode.com/problems/longest-subarray-with-maximum-bitwise-and/',
   complexity: 'O(n) time and O(1) extra space after finding the maximum.',
+  question: "Find the length of the longest subarray whose bitwise AND equals the largest value in the array.",
+  approaches: [
+    { name: "Longest run of the maximum", intuition: "After finding the maximum, take the longest run of consecutive values equal to it.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Own: five values', input: '{"nums":[6,1,4,4,2]}' },
     { label: 'Ties', input: '{"nums":[5,5,5]}' },

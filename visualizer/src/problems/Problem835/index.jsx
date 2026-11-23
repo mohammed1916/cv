@@ -12,6 +12,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Object with matrices A and B (JSON)',
   url: 'https://leetcode.com/problems/image-overlap/',
   complexity: 'O(a * b) time for a ones in A and b ones in B (at most n^4); O(n^2) space for the vote table.',
+  question: "Two binary images of equal size can be shifted over each other; find the largest number of positions where both have a 1.",
+  approaches: [
+    { name: "Vote for shifts", intuition: "For every pair of 1 cells from the two images, count the shift that aligns them and keep the largest count.", time: "O(m^2) for m ones", space: "O(m^2) in the vote map" },
+  ],
   examples: [
     { label: 'Official example', input: '{"A": [[1,1,0],[0,1,0],[0,1,0]], "B": [[0,0,0],[0,1,1],[0,0,1]]}' },
     { label: 'Single cell', input: '{"A": [[1]], "B": [[1]]}' },

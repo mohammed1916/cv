@@ -18,6 +18,10 @@ const definition = {
   inputLabel: 'JSON object with num (e.g. {"num": 11891})',
   url: "https://leetcode.com/problems/maximum-difference-by-remapping-a-digit/",
   complexity: "O(d) time and O(d) space for d digits. The visualization caps num at 8 digits.",
+  question: "Remap one digit to another digit to make the largest and smallest numbers possible, then return their difference.",
+  approaches: [
+    { name: "Try each digit remap", intuition: "Try replacing each digit with each other digit and track the largest and smallest results.", time: "O(d)", space: "O(d)" },
+  ],
   examples: [
     { label: "11891", input: '{"num": 11891}' },
     { label: 'Single digit', input: '{"num":1}' },

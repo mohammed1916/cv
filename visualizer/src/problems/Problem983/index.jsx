@@ -8,6 +8,10 @@ const definition = {
   inputLabel: `Object with days (increasing whole days from 1 to ${MAX_DAY}) and costs: one-day, seven-day and thirty-day prices`,
   url: 'https://leetcode.com/problems/minimum-cost-for-tickets/',
   complexity: 'O(D) time for D days in the calendar, with O(D) space for the running costs.',
+  question: "Given travel days, find the minimum cost of 1-day, 7-day and 30-day passes that covers every travel day.",
+  approaches: [
+    { name: "DP over days", intuition: "The cost up to a travel day is the cheapest of the three pass types that end on that day, using earlier best costs.", time: "O(D)", space: "O(D)" },
+  ],
   examples: [
     { label: 'Scattered trips', input: JSON.stringify({ days: [2, 5, 9, 18, 19, 30], costs: [3, 10, 25] }) },
     { label: 'A short burst', input: JSON.stringify({ days: [1, 2, 3, 4, 5, 6, 7, 8], costs: [2, 7, 15] }) },

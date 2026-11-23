@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON object with s (1 to 24 lowercase letters) and k (1 to 6, dividing the length of s)',
   url: 'https://leetcode.com/problems/hash-divided-string/',
   complexity: 'O(n) time for a string of length n. The visualization caps s at 24 characters.',
+  question: "Split a string into fixed-size blocks, compute a hash for each block, and join the results.",
+  approaches: [
+    { name: "Block scan", intuition: "Walk the string in blocks, map each block to its character sum modulo 26, and build the output.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Eight letters, k four', input: '{"s":"qwertyui","k":4}' },
     { label: 'Own: six letters, groups of 3', input: '{"s":"dbcfea","k":3}' },

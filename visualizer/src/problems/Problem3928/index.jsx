@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with prices (per shop) and roads ([a, b, cost, multiplier] entries)',
   url: 'https://leetcode.com/problems/minimum-cost-to-buy-apples-ii/',
   complexity: 'O(n * (n + m)^2) time with a simple shortest-path scan per start. The visualization caps the network at 8 shops.',
+  question: "Find the cheapest total for buying apples from a shop network, counting empty trips out and loaded trips back.",
+  approaches: [
+    { name: "Shortest path from each start", intuition: "For each start, add the cheapest empty trip out and the cheapest loaded trip back to a purchase shop, then keep the lowest total.", time: "O(n x (n + m)^2) with a simple scan", space: "O(n + m)" },
+  ],
   examples: [
     { label: 'Four shops', input: '{"prices":[5,2,9,4],"roads":[[0,1,3,2],[1,2,1,4],[2,3,2,1],[0,3,10,1]]}' },
     { label: 'Two shops', input: '{"prices":[5,1],"roads":[[0,1,3,2]]}' },

@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Fruit grid (JSON object with a square fruits grid of 0 to 99, 2 to 5 on a side)',
   url: 'https://leetcode.com/problems/find-the-maximum-number-of-fruits-collected/',
   complexity: 'O(3^n * 3^n * n^2) time by enumerating paths; the visualization caps the grid at 5 by 5.',
+  question: "Collect the most fruit with three children moving across a grid, starting from three corners.",
+  approaches: [
+    { name: "Path enumeration", intuition: "Enumerate the paths of each child and combine them, keeping the largest total without double counting.", time: "O(3^n * 3^n * n^2)", space: "O(n^2)" },
+  ],
   examples: [
     { label: 'Official', input: '{"fruits":[[1,2,3,4],[5,6,8,7],[9,10,11,12],[13,14,15,16]]}' },
     { label: 'Two by two', input: '{"fruits":[[1,2],[3,4]]}' },

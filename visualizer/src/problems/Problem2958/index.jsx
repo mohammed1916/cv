@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with nums and k (JSON)',
   url: 'https://leetcode.com/problems/length-of-longest-subarray-with-at-most-k-frequency/',
   complexity: 'O(n) time and O(n) space for the tally. The visualization caps input at 30 values.',
+  question: "Find the longest subarray where no value appears more than k times.",
+  approaches: [
+    { name: "Sliding window with counts", intuition: "Grow the window to the right and shrink from the left while some value exceeds k occurrences.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Eight values, k of three', input: '{"nums":[5,1,5,2,3,5,1,4],"k":3}' },
     { label: 'Repeats', input: '{"nums":[1,2,1,2,1,2,1,2],"k":1}' },

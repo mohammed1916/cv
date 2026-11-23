@@ -19,6 +19,10 @@ const definition = {
   phases, parse: parseInput, build: buildTrace, code, sql, python, inputLabel,
   url: `https://leetcode.com/problems/${meta.slug}/`,
   complexity, examples,
+  question: "Classify each triangle from its side lengths as equilateral, isosceles, scalene, or not a triangle.",
+  approaches: [
+    { name: "Conditional classification", intuition: "Test the triangle inequality first, then count equal sides.", time: "O(n)", space: "O(1)" },
+  ],
 }
 
 function Rows({ columns = [], rows = [] }) {

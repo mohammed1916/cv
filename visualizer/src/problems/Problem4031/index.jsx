@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Numbers and bounds (JSON object with nums, lower and upper)',
   url: 'https://www.talentd.in/fleetcode/videos/find-all-numbers-disappeared-in-an-array-ii',
   complexity: 'O(n + (upper - lower)) time and O(n) space. The visualization caps the range at 61 values.',
+  question: "Find the numbers missing from a range and merge consecutive missing numbers into ranges.",
+  approaches: [
+    { name: "Sort, then walk the gaps", intuition: "Sort the present values and walk the gaps inside the range, merging consecutive missing numbers.", time: "O(n + (upper - lower))", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"nums":[2,8,4],"lower":1,"upper":10}' },
     { label: 'Example 2', input: '{"nums":[1,1],"lower":5,"upper":7}' },

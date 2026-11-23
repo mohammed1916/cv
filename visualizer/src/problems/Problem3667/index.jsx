@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Integer array (e.g. [-4, -1, 0, 2, 10])',
   url: 'https://leetcode.com/problems/sort-array-by-absolute-value/',
   complexity: 'O(n²) time and O(n) space for this selection-style trace on n values. The visualization caps the array at 10 values with magnitudes up to 20; the official bounds are not verified here.',
+  question: "Sort an array by absolute value, keeping the original order for ties.",
+  approaches: [
+    { name: "Selection-style sort", intuition: "Repeatedly pick the smallest absolute value remaining and place it next.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Mixed signs', input: '[-4, -1, 0, 2, 10]' },
     { label: 'Equal magnitudes', input: '[5, -5, 5]' },

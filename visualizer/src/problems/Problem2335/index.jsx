@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON object with amount: three integers from 0 to 12',
   url: 'https://leetcode.com/problems/minimum-amount-of-time-to-fill-cups/',
   complexity: 'O(t) time for t seconds, which is at most the total water. The visualization caps each cup at 12.',
+  question: "Given amounts of three kinds of water, find the fewest seconds to fill all cups when two cups can be filled each second.",
+  approaches: [
+    { name: "Greedy take the two largest", intuition: "Each second, fill the two cups that need the most water.", time: "O(t)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Own: cups with an empty one', input: '{"amount":[3,0,7]}' },
     { label: 'Own: two large cups', input: '{"amount":[6,6,1]}' },

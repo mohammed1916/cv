@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Command as a JSON string of G, (), and (al) tokens',
   url: 'https://leetcode.com/problems/goal-parser-interpretation/',
   complexity: 'O(n) time and O(n) output: each character is read once, and multi-character tokens skip ahead.',
+  question: "Read a string of tokens that expand into letters and parentheses, and produce the expanded text.",
+  approaches: [
+    { name: "Single scan with lookahead", intuition: "An open-close pair becomes o, and an open-letters-close group becomes its letters.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Mixed', input: '"()G(al)G"' },
     { label: 'Ends with ()', input: '"G(al)()"' },

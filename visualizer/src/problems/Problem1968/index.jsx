@@ -11,6 +11,10 @@ const definition = {
   inputLabel: 'JSON array of distinct integers (e.g. [6,2,0,9,7])',
   url: 'https://leetcode.com/problems/array-with-elements-not-equal-to-average-of-neighbors/',
   complexity: 'O(n log n) time for the sort and O(n) for the interleave.',
+  question: "Rearrange an array so that no element equals the average of its two neighbours.",
+  approaches: [
+    { name: "Sort and interleave halves", intuition: "Sort, then alternate values from the lower half and the upper half.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Five values', input: '[6,2,0,9,7]' },
     { label: 'Sorted four', input: '[1,2,3,4]' },

@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with s (lowercase letters), for example {"s":"leetcoder"}',
   url: 'https://leetcode.com/problems/vowels-game-in-a-string/',
   complexity: 'O(n) time and O(1) extra space.',
+  question: "Decide the winner of a game on a string where a move removes a substring with an odd number of vowels, or a run of vowels.",
+  approaches: [
+    { name: "Parity of vowel count", intuition: "An odd vowel count wins at once, and an even positive count is answered by a symmetric move, so only the parity matters.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"s":"leetcoder"}' },
     { label: 'Example 2', input: '{"s":"bbcd"}' },

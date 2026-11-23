@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Opening times move_time (JSON)',
   url: 'https://leetcode.com/problems/find-minimum-time-to-reach-last-room-i/',
   complexity: 'O(m n log(m n)) time. The visualization caps the grid at 5 by 5.',
+  question: "Find the least time to reach the bottom-right room in a grid where each room can be entered only after its opening time.",
+  approaches: [
+    { name: "Dijkstra's algorithm", intuition: "Use a min-heap keyed by arrival time and expand the earliest reachable room first.", time: "O(m n log(m n))", space: "O(m n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"move_time":[[0,4],[4,4]]}' },
     { label: 'Zeros', input: '{"move_time":[[0,0,0],[0,0,0]]}' },

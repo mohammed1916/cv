@@ -14,6 +14,11 @@ const definition = {
   inputLabel: 'Numbers and value as JSON: {"nums": [...], "value": v}',
   url: 'https://leetcode.com/problems/smallest-missing-non-negative-integer-after-operations/',
   complexity: 'O(n + answer) time with a table of at most value entries. The visualization caps input at 20 numbers.',
+  question: "Given numbers and a value v, you may add or subtract v from any number any number of times; find the smallest non-negative integer that cannot be formed as a chosen member of the transformed list.",
+  approaches: [
+    { name: "Remainder buckets and greedy targets", intuition: "Numbers with the same remainder mod v can be shifted into each other, so count each remainder and try targets 0, 1, 2 in order.", time: "O(n + answer)", space: "O(v)" },
+    { name: "Sort and sweep", intuition: "Sort the remainders and walk through them to find the first gap that matches the target.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Mixed signs, value 4', input: '{"nums":[-4,12,-7,3,9,-1,5],"value":4}' },
     { label: 'Equal numbers, value 10', input: '{"nums":[10,10,10,10],"value":10}' },

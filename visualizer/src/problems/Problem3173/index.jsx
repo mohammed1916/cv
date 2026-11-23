@@ -19,6 +19,10 @@ const definition = {
   inputLabel: "List of integers (e.g. [1,2,3,4])",
   url: "https://leetcode.com/problems/bitwise-or-of-adjacent-elements/",
   complexity: "O(n) time and O(n) output space for n values, since each neighbour pair is OR-ed once. The visualization accepts up to 12 values from 0 to 1023; the bounds shown are this visualization's own limits.",
+  question: "Build an array whose entries are the bitwise OR of each neighbouring pair of values.",
+  approaches: [
+    { name: "Pairwise OR scan", intuition: "Each neighbouring pair is combined once, giving one fewer output value than the input.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: "Four values", input: "[1,2,3,4]" },
     { label: "Zero in the middle", input: "[8,0,5]" },

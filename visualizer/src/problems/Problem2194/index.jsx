@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'A range such as A1:C2',
   url: 'https://leetcode.com/problems/cells-in-a-range-on-an-excel-sheet/',
   complexity: 'O(rows * columns) time for the output, which is the size of the range. The page caps columns at F.',
+  question: "List every cell in a rectangular range of a spreadsheet given by its two corner cells, such as A1 to B3.",
+  approaches: [
+    { name: "Nested loops over columns and rows", intuition: "Convert the corners to column letters and row numbers, then walk the rectangle row by row.", time: "O(area)", space: "O(area)" },
+  ],
   examples: [
     { label: 'Block', input: 'A1:C2' },
     { label: 'Single cell', input: 'D4:D4' },

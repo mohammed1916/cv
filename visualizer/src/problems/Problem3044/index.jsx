@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON matrix of digits, up to 4 by 4',
   url: 'https://leetcode.com/problems/most-frequent-prime/',
   complexity: 'O(m * n * (m + n) * sqrt(V)) time, where V is the largest number formed. The grid is at most 4 by 4 here.',
+  question: "Find the most frequent prime formed by reading numbers in the grid along straight lines in any direction.",
+  approaches: [
+    { name: "Walk every direction and count primes", intuition: "From each cell, walk in each of the eight directions, form each number, and count the prime values.", time: "O(mn\u00b7(m+n)\u00b7\u221aV)", space: "O(answer)" },
+  ],
   examples: [
     { label: 'Example 1', input: '[[2,3],[5,1]]' },
     { label: 'Example 2', input: '[[1,1,3],[7,9,2]]' },

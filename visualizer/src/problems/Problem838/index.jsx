@@ -12,6 +12,11 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Dominoes string (JSON)',
   url: 'https://leetcode.com/problems/push-dominoes/',
   complexity: 'O(n) time and O(n) space: two linear sweeps and one pass to build the answer.',
+  question: "Each domino is pushed left, pushed right, or standing; find the final state after forces from neighbours settle.",
+  approaches: [
+    { name: "Nearest force scan", intuition: "Find the nearest push from the left and from the right for each domino and compare their distances.", time: "O(n)", space: "O(n)" },
+    { name: "Step simulation", intuition: "Apply the pushes one step at a time until nothing changes.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Own: eight cells', input: '"R.L.RL.R"' },
     { label: 'Own: two pushers', input: '"..RR.L.LR."' },

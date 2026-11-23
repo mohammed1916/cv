@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with pressed_keys, a string of digits 2 to 9 (JSON)',
   url: 'https://leetcode.com/problems/count-number-of-texts/',
   complexity: 'O(n) time and O(n) space for n presses, with the total kept modulo 1000000007. The visualization caps input at 12 presses.',
+  question: "Count the text messages that can be formed from a sequence of keypresses, where repeated presses of a key choose a letter.",
+  approaches: [
+    { name: "Run length dynamic programming", intuition: "Split each run of equal presses into groups of one to three (or one to four for 7 and 9) and multiply the group counts.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Own: four keys, sevens and a nine', input: '{"pressed_keys":"7779"}' },
     { label: 'Example 2', input: '{"pressed_keys":"7777"}' },

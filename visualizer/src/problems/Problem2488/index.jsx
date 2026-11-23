@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with nums (a permutation of 1 to n) and k (JSON)',
   url: 'https://leetcode.com/problems/count-subarrays-with-median-k/',
   complexity: 'O(n^2 log n) time for this sorted check. The visualization caps n at 12.',
+  question: "Count subarrays whose median equals k, where the median is taken from the sorted order.",
+  approaches: [
+    { name: "Check each window sorted", intuition: "For each subarray, sort it and read the middle value.", time: "O(n^2 log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Permutation of five, k two', input: '{"nums":[3,1,5,2,4],"k":2}' },
     { label: 'Example 2', input: '{"nums":[1,2,3],"k":2}' },

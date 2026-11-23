@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Two JSON values (e.g. {"o1":{"a":1,"b":[1,2]},"o2":{"b":[1,2],"a":1}})',
   url: "https://leetcode.com/problems/json-deep-equal/description/",
   complexity: "O(N) time for N total nodes across both values, one visit per node pair that is reached, and O(D) stack space for nesting depth D. The visualization caps each value at 20 nodes and depth 4.",
+  question: "Given two JSON-like values, decide whether they are deeply equal, comparing arrays and objects by their contents.",
+  approaches: [
+    { name: "Recursive comparison", intuition: "Compare types first, then compare arrays by index and objects by key sets, recursing on each child.", time: "O(size)", space: "O(depth)" },
+  ],
   examples: [
     { label: "Same keys in another order", input: '{"o1":{"a":1,"b":[1,2]},"o2":{"b":[1,2],"a":1}}' },
     { label: "Array order matters", input: '{"o1":[1,2],"o2":[2,1]}' },

@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 's of F, W, E letters (JSON object)',
   url: 'https://leetcode.com/problems/count-the-number-of-winning-sequences/',
   complexity: 'O(n^2) time and O(n) space for string length n (score differences are at most n). The visualization caps s at 10 characters.',
+  question: "Count the ways a string can be played so that Alice wins, where each move depends on the characters.",
+  approaches: [
+    { name: "Dynamic programming over score difference", intuition: "Track the number of ways for each score difference after each character.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"s": "WEF"}' },
     { label: 'Example 2', input: '{"s": "EWFFE"}' },

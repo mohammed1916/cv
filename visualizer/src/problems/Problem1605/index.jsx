@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Object with rows and cols (JSON)',
   url: 'https://leetcode.com/problems/find-valid-matrix-given-row-and-column-sums/',
   complexity: 'O(m + n) steps and O(m * n) time to fill the grid: each step satisfies a row or a column.',
+  question: "Build a grid that matches given row and column sums with non-negative values.",
+  approaches: [
+    { name: "Greedy fill of the minimum", intuition: "Repeatedly place the smaller of the remaining row and column sums and reduce both.", time: "O(m + n) steps", space: "O(m * n)" },
+  ],
   examples: [
     { label: 'Sample', input: '{"rows":[5,0,4],"cols":[2,6,1]}' },
     { label: 'Single cell', input: '{"rows":[7],"cols":[7]}' },

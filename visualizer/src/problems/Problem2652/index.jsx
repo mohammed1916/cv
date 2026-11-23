@@ -18,6 +18,11 @@ const definition = {
   inputLabel: 'JSON object with n (e.g. {"n": 7})',
   url: "https://leetcode.com/problems/sum-multiples/",
   complexity: "O(n) time and O(1) space. The visualization caps n at 1000.",
+  question: "Given an integer n, return the sum of all numbers from 1 to n that are divisible by 3, 5, or 7.",
+  approaches: [
+    { name: "Check each number", intuition: "Test each number from 1 to n for divisibility by any of the three values and add it.", time: "O(n)", space: "O(1)" },
+    { name: "Inclusion-exclusion", intuition: "Add the multiples of each divisor and subtract overlaps of pairs and the triple.", time: "O(1)", space: "O(1)" },
+  ],
   examples: [
     { label: "n = 7", input: '{"n": 7}' },
     { label: "n = 10", input: '{"n": 10}' },

@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON {"values": [4, 9, 1, 7, 2]}',
   url: 'https://leetcode.com/problems/remove-nodes-from-linked-list/',
   complexity: 'O(n) time and O(n) space for the kept stack. Each node is pushed and popped once.',
+  question: "Remove every node that has a strictly greater value somewhere after it in a linked list.",
+  approaches: [
+    { name: "Monotonic stack", intuition: "Keep a stack of values that are not beaten by any later value, so the survivors are the stack contents.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example', input: '{"values":[4,9,1,7,2]}' },
     { label: 'Equal', input: '{"values":[1,1,1]}' },

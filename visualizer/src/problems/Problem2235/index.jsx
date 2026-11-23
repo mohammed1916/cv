@@ -11,6 +11,10 @@ const definition = {
   inputLabel: 'JSON {"num1": 7, "num2": -3}',
   url: 'https://leetcode.com/problems/add-two-integers/',
   complexity: 'O(1) time and O(1) space.',
+  question: "Return the sum of two integers.",
+  approaches: [
+    { name: "Direct addition", intuition: "Add the two numbers.", time: "O(1)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Positive', input: '{"num1":7,"num2":-3}' },
     { label: 'Mixed signs', input: '{"num1":-8,"num2":3}' },

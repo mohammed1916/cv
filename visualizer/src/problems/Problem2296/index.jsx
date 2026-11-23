@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with operations such as ["addText", "abc"] (JSON)',
   url: 'https://leetcode.com/problems/design-a-text-editor/',
   complexity: 'O(k) per operation for k letters moved, with a cap of 10 letters per answer.',
+  question: "Design a text editor that supports typing, deleting, and moving the cursor, and reports the last ten characters before the cursor.",
+  approaches: [
+    { name: "Two stacks around the cursor", intuition: "Store the text left of the cursor and the text right of the cursor in two stacks, so moves transfer characters between them.", time: "O(k) per operation", space: "O(n)" },
+  ],
   examples: [
     { label: 'Own: short edit script', input: '{"operations":[["addText","hello"],["cursorLeft",2],["deleteText",1],["addText","xy"],["cursorRight",1]]}' },
     { label: 'Single letter typed', input: '{"operations":[["addText","a"]]}' },

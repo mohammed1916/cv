@@ -14,6 +14,11 @@ const definition = {
   inputLabel: 'Object with head array of digits, most significant first (JSON)',
   url: 'https://leetcode.com/problems/double-a-number-represented-as-a-linked-list/',
   complexity: 'O(n) time and O(n) space for the output digits.',
+  question: "Double a number stored as a linked list of digits, returning the result as a new digit list.",
+  approaches: [
+    { name: "Reverse then carry", intuition: "Process digits from the least significant end, carrying the tens part.", time: "O(n)", space: "O(n)" },
+    { name: "Carry with a sentinel head", intuition: "Use a leading carry node so the final carry is handled uniformly.", time: "O(n)", space: "O(1) extra" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"head":[1,8,9]}' },
     { label: 'Example 2', input: '{"head":[9,9,9]}' },

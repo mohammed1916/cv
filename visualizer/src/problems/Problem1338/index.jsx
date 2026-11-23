@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Even-length array of integers 1 to 9 as JSON',
   url: 'https://leetcode.com/problems/reduce-array-size-to-the-half/',
   complexity: 'O(n log n) time for sorting the counts, O(n) space.',
+  question: "Remove the fewest distinct values so that at least half the array is gone.",
+  approaches: [
+    { name: "Greedy by frequency", intuition: "Count each value and remove the most frequent values first until half is removed.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Pairs of unequal sizes', input: '[7,2,2,5,5,5,9,9]' },
     { label: 'Mixed singles and pairs', input: '[1,3,3,8,6,6]' },

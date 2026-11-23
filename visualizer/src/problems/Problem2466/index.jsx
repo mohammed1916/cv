@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with low, high, zero, and one (JSON)',
   url: 'https://leetcode.com/problems/count-ways-to-build-good-strings/',
   complexity: 'O(high) time and O(high) space. The visualization caps high at 14.',
+  question: "Count strings whose length lies in a range and that can be built by appending blocks of zeros and ones of given lengths, modulo a prime.",
+  approaches: [
+    { name: "Dynamic programming over length", intuition: "The number of ways to reach length i is the sum of the ways to reach the lengths one block shorter.", time: "O(high)", space: "O(high)" },
+  ],
   examples: [
     { label: 'Only the top length', input: '{"low":5,"high":5,"zero":3,"one":1}' },
     { label: 'Lengths 2 through 6', input: '{"low":2,"high":6,"zero":4,"one":1}' },

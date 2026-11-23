@@ -11,6 +11,10 @@ const definition = {
   inputLabel: 'Prices and discounts (JSON object with prices and discounts)',
   url: 'https://www.talentd.in/fleetcode/problems/minimum-total-price-after-applying-discounts',
   complexity: 'O(n log n + m log m) time for the sorts and O(1) extra space. The visualization caps each list at 8 entries.',
+  question: "Match discounts with prices to minimise the total price after the discounts.",
+  approaches: [
+    { name: "Greedy pairing of largest with largest", intuition: "Sort both lists and pair the largest discount with the largest price.", time: "O(n log n + m log m)", space: "O(1) extra" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"prices":[8,25,40],"discounts":[20,35]}' },
     { label: 'Example 2', input: '{"prices":[12,7,9,30],"discounts":[15,5,25]}' },

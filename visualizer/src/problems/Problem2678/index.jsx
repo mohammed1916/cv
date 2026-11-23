@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'Object with details: a list of 15-character passenger strings (at most 8)',
   url: 'https://leetcode.com/problems/number-of-senior-citizens/',
   complexity: 'O(n) time, one pass over the records with constant work each.',
+  question: "Given a list of details strings with age in a fixed position, count how many people are 60 or older.",
+  approaches: [
+    { name: "Parse each age and count", intuition: "Read the two digits at the fixed position and count those at least 60.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Three passengers', input: '{"details":["7868190130M7522","5303914400F9211","9273338290F4010"]}' },
     { label: 'Only young riders', input: '{"details":["1234567890M0010","1234567891F5959"]}' },

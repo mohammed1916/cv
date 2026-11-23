@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON {"n": 4, "ops": [["upload", 3], ["longest"], ["upload", 1], ["longest"]]}',
   url: 'https://leetcode.com/problems/longest-uploaded-prefix/',
   complexity: 'O(1) amortized time per upload, because the prefix pointer only moves right. O(n) space.',
+  question: "Track the longest prefix of uploaded video numbers, where a number is uploaded once and the prefix must be complete.",
+  approaches: [
+    { name: "Pointer that only moves right", intuition: "Mark each upload, then advance the prefix pointer while the next number is uploaded.", time: "O(1) amortized", space: "O(n)" },
+  ],
   examples: [
     { label: 'Gap closes', input: '{"n":4,"ops":[["upload",3],["longest"],["upload",1],["longest"],["upload",2],["longest"]]}' },
     { label: 'Early', input: '{"n":3,"ops":[["upload",2],["longest"],["upload",1],["longest"],["upload",3],["longest"]]}' },

@@ -15,6 +15,11 @@ const definition = {
   inputLabel: 'Object with ops: ["join", [chunks]], ["leave", id] or ["request", id, chunk]',
   url: 'https://leetcode.com/problems/design-a-file-sharing-system/',
   complexity: 'O(U) per join for U users in this scan version, and O(U) per request. A heap of free ids would make join faster.',
+  question: "Design a file-sharing system that hands out the smallest free user id and tracks chunk owners.",
+  approaches: [
+    { name: "Scan for the smallest free id", intuition: "Scan the ids in order to find the first free one and keep owner lists per chunk.", time: "O(U) per join", space: "O(U)" },
+    { name: "Min-heap of freed ids", intuition: "Reuse a heap of released ids so each join takes the smallest in logarithmic time.", time: "O(log U) per join", space: "O(U)" },
+  ],
   examples: [
     { label: 'Example', input: '{"ops":[["join",[5,6]],["join",[6]],["request",2,5],["leave",1],["join",[8]],["request",2,6]]}' },
     { label: 'Single join', input: '{"ops":[["join",[7]]]}' },

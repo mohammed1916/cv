@@ -4,6 +4,10 @@ import IndexedSequence from '../../components/shared/IndexedSequence'
 import { buildTrace, parseInput, code, python, phases, examples } from './algorithm'
 
 const definition = {
+  question: "Decide whether an array can be split into groups of consecutive numbers of a given size.",
+  approaches: [
+    { name: "Greedy smallest-first", intuition: "Always start a group at the smallest remaining value and take the next consecutive values.", time: "O(n log n)", space: "O(n)" },
+  ],
   number: '1296', phases, parse: parseInput, build: buildTrace, code, python, examples,
   inputLabel: 'Object with nums and k (JSON)',
   url: 'https://leetcode.com/problems/divide-array-in-sets-of-k-consecutive-numbers/',

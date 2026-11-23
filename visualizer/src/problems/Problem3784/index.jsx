@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Letters and costs (JSON object with s and cost)',
   url: 'https://leetcode.com/problems/minimum-deletion-cost-to-make-all-characters-equal/',
   complexity: 'O(n) time and O(1) extra space for 26 letters. The visualization caps n at 20.',
+  question: "Delete characters so that all remaining characters are equal, minimising the total deletion cost.",
+  approaches: [
+    { name: "Keep the most costly letter", intuition: "Keep the letter whose total deletion cost is largest and delete every other character.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Descending letters', input: '{"s":"dcba","cost":[2,9,4,1]}' },
     { label: 'Alternating letters', input: '{"s":"abab","cost":[5,5,1,1]}' },

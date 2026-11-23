@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Numbers (JSON object with nums and k, where k divides the length)',
   url: 'https://leetcode.com/problems/minimum-incompatibility/',
   complexity: 'O(3^n) submask enumeration over 2^n masks. The visualization caps input at 8 numbers.',
+  question: "Split numbers into equal-size groups with no repeated value in a group, minimising the total of each group's max minus min.",
+  approaches: [
+    { name: "Subset DP over masks", intuition: "Precompute the cost of each valid subset, then combine disjoint subsets that cover everything.", time: "O(3^n)", space: "O(2^n)" },
+  ],
   examples: [
     { label: 'Six values, k three', input: '{"nums":[2,9,5,7,7,11],"k":3}' },
     { label: 'Four values, k two', input: '{"nums":[4,8,1,9],"k":2}' },

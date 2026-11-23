@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Digit strings and target (JSON)',
   url: 'https://leetcode.com/problems/number-of-pairs-of-strings-with-concatenation-equal-to-target/',
   complexity: 'O(n^2) pairs, each concatenation takes O(length) time.',
+  question: "Count ordered pairs of strings whose concatenation equals the target string.",
+  approaches: [
+    { name: "Prefix and suffix counts", intuition: "Count every string, then for each string that matches a prefix of the target, look up the matching suffix.", time: "O(n L)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Two strings', input: '{"nums":["4","44","8"],"target":"448"}' },
     { label: 'Split target', input: '{"nums":["1","23","2","3"],"target":"123"}' },

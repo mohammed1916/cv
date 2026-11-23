@@ -12,6 +12,10 @@ const definition = {
   inputLabel: "Array of integers (e.g. [3,5,6])",
   url: "https://leetcode.com/problems/minimum-subarrays-in-a-valid-split/description/",
   complexity: "O(n^2) gcd checks for n values, with O(n) space for the prefix table. The visualization caps the array at 12 values of 1 to 30.",
+  question: "Split an array into the fewest contiguous pieces where each piece's first and last values have a gcd greater than one.",
+  approaches: [
+    { name: "Dynamic programming over prefixes", intuition: "Let each prefix's best split depend on earlier cut points whose end pairs pass the gcd test.", time: "O(n^2) gcd checks", space: "O(n)" },
+  ],
   examples: [
     { label: "Example", input: "[3,5,6]" },
     { label: "Singletons", input: "[2,3,5]" },

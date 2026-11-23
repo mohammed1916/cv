@@ -21,6 +21,10 @@ const definition = {
   inputLabel: 'Object with n, edges ([from, to] pairs), source and destination',
   url: 'https://leetcode.com/problems/all-paths-from-source-lead-to-destination/description/',
   complexity: 'O(V + E) time and O(V + E) space for V nodes and E edges, from a depth-first search. The visualization caps the graph at 8 nodes and 12 edges; the official bounds are not verified.',
+  question: "Decide whether every path from a source leads to a destination that is reachable, has no cycle, and has no dead end other than the destination.",
+  approaches: [
+    { name: "DFS with visit states", intuition: "Walk from the source marking nodes as in progress or done; a cycle or a dead end that is not the destination fails.", time: "O(V + E)", space: "O(V + E)" },
+  ],
   examples: [
     { label: 'Dead end', input: '{"n":3,"edges":[[0,1],[0,2]],"source":0,"destination":1}' },
     { label: 'Chain', input: '{"n":3,"edges":[[0,1],[1,2]],"source":0,"destination":2}' },

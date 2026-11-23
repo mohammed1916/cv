@@ -21,6 +21,10 @@ const definition = {
   inputLabel: 'Integer n (for example 6)',
   url: 'https://leetcode.com/problems/minimum-cost-to-split-into-ones-ii/',
   complexity: 'O(n^2) time and O(n) space for the dynamic program over totals 1 to n. The visualization caps n at 40; the official bounds are not checked here.',
+  question: "Break a total into two positive parts, paying the product of the parts, repeatedly until all parts are ones; minimise the total cost.",
+  approaches: [
+    { name: "Dynamic program over totals", intuition: "Compute the cheapest way to break each total from 1 to n by trying every split.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Six', input: '6' },
     { label: 'Nine', input: '9' },

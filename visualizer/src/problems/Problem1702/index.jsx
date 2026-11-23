@@ -14,6 +14,10 @@ const definition = {
   complexity,
   inputLabel: 'JSON string of 0s and 1s',
   url: 'https://leetcode.com/problems/maximum-binary-string-after-change/',
+  question: "Apply zero-to-one-and-one-zero moves to a binary string to get the lexicographically largest result.",
+  approaches: [
+    { name: "Gather zeros in one place", intuition: "Keep the leading ones, then move all zeros to the right and merge them into a single zero just after the leading ones.", time: "O(n)", space: "O(n)" },
+  ],
 }
 
 export default function Problem1702Visualizer() {

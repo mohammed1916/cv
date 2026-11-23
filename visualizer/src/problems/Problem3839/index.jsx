@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with words (lowercase strings) and k',
   url: 'https://leetcode.com/problems/number-of-prefix-connected-groups/',
   complexity: 'O(total length) time with a hash map from prefix to count.',
+  question: "Count the groups of words that share a common prefix of length k with at least two words.",
+  approaches: [
+    { name: "Bucket by prefix", intuition: "Words that share their first k letters form one group, so bucket the words by that prefix and count buckets of size two or more.", time: "O(total length)", space: "O(words)" },
+  ],
   examples: [
     { label: 'Two groups', input: '{"words":["ant","anvil","bee","beetle","cat"],"k":2}' },
     { label: 'Short words', input: '{"words":["sun","sunny","sea","tea","sea"],"k":3}' },

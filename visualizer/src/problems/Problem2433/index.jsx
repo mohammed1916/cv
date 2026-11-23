@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with pref (values 0 to 15), for example {"pref":[5,2,0,3,1]}',
   url: 'https://leetcode.com/problems/find-the-original-array-of-prefix-xor/',
   complexity: 'O(n) time and O(n) space for the answer.',
+  question: "Recover the original array from its prefix XOR array.",
+  approaches: [
+    { name: "XOR with previous prefix", intuition: "Each original value is the current prefix XOR combined with the previous one.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Four values', input: '{"pref":[6,3,5,4]}' },
     { label: 'Single value', input: '{"pref":[13]}' },

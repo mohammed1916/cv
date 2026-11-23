@@ -19,7 +19,12 @@ const examples = [
   { label: 'Long run: 20 friendships', input: '{"Friends":[{"user_id1":3,"user_id2":2},{"user_id1":1,"user_id2":6},{"user_id1":7,"user_id2":2},{"user_id1":5,"user_id2":8},{"user_id1":3,"user_id2":8},{"user_id1":1,"user_id2":8},{"user_id1":7,"user_id2":4},{"user_id1":5,"user_id2":4},{"user_id1":3,"user_id2":6},{"user_id1":1,"user_id2":6},{"user_id1":7,"user_id2":2},{"user_id1":5,"user_id2":4},{"user_id1":3,"user_id2":8},{"user_id1":1,"user_id2":8},{"user_id1":7,"user_id2":6},{"user_id1":5,"user_id2":8},{"user_id1":3,"user_id2":8},{"user_id1":1,"user_id2":4},{"user_id1":7,"user_id2":2},{"user_id1":5,"user_id2":8}]}' },
 ]
 
-const definition = { number: meta.number, phases, parse: parseInput, build: buildTrace, code, sql, python, inputLabel, complexity, examples }
+const definition = { number: meta.number, phases, parse: parseInput, build: buildTrace, code, sql, python, inputLabel, complexity, examples,
+  question: "Find the friend pairs that have no mutual friends.",
+  approaches: [
+    { name: "Neighbour set intersection", intuition: "Build each user's neighbour set and check whether the two users in each pair share any neighbour.", time: "O(e\u00b7d)", space: "O(e)" },
+  ],
+}
 
 function RowTable({ step }) {
   const { columns, rows } = step

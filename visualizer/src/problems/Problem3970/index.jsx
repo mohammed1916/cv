@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with labels, k and edges ([from, to, weight])',
   url: 'https://leetcode.com/problems/shortest-path-with-at-most-k-consecutive-identical-characters/',
   complexity: 'Dijkstra over (node, run) states: O(S log S + E k) with a heap. This trace scans for the closest state, so it is O(S^2) on the small visual graphs.',
+  question: "Find the cheapest directed route whose vertex labels never repeat one letter more than k times in a row.",
+  approaches: [
+    { name: "Dijkstra over node and run-length states", intuition: "Track the current run length with each vertex and run a cheapest-first search over those states.", time: "O(S log S + E k) with a heap", space: "O(S)" },
+  ],
   examples: [
     { label: 'Run limit two', input: '{"labels":"abbab","k":2,"edges":[[0,1,2],[1,2,3],[2,4,1],[0,3,5],[3,4,1]]}' },
     { label: 'Run too long', input: '{"labels":"aaab","k":3,"edges":[[0,1,1],[1,2,1],[2,3,1]]}' },

@@ -17,6 +17,10 @@ const definition = {
   inputLabel: 'JSON {"ops":[{"op":"deposit","counts":[0,0,0,3,1]},{"op":"withdraw","amount":600}]}',
   url: 'https://leetcode.com/problems/design-an-atm-machine/',
   complexity: 'O(1) time per call and O(1) space, since there are five note values.',
+  question: "Design an ATM that stores banknotes of five fixed values, supports deposits, and withdraws an amount using the largest notes first.",
+  approaches: [
+    { name: "Greedy denomination count", intuition: "Keep a count of each note; a withdrawal takes the largest notes first and is refused if it cannot be formed exactly.", time: "O(1) per note type", space: "O(1)" },
+  ],
   examples: [
     { label: 'Largest first', input: '{"ops":[{"op":"deposit","counts":[0,0,0,3,1]},{"op":"withdraw","amount":600},{"op":"withdraw","amount":500},{"op":"withdraw","amount":400},{"op":"withdraw","amount":20}]}' },
     { label: 'Small notes', input: '{"ops":[{"op":"deposit","counts":[2,1,0,0,0]},{"op":"withdraw","amount":70},{"op":"withdraw","amount":50}]}' },

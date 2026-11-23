@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with nums and k (JSON)',
   url: 'https://leetcode.com/problems/the-number-of-beautiful-subsets/',
   complexity: 'O(2^n) subsets in the worst case, with each check done by a map lookup. The visualization caps n at 12.',
+  question: "Count nonempty subsets where no two elements differ by exactly k.",
+  approaches: [
+    { name: "Backtracking with a count map", intuition: "Include or skip each value, keeping a count of chosen values to block conflicts.", time: "O(2^n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Five numbers, k two', input: '{"nums":[6,10,15,21,4],"k":2}' },
     { label: 'Repeated values, k five', input: '{"nums":[9,9,9,9,9,9],"k":5}' },

@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'left and right (JSON object)',
   url: 'https://leetcode.com/problems/self-dividing-numbers/',
   complexity: 'O(R * d) time for R numbers with d digits each, and O(output) extra space.',
+  question: "List the numbers in a range that are divisible by each of their nonzero digits.",
+  approaches: [
+    { name: "Digit check per number", intuition: "Check each number's digits and reject any that do not divide it.", time: "O(R log R)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Small range', input: '{"left":8,"right":16}' },
     { label: 'Two digits', input: '{"left":30,"right":40}' },

@@ -16,6 +16,11 @@ const definition = {
   inputLabel: 'nums (JSON object with nums, distinct integers 1 to 100)',
   url: "https://leetcode.com/problems/minimum-right-shifts-to-sort-the-array/",
   complexity: "O(n) time and O(n) space for the list of descents. The visualization caps the array at 100 elements.",
+  question: "Find the fewest right rotations needed to sort an array of distinct values, or -1 if it cannot be sorted by rotation.",
+  approaches: [
+    { name: "Count descents", intuition: "A rotation can sort the array only if there is at most one descent, and it must wrap around correctly.", time: "O(n)", space: "O(1)" },
+    { name: "Try every rotation", intuition: "Rotate the array each possible number of times and check whether it is sorted.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: "Rotated", input: '{"nums":[3,4,5,1,2]}' },
     { label: "Sorted", input: '{"nums":[1,3,5]}' },

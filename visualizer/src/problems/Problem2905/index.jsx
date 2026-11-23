@@ -18,6 +18,11 @@ const definition = {
   inputLabel: 'JSON {"nums":[...],"indexDifference":2,"valueDifference":4}',
   url: "https://leetcode.com/problems/find-indices-with-index-and-value-difference-ii/",
   complexity: "O(n) time and O(1) space. The visualization caps nums at 100 values and values at 1000.",
+  question: "Find two indices whose distance and value difference both meet thresholds, returning any valid pair.",
+  approaches: [
+    { name: "Track running minimum and maximum", intuition: "For each index, compare with the minimum and maximum among indexes far enough back.", time: "O(n)", space: "O(1)" },
+    { name: "Check all index pairs", intuition: "Test each pair of indexes against both thresholds.", time: "O(n^2)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Five values, index gap two', input: '{"nums":[8,3,1,10,6],"indexDifference":2,"valueDifference":4}' },
     { label: 'Two values, gap exactly five', input: '{"nums":[5,0],"indexDifference":1,"valueDifference":5}' },

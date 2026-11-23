@@ -4,6 +4,10 @@ import { StackLane } from '../../components/shared/AlgorithmStatePrimitives'
 import { buildTrace, parseInput, code, python, phases, examples } from './algorithm'
 
 const definition = {
+  question: "Compute the XOR of an arithmetic-style sequence start + 2i for i below n.",
+  approaches: [
+    { name: "Running XOR", intuition: "Generate each value and XOR it into one accumulator.", time: "O(n)", space: "O(1)" },
+  ],
   number: '1486', phases, parse: parseInput, build: buildTrace, code, python, examples,
   inputLabel: 'Object with n and start (JSON)',
   url: 'https://leetcode.com/problems/xor-operation-in-an-array/',

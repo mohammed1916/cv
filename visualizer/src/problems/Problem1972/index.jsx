@@ -19,6 +19,10 @@ const definition = {
   phases, parse: parseInput, build: buildTrace, code, sql, python, inputLabel,
   url: `https://leetcode.com/problems/${meta.slug}/`,
   complexity, examples,
+  question: "Find the first and last call times for each day in which the same pair of people had calls on that day.",
+  approaches: [
+    { name: "Group by day", intuition: "Group calls by day and person pair, then take the earliest and latest times.", time: "O(n log n)", space: "O(n)" },
+  ],
 }
 
 function Rows({ columns = [], rows = [] }) {

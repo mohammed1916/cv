@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with n, edges, price (even, 2 to 20) and trips [s,t]',
   url: 'https://leetcode.com/problems/minimize-the-total-price-of-the-trips/',
   complexity: 'O(n * trips) time for path counting plus O(n) tree DP. The visualization caps n at 8.',
+  question: "Given a tree and trips between node pairs, choose a price for each node so the total cost of all trips is minimized, with halving on some nodes.",
+  approaches: [
+    { name: "Path counting then tree DP", intuition: "Count how often each node is used by the trips, then run a tree dynamic program deciding which nodes to halve.", time: "O(n * trips)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Five-node tree, two trips', input: '{"n":5,"edges":[[0,1],[1,2],[1,3],[3,4]],"price":[4,8,2,16,6],"trips":[[4,0],[2,4]]}' },
     { label: 'Pair', input: '{"n":2,"edges":[[0,1]],"price":[2,4],"trips":[[0,1]]}' },

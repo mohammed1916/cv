@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with nums (one count per query)',
   url: "https://leetcode.com/problems/lexicographically-largest-string-after-pair-transformations/",
   complexity: "O(log x) time per count and O(log x) output length, because each letter stands for a block of 2 to the k copies and the blocks are taken greedily from the largest power down. The letter z is capped at 2 to the 25.",
+  question: "Build the lexicographically largest string after splitting each letter's count into blocks of powers of two.",
+  approaches: [
+    { name: "Greedy largest block first", intuition: "Split each count greedily from the largest block down.", time: "O(log x) per count", space: "O(log x)" },
+  ],
   examples: [
     { label: "Three counts", input: '{"nums":[3,5,6]}' },
     { label: "Single copy", input: '{"nums":[1]}' },

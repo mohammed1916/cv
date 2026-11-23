@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON object with a matrix (-1 marks a cell to fill)',
   url: 'https://leetcode.com/problems/modify-the-matrix/',
   complexity: 'O(mn) time and O(m + n) extra space for the column maxima. The visualization caps the matrix at 6 by 6.',
+  question: "Replace each -1 in a matrix with the largest value in its column.",
+  approaches: [
+    { name: "Column maximum", intuition: "Compute each column's maximum among non-negative values, then replace the -1 entries.", time: "O(mn)", space: "O(1) extra" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"matrix":[[1,2,-1],[4,-1,6],[7,8,9]]}' },
     { label: 'Example 2', input: '{"matrix":[[3,-1],[5,2]]}' },

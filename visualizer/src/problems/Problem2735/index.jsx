@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with nums (costs per type) and x (cost of one rotation)',
   url: 'https://leetcode.com/problems/collecting-chocolates/',
   complexity: 'O(n^2) time with the running minimum per type and O(n) space. The visualization caps n at 12.',
+  question: "Given chocolate collection costs by type and a cost per rotation, find the minimum total cost to collect at least one of every type.",
+  approaches: [
+    { name: "Running minimum per type", intuition: "Track the cheapest cost for each type after each rotation step, and sum the best totals.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: 'One rotation pays', input: '{"nums":[7,3,9,4],"x":2}' },
     { label: 'Three rotations pay', input: '{"nums":[5,5,1,6],"x":3}' },

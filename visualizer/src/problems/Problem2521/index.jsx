@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Array of integers from 2 to 1000 (JSON)',
   url: 'https://leetcode.com/problems/distinct-prime-factors-of-product-of-array/',
   complexity: 'O(n sqrt(V)) time and O(k) space for k distinct primes. The visualization caps input at 10 values.',
+  question: "Count the distinct prime factors of the product of all numbers in the array.",
+  approaches: [
+    { name: "Factor each value", intuition: "Factor every value by trial division and collect the distinct primes in a set.", time: "O(n sqrt(V))", space: "O(k)" },
+  ],
   examples: [
     { label: 'Seven values with shared factors', input: '[12,30,18,45,7,21,9]' },
     { label: 'Example 2', input: '[21,4,7]' },

@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with nums and queries ([1,index,value], [2,left,right] or [3,left,right])',
   url: 'https://leetcode.com/problems/range-xor-queries-with-subarray-reversals/',
   complexity: 'O(q * n) time and O(n) extra space for q queries over n values: each XOR query folds its range and each reversal swaps inward pairs. The visualization caps nums at 8 values and queries at 8.',
+  question: "Answer queries that XOR a range of values or reverse part of an array.",
+  approaches: [
+    { name: "Simulate each query", intuition: "Apply each XOR fold or reversal directly to the array.", time: "O(q n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Reverse then XOR', input: '{"nums":[1,2,3,4,5],"queries":[[3,0,4],[2,0,2],[2,1,3]]}' },
     { label: 'Assignment persists', input: '{"nums":[6,1,8],"queries":[[1,1,9],[2,0,2],[3,0,1],[2,0,0]]}' },

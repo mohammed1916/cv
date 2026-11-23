@@ -14,6 +14,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Rooms (JSON array of key lists)',
   url: 'https://leetcode.com/problems/keys-and-rooms/',
   complexity: 'O(n + total keys) time and O(n) space: each room is pushed once and each key examined once.',
+  question: "Each room holds keys to other rooms; starting in room 0, decide whether every room can be visited.",
+  approaches: [
+    { name: "Stack reachability", intuition: "Walk the keys with a stack and visit each unvisited room once.", time: "O(V + E)", space: "O(V)" },
+  ],
   examples: [
     { label: 'Keys open a chain', input: '[[1],[2],[3],[]]' },
     { label: 'Cycle with spare keys', input: '[[1,3],[3,0,1],[2],[0]]' },

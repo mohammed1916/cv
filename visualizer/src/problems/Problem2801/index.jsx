@@ -11,6 +11,11 @@ const definition = {
   inputLabel: 'JSON object with low and high as digit strings, for example {"low":"1","high":"11"}',
   url: 'https://leetcode.com/problems/count-stepping-numbers-in-range/',
   complexity: 'O(d * 10 * 2) states per bound for d digits, memoized. The visualization caps bounds at 4 digits.',
+  question: "Count the integers in a range whose adjacent digits always differ by exactly 1.",
+  approaches: [
+    { name: "Digit dynamic programming", intuition: "Build numbers digit by digit, tracking the previous digit, whether the prefix is still tight to the bound, and whether the number has started.", time: "O(d times 10 times 2) states", space: "O(d times 10)" },
+    { name: "Enumerate stepping numbers", intuition: "Generate all stepping numbers by extending digits and count those in range.", time: "proportional to the count of stepping numbers", space: "O(count)" },
+  ],
   examples: [
     { label: 'Two and three digit bounds', input: '{"low":"30","high":"120"}' },
     { label: 'Two digits', input: '{"low":"90","high":"101"}' },

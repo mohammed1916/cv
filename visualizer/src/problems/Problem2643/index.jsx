@@ -18,6 +18,10 @@ const definition = {
   inputLabel: 'Binary matrix JSON (e.g. {"mat": [[0,0,0],[0,1,1]]})',
   url: "https://leetcode.com/problems/row-with-maximum-ones/",
   complexity: "O(m * n) time and O(1) extra space for an m x n binary matrix. Both dimensions are at most 100.",
+  question: "Given a binary matrix, return the index and count of the row with the most ones, with the smallest index winning ties.",
+  approaches: [
+    { name: "Count each row", intuition: "Count the ones in each row and keep the first row with the highest count.", time: "O(mn)", space: "O(1)" },
+  ],
   examples: [
     { label: "Example 1", input: '{"mat": [[0,1],[1,0]]}' },
     { label: "Example 2", input: '{"mat": [[0,0,0],[0,1,1]]}' },

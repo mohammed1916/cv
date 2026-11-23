@@ -11,6 +11,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Moves (JSON string of U, D, L, R)',
   url: 'https://leetcode.com/problems/robot-return-to-origin/',
   complexity: 'O(n) time and O(1) extra space for the two counters.',
+  question: "Decide whether a sequence of moves returns a robot to its starting cell.",
+  approaches: [
+    { name: "Count directions", intuition: "Count the moves in each direction and check that opposite counts match.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Square', input: '"URDL"' },
     { label: 'Two up', input: '"UUD"' },

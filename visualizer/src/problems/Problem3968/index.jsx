@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Move string using U, D, L, R and _ (e.g. L_R_U)',
   url: 'https://leetcode.com/problems/maximum-manhattan-distance-after-all-moves/',
   complexity: 'O(length) time and O(1) extra space. The visual caps the string at 30 characters.',
+  question: "Fixed moves set a position and each wildcard may be any direction; find the largest Manhattan distance from the origin.",
+  approaches: [
+    { name: "Greedy wildcard direction", intuition: "Send each wildcard in the direction that increases distance from the origin.", time: "O(length)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Two blanks', input: 'L_R_U' },
     { label: 'Leading blanks', input: '__LLU' },

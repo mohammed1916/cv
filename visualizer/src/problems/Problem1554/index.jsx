@@ -19,6 +19,10 @@ const definition = {
   inputLabel: 'JSON array of distinct equal-length lowercase words (e.g. ["abc","adc","xyz"])',
   url: 'https://leetcode.com/problems/strings-differ-by-one-character/',
   complexity: 'O(n * m) expected time for n words of length m, using a hash set of wildcard keys. Each key has length m, so the set holds up to n * m keys of length m. The visualization caps the list at 12 words of up to 8 letters.',
+  question: "Decide whether there are two words that differ in exactly one position.",
+  approaches: [
+    { name: "Wildcard key set", intuition: "Replace each position with a star to form keys; a repeated key means a match.", time: "O(n * m) expected", space: "O(n * m)" },
+  ],
   examples: [
     { label: 'Pair at position 2', input: '["abcd","abce","axyz"]' },
     { label: 'No single-letter pair', input: '["aaa","bbb","abc","cab"]' },

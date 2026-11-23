@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Seat and student positions (JSON)',
   url: 'https://leetcode.com/problems/minimum-number-of-moves-to-seat-everyone/',
   complexity: 'O(n log n) time for the two sorts and O(n) for the pairing.',
+  question: "Find the fewest moves to seat people so that each seat holds exactly one person.",
+  approaches: [
+    { name: "Sort and match", intuition: "Sort the seats and the people, then sum the absolute differences of matched pairs.", time: "O(n log n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Three students', input: '{"seats":[2,8,5],"students":[6,1,4]}' },
     { label: 'Repeated seats', input: '{"seats":[3,3],"students":[1,6]}' },

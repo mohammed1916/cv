@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with nums1, nums2 and k (JSON)',
   url: 'https://leetcode.com/problems/maximum-subsequence-score/',
   complexity: 'O(n log n) time for sorting and heap work. The visualization caps n at 8.',
+  question: "Choose k indices to maximise the sum of nums1 values times the smallest nums2 value among them.",
+  approaches: [
+    { name: "Sort by nums2 with a min heap", intuition: "Sort pairs by nums2 descending and keep a min heap of the k largest nums1 values seen.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Six pairs, k four', input: '{"nums1":[0,6,3,9,1,5],"nums2":[4,2,7,0,8,3],"k":4}' },
     { label: 'Take every pair', input: '{"nums1":[11,11,11],"nums2":[2,15,6],"k":3}' },

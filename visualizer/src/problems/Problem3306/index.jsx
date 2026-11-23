@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'JSON object with word and k',
   url: 'https://leetcode.com/problems/count-of-substrings-containing-every-vowel-and-k-consonants-ii/',
   complexity: 'O(n) time for each of the two sliding windows. The visualization caps input at 16 letters.',
+  question: "Count substrings that contain every vowel and at least k consonants, for longer strings.",
+  approaches: [
+    { name: "Two sliding windows", intuition: "Count substrings with at least k consonants and subtract the ones that have more than k, using two windows.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Six letters, k two', input: '{"word":"rhythm","k":2}' },
     { label: 'Nine letters, k one', input: '{"word":"pqrsnopqr","k":1}' },

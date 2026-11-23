@@ -14,6 +14,10 @@ const definition = {
   complexity,
   inputLabel: 'Object with scores and ages, equal-length arrays (1 to 12 players in this visual)',
   url: 'https://leetcode.com/problems/best-team-with-no-conflicts/',
+  question: "Choose a team of players with the largest total score such that no younger player on the team has a higher score than an older one.",
+  approaches: [
+    { name: "Sort and extend", intuition: "Sort by age then score, and extend the best team ending at a compatible earlier player.", time: "O(n^2)", space: "O(n)" },
+  ],
 }
 
 export default function Problem1626Visualizer() {

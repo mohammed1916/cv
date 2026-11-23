@@ -12,6 +12,11 @@ const definition = {
   inputLabel: 'JSON object with a mat of positive integers',
   url: 'https://leetcode.com/problems/sort-the-matrix-diagonally/',
   complexity: 'O(mn * min(m, n)) time with insertion sort on each diagonal. The visualization caps the matrix at 6 by 6.',
+  question: "Sort every diagonal of a matrix in ascending order.",
+  approaches: [
+    { name: "Group by diagonal, then sort", intuition: "Cells on one diagonal share the same row minus column, so sort each group.", time: "O(mn log(min(m, n)))", space: "O(mn)" },
+    { name: "Insertion sort per diagonal", intuition: "Insert each value into its diagonal in order.", time: "O(mn min(m, n))", space: "O(mn)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"mat":[[3,3,1,1],[2,2,1,2],[1,1,1,2]]}' },
     { label: 'Single row', input: '{"mat":[[5,2,9]]}' },

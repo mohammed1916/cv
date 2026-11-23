@@ -9,6 +9,10 @@ const definition = {
   inputLabel: 'Words and letters (JSON object)',
   url: 'https://leetcode.com/problems/stream-of-characters/',
   complexity: 'Building costs O(total word length). Each query walks at most the longest stored word.',
+  question: "Given a word list, report after each new letter whether any listed word ends at the newest letters of the stream.",
+  approaches: [
+    { name: "Reversed trie over recent letters", intuition: "Insert words reversed into a trie; walking back from the newest letter checks whether a word ends there.", time: "O(total word length) to build, O(longest word) per query", space: "O(total word length)" },
+  ],
   examples: [
     { label: 'Suffix match', input: '{"words":["ab","cd","bcd"],"letters":"xabcd"}' },
     { label: 'Repeats', input: '{"words":["a","aa"],"letters":"baa"}' },

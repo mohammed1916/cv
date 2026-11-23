@@ -4,6 +4,10 @@ import { StackLane } from '../../components/shared/AlgorithmStatePrimitives'
 import { buildTrace, parseInput, code, python, phases, examples } from './algorithm'
 
 const definition = {
+  question: "Find the matrix values that are the smallest in their row and the largest in their column.",
+  approaches: [
+    { name: "Row minima and column maxima", intuition: "Compute both sets once, then keep values that appear in both.", time: "O(mn)", space: "O(m + n)" },
+  ],
   number: '1380', phases, parse: parseInput, build: buildTrace, code, python, examples,
   inputLabel: 'Object with a matrix of distinct values (JSON)',
   url: 'https://leetcode.com/problems/lucky-numbers-in-a-matrix/',

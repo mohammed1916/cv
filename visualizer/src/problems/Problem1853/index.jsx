@@ -15,6 +15,10 @@ const definition = {
   url: `https://leetcode.com/problems/${meta.slug}/`,
   complexity: 'O(n log n) for the date sort, with constant work per date for formatting. The visualizer caps the table at 12 rows.',
   examples,
+  question: "Rewrite each date in a given day, month and year form into another fixed text format.",
+  approaches: [
+    { name: "Parse and reformat", intuition: "Split the date into its parts, map the month name to a number, and rebuild the text.", time: "O(n)", space: "O(n)" },
+  ],
 }
 
 function Rows({ columns = [], rows = [] }) {

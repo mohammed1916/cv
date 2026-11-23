@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON object with an integer array nums (values -9 to 9)',
   url: 'https://leetcode.com/problems/maximum-strength-of-a-group/',
   complexity: 'O(n log n) time for the sort. The visualization caps the array at twelve values.',
+  question: "Given integers, choose a non-empty subset whose product is the maximum possible strength.",
+  approaches: [
+    { name: "Sort and pick signs", intuition: "Sort the values, pair negatives, and choose the subset with the largest product.", time: "O(n log n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"nums":[3,-1,-5,2,5,-9]}' },
     { label: 'Example 2', input: '{"nums":[-4,-5,-4]}' },

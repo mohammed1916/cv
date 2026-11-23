@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Parents and distinct genetic values (JSON)',
   url: 'https://leetcode.com/problems/smallest-missing-genetic-value-in-each-subtree/',
   complexity: 'O(n * d) time here, where d is the depth of the node holding 1; the subtree walk is repeated along that path.',
+  question: "For each node of a genetic tree, find the smallest genetic value missing from its subtree.",
+  approaches: [
+    { name: "DFS from the node with value one", intuition: "Only ancestors of the node with value one can be missing values; walk that path and mark what appears.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Chain', input: '{"parents":[-1,0,1],"nums":[3,1,2]}' },
     { label: 'Branches', input: '{"parents":[-1,0,0,1],"nums":[2,1,4,3]}' },

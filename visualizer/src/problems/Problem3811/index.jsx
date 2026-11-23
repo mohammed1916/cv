@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Array and targets (JSON object with nums, target1, target2)',
   url: 'https://leetcode.com/problems/number-of-alternating-xor-partitions/',
   complexity: 'O(n^2) time in this visualization, with prefix XOR values. The visualization caps n at 10.',
+  question: "Count cut points in an array where consecutive block XORs alternate between two targets.",
+  approaches: [
+    { name: "Prefix XOR dynamic programme", intuition: "Use prefix XOR values and a table of counts to extend partitions one block at a time.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Five values, two targets', input: '{"nums":[0,3,5,3,9],"target1":3,"target2":9}' },
     { label: 'Two equal values', input: '{"nums":[7,7],"target1":7,"target2":0}' },

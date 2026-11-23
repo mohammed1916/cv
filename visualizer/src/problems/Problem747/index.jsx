@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'nums (JSON array of integers 0–100)',
   url: 'https://leetcode.com/problems/largest-number-at-least-twice-of-others/',
   complexity: 'O(n) time and O(1) extra space.',
+  question: "Return the index of the largest number if it is at least twice every other number.",
+  approaches: [
+    { name: "Track the top two", intuition: "Find the largest and second largest values in one pass and compare them.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Dominant', input: '[4,12,3,1]' },
     { label: 'Close', input: '[9,5,8]' },

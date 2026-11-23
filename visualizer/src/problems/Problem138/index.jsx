@@ -22,6 +22,11 @@ const definition = {
   inputLabel: "Pairs (JSON object, e.g. {\"pairs\": [[7,null],[13,0]]})",
   url: "https://leetcode.com/problems/copy-list-with-random-pointer/",
   complexity: "O(n) time and O(1) extra space for n nodes, excluding the copy. The visualization caps the list at 30 nodes.",
+  question: "Copy a linked list where each node also has a random pointer.",
+  approaches: [
+    { name: "Hash map of copies", intuition: "Create copies in one pass and link next and random pointers through the map.", time: "O(n)", space: "O(n)" },
+    { name: "Interleaved copies", intuition: "Insert each copy after its original, then wire random pointers without extra memory.", time: "O(n)", space: "O(1)" },
+  ],
   examples: getExamples("copy-list-with-random-pointer").map(({ label, nodes }) => ({ label, input: JSON.stringify({ pairs: nodes.map(node => [node.val, node.random ?? null]) }) })),
 };
 

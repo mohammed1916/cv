@@ -18,6 +18,10 @@ const definition = {
   inputLabel: 'coordinate1 and coordinate2 (JSON object)',
   url: 'https://leetcode.com/problems/check-if-two-chessboard-squares-have-the-same-color/',
   complexity: 'O(1) time and O(1) space.',
+  question: "Decide whether two chessboard squares have the same color.",
+  approaches: [
+    { name: "Compare parities", intuition: "Add the column and row numbers of each square and check whether the two sums have the same parity.", time: "O(1)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"coordinate1": "e4", "coordinate2": "b7"}' },
     { label: 'Example 2', input: '{"coordinate1": "d5", "coordinate2": "g3"}' },

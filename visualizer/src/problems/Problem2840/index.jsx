@@ -12,6 +12,11 @@ const definition = {
   inputLabel: 'Object with "s1" and "s2" (lowercase, equal length), JSON',
   url: 'https://leetcode.com/problems/check-if-strings-can-be-made-equal-with-operations-ii/',
   complexity: 'O(n log n) time for sorting each parity class. The visualization caps strings at 12 letters.',
+  question: "Decide whether two strings of any even length can be made equal by repeatedly swapping letters whose positions differ by an even number.",
+  approaches: [
+    { name: "Sort letters by position parity", intuition: "Even and odd positions never mix, so compare the sorted letters within each parity class.", time: "O(n log n)", space: "O(n)" },
+    { name: "Count letters per parity", intuition: "Use letter counts per parity class instead of sorting.", time: "O(n)", space: "O(1) for 26 letters" },
+  ],
   examples: [
     { label: 'Six letters, repeated pattern', input: '{"s1":"cabbad","s2":"bcdaba"}' },
     { label: 'Two letters swapped', input: '{"s1":"ab","s2":"ba"}' },

@@ -18,6 +18,10 @@ const definition = {
   inputLabel: 'JSON array of positive integers, e.g. [1, 2, 1, 2]',
   url: 'https://leetcode.com/problems/maximum-equal-adjacent-pairs-after-at-most-one-replacement/',
   complexity: 'O(n) expected time with a hash tally of adjacent pairs, and O(n) space. The visualization caps the array at 20 values.',
+  question: "Find the largest number of equal adjacent pairs achievable after at most one value is replaced by another.",
+  approaches: [
+    { name: "Pair tally with merge bonus", intuition: "Count adjacent pairs of distinct values; merging two values makes exactly their adjacent pairs equal, so add the largest tally to the eligible merge.", time: "O(n + v)", space: "O(v)" },
+  ],
   examples: [
     { label: 'Merge two values', input: '[1, 2, 1, 2]' },
     { label: 'Existing equal pairs', input: '[1, 1, 2, 2, 1, 1]' },

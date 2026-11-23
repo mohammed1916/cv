@@ -23,6 +23,10 @@ const definition = {
   inputLabel: "Numbers (JSON object, e.g. {\"nums\": [100,4,200,1,3,2]})",
   url: "https://leetcode.com/problems/longest-consecutive-sequence/",
   complexity: "O(n) time and O(n) space for n numbers. The visualization caps the input at 40 numbers.",
+  question: "Find the length of the longest run of consecutive integers in an unsorted array.",
+  approaches: [
+    { name: "Hash set from run starts", intuition: "Only start counting at a number whose predecessor is missing, so each run is walked once.", time: "O(n)", space: "O(n)" },
+  ],
   examples: getExamples("longest-consecutive-sequence").map(({ label, nums }) => ({ label, input: JSON.stringify({ nums }) })),
 };
 

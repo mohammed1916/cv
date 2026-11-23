@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'Object with nums, a and b (e.g. {"nums":[5,1,8,3,9,2],"a":3,"b":6})',
   url: 'https://leetcode.com/problems/minimum-adjacent-swaps-to-partition-array/',
   complexity: 'O(n) time and O(1) extra space, since only three band counters are kept. The visualization caps nums at 10 values of at most 20.',
+  question: "Sort values into three bands using adjacent swaps, keeping the order inside each band free.",
+  approaches: [
+    { name: "Count band crossings", intuition: "Each value passes the earlier values that belong to a higher band; count those crossings with band counters.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Mixed bands', input: '{"nums":[5,1,8,3,9,2],"a":3,"b":6}' },
     { label: 'Two in order', input: '{"nums":[7,7,2,9],"a":5,"b":8}' },

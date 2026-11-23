@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'Array of integers from 0 to 15 (JSON)',
   url: 'https://leetcode.com/problems/longest-subsequence-with-non-zero-bitwise-xor/',
   complexity: 'O(n) time and O(1) extra space. The visualization caps the array at 10 entries.',
+  question: "Find the length of the longest subsequence whose XOR is non-zero.",
+  approaches: [
+    { name: "Single pass decision", intuition: "Scan the array once and decide whether each value can join the subsequence.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Range from zero to fifteen', input: '[0,15,7,3,15]' },
     { label: 'Two equal then zero', input: '[4,4,0]' },

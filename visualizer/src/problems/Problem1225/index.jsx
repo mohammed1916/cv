@@ -20,6 +20,10 @@ const definition = {
   inputLabel: 'Object with failed (fail_date) and succeeded (success_date) date lists',
   url: 'https://leetcode.com/problems/report-contiguous-dates/',
   complexity: 'O(n log n) to order the dates, then one pass over them. The visualization caps each list at 12 dates.',
+  question: "Report contiguous date ranges during which each state held.",
+  approaches: [
+    { name: "Group by row offset", intuition: "Subtract the row number from the date so consecutive days in one state share a key.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Mixed runs', input: '{"failed":[{"fail_date":"2018-12-31"},{"fail_date":"2019-01-01"},{"fail_date":"2019-01-02"},{"fail_date":"2019-01-05"}],"succeeded":[{"success_date":"2019-01-03"},{"success_date":"2019-01-04"},{"success_date":"2019-01-06"},{"success_date":"2019-02-01"}]}' },
     { label: 'One gap', input: '{"failed":[{"fail_date":"2019-03-10"}],"succeeded":[{"success_date":"2019-03-12"}]}' },

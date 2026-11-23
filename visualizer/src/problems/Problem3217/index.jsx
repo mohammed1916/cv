@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with nums and head arrays (JSON)',
   url: 'https://leetcode.com/problems/delete-nodes-from-linked-list-present-in-array/',
   complexity: 'O(m + n) time and O(m) space for m values in nums and n list nodes.',
+  question: "Remove from a linked list every node whose value appears in a given array.",
+  approaches: [
+    { name: "Set membership while walking", intuition: "Store the array values in a set, then skip matching nodes in one pass.", time: "O(m + n)", space: "O(m)" },
+  ],
   examples: [
     { label: 'Three nums, five nodes', input: '{"nums":[5,1,9],"head":[7,2,8,4,6]}' },
     { label: 'One num, six nodes', input: '{"nums":[6],"head":[1,6,1,6,1,6]}' },

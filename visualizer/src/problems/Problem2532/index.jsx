@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'JSON {"n": 3, "k": 2, "time": [[1,1,1,1],[2,1,2,1]]}',
   url: 'https://leetcode.com/problems/time-to-cross-a-bridge/',
   complexity: 'Each event moves time forward to a finishing step, so the simulation runs in O(n k log k) with heaps. The visualization caps n at 6 and k at 4.',
+  question: "Workers cross a bridge in a limited order with set times for crossing and picking up; find when the last worker arrives.",
+  approaches: [
+    { name: "Event simulation with heaps", intuition: "Advance the clock to the next event, using heaps for the workers waiting on each side.", time: "O(n k log k)", space: "O(n + k)" },
+  ],
   examples: [
     { label: 'One box, two workers', input: '{"n":1,"k":2,"time":[[1,2,3,1],[2,1,1,2]]}' },
     { label: 'Two boxes, two workers', input: '{"n":2,"k":2,"time":[[2,1,3,2],[1,2,1,1]]}' },

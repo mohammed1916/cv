@@ -14,6 +14,11 @@ const definition = {
   inputLabel: 'Object with nums (powers of two, 1 to 12 values) and target (1 to 1024), e.g. {"nums":[1,2,8],"target":7}',
   url: 'https://leetcode.com/problems/minimum-operations-to-form-subsequence-with-target-sum/',
   complexity: 'O(log target * log max) time after counting. The visualization caps values at 1024.',
+  question: "Find the fewest operations to form a subsequence of powers of two that sums to a target, where operations can split values.",
+  approaches: [
+    { name: "Greedy from the smallest bit", intuition: "Count powers of two available; handle each bit of the target, splitting larger powers when a bit is missing.", time: "O(log target log max)", space: "O(log max)" },
+    { name: "Recursive search", intuition: "Try taking or splitting each power, pruning when impossible.", time: "exponential worst case", space: "O(log)" },
+  ],
   examples: [
     { label: 'Six powers, target nineteen', input: '{"nums":[4,16,2,2,8,1],"target":19}' },
     { label: 'Equal large powers', input: '{"nums":[64,64,1],"target":128}' },

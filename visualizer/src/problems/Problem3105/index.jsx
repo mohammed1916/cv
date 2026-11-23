@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Array of integers 1 to 6 (JSON array, up to 12 entries)',
   url: 'https://leetcode.com/problems/longest-strictly-increasing-or-strictly-decreasing-subarray/',
   complexity: 'O(n) time and O(1) extra space. The visualization caps input at 12 entries.',
+  question: "Find the length of the longest subarray that is strictly increasing or strictly decreasing.",
+  approaches: [
+    { name: "Track two running runs", intuition: "A rise extends the increasing run and resets the decreasing one, and a fall does the reverse.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Five values, repeats', input: '[4,2,6,2,5]' },
     { label: 'Decreasing', input: '[3,2,1]' },

@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON with words and pref, e.g. {"words":["pay","attention"],"pref":"at"}',
   url: 'https://leetcode.com/problems/counting-words-with-a-given-prefix/',
   complexity: 'O(n * m) time, where m is the prefix length, and O(1) extra space. The visualization caps words at 10 and length at 12.',
+  question: "Count the words that start with a given prefix.",
+  approaches: [
+    { name: "Prefix check", intuition: "Test each word's beginning against the prefix.", time: "O(total length)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Two matches', input: '{"words":["pay","attention","practice","attend"],"pref":"at"}' },
     { label: 'No match', input: '{"words":["leetcode","win","loops"],"pref":"code"}' },

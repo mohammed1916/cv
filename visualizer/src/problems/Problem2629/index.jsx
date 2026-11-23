@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON object with fns (any of inc, dbl, sq; applied right to left) and x',
   url: 'https://leetcode.com/problems/function-composition/',
   complexity: 'O(k) time for k functions and O(1) extra space.',
+  question: "Given a list of functions, return one function that applies them from right to left to its input.",
+  approaches: [
+    { name: "Reduce from the right", intuition: "Start with the input and apply each function from the last to the first.", time: "O(k)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Chain', input: '{"fns":["inc","dbl","sq"],"x":2}' },
     { label: 'Empty', input: '{"fns":[],"x":5}' },

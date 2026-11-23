@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with count (0 to 15)',
   url: 'https://leetcode.com/problems/generate-fibonacci-sequence/',
   complexity: 'O(count) time and O(1) state. Only the last two values are kept.',
+  question: "Write a generator that yields the Fibonacci numbers for a given count.",
+  approaches: [
+    { name: "Iterative generator", intuition: "Keep the last two values and yield their sum each step.", time: "O(count)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Six values', input: '{"count":6}' },
     { label: 'Ten values', input: '{"count":10}' },

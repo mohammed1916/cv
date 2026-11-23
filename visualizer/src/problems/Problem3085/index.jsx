@@ -13,6 +13,11 @@ const definition = {
   inputLabel: 'JSON object: { "word": lowercase string, "k": integer 0 to 5 }',
   url: 'https://leetcode.com/problems/minimum-deletions-to-make-string-k-special/',
   complexity: 'O(n + m * d) time where m is the largest count and d the number of distinct letters.',
+  question: "Given a lowercase word and a limit k, find the fewest letters to delete so that the remaining letter counts all fit inside one window of width k.",
+  approaches: [
+    { name: "Try each target low count", intuition: "Pick the lowest kept count as a target, delete letters below it, and trim letters above low plus k down to that top.", time: "O(n + m * d)", space: "O(d)" },
+    { name: "Count letters once", intuition: "Tally each letter so every target can be priced from the counts alone.", time: "O(n)", space: "O(d)" },
+  ],
   examples: [
     { label: 'Five letters, k two', input: '{"word":"xyzzy","k":2}' },
     { label: 'Seven distinct letters', input: '{"word":"mnopqrs","k":4}' },

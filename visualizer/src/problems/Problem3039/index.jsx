@@ -13,6 +13,11 @@ const definition = {
   inputLabel: 'Lowercase string as a JSON string',
   url: 'https://leetcode.com/problems/apply-operations-to-make-string-empty/',
   complexity: 'O(n + 26) time and O(26) space for the scan.',
+  question: "Find the string left just before it becomes empty when repeatedly removing all copies of the most frequent letters.",
+  approaches: [
+    { name: "Simulate rounds", intuition: "Each round removes the letters with the highest remaining count, and track the last round's letters.", time: "O(26\u00b7n)", space: "O(26)" },
+    { name: "Last occurrence of top letters", intuition: "Find the last positions of the letters with the highest total count and keep those in order.", time: "O(n)", space: "O(26)" },
+  ],
   examples: [
     { label: 'Repeated letters', input: '"ddcbbaad"' },
     { label: 'Four distinct letters', input: '"mnop"' },

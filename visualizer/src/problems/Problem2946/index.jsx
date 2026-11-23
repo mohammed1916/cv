@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON object with mat and k',
   url: 'https://leetcode.com/problems/matrix-similarity-after-cyclic-shifts/',
   complexity: 'O(mn) time to shift and compare each row once. The visualization caps the matrix at 6 by 6.',
+  question: "Decide whether a matrix stays the same after cyclically shifting even rows left and odd rows right by k.",
+  approaches: [
+    { name: "Compare each row with its shift", intuition: "Shift each row by k modulo its length in the correct direction and compare with the original.", time: "O(mn)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Three by three grid, k of four', input: '{"mat":[[9,4,7],[1,8,3],[6,2,5]],"k":4}' },
     { label: 'Example 2', input: '{"mat":[[2,2],[1,3]],"k":3}' },

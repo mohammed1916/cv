@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Digit strings (JSON object with s and t of equal length)',
   url: 'https://leetcode.com/problems/check-if-string-is-transformable-with-substring-sort-operations/',
   complexity: 'O(n * 10) time with one queue of positions per digit. The visualization caps the strings at 8 digits.',
+  question: "Decide whether one digit string can be sorted into another by swapping neighbouring digits when they are in order.",
+  approaches: [
+    { name: "Earliest unused position per digit", intuition: "Queue the positions of each digit; a smaller digit before the chosen one blocks the move.", time: "O(n * 10)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Four digits, swap needed', input: '{"s":"7128","t":"8217"}' },
     { label: 'Blocked', input: '{"s":"12345","t":"12435"}' },

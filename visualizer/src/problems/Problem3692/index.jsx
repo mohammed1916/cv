@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'A JSON string of 1 to 40 lowercase letters, for example "pfpfgi"',
   url: 'https://leetcode.com/problems/majority-frequency-characters/',
   complexity: 'O(n + d log d) time for n letters and d distinct frequencies. The visualization caps the string at 40 letters.',
+  question: "Return the characters whose frequency is the most common frequency in the string.",
+  approaches: [
+    { name: "Count then group", intuition: "Count letters, group them by frequency, and return the letters in the most common group.", time: "O(n + d log d)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Six letters, all distinct', input: '"quartz"' },
     { label: 'Repeats at both ends', input: '"zzzaa"' },

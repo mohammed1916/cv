@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON with nums and key, e.g. {"nums":[1,100,200,1,100],"key":1}',
   url: 'https://leetcode.com/problems/most-frequent-number-following-key-in-an-array/',
   complexity: 'O(n) time and O(n) space for the follower counts. The visualization caps the array at 14 values.',
+  question: "Return the value that most often follows a given key in an array.",
+  approaches: [
+    { name: "Count adjacent pairs", intuition: "For each adjacent pair where the first value is the key, count the second value and return the most frequent.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Repeated follower', input: '{"nums":[1,100,200,1,100],"key":1}' },
     { label: 'Run of key', input: '{"nums":[2,2,2,2,3],"key":2}' },

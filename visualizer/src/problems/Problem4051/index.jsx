@@ -18,6 +18,10 @@ const definition = {
   inputLabel: 'Object with nums, goal and k, e.g. {"nums":[1,-1,2,3],"goal":2,"k":1}',
   url: 'https://leetcode.com/problems/count-subarrays-with-distant-sums/',
   complexity: 'O(n^2) worst case in this sorted-list form, from list insertion; O(n log n) with a balanced structure. The visualization caps nums at 12 values; the official limit is 100000.',
+  question: "Count subarrays whose sums land in a band near the goal, by subtracting the band from the total.",
+  approaches: [
+    { name: "Prefix sums with a sorted list", intuition: "Turn sums into prefix differences and count the band members with a sorted list.", time: "O(n^2) in this sorted-list form", space: "O(n)" },
+  ],
   examples: [
     { label: 'Mixed signs', input: '{"nums":[1,-1,2,3,-2],"goal":2,"k":1}' },
     { label: 'Any sum counts', input: '{"nums":[4,1,3],"goal":3,"k":0}' },

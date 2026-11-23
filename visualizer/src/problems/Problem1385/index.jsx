@@ -32,6 +32,11 @@ const definition = {
   complexity:
     'O(n·m) time and O(1) auxiliary space for the counting algorithm. ' +
     'The visualizer stores O(n·m) trace frames and their snapshots.',
+  question: "Count elements of the first array that are more than a distance d away from every element of the second.",
+  approaches: [
+    { name: "Sorted search", intuition: "Sort the second array and binary search for the nearest value to each element.", time: "O(n log m + m log m)", space: "O(m)" },
+    { name: "Direct comparison", intuition: "Compare every pair of values.", time: "O(n m)", space: "O(1)" },
+  ],
   examples: [
     {
       label: 'Far values',

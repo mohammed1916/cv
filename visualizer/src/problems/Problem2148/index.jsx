@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Integer array as JSON',
   url: 'https://leetcode.com/problems/count-elements-with-strictly-smaller-and-greater-elements/',
   complexity: 'O(n) time and O(1) extra space beyond the bounds.',
+  question: "Count the elements that have at least one strictly smaller and at least one strictly greater element in the array.",
+  approaches: [
+    { name: "Minimum and maximum check", intuition: "Find the minimum and maximum, then count the values strictly between them.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Two in the middle', input: '[11,7,2,15,7]' },
     { label: 'All equal', input: '[5,5,5]' },

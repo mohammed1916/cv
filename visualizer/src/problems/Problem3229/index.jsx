@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Two arrays (JSON object with nums and target)',
   url: 'https://leetcode.com/problems/minimum-operations-to-make-array-equal-to-target/',
   complexity: 'O(n) time and O(1) space. The visualization caps input at 10 entries.',
+  question: "Find the fewest operations to change an array into a target array, where each operation adds or subtracts one from a range.",
+  approaches: [
+    { name: "Count increments and decrements", intuition: "Positive and negative needs are counted separately, since an increment and a decrement never share one operation.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Four pairs, mixed', input: '{"nums":[3,8,2,11],"target":[6,9,4,12]}' },
     { label: 'Three pairs, reversed', input: '{"nums":[9,4,1],"target":[1,4,9]}' },

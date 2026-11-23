@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Points as JSON [[x, y], ...] (0 to 10)',
   url: 'https://leetcode.com/problems/maximum-area-rectangle-with-point-constraints-i/',
   complexity: 'O(n^3) time for n points, O(n) extra space. The visualization caps input at 10 points.',
+  question: "Find the largest axis-aligned rectangle that can be formed by four points, with no other point on its border or inside.",
+  approaches: [
+    { name: "Check every pair of diagonal points", intuition: "Use each pair of points as a diagonal, check whether the other two corners exist, and test the rectangle.", time: "O(n^3)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Square', input: '[[1,1],[1,3],[3,1],[3,3]]' },
     { label: 'Interior point', input: '[[1,1],[1,3],[3,1],[3,3],[2,2]]' },

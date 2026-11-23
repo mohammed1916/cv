@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON with nums and k, e.g. {"nums":[1,2,3,4,5],"k":2}',
   url: 'https://leetcode.com/problems/count-array-pairs-divisible-by-k/',
   complexity: 'O(n^2) pair checks in this visualization. The efficient version groups values by gcd with k. The page caps n at 10 and values at 30.',
+  question: "Count pairs of positions whose product is divisible by k.",
+  approaches: [
+    { name: "Group by gcd and match complements", intuition: "Only gcd(value, k) matters; count the values per gcd and match each gcd with the gcds whose product is a multiple of k.", time: "O(n * d(k))", space: "O(n + d(k))" },
+  ],
   examples: [
     { label: 'Five values', input: '{"nums":[1,2,3,4,5],"k":2}' },
     { label: 'No pair', input: '{"nums":[1,2,3,4],"k":5}' },

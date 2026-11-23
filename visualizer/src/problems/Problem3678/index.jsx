@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON array of integers',
   url: 'https://leetcode.com/problems/smallest-absent-positive-greater-than-average/',
   complexity: 'O(n) time and O(n) space for the set. The candidate can pass at most n present values.',
+  question: "Find the smallest positive integer that is absent from an array and greater than the array's average.",
+  approaches: [
+    { name: "Average then scan", intuition: "Compute the average, then scan upward from it for the first absent positive integer.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example', input: '[7,2,9]' },
     { label: 'Negatives', input: '[-4,1,1]' },

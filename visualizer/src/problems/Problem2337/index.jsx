@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Two strings of L, R and _ as JSON, e.g. {"start": "_L__R", "target": "L___R"}',
   url: 'https://leetcode.com/problems/move-pieces-to-obtain-a-string/',
   complexity: 'O(n) time and O(1) extra space. The visualization caps strings at 12 characters.',
+  question: "Decide whether one string can be turned into another by moving L pieces left and R pieces right.",
+  approaches: [
+    { name: "Two pointers over pieces", intuition: "Walk both strings skipping blanks, and check the order and the direction of each piece.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Five cells, mixed moves', input: '{"start":"LR__R","target":"_RL__"}' },
     { label: 'Five cells, two Rs', input: '{"start":"L_RRL","target":"_L_RR"}' },

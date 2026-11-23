@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Integer k from 1 to 200',
   url: 'https://leetcode.com/problems/apply-operations-to-make-sum-of-array-greater-than-or-equal-to-k/',
   complexity: 'O(k) time in this trace, trying every value x for the single repeated element.',
+  question: "Apply duplicate operations so the array sum reaches at least k, and find the fewest operations needed.",
+  approaches: [
+    { name: "Try every raised value", intuition: "Raise one element to x and copy it until the sum reaches k, then keep the cheapest x over all candidates.", time: "O(k)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '7' },
     { label: 'Example 2', input: '2' },

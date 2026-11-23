@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON {"root": 9, "left": 2, "right": 7}',
   url: 'https://leetcode.com/problems/root-equals-sum-of-children/',
   complexity: 'O(1) time and O(1) space for the three-node tree.',
+  question: "Check whether a tree's root value equals the sum of its two children's values.",
+  approaches: [
+    { name: "Direct comparison", intuition: "Read the root and the two children and compare the root with their sum.", time: "O(1)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Equal', input: '{"root":9,"left":2,"right":7}' },
     { label: 'Not equal', input: '{"root":4,"left":1,"right":2}' },

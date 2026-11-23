@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Road length n and rides [start, end, tip] (JSON)',
   url: 'https://leetcode.com/problems/maximum-earnings-from-taxi/',
   complexity: 'O(n + r) time: one pass over the points and the rides that end at each point.',
+  question: "Choose rides to maximise taxi earnings, where a ride earns its fare plus a tip per unit of distance.",
+  approaches: [
+    { name: "Sort by end and binary search DP", intuition: "Sort rides by end time; for each ride, take the best earlier total plus its earnings, found by binary search.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Two choices', input: '{"n":6,"rides":[[1,4,2],[4,6,1],[2,6,5]]}' },
     { label: 'Single ride', input: '{"n":4,"rides":[[1,4,3]]}' },

@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'Object with s: lowercase letters, e.g. {"s":"bcabc"}',
   url: 'https://leetcode.com/problems/smallest-subsequence-of-distinct-characters/',
   complexity: 'O(n) time and O(1) extra space for at most 26 letters. The visualization caps input at 40 letters.',
+  question: "Return the lexicographically smallest subsequence that contains each distinct letter exactly once.",
+  approaches: [
+    { name: "Monotonic stack with last occurrences", intuition: "Pop a larger letter from the stack when it appears again later, and keep each letter once.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"s":"bcabc"}' },
     { label: 'Example 2', input: '{"s":"cbacdcbc"}' },

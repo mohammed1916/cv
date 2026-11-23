@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'JSON object: {"length": n, "ops": [["set", i, v], ["snap"], ["get", i, id]]}',
   url: 'https://leetcode.com/problems/snapshot-array/',
   complexity: 'Each set or snapshot is constant time; each get is a binary search over that index history. The visualization caps input at 6 indices and 16 operations.',
+  question: "Support set, snapshot and get operations on an array, where get reads the value at an earlier snapshot.",
+  approaches: [
+    { name: "Per-index history with binary search", intuition: "Store each index's (snapshot, value) history; read the latest entry at or before the requested snapshot.", time: "O(log s) per get", space: "O(total writes)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"length":3,"ops":[["set",0,5],["snap"],["set",0,6],["get",0,0]]}' },
     { label: 'Example 2', input: '{"length":2,"ops":[["snap"],["set",1,7],["snap"],["get",1,0],["get",1,1]]}' },

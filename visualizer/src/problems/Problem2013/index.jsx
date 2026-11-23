@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Operations as ["add" or "count", [x, y]] (JSON)',
   url: 'https://leetcode.com/problems/detect-squares/',
   complexity: 'add is O(1); count is O(distinct stored points) with map lookups.',
+  question: "Support adding points and counting axis-aligned squares formed with a query point.",
+  approaches: [
+    { name: "Point counts and diagonal scan", intuition: "Keep counts of each point; for a query, multiply the counts of each diagonal point that forms a square.", time: "O(k) per query", space: "O(n)" },
+  ],
   examples: [
     { label: 'Corner query', input: '[["add",[1,1]],["add",[4,1]],["add",[1,4]],["count",[4,4]]]' },
     { label: 'Duplicates', input: '[["add",[2,2]],["add",[2,2]],["add",[5,2]],["add",[5,5]],["count",[2,5]]]' },

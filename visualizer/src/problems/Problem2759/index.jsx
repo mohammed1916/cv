@@ -2,6 +2,10 @@ import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import * as model from './algorithm'
 
 const definition = {
+  question: "Given a JSON string, parse it into a value without using the built-in parser.",
+  approaches: [
+    { name: "Recursive descent parser", intuition: "Read tokens one at a time, building arrays, objects, and primitives recursively.", time: "O(length)", space: "O(depth)" },
+  ],
   phases: model.PHASES, parse: model.parseInput, build: model.buildTrace, code: model.code, python: model.python,
   inputLabel: model.INPUT_LABEL, url: model.URL, complexity: model.COMPLEXITY, examples: model.EXAMPLES,
 }

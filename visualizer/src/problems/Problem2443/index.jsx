@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON object with num from 0 to 1000, for example {"num":443}',
   url: 'https://leetcode.com/problems/sum-of-number-and-its-reverse/',
   complexity: 'O(num * digits) time for the search. The visualization caps num at 1000.',
+  question: "Decide whether a non-negative integer num equals some x plus the reverse of x.",
+  approaches: [
+    { name: "Try every candidate", intuition: "Test each x from 0 up to num and compare x plus its reverse with num.", time: "O(num * digits)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Match', input: '{"num":443}' },
     { label: 'No match', input: '{"num":63}' },

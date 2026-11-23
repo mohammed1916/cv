@@ -14,6 +14,11 @@ const definition = {
   inputLabel: 'Object with hours and target (JSON), e.g. {"hours":[0,1,2,3,4],"target":2}',
   url: 'https://leetcode.com/problems/number-of-employees-who-met-the-target/',
   complexity: 'O(n) time and O(1) space for n employees. The visualization caps input at 50 employees, the official limit.',
+  question: "Count how many employees worked at least a target number of hours.",
+  approaches: [
+    { name: "Single pass count", intuition: "Increment a counter for each employee meeting the target.", time: "O(n)", space: "O(1)" },
+    { name: "Filter then length", intuition: "Filter the array and return the length of the result.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Hours with a zero', input: '{"hours":[7,0,7,1,8],"target":4}' },
     { label: 'Six hours, larger target', input: '{"hours":[9,9,1,2,12,3],"target":10}' },

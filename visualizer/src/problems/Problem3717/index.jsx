@@ -11,6 +11,10 @@ const definition = {
   inputLabel: "List of positive integers (e.g. [1,8,5,9])",
   url: "https://leetcode.com/problems/minimum-operations-to-make-the-array-beautiful/",
   complexity: "Dynamic search over candidate values: O(n times V squared) time in the simple form used here, where V is twice the largest input value, and O(V) space per layer. A greedy smallest-multiple choice is not enough, so every candidate keeps its cheapest chain. The visualization caps the array at 8 values of at most 20.",
+  question: "Find the fewest operations to make an array beautiful, where each step changes the value at a position.",
+  approaches: [
+    { name: "Reach by dividing values", intuition: "Track the cheapest cost to reach each value that divides the next position's values.", time: "O(n * max value)", space: "O(max value)" },
+  ],
   examples: [
     { label: "Expensive middle", input: "[1,8,5,9]" },
     { label: "Small chain", input: "[4,6,9]" },

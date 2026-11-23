@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Object with a nums list of 0s and 1s (JSON)',
   url: 'https://leetcode.com/problems/longest-subarray-of-1s-after-deleting-one-element/',
   complexity: 'O(n) time and O(1) extra space: each index enters and leaves the window once.',
+  question: "Find the longest run of ones left after deleting exactly one element.",
+  approaches: [
+    { name: "Sliding window with one zero allowed", intuition: "Expand the window and shrink it when a second zero appears; the answer is the window length minus one.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'One zero inside', input: '{"nums":[1,1,0,1]}' },
     { label: 'Two zero blocks', input: '{"nums":[0,1,1,1,0,1,1]}' },

@@ -17,6 +17,10 @@ const definition = {
   inputLabel: 'Input {n, dislikes} (JSON, n ≤ 20)',
   url: 'https://leetcode.com/problems/possible-bipartition/',
   complexity: 'O(n + m) time and space for BFS colouring.',
+  question: "Decide whether people can be split into two groups so that no two people who dislike each other share a group.",
+  approaches: [
+    { name: "BFS two-colouring", intuition: "Colour each person and give dislikers the opposite colour; a clash means the split is impossible.", time: "O(V + E)", space: "O(V + E)" },
+  ],
   examples: [
     { label: 'Possible', input: '{"n":4,"dislikes":[[1,2],[1,3],[2,4]]}' },
     { label: 'Triangle (impossible)', input: '{"n":3,"dislikes":[[1,2],[1,3],[2,3]]}' },

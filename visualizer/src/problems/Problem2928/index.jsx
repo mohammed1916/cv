@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with n and limit (JSON)',
   url: 'https://leetcode.com/problems/distribute-candies-among-children-i/',
   complexity: 'O(n^2) time with two nested loops. The visualization caps n and limit at 50.',
+  question: "Count the ways to split n candies among three children with a per-child limit when n and limit are small.",
+  approaches: [
+    { name: "Enumerate two children", intuition: "Fix the first two shares and check whether the third share is within the limit.", time: "O(min(n, limit)^2)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Eight items, limit four', input: '{"n":8,"limit":4}' },
     { label: 'Limit equals n', input: '{"n":7,"limit":7}' },

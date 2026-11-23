@@ -13,6 +13,11 @@ const definition = {
   inputLabel: 'Object with head (JSON list of positive integers)',
   url: 'https://leetcode.com/problems/insert-greatest-common-divisors-in-linked-list/',
   complexity: 'O(n) time for n nodes, with constant extra pointers. The visualization caps the list at 12 values.',
+  question: "Between each pair of neighbouring nodes in a linked list, insert a node holding the greatest common divisor of their values.",
+  approaches: [
+    { name: "Single pass insertion", intuition: "Walk the list, and insert the gcd between each node and its successor.", time: "O(n log V)", space: "O(1) extra" },
+    { name: "Build a new list", intuition: "Create a fresh list with gcd nodes between the originals.", time: "O(n log V)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"head":[18,6,10,3]}' },
     { label: 'Two nodes', input: '{"head":[7,5]}' },

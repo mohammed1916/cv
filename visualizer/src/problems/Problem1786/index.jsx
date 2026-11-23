@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'Graph {"n": nodes, "edges": [[u, v, w], ...]} (JSON)',
   url: 'https://leetcode.com/problems/number-of-restricted-paths-from-first-to-last-node/',
   complexity: 'O((V + E) log V) time for Dijkstra plus O(V log V + E) for the count. The visualization caps input at 8 nodes.',
+  question: "Count the paths from the first node to the last that always move to nodes closer to the target.",
+  approaches: [
+    { name: "Dijkstra then path DP", intuition: "Compute distances to the last node, then count paths along which the distance decreases each step.", time: "O((V + E) log V)", space: "O(V + E)" },
+  ],
   examples: [
     { label: 'Six-node weighted ring', input: '{"n":6,"edges":[[1,2,4],[2,3,1],[3,4,6],[4,5,2],[5,6,3],[6,1,5],[2,5,7]]}' },
     { label: 'Path', input: '{"n":3,"edges":[[1,2,1],[2,3,1],[1,3,5]]}' },

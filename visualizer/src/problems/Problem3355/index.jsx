@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with nums and queries (JSON)',
   url: 'https://leetcode.com/problems/zero-array-transformation-i/',
   complexity: 'O(n + q) time and O(n) space. The visualization caps input at 8 values and 6 queries.',
+  question: "Decide whether each element can be reduced to zero by applying the query ranges once each.",
+  approaches: [
+    { name: "Difference array", intuition: "Add each query to a difference array, then prefix-sum it and compare with the values.", time: "O(n + q)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Own: five values, two ranges', input: '{"nums":[3,1,4,1,5],"queries":[[0,4],[1,3]]}' },
     { label: 'Long range over seven values', input: '{"nums":[3,3,0,1,5,2,4],"queries":[[2,6]]}' },

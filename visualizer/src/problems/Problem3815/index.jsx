@@ -14,6 +14,11 @@ const definition = {
   inputLabel: 'Object with ops: a list such as ["addBid", user, item, amount]',
   url: 'https://leetcode.com/problems/design-auction-system/',
   complexity: 'Each query scans one item here; a per-item ordered structure would answer queries faster.',
+  question: "Design an auction system that records bids per item and reports the highest bidder.",
+  approaches: [
+    { name: "Scan the item's bids", intuition: "Keep each item's bids by user and compare amount and then user id when asked.", time: "O(bids) per query", space: "O(bids)" },
+    { name: "Ordered structure per item", intuition: "Keep bids in an ordered structure so the top bid is read directly.", time: "O(log bids) per query", space: "O(bids)" },
+  ],
   examples: [
     { label: 'Tie on amount', input: '{"ops":[["addBid",1,1,5],["addBid",2,1,7],["addBid",3,1,7],["getHighestBidder",1],["updateBid",1,1,9],["getHighestBidder",1],["removeBid",3,1],["getHighestBidder",1],["getHighestBidder",2]]}' },
     { label: 'One bid query', input: '{"ops":[["addBid",1,1,5],["getHighestBidder",1]]}' },

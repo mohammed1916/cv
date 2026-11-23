@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with nums (positive integers)',
   url: 'https://leetcode.com/problems/minimum-division-operations-to-make-array-non-decreasing/description/',
   complexity: 'O(n * sqrt(max value)) time for trial division, O(1) extra space beyond the working copy.',
+  question: "Find the fewest division operations that make an array non-decreasing, where each division replaces a value with its smallest divisor.",
+  approaches: [
+    { name: "Greedy from the right", intuition: "Scan from the right, and where a value is too large, divide it by its smallest prime factor.", time: "O(n * sqrt(max value))", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example', input: '{"nums":[12,9,8]}' },
     { label: 'Stuck prime', input: '{"nums":[5,5,4]}' },

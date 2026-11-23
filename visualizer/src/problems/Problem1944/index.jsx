@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON array of distinct heights (e.g. [10,6,8,5,11])',
   url: 'https://leetcode.com/problems/number-of-visible-people-in-a-queue/',
   complexity: 'O(n) time: each person is pushed and popped at most once. The stack is the set of people still able to be seen from the left.',
+  question: "For each person in a queue, count how many people to their right they can see, given that shorter people between them do not block the view.",
+  approaches: [
+    { name: "Monotonic stack from the right", intuition: "Scan from the right with a stack of heights that could still be seen; each popped person is visible once.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Mixed heights', input: '[10,6,8,5,11]' },
     { label: 'Increasing', input: '[1,2,3,4]' },

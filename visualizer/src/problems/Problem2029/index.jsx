@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Stone values (JSON)',
   url: 'https://leetcode.com/problems/stone-game-ix/',
   complexity: 'O(n) time: one pass to count residues modulo 3.',
+  question: "Decide whether Alice wins a stone game where each stone has a value and the removal rules depend on counts modulo three.",
+  approaches: [
+    { name: "Count residues and parity", intuition: "Count stones by value modulo three and apply the winning rule based on counts and parity.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Odd zeros', input: '[3,6,1,2]' },
     { label: 'Even zeros', input: '[3,6,2,1]' },

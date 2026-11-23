@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Numbers as JSON: {"nums": [...]}',
   url: 'https://leetcode.com/problems/count-number-of-distinct-integers-after-reverse-operations/',
   complexity: 'O(n * d) time for n numbers of d digits, and O(n) space. The visualization caps input at 30 numbers.',
+  question: "Add the reverse of every number to a set and count how many distinct values the set holds.",
+  approaches: [
+    { name: "Set of numbers and reversals", intuition: "Insert each number and its digit reversal into a set, then report the set size.", time: "O(n * d)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Own: four values', input: '{"nums":[17,3,22,8]}' },
     { label: 'Own: two values', input: '{"nums":[5,9]}' },

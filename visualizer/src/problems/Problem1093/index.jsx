@@ -20,6 +20,10 @@ const definition = {
   inputLabel: 'Counts for values 0 to 255 (JSON array of 256 integers)',
   url: 'https://leetcode.com/problems/statistics-from-a-large-sample/',
   complexity: 'O(256 + total) time and O(1) extra space. The visualization caps the total at 200 samples.',
+  question: "From a frequency table of samples with values 0 to 255, compute the minimum, maximum, mean, median and mode.",
+  approaches: [
+    { name: "Counted scan", intuition: "Walk the counts once; the median uses the middle positions of the cumulative counts.", time: "O(256 + total)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: countsJson([[1, 1], [2, 3], [3, 4]]) },
     { label: 'Single value', input: countsJson([[7, 1]]) },

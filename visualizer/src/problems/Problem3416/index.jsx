@@ -8,6 +8,10 @@ const definition = {
   inputLabel: 'Object with nums (5 to 24 integers here)',
   url: 'https://leetcode.com/problems/subsequences-with-a-unique-middle-mode-ii/',
   complexity: 'O(n) expected time and O(k) space for k distinct values, using five running sums. The official length is up to 100,000; the visualization caps nums at 24 entries.',
+  question: "Count odd-length subsequences whose middle value is the one value that appears most often inside them.",
+  approaches: [
+    { name: "Running sums per value", intuition: "Track five running sums over the values so each candidate middle is counted in one pass.", time: "O(n) expected", space: "O(k)" },
+  ],
   examples: [
     { label: 'Mixed', input: '{"nums":[7,2,7,9,4,7,2]}' },
     { label: 'Tie risk', input: '{"nums":[3,8,3,8,5,6]}' },

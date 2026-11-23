@@ -13,6 +13,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Object {head, nums} (JSON)',
   url: 'https://leetcode.com/problems/linked-list-components/',
   complexity: 'O(n + m) time and O(m) space for the set.',
+  question: "Given a linked list with unique values and a subset G, count the maximal runs of consecutive list nodes whose values are in G.",
+  approaches: [
+    { name: "Count run ends", intuition: "Count the nodes in G whose next node is not in G (or is missing), using a set for membership.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Two separate blocks', input: '{"head":[4,7,2,9,5],"nums":[7,5]}' },
     { label: 'Whole list selected', input: '{"head":[1,6,3,8],"nums":[1,3,6,8]}' },

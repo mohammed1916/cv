@@ -12,6 +12,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Tree (LeetCode level-order JSON array)',
   url: 'https://leetcode.com/problems/find-duplicate-subtrees/',
   complexity: 'O(n) nodes, each serialized once; the key length can add up to O(n²) characters in the worst case.',
+  question: "Find one root for each duplicate subtree shape in a binary tree.",
+  approaches: [
+    { name: "Subtree serialisation map", intuition: "Serialise each subtree bottom-up and count identical strings, reporting roots whose serialisation appears twice.", time: "O(n^2) worst case", space: "O(n^2)" },
+  ],
   examples: [
     { label: 'Leaf pairs', input: '[5,4,4,3,null,3]' },
     { label: 'Repeated leaves', input: '[1,1,1,null,1]' },

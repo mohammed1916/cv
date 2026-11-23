@@ -8,6 +8,11 @@ const definition = {
   inputLabel: 'Grid as a JSON list of rows; -1 is blocked, other cells hold 0 to 9',
   url: 'https://leetcode.com/problems/sum-of-remoteness-of-all-cells/',
   complexity: 'O(R * C) time and space for an R x C grid: one flood fill labels every component once. The visualization caps the grid at 6 x 6.',
+  question: "For each grid cell, compute the sum of the sizes of the other connected groups that are not reachable from it, called remoteness.",
+  approaches: [
+    { name: "Flood fill components then sum sizes", intuition: "Label each connected component of open cells; a cell's remoteness is the total open cells outside its component.", time: "O(R C)", space: "O(R C)" },
+    { name: "Repeated search from each cell", intuition: "Run a search from each cell and count the cells it cannot reach.", time: "O((R C)^2)", space: "O(R C)" },
+  ],
   examples: [
     { label: 'Two islands', input: '[[1, -1], [-1, 3]]' },
     { label: 'One pocket', input: '[[4, 0, -1], [2, 7, -1], [-1, -1, 5]]' },

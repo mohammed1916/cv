@@ -16,6 +16,10 @@ const definition = {
   inputLabel: 'Tree as JSON: nums, edges',
   url: 'https://leetcode.com/problems/create-components-with-same-value/',
   complexity: 'O(n * d(S)) time for the splits tried, where S is the total value. The visualization caps input at 10 vertices.',
+  question: "Cut a tree at some edges so that every resulting component has the same value sum, and maximise the number of components.",
+  approaches: [
+    { name: "Try divisors of the total", intuition: "Each valid component count divides the total value, so try each divisor and check greedily from the leaves.", time: "O(n * d(S))", space: "O(n)" },
+  ],
   examples: [
     { label: 'Five vertices', input: '{"nums":[4,1,7,2,7],"edges":[[0,2],[2,1],[2,3],[3,4]]}' },
     { label: 'Two parts', input: '{"nums":[3,3,3],"edges":[[0,1],[1,2]]}' },

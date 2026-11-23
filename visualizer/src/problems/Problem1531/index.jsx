@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with s (1 to 12 lowercase letters) and k',
   url: 'https://leetcode.com/problems/string-compression-ii/',
   complexity: 'O(n^2 * k) states with memoization, each with two choices. The visualization caps s at 12 characters.',
+  question: "Find the shortest string that remains after deleting at most k characters and compressing runs.",
+  approaches: [
+    { name: "DP over position, run and deletions", intuition: "At each character choose to delete it or keep it, memoising by position, last letter, run length and deletions left.", time: "O(n^2 * k) states", space: "O(n^2 * k)" },
+  ],
   examples: [
     { label: 'Pairs of letters, two deletions', input: '{"s":"aabbccdd","k":2}' },
     { label: 'Runs with four deletions', input: '{"s":"mmmnnnnoo","k":4}' },

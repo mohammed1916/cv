@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Lowercase letters and ? (at most 3 question marks), as a JSON string',
   url: 'https://leetcode.com/problems/replace-question-marks-in-string-to-minimize-its-value/',
   complexity: 'O(q * 26) for q question marks. The visualization caps the question marks at 3.',
+  question: "Replace the question marks in a string with letters so that the total cost is as small as possible.",
+  approaches: [
+    { name: "Greedy least-used letters", intuition: "Give each question mark the least-used letter so far, taking letters in alphabetical order on ties.", time: "O(n + 26 log 26)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Own: two gaps', input: '"ab?c?d"' },
     { label: 'Alternating question marks', input: '"x?y?z"' },

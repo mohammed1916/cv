@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Daily hours (JSON array)',
   url: 'https://leetcode.com/problems/longest-well-performing-interval/',
   complexity: 'O(n) time and O(n) space. The visualization caps the input at 40 days.',
+  question: "Find the longest interval of days in which tiring days outnumber the other days.",
+  approaches: [
+    { name: "Prefix balance with first index", intuition: "Map each positive balance to its first position; a later balance one higher than a stored one gives a valid interval.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Mixed', input: '[9,9,6,1]' },
     { label: 'Long run', input: '[6,9,9,6,6,9,9,9]' },

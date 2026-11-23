@@ -11,6 +11,10 @@ const definition = {
   inputLabel: 'Object with n and t',
   url: 'https://leetcode.com/problems/smallest-divisible-digit-product-i/',
   complexity: 'O(answer * digits) time; the answer stays close to n because a zero digit makes the product 0.',
+  question: "Find the smallest number at least n whose digit product is divisible by t.",
+  approaches: [
+    { name: "Check candidates in order", intuition: "Test each number from n upward, computing its digit product and checking divisibility by t.", time: "O(answer * digits)", space: "O(digits)" },
+  ],
   examples: [
     { label: 'Invented n and t', input: '{"n":15,"t":7}' },
     { label: 'Zero digit', input: '{"n":99,"t":10}' },

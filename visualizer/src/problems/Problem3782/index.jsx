@@ -13,6 +13,11 @@ const definition = {
   inputLabel: 'Count (JSON object with n)',
   url: 'https://leetcode.com/problems/last-remaining-integer-after-alternating-deletion-operations/',
   complexity: 'O(n) time for simulation in this visualization. The problem allows n up to 10^15, which needs the reverse-tracing method. The visualization caps n at 200.',
+  question: "Alternately delete numbers from the left and right until one integer remains, and report that integer.",
+  approaches: [
+    { name: "Simulate the deletions", intuition: "Delete every second number from alternating ends until one remains.", time: "O(n)", space: "O(n)" },
+    { name: "Reverse tracing", intuition: "Trace the surviving position back through the deletion rounds.", time: "O(log n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"n":8}' },
     { label: 'Example 2', input: '{"n":5}' },

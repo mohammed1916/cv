@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON object with ranks (five integers 1 to 13) and suits (five letters a to d)',
   url: 'https://leetcode.com/problems/best-poker-hand/',
   complexity: 'O(1) time, since a hand has five cards.',
+  question: "Classify a five-card poker hand as the best hand it forms.",
+  approaches: [
+    { name: "Count suits and ranks", intuition: "Count the suits and the rank frequencies, then match the counts to the hand categories.", time: "O(1)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Flush', input: '{"ranks":[13,2,3,1,9],"suits":["a","a","a","a","a"]}' },
     { label: 'Pair', input: '{"ranks":[4,4,2,6,10],"suits":["a","b","c","d","a"]}' },

@@ -13,6 +13,11 @@ const definition = {
   inputLabel: 'Words (JSON array of lowercase words)',
   url: 'https://leetcode.com/problems/short-encoding-of-words/',
   complexity: 'O(total length^2) for the suffix slices in this version; a trie gives O(total length).',
+  question: "Return the length of the shortest reference string that encodes every word, where each word ends at a # marker in the reference.",
+  approaches: [
+    { name: "Remove suffix words", intuition: "A word is needed only if no other word ends with it; remove every proper suffix of each word from a set.", time: "O(total length^2) with substring checks", space: "O(total length)" },
+    { name: "Reversed-word trie", intuition: "Insert reversed words into a trie and sum the lengths of the leaves.", time: "O(total length)", space: "O(total length)" },
+  ],
   examples: [
     { label: 'Suffix', input: '["time","me","bell"]' },
     { label: 'Repeat', input: '["pot","top","pot","opt"]' },

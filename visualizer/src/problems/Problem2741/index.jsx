@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with a distinct array nums (JSON)',
   url: 'https://leetcode.com/problems/special-permutations/',
   complexity: 'O(2^n * n^2) time and O(2^n * n) space. The visualization caps nums at 8 entries.',
+  question: "Given an array, count the permutations where each adjacent pair has one divisible by the other, modulo a prime.",
+  approaches: [
+    { name: "Bitmask DP", intuition: "Track the set of used numbers and the last number, extending the permutation one value at a time.", time: "O(2^n * n^2)", space: "O(2^n * n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"nums":[1,4,3]}' },
     { label: 'Powers of two', input: '{"nums":[2,4,8]}' },

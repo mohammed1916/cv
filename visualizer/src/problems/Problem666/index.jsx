@@ -13,6 +13,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Nodes (JSON array of three-digit strings DPV)',
   url: 'https://leetcode.com/problems/path-sum-iv/',
   complexity: 'O(n) time for n nodes and O(depth) recursion space.',
+  question: "Sum every root-to-leaf path of a binary tree given as three-digit codes for depth, position and value.",
+  approaches: [
+    { name: "Build tree then DFS", intuition: "Decode the codes into a tree, then add each root-to-leaf path as a number.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Small tree', input: '["113","215","221"]' },
     { label: 'Chain', input: '["111","222","333"]' },

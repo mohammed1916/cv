@@ -11,6 +11,10 @@ const definition = {
   inputLabel: 'JSON object with piles and k (e.g. {"piles":[5,4,9],"k":2})',
   url: 'https://leetcode.com/problems/remove-stones-to-minimize-the-total/',
   complexity: 'O(n + k log n) time: heapify once, then one sift-down per operation.',
+  question: "Repeatedly reduce the heaviest pile by taking away roughly half of it, and report the smallest total after a fixed number of operations.",
+  approaches: [
+    { name: "Max-heap", intuition: "Keep the piles in a max-heap; each operation takes the largest pile and leaves its ceiling-half.", time: "O(k log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Two operations', input: '{"piles":[5,4,9],"k":2}' },
     { label: 'One pile', input: '{"piles":[7],"k":1}' },

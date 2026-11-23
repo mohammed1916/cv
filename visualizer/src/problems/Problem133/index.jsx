@@ -29,6 +29,11 @@ const definition = {
   inputLabel: "Adjacency list (JSON object, e.g. {\"adj_list\": [[2,4],[1,3],[2,4],[1,3]]})",
   url: "https://leetcode.com/problems/clone-graph/",
   complexity: "O(V + E) time and space for V nodes and E edges. The visualization caps the graph at 100 nodes.",
+  question: "Make a deep copy of a connected graph of nodes.",
+  approaches: [
+    { name: "Depth-first with map", intuition: "Map each original node to its copy and fill in neighbours recursively.", time: "O(V + E)", space: "O(V)" },
+    { name: "Breadth-first with map", intuition: "Visit nodes level by level, creating copies as they are first met.", time: "O(V + E)", space: "O(V)" },
+  ],
   examples: getExamples("clone-graph").map(({ label, input }) => ({ label, input: JSON.stringify({ adj_list: JSON.parse(input) }) })),
 };
 

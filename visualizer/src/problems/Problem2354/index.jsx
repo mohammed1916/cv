@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Positive integers and k as JSON, e.g. {"nums": [1,2,3,1], "k": 3}',
   url: 'https://leetcode.com/problems/number-of-excellent-pairs/',
   complexity: 'O(d + 32 * 32) time for d distinct values. The visualization caps nums at 12 values.',
+  question: "Count the ordered pairs of values whose combined number of set bits is at least k.",
+  approaches: [
+    { name: "Count bit counts of distinct values", intuition: "Group distinct values by bit count and count the pairs whose bit counts add to at least k.", time: "O(d + 32 * 32)", space: "O(d)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"nums": [6,3,12,3], "k": 3}' },
     { label: 'Example 2', input: '{"nums": [7,8,1], "k": 4}' },

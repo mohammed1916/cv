@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with obj1 and obj2 (JSON objects, nesting allowed)',
   url: 'https://leetcode.com/problems/differences-between-two-objects/',
   complexity: 'O(total keys) time. Each key of both objects is compared once.',
+  question: "Given two objects, return the keys whose values differ, showing each side's value.",
+  approaches: [
+    { name: "Compare each key", intuition: "Walk the keys of both objects and record the entries whose values do not match.", time: "O(keys)", space: "O(keys)" },
+  ],
   examples: [
     { label: 'Nested change', input: '{"obj1":{"a":1,"nest":{"x":true,"y":[1,2]}},"obj2":{"a":1,"nest":{"x":false,"y":[1,2]},"extra":"new"}}' },
     { label: 'Same objects', input: '{"obj1":{"k":"v"},"obj2":{"k":"v"}}' },

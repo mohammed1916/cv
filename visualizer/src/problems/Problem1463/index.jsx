@@ -9,6 +9,10 @@ const definition = {
   inputLabel: 'Grid as a JSON array of rows',
   url: 'https://leetcode.com/problems/cherry-pickup-ii/',
   complexity: 'O(rows * cols^2 * 9) time: each row checks every pair of columns against nine previous pairs. O(cols^2) space.',
+  question: "Two robots collect cherries from a grid, moving down row by row; find the maximum total collected.",
+  approaches: [
+    { name: "Row-by-row DP over column pairs", intuition: "The state is the pair of columns where the two robots stand; try the nine legal moves from each pair.", time: "O(rows * cols^2 * 9)", space: "O(cols^2)" },
+  ],
   examples: [
     { label: 'Two rows', input: '[[1,2],[3,4]]' },
     { label: 'Single row', input: '[[5,6,7]]' },

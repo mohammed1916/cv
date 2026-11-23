@@ -19,6 +19,10 @@ const definition = {
   inputLabel: "Positive integer n (e.g. 22)",
   url: "https://leetcode.com/problems/maximum-number-that-makes-result-of-bitwise-and-zero/",
   complexity: "O(log n) time and O(1) extra space: one pass over the binary digits of n. The visualization accepts n up to 10^9.",
+  question: "Find the largest number not above n whose bitwise AND over the range from it up to n is zero.",
+  approaches: [
+    { name: "Highest power of two", intuition: "The answer is one less than the largest power of two that is at most n, because that range contains a number with no shared bits.", time: "O(log n)", space: "O(1)" },
+  ],
   examples: [
     { label: "Mixed bits", input: "22" },
     { label: "Power of two", input: "8" },

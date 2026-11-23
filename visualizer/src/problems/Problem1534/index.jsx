@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Values and three limits (JSON object)',
   url: 'https://leetcode.com/problems/count-good-triplets/',
   complexity: 'O(n^3) time and O(1) extra space: every index triple is checked once. Input is kept small here so the whole run can be followed.',
+  question: "Count triples of indices whose values satisfy three difference limits.",
+  approaches: [
+    { name: "Triple loop", intuition: "Test every ordered triple of indices against the three limits.", time: "O(n^3)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Mixed', input: '{"arr":[4,2,6,3,8],"a":3,"b":2,"c":4}' },
     { label: 'Single good', input: '{"arr":[1,2,3],"a":1,"b":1,"c":2}' },

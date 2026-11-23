@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with nums (at least 3 integers)',
   url: 'https://leetcode.com/problems/maximize-expression-of-three-elements/',
   complexity: 'O(n log n) in this trace, which sorts the other values for each subtracted index.',
+  question: "Pick three elements from an array to maximise the first plus the second minus the third.",
+  approaches: [
+    { name: "Fix the subtracted element", intuition: "For each candidate subtracted value, add the two largest of the remaining values.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example', input: '{"nums":[1,4,2,5]}' },
     { label: 'Ascending', input: '{"nums":[1,2,3,4]}' },

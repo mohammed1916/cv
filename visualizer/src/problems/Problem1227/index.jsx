@@ -6,6 +6,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'Object with n (JSON)',
   complexity: 'O(1) time for the closed form. The trace groups the middle seats into one step.',
+  question: "Find the probability that the last passenger sits in their own seat when the first passenger sits randomly.",
+  approaches: [
+    { name: "Closed form", intuition: "The answer is one half for more than one passenger, since the first passenger's choice decides the outcome.", time: "O(1)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Many passengers', input: '{"n":72}' },
     { label: 'One passenger', input: '{"n":1}' },

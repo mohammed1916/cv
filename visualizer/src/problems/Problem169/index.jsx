@@ -8,6 +8,11 @@ const definition = {
   inputLabel: 'Array of integers (JSON), where one value appears more than half the time',
   url: 'https://leetcode.com/problems/majority-element/',
   complexity: 'O(n) time and O(1) extra space: one pass that keeps a single candidate and a vote count.',
+  question: "Find the element that appears more than half the time in an array.",
+  approaches: [
+    { name: "Boyer-Moore vote", intuition: "Keep one candidate and a counter; matching values raise the counter and others lower it.", time: "O(n)", space: "O(1)" },
+    { name: "Hash count", intuition: "Count occurrences in a map and take the highest.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Clear majority', input: '[2,2,1,1,1,2,2]' },
     { label: 'Single value', input: '[5]' },

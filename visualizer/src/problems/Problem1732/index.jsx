@@ -14,6 +14,10 @@ const definition = {
   complexity,
   inputLabel: 'JSON array of altitude gains',
   url: 'https://leetcode.com/problems/find-the-highest-altitude/',
+  question: "Find the highest altitude reached while walking a route of altitude changes.",
+  approaches: [
+    { name: "Running prefix sum", intuition: "Add each change to a running altitude and keep the maximum.", time: "O(n)", space: "O(1)" },
+  ],
 }
 
 export default function Problem1732Visualizer() {

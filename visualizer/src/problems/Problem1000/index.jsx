@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Object with stones and k (JSON)',
   url: 'https://leetcode.com/problems/minimum-cost-to-merge-stones/',
   complexity: 'O(n^3 * k) time with interval DP over n piles of at most 8 in this view, and O(n^2 * k) space.',
+  question: "Given piles of stones and a group size k, find the least total cost to merge all piles into one, where each merge combines exactly k consecutive piles.",
+  approaches: [
+    { name: "Interval DP over merge blocks", intuition: "A block of piles can become one pile only when its length fits the k-merge rule; combine the best k-pile split of a block and add the block total when it collapses.", time: "O(n^3 * k)", space: "O(n^2 * k)" },
+  ],
   examples: [
     { label: 'Pairs', input: '{"stones":[1,2,3],"k":2}' },
     { label: 'Triples', input: '{"stones":[1,1,1,1,1],"k":3}' },

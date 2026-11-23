@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Points as JSON [[day, price], ...] (1 to 20, distinct days)',
   url: 'https://leetcode.com/problems/minimum-lines-to-represent-a-line-chart/',
   complexity: 'O(n log n) time from the sort, O(1) extra space. The visualization caps input at 10 points.',
+  question: "Given points sorted by x, count the fewest straight segments needed to connect them into a line chart.",
+  approaches: [
+    { name: "Compare slopes by cross product", intuition: "Walk the sorted points and start a new segment only when the slope changes, checked with cross multiplication to avoid division.", time: "O(n log n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Four days', input: '[[3,5],[1,9],[6,2],[4,7]]' },
     { label: 'Collinear', input: '[[3,4],[1,2],[7,8],[2,3]]' },

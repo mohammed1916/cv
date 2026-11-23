@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with nums (values 1 to 99), for example {"nums":[1,2,3,4,5,14]}',
   url: 'https://leetcode.com/problems/find-if-digit-game-can-be-won/',
   complexity: 'O(n) time and O(1) extra space.',
+  question: "Decide whether Alice can win a digit game where she picks one of two categories and Bob takes the other.",
+  approaches: [
+    { name: "Compare the two totals", intuition: "Alice wins exactly when the two category totals differ, because she takes the larger one.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"nums":[1,2,3,4,5,14]}' },
     { label: 'Example 2', input: '{"nums":[5,5,5,25]}' },

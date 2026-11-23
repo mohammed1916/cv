@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with nums (1 to 8 values, 0 to 15) and k (0 to 7), e.g. {"nums":[3,5,3,2,7],"k":2}',
   url: 'https://leetcode.com/problems/minimize-or-of-remaining-elements-using-operations/',
   complexity: 'O(B * n^2) time for B bits, with an O(n^2) segment DP per bit. The visualization caps the input at 8 values.',
+  question: "Find the smallest possible OR of the remaining elements after a limited number of merge operations.",
+  approaches: [
+    { name: "Greedy bits with merge count", intuition: "Decide bits from high to low and check whether the mask can be cleared within the operation budget.", time: "O(B\u00b7n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Five values, k of two', input: '{"nums":[3,9,5,6,12],"k":2}' },
     { label: 'Zero k, four values', input: '{"nums":[15,0,7,4],"k":0}' },

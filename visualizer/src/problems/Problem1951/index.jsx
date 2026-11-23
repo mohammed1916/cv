@@ -18,6 +18,10 @@ const definition = {
   phases, parse: parseInput, build: buildTrace, code, sql, python, inputLabel,
   url: `https://leetcode.com/problems/${meta.slug}/`,
   complexity, examples,
+  question: "Find the pairs of users that share the largest number of common followers.",
+  approaches: [
+    { name: "Self join and maximum", intuition: "Join the relation with itself, count common followers per pair, and keep pairs with the largest count.", time: "O(r^2)", space: "O(r)" },
+  ],
 }
 
 function Rows({ columns = [], rows = [] }) {

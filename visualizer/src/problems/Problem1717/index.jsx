@@ -14,6 +14,10 @@ const definition = {
   complexity,
   inputLabel: 'Object with s (letters a and b) and x, y (points for "ab" and "ba")',
   url: 'https://leetcode.com/problems/maximum-score-from-removing-substrings/',
+  question: "Remove the substrings ab and ba for points, where one kind is worth more, to maximise the total score.",
+  approaches: [
+    { name: "Take the higher-scoring pair first", intuition: "Remove the higher-valued pair first, then the other pair from what remains.", time: "O(n)", space: "O(n)" },
+  ],
 }
 
 export default function Problem1717Visualizer() {

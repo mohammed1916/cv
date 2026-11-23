@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with m, n, horizontalCut (m minus 1 costs) and verticalCut (n minus 1 costs)',
   url: 'https://leetcode.com/problems/minimum-cost-for-cutting-cake-i/',
   complexity: 'O(m log m + n log n) time after sorting the costs. The visualization caps the cake at 30 by 30.',
+  question: "Find the minimum total cost of cutting a cake into pieces with horizontal and vertical cuts, where each cut's cost is multiplied by the pieces it crosses.",
+  approaches: [
+    { name: "Greedy by most expensive cut", intuition: "Make the most expensive cut first, since a later cut is multiplied by at least as many pieces.", time: "O(m log m + n log n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Four rows, three columns', input: '{"m":4,"n":3,"horizontalCut":[2,9,4],"verticalCut":[6,1]}' },
     { label: 'Own: 3 by 2 grid', input: '{"m":3,"n":2,"horizontalCut":[5,2],"verticalCut":[3]}' },

@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with words (equal length) and target (JSON)',
   url: 'https://leetcode.com/problems/number-of-ways-to-form-a-target-string-given-a-dictionary/',
   complexity: 'O(m * L + w * L) time for m target letters, L columns and w words. The visualization caps each side at 6.',
+  question: "Count the ways to build a target string by picking one column of letters from words in order, using each word's column once per letter.",
+  approaches: [
+    { name: "Column DP", intuition: "Process target letters and columns left to right, counting ways for each target prefix.", time: "O(m * L + w * L)", space: "O(m)" },
+  ],
   examples: [
     { label: 'Four columns', input: '{"words":["xy","yx"],"target":"xyx"}' },
     { label: 'Repeated letters', input: '{"words":["abc","cba"],"target":"bca"}' },

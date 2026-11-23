@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Cake as a JSON object',
   url: 'https://leetcode.com/problems/maximum-area-of-a-piece-of-cake-after-horizontal-and-vertical-cuts/',
   complexity: 'O(H log H + W log W) time for sorting the cut lists, plus O(1) extra space for the gap scan.',
+  question: "Find the largest rectangular piece of cake after making horizontal and vertical cuts.",
+  approaches: [
+    { name: "Sort and take the largest gap", intuition: "Sort each set of cut positions and multiply the widest gap in each direction.", time: "O(H log H + W log W)", space: "O(1) extra" },
+  ],
   examples: [
     { label: 'Sample', input: '{"h":10,"w":6,"horizontalCuts":[3,7],"verticalCuts":[2]}' },
     { label: 'No cuts', input: '{"h":8,"w":8,"horizontalCuts":[],"verticalCuts":[]}' },

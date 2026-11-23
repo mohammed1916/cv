@@ -13,6 +13,11 @@ const definition = {
   inputLabel: 'JSON {"keys": ["id", "name", "id"], "values": [7, "Ada", 9]}',
   url: 'https://leetcode.com/problems/create-object-from-two-arrays/',
   complexity: 'O(n) time and O(n) space for n pairs.',
+  question: "Build an object from two arrays where the first array gives the keys and the second gives the values, keeping the first value for a repeated key.",
+  approaches: [
+    { name: "Loop and assign when absent", intuition: "Walk both arrays together and assign a key only the first time it appears.", time: "O(n)", space: "O(n)" },
+    { name: "Reverse loop overwrite", intuition: "Assign from the end so earlier entries overwrite later ones, which keeps the first value.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Repeated id', input: '{"keys":["id","name","id"],"values":[7,"Ada",9]}' },
     { label: 'Keys of mixed types', input: '{"keys":[3,"3",true],"values":["x","y","z"]}' },

@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON array of 1 to 12 integers from 1 to 100',
   url: 'https://leetcode.com/problems/smallest-unique-subarray/',
   complexity: 'O(n^3) time in this direct comparison and O(1) extra space. The visualization caps the array at 12 values.',
+  question: "Find the length of the shortest subarray that occurs at exactly one starting position in the array.",
+  approaches: [
+    { name: "Longest agreement per start", intuition: "For each start, find the longest match with another start; the shortest unique window is one longer, and the minimum over starts is the answer.", time: "O(n^3)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Repeated run', input: '[4, 4, 4]' },
     { label: 'Mixed values', input: '[1, 2, 1, 2, 3]' },

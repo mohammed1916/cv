@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Two interval lists a and b (JSON)',
   url: 'https://leetcode.com/problems/interval-list-intersections/',
   complexity: 'O(m + n) time for lists of m and n intervals. The visualization caps each list at 12 intervals.',
+  question: "Given two sorted lists of disjoint intervals, return the intervals where they overlap.",
+  approaches: [
+    { name: "Two pointers", intuition: "Intersect the current pair and advance whichever interval ends first.", time: "O(m + n)", space: "O(output)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"a":[[0,2],[5,10],[13,23],[24,25]],"b":[[1,5],[8,12],[15,24],[25,26]]}' },
     { label: 'Smallest: one point each', input: '{"a":[[0,0]],"b":[[0,0]]}' },

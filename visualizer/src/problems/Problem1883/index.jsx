@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with dist, speed, and hours_before (JSON)',
   url: 'https://leetcode.com/problems/minimum-skips-to-arrive-at-meeting-on-time/',
   complexity: 'O(n^2) time and O(n) space for n roads. The visualization caps input at 5 roads.',
+  question: "Find the fewest skipped rests so that a traveller reaches a meeting on time when each road's travel time is rounded up to whole hours before the next.",
+  approaches: [
+    { name: "DP over road and skips", intuition: "Track the earliest arrival time for each count of skipped rests, road by road.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"dist":[1,3,2],"speed":4,"hours_before":2}' },
     { label: 'Example 2', input: '{"dist":[7,3,5,5],"speed":2,"hours_before":10}' },

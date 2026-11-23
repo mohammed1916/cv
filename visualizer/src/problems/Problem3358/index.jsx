@@ -10,6 +10,10 @@ const definition = {
   inputLabel: 'Object with a books table (book_id, title, author, published_year, rating)',
   url: 'https://leetcode.com/problems/books-with-null-ratings/description/',
   complexity: 'Teaching model: one scan with a NULL test per row. Visualization caps the table at 12 rows.',
+  question: "Count the books whose rating is missing, using a NULL check on each row.",
+  approaches: [
+    { name: "Scan with a NULL test", intuition: "Read each row once and count the rows where the rating is null.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example', input: '{"books":[{"book_id":1,"title":"Dune","author":"Herbert","published_year":1965,"rating":4.5},{"book_id":2,"title":"Ulysses","author":"Joyce","published_year":1922,"rating":null},{"book_id":3,"title":"Emma","author":"Austen","published_year":1815,"rating":0},{"book_id":4,"title":"Beloved","author":"Morrison","published_year":1987,"rating":null},{"book_id":5,"title":"Notes","author":"Anon","published_year":2000,"rating":null}]}' },
     { label: 'Zeros only', input: '{"books":[{"book_id":7,"title":"Zero Star","author":"A","published_year":2001,"rating":0}]}' },

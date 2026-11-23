@@ -14,6 +14,10 @@ const definition = {
   complexity,
   inputLabel: 'Integer n of days, from 1 to 1000',
   url: 'https://leetcode.com/problems/calculate-money-in-leetcode-bank/',
+  question: "Calculate the total money saved in a bank over n days when the daily deposit grows by one each day and resets each Monday.",
+  approaches: [
+    { name: "Simulate day by day", intuition: "Add each day's deposit, resetting the base each Monday.", time: "O(n)", space: "O(1)" },
+  ],
 }
 
 export default function Problem1716Visualizer() {

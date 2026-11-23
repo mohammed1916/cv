@@ -14,6 +14,10 @@ const definition = {
   complexity,
   inputLabel: 'JSON array of integers',
   url: 'https://leetcode.com/problems/sort-array-by-increasing-frequency/',
+  question: "Sort an array so values with lower frequency come first, and ties go to the larger value first.",
+  approaches: [
+    { name: "Count then sort", intuition: "Count each value, then sort with a comparator on frequency and value.", time: "O(n log n)", space: "O(n)" },
+  ],
 }
 
 export default function Problem1636Visualizer() {

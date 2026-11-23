@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Tree (JSON object with parent and s)',
   url: 'https://leetcode.com/problems/check-if-dfs-strings-are-palindromes/',
   complexity: 'O(n^2) time in this trace, since each node string is rebuilt. The visualization caps input at 10 nodes.',
+  question: "In a tree of strings, check whether the depth-first string from each node is a palindrome.",
+  approaches: [
+    { name: "Rebuild each node's string", intuition: "For each node, build its depth-first string and test it for palindrome.", time: "O(n^2)", space: "O(n^2)" },
+  ],
   examples: [
     { label: 'Own: tree of six nodes', input: '{"parent":[-1,0,1,1,2,4],"s":"bacdeb"}' },
     { label: 'Own: four nodes, two levels', input: '{"parent":[-1,0,0,2],"s":"zzyx"}' },

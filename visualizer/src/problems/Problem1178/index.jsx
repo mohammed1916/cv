@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Words and puzzles (JSON object with words and puzzles arrays)',
   url: 'https://leetcode.com/problems/number-of-valid-words-for-each-puzzle/',
   complexity: 'O(words + puzzles * 2^6) time with one bitmask per word. The visualization caps the input at 12 words and 6 puzzles.',
+  question: "For each puzzle, count the words that contain its first letter and only letters from the puzzle.",
+  approaches: [
+    { name: "Letter bitmask subsets", intuition: "Store each word as a letter bitmask, then enumerate the subsets of each puzzle that include its first letter.", time: "O(W + P x 2^7)", space: "O(W + 2^26 sparse)" },
+  ],
   examples: [
     { label: 'Small word bank', input: '{"words":["abcd","bcde","dcba","eeee","aceg"],"puzzles":["abcdefg","aceghik"]}' },
     { label: 'Missing first letter', input: '{"words":["bcd","abc"],"puzzles":["abcdefg"]}' },

@@ -20,6 +20,10 @@ const definition = {
     { id: 'record', label: 'Record', description: 'Keep the longer balanced substring.' },
     { id: 'done', label: 'Result', description: 'Report the longest balanced substring length.' },
   ],
+  question: "Given a binary string, find the longest substring that has an equal number of zeros and ones, with all zeros before ones counted as balanced.",
+  approaches: [
+    { name: "Two-pass scan", intuition: "Count zeros and ones in each run, and when the counts match, record the length of the balanced block.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Mixed runs', input: '{"s": "0011000111"}' },
     { label: 'Zeros then ones', input: '{"s": "1000011"}' },

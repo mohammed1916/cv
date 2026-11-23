@@ -12,6 +12,11 @@ const definition = {
   inputLabel: 'Positions and moves as JSON: {"nums": [...], "moveFrom": [...], "moveTo": [...]}',
   url: 'https://leetcode.com/problems/relocate-marbles/',
   complexity: 'O(n + m) time for m moves with a hash set, plus O(k log k) to sort the k occupied positions. The visualization caps input at 10 marbles and 10 moves.',
+  question: "Apply a list of moves that each relocate every marble at one position to another, then return the sorted occupied positions.",
+  approaches: [
+    { name: "Hash set updated per move", intuition: "Keep the occupied positions in a set, remove the source and add the destination for each move.", time: "O(n + m + k log k)", space: "O(n)" },
+    { name: "Count map of positions", intuition: "Track how many marbles sit at each position and move whole counts; the same idea with counts instead of membership.", time: "O(n + m + k log k)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Three moves on distinct marbles', input: '{"nums":[3,5,9,12],"moveFrom":[5,3,12],"moveTo":[4,8,11]}' },
     { label: 'Shared start splits apart', input: '{"nums":[2,6,6,9],"moveFrom":[6,2],"moveTo":[2,6]}' },

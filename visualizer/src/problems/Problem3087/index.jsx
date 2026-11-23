@@ -16,6 +16,10 @@ const examples = [
 ]
 
 const definition = {
+  question: "From a tweets table, rank hashtags used in February 2024 by how many tweets carry them, keeping only the top three.",
+  approaches: [
+    { name: "Tag then aggregate", intuition: "Take each tweet's first hashtag, keep February rows, count per tag, then sort by count and name.", time: "O(n log n)", space: "O(t) for t tags" },
+  ],
   number: meta.number,
   phases, parse: parseInput, build: buildTrace, code, sql, python, inputLabel,
   url: `https://leetcode.com/problems/${meta.slug}/`,

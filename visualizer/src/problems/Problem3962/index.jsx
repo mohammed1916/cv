@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with nums and k (e.g. {"nums":[-3,4,-1,5],"k":1})',
   url: 'https://leetcode.com/problems/maximum-subarray-sum-after-at-most-k-swaps/',
   complexity: 'O(n^3 log n) for this trace, which sorts for every window. The official limit is 1500 values.',
+  question: "Swap up to k pairs of positions, then choose a contiguous block with maximum sum.",
+  approaches: [
+    { name: "Window with weakest-for-strongest trades", intuition: "For each block, swap its weakest values with the strongest outside values while each trade still gains.", time: "O(n^3 log n) in this trace", space: "O(n)" },
+  ],
   examples: [
     { label: 'One swap', input: '{"nums":[-3,4,-1,5],"k":1}' },
     { label: 'Two swaps', input: '{"nums":[2,-7,-4,6,-1],"k":2}' },

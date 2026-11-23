@@ -12,6 +12,10 @@ const definition = {
   inputLabel: "Object with heights, e.g. {\"heights\":[4,1,3,3,2]}",
   url: "https://leetcode.com/problems/widest-possible-fence/",
   complexity: "O(c * n) time for c candidate heights and n originals; the visualization caps n at 8.",
+  question: "Choose the candidate height that gives the best count of singles and pairs among the original items.",
+  approaches: [
+    { name: "Candidate scan with counting", intuition: "For each candidate height, count singles and pairs from the originals and keep the best.", time: "O(c x n)", space: "O(n)" },
+  ],
   examples: [
     { label: "Mixed heights", input: "{\"heights\":[4,1,3,3,2]}" },
     { label: "Equal heights", input: "{\"heights\":[2,2,2,2]}" },

@@ -10,6 +10,10 @@ const definition = {
   inputLabel: 'Object with Projects (project_id, skill, importance) and Candidates (candidate_id, skill, proficiency), values 1 to 5',
   url: 'https://leetcode.com/problems/find-candidates-for-data-scientist-position-ii/description/',
   complexity: 'O(p * c * s) for p project rows, c candidate ids and s skills per project. The visualization caps the tables at 8 projects and 10 candidate rows.',
+  question: "Choose candidates for a role by matching their skills to the required skills of each project.",
+  approaches: [
+    { name: "Join then group", intuition: "Join candidates to projects by skill, then keep the candidates whose matches meet the required count.", time: "O(p * c * s)", space: "O(c * s)" },
+  ],
   examples: [
     { label: 'Three projects', input: sample },
     { label: 'No match', input: noMatch },

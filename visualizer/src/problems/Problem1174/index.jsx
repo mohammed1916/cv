@@ -13,6 +13,10 @@ const definition = {
   python,
   inputLabel,
   complexity,
+  question: "Report the percentage of customers whose first order is an immediate-delivery order.",
+  approaches: [
+    { name: "First order per customer", intuition: "Take each customer's earliest order and count how many of those are immediate.", time: "O(n)", space: "O(customers)" },
+  ],
   examples,
 }
 

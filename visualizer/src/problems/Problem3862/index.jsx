@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Array (JSON object with nums)',
   url: 'https://leetcode.com/problems/find-the-smallest-balanced-index/',
   complexity: 'O(n) time and O(n) space. The visualization caps input at 30 values.',
+  question: "Find the smallest index where the sum of earlier values equals the product of later values.",
+  approaches: [
+    { name: "Running sum and capped products", intuition: "Compare the running left sum with the right product, capping products that can no longer match.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"nums":[2,1,2]}' },
     { label: 'Example 2', input: '{"nums":[2,8,2,2,5]}' },

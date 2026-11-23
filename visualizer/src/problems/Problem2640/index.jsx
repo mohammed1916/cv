@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'An object with nums: 1 to 12 integers from 1 to 10',
   url: 'https://leetcode.com/problems/find-the-score-of-all-prefixes-of-an-array/',
   complexity: 'O(n) time and O(n) space. The visualization caps nums at 12 entries.',
+  question: "Given an array, return the score of each prefix, where the score is the sum of each element plus the largest value up to that point.",
+  approaches: [
+    { name: "Running maximum and running sum", intuition: "Track the largest value so far and the running total of element plus maximum.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Mixed', input: '{"nums":[3,1,4,1,5]}' },
     { label: 'Single', input: '{"nums":[5]}' },

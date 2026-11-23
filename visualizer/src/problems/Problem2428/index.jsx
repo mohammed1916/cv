@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON object with a grid of non-negative integers',
   url: 'https://leetcode.com/problems/maximum-sum-of-an-hourglass/',
   complexity: 'O(mn) hourglasses with 7 additions each. The visualization caps the grid at 7 by 7.',
+  question: "Find the largest sum of an hourglass shape made of seven cells in a grid.",
+  approaches: [
+    { name: "Scan hourglass positions", intuition: "Compute the sum at each valid position and keep the largest.", time: "O(m * n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Own: three by four grid', input: '{"grid":[[5,1,0,3],[2,8,6,1],[4,4,0,9]]}' },
     { label: 'Own: shuffled three by three', input: '{"grid":[[0,9,4],[2,7,1],[6,3,5]]}' },

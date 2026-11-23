@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON array (e.g. [2,5,2])',
   url: 'https://leetcode.com/problems/concatenation-of-array/',
   complexity: 'O(n) time and O(n) space for the 2n output values.',
+  question: "Build an array that is the given array followed by a second copy of itself.",
+  approaches: [
+    { name: "Concatenate", intuition: "Append the array to itself.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Three values', input: '[2,5,2]' },
     { label: 'Single value', input: '[7]' },

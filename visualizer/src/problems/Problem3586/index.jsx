@@ -22,6 +22,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'Object with patients and covid_tests lists',
   complexity: 'O(T log T) for T tests: sort by date, then one pass per patient.',
+  question: "Using a table of COVID test records, find each patient whose first negative test follows their first positive test, and list the required fields.",
+  approaches: [
+    { name: "CTE per patient", intuition: "Find the first positive and the first later negative per patient in separate common table expressions, then join them.", time: "O(T log T)", space: "O(T)" },
+  ],
   examples: [
     { label: 'Sample', input: SAMPLE_TEXT },
     { label: 'Negative only', input: '{"patients":[{"patient_id":1,"patient_name":"Ana"}],"covid_tests":[{"test_id":1,"patient_id":1,"test_date":"2024-01-01","result":"Negative"}]}' },

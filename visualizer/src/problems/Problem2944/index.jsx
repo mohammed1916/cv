@@ -12,6 +12,11 @@ const definition = {
   inputLabel: 'Object with prices (JSON, 1-indexed fruits)',
   url: 'https://leetcode.com/problems/minimum-number-of-coins-for-fruits/',
   complexity: 'O(n^2) time for the direct scan of each reach, O(n) space. The visualization caps n at 10.',
+  question: "Find the minimum total price to acquire every fruit when buying one fruit lets you take the next few for free.",
+  approaches: [
+    { name: "Backward DP over purchase range", intuition: "Compute from the end the cheapest cost from each index by scanning every purchase that frees the following fruits.", time: "O(n^2)", space: "O(n)" },
+    { name: "Backward DP with monotonic deque", intuition: "Keep the cheapest cost in a sliding window using a monotonic deque.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"prices":[3,1,2]}' },
     { label: 'Example 2', input: '{"prices":[1,10,1,1]}' },

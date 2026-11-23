@@ -13,6 +13,11 @@ const definition = {
   inputLabel: 'Object with nums (JSON array of integers)',
   url: 'https://leetcode.com/problems/find-the-count-of-monotonic-pairs-i/',
   complexity: 'O(n * V^2) time for this trace and O(n * V) space; the Python version uses prefix sums for O(n * V). The visualization caps nums at 6 values from 0 to 6.',
+  question: "Count pairs of arrays where one part is non-decreasing, the other is non-increasing, and the two parts add to each nums value.",
+  approaches: [
+    { name: "Dynamic programming over the previous value", intuition: "For each position, try every possible value of the non-decreasing part and sum the ways that stay within the allowed bounds.", time: "O(n * V^2)", space: "O(n * V)" },
+    { name: "Prefix sums over values", intuition: "Replace the inner loop with a running prefix sum of the ways for earlier values.", time: "O(n * V)", space: "O(V)" },
+  ],
   examples: [
     { label: 'Dip then rise', input: '{"nums":[3,1,4,4]}' },
     { label: 'Flat run', input: '{"nums":[6,6,6]}' },

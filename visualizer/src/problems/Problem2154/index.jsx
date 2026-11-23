@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON object with nums and original',
   url: 'https://leetcode.com/problems/keep-multiplying-found-values-by-two/',
   complexity: 'O(n + log v) time for n numbers and the number of doublings; O(n) space for the set.',
+  question: "Start from a value, double it while it appears in the list, and return the final value.",
+  approaches: [
+    { name: "Hash set", intuition: "Store the values in a set and keep doubling while the current value is present.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Chain of three', input: '{"nums":[3,1,6,4,12],"original":3}' },
     { label: 'Stops at once', input: '{"nums":[5,2],"original":4}' },

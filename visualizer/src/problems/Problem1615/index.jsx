@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Object with n and roads (JSON)',
   url: 'https://leetcode.com/problems/maximal-network-rank/',
   complexity: 'O(n + r) to count degrees and O(n^2) to check every pair, where r is the number of roads.',
+  question: "Find the maximal network rank of two cities, counting roads that touch either city.",
+  approaches: [
+    { name: "Degrees then pair check", intuition: "Count each city's roads, then check each pair for a direct road to subtract the shared road.", time: "O(n + r) + O(n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Hub city', input: '{"n":5,"roads":[[0,2],[1,2],[2,3],[2,4],[3,4]]}' },
     { label: 'Chain', input: '{"n":3,"roads":[[0,1],[1,2]]}' },

@@ -13,6 +13,11 @@ const definition = {
   inputLabel: 'Array (JSON array of 1 to 12 integers from 0 to 1000)',
   url: 'https://leetcode.com/problems/transform-array-by-parity/',
   complexity: 'O(n log n) with a comparison sort. Counting the zeros and ones gives O(n).',
+  question: "Rearrange an array so that its even and odd values follow a fixed parity order.",
+  approaches: [
+    { name: "Count then fill", intuition: "Count zeros and ones, then write them back in order.", time: "O(n)", space: "O(n)" },
+    { name: "Comparison sort", intuition: "Sort by parity with a stable comparison.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Four values with zero', input: '[0,250,80,999]' },
     { label: 'Six growing values', input: '[3,9,27,81,243,729]' },

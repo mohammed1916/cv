@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON object with list1, a, b and list2',
   url: 'https://leetcode.com/problems/merge-in-between-linked-lists/',
   complexity: 'O(a + (b - a) + length of list2) time with O(1) extra pointers. The visualization caps list1 at 10 nodes.',
+  question: "Remove nodes from index a to b of one linked list and insert a second list in their place.",
+  approaches: [
+    { name: "Pointer splice", intuition: "Walk to the node before a and the node after b, then splice the second list in between.", time: "O(a + (b - a) + length of list2)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"list1":[0,1,2,3,4,5],"a":3,"b":4,"list2":[10,11,12]}' },
     { label: 'Example 2', input: '{"list1":[0,1,2,3,4,5,6],"a":2,"b":5,"list2":[10,11,12,13,14]}' },

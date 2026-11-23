@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'An integer n from 1 to 100000, for example 135',
   url: 'https://leetcode.com/problems/count-special-integers/',
   complexity: 'O(d * 10) time for d digits of n. The visualization caps n at 100000.',
+  question: "Count the integers from one to n whose digits are all different.",
+  approaches: [
+    { name: "Digit DP", intuition: "Build the number digit by digit, tracking the set of used digits and whether it is still below n.", time: "O(d * 10)", space: "O(d)" },
+  ],
   examples: [
     { label: 'Own: 137', input: '137' },
     { label: 'Input 23', input: '23' },

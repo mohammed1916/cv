@@ -11,6 +11,10 @@ const definition = {
   inputLabel: 'JSON square matrix (e.g. [[3,-1,2],[-4,5,0],[1,-2,6]])',
   url: 'https://leetcode.com/problems/maximum-matrix-sum/',
   complexity: 'O(n²) time to scan the matrix and O(1) extra space.',
+  question: "Maximise the sum of a matrix after any number of operations that flip the signs of two adjacent entries.",
+  approaches: [
+    { name: "Count negatives and minimum absolute", intuition: "Sum absolute values; if the number of negatives is odd, subtract twice the smallest absolute value.", time: "O(m n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Three negatives', input: '[[3,-1,2],[-4,5,0],[1,-2,6]]' },
     { label: 'Two negatives', input: '[[2,-3],[-5,4]]' },

@@ -21,6 +21,10 @@ const definition = {
   inputLabel: "Object with board and pattern",
   url: "https://leetcode.com/problems/match-alphanumerical-pattern-in-matrix-i/",
   complexity: "O(R * C * p * q) time and O(p * q) extra space for a board of R by C and a pattern of p by q. The visualization caps the board at 6 by 6 and the pattern at 4 by 4.",
+  question: "Find the first top-left position in a matrix where a pattern of digits and letters matches a window.",
+  approaches: [
+    { name: "Sliding window pattern check", intuition: "Slide a window of the pattern's size across the matrix and check the letter and digit consistency.", time: "O(mn\u00b7r\u00b7c)", space: "O(1)" },
+  ],
   examples: [
     { label: "Repeated pair", input: "{\"board\":[[1,2,3],[4,4,5]],\"pattern\":[\"aa\"]}" },
     { label: "Letter and literal", input: "{\"board\":[[7,1,7,2],[3,1,4,1]],\"pattern\":[\"a1a\"]}" },

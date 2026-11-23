@@ -20,6 +20,10 @@ const definition = {
   inputLabel: 'Object with teams (team_id, team_name) and matches (host_team, guest_team, host_goals, guest_goals)',
   url: 'https://leetcode.com/problems/team-scores-in-football-tournament/',
   complexity: 'O(T + M log T) for T teams and M matches. The visualization caps the tables at small sizes.',
+  question: "Rank teams by points from match results, including teams that have not played.",
+  approaches: [
+    { name: "Points per match then join", intuition: "Give each side points for each match, sum them per team, and join totals onto every team.", time: "O(T + M log T)", space: "O(T)" },
+  ],
   examples: [
     { label: 'Four teams', input: '{"teams":[{"team_id":3,"team_name":"Ash"},{"team_id":5,"team_name":"Birch"},{"team_id":6,"team_name":"Cedar"},{"team_id":8,"team_name":"Dune"}],"matches":[{"match_id":1,"host_team":3,"guest_team":5,"host_goals":2,"guest_goals":2},{"match_id":2,"host_team":6,"guest_team":3,"host_goals":0,"guest_goals":3},{"match_id":3,"host_team":5,"guest_team":6,"host_goals":1,"guest_goals":0}]}' },
     { label: 'No matches', input: '{"teams":[{"team_id":1,"team_name":"Oak"},{"team_id":2,"team_name":"Pine"}],"matches":[]}' },

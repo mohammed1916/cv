@@ -14,6 +14,11 @@ const definition = {
   inputLabel: 's and t (JSON object of strings with # for backspace)',
   url: 'https://leetcode.com/problems/backspace-string-compare/',
   complexity: 'O(n + m) time and O(1) extra space.',
+  question: "Compare two strings after applying backspaces, where each # erases the character before it.",
+  approaches: [
+    { name: "Two pointers from the end", intuition: "Walk both strings backwards, skipping characters erased by later #, and compare the surviving characters.", time: "O(n + m)", space: "O(1)" },
+    { name: "Stack build", intuition: "Build each final string with a stack and compare.", time: "O(n + m)", space: "O(n + m)" },
+  ],
   examples: [
     { label: 'Erased', input: '{"s":"ab#zz","t":"ab#czz"}' },
     { label: 'Differs', input: '{"s":"xy##","t":"x#y"}' },

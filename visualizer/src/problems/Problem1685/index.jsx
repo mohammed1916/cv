@@ -8,6 +8,10 @@ const definition = {
   inputLabel: 'Sorted array of integers (JSON)',
   url: `https://leetcode.com/problems/${meta.slug}/`,
   complexity: 'O(n) time and O(n) space: the total and a running prefix sum give every answer in one pass.',
+  question: "For each index of a sorted array, compute the sum of absolute differences to all other values.",
+  approaches: [
+    { name: "Prefix sums with counts", intuition: "Use prefix sums on the left of the index and suffix sums on the right, with counts.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Spread', input: '[1,4,6,9]' },
     { label: 'Negatives', input: '[-3,-3,2]' },

@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'JSON object with nums and k',
   url: 'https://leetcode.com/problems/count-the-number-of-good-subarrays/',
   complexity: 'O(n) time with a sliding window and a frequency map. The visualization caps input at 12 values.',
+  question: "Count the subarrays that contain at least k pairs of equal values.",
+  approaches: [
+    { name: "Sliding window with counts", intuition: "Grow the window and count equal pairs from the frequencies, shrinking whenever the count reaches k.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Own: six values, k 5', input: '{"nums":[2,0,3,1,0,4],"k":5}' },
     { label: 'Six values, k two', input: '{"nums":[2,2,4,0,5,2],"k":2}' },

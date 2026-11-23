@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON: {"matrix": [[...]]}',
   url: 'https://leetcode.com/problems/largest-local-values-in-a-matrix-ii/',
   complexity: 'O(n^2 * m^2) time in the worst case with the square scan, and O(1) extra space. The visualization caps the matrix at 7 by 7.',
+  question: "Each non-zero cell acts as a centre with radius equal to its value; count cells that are local maxima within that square.",
+  approaches: [
+    { name: "Square scan per cell", intuition: "For each non-zero cell, scan the square of its radius and check that no cell holds a larger value.", time: "O(n^2 x m^2) worst case", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 2', input: '{"matrix":[[1,2],[3,4]]}' },
     { label: 'Example 3', input: '{"matrix":[[1,0,1],[0,1,0],[1,0,1]]}' },

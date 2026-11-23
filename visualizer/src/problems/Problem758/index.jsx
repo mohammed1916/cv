@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Words and string (JSON)',
   url: 'https://leetcode.com/problems/bold-words-in-string/',
   complexity: 'O(words * n * length) time with direct comparison. The visualization caps input at 10 words and 50 letters.',
+  question: "Bold every letter covered by an occurrence of any keyword in a string.",
+  approaches: [
+    { name: "Merge covered ranges", intuition: "Mark ranges for every occurrence and merge overlapping and adjacent ranges.", time: "O(n m)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"words":["ab","bc"],"s":"aabcd"}' },
     { label: 'Whole word', input: '{"words":["abc","def"],"s":"abcdef"}' }, { label: 'Single letter word', input: '{"words":["a"],"s":"a"}' }, { label: 'Overlapping matches merge', input: '{"words":["ab","ba"],"s":"abab"}' }, { label: 'Whole string bold', input: '{"words":["abcdefghij","xyz"],"s":"abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwx"}' }, { label: 'Long run: 10 words, 50 letters', input: '{"words":["bd","dd","cba","bca","bdd","cd","bda","dbd","ca","ba"],"s":"ddccadbabbdbdbddbddaacbaadcbbccbddabbbbbabbaadadad"}' },

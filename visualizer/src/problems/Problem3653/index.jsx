@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON object with nums and queries ([l, r, k, v] per query)',
   url: 'https://leetcode.com/problems/xor-after-range-multiplication-queries-i/',
   complexity: 'O(total indices touched) time. The visualization caps nums at 12 values and queries at 8.',
+  question: "Apply range multiplication queries to an array and return the XOR of the final values.",
+  approaches: [
+    { name: "Simulate each query", intuition: "Visit each index in the query's range and multiply it, then XOR the results.", time: "O(total indices touched)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Own: four values, two queries', input: '{"nums":[2,5,3,7],"queries":[[0,3,2,3],[1,2,1,2]]}' },
     { label: 'Full window, one step', input: '{"nums":[1,4,6,2],"queries":[[0,3,1,10]]}' },

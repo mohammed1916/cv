@@ -8,6 +8,10 @@ const definition = {
   inputLabel: 'Object with arr: a list of whole numbers from 0 to 99',
   url: 'https://leetcode.com/problems/longest-turbulent-subarray/',
   complexity: 'O(n) time: one pass with a window that only moves forward. O(1) extra space.',
+  question: "Find the longest subarray in which the comparisons between neighbours alternate between rising and falling.",
+  approaches: [
+    { name: "Sliding window on comparisons", intuition: "Extend the window while each comparison flips direction; restart it at the previous element when the pattern breaks.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Zigzag run', input: JSON.stringify({ arr: [3, 7, 2, 9, 4, 4, 1] }) },
     { label: 'Straight climb', input: JSON.stringify({ arr: [4, 8, 12, 16] }) },

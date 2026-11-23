@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'JSON object with clips (1 to 12 [start, end] pairs, 0 to 100) and time (1 to 100)',
   url: 'https://leetcode.com/problems/video-stitching/',
   complexity: 'O(n * k) time for n clips and k clips taken. The visualization caps clips at 12.',
+  question: "Find the fewest video clips that cover the whole interval from time zero to time T.",
+  approaches: [
+    { name: "Greedy furthest reach", intuition: "Among clips that start within the covered range, take the one that reaches furthest, then repeat from its end.", time: "O(n + T)", space: "O(T)" },
+  ],
   examples: [
     { label: 'Overlapping chain of three', input: '{"clips":[[0,4],[3,8],[7,12],[1,2],[10,15]],"time":9}' },
     { label: 'Gap', input: '{"clips":[[0,1],[1,2]],"time":5}' },

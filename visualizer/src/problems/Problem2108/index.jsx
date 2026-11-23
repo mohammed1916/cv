@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Words as a JSON array (e.g. ["abc","aba"])',
   url: 'https://leetcode.com/problems/find-first-palindromic-string-in-the-array/',
   complexity: 'O(total length) time in the worst case and O(1) extra space per word.',
+  question: "Return the first word in a list that reads the same forwards and backwards, or an empty string if none does.",
+  approaches: [
+    { name: "Two-pointer palindrome check", intuition: "Test each word from the front with pointers that close in from both ends and stop at the first palindrome.", time: "O(total length)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Third word', input: '["abc","car","ada","racecar","cool"]' },
     { label: 'None', input: '["abcd","xyz"]' },

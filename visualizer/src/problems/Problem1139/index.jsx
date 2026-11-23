@@ -5,6 +5,10 @@ import MatrixGrid from '../../components/shared/MatrixGrid'
 import { Vars } from './SeqKit'
 
 const definition = {
+  question: "Find the largest square whose border is entirely ones in a binary grid.",
+  approaches: [
+    { name: "Run lengths left and up", intuition: "Measure the run of ones to the right and downward from each cell; each top-left corner tries the largest side its runs allow.", time: "O(R * C * min(R, C))", space: "O(R * C)" },
+  ],
   number: meta.number,
   phases, parse: parseInput, build: buildTrace, code, python, inputLabel, complexity, examples,
   url: `https://leetcode.com/problems/${meta.slug}/`,

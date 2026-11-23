@@ -11,6 +11,10 @@ const definition = {
   inputLabel: 'Object with n',
   url: 'https://leetcode.com/problems/minimum-cost-to-split-into-ones/',
   complexity: 'The table costs O(n^2) time. The visual caps n at 30.',
+  question: "Find the least cost of splitting a number of units into single units, where each split costs the product of its parts.",
+  approaches: [
+    { name: "Bottom-up table of splits", intuition: "For each size, try every two-part split and keep the cheapest total.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example', input: '{"n":6}' },
     { label: 'Small', input: '{"n":5}' },

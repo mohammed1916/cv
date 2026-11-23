@@ -12,6 +12,10 @@ const definition = {
   inputLabel: "Object with regular, express (equal-length cost lists) and expressCost",
   url: "https://leetcode.com/problems/minimum-costs-using-the-train-line/description/",
   complexity: "O(n) time and O(n) output for n stops. The visualization caps n at 20 and each cost at 100.",
+  question: "Find the minimum cost to reach each stop on a train line where each step can use a regular or express cost.",
+  approaches: [
+    { name: "Two-choice DP", intuition: "For each stop, take the cheaper of the regular and express transitions from earlier stops.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: "Example", input: '{"regular":[4,2,8,3],"express":[1,6,2,9],"expressCost":5}' },
     { label: "Switch once", input: '{"regular":[3,9,2],"express":[8,1,4],"expressCost":2}' },

@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON object with nums (1 to 12 integers from 1 to 100)',
   url: 'https://leetcode.com/problems/find-score-of-an-array-after-marking-all-elements/',
   complexity: 'O(n log n) time for the sort, O(n) space for the marks.',
+  question: "Process elements in order of value, marking neighbours, and sum the values you take.",
+  approaches: [
+    { name: "Sort indices and mark", intuition: "Sort the indices by value and take each unmarked one while marking its neighbours.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"nums":[2,1,3,4,5,2]}' },
     { label: 'Example 2', input: '{"nums":[2,3,5,1,3,2]}' },

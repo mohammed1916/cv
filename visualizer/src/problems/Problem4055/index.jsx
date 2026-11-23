@@ -20,6 +20,10 @@ const definition = {
   inputLabel: 'JSON array of integers, e.g. [1, 2, 3, 5]',
   url: 'https://leetcode.com/problems/count-shadow-pairs-ii/description/',
   complexity: 'O(n^2) time and O(1) extra space in this scan. The visualization caps the array at 16 values; the official limit is 50000.',
+  question: "Count the rising index pairs with no middle value strictly between their endpoints.",
+  approaches: [
+    { name: "Pairwise scan", intuition: "Check each pair for middle values strictly between its endpoints.", time: "O(n^2)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Middle value blocks', input: '[1, 2, 3]' },
     { label: 'Endpoint values pass', input: '[2, 4, 2, 4]' },

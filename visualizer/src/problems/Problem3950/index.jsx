@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON: {"n": n}',
   url: 'https://leetcode.com/problems/exactly-one-consecutive-set-bits-pair/',
   complexity: 'O(log n) time and O(1) extra space.',
+  question: "Count the places in a number's binary form where two set bits sit side by side, scanning from the lowest bit.",
+  approaches: [
+    { name: "Bit scan", intuition: "Shift the number right one bit at a time and count positions where the low two bits are both set.", time: "O(log n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"n":6}' },
     { label: 'Example 2', input: '{"n":5}' },

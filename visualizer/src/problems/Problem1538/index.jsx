@@ -19,6 +19,10 @@ const definition = {
   inputLabel: 'Object with bits, a list of 0 and 1 (e.g. {"bits":[1,0,1,1,1]})',
   url: 'https://leetcode.com/problems/guess-the-majority-in-a-hidden-array/',
   complexity: 'O(n) queries and O(n) space for the agreement table. Each query inspects four bits, and only about n queries are used. The visualization caps the array at 20 bits.',
+  question: "Find the majority of a hidden binary array using a limited number of queries.",
+  approaches: [
+    { name: "Query the first few and compare", intuition: "Use the first four bits as a reference and compare each later index against them with one probe.", time: "O(n) queries", space: "O(n)" },
+  ],
   examples: [
     { label: 'Majority of ones', input: '{"bits":[1,0,1,1,1,0,1]}' },
     { label: 'Majority of zeros', input: '{"bits":[0,0,1,0,0]}' },

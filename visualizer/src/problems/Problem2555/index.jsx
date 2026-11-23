@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON object with a sorted array prize_positions (up to 40 values from 0 to 50) and k, for example {"prize_positions":[1,1,2,2,3,3,5],"k":2}',
   url: 'https://leetcode.com/problems/maximize-win-from-two-segments/',
   complexity: 'O(n) time with two pointers and one array of best prefixes. The visualization caps the prizes at 40.',
+  question: "Pick two segments of a fixed length on the prize positions to cover as many prizes as possible.",
+  approaches: [
+    { name: "Two pointers with best prefix", intuition: "Slide one segment and keep the best prefix count of the other one.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"prize_positions":[1,1,2,2,3,3,5],"k":2}' },
     { label: 'Example 2', input: '{"prize_positions":[1,2,3,4],"k":0}' },

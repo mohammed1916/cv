@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'Object with grid (rows of integers 0 to 9) and k',
   url: 'https://leetcode.com/problems/find-sorted-submatrices-with-maximum-element-at-most-k/',
   complexity: 'O(m * n^2) time for an n-row, m-column grid, and O(n) extra space per left column. Reading used here: rows of the submatrix must be non-increasing left to right, with no vertical sorting. The visualization caps the grid at 6 by 6 with values 0 to 9.',
+  question: "Count the sorted submatrices whose maximum element is at most k.",
+  approaches: [
+    { name: "Column histograms with stacks", intuition: "For each left column, build row heights and count sorted submatrices with a monotone stack.", time: "O(m * n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Three by three', input: '{"grid":[[3,2,1],[5,2,2],[1,1,4]],"k":3}' },
     { label: 'Ragged tops', input: '{"grid":[[9,8,7,2],[3,3,1,1],[2,4,2,0]],"k":3}' },

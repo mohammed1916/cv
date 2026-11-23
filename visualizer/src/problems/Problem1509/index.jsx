@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Array of integers (JSON)',
   url: 'https://leetcode.com/problems/minimum-difference-between-largest-and-smallest-value-in-three-moves/',
   complexity: 'O(n log n) time for the sort, then four constant-time windows.',
+  question: "Find the smallest possible gap between the largest and smallest values after at most three changes.",
+  approaches: [
+    { name: "Sort and check four windows", intuition: "After sorting, the best result keeps a window of length n minus three and tries each of the four ways to trim.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Sample A', input: '[1,20,3,22,2,21]' },
     { label: 'Spread out', input: '[9,4,1,7,15,8]' },

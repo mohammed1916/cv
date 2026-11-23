@@ -9,6 +9,10 @@ const definition = {
   inputLabel: 'Object with nums and k',
   url: 'https://leetcode.com/problems/apply-operations-to-maximize-frequency-score/',
   complexity: 'O(n log n) time for the sort, then O(n) for the window because each end only moves right. O(n) space for the prefix sums. The official length is up to 100000; the drawing caps nums at 24 entries.',
+  question: "Apply up to k increments to maximise the frequency score of an array.",
+  approaches: [
+    { name: "Sliding window with median cost", intuition: "Sort the array and slide a window; the cost of making a window equal is computed around its median with prefix sums.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Scattered values', input: '{"nums":[9,2,7,3,12,8],"k":6}' },
     { label: 'No budget', input: '{"nums":[5,5,1,5,8],"k":0}' },

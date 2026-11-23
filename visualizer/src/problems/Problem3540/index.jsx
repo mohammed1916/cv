@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with forward, backward (costs per house) and queries (houses in order)',
   url: 'https://leetcode.com/problems/minimum-time-to-visit-all-houses/',
   complexity: 'O(n * q * (n * q)) time with this simple selection loop, and O(n * q) space for the states. The visualization caps n at 8 houses and queries at 6; a heap would reduce the selection cost.',
+  question: "Visit every house in a row, choosing an order that minimizes total travel time.",
+  approaches: [
+    { name: "Greedy selection", intuition: "Repeatedly pick the cheapest next house from the current position.", time: "O((n q)^2)", space: "O(n q)" },
+  ],
   examples: [
     { label: 'Short ring', input: '{"forward":[2,3,1,4],"backward":[1,5,2,2],"queries":[2,0,3]}' },
     { label: 'Lap', input: '{"forward":[4,4,4,4],"backward":[3,3,3,3],"queries":[0,0]}' },

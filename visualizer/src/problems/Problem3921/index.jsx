@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON array of 1 to 30 tokens from 0, 1, 2, 3, 4, 6, WD, NB, W',
   url: 'https://leetcode.com/problems/score-validator/',
   complexity: 'O(n) time and O(1) extra space for n tokens. The visualization caps the event list at 30 tokens.',
+  question: "Process a list of cricket-style event tokens, adding runs and extras to the score, and stop when the tenth wicket falls.",
+  approaches: [
+    { name: "Single pass with early stop", intuition: "Read the tokens in order, accumulate the score, and halt on the tenth wicket.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Mixed innings', input: '["1", "2", "W", "WD", "4", "6", "W", "NB"]' },
     { label: 'Ten down', input: '["6", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "4"]' },

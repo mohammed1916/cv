@@ -13,6 +13,11 @@ const definition = {
   inputLabel: 'Object with positive nums array (JSON)',
   url: 'https://leetcode.com/problems/count-the-number-of-incremovable-subarrays-ii/',
   complexity: 'O(n) time with two pointers. The visualization caps input at 20 values.',
+  question: "Count the subarrays whose removal leaves a strictly increasing array, for a large input.",
+  approaches: [
+    { name: "Two pointers over runs", intuition: "Take the increasing prefix and suffix runs and advance two pointers to count valid removal intervals.", time: "O(n)", space: "O(1)" },
+    { name: "Binary search per left end", intuition: "For each left end, binary search for the smallest right end that makes the rest increasing.", time: "O(n log n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"nums":[1,2,3,4]}' },
     { label: 'Example 2', input: '{"nums":[6,5,7,8]}' },

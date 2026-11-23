@@ -17,6 +17,10 @@ const definition = {
   inputLabel: "JSON array of integers",
   url: "https://leetcode.com/problems/linked-list-frequency/",
   complexity: "O(n) time and O(n) extra space for n nodes using a hash map. The visualization caps the list at 16 nodes with digits 0 to 9.",
+  question: "Build a new list that stores the frequency of each value in the input list.",
+  approaches: [
+    { name: "Count then build", intuition: "Count the frequency of each value and create a list node for each distinct value with its frequency.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: "Mixed counts", input: "[3, 1, 3, 2, 1, 3]" },
     { label: "Single node", input: "[7]" },

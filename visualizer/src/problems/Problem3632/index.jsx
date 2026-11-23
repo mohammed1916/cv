@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with nums and k (e.g. {"nums":[1,2,3],"k":2})',
   url: 'https://leetcode.com/problems/subarrays-with-xor-at-least-k/',
   complexity: 'O(n²) time and O(n) space for n numbers, comparing every pair of prefixes. The visualization caps nums at 12 values from 0 to 15 and k at 31; the official bounds are not verified here.',
+  question: "Count subarrays whose XOR is at least k.",
+  approaches: [
+    { name: "Compare all prefix pairs", intuition: "Compare every pair of prefix XOR values and count pairs whose XOR reaches k.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Small array', input: '{"nums":[1,2,3],"k":2}' },
     { label: 'Pair of large values', input: '{"nums":[8,4],"k":12}' },

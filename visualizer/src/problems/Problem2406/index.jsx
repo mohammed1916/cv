@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Intervals [left, right] (JSON)',
   url: 'https://leetcode.com/problems/divide-intervals-into-minimum-number-of-groups/',
   complexity: 'O(n log n) time. The visualization caps input at 10 intervals with endpoints up to 30.',
+  question: "Put intervals into the fewest groups so that no two intervals in a group overlap.",
+  approaches: [
+    { name: "Sweep with a heap", intuition: "Sort intervals by start and reuse the group that finished earliest.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Overlapping', input: '{"intervals":[[4,9],[7,12],[2,5],[10,11],[1,3]]}' },
     { label: 'Chain', input: '{"intervals":[[1,3],[5,6],[8,10],[11,13]]}' },

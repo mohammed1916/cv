@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'An object with s: 3 to 12 characters, each 0 or 1',
   url: 'https://leetcode.com/problems/number-of-ways-to-split-a-string/',
   complexity: 'O(n) time and O(n) space for the positions of the ones. The visualization caps s at 12 characters.',
+  question: "Count the ways to split a binary string into three parts with equal numbers of ones.",
+  approaches: [
+    { name: "Positions of ones and gaps", intuition: "Find the ones, check they split evenly, then count the gaps where each cut can fall.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"s":"10101"}' },
     { label: 'Zeros', input: '{"s":"0000"}' },

@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with nums (JSON list of positive integers)',
   url: 'https://leetcode.com/problems/minimize-length-of-array-using-operations/',
   complexity: 'O(n) time for n values, with one pass for the minimum and one for the remainder check. The visualization caps input at 8 values.',
+  question: "Find the minimum length an array can be reduced to using pair operations on remainders.",
+  approaches: [
+    { name: "Smallest value and count", intuition: "If any value is not a multiple of the smallest value, the answer is one; otherwise the answer is half the count of the smallest value, rounded up.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"nums":[1,4,3,1]}' },
     { label: 'Equal minima', input: '{"nums":[5,5,5,10,5]}' },

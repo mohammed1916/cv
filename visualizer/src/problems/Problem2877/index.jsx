@@ -14,6 +14,11 @@ const definition = {
   inputLabel: 'JSON {"data": [[101, 18], [102, 22]]}',
   url: 'https://leetcode.com/problems/create-a-dataframe-from-list/',
   complexity: 'O(n) rows. pandas builds the frame in one call; the visualization adds one row per step.',
+  question: "Build a table from a list of student records with the given column names.",
+  approaches: [
+    { name: "One constructor call", intuition: "Pass the records and column names to the table constructor.", time: "O(n)", space: "O(n)" },
+    { name: "Row-by-row append", intuition: "Add each record to an empty table one row at a time.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Three students', input: '{"data":[[101,18],[102,22],[103,19]]}' },
     { label: 'One student', input: '{"data":[[7,40]]}' },

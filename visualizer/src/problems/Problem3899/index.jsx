@@ -15,6 +15,10 @@ const definition = {
     { id: 'angle', label: 'Law of cosines', description: 'Compute each opposite angle in degrees.' },
     { id: 'done', label: 'Return sorted', description: 'Return sorted angles, or an empty array for invalid geometry.' },
   ],
+  question: "Given three side lengths, decide whether they form a valid triangle and return its three angles in sorted order.",
+  approaches: [
+    { name: "Triangle inequality and law of cosines", intuition: "Check positive area, then compute each angle from the three sides and sort them.", time: "O(1)", space: "O(1)" },
+  ],
   examples: authoredExamples0,
 }
 

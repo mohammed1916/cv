@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'List of phrases (e.g. ["writing code","code rocks"])',
   url: 'https://leetcode.com/problems/before-and-after-puzzle/',
   complexity: 'O(n² · w) time for n phrases with w words each, plus a sort of the distinct results. The visualization caps the input at 12 phrases of at most 6 words; the official bounds were not verified.',
+  question: "Merge phrases whose last word matches another phrase's first word, and return the distinct merged phrases in sorted order.",
+  approaches: [
+    { name: "Hash by first word", intuition: "Index phrases by their first word, then pair each phrase with those whose first word matches its last word.", time: "O(n^2 x w)", space: "O(n x w)" },
+  ],
   examples: [
     { label: 'One join', input: '["red blue","blue green","green sea"]' },
     { label: 'Repeated phrase', input: '["ink pen","pen cap","ink pen","cap"]' },

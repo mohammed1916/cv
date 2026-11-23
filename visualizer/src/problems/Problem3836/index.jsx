@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with nums1, nums2 (1 to 5 integers from -9 to 9 each) and k',
   url: 'https://leetcode.com/problems/maximum-score-using-exactly-k-pairs/',
   complexity: 'O(k * n * m) time and O(k * n * m) space for the full table shown.',
+  question: "Choose exactly k index pairs that increase in both arrays so that the total score is as large as possible.",
+  approaches: [
+    { name: "Layered prefix table", intuition: "Use a table indexed by the pair count and the prefixes of both arrays.", time: "O(k * n * m)", space: "O(k * n * m)" },
+  ],
   examples: [
     { label: 'Two pairs', input: '{"nums1":[2,4,1],"nums2":[3,1,5,2],"k":2}' },
     { label: 'Negatives', input: '{"nums1":[-4,1,-2],"nums2":[2,-1,3],"k":2}' },

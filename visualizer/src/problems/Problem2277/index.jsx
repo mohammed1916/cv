@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with n, edges and queries (e.g. {"n":5,"edges":[[0,1],[1,2],[2,3],[1,4]],"queries":[[0,3,4]]})',
   url: 'https://leetcode.com/problems/closest-node-to-path-in-tree/',
   complexity: 'O(n * q) time for q queries on an n-node tree, using a BFS per query. The visualization caps the tree at 10 nodes and 4 queries; the draft does not verify the official limits.',
+  question: "For each query, find the tree node closest to the path between two given nodes, ties broken by smallest index.",
+  approaches: [
+    { name: "BFS from the query path", intuition: "Mark the path between the two query nodes, then run a BFS outward to find the nearest path node for each candidate.", time: "O(n * q)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Side branch', input: '{"n":5,"edges":[[0,1],[1,2],[2,3],[1,4]],"queries":[[0,3,4]]}' },
     { label: 'Node on path', input: '{"n":5,"edges":[[0,1],[1,2],[2,3],[1,4]],"queries":[[0,3,2]]}' },

@@ -18,6 +18,10 @@ const definition = {
   number: meta.number,
   phases, parse: parseInput, build: buildTrace, code, sql, python, inputLabel,
   url: `https://leetcode.com/problems/${meta.slug}/`,
+  question: "Find which known topic words appear in each post, returning the topics for each post.",
+  approaches: [
+    { name: "Join words to keyword list and aggregate", intuition: "Join each post's words to the topic keyword list, keep the matches, and group the topics by post.", time: "O(n * k)", space: "O(n)" },
+  ],
   complexity, examples,
 }
 

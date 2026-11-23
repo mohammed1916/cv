@@ -12,6 +12,11 @@ const definition = {
   inputLabel: 'Object with nums and k, e.g. {"nums":[3,1,2],"k":3}',
   url: "https://leetcode.com/problems/kth-smallest-subarray-sum/",
   complexity: "O(n log S) time and O(1) space for n values with total sum S. The visualization shows up to 10 entries of 1 to 9 so the window and search bounds fit on screen.",
+  question: "Find the k-th smallest sum over all contiguous subarrays of a positive array.",
+  approaches: [
+    { name: "Binary search on the answer", intuition: "Binary search a candidate sum and count subarrays with sum at most it using two pointers.", time: "O(n log S)", space: "O(1)" },
+    { name: "Enumerate all sums", intuition: "Generate every subarray sum, sort them, and read the k-th.", time: "O(n^2 log n)", space: "O(n^2)" },
+  ],
   examples: [
     { label: "Third smallest", input: '{"nums":[3,1,2],"k":3}' },
     { label: "First smallest", input: '{"nums":[3,1,2],"k":1}' },

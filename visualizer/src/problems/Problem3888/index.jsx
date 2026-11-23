@@ -16,6 +16,10 @@ const definition = {
   inputLabel: 'Object with grid (rectangular, values 0 to 4) and k',
   url: 'https://leetcode.com/problems/minimum-operations-to-make-all-grid-elements-equal/',
   complexity: 'O(T * m * n) time for T candidate targets, with T bounded by m * n * k * k * (max + 1). The visualization caps the grid at 4 by 4 with values 0 to 4. Operations only increase values, so every cell is raised to a common target.',
+  question: "Raise every cell of a grid to a common target by adding k by k squares, using the fewest squares.",
+  approaches: [
+    { name: "Forced squares in scan order", intuition: "Scan cells in row order; a cell still short of the target can only be covered by squares starting there, so that count is forced.", time: "O(T * m * n)", space: "O(m * n)" },
+  ],
   examples: [
     { label: 'One square fits', input: '{"grid":[[0,0,1],[0,0,1]],"k":2}' },
     { label: 'Impossible shape', input: '{"grid":[[0,1,0],[1,1,1]],"k":2}' },

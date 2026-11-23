@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Sorted lists (JSON object with lists)',
   url: 'https://leetcode.com/problems/minimum-cost-to-merge-sorted-lists/',
   complexity: 'O(3^m * L) time for m lists over subsets. The visualization caps lists at 4.',
+  question: "Merge several sorted lists in some order so that the total merge cost is as small as possible.",
+  approaches: [
+    { name: "Subset dynamic programme", intuition: "Each merge history is a binary split of the lists, so a subset table finds the cheapest order.", time: "O(3^m * L)", space: "O(2^m)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"lists":[[1,3,5],[2,4],[6,7,8]]}' },
     { label: 'Example 2', input: '{"lists":[[1,1,5],[1,4,7,8]]}' },

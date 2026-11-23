@@ -12,6 +12,11 @@ const definition = {
   inputLabel: 'Integers as JSON array (1 to 10, up to 12 values)',
   url: 'https://leetcode.com/problems/continuous-subarrays/',
   complexity: 'O(n) time with two monotonic deques, O(n) space.',
+  question: "Count the subarrays in which the largest and smallest values differ by at most 2.",
+  approaches: [
+    { name: "Two pointers with monotonic deques", intuition: "Track the running maximum and minimum of the window with deques, and shrink from the left only while the spread exceeds 2.", time: "O(n)", space: "O(n)" },
+    { name: "Brute force over all subarrays", intuition: "Try every start and extend the end while tracking min and max; simple but quadratic.", time: "O(n^2)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Six mixed values', input: '[4,7,2,9,10,1]' },
     { label: 'Ascending', input: '[1,2,3]' },

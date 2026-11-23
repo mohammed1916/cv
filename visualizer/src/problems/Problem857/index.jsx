@@ -16,6 +16,10 @@ const definition = {
   inputLabel: 'Object {quality, wage, k} (JSON, up to 30 workers)',
   url: 'https://leetcode.com/problems/minimum-cost-to-hire-k-workers/',
   complexity: 'O(n log n) for the sort plus O(n log k) heap work.',
+  question: "Hire k workers, each paid in proportion to quality and at least their wage ratio; find the minimum total cost.",
+  approaches: [
+    { name: "Sort by ratio with a max-heap", intuition: "Sort workers by wage over quality; for each ratio, the group's cost is the ratio times the sum of the k smallest qualities seen so far.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Four workers, pick two', input: '{"quality":[10,20,5,8],"wage":[70,40,30,50],"k":2}' },
     { label: 'Hire all three', input: '{"quality":[3,6,9],"wage":[15,30,45],"k":3}' },

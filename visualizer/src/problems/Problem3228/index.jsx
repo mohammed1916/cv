@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Binary string (JSON object with s)',
   url: 'https://leetcode.com/problems/maximum-number-of-operations-to-move-ones-to-the-end/',
   complexity: 'O(n) time and O(1) space. The visualization caps input at 40 characters.',
+  question: "Find the maximum number of moves that push every one in a binary string to the end, where a one can only move right past zeros.",
+  approaches: [
+    { name: "Count zeros after each one", intuition: "Each zero that follows a one can be passed by every one counted before it, so the scan adds these up.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"s":"1001101"}' },
     { label: 'No zero after one', input: '{"s":"00111"}' },

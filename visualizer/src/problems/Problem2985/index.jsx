@@ -39,6 +39,10 @@ const definition = {
   inputLabel,
   complexity,
   examples,
+  question: "Compute the mean number of items per order from compressed order counts.",
+  approaches: [
+    { name: "Weighted average", intuition: "Multiply each item count by its occurrences, sum, and divide by the total occurrences, rounded to two decimals.", time: "O(n)", space: "O(1)" },
+  ],
 }
 
 function Table({ columns, rows }) {

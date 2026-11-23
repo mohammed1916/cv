@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON object with a grid of digits',
   url: 'https://leetcode.com/problems/check-if-grid-satisfies-conditions/',
   complexity: 'O(mn) time and O(1) extra space. The visualization caps the grid at 6 by 6.',
+  question: "Check whether a grid satisfies two rules: each cell equals the cell below it, and each cell differs from the cell to its right.",
+  approaches: [
+    { name: "Single scan with early stop", intuition: "Compare each cell with its neighbours below and to the right, and stop at the first broken rule.", time: "O(mn)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Satisfies', input: '{"grid":[[1,0,2],[1,0,2],[1,0,2]]}' },
     { label: 'Fails below', input: '{"grid":[[1,1,1],[0,0,0],[0,0,0]]}' },

@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON object: start, finish and s (digit strings), limit (1-9)',
   url: 'https://leetcode.com/problems/count-the-number-of-powerful-integers/',
   complexity: 'O(d) time per bound, where d is the number of digits. The visualization caps finish at 100000.',
+  question: "Count the powerful integers in a range, where each number ends with a fixed suffix and has digits no larger than a limit.",
+  approaches: [
+    { name: "Digit walk on the bound", intuition: "Count valid numbers up to each bound by walking its digits and fixing the required suffix.", time: "O(L)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"start":"1","finish":"5000","limit":5,"s":"12"}' },
     { label: 'No match', input: '{"start":"100","finish":"900","limit":2,"s":"10"}' },

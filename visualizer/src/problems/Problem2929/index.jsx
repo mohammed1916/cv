@@ -12,6 +12,11 @@ const definition = {
   inputLabel: 'Object with n and limit (JSON)',
   url: 'https://leetcode.com/problems/distribute-candies-among-children-ii/',
   complexity: 'O(1) time with the closed form. The visualization caps n and limit at 300.',
+  question: "Count the ways to split n candies among three children with a per-child limit, for large n.",
+  approaches: [
+    { name: "Inclusion-exclusion with combinations", intuition: "Subtract the splits where one, two or three children exceed the limit using binomial coefficients.", time: "O(1)", space: "O(1)" },
+    { name: "Enumerate first child", intuition: "Loop over the first child's share and count the remaining splits in closed form.", time: "O(min(n, limit))", space: "O(1)" },
+  ],
   examples: [
     { label: 'Eight items, limit three', input: '{"n":8,"limit":3}' },
     { label: 'Twelve items, limit ten', input: '{"n":12,"limit":10}' },

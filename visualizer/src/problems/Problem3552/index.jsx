@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with matrix (JSON array of strings)',
   url: 'https://leetcode.com/problems/grid-teleportation-traversal/',
   complexity: 'O(cells * 2^letters) states. The visualization caps the grid at 5 by 5 with at most 6 letters.',
+  question: "Find the fewest moves through a grid that can teleport between cells with matching letters.",
+  approaches: [
+    { name: "Breadth-first search with teleports", intuition: "Search outward and jump between cells with matching letters once per letter.", time: "O(cells * 2^letters)", space: "O(cells * 2^letters)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"matrix":["A..",".A.","..."]}' },
     { label: 'Example 2', input: '{"matrix":[".#...",".#.#.",".#.#.","...#."]}' },

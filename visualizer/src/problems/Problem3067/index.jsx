@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'Object with edges ([a, b, weight] lists) and signalSpeed, up to 9 servers in this trace',
   url: 'https://leetcode.com/problems/count-pairs-of-connectable-servers-in-a-weighted-tree-network/',
   complexity: 'O(n^2) time in this trace: each server runs a search over its tree. A rerooting pass gives O(n) overall.',
+  question: "Count the pairs of servers in a weighted tree that can connect with a total weight divisible by the signal speed.",
+  approaches: [
+    { name: "DFS per root", intuition: "For each server as root, count the paths to each subtree whose weight is divisible by the signal.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"edges":[[0,1,2],[0,2,3],[2,3,4]],"signalSpeed":2}' },
     { label: 'Example 2', input: '{"edges":[[0,1,4],[1,2,6],[1,3,5],[3,4,3]],"signalSpeed":2}' },

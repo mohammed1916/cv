@@ -8,6 +8,10 @@ const definition = {
   inputLabel: 'Object with n and edges ([a, b] pairs on nodes 0 to n-1)',
   url: 'https://leetcode.com/problems/tree-diameter/description/',
   complexity: 'O(n) time and O(n) space for the two breadth-first sweeps. The visualization caps the tree at 15 nodes; the draft does not state an exact official bound.',
+  question: "Find the diameter of a tree, the longest path between any two nodes.",
+  approaches: [
+    { name: "Two breadth-first searches", intuition: "Find the farthest node from any start, then the farthest node from that one; the distance is the diameter.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Five nodes', input: '{"n":5,"edges":[[0,1],[1,2],[1,3],[2,4]]}' },
     { label: 'Path', input: '{"n":4,"edges":[[0,1],[1,2],[2,3]]}' },

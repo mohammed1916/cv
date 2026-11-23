@@ -4,6 +4,10 @@ import { meta } from './meta'
 import { buildTrace, parseInput, code, python, phases, examples, complexity, inputLabel } from './algorithm'
 
 const definition = {
+  question: "Answer range-mode queries on an array: for each query, find the value that occurs at least a threshold number of times in the range.",
+  approaches: [
+    { name: "Offline blocks with rollback", intuition: "Sort queries by block and extend the window, adding and rolling back values to answer each query.", time: "O(n sqrt(n))", space: "O(n)" },
+  ],
   number: meta.number,
   phases, parse: parseInput, build: buildTrace, code, python, inputLabel, complexity, examples,
   url: `https://leetcode.com/problems/${meta.slug}/`,

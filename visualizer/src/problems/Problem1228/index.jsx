@@ -8,6 +8,10 @@ const definition = {
   inputLabel: 'Array of the remaining terms (e.g. [5,7,11,13])',
   url: 'https://leetcode.com/problems/missing-number-in-arithmetic-progression/description/',
   complexity: 'O(log n) time and O(1) extra space after reading the endpoints. The visualization caps the array at 20 values; the draft does not state an exact official bound.',
+  question: "Find the one missing value in an arithmetic progression with a single gap.",
+  approaches: [
+    { name: "Binary search on the progression", intuition: "Compare each middle value with its expected value to find where the sequence breaks.", time: "O(log n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Gap after 7', input: '[5,7,11,13]' },
     { label: 'Decreasing', input: '[15,13,11,7]' },

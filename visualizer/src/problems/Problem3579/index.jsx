@@ -10,6 +10,10 @@ const definition = {
   inputLabel: 'Object with word1 and word2 (same length, lowercase)',
   url: 'https://leetcode.com/problems/minimum-steps-to-convert-string-with-operations/',
   complexity: 'O(n^3) time: n^2 pieces, each priced in O(n). The Counter holds at most 26 by 26 pairs. The visualization takes words up to 12 letters; the official limit is 100.',
+  question: "Find the fewest operations that turn one word into another, where a piece can be fixed with a swap or reversed at an extra cost.",
+  approaches: [
+    { name: "Interval DP over pieces", intuition: "Price every piece of the word, either as it stands or reversed, and combine the cheapest pieces with a prefix DP.", time: "O(n^3)", space: "O(n^2)" },
+  ],
   examples: [
     { label: 'Reverse then replace', input: '{"word1":"drawerkit","word2":"rewardkid"}' },
     { label: 'Two swaps', input: '{"word1":"lemonxy","word2":"melonyx"}' },

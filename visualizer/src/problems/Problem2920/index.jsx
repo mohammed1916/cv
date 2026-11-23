@@ -13,6 +13,11 @@ const definition = {
   inputLabel: 'An object with n, edges, coins and k, for example {"n": 4, "edges": [[0,1],[1,2],[2,3]], "coins": [10,10,3,3], "k": 5}',
   url: 'https://leetcode.com/problems/maximum-points-after-collecting-coins-from-all-nodes/',
   complexity: 'O(n * log C) states for coins up to C. The visualization caps n at 15.',
+  question: "Collect coins from all nodes of a tree, where each node's coins can be taken in full or halved repeatedly, and maximize the points.",
+  approaches: [
+    { name: "Tree dynamic programming over halvings", intuition: "Define the best total for each subtree with the number of halvings already applied above it.", time: "O(n log C)", space: "O(n log C)" },
+    { name: "Brute force over choices per node", intuition: "Try each choice at every node.", time: "exponential", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"n":4,"edges":[[0,1],[1,2],[2,3]],"coins":[10,10,3,3],"k":5}' },
     { label: 'Example 2', input: '{"n":3,"edges":[[0,1],[0,2]],"coins":[8,4,4],"k":0}' },

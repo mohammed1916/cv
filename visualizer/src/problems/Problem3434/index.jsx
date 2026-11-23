@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with nums (integers from 1 to 9) and k (1 to 9)',
   url: 'https://leetcode.com/problems/maximum-frequency-after-subarray-operation/description/',
   complexity: 'O(n * d) time for n values with d distinct values. The visualization caps nums at 12 values.',
+  question: "Add one fixed value to a subarray and find the largest number of equal elements you can reach.",
+  approaches: [
+    { name: "Gain per target value", intuition: "For each target value, track the best subarray where converting values to it gains the most.", time: "O(n d)", space: "O(d)" },
+  ],
   examples: [
     { label: 'Invented row', input: JSON.stringify({ nums: [4, 8, 4, 2, 7, 4], k: 4 }) },
     { label: 'Repeated k', input: JSON.stringify({ nums: [9, 3, 9, 6, 3, 3], k: 9 }) },

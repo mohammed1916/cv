@@ -12,6 +12,11 @@ const definition = {
   inputLabel: 'List of [node, parent] pairs; the root pair has parent -1',
   url: 'https://leetcode.com/problems/is-array-a-preorder-of-some-binary-tree/',
   complexity: 'O(n) time and O(n) space for n pairs. Each node is pushed once and popped at most once. The visualization caps the input at 12 pairs with node values from 1 to 99; the rules for distinct nodes and at most two children are checked as the pairs are read.',
+  question: "Decide whether a list of (node, parent) pairs can be the preorder traversal of some binary tree.",
+  approaches: [
+    { name: "Stack of open nodes with child counts", intuition: "Keep the path from the root; each new node must attach to an open ancestor that still has fewer than two children.", time: "O(n)", space: "O(n)" },
+    { name: "Rebuild the tree and compare", intuition: "Construct the tree from the parent links and verify its preorder equals the input sequence.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Balanced sample', input: '[[5,-1],[3,5],[1,3],[4,3],[8,5],[9,8]]' },
     { label: 'Split subtree', input: '[[7,-1],[2,7],[6,2],[9,7],[4,6],[1,2]]' },

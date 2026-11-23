@@ -16,6 +16,10 @@ const definition = {
   inputLabel: 'Object with cost1, cost2, costBoth, need1 and need2',
   url: 'https://leetcode.com/problems/minimum-cost-to-acquire-required-items/',
   complexity: 'O(1) time: only three candidate counts of combined units are tested.',
+  question: "Buy requirement units at single or combined prices so that the total cost is as small as possible.",
+  approaches: [
+    { name: "Test only a few combined counts", intuition: "The cheapest split only needs three candidate counts of combined units.", time: "O(1)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"cost1":4,"cost2":3,"costBoth":2,"need1":4,"need2":1}' },
     { label: 'Example 2', input: '{"cost1":6,"cost2":5,"costBoth":20,"need1":3,"need2":3}' },

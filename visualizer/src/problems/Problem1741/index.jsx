@@ -15,6 +15,10 @@ const definition = {
   complexity,
   inputLabel: 'JSON array of Employees rows: emp_id, event_day, in_time, out_time (minutes)',
   url: 'https://leetcode.com/problems/find-total-time-spent-by-each-employee/',
+  question: "Find the total time each employee spent in the office on each day.",
+  approaches: [
+    { name: "Group and sum", intuition: "Group visits by employee and day and sum each out-minus-in duration.", time: "O(n)", space: "O(groups)" },
+  ],
 }
 
 export default function Problem1741Visualizer() {

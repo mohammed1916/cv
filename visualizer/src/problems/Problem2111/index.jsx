@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON object with arr and k',
   url: 'https://leetcode.com/problems/minimum-operations-to-make-the-array-k-increasing/',
   complexity: 'O(n log(n / k)) time overall, since each class is handled with binary search over its tails; O(n) space.',
+  question: "Change the fewest array values so that every element is no larger than the element k positions after it.",
+  approaches: [
+    { name: "Split by residue and longest non-decreasing subsequence", intuition: "Each residue class mod k must be non-decreasing; keep the longest non-decreasing run inside each class and change the rest.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Two classes', input: '{"arr":[3,1,2,5,4,4],"k":2}' },
     { label: 'Already sorted by class', input: '{"arr":[1,2,3,4],"k":2}' },

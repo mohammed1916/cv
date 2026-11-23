@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Strings (JSON object with s and t)',
   url: 'https://leetcode.com/problems/subsequence-after-one-replacement/',
   complexity: 'O(n + m) time and O(n + m) space. The visualization caps s at 12 letters and t at 16.',
+  question: "Decide whether t becomes a subsequence of s after replacing one character of s.",
+  approaches: [
+    { name: "Prefix and suffix matching", intuition: "Greedily match prefixes and suffixes of t, then test each position for a fitting replacement letter.", time: "O(n + m)", space: "O(n + m)" },
+  ],
   examples: [
     { label: 'True', input: '{"s":"cat","t":"chat"}' },
     { label: 'False', input: '{"s":"plane","t":"apple"}' },

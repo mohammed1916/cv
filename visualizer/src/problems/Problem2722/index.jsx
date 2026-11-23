@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Two object arrays as JSON: {"arr1": [...], "arr2": [...]}',
   url: 'https://leetcode.com/problems/join-two-arrays-by-id/',
   complexity: 'O((n + m) log(n + m)) time for the final sort, with O(n + m) space. The visualization caps each array at 8 objects.',
+  question: "Given two arrays of objects with ids, join them by id, merging their fields.",
+  approaches: [
+    { name: "Map by id then merge", intuition: "Store the second array in a map by id, then merge each first-array object with its match.", time: "O((n + m) log(n + m))", space: "O(n + m)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"arr1":[{"id":1,"x":2,"y":3},{"id":2,"x":3,"y":6}],"arr2":[{"id":2,"x":10,"y":4},{"id":3,"x":2,"y":9}]}' },
     { label: 'Single object each', input: '{"arr1":[{"id":1,"x":5}],"arr2":[{"id":1,"x":5}]}' },

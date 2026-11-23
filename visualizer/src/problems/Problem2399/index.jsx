@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'String and distances as JSON: {"s": "...", "distance": [26 numbers]}',
   url: 'https://leetcode.com/problems/check-distances-between-same-letters/',
   complexity: 'O(n) time and O(1) extra space for the 26-letter table. The visualization caps input at 52 letters.',
+  question: "Check that the two occurrences of each letter in a string are exactly the required distance apart.",
+  approaches: [
+    { name: "Compare index gaps", intuition: "Record the first position of each letter and check the gap at the second occurrence.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Own: m and n one apart', input: '{"s":"mnmnoo","distance":[0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0]}' },
     { label: 'Three letters twice each', input: '{"s":"mqnqmn","distance":[3,1,4,1,5,9,2,6,5,3,5,8,9,7,9,3,2,3,8,4,6,2,6,4,3,3]}' },

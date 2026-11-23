@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON object with energy (integers -10 to 10) and k (jump length)',
   url: 'https://leetcode.com/problems/taking-maximum-energy-from-the-mystic-dungeon/',
   complexity: 'O(n) time and O(n) space. The visualization caps input at 12 entries.',
+  question: "Choose a starting position in an energy array with jumps of a fixed size to maximise the total energy collected.",
+  approaches: [
+    { name: "Fill from the right", intuition: "Each position's best total is its energy plus the best total from the position k steps ahead.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Six values, k four', input: '{"energy":[7,-2,4,-8,-1,6],"k":4}' },
     { label: 'All negative', input: '{"energy":[-2,-3,-1],"k":2}' },

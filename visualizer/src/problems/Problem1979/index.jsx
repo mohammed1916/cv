@@ -8,6 +8,10 @@ const definition = {
   inputLabel: 'Array of positive integers (JSON)',
   url: 'https://leetcode.com/problems/find-greatest-common-divisor-of-array/',
   complexity: 'O(n) time for the scan and O(log max) time for Euclid\'s steps.',
+  question: "Find the greatest common divisor of the smallest and largest values in an array.",
+  approaches: [
+    { name: "Track min and max then Euclid", intuition: "Scan once for the minimum and maximum, then apply Euclid's algorithm.", time: "O(n + log V)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Extremes 2 and 9', input: '[9,4,6,2]' },
     { label: 'Shared divisor 6', input: '[12,30,18,6]' },

@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with s (lowercase letters)',
   url: 'https://leetcode.com/problems/count-residue-prefixes/',
   complexity: 'O(n) time with a set of at most 26 letters.',
+  question: "Count the prefixes of a string whose number of distinct letters is congruent to their length modulo 3.",
+  approaches: [
+    { name: "Grow prefixes with a set", intuition: "Add letters one at a time, tracking the distinct count in a set of at most 26 letters.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Short word', input: '{"s":"xyz"}' },
     { label: 'Repeats', input: '{"s":"aabbaa"}' },

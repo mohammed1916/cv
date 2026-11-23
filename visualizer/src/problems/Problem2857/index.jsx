@@ -14,6 +14,11 @@ const definition = {
   inputLabel: 'Object with points and integer k (JSON)',
   url: 'https://leetcode.com/problems/count-pairs-of-points-with-distance-k/',
   complexity: 'O(n * k) time and O(n) space. The visualization caps input at 30 points and k at 100.',
+  question: "Count pairs of points whose XOR-based distance equals k.",
+  approaches: [
+    { name: "Split k into all pairs of XOR partners", intuition: "For each point, try every split of k into a and b with a XOR b equal to k and look up earlier points by count.", time: "O(n k)", space: "O(n)" },
+    { name: "Compare every pair", intuition: "Compute the distance of each pair directly.", time: "O(n^2)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Four points', input: '{"points":[[1,2],[4,2],[1,3],[5,2]],"k":1}' },
     { label: 'Identical points', input: '{"points":[[0,0],[0,0],[0,0]],"k":0}' },

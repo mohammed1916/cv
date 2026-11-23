@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'Object with pairs of values, each [x, y] with x less than y (JSON)',
   url: 'https://leetcode.com/problems/number-of-ways-to-reconstruct-a-tree/',
   complexity: 'O(p + n^2) time for p pairs and n values, since each level scans its group. The visualization caps input at 8 values.',
+  question: "Count the rooted trees that match a list of parent and child pairs.",
+  approaches: [
+    { name: "Root by degree, then check", intuition: "Find a root with the largest degree, then check each node's ancestors.", time: "O(p + n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: 'One way', input: '{"pairs":[[1,2],[2,3]]}' },
     { label: 'Two ways', input: '{"pairs":[[1,2],[2,3],[1,3]]}' },

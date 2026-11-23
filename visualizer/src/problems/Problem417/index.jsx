@@ -14,6 +14,11 @@ const definition = {
   inputLabel: "Heights matrix (e.g. [[1,2],[4,3]])",
   url: "https://leetcode.com/problems/pacific-atlantic-water-flow/",
   complexity: "O(m * n) time and space for an m x n grid. The visualization caps the grid at 20 x 20; the official limit is 200 x 200 with heights from 0 to 10^5.",
+  question: "Find the cells of a grid from which water can flow to both the Pacific and Atlantic oceans.",
+  approaches: [
+    { name: "Reverse flood from each ocean", intuition: "Flood inland from each ocean's border, moving only to cells that are not lower; cells reached from both sides qualify.", time: "O(mn)", space: "O(mn)" },
+    { name: "Per-cell search", intuition: "Run a search from every cell to check both oceans; simpler but repeats work.", time: "O((mn)^2)", space: "O(mn)" },
+  ],
   examples: authoredExamples0.map((example) => ({
     label: example.label,
     input: JSON.stringify(example.input),

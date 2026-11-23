@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON object with arr1 and arr2, each a most-significant-first array of 0 and 1',
   url: 'https://leetcode.com/problems/adding-two-negabinary-numbers/',
   complexity: 'O(max(m, n)) time and space. The visualization caps each array at 30 digits.',
+  question: "Add two numbers written in base negative two and return their base -2 digits.",
+  approaches: [
+    { name: "Right-to-left addition with carry", intuition: "Add digits from the least significant end, carrying with base -2 rules.", time: "O(max(m, n))", space: "O(max(m, n))" },
+  ],
   examples: [
     { label: 'Own: 1001 plus 11', input: '{"arr1":[1,0,0,1],"arr2":[1,1]}' },
     { label: 'Zero', input: '{"arr1":[0],"arr2":[0]}' },

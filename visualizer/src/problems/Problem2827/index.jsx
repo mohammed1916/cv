@@ -11,6 +11,11 @@ const definition = {
   inputLabel: 'JSON object with low, high and k, for example {"low":10,"high":20,"k":3}',
   url: 'https://leetcode.com/problems/number-of-beautiful-integers-in-the-range/',
   complexity: 'O(d * d * k * 10) states per bound for d digits, memoized. The visualization caps high at 10000 and k at 20.',
+  question: "Count integers in a range that have an equal number of even and odd digits and are divisible by a given number.",
+  approaches: [
+    { name: "Digit dynamic programming", intuition: "Track the even-minus-odd difference and the remainder modulo k while building digits under the bound.", time: "O(d^2 k 10) states", space: "O(d^2 k)" },
+    { name: "Check every integer", intuition: "Test each number in the range directly.", time: "O(range length times digits)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Small range, k of six', input: '{"low":3,"high":40,"k":6}' },
     { label: 'Divisor 1', input: '{"low":1,"high":10,"k":1}' },

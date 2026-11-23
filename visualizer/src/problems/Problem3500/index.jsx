@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with nums, cost (same length) and k',
   url: 'https://leetcode.com/problems/minimum-cost-to-divide-array-into-subarrays/',
   complexity: 'O(n^3) time for this visualizer with n up to 8. Layers of this recurrence can be sped up with a convex hull trick.',
+  question: "Split an array into subarrays to minimize a total cost that depends on each subarray's sum and position.",
+  approaches: [
+    { name: "Layered DP", intuition: "Keep the best cost for each number of subarrays over the prefixes, adding one layer at a time.", time: "O(n^3)", space: "O(n^2)" },
+  ],
   examples: [
     { label: 'Example', input: '{"nums":[2,5],"cost":[3,1],"k":2}' },
     { label: 'Three items', input: '{"nums":[1,4,2],"cost":[2,2,3],"k":1}' },

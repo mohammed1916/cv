@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with nums (integers from 0 to 9) and k',
   url: 'https://leetcode.com/problems/minimum-partition-score-ii/',
   complexity: 'O(k * n^2) time and O(k * n) space for n values split into k parts, using prefix sums for each part. The visualization caps nums at 9 values.',
+  question: "Split an array into k contiguous parts where a part with sum s costs s(s+1)/2, and find the cheapest total.",
+  approaches: [
+    { name: "Table of best costs over prefixes", intuition: "Fill a DP table over prefix end and part count, using prefix sums for each candidate part.", time: "O(k x n^2)", space: "O(k x n)" },
+  ],
   examples: [
     { label: 'Two parts', input: '{"nums":[3,1,4,1,5],"k":2}' },
     { label: 'Equal values', input: '{"nums":[2,2,2,2],"k":3}' },

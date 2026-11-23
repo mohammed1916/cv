@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with cost and time arrays of equal length',
   url: 'https://leetcode.com/problems/painting-the-walls/',
   complexity: 'O(n^2) time and O(n) space. The visualization caps input at 10 walls.',
+  question: "Given paint costs and times for walls, paint all walls with the minimum cost where a free painter may help.",
+  approaches: [
+    { name: "Dynamic programming over walls", intuition: "Track the cheapest cost for covering each number of walls, combining paid and free painters.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Five walls', input: '{"cost":[7,2,9,4,6],"time":[3,1,4,2,5]}' },
     { label: 'Single wall', input: '{"cost":[5],"time":[1]}' },

@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with s (digits 1 to 9), k and min_length (JSON)',
   url: 'https://leetcode.com/problems/number-of-beautiful-partitions/',
   complexity: 'O(n^2 * k) time and O(n * k) space. The visualization caps n at 12, k at 6 and min_length at 6.',
+  question: "Split a digit string into k pieces, each long enough, starting with a prime digit and ending with a non-prime digit.",
+  approaches: [
+    { name: "Prefix dynamic programming", intuition: "Let each cell count the ways to finish k pieces with the last cut at a valid end position.", time: "O(n^2 * k)", space: "O(n * k)" },
+  ],
   examples: [
     { label: 'Own: six digits', input: '{"s":"784963","k":2,"min_length":3}' },
     { label: 'Example 2', input: '{"s":"2468","k":1,"min_length":4}' },

@@ -9,6 +9,10 @@ const definition = {
   inputLabel: 'Object with s (lowercase letters)',
   url: 'https://leetcode.com/problems/partition-string/',
   complexity: 'O(n) time with the trie, since each character is one step along an edge, and O(n) space for the pieces. The official length reaches 100000; the visualization caps s at 40 characters.',
+  question: "Split a string into pieces so that no piece equals an earlier piece, and report the pieces in order.",
+  approaches: [
+    { name: "Trie of seen pieces", intuition: "Walk a trie of earlier pieces and cut as soon as the current piece is new.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Pieces share prefixes', input: '{"s":"xyxzxxyy"}' },
     { label: 'Unfinished tail', input: '{"s":"qpqpq"}' },

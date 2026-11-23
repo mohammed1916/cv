@@ -13,6 +13,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'String s (JSON string, up to 12 letters)',
   url: 'https://leetcode.com/problems/count-different-palindromic-subsequences/',
   complexity: 'O(n²) states with O(1) work each in this version. The visualization is limited to n ≤ 12 because it stores the whole table.',
+  question: "Count the distinct palindromic subsequences of a string.",
+  approaches: [
+    { name: "Interval DP", intuition: "Equal ends multiply the inner count, corrected for palindromes repeated at the nearest matching letters.", time: "O(n^2)", space: "O(n^2)" },
+  ],
   examples: [
     { label: 'Four letters', input: '"bccb"' },
     { label: 'Repeats', input: '"abcdabcdabcdabcdabcd"' },

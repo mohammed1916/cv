@@ -13,6 +13,11 @@ const definition = {
   inputLabel: 'arr (JSON array that rises then falls)',
   url: 'https://leetcode.com/problems/peak-index-in-a-mountain-array/',
   complexity: 'O(log n) time and O(1) extra space.',
+  question: "Find the index of the peak in an array that rises strictly and then falls strictly.",
+  approaches: [
+    { name: "Binary search on the slope", intuition: "If the array is still rising at the middle, the peak is to the right; otherwise it is at or to the left.", time: "O(log n)", space: "O(1)" },
+    { name: "Linear scan", intuition: "Find the first index where the next value is smaller.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Early peak', input: '[1,4,7,5,2]' },
     { label: 'Late peak', input: '[2,3,4,9,8,1]' },

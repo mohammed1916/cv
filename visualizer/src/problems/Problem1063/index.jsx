@@ -8,6 +8,10 @@ const definition = {
   inputLabel: 'Values (JSON object with nums)',
   url: 'https://leetcode.com/problems/number-of-valid-subarrays/',
   complexity: 'O(n) time and O(n) stack space. The visualization caps input at 40 values.',
+  question: "Count the subarrays whose first element is the smallest element of that subarray.",
+  approaches: [
+    { name: "Monotonic stack", intuition: "For each index, count how far it stays the smallest to its right, using a stack of increasing values.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Closing starts', input: '{"nums":[3,6,4,7,2,5,5,1]}' },
     { label: 'Equal values', input: '{"nums":[8,8,8,8]}' },

@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON object with lowercase strings a and b',
   url: 'https://leetcode.com/problems/change-minimum-characters-to-satisfy-one-of-three-conditions/',
   complexity: 'O(26 * (n + m)) time with letter counts. The visualization caps each string at 20 letters.',
+  question: "Change the fewest characters so two strings satisfy one of three conditions.",
+  approaches: [
+    { name: "Letter counts per condition", intuition: "Count letters in both strings, then compute the cost of each condition for each pivot letter.", time: "O(26 * (n + m))", space: "O(26)" },
+  ],
   examples: [
     { label: 'Mirror letters', input: '{"a":"mqk","b":"kqm"}' },
     { label: 'Repeated runs', input: '{"a":"ooppoo","b":"pq"}' },

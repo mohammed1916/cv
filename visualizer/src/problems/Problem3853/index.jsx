@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with s and k',
   url: 'https://leetcode.com/problems/merge-close-characters/',
   complexity: 'Each merge shortens the string, and each search scans the pairs again. The visual caps the string at 16 letters.',
+  question: "Repeatedly merge close equal letters by deleting the right one, always choosing the lowest left position first.",
+  approaches: [
+    { name: "Repeated scans for merges", intuition: "Repeat scans for the leftmost merge until no pair of equal letters is within k.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example', input: '{"s":"mnmpnm","k":2}' },
     { label: 'Run of a', input: '{"s":"aaa","k":1}' },

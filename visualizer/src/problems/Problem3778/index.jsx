@@ -13,6 +13,11 @@ const definition = {
   inputLabel: 'Object with n and edges ([u, v, weight] triples)',
   url: 'https://leetcode.com/problems/minimum-distance-excluding-one-maximum-weighted-edge/',
   complexity: 'O((V + E) log V) time with a heap in general; this visualization uses a simple scan over the 2n states, so it runs in O(n^2 + E) for n up to 8.',
+  question: "Find the shortest distance from a start to a target when one edge of the graph can be waived.",
+  approaches: [
+    { name: "Two-layer Dijkstra", intuition: "Run shortest paths on two layers per node, one before and one after the waived edge.", time: "O(n^2 + E) for this scan", space: "O(n)" },
+    { name: "Heap-based Dijkstra", intuition: "Use a heap over the same two layers.", time: "O((V + E) log V)", space: "O(V + E)" },
+  ],
   examples: [
     { label: 'Two routes', input: '{"n":5,"edges":[[0,1,3],[1,4,6],[0,2,2],[2,3,8],[3,4,1],[1,2,5]]}' },
     { label: 'Heavy direct edge', input: '{"n":4,"edges":[[0,1,10],[1,3,1],[0,2,2],[2,3,3]]}' },

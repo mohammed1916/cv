@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Batches (JSON object with batchSize and groups as sizes)',
   url: 'https://leetcode.com/problems/maximum-number-of-groups-getting-fresh-donuts/',
   complexity: 'O(b^(b-1)) memoized states in the worst case for batch size b. The visualization caps batchSize at 4 and groups at 8.',
+  question: "Arrange customer groups so that as many groups as possible receive only fresh donuts.",
+  approaches: [
+    { name: "Memoised bitmask search", intuition: "Track the leftover donut residues in a memoised state.", time: "O(b^(b-1)) states worst case", space: "O(b^b)" },
+  ],
   examples: [
     { label: 'Six groups', input: '{"batchSize":3,"groups":[1,2,3,4,5,6]}' },
     { label: 'Eight groups', input: '{"batchSize":4,"groups":[1,3,2,5,2,2,1,6]}' },

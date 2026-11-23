@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Digit range and length (JSON object with l, r, k)',
   url: 'https://leetcode.doocs.org/en/lc/3855',
   complexity: 'O(log k) time with modular exponentiation. The visualization caps k at 60.',
+  question: "Sum all k-digit numbers in a range of digit positions.",
+  approaches: [
+    { name: "Closed form with modular inverse", intuition: "The sum is a digit sum times a closed form, computed with modular exponentiation.", time: "O(log k)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Digits two to six, k three', input: '{"l":2,"r":6,"k":3}' },
     { label: 'Leading zeros', input: '{"l":0,"r":1,"k":3}' },

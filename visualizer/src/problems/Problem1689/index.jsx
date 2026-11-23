@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Positive whole number (digits only)',
   url: 'https://leetcode.com/problems/partitioning-into-minimum-number-of-deci-binary-numbers/',
   complexity: 'O(d) time for d digits and O(1) extra space.',
+  question: "Find the fewest deci-binary numbers whose sum is a given numeric string.",
+  approaches: [
+    { name: "Largest digit", intuition: "The answer is the largest digit, since each deci-binary number covers one unit in each position.", time: "O(d)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Mixed digits', input: '2046' },
     { label: 'Single digit', input: '5' },

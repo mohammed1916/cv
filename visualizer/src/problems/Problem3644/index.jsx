@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with nums (a permutation of 0 to n minus 1, up to 7 values)',
   url: 'https://leetcode.com/problems/maximum-k-to-sort-a-permutation/description/',
   complexity: 'Teaching search: up to n candidate values, each exploring at most n! arrangements. Not the efficient route for large n.',
+  question: "Find the largest k for which allowed swaps can sort a permutation.",
+  approaches: [
+    { name: "Test candidate k values", intuition: "Check each candidate k by searching over the reachable arrangements.", time: "O(n * n!)", space: "O(n!)" },
+  ],
   examples: [
     { label: 'Invented example', input: '{"nums":[2,0,1]}' },
     { label: 'Already sorted', input: '{"nums":[0,1]}' },

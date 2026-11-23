@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Preferences (JSON object with hats as one list of hat numbers per person)',
   url: 'https://leetcode.com/problems/number-of-ways-to-wear-different-hats-to-each-other/',
   complexity: 'O(40 * 2^n * n) time and O(2^n) space. The visualization caps the group at 5 people.',
+  question: "Count the ways to assign each person a distinct hat so that every hat is worn by one person.",
+  approaches: [
+    { name: "Bitmask DP over hats", intuition: "Process hats in order with a bitmask of people who have already been given one.", time: "O(40 2^n n)", space: "O(2^n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"hats":[[3,4],[4,5],[5]]}' },
     { label: 'Example 2', input: '{"hats":[[3,5,1],[3,5]]}' },

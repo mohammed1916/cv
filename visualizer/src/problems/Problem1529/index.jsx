@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Target bit string (JSON string)',
   url: 'https://leetcode.com/problems/minimum-suffix-flips/',
   complexity: 'O(n) time and O(1) extra space: one scan that compares each bit with the current state.',
+  question: "Find the fewest flips that turn the bulb string into all ones on a suffix.",
+  approaches: [
+    { name: "Scan and count changes", intuition: "Count each position where the bit differs from the current state, which flips each time a change occurs.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Mixed', input: '"011001"' },
     { label: 'Two changes', input: '"10"' },

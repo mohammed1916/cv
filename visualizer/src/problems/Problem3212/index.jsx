@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Grid of X, Y and . rows (JSON)',
   url: 'https://leetcode.com/problems/count-submatrices-with-equal-frequency-of-x-and-y/',
   complexity: 'O(m * n) time and space with two prefix-count tables. The visualization caps the grid at 6 by 6.',
+  question: "Count submatrices that contain the same number of X and Y cells with at least one X, in a grid of letters.",
+  approaches: [
+    { name: "Prefix counts for each corner", intuition: "Each submatrix containing the top-left cell has its X and Y counts read from two prefix tables in constant time.", time: "O(m * n)", space: "O(m * n)" },
+  ],
   examples: [
     { label: 'Example', input: '{"grid":["XY.","Y.."]}' },
     { label: 'No X', input: '{"grid":["..",".."]}' },

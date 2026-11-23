@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'sentence1, sentence2 and pairs (JSON object)',
   url: 'https://leetcode.com/problems/sentence-similarity-ii/',
   complexity: 'O((n + p) * α) time with union-find, where p is the number of pairs.',
+  question: "Decide whether two sentences match when similar-word pairs may chain together.",
+  approaches: [
+    { name: "Union find over words", intuition: "Union similar words into groups and check that each pair of words shares a group.", time: "O(n α(n))", space: "O(n)" },
+  ],
   examples: [
     { label: 'Chain', input: '{"sentence1":["cat","sees","fish"],"sentence2":["dog","notices","shark"],"pairs":[["cat","dog"],["sees","notices"],["fish","shark"]]}' },
     { label: 'Broken', input: '{"sentence1":["red","car"],"sentence2":["blue","car"],"pairs":[["red","green"]]}' },

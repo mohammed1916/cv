@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Rectangle (JSON object with x, y, and circles as [cx, cy, r])',
   url: 'https://leetcode.com/problems/check-if-the-rectangle-corner-is-reachable/',
   complexity: 'O(n^2) time for n circles. The visualization caps input at 5 circles on a 10 by 10 rectangle.',
+  question: "Decide whether the bottom-left corner of a rectangle can reach the top-right corner without crossing overlapping circles.",
+  approaches: [
+    { name: "Union of overlapping circles", intuition: "The corner is blocked when a chain of overlapping circles links the two edge arcs around it.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Reachable', input: '{"x":3,"y":3,"circles":[[2,1,1]]}' },
     { label: 'Blocked', input: '{"x":3,"y":3,"circles":[[1,1,3]]}' },

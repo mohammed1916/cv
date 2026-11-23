@@ -16,6 +16,11 @@ const definition = {
   inputLabel: "nums and k (JSON object with nums and integer k)",
   url: "https://leetcode.com/problems/minimum-operations-to-collect-elements/",
   complexity: "O(n) time and O(k) space. The visualization caps the array at 50 elements.",
+  question: "Find the fewest operations, each removing the last element of an array, needed to collect every value from 1 to k.",
+  approaches: [
+    { name: "Scan from the end until all values are collected", intuition: "Removing from the end collects values in reverse; stop when all values from 1 to k have been seen.", time: "O(n)", space: "O(k)" },
+    { name: "Track positions", intuition: "Find the latest position of each value and derive the answer from the earliest one needed.", time: "O(n)", space: "O(k)" },
+  ],
   examples: [
     { label: "k = 2", input: '{"nums":[3,1,5,4,2],"k":2}' },
     { label: "k = 5", input: '{"nums":[3,1,5,4,2],"k":5}' },

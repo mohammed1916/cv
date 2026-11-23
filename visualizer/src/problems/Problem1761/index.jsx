@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with n (3 to 10) and edges (1-based pairs), e.g. {"n":3,"edges":[[1,2],[2,3],[1,3]]}',
   url: 'https://leetcode.com/problems/minimum-degree-of-a-connected-trio-in-a-graph/',
   complexity: 'O(n^3 + m) time and O(n^2) space for the adjacency table. The visualization caps n at 10.',
+  question: "In an undirected graph, find a triangle whose outside connections are as few as possible.",
+  approaches: [
+    { name: "Check every triple", intuition: "Check each triple of nodes that forms a triangle and add up their degrees minus six.", time: "O(n^3 + m)", space: "O(n^2)" },
+  ],
   examples: [
     { label: 'Five nodes, one path', input: '{"n":5,"edges":[[1,5],[2,4],[4,5],[3,1]]}' },
     { label: 'Two cycles and a pendant', input: '{"n":9,"edges":[[1,2],[2,3],[3,4],[4,1],[5,6],[6,7],[7,8],[8,5],[9,1]]}' },

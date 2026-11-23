@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON object with targetX and targetY (1 to 1000)',
   url: 'https://leetcode.com/problems/check-if-point-is-reachable/',
   complexity: 'O(log(max(targetX, targetY))) time and O(1) space.',
+  question: "Decide whether a point is reachable from (1, 1) using the allowed coordinate moves.",
+  approaches: [
+    { name: "GCD and power of two check", intuition: "The point is reachable exactly when the gcd of its coordinates is a power of two.", time: "O(log(max(x, y)))", space: "O(1)" },
+  ],
   examples: [
     { label: 'Unequal targets', input: '{"targetX":12,"targetY":9}' },
     { label: 'Diagonal target', input: '{"targetX":6,"targetY":6}' },

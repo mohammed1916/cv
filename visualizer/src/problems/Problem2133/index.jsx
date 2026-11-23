@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Square matrix as JSON rows',
   url: 'https://leetcode.com/problems/check-if-every-row-and-column-contains-all-numbers/',
   complexity: 'O(n^2) time with a set per row and column; O(n) extra space per line checked.',
+  question: "Check whether every row and every column of an n by n matrix contains each value from 1 to n exactly once.",
+  approaches: [
+    { name: "Set per row and column", intuition: "Keep a set for each row and column and check that each has n distinct values.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Valid Latin square', input: '[[2,1],[1,2]]' },
     { label: 'Repeated in a column', input: '[[1,1],[2,2]]' },

@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Grid (JSON object with grid rows of integers from 1 to 99, up to 6 by 6)',
   url: 'https://leetcode.com/problems/maximum-number-of-moves-in-a-grid/',
   complexity: 'O(m * n) time with three neighbours per cell. The visualization caps the grid at 6 by 6.',
+  question: "Given a grid, return the maximum number of moves starting from any cell in the first column, moving right and diagonally to strictly larger values.",
+  approaches: [
+    { name: "Dynamic programming from left", intuition: "Compute the longest path ending in each cell from the cells in the previous column.", time: "O(m * n)", space: "O(m * n)" },
+  ],
   examples: [
     { label: 'Official', input: '{"grid":[[2,4,3,5],[5,4,9,3],[3,4,2,11],[10,9,13,15]]}' },
     { label: 'No move', input: '{"grid":[[3,2,4],[2,1,9],[1,1,7]]}' },

@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'ip and n (JSON)',
   url: 'https://leetcode.com/problems/ip-to-cidr/',
   complexity: 'O(log n) blocks of work each. The visualization accepts up to 1000 addresses.',
+  question: "Cover a range of IPv4 addresses with the fewest aligned CIDR blocks.",
+  approaches: [
+    { name: "Greedy largest aligned block", intuition: "Repeatedly take the largest power-of-two block that starts at the current address and fits in the range.", time: "O(log n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"ip":"255.0.0.7","n":10}' },
     { label: 'One block', input: '{"ip":"10.0.0.0","n":256}' },

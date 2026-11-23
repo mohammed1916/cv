@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Bank rows as a JSON array of binary strings',
   url: 'https://leetcode.com/problems/number-of-laser-beams-in-a-bank/',
   complexity: 'O(m n) time to count the devices in an m x n bank; O(1) extra space.',
+  question: "Count the laser beams in a bank floor plan, where beams run between devices in consecutive rows that contain devices.",
+  approaches: [
+    { name: "Multiply counts of adjacent non-empty rows", intuition: "Only rows with devices matter; each pair of adjacent such rows contributes the product of their device counts.", time: "O(m * n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Empty row between', input: '["0110","0000","1001","1110"]' },
     { label: 'Adjacent rows', input: '["10","10"]' }, { label: "Single row", input: "[\"0\"]" }, { label: "Equal rows", input: "[\"11\",\"11\"]" }, { label: "Largest bank", input: "[\"111111111111\",\"111111111111\",\"111111111111\",\"111111111111\",\"111111111111\",\"111111111111\",\"111111111111\",\"111111111111\",\"111111111111\",\"111111111111\",\"111111111111\",\"111111111111\"]" }, { label: "Long run: 12 by 12", input: "[\"110101000100\",\"000100111000\",\"000000110100\",\"010000001000\",\"101111000111\",\"100111110101\",\"110111010011\",\"111010001111\",\"001010001101\",\"010100011011\",\"000111110011\",\"010110000010\"]" },

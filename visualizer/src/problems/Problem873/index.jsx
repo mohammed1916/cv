@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'Array arr (JSON, strictly increasing)',
   url: 'https://leetcode.com/problems/length-of-longest-fibonacci-subsequence/',
   complexity: 'O(n^2) time and space. The visualization caps n at 16.',
+  question: "Find the length of the longest subsequence of a strictly increasing array that forms a Fibonacci-like sequence.",
+  approaches: [
+    { name: "Pair DP with value lookup", intuition: "Let dp[i][j] be the length of a sequence ending with the last two values at i and j, and extend it by looking up the needed previous value.", time: "O(n^2)", space: "O(n^2)" },
+  ],
   examples: [
     { label: 'Mixed with one Fibonacci run', input: '[1,2,4,7,11,13]' },
     { label: 'No Fibonacci triple', input: '[2,4,6,8,10,12,14]' },

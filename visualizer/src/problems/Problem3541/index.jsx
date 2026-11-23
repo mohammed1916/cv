@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'String of lowercase letters (JSON string, up to 30 letters)',
   url: 'https://leetcode.com/problems/find-most-frequent-vowel-and-consonant/',
   complexity: 'O(n + 26) time and O(1) extra space. The visualization caps input at 30 letters.',
+  question: "Find the most frequent vowel and the most frequent consonant in a string.",
+  approaches: [
+    { name: "Count map", intuition: "Count each letter and take the most frequent vowel and consonant.", time: "O(n + 26)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Triple then two letters', input: '"zzzyx"' },
     { label: 'Vowels only', input: '"aeiou"' },

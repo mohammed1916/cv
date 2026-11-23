@@ -16,6 +16,10 @@ const definition = {
   inputLabel: 'Object with Items ({ item_id, item_name, item_category }) and Orders ({ order_id, order_date, item_id, quantity }) lists',
   url: 'https://leetcode.com/problems/sales-by-day-of-the-week/',
   complexity: 'O(o) to tag orders, then O(c * o) for the category-by-day totals in this visualization.',
+  question: "Count orders for each product category by the weekday they were placed.",
+  approaches: [
+    { name: "Weekday tag then pivot totals", intuition: "Tag each order with its weekday and category, then total each category across the seven day columns.", time: "O(o + c * o)", space: "O(c * 7)" },
+  ],
   examples: [
     { label: 'Example', input: '{"Items":[{"item_id":1,"item_name":"Laptop","item_category":"Electronics"},{"item_id":2,"item_name":"Pen","item_category":"Stationery"},{"item_id":3,"item_name":"Desk","item_category":"Furniture"},{"item_id":4,"item_name":"Phone","item_category":"Electronics"}],"Orders":[{"order_id":1,"customer_id":1,"order_date":"2020-06-29","item_id":1,"quantity":2},{"order_id":2,"customer_id":2,"order_date":"2020-06-29","item_id":2,"quantity":5},{"order_id":3,"customer_id":1,"order_date":"2020-07-04","item_id":1,"quantity":1},{"order_id":4,"customer_id":3,"order_date":"2020-07-05","item_id":3,"quantity":3},{"order_id":5,"customer_id":2,"order_date":"2020-06-30","item_id":2,"quantity":4}]}' },
     { label: 'Single order', input: '{"Items":[{"item_id":7,"item_name":"Mug","item_category":"Kitchen"}],"Orders":[{"order_id":1,"customer_id":1,"order_date":"2021-01-01","item_id":7,"quantity":0}]}' },

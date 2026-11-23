@@ -11,6 +11,10 @@ const definition = {
   inputLabel: 'JSON array of [start, duration] pairs',
   url: 'https://leetcode.com/problems/earliest-time-to-finish-one-task/',
   complexity: 'O(n) time and O(1) extra space.',
+  question: "Find the earliest finish time of one task from a list of start and duration pairs.",
+  approaches: [
+    { name: "Single pass", intuition: "Take the minimum of start plus duration across the tasks.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example', input: '[[4,9],[10,1],[3,20]]' },
     { label: 'Single task', input: '[[50,50]]' },

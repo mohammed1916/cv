@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Sentence and discount (JSON object with sentence and discount)',
   url: 'https://leetcode.com/problems/apply-discount-to-prices/',
   complexity: 'O(n) time for the sentence. The visualization caps the sentence at 80 characters.',
+  question: "In a sentence, every word that starts with a dollar sign and then a number should have its price reduced by a given percentage.",
+  approaches: [
+    { name: "Scan and rewrite words", intuition: "Split the sentence into words, apply the discount to matching prices, and join them back.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Three prices, 20 percent', input: '{"sentence":"pen $30 mug $7 cap 9","discount":20}' },
     { label: 'Own: mixed prices, 50 percent', input: '{"sentence":"$12 3 apples $4 $0$","discount":50}' },

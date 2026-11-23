@@ -11,6 +11,10 @@ const definition = {
   inputLabel: 'Object with initialCurrency, pairs1, rates1, pairs2 and rates2',
   url: 'https://leetcode.com/problems/maximize-amount-after-two-days-of-conversions/description/',
   complexity: 'O(n * m) per day with Bellman-Ford style relaxation. The visualization caps each day at 5 pairs.',
+  question: "Find the largest amount of money you can end with after two days of currency conversions, starting from a given currency.",
+  approaches: [
+    { name: "Bellman-Ford style relaxation", intuition: "Relax every conversion rate for each day in turn to find the best amount in each currency.", time: "O(n * m)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Invented market', input: JSON.stringify({ initialCurrency: 'AA', pairs1: [['AA', 'BB']], rates1: [2], pairs2: [['BB', 'AA']], rates2: [3] }) },
     { label: 'Middle hop', input: JSON.stringify({ initialCurrency: 'AA', pairs1: [['AA', 'BB'], ['BB', 'CC']], rates1: [1.5, 2], pairs2: [['CC', 'AA']], rates2: [1.25] }) },

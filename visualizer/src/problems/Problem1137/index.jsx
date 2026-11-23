@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Object with an integer n from 0 to 37 (JSON)',
   url: 'https://leetcode.com/problems/n-th-tribonacci-number/',
   complexity: 'O(n) time and O(1) extra space with a three-term window. The visualization caps n at 37.',
+  question: "Return the n-th tribonacci number, where each term is the sum of the previous three.",
+  approaches: [
+    { name: "Rolling three values", intuition: "Keep the last three terms and slide the window forward.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Term 6', input: '{"n":6}' },
     { label: 'Term 10', input: '{"n":10}' },

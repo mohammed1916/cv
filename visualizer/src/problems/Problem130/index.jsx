@@ -21,6 +21,10 @@ const definition = {
   inputLabel: "Board (JSON object, e.g. {\"board\": [[\"X\",\"O\"],[\"X\",\"X\"]]})",
   url: "https://leetcode.com/problems/surrounded-regions/",
   complexity: "O(R*C) time and space for an R by C board. The visualization caps the board at 20 by 20.",
+  question: "Flip every region of O letters that is not connected to the border.",
+  approaches: [
+    { name: "Border flood fill", intuition: "Mark regions connected to the border as safe, then flip the remaining O cells.", time: "O(R x C)", space: "O(R x C)" },
+  ],
   examples: getExamples("surrounded-regions").map(({ label, input }) => ({ label, input: JSON.stringify({ board: JSON.parse(input) }) })),
 };
 

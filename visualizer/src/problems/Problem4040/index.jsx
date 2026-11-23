@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Input JSON, e.g. {"nums":[3,7],"sum":6}',
   url: "https://leetcode.com/problems/minimum-operations-to-form-subset-sum-i/",
   complexity: "O(n * sum * V) time, where V is the number of distinct reachable values per element (at most 14 x 14 combinations, deduplicated), and O(sum) extra space. The note's bounds are checked on parse (length up to 100, values up to 500, sum up to 5000); the visualization caps the array at 6 values and the sum at 24.",
+  question: "Each value can be doubled or halved at a cost; find the cheapest subset that reaches the target sum.",
+  approaches: [
+    { name: "Sum table DP", intuition: "Keep a table of the cheapest cost for each reachable sum, element by element.", time: "O(n x sum x V)", space: "O(sum)" },
+  ],
   examples: [
     { label: "[3,7] sum 6 gives 1", input: JSON.stringify({ nums: [3, 7], sum: 6 }) },
     { label: "[5,5] sum 10 gives 0", input: JSON.stringify({ nums: [5, 5], sum: 10 }) },

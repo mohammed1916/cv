@@ -3,6 +3,10 @@ import IndexedSequence from '../../components/shared/IndexedSequence'
 import { buildTrace, parseInput, code, python, pythonLineMap, examples } from './algorithm'
 
 const definition = {
+  question: "Reverse one subarray to maximize the total of adjacent absolute differences.",
+  approaches: [
+    { name: "Edge reversal plus best inner gain", intuition: "Reversing an end segment changes only one edge, and inner swaps are tracked with prefix best values.", time: "O(n)", space: "O(1)" },
+  ],
   phases: [
     { id: 'base', label: 'Base', description: 'Add up the current adjacent differences.' },
     { id: 'scan', label: 'Scan', description: 'Test each boundary as a reversal end and track pair bounds.' },

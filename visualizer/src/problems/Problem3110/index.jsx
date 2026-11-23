@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'String (JSON object with s)',
   url: 'https://leetcode.com/problems/score-of-a-string/',
   complexity: 'O(n) time and O(1) extra space. The visualization caps input at 30 letters.',
+  question: "Compute the score of a string as the sum of absolute differences between neighbouring letter codes.",
+  approaches: [
+    { name: "Single pass over neighbours", intuition: "Add the distance between each pair of neighbouring letters as the scan moves forward.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"s":"hello"}' },
     { label: 'Example 2', input: '{"s":"zaz"}' },

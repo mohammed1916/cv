@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'An object with nums (1 to 12 integers from 1 to 10) and queries ([from, to] pairs)',
   url: 'https://leetcode.com/problems/special-array-ii/',
   complexity: 'O(n + q) time after the prefix pass. The visualization caps input at 12 numbers and 6 queries.',
+  question: "Answer queries asking whether a range of an array has no neighbouring pair with the same parity.",
+  approaches: [
+    { name: "Prefix count of bad pairs", intuition: "Count the bad neighbouring pairs in a prefix table, so each query is a difference of two counts.", time: "O(n + q)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"nums":[4,3,1,6],"queries":[[0,2],[2,3],[0,3]]}' },
     { label: 'Single', input: '{"nums":[2,2],"queries":[[1,1]]}' },

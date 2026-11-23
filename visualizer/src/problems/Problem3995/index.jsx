@@ -17,6 +17,10 @@ const definition = {
   inputLabel: 'Object with source, target and rules ({"pattern","replacement","cost"})',
   url: 'https://leetcode.com/problems/minimum-cost-to-convert-string-iii/',
   complexity: 'O(n * r * L) time and O(n) space for n letters, r rules and pattern length L. The visualization caps the string at 12 letters and the rules at 6.',
+  question: "Rewrite disjoint windows of a string with wildcard rules so the result equals the target, at minimum cost.",
+  approaches: [
+    { name: "Prefix DP over positions", intuition: "Track the cheapest way to reach each position, trying each rule window that ends there.", time: "O(n x r x L)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Wildcard window', input: '{"source":"abcd","target":"xyzd","rules":[{"pattern":"a*","replacement":"xy","cost":2},{"pattern":"c","replacement":"z","cost":1}]}' },
     { label: 'Two single letters', input: '{"source":"aaa","target":"xyz","rules":[{"pattern":"a","replacement":"x","cost":1},{"pattern":"a*","replacement":"yz","cost":2}]}' },

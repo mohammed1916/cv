@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON {"n": nodes, "edges": [[type, u, v], ...]} with type 1, 2, or 3',
   url: 'https://leetcode.com/problems/remove-max-number-of-edges-to-keep-graph-fully-traversable/',
   complexity: 'O(E alpha(n)) time with two union-find structures after sorting edges by type. The visualization caps input at 6 nodes and 10 edges.',
+  question: "Remove the most edges while keeping the graph fully traversable for Alice and Bob.",
+  approaches: [
+    { name: "Two union-find structures", intuition: "Add the shared edges first, then the edges needed by each person, counting the ones that add nothing.", time: "O(E * alpha(n))", space: "O(n)" },
+  ],
   examples: [
     { label: 'Invented mesh', input: '{"n":5,"edges":[[3,1,2],[1,2,3],[2,3,4],[1,4,5],[2,1,5],[3,4,5]]}' },
     { label: 'Two islands', input: '{"n":4,"edges":[[1,1,2],[2,3,4],[3,1,4]]}' },

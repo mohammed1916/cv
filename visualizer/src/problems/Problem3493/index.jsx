@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with properties (rows of 1 to 6 values) and k, e.g. {"properties":[[1,2],[1,1]],"k":1}',
   url: 'https://leetcode.com/problems/properties-graph/',
   complexity: 'O(m^2 * w) time with a hash set per row, plus near-constant union-find. The visualization caps the table at 8 rows.',
+  question: "Count the connected components in a graph whose edges are defined by how many values two rows share.",
+  approaches: [
+    { name: "Union-find over rows", intuition: "Compare each pair of rows against the threshold and merge the connected ones.", time: "O(m^2 w)", space: "O(m)" },
+  ],
   examples: [
     { label: 'Three by three grid, k two', input: '{"properties":[[2,5,3],[6,1,4],[4,9,2]],"k":2}' },
     { label: 'Example 2', input: '{"properties":[[1,2,3],[2,3,4],[4,5,6]],"k":2}' },

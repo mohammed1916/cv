@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with s (lowercase letters) and k (0 to 26)',
   url: 'https://leetcode.com/problems/select-k-disjoint-special-substrings/',
   complexity: 'O(n) expansion work per candidate start with a greedy pick over the blocks; the visualization caps s at 16 letters.',
+  question: "Choose k non-overlapping blocks of special substrings from a string.",
+  approaches: [
+    { name: "Greedy blocks", intuition: "Start a block at the first occurrence of its first letter and grow it until every letter in it is closed.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Three blocks', input: '{"s":"aabbcc","k":3}' },
     { label: 'Two blocks', input: '{"s":"xyzx","k":2}' },

@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON {"colors": [0/1 circle], "queries": [[1, size] or [2, index, color]]}',
   url: 'https://leetcode.com/problems/alternating-groups-iii/',
   complexity: 'O(n) per count query for this visualization, which rescans the circle. The official problem needs a segment tree for speed.',
+  question: "Count the groups of alternating colours on a circle of tiles for a query that asks about a group size.",
+  approaches: [
+    { name: "Rescan the circle per query", intuition: "Count good neighbouring pairs around the circle and convert the runs into group counts.", time: "O(n) per query", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"colors":[0,1,0,1,0],"queries":[[1,3]]}' },
     { label: 'Updates', input: '{"colors":[0,1,0,0,1],"queries":[[1,3],[2,2,1],[1,4]]}' },

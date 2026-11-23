@@ -98,6 +98,10 @@ const definition = {
   inputLabel: 'Object with ops: [\'create\', name, columns], [\'insert\', name, row], [\'delete\', name, id], [\'select\', name, id, column]',
   url: 'https://leetcode.com/problems/design-sql/',
   complexity: 'Each operation is a dictionary lookup plus a constant amount of work on the row. Row ids are never reused, so deleted ids stay empty.',
+  question: "Design a small SQL-like system with table creation, insertion, row deletion, and row selection.",
+  approaches: [
+    { name: "Map of tables and row ids", intuition: "Keep each table in a map of row ids, never reusing a deleted id.", time: "O(1) per row operation", space: "O(rows)" },
+  ],
   examples: [
     { label: 'Example', input: '{"ops":[["create","Users",2],["insert","Users",["ana","pt"]],["insert","Users",["ben","nz"]],["delete","Users",1],["select","Users",1,1],["select","Users",2,2],["insert","Users",["cy"]]]}' },
   ],

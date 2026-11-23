@@ -2,6 +2,10 @@ import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import { buildTrace, parseInput, code, python, phases, inputLabel, complexity, examples } from './algorithm'
 
 const definition = {
+  question: "Find the longest subsequence whose consecutive terms differ by a given value.",
+  approaches: [
+    { name: "Map of best ending lengths", intuition: "For each value, store the longest subsequence that ends with it and extend it by the difference.", time: "O(n)", space: "O(n)" },
+  ],
   phases, parse: parseInput, build: buildTrace, code, python, inputLabel, complexity, examples,
   url: 'https://leetcode.com/problems/longest-arithmetic-subsequence-of-given-difference/',
 }

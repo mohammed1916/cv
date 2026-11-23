@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'Object {n, ops} (JSON, n up to 40, up to 40 ops)',
   url: 'https://leetcode.com/problems/exam-room/',
   complexity: 'seat is O(k) over k seated students, leave is O(k); the visualization is capped at 40 seats.',
+  question: "Design an exam room that seats students to maximise distance from the nearest student, and supports removing a student.",
+  approaches: [
+    { name: "Ordered gaps", intuition: "Keep the gaps between seated students in an ordered structure keyed by distance and position, and pick the best gap.", time: "O(log n) per operation", space: "O(n)" },
+  ],
   examples: [
     { label: 'Official example', input: '{"n":10,"ops":[["seat"],["seat"],["seat"],["seat"],["leave",4],["seat"]]}' },
     { label: 'Fill a small room', input: '{"n":5,"ops":[["seat"],["seat"],["seat"],["seat"],["seat"]]}' },

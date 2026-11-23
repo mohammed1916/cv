@@ -27,6 +27,10 @@ const definition = {
   inputLabel: 'Object with robots, distance and walls (positions and reaches)',
   url: 'https://leetcode.com/problems/maximum-walls-destroyed-by-robots/',
   complexity: 'Sorting plus a two-state DP over the robots. Each interval count scans the walls in this teaching version.',
+  question: "Place robots on a line to destroy as many walls as possible, where each robot's bullet has a range.",
+  approaches: [
+    { name: "Sort and two-state DP", intuition: "Sort the robots by position and keep a DP over whether each robot shoots left or right.", time: "O(n log n + n * walls)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Three robots', input: '{"robots":[6,15,20],"distance":[4,3,2],"walls":[3,5,9,18,21,22]}' },
     { label: 'Blocked shot', input: '{"robots":[2,9],"distance":[9,1],"walls":[4,5,12]}' },

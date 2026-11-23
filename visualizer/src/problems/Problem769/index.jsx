@@ -12,6 +12,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Permutation arr of 0..n-1 (JSON)',
   url: 'https://leetcode.com/problems/max-chunks-to-make-sorted/',
   complexity: 'O(n) time and O(1) extra space.',
+  question: "Split a permutation of 0 to n-1 into the most chunks that can be sorted independently.",
+  approaches: [
+    { name: "Prefix maximum equals index", intuition: "Cut wherever the prefix maximum equals the index.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: '[4,3,2,1,0]', input: '[4,3,2,1,0]' },
     { label: '[1,0,2,3,4]', input: '[1,0,2,3,4]' },

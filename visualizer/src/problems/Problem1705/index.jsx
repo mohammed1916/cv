@@ -14,6 +14,10 @@ const definition = {
   complexity,
   inputLabel: 'Object with apples and days: equal-length arrays (apples[i] grow on day i and rot after days[i] days)',
   url: 'https://leetcode.com/problems/maximum-number-of-eaten-apples/',
+  question: "Apples grow each day and expire; you can eat at most one apple per day. Find the most apples you can eat.",
+  approaches: [
+    { name: "Min-heap by expiry", intuition: "Each day add new apples to a heap keyed by expiry, eat the one expiring soonest, and drop expired ones.", time: "O(n log n)", space: "O(n)" },
+  ],
 }
 
 export default function Problem1705Visualizer() {

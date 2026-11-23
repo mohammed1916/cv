@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON object with nums (2 to 12 integers from -100 to 100)',
   url: 'https://leetcode.com/problems/maximum-difference-between-adjacent-elements-in-a-circular-array/',
   complexity: 'O(n) time and O(1) extra space.',
+  question: "In a circular array, find the largest absolute difference between two neighbouring values.",
+  approaches: [
+    { name: "Single scan with wraparound", intuition: "Compare each value with its right neighbour, and the last value with the first.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"nums":[1,2,4]}' },
     { label: 'Example 2', input: '{"nums":[-5,-10,-5]}' },

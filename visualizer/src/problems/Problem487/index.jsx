@@ -32,6 +32,11 @@ const definition = {
   inputLabel: 'Object with nums: an array of 0s and 1s (up to 12 entries)',
   url: 'https://leetcode.com/problems/max-consecutive-ones-ii/',
   complexity: 'O(n) time, because each edge moves forward once, and O(1) extra space.',
+  question: "Find the longest run of 1s after flipping at most one 0 to 1.",
+  approaches: [
+    { name: "Sliding window with at most one zero", intuition: "Extend the window on the right. When it holds two zeros, move the left edge until one zero remains, and keep the largest window length.", time: "O(n)", space: "O(1)" },
+    { name: "Try each zero", intuition: "Flip each zero in turn, measure the longest run of ones, and keep the best result.", time: "O(n^2)", space: "O(1)" },
+  ],
   goal: {
     summary: 'Find the longest run of 1s you can make by flipping at most one 0 to 1.',
     requirement: [

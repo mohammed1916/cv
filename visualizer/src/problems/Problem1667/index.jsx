@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Rows as JSON: [{"user_id": integer, "name": letters}, ...]',
   url: 'https://leetcode.com/problems/fix-names-in-a-table/',
   complexity: 'Teaching model of the SQL rewrite: one pass over the rows plus a sort by user_id. The rows here are JavaScript objects, not a database table.',
+  question: "Fix the capitalisation of user names in a table and sort the rows by user id.",
+  approaches: [
+    { name: "Capitalise and sort", intuition: "Capitalise the first letter of each name, lowercase the rest, and sort by id.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Mixed case', input: '[{"user_id":9,"name":"mARIA"},{"user_id":2,"name":"tom"},{"user_id":5,"name":"JOHN"}]' },
     { label: 'Single letter', input: '[{"user_id":4,"name":"x"},{"user_id":1,"name":"yusuf"}]' },

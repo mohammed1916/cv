@@ -16,6 +16,10 @@ const examples = [
 ]
 
 const definition = {
+  question: "From a tweets table, find the top three hashtags used within a date range, counting each tweet at most once per tag.",
+  approaches: [
+    { name: "Distinct tags then rank", intuition: "Reduce each tweet to its distinct tags, filter by date, count, and rank by use and name.", time: "O(n log n)", space: "O(n)" },
+  ],
   number: meta.number,
   phases, parse: parseInput, build: buildTrace, code, sql, python, inputLabel,
   url: `https://leetcode.com/problems/${meta.slug}/`,

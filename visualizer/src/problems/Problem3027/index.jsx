@@ -15,6 +15,11 @@ const definition = {
   inputLabel: 'JSON array of 2 to 12 distinct points [x, y] with coordinates 0 to 50 in this trace',
   url: 'https://leetcode.com/problems/find-the-number-of-ways-to-place-people-ii/',
   complexity: 'O(n^2) after sorting: each Alice point sweeps the points after it once, keeping the highest blocker seen so far.',
+  question: "Count the pairs of points that form a valid placement when a rectangle must not contain other points.",
+  approaches: [
+    { name: "Sort then scan with a blocker", intuition: "Sort points and count pairs while tracking the highest point seen so far that blocks the rectangle.", time: "O(n^2)", space: "O(1)" },
+    { name: "Brute force check", intuition: "Test each pair against every other point.", time: "O(n^3)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '[[3,1],[1,4],[5,2],[2,2]]' },
     { label: 'Example 2', input: '[[0,5],[4,4],[2,0]]' },

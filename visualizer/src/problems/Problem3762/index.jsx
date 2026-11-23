@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with nums, k and queries ([l, r] pairs)',
   url: 'https://leetcode.com/problems/minimum-operations-to-equalize-subarrays/',
   complexity: 'O(q * w log w) time for q queries of window length w, in the teaching version. A faster version would use prefix counts of remainder changes and order statistics. The visualization caps nums at 10 values.',
+  question: "Make windows of an array equal using steps of k, counting the least operations for each query window.",
+  approaches: [
+    { name: "Median level per remainder class", intuition: "Values can meet only within one remainder class mod k; the median level gives the cheapest common target.", time: "O(q * w log w)", space: "O(w)" },
+  ],
   examples: [
     { label: 'Example', input: '{"nums":[2,5,8,11],"k":3,"queries":[[0,3],[1,2]]}' },
     { label: 'Mismatch', input: '{"nums":[2,5,6,9],"k":3,"queries":[[0,2],[2,3]]}' },

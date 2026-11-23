@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with root (level-order full binary tree: leaves 0 or 1, internal 2 for OR or 3 for AND) (JSON)',
   url: 'https://leetcode.com/problems/evaluate-boolean-binary-tree/',
   complexity: 'O(n) time and O(h) stack space for n nodes. The visualization caps the tree at 15 entries.',
+  question: "Evaluate a binary tree whose leaves are booleans and whose internal nodes are OR or AND operations.",
+  approaches: [
+    { name: "Post-order evaluation", intuition: "Evaluate the children first, then apply the node's operator to their results.", time: "O(n)", space: "O(h)" },
+  ],
   examples: [
     { label: 'Own: AND over OR', input: '{"root":[3,2,1,1,0]}' },
     { label: 'Own: single true leaf', input: '{"root":[1]}' },

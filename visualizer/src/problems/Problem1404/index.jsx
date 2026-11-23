@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Binary digits as a JSON string',
   url: 'https://leetcode.com/problems/number-of-steps-to-reduce-a-number-in-binary-representation-to-one/',
   complexity: 'O(n) time for n binary digits, scanning each digit once. O(1) extra space for the counter and carry.',
+  question: "Count the steps to reduce a binary number to one.",
+  approaches: [
+    { name: "Right-to-left carry scan", intuition: "Scan the bits from the right, tracking a carry.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Mixed bits', input: '"1101"' },
     { label: 'Two digits', input: '"11"' },

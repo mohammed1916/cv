@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with s, a digit string (JSON)',
   url: 'https://leetcode.com/problems/sum-of-largest-prime-substrings/',
   complexity: 'O(n^2 * sqrt(V)) time for n digits and substring value V. The visualization caps s at 10 digits.',
+  question: "Sum the largest prime value found among substrings of a digit string.",
+  approaches: [
+    { name: "Sieve and enumerate", intuition: "Build a prime sieve, then check every substring value.", time: "O(n^2 sqrt(V))", space: "O(V)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"s":"12234"}' },
     { label: 'Example 2', input: '{"s":"111"}' },

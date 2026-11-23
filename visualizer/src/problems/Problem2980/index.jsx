@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with nums: 2 to 20 integers from 1 to 100, e.g. {"nums":[1,2,3,4,5]}',
   url: 'https://leetcode.com/problems/check-if-bitwise-or-has-trailing-zeros/',
   complexity: 'O(n) time and O(1) space. The visualization caps the input at 20 values.',
+  question: "Check whether some subset of at least two numbers has a bitwise OR with a trailing zero bit.",
+  approaches: [
+    { name: "Count evens", intuition: "A trailing zero needs at least two even numbers, so count evens and stop at two.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"nums":[1,2,3,4,5]}' },
     { label: 'Example 2', input: '{"nums":[1,3,5,7,9]}' },

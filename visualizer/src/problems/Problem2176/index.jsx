@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON with nums and k, e.g. {"nums":[3,1,2,2],"k":2}',
   url: 'https://leetcode.com/problems/count-equal-and-divisible-pairs-in-an-array/',
   complexity: 'O(n^2) time for the pair scan and O(1) extra space. The visualization caps the array at 12 values.',
+  question: "Count the index pairs with equal values whose index product is divisible by k.",
+  approaches: [
+    { name: "Check every pair", intuition: "For each pair of indices i < j, test the equal values and the divisibility of i * j by k.", time: "O(n^2)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Repeats', input: '{"nums":[3,1,2,2,2,1,3],"k":2}' },
     { label: 'No repeats', input: '{"nums":[1,2,3,4],"k":1}' },

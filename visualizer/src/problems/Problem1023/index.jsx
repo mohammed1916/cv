@@ -3,6 +3,10 @@ import { meta } from './meta'
 import { buildTrace, parseInput, code, python, phases, examples, complexity, inputLabel } from './algorithm'
 
 const definition = {
+  question: "For each query string, decide whether it matches a pattern once lowercase letters are allowed to be inserted anywhere.",
+  approaches: [
+    { name: "Two-pointer match", intuition: "Walk the query and pattern together; a lowercase letter in the query is skipped unless it matches, and capitals must match exactly.", time: "O(Q * L)", space: "O(1)" },
+  ],
   number: meta.number,
   phases, parse: parseInput, build: buildTrace, code, python, inputLabel,
   url: `https://leetcode.com/problems/${meta.slug}/`,

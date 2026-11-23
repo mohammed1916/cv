@@ -8,6 +8,10 @@ const definition = {
   inputLabel: 'Line of A and B pieces (JSON)',
   url: 'https://leetcode.com/problems/remove-colored-pieces-if-both-neighbors-are-the-same-color/',
   complexity: 'O(n) time: each interior piece is checked against its neighbours once.',
+  question: "Decide whether Alice wins a game of removing pieces whose neighbours have the same colour, where a removal keeps the other player's options.",
+  approaches: [
+    { name: "Count runs", intuition: "Count the removable pieces of each colour in a run; the winner is determined by which count is larger.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Bob ahead', input: '{"colors":"BBBABBB"}' },
     { label: 'Alice plays', input: '{"colors":"AAAABA"}' },

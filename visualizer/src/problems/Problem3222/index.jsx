@@ -11,6 +11,10 @@ const definition = {
   inputLabel: 'Coin counts (JSON object with x and y)',
   url: 'https://leetcode.com/problems/find-the-winning-player-in-coin-game/',
   complexity: 'O(min(x, y / 4)) time and O(1) space. The visualization caps x at 40 and y at 80.',
+  question: "Decide the winner of a coin game in which each turn removes a fixed set of coins from two piles.",
+  approaches: [
+    { name: "Parity of the number of turns", intuition: "Every legal turn costs the same counts, so the number of turns depends only on the piles and its parity decides the winner.", time: "O(min(x, y / 4))", space: "O(1)" },
+  ],
   examples: [
     { label: 'Alice', input: '{"x":2,"y":7}' },
     { label: 'Bob', input: '{"x":4,"y":11}' },

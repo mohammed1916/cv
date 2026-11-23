@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Coins and maximum jump (JSON)',
   url: 'https://leetcode.com/problems/coin-path/',
   complexity: 'O(n * maxJump) time and O(n) space. The visualization caps input at 30 coins.',
+  question: "Find the cheapest path from the first to the last index using jumps of at most a given length, with the lexicographically smallest path among ties.",
+  approaches: [
+    { name: "Backward cost DP then forward walk", intuition: "Compute the cheapest cost from each index going backward, then walk forward taking the earliest index among equal costs.", time: "O(nB)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"coins":[1,2,4,-1,2],"maxJump":2}' },
     { label: 'No path', input: '{"coins":[1,2,4,-1,2],"maxJump":1}' },

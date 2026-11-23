@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with n (1 to 10) and target (-55 to 55)',
   url: 'https://leetcode.com/problems/lexicographically-smallest-negated-permutation-that-sums-to-target/',
   complexity: 'Exponential in this visualization because each feasibility check enumerates subset sums; the caps keep it small.',
+  question: "Build the lexicographically smallest signed permutation of the values that sums to a target.",
+  approaches: [
+    { name: "Greedy with feasibility check", intuition: "Fix positions left to right, trying the smallest signed value and keeping it only when the rest can still reach the target.", time: "Exponential in the subset-sum check", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example', input: '{"n":4,"target":2}' },
     { label: 'Impossible', input: '{"n":2,"target":2}' },

@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'a, b and c (JSON)',
   url: 'https://leetcode.com/problems/longest-happy-string/',
   complexity: 'O(a + b + c) steps with a constant number of letters to compare. The visualization caps each count at 100.',
+  question: "Build the longest string using at most a copies of a, b copies of b and c copies of c, without three equal letters in a row.",
+  approaches: [
+    { name: "Greedy with a run check", intuition: "Add the letter with the most copies left unless it would create three in a row, in which case add the next one.", time: "O(a + b + c)", space: "O(a + b + c)" },
+  ],
   examples: [
     { label: 'Mixed', input: '{"a":1,"b":1,"c":7}' },
     { label: 'Impossible', input: '{"a":0,"b":0,"c":3}' },

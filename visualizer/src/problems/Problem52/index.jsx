@@ -23,6 +23,10 @@ const definition = {
   inputLabel: "Board size n from 1 to 6 (e.g. 4)",
   url: "https://leetcode.com/problems/n-queens-ii/",
   complexity: "O(n!) time in the worst case with O(n) set lookups per square, and O(n) extra space for the column and diagonal sets. The visualization accepts n from 1 to 6 and replays at most 12,000 events.",
+  question: "Count the distinct ways to place n queens on an n by n board so that no two attack each other.",
+  approaches: [
+    { name: "Backtracking with column and diagonal sets", intuition: "Place one queen per row, blocking used columns and diagonals, and backtrack when a row has no safe square.", time: "O(n!)", space: "O(n)" },
+  ],
   examples: authoredExamples.map(example => ({ label: example.label, input: String(example.n) })),
 };
 

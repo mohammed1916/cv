@@ -7,6 +7,10 @@ const definition = {
   phases, parse: parseInput, build: buildTrace, code, sql, python, inputLabel,
   url: `https://leetcode.com/problems/${meta.slug}/`,
   complexity, examples,
+  question: "For each month of 2020, compare how many drivers had joined by that month with how many were working.",
+  approaches: [
+    { name: "Month-by-month join", intuition: "For each month, count drivers who joined by then and drivers still working, then compute the percentage.", time: "O(months * drivers)", space: "O(drivers)" },
+  ],
 }
 
 function Rows({ columns = [], rows = [] }) {

@@ -11,6 +11,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Setup and draws (JSON object with n, blacklist and draws)',
   url: 'https://leetcode.com/problems/random-pick-with-blacklist/',
   complexity: 'O(b) setup for b blacklisted values and O(1) per pick. The draws are supplied in the input so the run is reproducible.',
+  question: "Pick a random integer in a range that is not on a blacklist, with uniform probability.",
+  approaches: [
+    { name: "Remap blacklisted values", intuition: "Map each blacklisted value below the allowed range to an allowed value above it, so one draw never rejects.", time: "O(1) per pick", space: "O(b)" },
+  ],
   examples: [
     { label: 'Remapped', input: '{"n":4,"blacklist":[2],"draws":[0,1,2]}' },
     { label: 'Several', input: '{"n":8,"blacklist":[1,5,6],"draws":[0,1,2,3,4]}' },

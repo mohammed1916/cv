@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with points, a list of [x, y] pairs (JSON)',
   url: 'https://leetcode.com/problems/minimize-manhattan-distances/',
   complexity: 'O(n log n) time for the sorts and O(1) per removal. The visualization caps input at 8 points.',
+  question: "Remove one point, then find the smallest possible largest Manhattan distance among the remaining points, over all choices.",
+  approaches: [
+    { name: "Rotate coordinates and track extremes", intuition: "Manhattan distance equals the larger of the spreads of x plus y and x minus y, so only the two extremes of each list matter.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example', input: '{"points":[[3,10],[5,15],[10,2],[4,4]]}' },
     { label: 'Three points', input: '{"points":[[0,0],[1,0],[5,0]]}' },

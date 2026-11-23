@@ -4,6 +4,10 @@ import { StackLane } from '../../components/shared/AlgorithmStatePrimitives'
 import { buildTrace, parseInput, code, python, phases, examples } from './algorithm'
 
 const definition = {
+  question: "Find the fewest bit flips that make a OR b equal c.",
+  approaches: [
+    { name: "Bit by bit", intuition: "Compare each bit position of a, b and c and count the flips that position needs.", time: "O(log max)", space: "O(1)" },
+  ],
   number: '1318', phases, parse: parseInput, build: buildTrace, code, python, examples,
   inputLabel: 'Integers a, b and c (JSON object)',
   url: 'https://leetcode.com/problems/minimum-flips-to-make-a-or-b-equal-to-c/',

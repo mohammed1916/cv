@@ -16,6 +16,10 @@ const definition = {
   inputLabel: 'JSON {"nums": [6, 10, 15]}',
   url: 'https://leetcode.com/problems/greatest-common-divisor-traversal/',
   complexity: 'Near-linear time with union-find over the prime factors of each value. The visualization caps nums at 8 values up to 100.',
+  question: "Given an array, decide whether every pair of indices can be joined by a path where consecutive indices share a common factor greater than one.",
+  approaches: [
+    { name: "Union-find over prime factors", intuition: "Union each index with the primes of its value, then check that all indices share one component.", time: "near-linear", space: "O(n + max)" },
+  ],
   examples: [
     { label: 'Chain through primes', input: '{"nums":[6,10,15]}' },
     { label: 'Isolated value', input: '{"nums":[8,12,18,25]}' },

@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON object with nums and k',
   url: 'https://leetcode.com/problems/sum-of-good-numbers/',
   complexity: 'O(n) time and O(1) extra space.',
+  question: "Find the values that pass a neighbour test and add them up.",
+  approaches: [
+    { name: "Filter and sum", intuition: "Test each value against its neighbours and keep the ones that pass.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Six values, k two', input: '{"nums":[14,6,25,3,9,11],"k":2}' },
     { label: 'Smallest', input: '{"nums":[5,1],"k":1}' },

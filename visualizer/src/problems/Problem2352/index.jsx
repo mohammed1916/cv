@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON object with a square grid',
   url: 'https://leetcode.com/problems/equal-row-and-column-pairs/',
   complexity: 'O(n^2) time to read the grid and hash each column, plus O(n^2) for the lookups. The visualization caps the grid at 6 by 6.',
+  question: "Count the pairs of a square grid where a row and a column contain exactly the same values in the same order.",
+  approaches: [
+    { name: "Hash rows and compare columns", intuition: "Turn each row into a key, count the keys, then look up each column's key.", time: "O(n^2)", space: "O(n^2)" },
+  ],
   examples: [
     { label: 'Own: two by two grid', input: '{"grid":[[5,3],[2,8]]}' },
     { label: 'Own: three by three grid', input: '{"grid":[[9,1,4],[2,2,7],[6,3,8]]}' },

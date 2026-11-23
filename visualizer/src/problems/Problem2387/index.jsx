@@ -12,6 +12,10 @@ const definition = {
   inputLabel: "Matrix of sorted rows with an odd total count (e.g. [[1,3,5],[2,4,6],[7,8,9]])",
   url: "https://leetcode.com/problems/median-of-a-row-wise-sorted-matrix/description/",
   complexity: "O(m log(max - min)) time with O(1) extra space for m rows, each binary-searched. The visualization caps the matrix at 6 x 6 with values 1 to 100.",
+  question: "Find the median of all values in a matrix whose rows are sorted.",
+  approaches: [
+    { name: "Binary search on value", intuition: "Binary search the value range and count how many entries are at most the midpoint using each sorted row.", time: "O(m log(max - min))", space: "O(1)" },
+  ],
   examples: [
     { label: "Example", input: "[[1,3,5],[2,6,9],[3,6,9]]" },
     { label: "Repeats", input: "[[1,1,2],[1,1,2],[3,3,3]]" },

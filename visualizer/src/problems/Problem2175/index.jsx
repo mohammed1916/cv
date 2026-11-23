@@ -8,6 +8,10 @@ const definition = {
   inputLabel: 'Teams and point changes as JSON: {"team_points":[...],"points_change":[...]}',
   url: 'https://leetcode.com/problems/the-change-in-global-rankings/',
   complexity: 'Two rankings of at most 10 teams, joined by team: O(t log t) for t teams.',
+  question: "Compute the change in each player's global rank after a set of score updates.",
+  approaches: [
+    { name: "Window ranks compared", intuition: "Rank players before and after the update with window functions, then join the two rankings and subtract.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Sample tables', input: JSON.stringify(sample) },
     { label: 'One team, no change', input: '{"team_points":[{"team_id":1,"name":"Ajax","points":3}],"points_change":[]}' },

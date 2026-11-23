@@ -11,6 +11,10 @@ const definition = {
   inputLabel: 'JSON object with num1, num2, min_sum and max_sum',
   url: 'https://leetcode.com/problems/count-of-integers/',
   complexity: 'O(d * 9 * S) time for d digits and digit sums up to S. The visualization caps num2 at 4 digits.',
+  question: "Count integers between two numeric strings whose digit sum lies within a range, modulo a fixed number.",
+  approaches: [
+    { name: "Digit DP", intuition: "Count numbers with a bounded digit sum using a digit-by-digit table.", time: "O(d * 9 * S)", space: "O(d * S)" },
+  ],
   examples: [
     { label: 'Three-digit range', input: '{"num1":"105","num2":"312","min_sum":4,"max_sum":8}' },
     { label: 'Example 2', input: '{"num1":"1","num2":"5","min_sum":2,"max_sum":3}' },

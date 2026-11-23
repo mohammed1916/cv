@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON array of 1 to 12 integers from 0 to 9',
   url: 'https://leetcode.com/problems/minimum-swaps-to-move-zeros-to-end/',
   complexity: 'O(n) time and O(n) space for n values. The visualization caps the array at 12 values.',
+  question: "Find the fewest swaps needed to move every zero into the final positions of the array.",
+  approaches: [
+    { name: "Pair misplaced zeros with misplaced values", intuition: "Count zeros in the front and non-zero values in the back that are misplaced; each swap fixes one pair.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Zeros in front', input: '[0, 4, 0, 7, 1]' },
     { label: 'Mixed tail', input: '[5, 0, 3, 0]' },

@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Arrays (JSON array of arrays)',
   url: 'https://leetcode.com/problems/maximum-distance-in-arrays/',
   complexity: 'O(total length) time and O(1) extra space: only the running minimum and maximum are kept.',
+  question: "Choose one number from each of several sorted arrays so that the difference between the two chosen numbers is as large as possible.",
+  approaches: [
+    { name: "Track running minimum and maximum", intuition: "The best pair uses the smallest or largest value seen so far, so one pass with running extremes is enough.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Two arrays', input: '[[1,2,3],[4,5],[1,2,3]]' },
     { label: 'Negative', input: '[[1],[-1]]' },

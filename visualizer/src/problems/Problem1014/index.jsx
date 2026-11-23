@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with values (JSON)',
   url: 'https://leetcode.com/problems/best-sightseeing-pair/',
   complexity: 'O(n) time and O(1) auxiliary space: one pass keeps only the best left contribution.',
+  question: "Pick two places to maximise the sum of their scores minus the distance between them.",
+  approaches: [
+    { name: "Running best left term", intuition: "For each right place, add its score to the best left score minus its index; keep the best left value as you scan.", time: "O(n)", space: "O(1)" },
+  ],
   examples: authoredExamples,
 }
 

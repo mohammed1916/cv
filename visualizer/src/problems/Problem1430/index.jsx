@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with tree (LeetCode level-order array, null for missing children) and arr',
   url: 'https://leetcode.com/problems/check-if-a-string-is-a-valid-sequence-from-root-to-leaves-path-in-a-binary-tree/description/',
   complexity: 'O(n) time for n tree nodes, with O(h) recursion depth. The visualization caps the tree at 15 positions, values at 0 to 9 and arr at 10 entries; the draft does not verify the official bounds.',
+  question: "Check whether an array of values forms a downward path from the root of a tree.",
+  approaches: [
+    { name: "Depth-first matching", intuition: "Follow children while the array's next value matches.", time: "O(n)", space: "O(h)" },
+  ],
   examples: [
     { label: 'Valid path', input: '{"tree":[0,1,0,0,1,0,null,null,1,0,0],"arr":[0,1,0,1]}' },
     { label: 'Prefix ends early', input: '{"tree":[0,1,0,0,1,0,null,null,1,0,0],"arr":[0,0,1]}' },

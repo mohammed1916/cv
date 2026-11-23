@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'An object with grid: 1 to 6 rows of 1 to 6 integers from 1 to 6, all rows the same length',
   url: 'https://leetcode.com/problems/equal-sum-grid-partition-i/',
   complexity: 'O(m * n) time. The visualization caps the grid at 6 by 6.',
+  question: "Decide whether a grid can be cut into two parts with equal sums.",
+  approaches: [
+    { name: "Prefix sums", intuition: "Compare prefix sums of rows and columns with the total.", time: "O(m n)", space: "O(m n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"grid":[[1,4],[2,3]]}' },
     { label: 'Example 2', input: '{"grid":[[1,3],[2,4]]}' },

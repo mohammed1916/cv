@@ -16,6 +16,10 @@ const definition = {
   inputLabel: 'Object with nums (integers) and k (window length)',
   url: 'https://leetcode.com/problems/smallest-subarray-to-sort-in-every-sliding-window/',
   complexity: 'O(n * k log k) time for this direct version, which sorts each window copy. The visualization caps nums at 12 values.',
+  question: "Find the shortest subarray in each sliding window that must be sorted to sort the whole window.",
+  approaches: [
+    { name: "Sort each window", intuition: "Sort each window copy and find the first and last mismatch.", time: "O(n k log k)", space: "O(k)" },
+  ],
   examples: [
     { label: 'Mixed window', input: '{"nums":[1,3,2,4,5],"k":3}' },
     { label: 'Reversed run', input: '{"nums":[3,2,1,6],"k":3}' },

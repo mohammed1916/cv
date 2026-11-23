@@ -17,6 +17,10 @@ const definition = {
   inputLabel: 'Input {edges, maxMoves, n} (JSON)',
   url: 'https://leetcode.com/problems/reachable-nodes-in-subdivided-graph/',
   complexity: 'O((V + E) log V) time with a heap; subdivision nodes are never materialised.',
+  question: "Edges are subdivided into chains of new nodes; count the original and new nodes reachable from node 0 within a given number of moves.",
+  approaches: [
+    { name: "Dijkstra then count partial edges", intuition: "Run Dijkstra from node 0, then count the new nodes on each edge reachable from either end within the remaining moves.", time: "O(E log V)", space: "O(V)" },
+  ],
   examples: [
     { label: 'Three edges, four moves', input: '{"edges":[[0,2,4],[1,3,2],[0,3,1]],"maxMoves":4,"n":4}' },
     { label: 'Chain, longer budget', input: '{"edges":[[0,1,2],[1,2,3]],"maxMoves":7,"n":3}' },

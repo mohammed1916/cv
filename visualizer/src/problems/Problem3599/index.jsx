@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with nums and k (JSON)',
   url: 'https://leetcode.com/problems/partition-array-to-minimize-xor/',
   complexity: 'O(k * n^2) time and O(k * n) space. The visualization caps nums at 6 values.',
+  question: "Split an array into k contiguous parts so that the sum of the XOR values of the parts is as small as possible.",
+  approaches: [
+    { name: "Prefix DP over cut points", intuition: "Build a DP table over prefixes and the number of parts, trying every last cut.", time: "O(k * n^2)", space: "O(k * n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"nums":[1,2,3],"k":1}' },
     { label: 'Example 2', input: '{"nums":[1,2,3],"k":3}' },

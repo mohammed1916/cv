@@ -13,6 +13,11 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Preorder traversal (JSON object with preorder)',
   url: 'https://leetcode.com/problems/construct-binary-search-tree-from-preorder-traversal/',
   complexity: 'O(n) time and O(h) recursion space. The visualization caps input at 12 values.',
+  question: "Rebuild a binary search tree from the values in its preorder traversal.",
+  approaches: [
+    { name: "Recursive value bounds", intuition: "Each value must fall inside a range; the next value opens a left or right subtree depending on its bound.", time: "O(n)", space: "O(h)" },
+    { name: "Stack-based build", intuition: "Keep a stack of ancestors and attach each new value as the left or right child of the last ancestor it fits under.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"preorder":[8,5,1,7,10,12]}' },
     { label: 'Two values', input: '{"preorder":[1,3]}' },

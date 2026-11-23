@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with s, a binary string',
   url: 'https://leetcode.com/problems/longest-balanced-substring-after-one-swap/',
   complexity: 'This visual checks every window: O(n^2) with counting inside each window. A prefix-count scan would be faster for large strings. The visual caps s at 20 characters.',
+  question: "Use at most one swap in a binary string, then find the longest substring that can have equal numbers of zeros and ones.",
+  approaches: [
+    { name: "Check every window", intuition: "Test each substring after considering the swap, counting zeros and ones inside it.", time: "O(n^2) here; prefix counts are faster", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example A', input: '{"s":"1001000"}' },
     { label: 'Example B', input: '{"s":"0011"}' },

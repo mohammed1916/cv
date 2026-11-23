@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with towers ([x, y, q] rows), center and radius',
   url: 'https://leetcode.com/problems/best-reachable-tower/',
   complexity: 'O(n) time: one distance check and one comparison per tower.',
+  question: "Choose the highest-quality tower within a Manhattan radius of a centre, with a coordinate tie-break.",
+  approaches: [
+    { name: "Filter then take the best", intuition: "Keep towers within the radius and compare quality with the coordinate tie-break.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Tie break', input: '{"towers":[[1,3,5],[2,2,5],[9,9,30]],"center":[0,0],"radius":5}' },
     { label: 'Nothing reachable', input: '{"towers":[[10,10,3]],"center":[0,0],"radius":4}' },

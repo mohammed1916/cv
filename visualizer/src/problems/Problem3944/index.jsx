@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with nums (integers 0 to 20) and k (from 2 to 6)',
   url: 'https://leetcode.com/problems/minimum-operations-to-make-array-modulo-alternating-ii/',
   complexity: 'O(n * k + k^2) time and O(k) space: each value is priced against every residue, then every pair of distinct residues is compared. The visualization caps nums at 8 values and k at 6.',
+  question: "Change array values with the fewest operations so that even and odd positions use different residues modulo k.",
+  approaches: [
+    { name: "Residue pricing with pair search", intuition: "Price each residue for even and odd positions, then compare every pair of distinct residues.", time: "O(n x k + k^2)", space: "O(k)" },
+  ],
   examples: [
     { label: 'Six values', input: '{"nums":[5,8,2,9,4,7],"k":3}' },
     { label: 'All ones', input: '{"nums":[1,1,1,1],"k":2}' },

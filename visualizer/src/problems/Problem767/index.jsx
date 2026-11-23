@@ -14,6 +14,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'String s (JSON, 1-500 lowercase letters)',
   url: 'https://leetcode.com/problems/reorganize-string/',
   complexity: 'O(n + k log k) time for k distinct letters and O(n) space.',
+  question: "Rearrange a string so that no two adjacent letters are equal, or report that it cannot.",
+  approaches: [
+    { name: "Fill even then odd slots", intuition: "Place the most frequent letters first into even slots, then odd slots, so no neighbours match.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'aab', input: '"aab"' },
     { label: 'aaab (impossible)', input: '"aaab"' },

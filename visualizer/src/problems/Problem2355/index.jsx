@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'JSON {"books": [8, 5, 2, 7, 9]}',
   url: 'https://leetcode.com/problems/maximum-number-of-books-you-can-take/',
   complexity: 'O(n^2) time in this walk and O(1) extra space. Each r walks left until the count reaches zero.',
+  question: "Choose a contiguous set of books, taking the most books possible while the count on each shelf steps down.",
+  approaches: [
+    { name: "Walk left from each end", intuition: "For each right end, walk left while the book count is valid and record the total.", time: "O(n^2)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example', input: '{"books":[8,5,2,7,9]}' },
     { label: 'Rising', input: '{"books":[1,2,3]}' },

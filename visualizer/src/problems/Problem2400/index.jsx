@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with start_pos, end_pos and k (JSON)',
   url: 'https://leetcode.com/problems/number-of-ways-to-reach-a-position-after-exactly-k-steps/',
   complexity: 'O(k^2) time. The visualization caps all values at 40.',
+  question: "Count the ways to end at a given position after exactly k steps of one unit each.",
+  approaches: [
+    { name: "Count left and right moves", intuition: "The answer depends only on how many steps go right, so count those pairs over k.", time: "O(k^2)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Six steps', input: '{"start_pos":3,"end_pos":7,"k":6}' },
     { label: 'Unreachable', input: '{"start_pos":9,"end_pos":2,"k":4}' },

@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with nums: 1 to 30 integers from 1 to 100, e.g. {"nums":[5,3,4,4,7]}',
   url: 'https://leetcode.com/problems/steps-to-make-array-non-decreasing/',
   complexity: 'O(n) time and O(n) space with a monotonic stack. The visualization caps the input at 30 values.',
+  question: "Each round removes every element that is smaller than the element before it; count how many rounds it takes until nothing is removed.",
+  approaches: [
+    { name: "Monotonic stack with round counts", intuition: "Keep a stack of elements that survive, and track how many rounds each element is removed after a larger value to its left.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Own: six values', input: '{"nums":[9,12,2,15,2,8]}' },
     { label: 'Own: three values', input: '{"nums":[20,1,6]}' },

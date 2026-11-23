@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Object with s and shift (JSON)',
   url: 'https://leetcode.com/problems/perform-string-shifts/',
   complexity: 'O(m + n) time and O(n) space: sum the operations, reduce once, then rotate once.',
+  question: "Apply a list of left and right shifts to a string and return the final string.",
+  approaches: [
+    { name: "Net shift", intuition: "Sum the shifts into one net rotation, then rotate once.", time: "O(m + n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Cancelling shifts', input: '{"s":"abcde","shift":[[0,1],[1,2],[1,3]]}' },
     { label: 'Single right shift', input: '{"s":"abcde","shift":[[1,1]]}' },

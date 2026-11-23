@@ -13,6 +13,11 @@ const definition = {
   inputLabel: 'JSON array of integers',
   url: 'https://leetcode.com/problems/split-array-by-prime-indices/',
   complexity: 'O(n sqrt(n)) with trial division. A sieve gives O(n log log n).',
+  question: "Split an array by prime indices so that the resulting part sums meet the stated rule, and return the cut.",
+  approaches: [
+    { name: "Trial-division primes", intuition: "Test each index for primality by trial division, then split values by whether their index is prime.", time: "O(n sqrt(n))", space: "O(n)" },
+    { name: "Sieve of primes", intuition: "Build a sieve up to n once and read the prime flags directly.", time: "O(n log log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Mixed signs with zero', input: '[7,-3,12,0,5]' },
     { label: 'Single negative value', input: '[-8]' },

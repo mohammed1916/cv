@@ -14,6 +14,10 @@ const definition = {
   complexity,
   inputLabel: 'Object with boxTypes ([count, units per box] pairs) and truckSize',
   url: 'https://leetcode.com/problems/maximum-units-on-a-truck/',
+  question: "Load boxes with a unit count each onto a truck with a box capacity, maximising the total units.",
+  approaches: [
+    { name: "Greedy by units per box", intuition: "Sort box types by units per box and take as many of the best as fit.", time: "O(n log n)", space: "O(n)" },
+  ],
 }
 
 export default function Problem1710Visualizer() {

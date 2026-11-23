@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with a binary string s',
   url: 'https://leetcode.com/problems/maximize-active-section-with-trade-i/',
   complexity: 'O(n) time and O(n) space for a string of length n.',
+  question: "Choose one trade in a binary string that flips a block of ones to zeros, maximizing the number of active sections.",
+  approaches: [
+    { name: "Neighbour zero runs", intuition: "Trading a block of ones gains exactly the zero runs on each side of it.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example', input: '{"s":"0011010"}' },
     { label: 'All ones', input: '{"s":"111"}' },

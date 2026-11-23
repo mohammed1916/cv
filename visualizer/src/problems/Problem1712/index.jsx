@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with nums (JSON)',
   url: 'https://leetcode.com/problems/ways-to-split-array-into-three-subarrays/',
   complexity: 'O(n log n) time and O(n) space for the prefix sums.',
+  question: "Count the ways to split an array into three non-empty parts whose sums are nondecreasing.",
+  approaches: [
+    { name: "Prefix sums and binary search", intuition: "For each left cut, binary search the range of valid right cuts using prefix sums.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"nums":[1,1,1]}' },
     { label: 'Example 2', input: '{"nums":[1,2,2,2,5,0]}' },

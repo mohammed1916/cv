@@ -11,6 +11,10 @@ const definition = {
   inputLabel: 'Object with eventTime, startTime, endTime (in order), and k',
   url: 'https://leetcode.com/problems/reschedule-meetings-for-maximum-free-time-i/',
   complexity: 'O(n * k) windows, each summed in O(k) time. The visualization caps the schedule at 8 meetings.',
+  question: "Shift meeting times within a day to maximize the largest free block after rescheduling up to k consecutive meetings.",
+  approaches: [
+    { name: "Sliding window of meetings", intuition: "Check every block of k consecutive meetings and sum the free gaps it creates.", time: "O(n k)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Invented short day', input: '{"eventTime":6,"startTime":[0,2],"endTime":[1,4],"k":1}' },
     { label: 'Invented three meetings', input: '{"eventTime":10,"startTime":[0,7,9],"endTime":[1,8,10],"k":1}' },

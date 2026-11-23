@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with "s" (lowercase letters, "*" and "|"), JSON',
   url: 'https://leetcode.com/problems/count-asterisks/',
   complexity: 'O(n) time and O(1) extra space. The visualization caps s at 30 characters.',
+  question: "Count the asterisks in a string that are not between a pair of vertical bars.",
+  approaches: [
+    { name: "Toggle inside flag", intuition: "Scan the string and toggle a flag at each bar, counting asterisks only when the flag is off.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Own: short starred string', input: '{"s":"ab*c|d*|e"}' },
     { label: 'No bars', input: '{"s":"iamprogrammer"}' },

@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with s and shifts (JSON)',
   url: 'https://leetcode.com/problems/shifting-letters-ii/',
   complexity: 'O(n + m) time and O(n) space. The visualization caps input at 20 letters and 8 shifts.',
+  question: "Apply a list of range shifts to a string, where each shift moves a range of letters forward or backward in the alphabet.",
+  approaches: [
+    { name: "Difference array", intuition: "Record the start and end of each shift in a difference array, then apply the prefix sums to each letter.", time: "O(n + m)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Three shifts on five letters', input: '{"s":"mnopq","shifts":[[0,1,1],[2,4,0],[1,3,1]]}' },
     { label: 'Backward full shift', input: '{"s":"lkjh","shifts":[[0,3,0],[2,2,1]]}' },

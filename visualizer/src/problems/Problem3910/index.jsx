@@ -18,6 +18,10 @@ const definition = {
     { id: 'decide', label: 'Count / reject', description: 'Require even parity and connectivity.' },
     { id: 'done', label: 'Complete', description: 'Return the count over all non-empty subsets.' },
   ],
+  question: "Count node subsets that induce a connected subgraph and whose node values sum to an even number.",
+  approaches: [
+    { name: "Subset enumeration with connectivity check", intuition: "Try every node subset, skip odd sums, and traverse the induced edges to test connectivity.", time: "O(2^n x (n + edges))", space: "O(n + edges)" },
+  ],
   examples: authoredExamples0,
 }
 

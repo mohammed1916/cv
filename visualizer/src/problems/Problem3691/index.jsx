@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with nums (up to 8 non-negative integers) and k',
   url: 'https://leetcode.com/problems/maximum-total-subarray-value-ii/',
   complexity: 'Heap selection over one chain per left end, with range values computed directly. The visualization caps length at 8 and k at 20.',
+  question: "Find the largest total value of k distinct subarrays.",
+  approaches: [
+    { name: "Heap of best chains", intuition: "Keep a heap with one chain per left end and take the best k values.", time: "O(n log n + k log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Small', input: '{"nums":[2,7,4,1],"k":2}' },
     { label: 'Four values', input: '{"nums":[6,0,3,9],"k":3}' },

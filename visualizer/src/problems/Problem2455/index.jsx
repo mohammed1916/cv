@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'JSON {"nums": [2,6,9,12,18]}',
   url: 'https://leetcode.com/problems/average-value-of-even-numbers-that-are-divisible-by-three/',
   complexity: 'O(n) time and O(1) extra space. The visualization caps nums at 50 values.',
+  question: "Find the average of the even values that are divisible by three, rounded down, or 0 if there are none.",
+  approaches: [
+    { name: "Single scan with sum and count", intuition: "Add each value that passes both tests and divide by the count at the end.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"nums":[2,6,9,12,18]}' },
     { label: 'No match', input: '{"nums":[1,5,7]}' },

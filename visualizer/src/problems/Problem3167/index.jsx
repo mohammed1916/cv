@@ -19,6 +19,10 @@ const definition = {
   inputLabel: 'Compressed string of letter-and-number groups (e.g. "b12a3b4")',
   url: "https://leetcode.com/problems/better-compression-of-string/",
   complexity: "O(n + 26) time and O(1) extra space for n characters of input. The visualization accepts up to 16 groups with frequencies of up to six digits; the limits shown are this visualization's own.",
+  question: "Decode a compressed string of letter groups with frequencies and produce its better compressed form.",
+  approaches: [
+    { name: "Combine groups per letter", intuition: "Add up the frequencies for each letter, then write the letters in order.", time: "O(n + 26)", space: "O(1)" },
+  ],
   examples: [
     { label: "Split letters", input: '"b12a3b4"' },
     { label: "One group", input: '"z1"' },

@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Operations as JSON [["add", l, r] or ["count"], ...] (integers 1 to 32)',
   url: 'https://leetcode.com/problems/count-integers-in-intervals/',
   complexity: 'O(log M) per operation with a lazy segment tree over M values; the visualization caps M at 32.',
+  question: "Support adding integer intervals to a set and counting how many distinct integers the set covers.",
+  approaches: [
+    { name: "Lazy segment tree", intuition: "Cover the value range with a segment tree that marks whole ranges as filled and answers the covered count in logarithmic time.", time: "O(log M) per operation", space: "O(M)" },
+  ],
   examples: [
     { label: 'Own: three ranges', input: '[["add",1,4],["count"],["add",3,9],["add",2,2],["count"]]' },
     { label: 'Count on empty set', input: '[["count"]]' },

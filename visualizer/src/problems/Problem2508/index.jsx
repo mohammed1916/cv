@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with n and edges (1-based pairs)',
   url: 'https://leetcode.com/problems/add-edges-to-make-degrees-of-all-nodes-even/',
   complexity: 'O(n + m) time with neighbour sets. The number of odd nodes decides the case, so the search checks at most three pairings.',
+  question: "Add at most two edges so that every node in a graph has even degree, or report that it is impossible.",
+  approaches: [
+    { name: "Case analysis on odd nodes", intuition: "The odd nodes determine the case: none, a direct pair, or a helper node used to pair the rest.", time: "O(n + m)", space: "O(n + m)" },
+  ],
   examples: [
     { label: 'Path', input: '{"n":4,"edges":[[1,2],[2,3]]}' },
     { label: 'Star', input: '{"n":4,"edges":[[1,2],[1,3],[1,4]]}' },

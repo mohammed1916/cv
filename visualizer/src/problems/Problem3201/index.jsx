@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Array of integers 1 to 9 (JSON array, up to 12 entries)',
   url: 'https://leetcode.com/problems/find-the-maximum-length-of-valid-subsequence-i/',
   complexity: 'O(n) time and O(1) extra space. The visualization caps input at 12 entries.',
+  question: "Find the length of the longest valid subsequence of an array in which every neighbouring pair sum has the same parity.",
+  approaches: [
+    { name: "Parity classes or alternating runs", intuition: "If neighbouring sums are all even the values share one parity, and if they are all odd the parity alternates, so the answer is the larger class or the alternating run count.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Alternating', input: '[1,2,3,4]' },
     { label: 'Mixed parity', input: '[1,2,1,1,2,1,2]' },

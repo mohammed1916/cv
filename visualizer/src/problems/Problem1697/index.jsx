@@ -14,6 +14,10 @@ const definition = {
   complexity,
   inputLabel: 'Object with n, edgeList ([u, v, distance] triples) and queries ([p, q, limit] triples)',
   url: 'https://leetcode.com/problems/checking-existence-of-edge-length-limited-paths/',
+  question: "Answer queries about whether two nodes are connected using only edges shorter than a given limit.",
+  approaches: [
+    { name: "Offline union-find", intuition: "Sort edges and queries by limit, add edges below each limit, then check whether the two nodes share a component.", time: "O((E + Q) log(E + Q))", space: "O(n)" },
+  ],
 }
 
 export default function Problem1697Visualizer() {

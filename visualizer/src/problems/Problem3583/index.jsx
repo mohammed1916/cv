@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Array nums of integers 0 to 100 (JSON object)',
   url: 'https://leetcode.com/problems/count-special-triplets/',
   complexity: 'O(n) time with hash counts. The visualization caps input at 30 values.',
+  question: "Count index triples i < j < k where the middle value is double each outer value.",
+  approaches: [
+    { name: "Hash counts while scanning", intuition: "Keep counts of values seen to the left and to the right of each middle position, then multiply matching counts.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Two doubles', input: '{"nums":[8,4,2,8,4]}' },
     { label: 'Zeros', input: '{"nums":[0,1,0,0]}' },

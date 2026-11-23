@@ -16,6 +16,10 @@ const definition = {
   inputLabel: 'JSON {"n": rows 1-4, "m": seats 1-6, "ops": [["gather" or "scatter", k, maxRow], ...]}',
   url: 'https://leetcode.com/problems/booking-concert-tickets-in-groups/',
   complexity: 'O(log n) tree work per operation plus O(m) to scan one row. The visualization caps the hall at 4 rows by 6 seats.',
+  question: "Manage a concert hall of rows and seats, booking groups in one row or scattered seats across rows.",
+  approaches: [
+    { name: "Segment tree over row capacity", intuition: "Keep the largest free block and total free seats per row range in a tree, so a booking can find a row or a range quickly.", time: "O(log n) per operation", space: "O(n)" },
+  ],
   examples: [
     { label: 'Own: three by four seats', input: '{"n":3,"m":4,"ops":[["gather",3,0],["scatter",4,1],["gather",2,1]]}' },
     { label: 'Single seat', input: '{"n":1,"m":1,"ops":[["gather",1,0]]}' },

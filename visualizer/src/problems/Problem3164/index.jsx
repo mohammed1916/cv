@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON object: { "nums1": [...], "nums2": [...], "k": integer }',
   url: 'https://leetcode.com/problems/find-the-number-of-good-pairs-ii/',
   complexity: 'O(m * d) time for m values in nums2 and d distinct values in nums1.',
+  question: "Count good pairs between two arrays, where a pair is good when a value divides the other value times k, for larger inputs.",
+  approaches: [
+    { name: "Divisor counting with frequencies", intuition: "Equal values share divisors, so each distinct value is counted once with its multiplicity.", time: "O(m * d)", space: "O(d)" },
+  ],
   examples: [
     { label: 'Three and two values, k one', input: '{"nums1":[7,12,3],"nums2":[1,6],"k":1}' },
     { label: 'Five and three values, k three', input: '{"nums1":[6,6,20,11,28],"nums2":[7,2,8],"k":3}' },

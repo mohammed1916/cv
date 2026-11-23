@@ -19,6 +19,11 @@ const definition = {
   inputLabel: 'JSON object with n and time (e.g. {"n": 4, "time": 5})',
   url: "https://leetcode.com/problems/pass-the-pillow/",
   complexity: "O(time) time and O(1) space for this simulation. The visualization caps n and time at 1000.",
+  question: "A pillow is passed along a line of people and bounces at the ends; find who holds it after a given time.",
+  approaches: [
+    { name: "Simulate each second", intuition: "Move the pillow one person each second and reverse at the ends.", time: "O(time)", space: "O(1)" },
+    { name: "Modular arithmetic", intuition: "The position repeats every 2(n - 1) seconds, so reduce the time modulo that period.", time: "O(1)", space: "O(1)" },
+  ],
   examples: [
     { label: "n=4, time=5", input: '{"n": 4, "time": 5}' },
     { label: "n=8, time=9", input: '{"n": 8, "time": 9}' },

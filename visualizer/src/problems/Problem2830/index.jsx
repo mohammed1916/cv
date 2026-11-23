@@ -13,6 +13,11 @@ const definition = {
   inputLabel: 'JSON object with n (houses) and offers ([start, end, gold] triples)',
   url: 'https://leetcode.com/problems/maximize-the-profit-as-the-salesman/',
   complexity: 'O(n + m) time after grouping offers by end house, and O(n) space. The visualization caps input at 12 houses and 8 offers.',
+  question: "Choose non-overlapping house ranges from offers to maximize the gold earned, where each offer pays for a house range.",
+  approaches: [
+    { name: "Dynamic programming by end house", intuition: "For each house, the best value is either skipping it or taking an offer that ends there and adds to the best value before its start.", time: "O(n + m)", space: "O(n)" },
+    { name: "Recursive choice per offer", intuition: "Take or skip each offer with memoization on the next free house.", time: "O(n m)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Four offers, seven houses', input: '{"n":7,"offers":[[0,1,4],[2,2,5],[1,5,3],[6,6,9]]}' },
     { label: 'Big offer', input: '{"n":5,"offers":[[0,0,1],[0,2,10],[1,3,2]]}' },

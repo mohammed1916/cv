@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with root (level-order array, values 1 to 4, null for missing) and target (1 to 4) (JSON)',
   url: 'https://leetcode.com/problems/delete-leaves-with-a-given-value/',
   complexity: 'O(n) time and O(h) stack space for n nodes. The visualization caps the tree at 15 entries.',
+  question: "Remove every leaf that equals a target value, repeating as new leaves appear.",
+  approaches: [
+    { name: "Post-order removal", intuition: "Process children first, so a parent becomes a leaf only after its children are decided.", time: "O(n)", space: "O(h)" },
+  ],
   examples: [
     { label: 'Target three path', input: '{"root":[3,1,4,null,2,3,null],"target":3}' },
     { label: 'Root equals target', input: '{"root":[1,3,2,1,null,4],"target":1}' },

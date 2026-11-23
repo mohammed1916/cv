@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Task durations and session length (JSON)',
   url: 'https://leetcode.com/problems/minimum-number-of-work-sessions-to-finish-the-tasks/',
   complexity: 'O(2^n * n) time and O(2^n) space for n tasks (this visual caps n at 8).',
+  question: "Find the fewest work sessions of a fixed length that can hold all tasks.",
+  approaches: [
+    { name: "Bitmask DP over tasks", intuition: "For each subset of tasks, track the fewest sessions and the time used in the last session.", time: "O(2^n * n)", space: "O(2^n)" },
+  ],
   examples: [
     { label: 'Three tasks', input: '{"tasks":[2,3,4],"sessionTime":5}' },
     { label: 'Mixed lengths', input: '{"tasks":[4,1,3,2,2],"sessionTime":6}' },

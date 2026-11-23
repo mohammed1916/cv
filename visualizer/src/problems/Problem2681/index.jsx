@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON object with nums (1 to 12 strengths from 1 to 1000)',
   url: 'https://leetcode.com/problems/power-of-heroes/',
   complexity: 'O(n log n) time for the sort, O(1) extra space for the running sums.',
+  question: "Given strengths of heroes, return the sum of the powers of all non-empty groups, where a group's power is the max squared times the min.",
+  approaches: [
+    { name: "Sort then running sums", intuition: "After sorting, the contribution of each element is tracked with a running sum of prior values.", time: "O(n log n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"nums":[2,1,4]}' },
     { label: 'Example 2', input: '{"nums":[1,1,1]}' },

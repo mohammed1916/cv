@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Array of integers from 1 to 100 (JSON)',
   url: 'https://leetcode.com/problems/compute-alternating-sum/',
   complexity: 'O(n) time and O(1) extra space. The visualization caps the array at 100 entries.',
+  question: "Compute the alternating sum of an array, adding even positions and subtracting odd ones.",
+  approaches: [
+    { name: "Single pass", intuition: "Walk the array once, adding or subtracting each value by its position.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Repeats with extremes', input: '[88,1,42,42,99]' },
     { label: 'Own: five values with a repeat', input: '[4,9,2,7,7]' },

@@ -11,6 +11,10 @@ const definition = {
   inputLabel: 'JSON object with times ([arrival, leaving] pairs) and targetFriend (an index)',
   url: 'https://leetcode.com/problems/the-number-of-the-smallest-unoccupied-chair/',
   complexity: 'O(n log n) for the sorted events and a sorted free list; the visualization keeps the list small.',
+  question: "Find the number of the chair that the friend with a given arrival time takes when chairs are reused as people leave.",
+  approaches: [
+    { name: "Two heaps on time events", intuition: "Sort arrivals and departures, keep free chairs in a min-heap and occupied chairs in a heap by leave time.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Target friend 1', input: '{"times":[[1,4],[2,3],[4,6]],"targetFriend":1}' },
     { label: 'Reuse at the same moment', input: '{"times":[[1,2],[2,4],[3,5]],"targetFriend":2}' },

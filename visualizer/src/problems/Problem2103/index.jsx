@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Colour and rod pairs (e.g. R3G2B1)',
   url: 'https://leetcode.com/problems/rings-and-rods/',
   complexity: 'O(n) time for n rings, with ten fixed rod sets; O(1) extra space.',
+  question: "Count the rods whose rings include all three colours (red, green, blue).",
+  approaches: [
+    { name: "Colour set per rod", intuition: "Give each rod a set of the colours placed on it, then count the rods whose set has all three colours.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'One full rod', input: 'R1G1B1R2G3' },
     { label: 'Two full rods', input: 'B0R0G0R9R9G9B9' },

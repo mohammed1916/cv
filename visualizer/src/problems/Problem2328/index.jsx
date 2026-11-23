@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with grid (1 to 5 rows and columns, values 1 to 9)',
   url: 'https://leetcode.com/problems/number-of-increasing-paths-in-a-grid/',
   complexity: 'O(m * n) cells with memoization, each checking four neighbours. The visualization caps the grid at 5 by 5.',
+  question: "Count strictly increasing paths in a grid, where each step moves to an adjacent cell with a larger value.",
+  approaches: [
+    { name: "DFS with memoization", intuition: "From each cell, count increasing paths through its neighbours and store each cell's result once.", time: "O(m * n)", space: "O(m * n)" },
+  ],
   examples: [
     { label: 'Own: two by three grid', input: '{"grid":[[2,5,1],[4,3,9]]}' },
     { label: 'Column', input: '{"grid":[[1],[2]]}' },

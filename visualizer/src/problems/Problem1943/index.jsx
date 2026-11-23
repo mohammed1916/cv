@@ -11,6 +11,10 @@ const definition = {
   inputLabel: 'JSON array of [start, end, colour] segments (e.g. [[1,4,5],[1,7,7]])',
   url: 'https://leetcode.com/problems/describe-the-painting/',
   complexity: 'O(k log k) for k endpoints: sort the endpoints and sweep once.',
+  question: "Describe a painting made of overlapping coloured segments as a list of non-overlapping segments with their mixed colours.",
+  approaches: [
+    { name: "Sweep the endpoints", intuition: "Sort segment endpoints, keep a running colour sum, and emit a piece whenever the sum changes.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Overlap', input: '[[1,4,5],[1,7,7]]' },
     { label: 'Gap between', input: '[[1,3,2],[4,6,9]]' },

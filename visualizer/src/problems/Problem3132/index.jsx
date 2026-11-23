@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with nums1 (3 to 10 integers) and nums2 (two fewer values)',
   url: 'https://leetcode.com/problems/find-the-integer-added-to-array-ii/',
   complexity: 'O(n^3 log n) time in this trace: every pair of removals is tested. The trace caps n at 10.',
+  question: "Find the integer added to an array after removing exactly two values, so the rest matches the target array as a multiset.",
+  approaches: [
+    { name: "Try every pair of removals", intuition: "For each pair of removed values, shift by the smallest-value difference and check that the sorted rest matches.", time: "O(n^3 log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Four values, two in nums2', input: '{"nums1":[30,-12,7,44],"nums2":[-3,25]}' },
     { label: 'Five equal negatives', input: '{"nums1":[-9,-9,-9,-9,-9],"nums2":[1,-1,1]}' },

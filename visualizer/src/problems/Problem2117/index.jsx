@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON object with left and right, 1 <= left <= right <= 1000, for example {"left":371,"right":375}',
   url: 'https://leetcode.com/problems/abbreviating-the-product-of-a-range/',
   complexity: 'O(right - left) time. The visualization caps right at 1000.',
+  question: "Multiply all integers in a range and report the product as a short string of leading digits, a count of removed trailing zeros, and an exponent suffix.",
+  approaches: [
+    { name: "Strip 2s and 5s, keep the tail", intuition: "Count the factors of 2 and 5 that create trailing zeros, multiply the rest modulo a large number for the tail, and track the leading digits separately.", time: "O(right - left)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Narrow range', input: '{"left":4,"right":11}' },
     { label: 'Short range', input: '{"left":6,"right":9}' }, { label: "Single number", input: "{\"left\":1,\"right\":1}" }, { label: "Equal bounds", input: "{\"left\":5,\"right\":5}" }, { label: "Largest range", input: "{\"left\":1,\"right\":1000}" }, { label: "Long run: upper half", input: "{\"left\":500,\"right\":1000}" },

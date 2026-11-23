@@ -17,6 +17,10 @@ const definition = {
   inputLabel: 'JSON object with a users list (user_id, email)',
   url: 'https://leetcode.com/problems/find-valid-emails/description/',
   complexity: 'O(n) time for n users, each email checked once. The pattern is a knowledge-derived teaching rule, not the official one.',
+  question: "From a table of user emails, return the emails that follow a naming pattern and use one fixed domain.",
+  approaches: [
+    { name: "Row-by-row rule test", intuition: "Check each email's local part and domain against the rule.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example', input: '{"users":[{"user_id":1,"email":"ann@example.com"},{"user_id":2,"email":"1bob@example.com"},{"user_id":3,"email":"carl_9@example.com"},{"user_id":4,"email":"dee@example.org"}]}' },
     { label: 'Empty', input: '{"users":[]}' },

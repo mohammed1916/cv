@@ -8,6 +8,10 @@ const definition = {
   inputLabel: 'team (0 = not it, 1 = it) and dist (JSON)',
   url: 'https://leetcode.com/problems/maximum-number-of-people-that-can-be-caught-in-tag/',
   complexity: 'O(n) time and O(1) extra space: one forward pointer over the line.',
+  question: "Pair up the most people who can catch the tagger, where each person catches anyone within reach.",
+  approaches: [
+    { name: "Greedy two pointers", intuition: "Match each tagger with the nearest untagged person within reach, using two pointers.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Window of three', input: '{"team":[1,0,0,1,0],"dist":2}' },
     { label: 'Tight distance', input: '{"team":[1,0,0,0,0,1],"dist":1}' },

@@ -12,6 +12,11 @@ const definition = {
   inputLabel: 'JSON object with nums (values 0 to 255) and k',
   url: 'https://leetcode.com/problems/apply-operations-on-array-to-maximize-sum-of-squares/',
   complexity: 'O(k * 8 + n * 8) time. The visualization caps the array at six values.',
+  question: "Apply operations on an array of pair-wise bit exchanges, then choose k values maximizing the sum of their squares.",
+  approaches: [
+    { name: "Bit counting greedy", intuition: "Count how many values have each bit set; greedily build the k chosen values bit by bit.", time: "O(k * bits + n * bits)", space: "O(bits)" },
+    { name: "Try combinations", intuition: "Try all combinations of k values and take the best sum of squares.", time: "exponential", space: "O(k)" },
+  ],
   examples: [
     { label: 'Five values, k of two', input: '{"nums":[4,10,7,2,9],"k":2}' },
     { label: 'Repeated values, k of four', input: '{"nums":[3,3,8,1,8,2],"k":4}' },

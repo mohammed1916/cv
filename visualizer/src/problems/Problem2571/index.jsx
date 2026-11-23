@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'A positive integer as JSON, e.g. {"n": 39}',
   url: 'https://leetcode.com/problems/minimum-operations-to-reduce-an-integer-to-0/',
   complexity: 'O(log n) time and O(1) extra space.',
+  question: "Each operation adds or subtracts a power of two; find the fewest operations that reduce an integer to zero.",
+  approaches: [
+    { name: "Greedy on low bits", intuition: "Look at the lowest bits, and choose to add or subtract so that more bits clear.", time: "O(log n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"n": 39}' },
     { label: 'Example 2', input: '{"n": 54}' },

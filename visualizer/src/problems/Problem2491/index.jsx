@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with skill (JSON)',
   url: 'https://leetcode.com/problems/divide-players-into-teams-of-equal-skill/',
   complexity: 'O(n log n) time for sorting and O(n) for the pair checks. The visualization caps input at 30 players.',
+  question: "Pair players into teams with equal total skill and return the sum of the products of each pair, or -1 if impossible.",
+  approaches: [
+    { name: "Sort and pair smallest with largest", intuition: "After sorting, the only valid pairing matches the ends inward, so check each pair's sum.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Valid', input: '{"skill":[3,2,5,1,3,4]}' },
     { label: 'Impossible', input: '{"skill":[1,1,2,3]}' },

@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'wordlist and queries (JSON)',
   url: 'https://leetcode.com/problems/vowel-spellchecker/',
   complexity: 'O(total length) time with hash lookups. The visualization caps input at 10 words and 10 queries.',
+  question: "Given a word list and queries, correct each query to a word from the list by matching case-insensitively and by ignoring vowels.",
+  approaches: [
+    { name: "Three-tier lookup", intuition: "Check exact matches first, then case-insensitive matches, then matches with vowels masked.", time: "O(total length)", space: "O(total length)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"wordlist":["Mouse","mouse","rat"],"queries":["MOUSE","rat","Rot","RAT"]}' },
     { label: 'Single letter', input: '{"wordlist":["a"],"queries":["a"]}' },

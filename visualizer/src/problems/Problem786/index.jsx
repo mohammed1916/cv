@@ -14,6 +14,11 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'arr and k (JSON)',
   url: 'https://leetcode.com/problems/k-th-smallest-prime-fraction/',
   complexity: 'O((n + k) log n) time, O(n) space. Visualization limited to 12 values.',
+  question: "Given sorted primes and k, return the k-th smallest fraction formed by two entries with the numerator earlier in the list.",
+  approaches: [
+    { name: "Min-heap over rows", intuition: "Start with the fraction arr[0]/arr[j] for every j, pop the smallest, and push its successor in the same column.", time: "O((n + k) log n)", space: "O(n)" },
+    { name: "Binary search on value", intuition: "Search for the value v where the count of fractions below v reaches k, using two pointers to count.", time: "O(n log(precision))", space: "O(1)" },
+  ],
   examples: [
     { label: 'arr=[1,2,3,5], k=3', input: '{"arr":[1,2,3,5],"k":3}' },
     { label: 'arr=[1,7], k=1', input: '{"arr":[1,7],"k":1}' },

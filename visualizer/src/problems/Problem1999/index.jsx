@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'Object with k, digit1 and digit2',
   url: 'https://leetcode.com/problems/smallest-greater-multiple-made-of-two-digits/',
   complexity: 'Time is bounded by the numbers up to 2147483647 built from two digits, about 2 to the power 11 candidates. Space is the queue of pending candidates. The visualization accepts k up to 1000000.',
+  question: "Find the smallest multiple of a given number that is greater than a bound and uses only two given digits.",
+  approaches: [
+    { name: "BFS over digit strings", intuition: "Build numbers from the two digits in increasing order with a queue and test each for divisibility.", time: "O(answer size)", space: "O(answer size)" },
+  ],
   examples: [
     { label: 'Nines and twos', input: '{"k":7,"digit1":9,"digit2":2}' },
     { label: 'Zero and eight', input: '{"k":11,"digit1":0,"digit2":8}' },

@@ -4,6 +4,10 @@ import RecordStateTable from '../../components/shared/RecordStateTable'
 import { code, python, pythonLineMap, parseInput, buildTrace, phases, examples } from './algorithm'
 
 const definition = {
+  question: "Remove the shortest subarray so that the total sum is divisible by p.",
+  approaches: [
+    { name: "Prefix remainders in a map", intuition: "Find the latest earlier prefix with the required remainder, so the gap between them is the removed subarray.", time: "O(n)", space: "O(min(n, p))" },
+  ],
   number: '1590', phases, parse: parseInput, build: buildTrace, code, python, pythonLineMap, examples,
   inputLabel: 'Object with nums and p (JSON)',
   url: 'https://leetcode.com/problems/make-sum-divisible-by-p/',

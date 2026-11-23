@@ -12,6 +12,11 @@ const definition = {
   inputLabel: 'JSON object with an integer array nums (values 1 to 50)',
   url: 'https://leetcode.com/problems/maximum-value-of-an-ordered-triplet-ii/',
   complexity: 'O(n) time and O(n) space. The visualization caps the array at twelve values.',
+  question: "Find the largest value of (nums[i] minus nums[j]) times nums[k] for indices i less than j less than k, or 0 if all are negative.",
+  approaches: [
+    { name: "Prefix and suffix maxima", intuition: "For each middle index, use the largest value before it and the largest value after it.", time: "O(n)", space: "O(n)" },
+    { name: "Check every middle pair", intuition: "Try each middle index with a scan on both sides.", time: "O(n^2)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"nums":[12,6,1,2,7]}' },
     { label: 'Example 2', input: '{"nums":[1,10,3,4,19]}' },

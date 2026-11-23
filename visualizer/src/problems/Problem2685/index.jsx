@@ -15,6 +15,10 @@ const definition = {
   inputLabel: 'JSON {"n": 6, "edges": [[0,1],[0,2],[1,2],[3,4]]}',
   url: 'https://leetcode.com/problems/count-the-number-of-complete-components/',
   complexity: 'Near-linear time with union-find over n vertices and m edges. The visualization caps n at 8.',
+  question: "Given an undirected graph, count the connected components in which every pair of vertices is joined by an edge.",
+  approaches: [
+    { name: "Union-find with edge and vertex counts", intuition: "Union the endpoints, then compare each component's edge count with its complete-graph count.", time: "near-linear", space: "O(n)" },
+  ],
   examples: [
     { label: 'Triangle and pair', input: '{"n":5,"edges":[[0,1],[1,2],[0,2],[3,4]]}' },
     { label: 'Path is not complete', input: '{"n":4,"edges":[[0,1],[1,2],[2,3]]}' },

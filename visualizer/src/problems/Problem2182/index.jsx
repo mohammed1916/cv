@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON with s and limit, e.g. {"s":"cczazcc","limit":3}',
   url: 'https://leetcode.com/problems/construct-string-with-repeat-limit/',
   complexity: 'O(n + 26) time and O(26) extra space for the letter counts. The visualization caps s at 24 letters and limit at 6.',
+  question: "Build the lexicographically largest string in which no letter appears more than a given limit times in a row.",
+  approaches: [
+    { name: "Greedy with a fallback letter", intuition: "Write the largest letter up to the limit; if more of it remain, write one of the next smaller letter before continuing.", time: "O(n + 26)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Mixed letters', input: '{"s":"cczazcc","limit":3}' },
     { label: 'Two letters', input: '{"s":"aababab","limit":2}' },

@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON object with s and locked (0 = free, 1 = fixed)',
   url: 'https://leetcode.com/problems/check-if-a-parentheses-string-can-be-valid/',
   complexity: 'O(n) time and O(1) extra space: only the lowest and highest balance are kept.',
+  question: "Decide whether a bracket string can be made valid by choosing a bracket for each unlocked position.",
+  approaches: [
+    { name: "Track the balance range", intuition: "Keep the lowest and highest open-bracket balance reachable so far, and fail when the highest drops below zero.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Free start fixes it', input: '{"s":"))()","locked":"0100"}' },
     { label: 'Fixed close too early', input: '{"s":"())(","locked":"1111"}' },

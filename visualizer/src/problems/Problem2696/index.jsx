@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with string s of uppercase letters (JSON)',
   url: 'https://leetcode.com/problems/minimum-string-length-after-removing-substrings/',
   complexity: 'O(n) time and O(n) space.',
+  question: "Given a string, repeatedly remove the substrings AB or CD, and return the shortest length possible.",
+  approaches: [
+    { name: "Stack removal", intuition: "Push letters on a stack, and remove a pair whenever the top two complete AB or CD.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"s":"ABFCACDB"}' },
     { label: 'Example 2', input: '{"s":"ACBBD"}' },

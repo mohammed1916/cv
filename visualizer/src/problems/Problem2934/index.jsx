@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON object with nums1 and nums2 of equal length (values 1 to 9)',
   url: 'https://leetcode.com/problems/minimum-operations-to-maximize-last-elements-in-arrays/',
   complexity: 'O(n) time. The visualization caps the arrays at eight entries.',
+  question: "Find the minimum number of swaps between two arrays so that each array's last element is its maximum.",
+  approaches: [
+    { name: "Try both final orientations", intuition: "Try keeping the last elements in place and swapping them, count forced swaps at each index, and keep the cheaper valid option.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Four pairs, mixed order', input: '{"nums1":[7,2,9,4],"nums2":[3,8,5,6]}' },
     { label: 'Example 2', input: '{"nums1":[1,9],"nums2":[9,2]}' },

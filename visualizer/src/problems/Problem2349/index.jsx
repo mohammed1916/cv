@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Operations as JSON: {"operations": [["change", index, number], ["find", number], ...]}',
   url: 'https://leetcode.com/problems/design-a-number-container-system/',
   complexity: 'O(1) time for change and O(k) time for find, where k is the number of indices holding that number. The visualization caps input at 30 operations.',
+  question: "Support setting a number at an index and finding the smallest index holding a given number.",
+  approaches: [
+    { name: "Map of index sets", intuition: "Keep a map from each number to its indices and a map from each index to its number, then scan the indices for the smallest.", time: "O(1) change, O(k) find", space: "O(n)" },
+  ],
   examples: [
     { label: 'Own: short number container', input: '{"operations":[["change",4,7],["find",7],["change",4,9],["find",9],["find",7]]}' },
     { label: 'Find on an empty table', input: '{"operations":[["find",5]]}' },

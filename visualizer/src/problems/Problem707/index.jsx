@@ -14,6 +14,10 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Operations (JSON array)',
   url: 'https://leetcode.com/problems/design-linked-list/',
   complexity: 'O(index) per operation, which is O(n) in the worst case, and O(1) extra space.',
+  question: "Implement a singly linked list with get, add and delete by index.",
+  approaches: [
+    { name: "Sentinel head and walk", intuition: "Walk to the target index and splice nodes in or out; a sentinel keeps edges uniform.", time: "O(index)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Mixed', input: '[["addAtTail",5],["addAtHead",2],["addAtIndex",2,7],["get",2],["deleteAtIndex",1],["get",1],["get",9]]' },
     { label: 'Single head insert', input: '[["addAtHead",1],["get",0]]' },

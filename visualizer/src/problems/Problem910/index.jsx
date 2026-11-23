@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object {nums, k} (JSON)',
   url: 'https://leetcode.com/problems/smallest-range-ii/',
   complexity: 'O(n log n) time for the sort, then O(n) for the splits. nums is capped at 100 values.',
+  question: "Add a value between -k and k to each element of an array; minimise the difference between the largest and smallest values.",
+  approaches: [
+    { name: "Sort and split", intuition: "After sorting, the best choice raises the smallest prefix and lowers the rest, so try each split point.", time: "O(n log n)", space: "O(1) extra" },
+  ],
   examples: [
     { label: 'Three numbers, small k', input: '{"nums":[2,8,5],"k":2}' },
     { label: 'Almost equal values', input: '{"nums":[10,10,10,11],"k":1}' },

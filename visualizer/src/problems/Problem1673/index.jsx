@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Object with values and k (JSON)',
   url: 'https://leetcode.com/problems/find-the-most-competitive-subsequence/',
   complexity: 'O(n) time and O(n) space: every value is pushed and popped at most once.',
+  question: "Pick a subsequence of length k that is lexicographically smallest.",
+  approaches: [
+    { name: "Monotonic stack", intuition: "Pop larger values while enough elements remain to fill the subsequence.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Sample A', input: '{"values":[4,1,5,2],"k":2}' },
     { label: 'Pops', input: '{"values":[9,8,1,7],"k":2}' },

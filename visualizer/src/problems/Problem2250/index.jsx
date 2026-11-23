@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Rectangles [length, height] and points [x, y] (JSON)',
   url: 'https://leetcode.com/problems/count-number-of-rectangles-containing-each-point/',
   complexity: 'O(R log R + P * H log R) time with H = 101 height buckets. The visualization caps input at 12 rectangles and 12 points.',
+  question: "For each point, count how many rectangles contain it.",
+  approaches: [
+    { name: "Height buckets with binary search", intuition: "Group the rectangles by height, sort each group by length, and use binary search to count the rectangles that reach each point.", time: "O(n log n + q log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Three rectangles, two points', input: '{"rectangles":[[5,2],[7,9],[4,4]],"points":[[6,3],[1,10]]}' },
     { label: 'Tiny rectangles, three points', input: '{"rectangles":[[3,8],[1,1]],"points":[[2,2],[9,5],[1,1]]}' },

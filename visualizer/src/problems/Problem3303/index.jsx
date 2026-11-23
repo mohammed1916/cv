@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Text and pattern (JSON object with s and pattern)',
   url: 'https://leetcode.com/problems/find-the-occurrence-of-first-almost-equal-substring/',
   complexity: 'O(n * m) time and O(1) space in this trace. The visualization caps s at 40 characters.',
+  question: "Find the first position where a pattern occurs in a string with at most one mismatched letter.",
+  approaches: [
+    { name: "Check each start", intuition: "For each start position, compare the pattern and count mismatches, stopping after the second one.", time: "O(n * m)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Pattern with a gap', input: '{"s":"xaxbxcx","pattern":"xbx"}' },
     { label: 'Repeating pattern', input: '{"s":"kmkmkmk","pattern":"mkm"}' },

@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Object with n and edges (JSON)',
   url: 'https://leetcode.com/problems/minimum-number-of-vertices-to-reach-all-nodes/',
   complexity: 'O(n + m) time and O(n) space: one pass over the edges to count arrivals, then one pass over the vertices.',
+  question: "Find the smallest set of vertices from which every vertex can be reached.",
+  approaches: [
+    { name: "Vertices with no incoming edge", intuition: "Any vertex that is never the target of an edge must be included.", time: "O(n + m)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Mixed sources', input: '{"n":6,"edges":[[0,2],[1,2],[2,3],[4,5]]}' },
     { label: 'Single chain', input: '{"n":4,"edges":[[3,2],[2,1],[1,0]]}' },

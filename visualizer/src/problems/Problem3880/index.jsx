@@ -17,6 +17,11 @@ const definition = {
   inputLabel: 'Object with nums (entries are 0, 1 or 2)',
   url: 'https://leetcode.com/problems/minimum-absolute-difference-between-two-values/',
   complexity: 'O(n) time and O(1) space. The official length is up to 100; the visualization caps nums at 20 entries.',
+  question: "Find the smallest index distance between a 1 and a 2 in an array of ones and twos, or -1 when one is missing.",
+  approaches: [
+    { name: "Track the last index of each value", intuition: "Scan once and record the last index of 1 and of 2; each new index gives a candidate distance.", time: "O(n)", space: "O(1)" },
+    { name: "Compare every pair", intuition: "Check the distance of every 1 and 2 pair.", time: "O(n^2)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example', input: '{"nums":[0,1,2,0,1]}' },
     { label: 'No pair', input: '{"nums":[2,0,0,1]}' },

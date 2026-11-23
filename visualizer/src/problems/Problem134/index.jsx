@@ -22,6 +22,11 @@ const definition = {
   inputLabel: "Gas and cost (JSON object, e.g. {\"gas\": [2,5,1,3], \"cost\": [3,2,4,1]})",
   url: "https://leetcode.com/problems/gas-station/",
   complexity: "O(n) time and O(1) space for n stations. The visualization caps the trip at 40 stations.",
+  question: "Find the starting gas station from which a full circuit is possible.",
+  approaches: [
+    { name: "Greedy running balance", intuition: "If a station cannot be reached, every station before it cannot be the start either.", time: "O(n)", space: "O(1)" },
+    { name: "Try each start", intuition: "Simulate the circuit from every station.", time: "O(n^2)", space: "O(1)" },
+  ],
   examples: getExamples("gas-station").map(({ label, gas, cost }) => ({ label, input: JSON.stringify({ gas, cost }) })),
 };
 

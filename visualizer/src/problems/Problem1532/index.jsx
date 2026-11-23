@@ -26,6 +26,10 @@ const definition = {
   inputLabel: 'Object with Customers ({ customer_id, name }) and Orders ({ order_id, order_date, customer_id, cost }) lists',
   url: 'https://leetcode.com/problems/the-most-recent-three-orders/',
   complexity: 'O(o log o) to sort the orders, then up to three picks per customer.',
+  question: "Keep the three most recent orders for each customer.",
+  approaches: [
+    { name: "Sort, then keep three", intuition: "Sort by customer and newest first, then keep up to three rows per customer.", time: "O(o log o)", space: "O(o)" },
+  ],
   examples: [
     { label: 'Example', input: '{"Customers":[{"customer_id":1,"name":"Alice"},{"customer_id":2,"name":"Bob"}],"Orders":[{"order_id":1,"order_date":"2020-07-01","customer_id":1,"cost":30},{"order_id":2,"order_date":"2020-07-10","customer_id":1,"cost":45},{"order_id":3,"order_date":"2020-07-05","customer_id":1,"cost":20},{"order_id":4,"order_date":"2020-06-30","customer_id":1,"cost":15},{"order_id":5,"order_date":"2020-07-03","customer_id":2,"cost":10},{"order_id":6,"order_date":"2020-07-03","customer_id":2,"cost":25},{"order_id":7,"order_date":"2020-07-20","customer_id":2,"cost":60},{"order_id":8,"order_date":"2020-07-15","customer_id":2,"cost":35}]}' },
     { label: 'Single order', input: '{"Customers":[{"customer_id":1,"name":"Ann"}],"Orders":[{"order_id":1,"order_date":"2020-08-01","customer_id":1,"cost":5}]}' },

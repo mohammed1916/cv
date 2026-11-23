@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with value and limit (same length, up to 8 elements)',
   url: 'https://leetcode.com/problems/maximum-total-from-optimal-activation-order/description/',
   complexity: 'Teaching search over activation states: at most 2^n activated sets times the possible maximum counts, memoized.',
+  question: "Find the largest total from an activation order, where each activation depends on the earlier ones.",
+  approaches: [
+    { name: "Memoised search over sets", intuition: "Search over activated sets with memoisation, and combine the best maximum count for each.", time: "O(2^n * n)", space: "O(2^n)" },
+  ],
   examples: [
     { label: 'Invented example', input: '{"value":[4,6,2],"limit":[1,3,2]}' },
     { label: 'Single element', input: '{"value":[7],"limit":[1]}' },

@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Grid of lowercase letters as JSON, e.g. {"grid": ["aaaa","aba"]}',
   url: 'https://leetcode.com/problems/detect-cycles-in-2d-grid/',
   complexity: 'O(m * n * alpha) time with union by size and path halving. The visualization caps the grid at 6 by 6.',
+  question: "Detect whether a grid contains a cycle of same-letter cells.",
+  approaches: [
+    { name: "Union-find with cycle check", intuition: "Merge neighbouring cells with the same letter; joining two already-joined cells closes a cycle.", time: "O(m * n * alpha)", space: "O(m * n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"grid": ["aaaa","abba","abba","aaaa"]}' },
     { label: 'Example 2', input: '{"grid": ["abb","bzb","bba"]}' },

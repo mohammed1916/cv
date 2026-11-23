@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with nums (a matrix of 1 to 6 rows and 1 to 6 columns, values 0 to 1000)',
   url: 'https://leetcode.com/problems/sum-in-a-matrix/',
   complexity: 'O(n * m log m) time for n rows and m columns, dominated by sorting each row.',
+  question: "Given a matrix, repeatedly remove the largest value from each row and add the maximum of the removed values, returning the total.",
+  approaches: [
+    { name: "Sort each row then take column maxima", intuition: "Sort each row, then add the largest value in each column, since the removals pair up.", time: "O(n * m log m)", space: "O(m)" },
+  ],
   examples: [
     { label: 'Two rows', input: '{"nums":[[4,9,1],[8,2,6]]}' },
     { label: 'Equal tops', input: '{"nums":[[5,5],[5,0]]}' },

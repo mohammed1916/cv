@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Integer array of length 3n as JSON',
   url: 'https://leetcode.com/problems/minimum-difference-in-sums-after-removal-of-elements/',
   complexity: 'O(n log n) time with two heaps over the array; O(n) space.',
+  question: "Remove n numbers from an array of 3n values so that the difference between the first n remaining and the last n remaining is as small as possible.",
+  approaches: [
+    { name: "Prefix minimum and suffix maximum heaps", intuition: "For each split point, keep the n smallest values on the left and the n largest on the right using heaps.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Six values', input: '[7,9,5,8,1,3]' },
     { label: 'Nine values', input: '[10,2,8,6,3,9,1,4,5]' },

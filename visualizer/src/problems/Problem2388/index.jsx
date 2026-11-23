@@ -25,6 +25,10 @@ const examples = [{
 }]
 
 const definition = {
+  question: "Using a coffee shop orders table, fill each missing value with the previous non-missing value by id.",
+  approaches: [
+    { name: "Sort then carry forward", intuition: "Sort the rows by id and carry the last seen value forward.", time: "O(n log n)", space: "O(n)" },
+  ],
   number: meta.number,
   phases, parse: parseInput, build: buildTrace, code, sql, python, inputLabel,
   url: `https://leetcode.com/problems/${meta.slug}/`,

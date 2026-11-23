@@ -11,6 +11,10 @@ const definition = {
   inputLabel: 'String (JSON object with s)',
   url: 'https://leetcode.com/problems/minimum-operations-to-make-a-rotated-palindrome-i/',
   complexity: 'O(n²) time and O(n) space for each rotation. The visualization caps s at 12 letters.',
+  question: "Find the cheapest rotation of a string into a palindrome, where mismatched mirror pairs cost forward increments.",
+  approaches: [
+    { name: "Try every rotation", intuition: "Price the mismatched mirror pairs for each rotation and keep the best total.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"s":"abc"}' },
     { label: 'Example 2', input: '{"s":"yb"}' },

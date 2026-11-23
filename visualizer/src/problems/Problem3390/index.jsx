@@ -8,6 +8,10 @@ const definition = {
   inputLabel: 'Object with teams (name to player ids) and passes ([from, "MM:SS", to])',
   url: 'https://leetcode.com/problems/longest-team-pass-streak/',
   complexity: 'O(p log p + t) for p passes and t players: sorting by time dominates. The visualization shows up to 20 passes with distinct times and up to 6 teams.',
+  question: "Find the longest streak of consecutive passes among a team of players, where each pass must stay within the team.",
+  approaches: [
+    { name: "Sort by time and sweep", intuition: "Sort passes by time, then sweep while tracking which players are in the current team streak.", time: "O(p log p + t)", space: "O(p + t)" },
+  ],
   examples: [
     { label: 'Run broken, then rebuilt', input: '{"teams":{"Rovers":[11,12,13],"Comets":[21,22]},"passes":[[11,"02:10",12],[12,"03:40",13],[21,"05:00",22],[13,"06:20",21],[22,"07:05",21],[21,"08:15",22],[11,"09:30",13]]}' },
     { label: 'Team with no kept pass', input: '{"teams":{"Aces":[1,2],"Bears":[3,4]},"passes":[[1,"10:00",3],[2,"11:00",4],[3,"12:00",4]]}' },

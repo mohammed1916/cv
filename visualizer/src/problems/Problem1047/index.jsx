@@ -10,6 +10,10 @@ const definition = {
   inputLabel: 'Lowercase letters, such as mnoonpq',
   url: 'https://leetcode.com/problems/remove-all-adjacent-duplicates-in-string/',
   complexity: 'O(n) time and O(n) space: each character is pushed and popped at most once.',
+  question: "Repeatedly remove adjacent equal letters from a string until none remain.",
+  approaches: [
+    { name: "Stack of kept letters", intuition: "Push each letter and pop when it matches the top; the stack holds the reduced string.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Exposed pair', input: 'mnoonpq' },
     { label: 'Full cancel', input: 'xxyyzz' },

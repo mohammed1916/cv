@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'An object with nums (1 to 12 integers from 1 to 100) and queries ([l, r] pairs)',
   url: 'https://leetcode.com/problems/minimum-absolute-difference-queries/',
   complexity: 'O(V * (n + q)) time for V distinct values. The visualization caps input at 12 numbers and 5 queries.',
+  question: "For each query on a range, find the smallest absolute difference between two values in that subarray.",
+  approaches: [
+    { name: "Prefix counts per value", intuition: "Keep prefix counts for each value from 1 to 100, then scan the sorted distinct values within each query range.", time: "O(q * 100 + n * 100)", space: "O(n * 100)" },
+  ],
   examples: [
     { label: 'Four numbers, two ranges', input: '{"nums":[6,2,9,5],"queries":[[0,2],[1,3]]}' },
     { label: 'Example 2', input: '{"nums":[4,5,2,2,7,10],"queries":[[2,3],[0,2],[0,5]]}' },

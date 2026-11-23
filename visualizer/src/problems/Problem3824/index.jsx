@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Numbers (JSON object with nums)',
   url: 'https://leetcode.com/problems/minimum-k-to-reduce-array-within-limit/',
   complexity: 'O(n log(max + n)) time. The visualization caps n at 12.',
+  question: "Find the smallest k for which the total ceiling-division cost is at most k squared.",
+  approaches: [
+    { name: "Binary search on k", intuition: "The condition only gets easier as k grows, so binary search finds the smallest valid k.", time: "O(n log(max + n))", space: "O(1)" },
+  ],
   examples: [
     { label: 'Example 1', input: '{"nums":[3,7,5]}' },
     { label: 'Example 2', input: '{"nums":[1]}' },

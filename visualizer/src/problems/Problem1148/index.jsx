@@ -4,6 +4,10 @@ import { buildTrace, parseInput, code, sql, python, phases, inputLabel, complexi
 import { meta } from './meta'
 
 const definition = {
+  question: "Find the authors who viewed their own articles.",
+  approaches: [
+    { name: "Join and group in SQL", intuition: "Keep view rows whose viewer equals the author, and take the distinct authors.", time: "O(n log n)", space: "O(n)" },
+  ],
   number: meta.number,
   phases,
   parse: parseInput,

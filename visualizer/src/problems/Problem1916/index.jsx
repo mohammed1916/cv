@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'JSON prevRoom array, prevRoom[0] = -1 (e.g. [-1,0,0,1,1])',
   url: 'https://leetcode.com/problems/count-ways-to-build-rooms-in-an-ant-colony/',
   complexity: 'O(n) time for the subtree sizes and O(n log MOD) for the modular inverses. The visualization caps n at 12.',
+  question: "Count the number of orders in which rooms of an ant colony can be built when each room needs its parent built first.",
+  approaches: [
+    { name: "Tree DP with subtree sizes", intuition: "Multiply factorial-style counts by inverse subtree sizes, combining children bottom-up.", time: "O(n log MOD)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Five rooms', input: '[-1,0,0,1,1]' },
     { label: 'Chain', input: '[-1,0,1,2]' },

@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with num (2 to 10 digits as a string) and k (1 to 30)',
   url: 'https://leetcode.com/problems/minimum-adjacent-swaps-to-reach-the-kth-smallest-number/',
   complexity: 'O(k * n + n^2) time for the steps and the swap count, where n is the number of digits.',
+  question: "Given a digit string and k, find the minimum number of adjacent swaps that turns the string into its k-th smallest permutation.",
+  approaches: [
+    { name: "Next permutation then greedy swaps", intuition: "Advance to the k-th permutation with next-permutation steps, then move each digit into place with the fewest adjacent swaps.", time: "O(k * n + n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Ascending digits, k 3', input: '{"num":"1234","k":3}' },
     { label: 'Own: 3120, k 1', input: '{"num":"3120","k":1}' },

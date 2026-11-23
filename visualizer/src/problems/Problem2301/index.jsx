@@ -16,6 +16,10 @@ const definition = {
   inputLabel: 'Object with s, sub and mappings ([old, new] letter pairs)',
   url: 'https://leetcode.com/problems/match-substring-after-replacement/',
   complexity: 'O(n * m) time with a set of replacements. The visualization caps s at 20 characters.',
+  question: "Decide whether a given string can be matched in a longer string when some characters may be replaced using a list of allowed swaps.",
+  approaches: [
+    { name: "Try each start with a replacement set", intuition: "For each start position, compare characters with a set of allowed replacements.", time: "O(n * m)", space: "O(replacements)" },
+  ],
   examples: [
     { label: 'Example', input: '{"s":"fooleyzbar","sub":"leet","mappings":[["e","3"],["t","7"],["t","8"]]}' },
     { label: 'No match', input: '{"s":"abcd","sub":"ef","mappings":[["e","b"]]}' },

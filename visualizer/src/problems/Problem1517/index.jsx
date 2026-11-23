@@ -54,6 +54,10 @@ const definition = {
   inputLabel: 'Object with Users (user_id, name, mail) (JSON)',
   url: 'https://leetcode.com/problems/find-users-with-valid-e-mails/',
   complexity: 'O(u * m) for u users and mails of length m.',
+  question: "Return the users whose e-mail address matches a fixed pattern.",
+  approaches: [
+    { name: "Pattern test per mail", intuition: "Test each address against the pattern and keep the matching users.", time: "O(u * m)", space: "O(u)" },
+  ],
   examples: [
     { label: 'Example', input: '{"Users":[{"user_id":1,"name":"Ana","mail":"ana_01@leetcode.com"},{"user_id":2,"name":"Bo","mail":"1bo@leetcode.com"},{"user_id":3,"name":"Cy","mail":"cy.dev@example.com"},{"user_id":4,"name":"Di","mail":"di-x@LEETCODE.com"},{"user_id":5,"name":"Ed","mail":"ed@leetcode.com"}]}' },
     { label: 'Single valid mail', input: '{"Users":[{"user_id":1,"name":"Lee","mail":"lee@leetcode.com"}]}' },

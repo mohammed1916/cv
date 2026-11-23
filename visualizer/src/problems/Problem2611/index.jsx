@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Object with reward1, reward2 (equal-length arrays) and k',
   url: 'https://leetcode.com/problems/mice-and-cheese/',
   complexity: 'O(n log n) time for the sort and O(n) for the assignment. The visualization caps input at 12 cheese types.',
+  question: "Given two mice and cheese rewards, each cheese is eaten by the mouse that gains most, and find the maximum total reward when exactly k cheeses go to the first mouse.",
+  approaches: [
+    { name: "Sort by difference", intuition: "Sort cheeses by the difference between the two mice rewards, give the first k to mouse one, and sum the rest.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Five cheeses, k two', input: '{"reward1":[9,4,12,7,3],"reward2":[6,10,1,8,11],"k":2}' },
     { label: 'Example 2', input: '{"reward1":[1,1],"reward2":[3,4],"k":1}' },

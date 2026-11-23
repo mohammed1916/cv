@@ -14,6 +14,10 @@ const definition = {
   inputLabel: 'Object with n and edges (n minus 1 [u, v] pairs)',
   url: 'https://leetcode.com/problems/find-diameter-endpoints-of-a-tree/',
   complexity: 'O(n) time and O(n) space for a tree on n nodes. The visualization caps n at 12.',
+  question: "Find the two endpoints of the longest path in a tree.",
+  approaches: [
+    { name: "Two breadth-first searches", intuition: "Search from any node, then search from the farthest node found; that second farthest node is an endpoint.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Branch on one side', input: '{"n":7,"edges":[[0,1],[0,2],[2,3],[3,4],[3,5],[5,6]]}' },
     { label: 'Plain path', input: '{"n":4,"edges":[[2,0],[0,3],[3,1]]}' },

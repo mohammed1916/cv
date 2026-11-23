@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Numbers (JSON object with a nums array of integers from 0 to 20, up to 12 entries)',
   url: 'https://leetcode.com/problems/count-number-of-bad-pairs/',
   complexity: 'O(n) expected time with a hash table of keys. The visualization caps the array at 12 entries.',
+  question: "Count the pairs of indices where the difference of indices differs from the difference of values.",
+  approaches: [
+    { name: "Count keys nums[i] - i", intuition: "Pairs with equal keys are good, so count the total pairs minus the good pairs using a hash map.", time: "O(n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Official', input: '{"nums":[4,1,3,3]}' },
     { label: 'No bad pairs', input: '{"nums":[1,2,3,4,5]}' },

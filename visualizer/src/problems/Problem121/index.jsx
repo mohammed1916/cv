@@ -20,6 +20,10 @@ const definition = {
   inputLabel: "Prices (JSON object, e.g. {\"prices\": [7,1,5,3,6,4]})",
   url: "https://leetcode.com/problems/best-time-to-buy-and-sell-stock/",
   complexity: "O(n) time and O(1) space for n prices. The visualization caps the trace at 60 prices.",
+  question: "Find the largest profit from one buy and one later sell of a stock.",
+  approaches: [
+    { name: "Track the minimum so far", intuition: "Keep the lowest price seen and the best profit against it.", time: "O(n)", space: "O(1)" },
+  ],
   examples: getExamples("best-time-to-buy-and-sell-stock").map(({ label, prices }) => ({ label, input: JSON.stringify({ prices }) })),
 };
 

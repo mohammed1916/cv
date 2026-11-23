@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Digits as a JSON string',
   url: 'https://leetcode.com/problems/check-if-number-has-equal-digit-count-and-digit-value/',
   complexity: 'O(n^2) time for n digits; the visualization caps input at 10 digits.',
+  question: "Check whether, for every index i, the digit at position i equals how many times the digit i appears in the string.",
+  approaches: [
+    { name: "Count then compare", intuition: "For each index, count the occurrences of that index digit in the string and compare with the digit at that index.", time: "O(n^2)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Four digit string', input: '"5902"' },
     { label: 'Digits with a repeat', input: '"7717"' },

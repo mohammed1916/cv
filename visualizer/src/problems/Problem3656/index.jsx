@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'Degree list (e.g. [3, 3, 3, 3])',
   url: 'https://leetcode.com/problems/determine-if-a-simple-graph-exists/',
   complexity: 'O(n log n) time and O(n) space for n vertices, from sorting and the prefix checks. The visualization caps the list at 10 vertices with degrees up to 12; the official bounds are not verified here.',
+  question: "Decide whether a degree sequence can be realised by a simple graph with no loops or repeated edges.",
+  approaches: [
+    { name: "Sorted prefix checks", intuition: "Sort the degrees and check the prefix sums against the standard bounds.", time: "O(n log n)", space: "O(n)" },
+  ],
   examples: [
     { label: 'Complete graph on four', input: '[3, 3, 3, 3]' },
     { label: 'Degree beyond reach', input: '[3, 1]' },

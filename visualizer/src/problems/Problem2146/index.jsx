@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'JSON object with grid, pricing [low, high], start [row, col] and k',
   url: 'https://leetcode.com/problems/k-highest-ranked-items-within-a-price-range/',
   complexity: 'O(m n log(m n)) time: a breadth-first search plus sorting the items found; O(m n) space.',
+  question: "Return the k highest-ranked items inside a price range, ranked by distance from a start cell, then price, then position.",
+  approaches: [
+    { name: "Breadth-first search then sort", intuition: "Run a breadth-first search from the start over non-wall cells, keep the items in the price range, and sort them by rank.", time: "O(m * n log(m * n))", space: "O(m * n)" },
+  ],
   examples: [
     { label: 'Ranked by distance', input: '{"grid":[[1,2,0,3],[1,1,1,4],[2,0,1,5]],"pricing":[2,5],"start":[0,0],"k":3}' },
     { label: 'Walls block', input: '{"grid":[[1,0,2],[0,0,3],[4,1,1]],"pricing":[2,4],"start":[2,2],"k":2}' },

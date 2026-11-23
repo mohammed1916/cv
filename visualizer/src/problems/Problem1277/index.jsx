@@ -7,6 +7,10 @@ const definition = {
   inputLabel: 'Object with a matrix of 0 and 1 rows (JSON)',
   url: 'https://leetcode.com/problems/count-square-submatrices-with-all-ones/',
   complexity: 'O(rows x cols) time and space: each cell is computed once from three earlier neighbours.',
+  question: "Count the square submatrices in a grid that contain only ones.",
+  approaches: [
+    { name: "Corner DP", intuition: "Each cell holds the largest square with that corner, the minimum of its three neighbours plus one.", time: "O(m x n)", space: "O(m x n)" },
+  ],
   examples: [
     { label: 'Small block', input: '{"matrix":[[0,1],[1,1]]}' },
     { label: 'Two by three', input: '{"matrix":[[1,1,1],[1,1,1]]}' },

@@ -13,6 +13,10 @@ const definition = {
   inputLabel: 'String length n (integer 1 to 8)',
   url: 'https://leetcode.com/problems/generate-binary-strings-without-adjacent-zeros/',
   complexity: 'O(n * F(n)) time, where F(n) is the number of answers, and O(n) recursion depth. The visualization caps n at 8.',
+  question: "Generate all binary strings of a given length with no two adjacent zeros, in sorted order.",
+  approaches: [
+    { name: "Depth-first construction", intuition: "Build the string left to right, trying 0 before 1 so answers come out sorted, and skip a zero right after another zero.", time: "O(n * F(n))", space: "O(n)" },
+  ],
   examples: [
     { label: 'Length 3', input: '3' },
     { label: 'Length 1', input: '1' },

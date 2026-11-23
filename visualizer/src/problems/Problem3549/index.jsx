@@ -12,6 +12,10 @@ const definition = {
   inputLabel: 'Object with a and b (coefficient lists, lowest degree first)',
   url: 'https://leetcode.com/problems/multiply-two-polynomials/',
   complexity: 'O(n * m) time for coefficient lists of length n and m, and O(n + m) space for the product. The visualization caps each list at 8 coefficients.',
+  question: "Multiply two polynomials given as coefficient lists.",
+  approaches: [
+    { name: "Coefficient convolution", intuition: "Add the product of every pair of coefficients into the matching power.", time: "O(n m)", space: "O(n + m)" },
+  ],
   examples: [
     { label: 'Pair of binomials', input: '{"a":[3,-1],"b":[2,0,4]}' },
     { label: 'Constant times a line', input: '{"a":[5],"b":[0,-2,1]}' },

@@ -16,6 +16,10 @@ const definition = {
   inputLabel: 'Object with equal-length source and target arrays, e.g. {"source":[1,2,3],"target":[6,0,0]}',
   url: 'https://leetcode.com/problems/transform-array-using-pair-operations/',
   complexity: 'O(n) time and O(n) space for n values. The visualization caps each array at 12 values.',
+  question: "Transform an array into the target using pair operations that keep the total unchanged.",
+  approaches: [
+    { name: "Invariant-based greedy", intuition: "Because the total never changes, equal totals let each position be fixed in turn using the pair operations.", time: "O(n)", space: "O(1)" },
+  ],
   examples: [
     { label: 'Same total', input: '{"source":[1,2,3],"target":[6,0,0]}' },
     { label: 'Different total', input: '{"source":[4,1],"target":[4,2]}' },

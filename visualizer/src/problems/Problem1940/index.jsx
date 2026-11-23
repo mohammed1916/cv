@@ -11,6 +11,10 @@ const definition = {
   inputLabel: 'JSON array of strictly increasing arrays (e.g. [[1,3,4],[1,4,5],[1,4,6]])',
   url: 'https://leetcode.com/problems/longest-common-subsequence-between-sorted-arrays/',
   complexity: 'O(total length) time with a hash map of counts, plus a sort of the common values.',
+  question: "Find the values that appear in every one of several sorted arrays, returned in sorted order.",
+  approaches: [
+    { name: "Count appearances", intuition: "Count how many arrays contain each value and keep values whose count equals the number of arrays.", time: "O(total)", space: "O(distinct)" },
+  ],
   examples: [
     { label: 'Three arrays', input: '[[1,3,4],[1,4,5],[1,4,6]]' },
     { label: 'No overlap', input: '[[2,5],[3,6]]' },

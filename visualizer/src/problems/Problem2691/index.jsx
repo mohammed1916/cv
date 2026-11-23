@@ -6,6 +6,10 @@ const definition = {
   inputLabel: 'Object with obj and writes, a list of [path, value] assignments (e.g. {"obj":{"x":1},"writes":[[["x"],2]]})',
   url: 'https://leetcode.com/problems/immutability-helper/',
   complexity: 'O(path length) copies for each assignment. Every other branch is shared with the original, and the original is never changed.',
+  question: "Given an object and update commands, return a new object with the changes applied without modifying the original.",
+  approaches: [
+    { name: "Copy along the path", intuition: "Copy each object on the path to the changed value, and share the other branches.", time: "O(path)", space: "O(path)" },
+  ],
   examples: [
     { label: 'Nested set', input: '{"obj":{"a":{"b":1,"c":2},"d":3},"writes":[[["a","b"],9]]}' },
     { label: 'Two writes', input: '{"obj":{"x":5,"a":{"b":[1,2]}},"writes":[[["x"],6],[["a","b",1],9]]}' },
