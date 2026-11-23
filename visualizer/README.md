@@ -102,6 +102,47 @@ The Functions `postdeploy` hook runs `scripts/prune-old-secret-versions.py` usin
 
 This is a local Firebase CLI deployment hook, not a scheduled cloud policy; console rotations or deployments from another checkout do not run it. It needs gcloud metadata-read and secret-version-destroy permissions. Destroyed payloads cannot be recovered for rollback; redeploy older code with the retained credential if necessary. Disabled versions remain billable, while destroyed versions do not. Version metadata and audit history may remain visible. Normal application deployments should reuse current secrets instead of running `secrets:set` for unchanged values.
 
+## Payments (Razorpay)
+
+Pro is sold as three plans, priced in two currencies. Visitors in India see rupees by default; everyone else sees dollars. A USD/INR switch on the pricing screen lets anyone change it.
+
+| Plan | INR | USD (matched at 92.96 INR per USD) |
+|---|---|---|
+| Monthly (30 days) | 199 | 2.14 |
+| Yearly (365 days) | 1,499 | 16.13 |
+| Lifetime (one time) | 4,999 | 53.78 |
+
+Prices are defined in two places that must stay in step: `functions/policy.js` (charged by the server) and `src/access/policy.js` (displayed to the visitor). The USD figures are the rupee prices divided by the rate, so update both files together if the rate changes.
+
+### Flow
+
+1. **Checkout starts.** The client calls `createProOrder` with `plan` and `currency` (`INR` or `USD`). The function looks up the price on the server, ignoring any amount the client sends, and rejects unknown plans or currencies. It limits each user to one new checkout every 30 seconds and refuses to run while `config/billing.enabled` is not set.
+2. **Razorpay order.** The function creates a Razorpay order in that currency and stores it in `orders/{orderId}` with the uid, plan, amount and currency.
+3. **Payment.** The browser opens Razorpay Checkout with the order id and amount.
+4. **Verification.** The browser calls `verifyProPayment` with the order, payment and signature. The function checks the HMAC signature, fetches the payment from Razorpay, and requires that it is captured, in the same currency as the order, for the same amount, and not refunded.
+5. **Activation.** `accounts/{uid}.expiresAt` is extended by the plan length. Lifetime uses 36,500 days. A repeated callback or webhook does not extend the plan twice.
+6. **Webhook.** `paymentWebhook` receives signed Razorpay events and applies the same activation and refund rules, so access is granted even if the browser never reports success.
+
+### Refunds
+
+`requestRefund` refunds a full payment made within 7 days. Razorpay confirms the refund through the webhook, which removes the access that was granted.
+
+### Functions involved
+
+- `createProOrder`: creates the order at the server price in the chosen currency.
+- `verifyProPayment`: checks the signature and grants access after checkout.
+- `paymentWebhook`: applies captured payments and refunds from Razorpay.
+- `requestRefund`: refunds a recent purchase.
+- `accountStatus`, `startProTrial`: report access and start the 3-day trial.
+
+### Setup and limits
+
+- Razorpay must have international payments enabled to accept USD. Rupee payments need only the normal account.
+- Razorpay settles in INR, so dollar payments are converted by Razorpay, and the conversion and international fees apply. Check Razorpay's current rates before quoting prices.
+- Each foreign inward payment needs an RBI purpose code. P0807 (off-site software exports) is the likely purpose code, but it is not yet confirmed; confirm it with a chartered accountant before relying on it.
+- Secrets (`RAZORPAY_KEY_ID`, `RAZORPAY_KEY_SECRET`, `RAZORPAY_WEBHOOK_SECRET`) are read from Firebase secrets, never from the client.
+- Deploy the functions and hosting together. Otherwise the website can show dollar prices while the server still charges the old amounts.
+
 ## User feedback (Firestore `feedback` collection)
 
 The feedback button (right edge of the app) lets signed-in Google users send
