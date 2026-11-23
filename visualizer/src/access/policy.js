@@ -2,12 +2,13 @@
 // The cloud-function access checks are skipped while this is true. Set it to
 // false to require an active Pro account for the playground.
 export const BETA_FREE_ACCESS = false;
-// Reference paid prices are retained for display; nothing is charged during free beta.
-const BETA = { monthly: 99, annual: 799 };
-const REGULAR = { monthly: 199, annual: 1499 };
+// Prices in US dollar cents. Keep in step with functions/policy.js.
+const USD_CENTS = { monthly: 999, annual: 7900, lifetime: 14999 };
+const usd = cents => '$' + (cents / 100).toFixed(2).replace(/\.00$/, '');
 export const PLANS = {
-  monthly: { label: 'month (30 days)', amount: BETA.monthly * 100, days: 30, display: `₹${BETA.monthly}`, regular: `₹${REGULAR.monthly}`, regularAmount: REGULAR.monthly * 100 },
-  annual: { label: 'year (365 days)', amount: BETA.annual * 100, days: 365, display: `₹${BETA.annual}`, regular: `₹${REGULAR.annual}`, regularAmount: REGULAR.annual * 100 },
+  monthly: { label: 'month (30 days)', amount: USD_CENTS.monthly, days: 30, display: usd(USD_CENTS.monthly) },
+  annual: { label: 'year (365 days)', amount: USD_CENTS.annual, days: 365, display: usd(USD_CENTS.annual) },
+  lifetime: { label: 'one-time, lifetime', amount: USD_CENTS.lifetime, days: 36500, display: usd(USD_CENTS.lifetime) },
 };
 // A useful sample of the next step after Easy: arrays, windows, lists, trees,
 // graphs, backtracking and dynamic programming. Basics always remain free.

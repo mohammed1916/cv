@@ -1,7 +1,10 @@
-// Beta prices (₹99 a month, ₹799 a year). Keep in step with src/access/policy.js.
-const MONTHLY_PAISE = 9900;
-const YEARLY_PAISE = 79900;
-export const PLANS = { monthly: { amount: MONTHLY_PAISE, days: 30 }, annual: { amount: YEARLY_PAISE, days: 365 } };
+// Prices in US dollar cents. Keep in step with src/access/policy.js.
+// Lifetime uses 36500 days so the existing expiry logic applies unchanged.
+export const PLANS = {
+  monthly: { amount: 999, days: 30 },
+  annual: { amount: 7900, days: 365 },
+  lifetime: { amount: 14999, days: 36500 },
+};
 export const TRIAL_MS = 3 * 86400000;
 export function status(data = {}, now = Date.now()) {
   const paidExpiresAt = Number(data.expiresAt || 0);

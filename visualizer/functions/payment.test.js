@@ -24,8 +24,8 @@ db.runTransaction = async fn => fn({
 globalThis.fetch = async () => ({ ok: true, json: async () => payment });
 function reset() {
   // Orders opened before the price change still verify against their stored amount.
-  records = new Map([['orders/order_one', { uid: 'owner', plan: 'monthly', amount: 19900, status: 'created' }]]);
-  payment = { id: 'pay_one', order_id: 'order_one', status: 'captured', amount: 19900, currency: 'INR', amount_refunded: 0 };
+  records = new Map([['orders/order_one', { uid: 'owner', plan: 'monthly', amount: 999, status: 'created' }]]);
+  payment = { id: 'pay_one', order_id: 'order_one', status: 'captured', amount: 999, currency: 'USD', amount_refunded: 0 };
 }
 function request(user = 'owner') {
   return {
@@ -81,10 +81,10 @@ test('checkout sends the trusted new monthly and annual prices, ignoring client 
   t.mock.method(db, 'collection', () => ({ doc: () => ({ id: 'receipt_test' }) }));
   t.mock.method(globalThis, 'fetch', async (_url, options) => {
     const body = JSON.parse(options.body);
-    assert.equal(body.currency, 'INR');
+    assert.equal(body.currency, 'USD');
     return { ok: true, json: async () => ({ id: 'order_new', amount: body.amount }) };
   });
-  for (const [plan, expected] of [['monthly', 9900], ['annual', 79900]]) {
+  for (const [plan, expected] of [['monthly', 999], ['annual', 7900], ['lifetime', 14999]]) {
     reset();
     records.set('config/billing', { enabled: true });
     const order = await createProOrder.run({ ...request(), data: { plan, amount: 1 } });
@@ -119,7 +119,7 @@ test('uncaptured and refunded payments never grant Pro', async () => {
   assert.equal(records.has('accounts/owner'), false);
 });
 test('refund delivered before capture marks order and delayed capture stays revoked', async () => {
-  reset(); payment.amount_refunded = 19900;
+  reset(); payment.amount_refunded = 999;
   await webhook('refund.processed', { refund: { entity: { payment_id: 'pay_one' } } });
   await webhook('payment.captured', { payment: { entity: { ...payment, amount_refunded: 0 } } });
   assert.equal(records.get('orders/order_one').status, 'refunded');
@@ -129,7 +129,7 @@ test('duplicate refunds revoke once and preserve another purchased period', asyn
   reset(); await verifyProPayment.run(request());
   const original = records.get('accounts/owner').expiresAt;
   records.set('accounts/owner', { expiresAt: original + 365 * 86400000 });
-  payment.amount_refunded = 19900;
+  payment.amount_refunded = 999;
   const payload = { refund: { entity: { payment_id: 'pay_one' } } };
   await webhook('refund.processed', payload);
   const remaining = records.get('accounts/owner').expiresAt;

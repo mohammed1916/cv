@@ -77,7 +77,7 @@ export const createProOrder = onCall(paymentOptions, async request => {
     if (prior?.at > Date.now() - 30000) throw new HttpsError('resource-exhausted', 'Wait 30 seconds before starting another checkout.');
     tx.set(rate, { at: Date.now() });
   });
-  const order = await razorpay('orders', { amount: PLANS[plan].amount, currency: 'INR', receipt: ref.id, notes: { product: 'visualizer-pro' } });
+  const order = await razorpay('orders', { amount: PLANS[plan].amount, currency: 'USD', receipt: ref.id, notes: { product: 'visualizer-pro' } });
   await db.doc(`orders/${order.id}`).set({ uid: user, plan, amount: PLANS[plan].amount, status: 'created', createdAt: Date.now() });
   return { id: order.id, amount: PLANS[plan].amount, key: keyId.value() };
 });
@@ -95,7 +95,7 @@ async function activate(payment, expectedUid) {
     // Acknowledge those events without retrying or granting product access.
     if (!order && !expectedUid) return { ignored: true };
     if (!order || (expectedUid && order.uid !== expectedUid)) throw new HttpsError('permission-denied', 'Order does not belong to this account.');
-    if (payment.status !== 'captured' || payment.currency !== 'INR' || payment.amount !== order.amount || payment.amount_refunded > 0) throw new HttpsError('failed-precondition', 'Payment has not been captured or was refunded.');
+    if (payment.status !== 'captured' || payment.currency !== 'USD' || payment.amount !== order.amount || payment.amount_refunded > 0) throw new HttpsError('failed-precondition', 'Payment has not been captured or was refunded.');
     if (order.status === 'refunded') throw new HttpsError('failed-precondition', 'Payment was refunded.');
     if (order.status === 'paid') return { activated: true };
     const accountRef = db.doc(`accounts/${order.uid}`);
