@@ -40,6 +40,10 @@ export default function ProblemNotes({ problem }) {
         <tbody>{notes.approaches.map(row => <tr key={row.name}><td>{row.name}</td><td>{row.intuition}</td><td>{row.time}</td><td>{row.space}</td></tr>)}</tbody>
       </table> : null}
     </section>}
+    {notes?.story && <section className="problem-notes__section" aria-label="Story">
+      <h3>Story</h3>
+      {notes.story}
+    </section>}
     {notes?.complexity ? <p>{notes.complexity}</p> : problem.description ? <p>{problem.description}</p> : null}
   </details>;
 }

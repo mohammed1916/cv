@@ -41,10 +41,14 @@ export default function AlgorithmWorkspace({ definition, renderVisual, renderRea
   const audioRef = useRef(null)
   const adaptive = !!visuals
   const publishNotes = usePublishProblemNotes()
+  // The story text is the visualizer's renderReasoning; it lives in the Problem section, not a panel.
+  const reasoningRef = useRef(renderReasoning)
+  reasoningRef.current = renderReasoning
   useEffect(() => {
-    publishNotes({ goal: definition.goal, goalDiagram: definition.goalDiagram, question: definition.question, approaches: definition.approaches, complexity: definition.complexity, url: definition.url ?? null })
-    return () => publishNotes(null)
-  }, [definition, publishNotes])
+    const story = run && reasoningRef.current && step ? reasoningRef.current({ run, step }) : null
+    publishNotes({ goal: definition.goal, goalDiagram: definition.goalDiagram, question: definition.question, approaches: definition.approaches, complexity: definition.complexity, url: definition.url ?? null, story })
+  }, [definition, publishNotes, run, step])
+  useEffect(() => () => publishNotes(null), [publishNotes])
   const supportsTutorial = adaptive || !!tutorial
   const directed = supportsTutorial && tutorialMode !== 'off'
   const narrated = !!narration && narrationOn && directed && presetIndex >= 0
@@ -173,10 +177,6 @@ export default function AlgorithmWorkspace({ definition, renderVisual, renderRea
     </label>}
     <span>{run ? `${position + 1} / ${total} ${directed ? 'scenes' : 'frames'}` : 'No valid input'}</span>
   </div>
-  // The visualizer's own story text: its own floating panel, next to the Why panel.
-  const storyPanel = run && renderReasoning && <section className="algorithm-workspace__story" aria-label="Story">
-    {renderReasoning({ run, step })}
-  </section>
   const whyPanel = run && <section className="algorithm-workspace__why" aria-label="Why it works and current state">
     {!directed && <nav className="algorithm-workspace__phases" aria-label="Algorithm states">
       {definition.phases.map(phase => <button type="button" key={phase.id}
@@ -212,11 +212,8 @@ export default function AlgorithmWorkspace({ definition, renderVisual, renderRea
         onNext={() => seek(Math.min(total - 1, position + 1))}
         prevDisabled={!playback.canPrev} nextDisabled={!playback.canNext}
         stepIndex={position} total={total} onSeek={seek} />}>{controls}</FloatingPanel>, document.body) : controls}
-    {floating && storyPanel ? createPortal(<FloatingPanel title="Story" storageKey="algorithm-workspace-story-size"
-      defaultSize={{ width: Math.min(360, window.innerWidth - 16), height: 180 }}
-      defaultPosition={{ x: Math.max(8, window.innerWidth - Math.min(360, window.innerWidth - 16) - 16), y: 290 }}>{storyPanel}</FloatingPanel>, document.body) : null}
     {floating ? createPortal(<FloatingPanel title="Why it works" storageKey="algorithm-workspace-why-size"
       defaultSize={{ width: Math.min(360, window.innerWidth - 16), height: 150 }}
-      defaultPosition={{ x: Math.max(8, window.innerWidth - Math.min(360, window.innerWidth - 16) - 16), y: 96 }}>{whyPanel}</FloatingPanel>, document.body) : <>{whyPanel}{storyPanel}</>}
+      defaultPosition={{ x: Math.max(8, window.innerWidth - Math.min(360, window.innerWidth - 16) - 16), y: 96 }}>{whyPanel}</FloatingPanel>, document.body) : whyPanel}
   </div>
 }
