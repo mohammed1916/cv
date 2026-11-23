@@ -16,8 +16,20 @@ import { examples as examples3331 } from '../src/problems/Problem3331/presets.js
 import * as p1352 from '../src/problems/Problem1352/algorithm.js';
 import { productTutorial } from '../src/problems/Problem1352/tutorial.js';
 import { examples as examples1352 } from '../src/problems/Problem1352/presets.js';
+import * as p353 from '../src/problems/Problem353/algorithm.js';
+import { snakeTutorial } from '../src/problems/Problem353/tutorial.js';
+import { examples as examples353 } from '../src/problems/Problem353/presets.js';
 
+import * as p487 from '../src/problems/Problem487/algorithm.js';
+import { onesTutorial } from '../src/problems/Problem487/tutorial.js';
+import { examples as examples487 } from '../src/problems/Problem487/presets.js';
+import * as p505 from '../src/problems/Problem505/algorithm.js';
+import { mazeTutorial } from '../src/problems/Problem505/tutorial.js';
+import { examples as examples505 } from '../src/problems/Problem505/presets.js';
 const routes = [
+  { id: '487', build: p487.buildTrace, parse: p487.parseInput, tutorial: onesTutorial, examples: examples487 },
+  { id: '505', build: p505.buildTrace, parse: p505.parseInput, tutorial: mazeTutorial, examples: examples505 },
+  { id: '353', build: p353.buildTrace, parse: p353.parseInput, tutorial: snakeTutorial, examples: examples353 },
   { id: '1352', build: p1352.buildTrace, parse: p1352.parseInput, tutorial: productTutorial, examples: examples1352 },
   { id: '3331', build: p3331.buildTrace, parse: p3331.parseInput, tutorial: sizeTutorial, examples: examples3331 },
   { id: '1606-bisect', build: p1606.buildTrace, parse: p1606.parseInput, tutorial: serverTutorial, examples: examples1606 },

@@ -1,31 +1,31 @@
 {
   "number": "534",
-  "title": "Design Log Storage System",
-  "goal": "Solve Design Log Storage System: Design a log storage system with put and retrieve operations supporting granularities.",
-  "strategy": "Design a log storage system with put and retrieve operations supporting granularities.",
+  "title": "Game Play Analysis III",
+  "goal": "Show the games each player has accumulated through each recorded day.",
+  "strategy": "Sort each player timeline, then maintain a running total that resets at the next player. Days with no activity need no invented rows; the total spans all earlier recorded dates.",
   "phases": [
-    "done",
-    "filter",
-    "init",
-    "match",
-    "put",
-    "retrieve",
-    "set_precision",
-    "truncate"
+    "start",
+    "inspect",
+    "update",
+    "done"
   ],
-  "phasePurposes": {},
+  "phasePurposes": {
+    "start": "Show the games each player has accumulated through each recorded day.",
+    "inspect": "Sort each player timeline, then maintain a running total that resets at the next player. Days with no activity need no invented rows; the total spans all earlier recorded dates.",
+    "update": "Sort each player timeline, then maintain a running total that resets at the next player. Days with no activity need no invented rows; the total spans all earlier recorded dates.",
+    "done": "Show the games each player has accumulated through each recorded day."
+  },
   "edgeCases": [
-    "Truncate timestamps to the requested granularity before the inclusive range comparison."
+    "Zero-game sessions retain the accumulated total",
+    "A device change does not start a new player total",
+    "An empty activity table produces no result rows"
   ],
   "checks": [],
   "inputRules": [
-    "logs must be a non-empty array of { \"id\": number, \"timestamp\": \"Y:M:D:h:m:s\" }",
-    "each log must be an object",
-    "each log needs an \"id\"",
-    "each log needs a string \"timestamp\""
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
   ],
-  "source": [
-    "src/problems/Problem534/index.jsx",
-    "src/problems/Problem534/DesignLogStorageSystemVisualizer.jsx"
-  ]
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
 }

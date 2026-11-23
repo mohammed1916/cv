@@ -1,26 +1,31 @@
 {
   "number": "571",
-  "title": "Maximum Distance in Arrays",
-  "goal": "Solve Maximum Distance in Arrays: Find the maximum distance between two elements from different arrays, where distance is the absolute difference between elements from two different rows.",
-  "strategy": "Find the maximum distance between two elements from different arrays, where distance is the absolute difference between elements from two different rows.",
+  "title": "Find Median Given Frequency of Numbers",
+  "goal": "Find the median of a multiset stored as values with frequencies.",
+  "strategy": "Sort distinct values and walk cumulative frequencies. The median is the average of the values occupying the two central ranks; an odd total gives the same rank twice. No expanded list is needed.",
   "phases": [
-    "init",
-    "iterate",
-    "calculate",
+    "start",
+    "inspect",
     "update",
     "done"
   ],
-  "phasePurposes": {},
+  "phasePurposes": {
+    "start": "Find the median of a multiset stored as values with frequencies.",
+    "inspect": "Sort distinct values and walk cumulative frequencies. The median is the average of the values occupying the two central ranks; an odd total gives the same rank twice. No expanded list is needed.",
+    "update": "Sort distinct values and walk cumulative frequencies. The median is the average of the values occupying the two central ranks; an odd total gives the same rank twice. No expanded list is needed.",
+    "done": "Find the median of a multiset stored as values with frequencies."
+  },
   "edgeCases": [
-    "The two chosen values must come from different arrays; two extremes in one array are not an eligible pair."
+    "One repeated value owns both central ranks",
+    "Even size averages two different middle values",
+    "Odd size selects one central rank twice"
   ],
   "checks": [],
   "inputRules": [
-    "Input must be array of arrays",
-    "All elements must be arrays"
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
   ],
-  "source": [
-    "src/problems/Problem571/index.jsx",
-    "src/problems/Problem571/MaxDistanceVisualizer.jsx"
-  ]
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
 }

@@ -1,9 +1,12 @@
 export const meta = {
-  number: '381',
-  title: 'Random Pick with Blacklist',
-  slug: 'random-pick-with-blacklist',
-  difficulty: 'Medium',
-  tags: ['Hash Map', 'Random'],
-  description: 'Efficiently pick random integers avoiding a blacklist using hash mapping.',
-  accent: '#8b5cf6',
-}
+  "number": "381",
+  "title": "Insert Delete GetRandom O(1) - Duplicates allowed",
+  "slug": "insert-delete-getrandom-o1-duplicates-allowed",
+  "difficulty": "Hard",
+  "tags": [
+    "Design",
+    "Hash Table"
+  ],
+  "accent": "#0891b2",
+  "description": "Maintain duplicate values with constant-time insert remove and occurrence-weighted random selection."
+};

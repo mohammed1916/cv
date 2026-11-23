@@ -1,9 +1,9 @@
 export const meta = {
-  number: '219',
-  title: 'Contains Duplicate II',
-  slug: 'contains-duplicate-ii',
+  number: '217',
+  title: 'Contains Duplicate',
+  slug: 'contains-duplicate',
   difficulty: 'Easy',
-  tags: ['Hash Table', 'Sliding Window', 'Array'],
-  description: 'Check if array has duplicate with index difference <= k.',
+  tags: ['Hash Table', 'Array'],
+  description: 'Check if array contains any duplicate element.',
   accent: '#f59e0b',
 }

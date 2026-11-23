@@ -1,27 +1,31 @@
 {
   "number": "577",
-  "title": "Employee Free Time",
-  "goal": "Solve Employee Free Time: Find the free time slots among employee schedules",
-  "strategy": "Find the free time slots among employee schedules",
+  "title": "Employee Bonus",
+  "goal": "List employees with a bonus below 1000, including employees without a bonus row.",
+  "strategy": "Start from every employee and look up their optional bonus. A missing row is a null bonus, not a reason to lose that employee; keep null bonuses and numeric bonuses below the threshold.",
   "phases": [
-    "flatten",
-    "sort",
-    "merge",
-    "overlap_check",
-    "merge_update",
-    "find_gaps",
+    "start",
+    "inspect",
+    "update",
     "done"
   ],
-  "phasePurposes": {},
+  "phasePurposes": {
+    "start": "List employees with a bonus below 1000, including employees without a bonus row.",
+    "inspect": "Start from every employee and look up their optional bonus. A missing row is a null bonus, not a reason to lose that employee; keep null bonuses and numeric bonuses below the threshold.",
+    "update": "Start from every employee and look up their optional bonus. A missing row is a null bonus, not a reason to lose that employee; keep null bonuses and numeric bonuses below the threshold.",
+    "done": "List employees with a bonus below 1000, including employees without a bonus row."
+  },
   "edgeCases": [
-    "Only gaps between merged busy intervals are finite common free time; overlapping schedules must be merged first."
+    "No bonus rows preserves every employee",
+    "Exactly 1000 does not qualify",
+    "No employee rows means no output"
   ],
   "checks": [],
   "inputRules": [
-    "Invalid format"
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
   ],
-  "source": [
-    "src/problems/Problem577/index.jsx",
-    "src/problems/Problem577/EmployeeFreeTimeVisualizer.jsx"
-  ]
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
 }

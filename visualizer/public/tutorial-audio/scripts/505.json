@@ -1,0 +1,873 @@
+{
+  "route": "505",
+  "presets": [
+    {
+      "presetIndex": 0,
+      "label": "Short detour",
+      "input": "{\"maze\":[[0,0,1],[0,0,0],[1,0,0]],\"start\":[0,0],\"destination\":[2,2]}",
+      "scenes": [
+        {
+          "key": "0-reason",
+          "kind": "reason",
+          "text": "Here is the big picture. The ball cannot stop just anywhere; it stops only where a wall blocks it. So we only track the cells where it can rest, and find the shortest route between those resting points."
+        },
+        {
+          "key": "0-code",
+          "kind": "code",
+          "text": "So we start."
+        },
+        {
+          "key": "0-impact",
+          "kind": "impact",
+          "text": "Start at [0,0] with distance 0."
+        },
+        {
+          "key": "1-reason",
+          "kind": "reason",
+          "text": "Now we take the resting cell that is closest to the start and has not been finished yet. Its distance is final, because every shorter route has already been considered."
+        },
+        {
+          "key": "1-code",
+          "kind": "code",
+          "text": "So we pick."
+        },
+        {
+          "key": "1-impact",
+          "kind": "impact",
+          "text": "Finish the closest cell [0, 0] at distance 0."
+        },
+        {
+          "key": "2-reason",
+          "kind": "reason",
+          "text": "From this cell, the ball rolls in one direction until a wall stops it. The distance it covers is the number of empty cells it passes, and the stop becomes a new candidate."
+        },
+        {
+          "key": "2-code",
+          "kind": "code",
+          "text": "So we roll."
+        },
+        {
+          "key": "2-impact",
+          "kind": "impact",
+          "text": "Roll up: 0 steps to stop at [0, 0]."
+        },
+        {
+          "key": "3-reason",
+          "kind": "reason",
+          "text": "From this cell, the ball rolls in one direction until a wall stops it. The distance it covers is the number of empty cells it passes, and the stop becomes a new candidate."
+        },
+        {
+          "key": "3-code",
+          "kind": "code",
+          "text": "So we roll."
+        },
+        {
+          "key": "3-impact",
+          "kind": "impact",
+          "text": "Roll down: 1 steps to stop at [1, 0]."
+        },
+        {
+          "key": "4-reason",
+          "kind": "reason",
+          "text": "The new stop can be reached more cheaply through this cell, so we record the shorter distance for it."
+        },
+        {
+          "key": "4-code",
+          "kind": "code",
+          "text": "So we relax."
+        },
+        {
+          "key": "4-impact",
+          "kind": "impact",
+          "text": "Shorter route to [1, 0]: distance 1."
+        },
+        {
+          "key": "5-reason",
+          "kind": "reason",
+          "text": "From this cell, the ball rolls in one direction until a wall stops it. The distance it covers is the number of empty cells it passes, and the stop becomes a new candidate."
+        },
+        {
+          "key": "5-code",
+          "kind": "code",
+          "text": "So we roll."
+        },
+        {
+          "key": "5-impact",
+          "kind": "impact",
+          "text": "Roll left: 0 steps to stop at [0, 0]."
+        },
+        {
+          "key": "6-reason",
+          "kind": "reason",
+          "text": "From this cell, the ball rolls in one direction until a wall stops it. The distance it covers is the number of empty cells it passes, and the stop becomes a new candidate."
+        },
+        {
+          "key": "6-code",
+          "kind": "code",
+          "text": "So we roll."
+        },
+        {
+          "key": "6-impact",
+          "kind": "impact",
+          "text": "Roll right: 1 steps to stop at [0, 1]."
+        },
+        {
+          "key": "7-reason",
+          "kind": "reason",
+          "text": "The new stop can be reached more cheaply through this cell, so we record the shorter distance for it."
+        },
+        {
+          "key": "7-code",
+          "kind": "code",
+          "text": "So we relax."
+        },
+        {
+          "key": "7-impact",
+          "kind": "impact",
+          "text": "Shorter route to [0, 1]: distance 1."
+        },
+        {
+          "key": "8-reason",
+          "kind": "reason",
+          "text": "Now we take the resting cell that is closest to the start and has not been finished yet. Its distance is final, because every shorter route has already been considered."
+        },
+        {
+          "key": "8-code",
+          "kind": "code",
+          "text": "So we pick."
+        },
+        {
+          "key": "8-impact",
+          "kind": "impact",
+          "text": "Finish the closest cell [0, 1] at distance 1."
+        },
+        {
+          "key": "9-reason",
+          "kind": "reason",
+          "text": "From this cell, the ball rolls in one direction until a wall stops it. The distance it covers is the number of empty cells it passes, and the stop becomes a new candidate."
+        },
+        {
+          "key": "9-code",
+          "kind": "code",
+          "text": "So we roll."
+        },
+        {
+          "key": "9-impact",
+          "kind": "impact",
+          "text": "Roll up: 0 steps to stop at [0, 1]."
+        },
+        {
+          "key": "10-reason",
+          "kind": "reason",
+          "text": "From this cell, the ball rolls in one direction until a wall stops it. The distance it covers is the number of empty cells it passes, and the stop becomes a new candidate."
+        },
+        {
+          "key": "10-code",
+          "kind": "code",
+          "text": "So we roll."
+        },
+        {
+          "key": "10-impact",
+          "kind": "impact",
+          "text": "Roll down: 2 steps to stop at [2, 1]."
+        },
+        {
+          "key": "11-reason",
+          "kind": "reason",
+          "text": "The new stop can be reached more cheaply through this cell, so we record the shorter distance for it."
+        },
+        {
+          "key": "11-code",
+          "kind": "code",
+          "text": "So we relax."
+        },
+        {
+          "key": "11-impact",
+          "kind": "impact",
+          "text": "Shorter route to [2, 1]: distance 3."
+        },
+        {
+          "key": "12-reason",
+          "kind": "reason",
+          "text": "From this cell, the ball rolls in one direction until a wall stops it. The distance it covers is the number of empty cells it passes, and the stop becomes a new candidate."
+        },
+        {
+          "key": "12-code",
+          "kind": "code",
+          "text": "So we roll."
+        },
+        {
+          "key": "12-impact",
+          "kind": "impact",
+          "text": "Roll left: 1 steps to stop at [0, 0]."
+        },
+        {
+          "key": "13-reason",
+          "kind": "reason",
+          "text": "From this cell, the ball rolls in one direction until a wall stops it. The distance it covers is the number of empty cells it passes, and the stop becomes a new candidate."
+        },
+        {
+          "key": "13-code",
+          "kind": "code",
+          "text": "So we roll."
+        },
+        {
+          "key": "13-impact",
+          "kind": "impact",
+          "text": "Roll right: 0 steps to stop at [0, 1]."
+        },
+        {
+          "key": "14-reason",
+          "kind": "reason",
+          "text": "Now we take the resting cell that is closest to the start and has not been finished yet. Its distance is final, because every shorter route has already been considered."
+        },
+        {
+          "key": "14-code",
+          "kind": "code",
+          "text": "So we pick."
+        },
+        {
+          "key": "14-impact",
+          "kind": "impact",
+          "text": "Finish the closest cell [1, 0] at distance 1."
+        },
+        {
+          "key": "15-reason",
+          "kind": "reason",
+          "text": "From this cell, the ball rolls in one direction until a wall stops it. The distance it covers is the number of empty cells it passes, and the stop becomes a new candidate."
+        },
+        {
+          "key": "15-code",
+          "kind": "code",
+          "text": "So we roll."
+        },
+        {
+          "key": "15-impact",
+          "kind": "impact",
+          "text": "Roll up: 1 steps to stop at [0, 0]."
+        },
+        {
+          "key": "16-reason",
+          "kind": "reason",
+          "text": "From this cell, the ball rolls in one direction until a wall stops it. The distance it covers is the number of empty cells it passes, and the stop becomes a new candidate."
+        },
+        {
+          "key": "16-code",
+          "kind": "code",
+          "text": "So we roll."
+        },
+        {
+          "key": "16-impact",
+          "kind": "impact",
+          "text": "Roll down: 0 steps to stop at [1, 0]."
+        },
+        {
+          "key": "17-reason",
+          "kind": "reason",
+          "text": "From this cell, the ball rolls in one direction until a wall stops it. The distance it covers is the number of empty cells it passes, and the stop becomes a new candidate."
+        },
+        {
+          "key": "17-code",
+          "kind": "code",
+          "text": "So we roll."
+        },
+        {
+          "key": "17-impact",
+          "kind": "impact",
+          "text": "Roll left: 0 steps to stop at [1, 0]."
+        },
+        {
+          "key": "18-reason",
+          "kind": "reason",
+          "text": "From this cell, the ball rolls in one direction until a wall stops it. The distance it covers is the number of empty cells it passes, and the stop becomes a new candidate."
+        },
+        {
+          "key": "18-code",
+          "kind": "code",
+          "text": "So we roll."
+        },
+        {
+          "key": "18-impact",
+          "kind": "impact",
+          "text": "Roll right: 2 steps to stop at [1, 2]."
+        },
+        {
+          "key": "19-reason",
+          "kind": "reason",
+          "text": "The new stop can be reached more cheaply through this cell, so we record the shorter distance for it."
+        },
+        {
+          "key": "19-code",
+          "kind": "code",
+          "text": "So we relax."
+        },
+        {
+          "key": "19-impact",
+          "kind": "impact",
+          "text": "Shorter route to [1, 2]: distance 3."
+        },
+        {
+          "key": "20-reason",
+          "kind": "reason",
+          "text": "Now we take the resting cell that is closest to the start and has not been finished yet. Its distance is final, because every shorter route has already been considered."
+        },
+        {
+          "key": "20-code",
+          "kind": "code",
+          "text": "So we pick."
+        },
+        {
+          "key": "20-impact",
+          "kind": "impact",
+          "text": "Finish the closest cell [1, 2] at distance 3."
+        },
+        {
+          "key": "21-reason",
+          "kind": "reason",
+          "text": "From this cell, the ball rolls in one direction until a wall stops it. The distance it covers is the number of empty cells it passes, and the stop becomes a new candidate."
+        },
+        {
+          "key": "21-code",
+          "kind": "code",
+          "text": "So we roll."
+        },
+        {
+          "key": "21-impact",
+          "kind": "impact",
+          "text": "Roll up: 0 steps to stop at [1, 2]."
+        },
+        {
+          "key": "22-reason",
+          "kind": "reason",
+          "text": "From this cell, the ball rolls in one direction until a wall stops it. The distance it covers is the number of empty cells it passes, and the stop becomes a new candidate."
+        },
+        {
+          "key": "22-code",
+          "kind": "code",
+          "text": "So we roll."
+        },
+        {
+          "key": "22-impact",
+          "kind": "impact",
+          "text": "Roll down: 1 steps to stop at [2, 2]."
+        },
+        {
+          "key": "23-reason",
+          "kind": "reason",
+          "text": "The new stop can be reached more cheaply through this cell, so we record the shorter distance for it."
+        },
+        {
+          "key": "23-code",
+          "kind": "code",
+          "text": "So we relax."
+        },
+        {
+          "key": "23-impact",
+          "kind": "impact",
+          "text": "Shorter route to [2, 2]: distance 4."
+        },
+        {
+          "key": "24-reason",
+          "kind": "reason",
+          "text": "From this cell, the ball rolls in one direction until a wall stops it. The distance it covers is the number of empty cells it passes, and the stop becomes a new candidate."
+        },
+        {
+          "key": "24-code",
+          "kind": "code",
+          "text": "So we roll."
+        },
+        {
+          "key": "24-impact",
+          "kind": "impact",
+          "text": "Roll left: 2 steps to stop at [1, 0]."
+        },
+        {
+          "key": "25-reason",
+          "kind": "reason",
+          "text": "From this cell, the ball rolls in one direction until a wall stops it. The distance it covers is the number of empty cells it passes, and the stop becomes a new candidate."
+        },
+        {
+          "key": "25-code",
+          "kind": "code",
+          "text": "So we roll."
+        },
+        {
+          "key": "25-impact",
+          "kind": "impact",
+          "text": "Roll right: 0 steps to stop at [1, 2]."
+        },
+        {
+          "key": "26-reason",
+          "kind": "reason",
+          "text": "Now we take the resting cell that is closest to the start and has not been finished yet. Its distance is final, because every shorter route has already been considered."
+        },
+        {
+          "key": "26-code",
+          "kind": "code",
+          "text": "So we pick."
+        },
+        {
+          "key": "26-impact",
+          "kind": "impact",
+          "text": "Finish the closest cell [2, 1] at distance 3."
+        },
+        {
+          "key": "27-reason",
+          "kind": "reason",
+          "text": "From this cell, the ball rolls in one direction until a wall stops it. The distance it covers is the number of empty cells it passes, and the stop becomes a new candidate."
+        },
+        {
+          "key": "27-code",
+          "kind": "code",
+          "text": "So we roll."
+        },
+        {
+          "key": "27-impact",
+          "kind": "impact",
+          "text": "Roll up: 2 steps to stop at [0, 1]."
+        },
+        {
+          "key": "28-reason",
+          "kind": "reason",
+          "text": "From this cell, the ball rolls in one direction until a wall stops it. The distance it covers is the number of empty cells it passes, and the stop becomes a new candidate."
+        },
+        {
+          "key": "28-code",
+          "kind": "code",
+          "text": "So we roll."
+        },
+        {
+          "key": "28-impact",
+          "kind": "impact",
+          "text": "Roll down: 0 steps to stop at [2, 1]."
+        },
+        {
+          "key": "29-reason",
+          "kind": "reason",
+          "text": "From this cell, the ball rolls in one direction until a wall stops it. The distance it covers is the number of empty cells it passes, and the stop becomes a new candidate."
+        },
+        {
+          "key": "29-code",
+          "kind": "code",
+          "text": "So we roll."
+        },
+        {
+          "key": "29-impact",
+          "kind": "impact",
+          "text": "Roll left: 0 steps to stop at [2, 1]."
+        },
+        {
+          "key": "30-reason",
+          "kind": "reason",
+          "text": "From this cell, the ball rolls in one direction until a wall stops it. The distance it covers is the number of empty cells it passes, and the stop becomes a new candidate."
+        },
+        {
+          "key": "30-code",
+          "kind": "code",
+          "text": "So we roll."
+        },
+        {
+          "key": "30-impact",
+          "kind": "impact",
+          "text": "Roll right: 1 steps to stop at [2, 2]."
+        },
+        {
+          "key": "31-reason",
+          "kind": "reason",
+          "text": "Now we take the resting cell that is closest to the start and has not been finished yet. Its distance is final, because every shorter route has already been considered."
+        },
+        {
+          "key": "31-code",
+          "kind": "code",
+          "text": "So we pick."
+        },
+        {
+          "key": "31-impact",
+          "kind": "impact",
+          "text": "Finish the closest cell [2, 2] at distance 4."
+        },
+        {
+          "key": "32-reason",
+          "kind": "reason",
+          "text": "The ball has stopped at the destination, and this is the shortest distance to get there."
+        },
+        {
+          "key": "32-code",
+          "kind": "code",
+          "text": "So we done."
+        },
+        {
+          "key": "32-impact",
+          "kind": "impact",
+          "text": "The ball stops at the destination after 4 steps."
+        }
+      ]
+    },
+    {
+      "presetIndex": 1,
+      "label": "Boxed in: no roll possible",
+      "input": "{\"maze\":[[0,1],[1,0]],\"start\":[0,0],\"destination\":[1,1]}",
+      "scenes": [
+        {
+          "key": "0-reason",
+          "kind": "reason",
+          "text": "Here is the big picture. The ball cannot stop just anywhere; it stops only where a wall blocks it. So we only track the cells where it can rest, and find the shortest route between those resting points."
+        },
+        {
+          "key": "0-code",
+          "kind": "code",
+          "text": "So we start."
+        },
+        {
+          "key": "0-impact",
+          "kind": "impact",
+          "text": "Start at [0,0] with distance 0."
+        },
+        {
+          "key": "1-reason",
+          "kind": "reason",
+          "text": "Now we take the resting cell that is closest to the start and has not been finished yet. Its distance is final, because every shorter route has already been considered."
+        },
+        {
+          "key": "1-code",
+          "kind": "code",
+          "text": "So we pick."
+        },
+        {
+          "key": "1-impact",
+          "kind": "impact",
+          "text": "Finish the closest cell [0, 0] at distance 0."
+        },
+        {
+          "key": "2-reason",
+          "kind": "reason",
+          "text": "From this cell, the ball rolls in one direction until a wall stops it. The distance it covers is the number of empty cells it passes, and the stop becomes a new candidate."
+        },
+        {
+          "key": "2-code",
+          "kind": "code",
+          "text": "So we roll."
+        },
+        {
+          "key": "2-impact",
+          "kind": "impact",
+          "text": "Roll up: 0 steps to stop at [0, 0]."
+        },
+        {
+          "key": "3-reason",
+          "kind": "reason",
+          "text": "From this cell, the ball rolls in one direction until a wall stops it. The distance it covers is the number of empty cells it passes, and the stop becomes a new candidate."
+        },
+        {
+          "key": "3-code",
+          "kind": "code",
+          "text": "So we roll."
+        },
+        {
+          "key": "3-impact",
+          "kind": "impact",
+          "text": "Roll down: 0 steps to stop at [0, 0]."
+        },
+        {
+          "key": "4-reason",
+          "kind": "reason",
+          "text": "From this cell, the ball rolls in one direction until a wall stops it. The distance it covers is the number of empty cells it passes, and the stop becomes a new candidate."
+        },
+        {
+          "key": "4-code",
+          "kind": "code",
+          "text": "So we roll."
+        },
+        {
+          "key": "4-impact",
+          "kind": "impact",
+          "text": "Roll left: 0 steps to stop at [0, 0]."
+        },
+        {
+          "key": "5-reason",
+          "kind": "reason",
+          "text": "From this cell, the ball rolls in one direction until a wall stops it. The distance it covers is the number of empty cells it passes, and the stop becomes a new candidate."
+        },
+        {
+          "key": "5-code",
+          "kind": "code",
+          "text": "So we roll."
+        },
+        {
+          "key": "5-impact",
+          "kind": "impact",
+          "text": "Roll right: 0 steps to stop at [0, 0]."
+        },
+        {
+          "key": "6-reason",
+          "kind": "reason",
+          "text": "Every reachable stop has been finished, and the destination was never reached, so no route exists."
+        },
+        {
+          "key": "6-code",
+          "kind": "code",
+          "text": "So we lose."
+        },
+        {
+          "key": "6-impact",
+          "kind": "impact",
+          "text": "No unfinished cell can be reached. The answer is -1."
+        }
+      ]
+    },
+    {
+      "presetIndex": 2,
+      "label": "Start is the destination",
+      "input": "{\"maze\":[[0,1],[0,0]],\"start\":[1,1],\"destination\":[1,1]}",
+      "scenes": [
+        {
+          "key": "0-reason",
+          "kind": "reason",
+          "text": "Here is the big picture. The ball cannot stop just anywhere; it stops only where a wall blocks it. So we only track the cells where it can rest, and find the shortest route between those resting points."
+        },
+        {
+          "key": "0-code",
+          "kind": "code",
+          "text": "So we start."
+        },
+        {
+          "key": "0-impact",
+          "kind": "impact",
+          "text": "Start at [1,1] with distance 0."
+        },
+        {
+          "key": "1-reason",
+          "kind": "reason",
+          "text": "Now we take the resting cell that is closest to the start and has not been finished yet. Its distance is final, because every shorter route has already been considered."
+        },
+        {
+          "key": "1-code",
+          "kind": "code",
+          "text": "So we pick."
+        },
+        {
+          "key": "1-impact",
+          "kind": "impact",
+          "text": "Finish the closest cell [1, 1] at distance 0."
+        },
+        {
+          "key": "2-reason",
+          "kind": "reason",
+          "text": "The ball has stopped at the destination, and this is the shortest distance to get there."
+        },
+        {
+          "key": "2-code",
+          "kind": "code",
+          "text": "So we done."
+        },
+        {
+          "key": "2-impact",
+          "kind": "impact",
+          "text": "The ball stops at the destination after 0 steps."
+        }
+      ]
+    },
+    {
+      "presetIndex": 3,
+      "label": "Five by five",
+      "input": "{\"maze\":[[0,0,0,0,0],[1,1,0,1,1],[0,0,0,0,0],[0,1,1,1,0],[0,0,0,1,0]],\"start\":[0,0],\"destination\":[4,4]}",
+      "scenes": [
+        {
+          "key": "0-reason",
+          "kind": "reason",
+          "text": "Here is the big picture. The ball cannot stop just anywhere; it stops only where a wall blocks it. So we only track the cells where it can rest, and find the shortest route between those resting points."
+        },
+        {
+          "key": "0-code",
+          "kind": "code",
+          "text": "So we start."
+        },
+        {
+          "key": "0-impact",
+          "kind": "impact",
+          "text": "Start at [0,0] with distance 0."
+        },
+        {
+          "key": "1-reason",
+          "kind": "reason",
+          "text": "Now we take the resting cell that is closest to the start and has not been finished yet. Its distance is final, because every shorter route has already been considered."
+        },
+        {
+          "key": "1-code",
+          "kind": "code",
+          "text": "So we pick."
+        },
+        {
+          "key": "1-impact",
+          "kind": "impact",
+          "text": "Finish the closest cell [0, 0] at distance 0."
+        },
+        {
+          "key": "2-reason",
+          "kind": "reason",
+          "text": "From this cell, the ball rolls in one direction until a wall stops it. The distance it covers is the number of empty cells it passes, and the stop becomes a new candidate."
+        },
+        {
+          "key": "2-code",
+          "kind": "code",
+          "text": "So we roll."
+        },
+        {
+          "key": "2-impact",
+          "kind": "impact",
+          "text": "Roll up: 0 steps to stop at [0, 0]."
+        },
+        {
+          "key": "3-reason",
+          "kind": "reason",
+          "text": "From this cell, the ball rolls in one direction until a wall stops it. The distance it covers is the number of empty cells it passes, and the stop becomes a new candidate."
+        },
+        {
+          "key": "3-code",
+          "kind": "code",
+          "text": "So we roll."
+        },
+        {
+          "key": "3-impact",
+          "kind": "impact",
+          "text": "Roll down: 0 steps to stop at [0, 0]."
+        },
+        {
+          "key": "4-reason",
+          "kind": "reason",
+          "text": "From this cell, the ball rolls in one direction until a wall stops it. The distance it covers is the number of empty cells it passes, and the stop becomes a new candidate."
+        },
+        {
+          "key": "4-code",
+          "kind": "code",
+          "text": "So we roll."
+        },
+        {
+          "key": "4-impact",
+          "kind": "impact",
+          "text": "Roll left: 0 steps to stop at [0, 0]."
+        },
+        {
+          "key": "5-reason",
+          "kind": "reason",
+          "text": "From this cell, the ball rolls in one direction until a wall stops it. The distance it covers is the number of empty cells it passes, and the stop becomes a new candidate."
+        },
+        {
+          "key": "5-code",
+          "kind": "code",
+          "text": "So we roll."
+        },
+        {
+          "key": "5-impact",
+          "kind": "impact",
+          "text": "Roll right: 4 steps to stop at [0, 4]."
+        },
+        {
+          "key": "6-reason",
+          "kind": "reason",
+          "text": "The new stop can be reached more cheaply through this cell, so we record the shorter distance for it."
+        },
+        {
+          "key": "6-code",
+          "kind": "code",
+          "text": "So we relax."
+        },
+        {
+          "key": "6-impact",
+          "kind": "impact",
+          "text": "Shorter route to [0, 4]: distance 4."
+        },
+        {
+          "key": "7-reason",
+          "kind": "reason",
+          "text": "Now we take the resting cell that is closest to the start and has not been finished yet. Its distance is final, because every shorter route has already been considered."
+        },
+        {
+          "key": "7-code",
+          "kind": "code",
+          "text": "So we pick."
+        },
+        {
+          "key": "7-impact",
+          "kind": "impact",
+          "text": "Finish the closest cell [0, 4] at distance 4."
+        },
+        {
+          "key": "8-reason",
+          "kind": "reason",
+          "text": "From this cell, the ball rolls in one direction until a wall stops it. The distance it covers is the number of empty cells it passes, and the stop becomes a new candidate."
+        },
+        {
+          "key": "8-code",
+          "kind": "code",
+          "text": "So we roll."
+        },
+        {
+          "key": "8-impact",
+          "kind": "impact",
+          "text": "Roll up: 0 steps to stop at [0, 4]."
+        },
+        {
+          "key": "9-reason",
+          "kind": "reason",
+          "text": "From this cell, the ball rolls in one direction until a wall stops it. The distance it covers is the number of empty cells it passes, and the stop becomes a new candidate."
+        },
+        {
+          "key": "9-code",
+          "kind": "code",
+          "text": "So we roll."
+        },
+        {
+          "key": "9-impact",
+          "kind": "impact",
+          "text": "Roll down: 0 steps to stop at [0, 4]."
+        },
+        {
+          "key": "10-reason",
+          "kind": "reason",
+          "text": "From this cell, the ball rolls in one direction until a wall stops it. The distance it covers is the number of empty cells it passes, and the stop becomes a new candidate."
+        },
+        {
+          "key": "10-code",
+          "kind": "code",
+          "text": "So we roll."
+        },
+        {
+          "key": "10-impact",
+          "kind": "impact",
+          "text": "Roll left: 4 steps to stop at [0, 0]."
+        },
+        {
+          "key": "11-reason",
+          "kind": "reason",
+          "text": "From this cell, the ball rolls in one direction until a wall stops it. The distance it covers is the number of empty cells it passes, and the stop becomes a new candidate."
+        },
+        {
+          "key": "11-code",
+          "kind": "code",
+          "text": "So we roll."
+        },
+        {
+          "key": "11-impact",
+          "kind": "impact",
+          "text": "Roll right: 0 steps to stop at [0, 4]."
+        },
+        {
+          "key": "12-reason",
+          "kind": "reason",
+          "text": "Every reachable stop has been finished, and the destination was never reached, so no route exists."
+        },
+        {
+          "key": "12-code",
+          "kind": "code",
+          "text": "So we lose."
+        },
+        {
+          "key": "12-impact",
+          "kind": "impact",
+          "text": "No unfinished cell can be reached. The answer is -1."
+        }
+      ]
+    }
+  ]
+}

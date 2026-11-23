@@ -1,22 +1,28 @@
 {
-  "number": "217",
-  "title": "Contains Duplicate",
-  "goal": "Solve Contains Duplicate: Check if array contains any duplicate element.",
-  "strategy": "Check if array contains any duplicate element.",
+  "number": "220",
+  "title": "Contains Duplicate III",
+  "goal": "Solve Contains Duplicate III: Find nums[i] and nums[j] where |nums[i]-nums[j]|<=t and |i-j|<=k.",
+  "strategy": "Find nums[i] and nums[j] where |nums[i]-nums[j]|<=t and |i-j|<=k.",
   "phases": [],
   "phasePurposes": {},
   "edgeCases": [],
   "checks": [
     {
-      "condition": "num in seen",
+      "condition": "t < 0",
+      "outcome": "return False"
+    },
+    {
+      "condition": "abs(nums[i] - elem) <= t",
       "outcome": "return True"
     }
   ],
   "inputRules": [
-    "Enter a JSON array of numbers."
+    "nums must be a JSON array of numbers",
+    "k must be a non-negative integer",
+    "t must be a number"
   ],
   "source": [
-    "src/problems/Problem220/index.jsx",
-    "src/problems/Problem220/ContainsDuplicateVisualizer.jsx"
+    "src/problems/Problem219/index.jsx",
+    "src/problems/Problem219/ContainsDuplicateIIIVisualizer.jsx"
   ]
 }

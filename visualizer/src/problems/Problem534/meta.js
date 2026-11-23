@@ -1,9 +1,11 @@
 export const meta = {
-  number: "534",
-  title: "Design Log Storage System",
-  slug: "design-log-storage-system",
-  difficulty: "Medium",
-  tags: ["Design", "System"],
-  description: "Design a log storage system with put and retrieve operations supporting granularities.",
-  accent: "#0284c7",
-}
+  "number": "534",
+  "title": "Game Play Analysis III",
+  "slug": "game-play-analysis-iii",
+  "difficulty": "Medium",
+  "tags": [
+    "Database"
+  ],
+  "accent": "#0891b2",
+  "description": "Show the games each player has accumulated through each recorded day."
+};

@@ -1,28 +1,23 @@
 {
-  "number": "220",
-  "title": "Contains Duplicate III",
-  "goal": "Solve Contains Duplicate III: Find nums[i] and nums[j] where |nums[i]-nums[j]|<=t and |i-j|<=k.",
-  "strategy": "Find nums[i] and nums[j] where |nums[i]-nums[j]|<=t and |i-j|<=k.",
+  "number": "219",
+  "title": "Contains Duplicate II",
+  "goal": "Solve Contains Duplicate II: Check if array has duplicate with index difference <= k.",
+  "strategy": "Check if array has duplicate with index difference <= k.",
   "phases": [],
   "phasePurposes": {},
   "edgeCases": [],
   "checks": [
     {
-      "condition": "t < 0",
-      "outcome": "return False"
-    },
-    {
-      "condition": "abs(nums[i] - elem) <= t",
+      "condition": "nums[i] in window",
       "outcome": "return True"
     }
   ],
   "inputRules": [
-    "nums must be a JSON array of numbers",
-    "k must be a non-negative integer",
-    "t must be a number"
+    "nums must be an array of numbers",
+    "k must be a non-negative integer"
   ],
   "source": [
-    "src/problems/Problem219/index.jsx",
-    "src/problems/Problem219/ContainsDuplicateIIIVisualizer.jsx"
+    "src/problems/Problem217/index.jsx",
+    "src/problems/Problem217/ContainsDuplicateIIVisualizer.jsx"
   ]
 }

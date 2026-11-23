@@ -1,26 +1,31 @@
 {
   "number": "381",
-  "title": "Random Pick with Blacklist",
-  "goal": "Solve Random Pick with Blacklist: Efficiently pick random integers avoiding a blacklist using hash mapping.",
-  "strategy": "Efficiently pick random integers avoiding a blacklist using hash mapping.",
+  "title": "Insert Delete GetRandom O(1) - Duplicates allowed",
+  "goal": "Maintain duplicate values with constant-time insert remove and occurrence-weighted random selection.",
+  "strategy": "A dense occurrence array supports random indexing. A value-to-index-set map locates removals; swapping the last occurrence into a removed slot preserves density while repairing only the affected index sets.",
   "phases": [
-    "build_map",
-    "complete",
-    "init",
-    "pick",
-    "remap"
+    "start",
+    "inspect",
+    "update",
+    "done"
   ],
-  "phasePurposes": {},
+  "phasePurposes": {
+    "start": "Maintain duplicate values with constant-time insert remove and occurrence-weighted random selection.",
+    "inspect": "A dense occurrence array supports random indexing. A value-to-index-set map locates removals; swapping the last occurrence into a removed slot preserves density while repairing only the affected index sets.",
+    "update": "A dense occurrence array supports random indexing. A value-to-index-set map locates removals; swapping the last occurrence into a removed slot preserves density while repairing only the affected index sets.",
+    "done": "Maintain duplicate values with constant-time insert remove and occurrence-weighted random selection."
+  },
   "edgeCases": [
-    "Sampling must be uniform over allowed values; blacklisted values need a mapping that does not introduce collisions."
+    "Removing one duplicate does not erase the remaining occurrence",
+    "Removing the last array slot requires no swap",
+    "An absent removal leaves the collection unchanged"
   ],
   "checks": [],
   "inputRules": [
-    "n must be a number",
-    "blacklist must be an array"
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
   ],
-  "source": [
-    "src/problems/Problem381/index.jsx",
-    "src/problems/Problem381/Problem381Visualizer.jsx"
-  ]
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
 }

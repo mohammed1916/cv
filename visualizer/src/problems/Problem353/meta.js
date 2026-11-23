@@ -1,9 +1,5 @@
 export const meta = {
-  number: '353',
-  title: 'Design Underground System',
-  slug: 'design-underground-system',
-  difficulty: 'Medium',
-  tags: ['Data Structure', 'Hash Map'],
-  description: 'Track average travel times between station pairs in an underground system.',
-  accent: '#8b5cf6',
+  number: '353', title: 'Design Snake Game', slug: 'design-snake-game', difficulty: 'Medium',
+  tags: ['Design', 'Simulation', 'Queue'], accent: '#0f766e',
+  description: 'Simulate a growing snake on a grid: track the body as a queue, grow on food, and end the game on a wall or self-collision.',
 }

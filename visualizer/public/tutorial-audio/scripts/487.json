@@ -1,0 +1,1615 @@
+{
+  "route": "487",
+  "presets": [
+    {
+      "presetIndex": 0,
+      "label": "One zero to flip",
+      "input": "{\"nums\":[1,1,0,1,1,0,1]}",
+      "scenes": [
+        {
+          "key": "0-reason",
+          "kind": "reason",
+          "text": "Here is the big picture. We want the longest stretch of ones after we are allowed to flip one zero. A window that contains at most one zero is exactly that stretch, so we slide it across the array and keep the largest size."
+        },
+        {
+          "key": "0-code",
+          "kind": "code",
+          "text": "So we start."
+        },
+        {
+          "key": "0-impact",
+          "kind": "impact",
+          "text": "Start with an empty window and no zeros."
+        },
+        {
+          "key": "1-reason",
+          "kind": "reason",
+          "text": "Now the right edge moves one step forward. Adding a value can only make the window longer, so we check whether the window is still valid."
+        },
+        {
+          "key": "1-code",
+          "kind": "code",
+          "text": "So we right."
+        },
+        {
+          "key": "1-impact",
+          "kind": "impact",
+          "text": "Extend the window to index 0 (value 1)."
+        },
+        {
+          "key": "2-reason",
+          "kind": "reason",
+          "text": "The window is valid now. Its length is a candidate for the answer, so we keep the larger of the two."
+        },
+        {
+          "key": "2-code",
+          "kind": "code",
+          "text": "So we best."
+        },
+        {
+          "key": "2-impact",
+          "kind": "impact",
+          "text": "Window [0, 0] has length 1; best is 1."
+        },
+        {
+          "key": "3-reason",
+          "kind": "reason",
+          "text": "Now the right edge moves one step forward. Adding a value can only make the window longer, so we check whether the window is still valid."
+        },
+        {
+          "key": "3-code",
+          "kind": "code",
+          "text": "So we right."
+        },
+        {
+          "key": "3-impact",
+          "kind": "impact",
+          "text": "Extend the window to index 1 (value 1)."
+        },
+        {
+          "key": "4-reason",
+          "kind": "reason",
+          "text": "The window is valid now. Its length is a candidate for the answer, so we keep the larger of the two."
+        },
+        {
+          "key": "4-code",
+          "kind": "code",
+          "text": "So we best."
+        },
+        {
+          "key": "4-impact",
+          "kind": "impact",
+          "text": "Window [0, 1] has length 2; best is 2."
+        },
+        {
+          "key": "5-reason",
+          "kind": "reason",
+          "text": "Now the right edge moves one step forward. Adding a value can only make the window longer, so we check whether the window is still valid."
+        },
+        {
+          "key": "5-code",
+          "kind": "code",
+          "text": "So we right."
+        },
+        {
+          "key": "5-impact",
+          "kind": "impact",
+          "text": "Extend the window to index 2 (value 0)."
+        },
+        {
+          "key": "6-reason",
+          "kind": "reason",
+          "text": "This value is a zero. It uses up the one zero we are allowed to flip, so we count it."
+        },
+        {
+          "key": "6-code",
+          "kind": "code",
+          "text": "So we zero."
+        },
+        {
+          "key": "6-impact",
+          "kind": "impact",
+          "text": "That value is 0, so the window now holds 1 zeros."
+        },
+        {
+          "key": "7-reason",
+          "kind": "reason",
+          "text": "The window is valid now. Its length is a candidate for the answer, so we keep the larger of the two."
+        },
+        {
+          "key": "7-code",
+          "kind": "code",
+          "text": "So we best."
+        },
+        {
+          "key": "7-impact",
+          "kind": "impact",
+          "text": "Window [0, 2] has length 3; best is 3."
+        },
+        {
+          "key": "8-reason",
+          "kind": "reason",
+          "text": "Now the right edge moves one step forward. Adding a value can only make the window longer, so we check whether the window is still valid."
+        },
+        {
+          "key": "8-code",
+          "kind": "code",
+          "text": "So we right."
+        },
+        {
+          "key": "8-impact",
+          "kind": "impact",
+          "text": "Extend the window to index 3 (value 1)."
+        },
+        {
+          "key": "9-reason",
+          "kind": "reason",
+          "text": "The window is valid now. Its length is a candidate for the answer, so we keep the larger of the two."
+        },
+        {
+          "key": "9-code",
+          "kind": "code",
+          "text": "So we best."
+        },
+        {
+          "key": "9-impact",
+          "kind": "impact",
+          "text": "Window [0, 3] has length 4; best is 4."
+        },
+        {
+          "key": "10-reason",
+          "kind": "reason",
+          "text": "Now the right edge moves one step forward. Adding a value can only make the window longer, so we check whether the window is still valid."
+        },
+        {
+          "key": "10-code",
+          "kind": "code",
+          "text": "So we right."
+        },
+        {
+          "key": "10-impact",
+          "kind": "impact",
+          "text": "Extend the window to index 4 (value 1)."
+        },
+        {
+          "key": "11-reason",
+          "kind": "reason",
+          "text": "The window is valid now. Its length is a candidate for the answer, so we keep the larger of the two."
+        },
+        {
+          "key": "11-code",
+          "kind": "code",
+          "text": "So we best."
+        },
+        {
+          "key": "11-impact",
+          "kind": "impact",
+          "text": "Window [0, 4] has length 5; best is 5."
+        },
+        {
+          "key": "12-reason",
+          "kind": "reason",
+          "text": "Now the right edge moves one step forward. Adding a value can only make the window longer, so we check whether the window is still valid."
+        },
+        {
+          "key": "12-code",
+          "kind": "code",
+          "text": "So we right."
+        },
+        {
+          "key": "12-impact",
+          "kind": "impact",
+          "text": "Extend the window to index 5 (value 0)."
+        },
+        {
+          "key": "13-reason",
+          "kind": "reason",
+          "text": "This value is a zero. It uses up the one zero we are allowed to flip, so we count it."
+        },
+        {
+          "key": "13-code",
+          "kind": "code",
+          "text": "So we zero."
+        },
+        {
+          "key": "13-impact",
+          "kind": "impact",
+          "text": "That value is 0, so the window now holds 2 zeros."
+        },
+        {
+          "key": "14-reason",
+          "kind": "reason",
+          "text": "The window now has two zeros. It is no longer valid, so the left edge moves forward until one zero is left inside."
+        },
+        {
+          "key": "14-code",
+          "kind": "code",
+          "text": "So we shrink."
+        },
+        {
+          "key": "14-impact",
+          "kind": "impact",
+          "text": "2 zeros is too many, so move the left edge."
+        },
+        {
+          "key": "15-reason",
+          "kind": "reason",
+          "text": "The window now has two zeros. It is no longer valid, so the left edge moves forward until one zero is left inside."
+        },
+        {
+          "key": "15-code",
+          "kind": "code",
+          "text": "So we shrink."
+        },
+        {
+          "key": "15-impact",
+          "kind": "impact",
+          "text": "2 zeros is too many, so move the left edge."
+        },
+        {
+          "key": "16-reason",
+          "kind": "reason",
+          "text": "The window now has two zeros. It is no longer valid, so the left edge moves forward until one zero is left inside."
+        },
+        {
+          "key": "16-code",
+          "kind": "code",
+          "text": "So we shrink."
+        },
+        {
+          "key": "16-impact",
+          "kind": "impact",
+          "text": "2 zeros is too many, so move the left edge."
+        },
+        {
+          "key": "17-reason",
+          "kind": "reason",
+          "text": "The window is valid now. Its length is a candidate for the answer, so we keep the larger of the two."
+        },
+        {
+          "key": "17-code",
+          "kind": "code",
+          "text": "So we best."
+        },
+        {
+          "key": "17-impact",
+          "kind": "impact",
+          "text": "Window [3, 5] has length 3; best is 5."
+        },
+        {
+          "key": "18-reason",
+          "kind": "reason",
+          "text": "Now the right edge moves one step forward. Adding a value can only make the window longer, so we check whether the window is still valid."
+        },
+        {
+          "key": "18-code",
+          "kind": "code",
+          "text": "So we right."
+        },
+        {
+          "key": "18-impact",
+          "kind": "impact",
+          "text": "Extend the window to index 6 (value 1)."
+        },
+        {
+          "key": "19-reason",
+          "kind": "reason",
+          "text": "The window is valid now. Its length is a candidate for the answer, so we keep the larger of the two."
+        },
+        {
+          "key": "19-code",
+          "kind": "code",
+          "text": "So we best."
+        },
+        {
+          "key": "19-impact",
+          "kind": "impact",
+          "text": "Window [3, 6] has length 4; best is 5."
+        },
+        {
+          "key": "20-reason",
+          "kind": "reason",
+          "text": "Every position has been checked, and the best length is the answer."
+        },
+        {
+          "key": "20-code",
+          "kind": "code",
+          "text": "So we done."
+        },
+        {
+          "key": "20-impact",
+          "kind": "impact",
+          "text": "Answer: 5."
+        }
+      ]
+    },
+    {
+      "presetIndex": 1,
+      "label": "Only zeros",
+      "input": "{\"nums\":[0,0,0]}",
+      "scenes": [
+        {
+          "key": "0-reason",
+          "kind": "reason",
+          "text": "Here is the big picture. We want the longest stretch of ones after we are allowed to flip one zero. A window that contains at most one zero is exactly that stretch, so we slide it across the array and keep the largest size."
+        },
+        {
+          "key": "0-code",
+          "kind": "code",
+          "text": "So we start."
+        },
+        {
+          "key": "0-impact",
+          "kind": "impact",
+          "text": "Start with an empty window and no zeros."
+        },
+        {
+          "key": "1-reason",
+          "kind": "reason",
+          "text": "Now the right edge moves one step forward. Adding a value can only make the window longer, so we check whether the window is still valid."
+        },
+        {
+          "key": "1-code",
+          "kind": "code",
+          "text": "So we right."
+        },
+        {
+          "key": "1-impact",
+          "kind": "impact",
+          "text": "Extend the window to index 0 (value 0)."
+        },
+        {
+          "key": "2-reason",
+          "kind": "reason",
+          "text": "This value is a zero. It uses up the one zero we are allowed to flip, so we count it."
+        },
+        {
+          "key": "2-code",
+          "kind": "code",
+          "text": "So we zero."
+        },
+        {
+          "key": "2-impact",
+          "kind": "impact",
+          "text": "That value is 0, so the window now holds 1 zeros."
+        },
+        {
+          "key": "3-reason",
+          "kind": "reason",
+          "text": "The window is valid now. Its length is a candidate for the answer, so we keep the larger of the two."
+        },
+        {
+          "key": "3-code",
+          "kind": "code",
+          "text": "So we best."
+        },
+        {
+          "key": "3-impact",
+          "kind": "impact",
+          "text": "Window [0, 0] has length 1; best is 1."
+        },
+        {
+          "key": "4-reason",
+          "kind": "reason",
+          "text": "Now the right edge moves one step forward. Adding a value can only make the window longer, so we check whether the window is still valid."
+        },
+        {
+          "key": "4-code",
+          "kind": "code",
+          "text": "So we right."
+        },
+        {
+          "key": "4-impact",
+          "kind": "impact",
+          "text": "Extend the window to index 1 (value 0)."
+        },
+        {
+          "key": "5-reason",
+          "kind": "reason",
+          "text": "This value is a zero. It uses up the one zero we are allowed to flip, so we count it."
+        },
+        {
+          "key": "5-code",
+          "kind": "code",
+          "text": "So we zero."
+        },
+        {
+          "key": "5-impact",
+          "kind": "impact",
+          "text": "That value is 0, so the window now holds 2 zeros."
+        },
+        {
+          "key": "6-reason",
+          "kind": "reason",
+          "text": "The window now has two zeros. It is no longer valid, so the left edge moves forward until one zero is left inside."
+        },
+        {
+          "key": "6-code",
+          "kind": "code",
+          "text": "So we shrink."
+        },
+        {
+          "key": "6-impact",
+          "kind": "impact",
+          "text": "2 zeros is too many, so move the left edge."
+        },
+        {
+          "key": "7-reason",
+          "kind": "reason",
+          "text": "The window is valid now. Its length is a candidate for the answer, so we keep the larger of the two."
+        },
+        {
+          "key": "7-code",
+          "kind": "code",
+          "text": "So we best."
+        },
+        {
+          "key": "7-impact",
+          "kind": "impact",
+          "text": "Window [1, 1] has length 1; best is 1."
+        },
+        {
+          "key": "8-reason",
+          "kind": "reason",
+          "text": "Now the right edge moves one step forward. Adding a value can only make the window longer, so we check whether the window is still valid."
+        },
+        {
+          "key": "8-code",
+          "kind": "code",
+          "text": "So we right."
+        },
+        {
+          "key": "8-impact",
+          "kind": "impact",
+          "text": "Extend the window to index 2 (value 0)."
+        },
+        {
+          "key": "9-reason",
+          "kind": "reason",
+          "text": "This value is a zero. It uses up the one zero we are allowed to flip, so we count it."
+        },
+        {
+          "key": "9-code",
+          "kind": "code",
+          "text": "So we zero."
+        },
+        {
+          "key": "9-impact",
+          "kind": "impact",
+          "text": "That value is 0, so the window now holds 2 zeros."
+        },
+        {
+          "key": "10-reason",
+          "kind": "reason",
+          "text": "The window now has two zeros. It is no longer valid, so the left edge moves forward until one zero is left inside."
+        },
+        {
+          "key": "10-code",
+          "kind": "code",
+          "text": "So we shrink."
+        },
+        {
+          "key": "10-impact",
+          "kind": "impact",
+          "text": "2 zeros is too many, so move the left edge."
+        },
+        {
+          "key": "11-reason",
+          "kind": "reason",
+          "text": "The window is valid now. Its length is a candidate for the answer, so we keep the larger of the two."
+        },
+        {
+          "key": "11-code",
+          "kind": "code",
+          "text": "So we best."
+        },
+        {
+          "key": "11-impact",
+          "kind": "impact",
+          "text": "Window [2, 2] has length 1; best is 1."
+        },
+        {
+          "key": "12-reason",
+          "kind": "reason",
+          "text": "Every position has been checked, and the best length is the answer."
+        },
+        {
+          "key": "12-code",
+          "kind": "code",
+          "text": "So we done."
+        },
+        {
+          "key": "12-impact",
+          "kind": "impact",
+          "text": "Answer: 1."
+        }
+      ]
+    },
+    {
+      "presetIndex": 2,
+      "label": "Already all ones",
+      "input": "{\"nums\":[1,1,1,1]}",
+      "scenes": [
+        {
+          "key": "0-reason",
+          "kind": "reason",
+          "text": "Here is the big picture. We want the longest stretch of ones after we are allowed to flip one zero. A window that contains at most one zero is exactly that stretch, so we slide it across the array and keep the largest size."
+        },
+        {
+          "key": "0-code",
+          "kind": "code",
+          "text": "So we start."
+        },
+        {
+          "key": "0-impact",
+          "kind": "impact",
+          "text": "Start with an empty window and no zeros."
+        },
+        {
+          "key": "1-reason",
+          "kind": "reason",
+          "text": "Now the right edge moves one step forward. Adding a value can only make the window longer, so we check whether the window is still valid."
+        },
+        {
+          "key": "1-code",
+          "kind": "code",
+          "text": "So we right."
+        },
+        {
+          "key": "1-impact",
+          "kind": "impact",
+          "text": "Extend the window to index 0 (value 1)."
+        },
+        {
+          "key": "2-reason",
+          "kind": "reason",
+          "text": "The window is valid now. Its length is a candidate for the answer, so we keep the larger of the two."
+        },
+        {
+          "key": "2-code",
+          "kind": "code",
+          "text": "So we best."
+        },
+        {
+          "key": "2-impact",
+          "kind": "impact",
+          "text": "Window [0, 0] has length 1; best is 1."
+        },
+        {
+          "key": "3-reason",
+          "kind": "reason",
+          "text": "Now the right edge moves one step forward. Adding a value can only make the window longer, so we check whether the window is still valid."
+        },
+        {
+          "key": "3-code",
+          "kind": "code",
+          "text": "So we right."
+        },
+        {
+          "key": "3-impact",
+          "kind": "impact",
+          "text": "Extend the window to index 1 (value 1)."
+        },
+        {
+          "key": "4-reason",
+          "kind": "reason",
+          "text": "The window is valid now. Its length is a candidate for the answer, so we keep the larger of the two."
+        },
+        {
+          "key": "4-code",
+          "kind": "code",
+          "text": "So we best."
+        },
+        {
+          "key": "4-impact",
+          "kind": "impact",
+          "text": "Window [0, 1] has length 2; best is 2."
+        },
+        {
+          "key": "5-reason",
+          "kind": "reason",
+          "text": "Now the right edge moves one step forward. Adding a value can only make the window longer, so we check whether the window is still valid."
+        },
+        {
+          "key": "5-code",
+          "kind": "code",
+          "text": "So we right."
+        },
+        {
+          "key": "5-impact",
+          "kind": "impact",
+          "text": "Extend the window to index 2 (value 1)."
+        },
+        {
+          "key": "6-reason",
+          "kind": "reason",
+          "text": "The window is valid now. Its length is a candidate for the answer, so we keep the larger of the two."
+        },
+        {
+          "key": "6-code",
+          "kind": "code",
+          "text": "So we best."
+        },
+        {
+          "key": "6-impact",
+          "kind": "impact",
+          "text": "Window [0, 2] has length 3; best is 3."
+        },
+        {
+          "key": "7-reason",
+          "kind": "reason",
+          "text": "Now the right edge moves one step forward. Adding a value can only make the window longer, so we check whether the window is still valid."
+        },
+        {
+          "key": "7-code",
+          "kind": "code",
+          "text": "So we right."
+        },
+        {
+          "key": "7-impact",
+          "kind": "impact",
+          "text": "Extend the window to index 3 (value 1)."
+        },
+        {
+          "key": "8-reason",
+          "kind": "reason",
+          "text": "The window is valid now. Its length is a candidate for the answer, so we keep the larger of the two."
+        },
+        {
+          "key": "8-code",
+          "kind": "code",
+          "text": "So we best."
+        },
+        {
+          "key": "8-impact",
+          "kind": "impact",
+          "text": "Window [0, 3] has length 4; best is 4."
+        },
+        {
+          "key": "9-reason",
+          "kind": "reason",
+          "text": "Every position has been checked, and the best length is the answer."
+        },
+        {
+          "key": "9-code",
+          "kind": "code",
+          "text": "So we done."
+        },
+        {
+          "key": "9-impact",
+          "kind": "impact",
+          "text": "Answer: 4."
+        }
+      ]
+    },
+    {
+      "presetIndex": 3,
+      "label": "Two zeros far apart",
+      "input": "{\"nums\":[1,1,0,1,1,1,0,1]}",
+      "scenes": [
+        {
+          "key": "0-reason",
+          "kind": "reason",
+          "text": "Here is the big picture. We want the longest stretch of ones after we are allowed to flip one zero. A window that contains at most one zero is exactly that stretch, so we slide it across the array and keep the largest size."
+        },
+        {
+          "key": "0-code",
+          "kind": "code",
+          "text": "So we start."
+        },
+        {
+          "key": "0-impact",
+          "kind": "impact",
+          "text": "Start with an empty window and no zeros."
+        },
+        {
+          "key": "1-reason",
+          "kind": "reason",
+          "text": "Now the right edge moves one step forward. Adding a value can only make the window longer, so we check whether the window is still valid."
+        },
+        {
+          "key": "1-code",
+          "kind": "code",
+          "text": "So we right."
+        },
+        {
+          "key": "1-impact",
+          "kind": "impact",
+          "text": "Extend the window to index 0 (value 1)."
+        },
+        {
+          "key": "2-reason",
+          "kind": "reason",
+          "text": "The window is valid now. Its length is a candidate for the answer, so we keep the larger of the two."
+        },
+        {
+          "key": "2-code",
+          "kind": "code",
+          "text": "So we best."
+        },
+        {
+          "key": "2-impact",
+          "kind": "impact",
+          "text": "Window [0, 0] has length 1; best is 1."
+        },
+        {
+          "key": "3-reason",
+          "kind": "reason",
+          "text": "Now the right edge moves one step forward. Adding a value can only make the window longer, so we check whether the window is still valid."
+        },
+        {
+          "key": "3-code",
+          "kind": "code",
+          "text": "So we right."
+        },
+        {
+          "key": "3-impact",
+          "kind": "impact",
+          "text": "Extend the window to index 1 (value 1)."
+        },
+        {
+          "key": "4-reason",
+          "kind": "reason",
+          "text": "The window is valid now. Its length is a candidate for the answer, so we keep the larger of the two."
+        },
+        {
+          "key": "4-code",
+          "kind": "code",
+          "text": "So we best."
+        },
+        {
+          "key": "4-impact",
+          "kind": "impact",
+          "text": "Window [0, 1] has length 2; best is 2."
+        },
+        {
+          "key": "5-reason",
+          "kind": "reason",
+          "text": "Now the right edge moves one step forward. Adding a value can only make the window longer, so we check whether the window is still valid."
+        },
+        {
+          "key": "5-code",
+          "kind": "code",
+          "text": "So we right."
+        },
+        {
+          "key": "5-impact",
+          "kind": "impact",
+          "text": "Extend the window to index 2 (value 0)."
+        },
+        {
+          "key": "6-reason",
+          "kind": "reason",
+          "text": "This value is a zero. It uses up the one zero we are allowed to flip, so we count it."
+        },
+        {
+          "key": "6-code",
+          "kind": "code",
+          "text": "So we zero."
+        },
+        {
+          "key": "6-impact",
+          "kind": "impact",
+          "text": "That value is 0, so the window now holds 1 zeros."
+        },
+        {
+          "key": "7-reason",
+          "kind": "reason",
+          "text": "The window is valid now. Its length is a candidate for the answer, so we keep the larger of the two."
+        },
+        {
+          "key": "7-code",
+          "kind": "code",
+          "text": "So we best."
+        },
+        {
+          "key": "7-impact",
+          "kind": "impact",
+          "text": "Window [0, 2] has length 3; best is 3."
+        },
+        {
+          "key": "8-reason",
+          "kind": "reason",
+          "text": "Now the right edge moves one step forward. Adding a value can only make the window longer, so we check whether the window is still valid."
+        },
+        {
+          "key": "8-code",
+          "kind": "code",
+          "text": "So we right."
+        },
+        {
+          "key": "8-impact",
+          "kind": "impact",
+          "text": "Extend the window to index 3 (value 1)."
+        },
+        {
+          "key": "9-reason",
+          "kind": "reason",
+          "text": "The window is valid now. Its length is a candidate for the answer, so we keep the larger of the two."
+        },
+        {
+          "key": "9-code",
+          "kind": "code",
+          "text": "So we best."
+        },
+        {
+          "key": "9-impact",
+          "kind": "impact",
+          "text": "Window [0, 3] has length 4; best is 4."
+        },
+        {
+          "key": "10-reason",
+          "kind": "reason",
+          "text": "Now the right edge moves one step forward. Adding a value can only make the window longer, so we check whether the window is still valid."
+        },
+        {
+          "key": "10-code",
+          "kind": "code",
+          "text": "So we right."
+        },
+        {
+          "key": "10-impact",
+          "kind": "impact",
+          "text": "Extend the window to index 4 (value 1)."
+        },
+        {
+          "key": "11-reason",
+          "kind": "reason",
+          "text": "The window is valid now. Its length is a candidate for the answer, so we keep the larger of the two."
+        },
+        {
+          "key": "11-code",
+          "kind": "code",
+          "text": "So we best."
+        },
+        {
+          "key": "11-impact",
+          "kind": "impact",
+          "text": "Window [0, 4] has length 5; best is 5."
+        },
+        {
+          "key": "12-reason",
+          "kind": "reason",
+          "text": "Now the right edge moves one step forward. Adding a value can only make the window longer, so we check whether the window is still valid."
+        },
+        {
+          "key": "12-code",
+          "kind": "code",
+          "text": "So we right."
+        },
+        {
+          "key": "12-impact",
+          "kind": "impact",
+          "text": "Extend the window to index 5 (value 1)."
+        },
+        {
+          "key": "13-reason",
+          "kind": "reason",
+          "text": "The window is valid now. Its length is a candidate for the answer, so we keep the larger of the two."
+        },
+        {
+          "key": "13-code",
+          "kind": "code",
+          "text": "So we best."
+        },
+        {
+          "key": "13-impact",
+          "kind": "impact",
+          "text": "Window [0, 5] has length 6; best is 6."
+        },
+        {
+          "key": "14-reason",
+          "kind": "reason",
+          "text": "Now the right edge moves one step forward. Adding a value can only make the window longer, so we check whether the window is still valid."
+        },
+        {
+          "key": "14-code",
+          "kind": "code",
+          "text": "So we right."
+        },
+        {
+          "key": "14-impact",
+          "kind": "impact",
+          "text": "Extend the window to index 6 (value 0)."
+        },
+        {
+          "key": "15-reason",
+          "kind": "reason",
+          "text": "This value is a zero. It uses up the one zero we are allowed to flip, so we count it."
+        },
+        {
+          "key": "15-code",
+          "kind": "code",
+          "text": "So we zero."
+        },
+        {
+          "key": "15-impact",
+          "kind": "impact",
+          "text": "That value is 0, so the window now holds 2 zeros."
+        },
+        {
+          "key": "16-reason",
+          "kind": "reason",
+          "text": "The window now has two zeros. It is no longer valid, so the left edge moves forward until one zero is left inside."
+        },
+        {
+          "key": "16-code",
+          "kind": "code",
+          "text": "So we shrink."
+        },
+        {
+          "key": "16-impact",
+          "kind": "impact",
+          "text": "2 zeros is too many, so move the left edge."
+        },
+        {
+          "key": "17-reason",
+          "kind": "reason",
+          "text": "The window now has two zeros. It is no longer valid, so the left edge moves forward until one zero is left inside."
+        },
+        {
+          "key": "17-code",
+          "kind": "code",
+          "text": "So we shrink."
+        },
+        {
+          "key": "17-impact",
+          "kind": "impact",
+          "text": "2 zeros is too many, so move the left edge."
+        },
+        {
+          "key": "18-reason",
+          "kind": "reason",
+          "text": "The window now has two zeros. It is no longer valid, so the left edge moves forward until one zero is left inside."
+        },
+        {
+          "key": "18-code",
+          "kind": "code",
+          "text": "So we shrink."
+        },
+        {
+          "key": "18-impact",
+          "kind": "impact",
+          "text": "2 zeros is too many, so move the left edge."
+        },
+        {
+          "key": "19-reason",
+          "kind": "reason",
+          "text": "The window is valid now. Its length is a candidate for the answer, so we keep the larger of the two."
+        },
+        {
+          "key": "19-code",
+          "kind": "code",
+          "text": "So we best."
+        },
+        {
+          "key": "19-impact",
+          "kind": "impact",
+          "text": "Window [3, 6] has length 4; best is 6."
+        },
+        {
+          "key": "20-reason",
+          "kind": "reason",
+          "text": "Now the right edge moves one step forward. Adding a value can only make the window longer, so we check whether the window is still valid."
+        },
+        {
+          "key": "20-code",
+          "kind": "code",
+          "text": "So we right."
+        },
+        {
+          "key": "20-impact",
+          "kind": "impact",
+          "text": "Extend the window to index 7 (value 1)."
+        },
+        {
+          "key": "21-reason",
+          "kind": "reason",
+          "text": "The window is valid now. Its length is a candidate for the answer, so we keep the larger of the two."
+        },
+        {
+          "key": "21-code",
+          "kind": "code",
+          "text": "So we best."
+        },
+        {
+          "key": "21-impact",
+          "kind": "impact",
+          "text": "Window [3, 7] has length 5; best is 6."
+        },
+        {
+          "key": "22-reason",
+          "kind": "reason",
+          "text": "Every position has been checked, and the best length is the answer."
+        },
+        {
+          "key": "22-code",
+          "kind": "code",
+          "text": "So we done."
+        },
+        {
+          "key": "22-impact",
+          "kind": "impact",
+          "text": "Answer: 6."
+        }
+      ]
+    },
+    {
+      "presetIndex": 4,
+      "label": "Long run: twelve entries",
+      "input": "{\"nums\":[1,0,1,1,1,0,1,0,0,1,1,1]}",
+      "scenes": [
+        {
+          "key": "0-reason",
+          "kind": "reason",
+          "text": "Here is the big picture. We want the longest stretch of ones after we are allowed to flip one zero. A window that contains at most one zero is exactly that stretch, so we slide it across the array and keep the largest size."
+        },
+        {
+          "key": "0-code",
+          "kind": "code",
+          "text": "So we start."
+        },
+        {
+          "key": "0-impact",
+          "kind": "impact",
+          "text": "Start with an empty window and no zeros."
+        },
+        {
+          "key": "1-reason",
+          "kind": "reason",
+          "text": "Now the right edge moves one step forward. Adding a value can only make the window longer, so we check whether the window is still valid."
+        },
+        {
+          "key": "1-code",
+          "kind": "code",
+          "text": "So we right."
+        },
+        {
+          "key": "1-impact",
+          "kind": "impact",
+          "text": "Extend the window to index 0 (value 1)."
+        },
+        {
+          "key": "2-reason",
+          "kind": "reason",
+          "text": "The window is valid now. Its length is a candidate for the answer, so we keep the larger of the two."
+        },
+        {
+          "key": "2-code",
+          "kind": "code",
+          "text": "So we best."
+        },
+        {
+          "key": "2-impact",
+          "kind": "impact",
+          "text": "Window [0, 0] has length 1; best is 1."
+        },
+        {
+          "key": "3-reason",
+          "kind": "reason",
+          "text": "Now the right edge moves one step forward. Adding a value can only make the window longer, so we check whether the window is still valid."
+        },
+        {
+          "key": "3-code",
+          "kind": "code",
+          "text": "So we right."
+        },
+        {
+          "key": "3-impact",
+          "kind": "impact",
+          "text": "Extend the window to index 1 (value 0)."
+        },
+        {
+          "key": "4-reason",
+          "kind": "reason",
+          "text": "This value is a zero. It uses up the one zero we are allowed to flip, so we count it."
+        },
+        {
+          "key": "4-code",
+          "kind": "code",
+          "text": "So we zero."
+        },
+        {
+          "key": "4-impact",
+          "kind": "impact",
+          "text": "That value is 0, so the window now holds 1 zeros."
+        },
+        {
+          "key": "5-reason",
+          "kind": "reason",
+          "text": "The window is valid now. Its length is a candidate for the answer, so we keep the larger of the two."
+        },
+        {
+          "key": "5-code",
+          "kind": "code",
+          "text": "So we best."
+        },
+        {
+          "key": "5-impact",
+          "kind": "impact",
+          "text": "Window [0, 1] has length 2; best is 2."
+        },
+        {
+          "key": "6-reason",
+          "kind": "reason",
+          "text": "Now the right edge moves one step forward. Adding a value can only make the window longer, so we check whether the window is still valid."
+        },
+        {
+          "key": "6-code",
+          "kind": "code",
+          "text": "So we right."
+        },
+        {
+          "key": "6-impact",
+          "kind": "impact",
+          "text": "Extend the window to index 2 (value 1)."
+        },
+        {
+          "key": "7-reason",
+          "kind": "reason",
+          "text": "The window is valid now. Its length is a candidate for the answer, so we keep the larger of the two."
+        },
+        {
+          "key": "7-code",
+          "kind": "code",
+          "text": "So we best."
+        },
+        {
+          "key": "7-impact",
+          "kind": "impact",
+          "text": "Window [0, 2] has length 3; best is 3."
+        },
+        {
+          "key": "8-reason",
+          "kind": "reason",
+          "text": "Now the right edge moves one step forward. Adding a value can only make the window longer, so we check whether the window is still valid."
+        },
+        {
+          "key": "8-code",
+          "kind": "code",
+          "text": "So we right."
+        },
+        {
+          "key": "8-impact",
+          "kind": "impact",
+          "text": "Extend the window to index 3 (value 1)."
+        },
+        {
+          "key": "9-reason",
+          "kind": "reason",
+          "text": "The window is valid now. Its length is a candidate for the answer, so we keep the larger of the two."
+        },
+        {
+          "key": "9-code",
+          "kind": "code",
+          "text": "So we best."
+        },
+        {
+          "key": "9-impact",
+          "kind": "impact",
+          "text": "Window [0, 3] has length 4; best is 4."
+        },
+        {
+          "key": "10-reason",
+          "kind": "reason",
+          "text": "Now the right edge moves one step forward. Adding a value can only make the window longer, so we check whether the window is still valid."
+        },
+        {
+          "key": "10-code",
+          "kind": "code",
+          "text": "So we right."
+        },
+        {
+          "key": "10-impact",
+          "kind": "impact",
+          "text": "Extend the window to index 4 (value 1)."
+        },
+        {
+          "key": "11-reason",
+          "kind": "reason",
+          "text": "The window is valid now. Its length is a candidate for the answer, so we keep the larger of the two."
+        },
+        {
+          "key": "11-code",
+          "kind": "code",
+          "text": "So we best."
+        },
+        {
+          "key": "11-impact",
+          "kind": "impact",
+          "text": "Window [0, 4] has length 5; best is 5."
+        },
+        {
+          "key": "12-reason",
+          "kind": "reason",
+          "text": "Now the right edge moves one step forward. Adding a value can only make the window longer, so we check whether the window is still valid."
+        },
+        {
+          "key": "12-code",
+          "kind": "code",
+          "text": "So we right."
+        },
+        {
+          "key": "12-impact",
+          "kind": "impact",
+          "text": "Extend the window to index 5 (value 0)."
+        },
+        {
+          "key": "13-reason",
+          "kind": "reason",
+          "text": "This value is a zero. It uses up the one zero we are allowed to flip, so we count it."
+        },
+        {
+          "key": "13-code",
+          "kind": "code",
+          "text": "So we zero."
+        },
+        {
+          "key": "13-impact",
+          "kind": "impact",
+          "text": "That value is 0, so the window now holds 2 zeros."
+        },
+        {
+          "key": "14-reason",
+          "kind": "reason",
+          "text": "The window now has two zeros. It is no longer valid, so the left edge moves forward until one zero is left inside."
+        },
+        {
+          "key": "14-code",
+          "kind": "code",
+          "text": "So we shrink."
+        },
+        {
+          "key": "14-impact",
+          "kind": "impact",
+          "text": "2 zeros is too many, so move the left edge."
+        },
+        {
+          "key": "15-reason",
+          "kind": "reason",
+          "text": "The window now has two zeros. It is no longer valid, so the left edge moves forward until one zero is left inside."
+        },
+        {
+          "key": "15-code",
+          "kind": "code",
+          "text": "So we shrink."
+        },
+        {
+          "key": "15-impact",
+          "kind": "impact",
+          "text": "2 zeros is too many, so move the left edge."
+        },
+        {
+          "key": "16-reason",
+          "kind": "reason",
+          "text": "The window is valid now. Its length is a candidate for the answer, so we keep the larger of the two."
+        },
+        {
+          "key": "16-code",
+          "kind": "code",
+          "text": "So we best."
+        },
+        {
+          "key": "16-impact",
+          "kind": "impact",
+          "text": "Window [2, 5] has length 4; best is 5."
+        },
+        {
+          "key": "17-reason",
+          "kind": "reason",
+          "text": "Now the right edge moves one step forward. Adding a value can only make the window longer, so we check whether the window is still valid."
+        },
+        {
+          "key": "17-code",
+          "kind": "code",
+          "text": "So we right."
+        },
+        {
+          "key": "17-impact",
+          "kind": "impact",
+          "text": "Extend the window to index 6 (value 1)."
+        },
+        {
+          "key": "18-reason",
+          "kind": "reason",
+          "text": "The window is valid now. Its length is a candidate for the answer, so we keep the larger of the two."
+        },
+        {
+          "key": "18-code",
+          "kind": "code",
+          "text": "So we best."
+        },
+        {
+          "key": "18-impact",
+          "kind": "impact",
+          "text": "Window [2, 6] has length 5; best is 5."
+        },
+        {
+          "key": "19-reason",
+          "kind": "reason",
+          "text": "Now the right edge moves one step forward. Adding a value can only make the window longer, so we check whether the window is still valid."
+        },
+        {
+          "key": "19-code",
+          "kind": "code",
+          "text": "So we right."
+        },
+        {
+          "key": "19-impact",
+          "kind": "impact",
+          "text": "Extend the window to index 7 (value 0)."
+        },
+        {
+          "key": "20-reason",
+          "kind": "reason",
+          "text": "This value is a zero. It uses up the one zero we are allowed to flip, so we count it."
+        },
+        {
+          "key": "20-code",
+          "kind": "code",
+          "text": "So we zero."
+        },
+        {
+          "key": "20-impact",
+          "kind": "impact",
+          "text": "That value is 0, so the window now holds 2 zeros."
+        },
+        {
+          "key": "21-reason",
+          "kind": "reason",
+          "text": "The window now has two zeros. It is no longer valid, so the left edge moves forward until one zero is left inside."
+        },
+        {
+          "key": "21-code",
+          "kind": "code",
+          "text": "So we shrink."
+        },
+        {
+          "key": "21-impact",
+          "kind": "impact",
+          "text": "2 zeros is too many, so move the left edge."
+        },
+        {
+          "key": "22-reason",
+          "kind": "reason",
+          "text": "The window now has two zeros. It is no longer valid, so the left edge moves forward until one zero is left inside."
+        },
+        {
+          "key": "22-code",
+          "kind": "code",
+          "text": "So we shrink."
+        },
+        {
+          "key": "22-impact",
+          "kind": "impact",
+          "text": "2 zeros is too many, so move the left edge."
+        },
+        {
+          "key": "23-reason",
+          "kind": "reason",
+          "text": "The window now has two zeros. It is no longer valid, so the left edge moves forward until one zero is left inside."
+        },
+        {
+          "key": "23-code",
+          "kind": "code",
+          "text": "So we shrink."
+        },
+        {
+          "key": "23-impact",
+          "kind": "impact",
+          "text": "2 zeros is too many, so move the left edge."
+        },
+        {
+          "key": "24-reason",
+          "kind": "reason",
+          "text": "The window now has two zeros. It is no longer valid, so the left edge moves forward until one zero is left inside."
+        },
+        {
+          "key": "24-code",
+          "kind": "code",
+          "text": "So we shrink."
+        },
+        {
+          "key": "24-impact",
+          "kind": "impact",
+          "text": "2 zeros is too many, so move the left edge."
+        },
+        {
+          "key": "25-reason",
+          "kind": "reason",
+          "text": "The window is valid now. Its length is a candidate for the answer, so we keep the larger of the two."
+        },
+        {
+          "key": "25-code",
+          "kind": "code",
+          "text": "So we best."
+        },
+        {
+          "key": "25-impact",
+          "kind": "impact",
+          "text": "Window [6, 7] has length 2; best is 5."
+        },
+        {
+          "key": "26-reason",
+          "kind": "reason",
+          "text": "Now the right edge moves one step forward. Adding a value can only make the window longer, so we check whether the window is still valid."
+        },
+        {
+          "key": "26-code",
+          "kind": "code",
+          "text": "So we right."
+        },
+        {
+          "key": "26-impact",
+          "kind": "impact",
+          "text": "Extend the window to index 8 (value 0)."
+        },
+        {
+          "key": "27-reason",
+          "kind": "reason",
+          "text": "This value is a zero. It uses up the one zero we are allowed to flip, so we count it."
+        },
+        {
+          "key": "27-code",
+          "kind": "code",
+          "text": "So we zero."
+        },
+        {
+          "key": "27-impact",
+          "kind": "impact",
+          "text": "That value is 0, so the window now holds 2 zeros."
+        },
+        {
+          "key": "28-reason",
+          "kind": "reason",
+          "text": "The window now has two zeros. It is no longer valid, so the left edge moves forward until one zero is left inside."
+        },
+        {
+          "key": "28-code",
+          "kind": "code",
+          "text": "So we shrink."
+        },
+        {
+          "key": "28-impact",
+          "kind": "impact",
+          "text": "2 zeros is too many, so move the left edge."
+        },
+        {
+          "key": "29-reason",
+          "kind": "reason",
+          "text": "The window now has two zeros. It is no longer valid, so the left edge moves forward until one zero is left inside."
+        },
+        {
+          "key": "29-code",
+          "kind": "code",
+          "text": "So we shrink."
+        },
+        {
+          "key": "29-impact",
+          "kind": "impact",
+          "text": "2 zeros is too many, so move the left edge."
+        },
+        {
+          "key": "30-reason",
+          "kind": "reason",
+          "text": "The window is valid now. Its length is a candidate for the answer, so we keep the larger of the two."
+        },
+        {
+          "key": "30-code",
+          "kind": "code",
+          "text": "So we best."
+        },
+        {
+          "key": "30-impact",
+          "kind": "impact",
+          "text": "Window [8, 8] has length 1; best is 5."
+        },
+        {
+          "key": "31-reason",
+          "kind": "reason",
+          "text": "Now the right edge moves one step forward. Adding a value can only make the window longer, so we check whether the window is still valid."
+        },
+        {
+          "key": "31-code",
+          "kind": "code",
+          "text": "So we right."
+        },
+        {
+          "key": "31-impact",
+          "kind": "impact",
+          "text": "Extend the window to index 9 (value 1)."
+        },
+        {
+          "key": "32-reason",
+          "kind": "reason",
+          "text": "The window is valid now. Its length is a candidate for the answer, so we keep the larger of the two."
+        },
+        {
+          "key": "32-code",
+          "kind": "code",
+          "text": "So we best."
+        },
+        {
+          "key": "32-impact",
+          "kind": "impact",
+          "text": "Window [8, 9] has length 2; best is 5."
+        },
+        {
+          "key": "33-reason",
+          "kind": "reason",
+          "text": "Now the right edge moves one step forward. Adding a value can only make the window longer, so we check whether the window is still valid."
+        },
+        {
+          "key": "33-code",
+          "kind": "code",
+          "text": "So we right."
+        },
+        {
+          "key": "33-impact",
+          "kind": "impact",
+          "text": "Extend the window to index 10 (value 1)."
+        },
+        {
+          "key": "34-reason",
+          "kind": "reason",
+          "text": "The window is valid now. Its length is a candidate for the answer, so we keep the larger of the two."
+        },
+        {
+          "key": "34-code",
+          "kind": "code",
+          "text": "So we best."
+        },
+        {
+          "key": "34-impact",
+          "kind": "impact",
+          "text": "Window [8, 10] has length 3; best is 5."
+        },
+        {
+          "key": "35-reason",
+          "kind": "reason",
+          "text": "Now the right edge moves one step forward. Adding a value can only make the window longer, so we check whether the window is still valid."
+        },
+        {
+          "key": "35-code",
+          "kind": "code",
+          "text": "So we right."
+        },
+        {
+          "key": "35-impact",
+          "kind": "impact",
+          "text": "Extend the window to index 11 (value 1)."
+        },
+        {
+          "key": "36-reason",
+          "kind": "reason",
+          "text": "The window is valid now. Its length is a candidate for the answer, so we keep the larger of the two."
+        },
+        {
+          "key": "36-code",
+          "kind": "code",
+          "text": "So we best."
+        },
+        {
+          "key": "36-impact",
+          "kind": "impact",
+          "text": "Window [8, 11] has length 4; best is 5."
+        },
+        {
+          "key": "37-reason",
+          "kind": "reason",
+          "text": "Every position has been checked, and the best length is the answer."
+        },
+        {
+          "key": "37-code",
+          "kind": "code",
+          "text": "So we done."
+        },
+        {
+          "key": "37-impact",
+          "kind": "impact",
+          "text": "Answer: 5."
+        }
+      ]
+    }
+  ]
+}

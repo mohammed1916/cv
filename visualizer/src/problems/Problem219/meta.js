@@ -1,9 +1,9 @@
 export const meta = {
-  number: '220',
-  title: 'Contains Duplicate III',
-  slug: 'contains-duplicate-iii',
-  difficulty: 'Hard',
-  tags: ['BST', 'Bucket', 'Sliding Window'],
-  description: 'Find nums[i] and nums[j] where |nums[i]-nums[j]|<=t and |i-j|<=k.',
-  accent: '#06b6d4',
+  number: '219',
+  title: 'Contains Duplicate II',
+  slug: 'contains-duplicate-ii',
+  difficulty: 'Easy',
+  tags: ['Hash Table', 'Sliding Window', 'Array'],
+  description: 'Check if array has duplicate with index difference <= k.',
+  accent: '#f59e0b',
 }

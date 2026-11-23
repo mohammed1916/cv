@@ -1,0 +1,11 @@
+.grid-board { display: inline-grid; gap: 3px; max-width: 100%; }
+.grid-board__cell { width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; border: 1px solid var(--border); border-radius: 6px; background: var(--surface2); font-size: 12px; font-weight: 700; transition: background .3s, border-color .3s; }
+.grid-board__cell.is-wall { background: #1f2937; color: #e5e7eb; }
+.grid-board__cell.is-body { background: color-mix(in srgb, var(--success, #16a34a) 30%, var(--surface2)); }
+.grid-board__cell.is-head { background: var(--success, #16a34a); color: #fff; }
+.grid-board__cell.is-food { background: color-mix(in srgb, var(--warning, #d97706) 35%, var(--surface2)); }
+.grid-board__cell.is-start { border-color: var(--primary); }
+.grid-board__cell.is-target { border: 2px solid var(--warning, #d97706); }
+.grid-board__cell.is-current { border: 2px solid var(--primary); }
+.grid-board__cell.is-done { background: color-mix(in srgb, var(--primary) 16%, var(--surface2)); }
+@media (prefers-reduced-motion: reduce) { .grid-board__cell { transition: none; } }

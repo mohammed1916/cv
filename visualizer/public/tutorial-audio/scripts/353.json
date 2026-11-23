@@ -1,0 +1,790 @@
+{
+  "route": "353",
+  "presets": [
+    {
+      "presetIndex": 0,
+      "label": "Eat, turn, eat",
+      "input": "{\"width\":3,\"height\":2,\"food\":[[1,2],[0,2]],\"moves\":[\"R\",\"D\",\"R\",\"U\",\"L\",\"L\"]}",
+      "scenes": [
+        {
+          "key": "0-reason",
+          "kind": "reason",
+          "text": "Here is the big picture. The snake lives on a grid, and every move either takes it to a free cell, onto food, or into a wall or its own body. We need to track the head, the body and the food, and check each move before we make it."
+        },
+        {
+          "key": "0-code",
+          "kind": "code",
+          "text": "So we start."
+        },
+        {
+          "key": "0-impact",
+          "kind": "impact",
+          "text": "The snake starts at the top-left cell with length 1."
+        },
+        {
+          "key": "1-reason",
+          "kind": "reason",
+          "text": "Now a move. The head goes one cell in the chosen direction, and before anything else we ask whether that cell is still on the grid. Leaving the grid ends the game."
+        },
+        {
+          "key": "1-code",
+          "kind": "code",
+          "text": "So we move R."
+        },
+        {
+          "key": "1-impact",
+          "kind": "impact",
+          "text": "Move R: the head moves to [0,1]."
+        },
+        {
+          "key": "2-reason",
+          "kind": "reason",
+          "text": "The head moved to an empty cell. The tail moves up by one, which keeps the length the same, and the score does not change."
+        },
+        {
+          "key": "2-code",
+          "kind": "code",
+          "text": "So we slide."
+        },
+        {
+          "key": "2-impact",
+          "kind": "impact",
+          "text": "The head moves, the tail follows. Score 0."
+        },
+        {
+          "key": "3-reason",
+          "kind": "reason",
+          "text": "Now a move. The head goes one cell in the chosen direction, and before anything else we ask whether that cell is still on the grid. Leaving the grid ends the game."
+        },
+        {
+          "key": "3-code",
+          "kind": "code",
+          "text": "So we move D."
+        },
+        {
+          "key": "3-impact",
+          "kind": "impact",
+          "text": "Move D: the head moves to [1,1]."
+        },
+        {
+          "key": "4-reason",
+          "kind": "reason",
+          "text": "The head moved to an empty cell. The tail moves up by one, which keeps the length the same, and the score does not change."
+        },
+        {
+          "key": "4-code",
+          "kind": "code",
+          "text": "So we slide."
+        },
+        {
+          "key": "4-impact",
+          "kind": "impact",
+          "text": "The head moves, the tail follows. Score 0."
+        },
+        {
+          "key": "5-reason",
+          "kind": "reason",
+          "text": "Now a move. The head goes one cell in the chosen direction, and before anything else we ask whether that cell is still on the grid. Leaving the grid ends the game."
+        },
+        {
+          "key": "5-code",
+          "kind": "code",
+          "text": "So we move R."
+        },
+        {
+          "key": "5-impact",
+          "kind": "impact",
+          "text": "Move R: the head moves to [1,2]."
+        },
+        {
+          "key": "6-reason",
+          "kind": "reason",
+          "text": "The head landed on the next food. Food makes the snake grow, so the tail stays where it is, and the score goes up by one."
+        },
+        {
+          "key": "6-code",
+          "kind": "code",
+          "text": "So we eat."
+        },
+        {
+          "key": "6-impact",
+          "kind": "impact",
+          "text": "The head reaches food. Score 1; the snake grows."
+        },
+        {
+          "key": "7-reason",
+          "kind": "reason",
+          "text": "Now a move. The head goes one cell in the chosen direction, and before anything else we ask whether that cell is still on the grid. Leaving the grid ends the game."
+        },
+        {
+          "key": "7-code",
+          "kind": "code",
+          "text": "So we move U."
+        },
+        {
+          "key": "7-impact",
+          "kind": "impact",
+          "text": "Move U: the head moves to [0,2]."
+        },
+        {
+          "key": "8-reason",
+          "kind": "reason",
+          "text": "The head landed on the next food. Food makes the snake grow, so the tail stays where it is, and the score goes up by one."
+        },
+        {
+          "key": "8-code",
+          "kind": "code",
+          "text": "So we eat."
+        },
+        {
+          "key": "8-impact",
+          "kind": "impact",
+          "text": "The head reaches food. Score 2; the snake grows."
+        },
+        {
+          "key": "9-reason",
+          "kind": "reason",
+          "text": "Now a move. The head goes one cell in the chosen direction, and before anything else we ask whether that cell is still on the grid. Leaving the grid ends the game."
+        },
+        {
+          "key": "9-code",
+          "kind": "code",
+          "text": "So we move L."
+        },
+        {
+          "key": "9-impact",
+          "kind": "impact",
+          "text": "Move L: the head moves to [0,1]."
+        },
+        {
+          "key": "10-reason",
+          "kind": "reason",
+          "text": "The head moved to an empty cell. The tail moves up by one, which keeps the length the same, and the score does not change."
+        },
+        {
+          "key": "10-code",
+          "kind": "code",
+          "text": "So we slide."
+        },
+        {
+          "key": "10-impact",
+          "kind": "impact",
+          "text": "The head moves, the tail follows. Score 2."
+        },
+        {
+          "key": "11-reason",
+          "kind": "reason",
+          "text": "Now a move. The head goes one cell in the chosen direction, and before anything else we ask whether that cell is still on the grid. Leaving the grid ends the game."
+        },
+        {
+          "key": "11-code",
+          "kind": "code",
+          "text": "So we move L."
+        },
+        {
+          "key": "11-impact",
+          "kind": "impact",
+          "text": "Move L: the head moves to [0,0]."
+        },
+        {
+          "key": "12-reason",
+          "kind": "reason",
+          "text": "The head moved to an empty cell. The tail moves up by one, which keeps the length the same, and the score does not change."
+        },
+        {
+          "key": "12-code",
+          "kind": "code",
+          "text": "So we slide."
+        },
+        {
+          "key": "12-impact",
+          "kind": "impact",
+          "text": "The head moves, the tail follows. Score 2."
+        },
+        {
+          "key": "13-reason",
+          "kind": "reason",
+          "text": "That completes every move. The list of results is the answer."
+        },
+        {
+          "key": "13-code",
+          "kind": "code",
+          "text": "So we done."
+        },
+        {
+          "key": "13-impact",
+          "kind": "impact",
+          "text": "Results: [0, 0, 1, 2, 2, 2]."
+        }
+      ]
+    },
+    {
+      "presetIndex": 1,
+      "label": "Hit the wall",
+      "input": "{\"width\":2,\"height\":2,\"food\":[],\"moves\":[\"R\",\"R\"]}",
+      "scenes": [
+        {
+          "key": "0-reason",
+          "kind": "reason",
+          "text": "Here is the big picture. The snake lives on a grid, and every move either takes it to a free cell, onto food, or into a wall or its own body. We need to track the head, the body and the food, and check each move before we make it."
+        },
+        {
+          "key": "0-code",
+          "kind": "code",
+          "text": "So we start."
+        },
+        {
+          "key": "0-impact",
+          "kind": "impact",
+          "text": "The snake starts at the top-left cell with length 1."
+        },
+        {
+          "key": "1-reason",
+          "kind": "reason",
+          "text": "Now a move. The head goes one cell in the chosen direction, and before anything else we ask whether that cell is still on the grid. Leaving the grid ends the game."
+        },
+        {
+          "key": "1-code",
+          "kind": "code",
+          "text": "So we move R."
+        },
+        {
+          "key": "1-impact",
+          "kind": "impact",
+          "text": "Move R: the head moves to [0,1]."
+        },
+        {
+          "key": "2-reason",
+          "kind": "reason",
+          "text": "The head moved to an empty cell. The tail moves up by one, which keeps the length the same, and the score does not change."
+        },
+        {
+          "key": "2-code",
+          "kind": "code",
+          "text": "So we slide."
+        },
+        {
+          "key": "2-impact",
+          "kind": "impact",
+          "text": "The head moves, the tail follows. Score 0."
+        },
+        {
+          "key": "3-reason",
+          "kind": "reason",
+          "text": "Now a move. The head goes one cell in the chosen direction, and before anything else we ask whether that cell is still on the grid. Leaving the grid ends the game."
+        },
+        {
+          "key": "3-code",
+          "kind": "code",
+          "text": "So we move R."
+        },
+        {
+          "key": "3-impact",
+          "kind": "impact",
+          "text": "Move R: the head moves to [0,2]."
+        },
+        {
+          "key": "4-reason",
+          "kind": "reason",
+          "text": "The move can no longer be played. The game is over, and this move returns minus one."
+        },
+        {
+          "key": "4-code",
+          "kind": "code",
+          "text": "So we lose."
+        },
+        {
+          "key": "4-impact",
+          "kind": "impact",
+          "text": "The head leaves the grid. The game is over, and the move returns -1."
+        },
+        {
+          "key": "5-reason",
+          "kind": "reason",
+          "text": "That completes every move. The list of results is the answer."
+        },
+        {
+          "key": "5-code",
+          "kind": "code",
+          "text": "So we done."
+        },
+        {
+          "key": "5-impact",
+          "kind": "impact",
+          "text": "Results: [0, -1]."
+        }
+      ]
+    },
+    {
+      "presetIndex": 2,
+      "label": "Food on the first move",
+      "input": "{\"width\":2,\"height\":2,\"food\":[[0,1]],\"moves\":[\"R\",\"D\",\"L\",\"U\"]}",
+      "scenes": [
+        {
+          "key": "0-reason",
+          "kind": "reason",
+          "text": "Here is the big picture. The snake lives on a grid, and every move either takes it to a free cell, onto food, or into a wall or its own body. We need to track the head, the body and the food, and check each move before we make it."
+        },
+        {
+          "key": "0-code",
+          "kind": "code",
+          "text": "So we start."
+        },
+        {
+          "key": "0-impact",
+          "kind": "impact",
+          "text": "The snake starts at the top-left cell with length 1."
+        },
+        {
+          "key": "1-reason",
+          "kind": "reason",
+          "text": "Now a move. The head goes one cell in the chosen direction, and before anything else we ask whether that cell is still on the grid. Leaving the grid ends the game."
+        },
+        {
+          "key": "1-code",
+          "kind": "code",
+          "text": "So we move R."
+        },
+        {
+          "key": "1-impact",
+          "kind": "impact",
+          "text": "Move R: the head moves to [0,1]."
+        },
+        {
+          "key": "2-reason",
+          "kind": "reason",
+          "text": "The head landed on the next food. Food makes the snake grow, so the tail stays where it is, and the score goes up by one."
+        },
+        {
+          "key": "2-code",
+          "kind": "code",
+          "text": "So we eat."
+        },
+        {
+          "key": "2-impact",
+          "kind": "impact",
+          "text": "The head reaches food. Score 1; the snake grows."
+        },
+        {
+          "key": "3-reason",
+          "kind": "reason",
+          "text": "Now a move. The head goes one cell in the chosen direction, and before anything else we ask whether that cell is still on the grid. Leaving the grid ends the game."
+        },
+        {
+          "key": "3-code",
+          "kind": "code",
+          "text": "So we move D."
+        },
+        {
+          "key": "3-impact",
+          "kind": "impact",
+          "text": "Move D: the head moves to [1,1]."
+        },
+        {
+          "key": "4-reason",
+          "kind": "reason",
+          "text": "The head moved to an empty cell. The tail moves up by one, which keeps the length the same, and the score does not change."
+        },
+        {
+          "key": "4-code",
+          "kind": "code",
+          "text": "So we slide."
+        },
+        {
+          "key": "4-impact",
+          "kind": "impact",
+          "text": "The head moves, the tail follows. Score 1."
+        },
+        {
+          "key": "5-reason",
+          "kind": "reason",
+          "text": "Now a move. The head goes one cell in the chosen direction, and before anything else we ask whether that cell is still on the grid. Leaving the grid ends the game."
+        },
+        {
+          "key": "5-code",
+          "kind": "code",
+          "text": "So we move L."
+        },
+        {
+          "key": "5-impact",
+          "kind": "impact",
+          "text": "Move L: the head moves to [1,0]."
+        },
+        {
+          "key": "6-reason",
+          "kind": "reason",
+          "text": "The head moved to an empty cell. The tail moves up by one, which keeps the length the same, and the score does not change."
+        },
+        {
+          "key": "6-code",
+          "kind": "code",
+          "text": "So we slide."
+        },
+        {
+          "key": "6-impact",
+          "kind": "impact",
+          "text": "The head moves, the tail follows. Score 1."
+        },
+        {
+          "key": "7-reason",
+          "kind": "reason",
+          "text": "Now a move. The head goes one cell in the chosen direction, and before anything else we ask whether that cell is still on the grid. Leaving the grid ends the game."
+        },
+        {
+          "key": "7-code",
+          "kind": "code",
+          "text": "So we move U."
+        },
+        {
+          "key": "7-impact",
+          "kind": "impact",
+          "text": "Move U: the head moves to [0,0]."
+        },
+        {
+          "key": "8-reason",
+          "kind": "reason",
+          "text": "The head moved to an empty cell. The tail moves up by one, which keeps the length the same, and the score does not change."
+        },
+        {
+          "key": "8-code",
+          "kind": "code",
+          "text": "So we slide."
+        },
+        {
+          "key": "8-impact",
+          "kind": "impact",
+          "text": "The head moves, the tail follows. Score 1."
+        },
+        {
+          "key": "9-reason",
+          "kind": "reason",
+          "text": "That completes every move. The list of results is the answer."
+        },
+        {
+          "key": "9-code",
+          "kind": "code",
+          "text": "So we done."
+        },
+        {
+          "key": "9-impact",
+          "kind": "impact",
+          "text": "Results: [1, 1, 1, 1]."
+        }
+      ]
+    },
+    {
+      "presetIndex": 3,
+      "label": "Tail frees the cell",
+      "input": "{\"width\":2,\"height\":2,\"food\":[[0,1],[1,1],[1,0]],\"moves\":[\"R\",\"D\",\"L\",\"U\"]}",
+      "scenes": [
+        {
+          "key": "0-reason",
+          "kind": "reason",
+          "text": "Here is the big picture. The snake lives on a grid, and every move either takes it to a free cell, onto food, or into a wall or its own body. We need to track the head, the body and the food, and check each move before we make it."
+        },
+        {
+          "key": "0-code",
+          "kind": "code",
+          "text": "So we start."
+        },
+        {
+          "key": "0-impact",
+          "kind": "impact",
+          "text": "The snake starts at the top-left cell with length 1."
+        },
+        {
+          "key": "1-reason",
+          "kind": "reason",
+          "text": "Now a move. The head goes one cell in the chosen direction, and before anything else we ask whether that cell is still on the grid. Leaving the grid ends the game."
+        },
+        {
+          "key": "1-code",
+          "kind": "code",
+          "text": "So we move R."
+        },
+        {
+          "key": "1-impact",
+          "kind": "impact",
+          "text": "Move R: the head moves to [0,1]."
+        },
+        {
+          "key": "2-reason",
+          "kind": "reason",
+          "text": "The head landed on the next food. Food makes the snake grow, so the tail stays where it is, and the score goes up by one."
+        },
+        {
+          "key": "2-code",
+          "kind": "code",
+          "text": "So we eat."
+        },
+        {
+          "key": "2-impact",
+          "kind": "impact",
+          "text": "The head reaches food. Score 1; the snake grows."
+        },
+        {
+          "key": "3-reason",
+          "kind": "reason",
+          "text": "Now a move. The head goes one cell in the chosen direction, and before anything else we ask whether that cell is still on the grid. Leaving the grid ends the game."
+        },
+        {
+          "key": "3-code",
+          "kind": "code",
+          "text": "So we move D."
+        },
+        {
+          "key": "3-impact",
+          "kind": "impact",
+          "text": "Move D: the head moves to [1,1]."
+        },
+        {
+          "key": "4-reason",
+          "kind": "reason",
+          "text": "The head landed on the next food. Food makes the snake grow, so the tail stays where it is, and the score goes up by one."
+        },
+        {
+          "key": "4-code",
+          "kind": "code",
+          "text": "So we eat."
+        },
+        {
+          "key": "4-impact",
+          "kind": "impact",
+          "text": "The head reaches food. Score 2; the snake grows."
+        },
+        {
+          "key": "5-reason",
+          "kind": "reason",
+          "text": "Now a move. The head goes one cell in the chosen direction, and before anything else we ask whether that cell is still on the grid. Leaving the grid ends the game."
+        },
+        {
+          "key": "5-code",
+          "kind": "code",
+          "text": "So we move L."
+        },
+        {
+          "key": "5-impact",
+          "kind": "impact",
+          "text": "Move L: the head moves to [1,0]."
+        },
+        {
+          "key": "6-reason",
+          "kind": "reason",
+          "text": "The head landed on the next food. Food makes the snake grow, so the tail stays where it is, and the score goes up by one."
+        },
+        {
+          "key": "6-code",
+          "kind": "code",
+          "text": "So we eat."
+        },
+        {
+          "key": "6-impact",
+          "kind": "impact",
+          "text": "The head reaches food. Score 3; the snake grows."
+        },
+        {
+          "key": "7-reason",
+          "kind": "reason",
+          "text": "Now a move. The head goes one cell in the chosen direction, and before anything else we ask whether that cell is still on the grid. Leaving the grid ends the game."
+        },
+        {
+          "key": "7-code",
+          "kind": "code",
+          "text": "So we move U."
+        },
+        {
+          "key": "7-impact",
+          "kind": "impact",
+          "text": "Move U: the head moves to [0,0]."
+        },
+        {
+          "key": "8-reason",
+          "kind": "reason",
+          "text": "The head moved to an empty cell. The tail moves up by one, which keeps the length the same, and the score does not change."
+        },
+        {
+          "key": "8-code",
+          "kind": "code",
+          "text": "So we slide."
+        },
+        {
+          "key": "8-impact",
+          "kind": "impact",
+          "text": "The head moves, the tail follows. Score 3."
+        },
+        {
+          "key": "9-reason",
+          "kind": "reason",
+          "text": "That completes every move. The list of results is the answer."
+        },
+        {
+          "key": "9-code",
+          "kind": "code",
+          "text": "So we done."
+        },
+        {
+          "key": "9-impact",
+          "kind": "impact",
+          "text": "Results: [1, 2, 3, 3]."
+        }
+      ]
+    },
+    {
+      "presetIndex": 4,
+      "label": "Bite the body",
+      "input": "{\"width\":2,\"height\":2,\"food\":[[0,1],[1,1],[1,0],[0,0]],\"moves\":[\"R\",\"D\",\"L\",\"U\"]}",
+      "scenes": [
+        {
+          "key": "0-reason",
+          "kind": "reason",
+          "text": "Here is the big picture. The snake lives on a grid, and every move either takes it to a free cell, onto food, or into a wall or its own body. We need to track the head, the body and the food, and check each move before we make it."
+        },
+        {
+          "key": "0-code",
+          "kind": "code",
+          "text": "So we start."
+        },
+        {
+          "key": "0-impact",
+          "kind": "impact",
+          "text": "The snake starts at the top-left cell with length 1."
+        },
+        {
+          "key": "1-reason",
+          "kind": "reason",
+          "text": "Now a move. The head goes one cell in the chosen direction, and before anything else we ask whether that cell is still on the grid. Leaving the grid ends the game."
+        },
+        {
+          "key": "1-code",
+          "kind": "code",
+          "text": "So we move R."
+        },
+        {
+          "key": "1-impact",
+          "kind": "impact",
+          "text": "Move R: the head moves to [0,1]."
+        },
+        {
+          "key": "2-reason",
+          "kind": "reason",
+          "text": "The head landed on the next food. Food makes the snake grow, so the tail stays where it is, and the score goes up by one."
+        },
+        {
+          "key": "2-code",
+          "kind": "code",
+          "text": "So we eat."
+        },
+        {
+          "key": "2-impact",
+          "kind": "impact",
+          "text": "The head reaches food. Score 1; the snake grows."
+        },
+        {
+          "key": "3-reason",
+          "kind": "reason",
+          "text": "Now a move. The head goes one cell in the chosen direction, and before anything else we ask whether that cell is still on the grid. Leaving the grid ends the game."
+        },
+        {
+          "key": "3-code",
+          "kind": "code",
+          "text": "So we move D."
+        },
+        {
+          "key": "3-impact",
+          "kind": "impact",
+          "text": "Move D: the head moves to [1,1]."
+        },
+        {
+          "key": "4-reason",
+          "kind": "reason",
+          "text": "The head landed on the next food. Food makes the snake grow, so the tail stays where it is, and the score goes up by one."
+        },
+        {
+          "key": "4-code",
+          "kind": "code",
+          "text": "So we eat."
+        },
+        {
+          "key": "4-impact",
+          "kind": "impact",
+          "text": "The head reaches food. Score 2; the snake grows."
+        },
+        {
+          "key": "5-reason",
+          "kind": "reason",
+          "text": "Now a move. The head goes one cell in the chosen direction, and before anything else we ask whether that cell is still on the grid. Leaving the grid ends the game."
+        },
+        {
+          "key": "5-code",
+          "kind": "code",
+          "text": "So we move L."
+        },
+        {
+          "key": "5-impact",
+          "kind": "impact",
+          "text": "Move L: the head moves to [1,0]."
+        },
+        {
+          "key": "6-reason",
+          "kind": "reason",
+          "text": "The head landed on the next food. Food makes the snake grow, so the tail stays where it is, and the score goes up by one."
+        },
+        {
+          "key": "6-code",
+          "kind": "code",
+          "text": "So we eat."
+        },
+        {
+          "key": "6-impact",
+          "kind": "impact",
+          "text": "The head reaches food. Score 3; the snake grows."
+        },
+        {
+          "key": "7-reason",
+          "kind": "reason",
+          "text": "Now a move. The head goes one cell in the chosen direction, and before anything else we ask whether that cell is still on the grid. Leaving the grid ends the game."
+        },
+        {
+          "key": "7-code",
+          "kind": "code",
+          "text": "So we move U."
+        },
+        {
+          "key": "7-impact",
+          "kind": "impact",
+          "text": "Move U: the head moves to [0,0]."
+        },
+        {
+          "key": "8-reason",
+          "kind": "reason",
+          "text": "The move can no longer be played. The game is over, and this move returns minus one."
+        },
+        {
+          "key": "8-code",
+          "kind": "code",
+          "text": "So we lose."
+        },
+        {
+          "key": "8-impact",
+          "kind": "impact",
+          "text": "The head runs into the body. The game is over, and the move returns -1."
+        },
+        {
+          "key": "9-reason",
+          "kind": "reason",
+          "text": "That completes every move. The list of results is the answer."
+        },
+        {
+          "key": "9-code",
+          "kind": "code",
+          "text": "So we done."
+        },
+        {
+          "key": "9-impact",
+          "kind": "impact",
+          "text": "Results: [1, 2, 3, -1]."
+        }
+      ]
+    }
+  ]
+}

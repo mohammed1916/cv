@@ -9,7 +9,7 @@ const lazyModules = import.meta.glob("../problems/*/index.jsx");
 // Problem1103). Their corrected implementations live in Problem<number>Canonical, and a
 // few other stale folders are listed here. Their ids are suffixed when they collide so
 // React keys and selection stay unique; the folders themselves are left untouched.
-const STALE_FOLDERS = new Set(["Problem353", "Problem2756"]);
+const STALE_FOLDERS = new Set();
 const folderName = path => path.replace(/^.*\/(Problem[^/]+)\/meta\.js$/, "$1");
 const hasCanonicalTwin = path =>
   Object.prototype.hasOwnProperty.call(lazyModules, path.replace(/\/meta\.js$/, "Canonical/index.jsx"));
