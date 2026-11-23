@@ -124,7 +124,8 @@ function sitemap(problems) {
 
 const problems = await loadProblems();
 const pagesRoot = path.join(PUBLIC, "problems");
-fs.rmSync(pagesRoot, { recursive: true, force: true });
+// Never delete committed pages: this run may load fewer problems than the site has, and removing the folder
+// first previously wiped thousands of committed pages. Existing pages are overwritten, never removed.
 for (const p of problems) {
   const dir = path.join(pagesRoot, p.slug);
   fs.mkdirSync(dir, { recursive: true });
