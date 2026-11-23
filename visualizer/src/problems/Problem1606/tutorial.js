@@ -19,6 +19,28 @@ const reasons = {
   'sift-compare': ['Compare one heap pair', 'Each comparison decides whether an item belongs above its parent. Only this pair is highlighted; a swap changes exactly these two cells.'],
   done: ['Return the busiest servers', 'The answer includes all servers whose handled count equals the maximum.'],
 };
+// Spoken narration for the audio. Each entry opens with where we are in the big picture, then says why this step is needed.
+const spokenReasons = {
+  start: 'Here is the big picture. Requests arrive in time order. Each one goes to a free server if one exists, and is dropped otherwise. At the end we count how many requests each server handled and report the busiest ones. So the first thing to set up is which servers are free and which are busy.',
+  'loop-check': 'Now the loop condition. We keep going only while there is something left to decide, so this check tells us whether another request or another search step remains.',
+  arrival: 'Now the next request. Its arrival time tells us which running jobs have already finished, and its duration tells us how long the server it gets will stay busy.',
+  'busy-pop': 'Before we assign anything, we need to know which servers are free right now. Busy servers sit in a heap ordered by finish time, so the one that finishes first is at the top. If it finished before this arrival, we take it out and return it to the free pool.',
+  'key-calc': 'Requests wrap around the servers, so the order we pick servers in is circular. A heap can only compare numbers, so we turn each server into a single number that encodes its place in that circular order.',
+  'free-insert': 'The server we just released has to be selectable again, otherwise later requests would never see it. We put it back in the free structure, keeping the order intact.',
+  preferred: 'Every request starts its search at its own index modulo k. This spreads the work instead of always favouring server zero, so we begin the search at that preferred server.',
+  'bisect-compare': 'The free server IDs are kept sorted, so we can search them quickly. Comparing the middle value with our target lets us throw away half of the remaining range each time.',
+  'bisect-result': 'We need the first free server whose ID is at least the preferred one. If none exists, the circular rule means we wrap around to the smallest free ID.',
+  'key-select': 'The keys already encode circular order, so the smallest key is the next free server in that order. We do not have to scan every server.',
+  'free-pop': 'A server cannot take two requests at once. So we take the chosen server out of the free structure before we give it this request.',
+  'timeline-create': 'We record when this server is busy. The request occupies it from now until arrival plus duration. Future requests will check this interval.',
+  assign: 'The answer compares how many requests each server handled, so this successful assignment goes into that server\'s count.',
+  'busy-push': 'This server now has a finish time, and we will need the earliest finish time for the next request. Putting it in the busy heap makes that earliest time available at the top.',
+  drop: 'Here, no server is free at this arrival. There is no queue in this problem, so the request is dropped instead of waiting.',
+  frequency: 'The busiest servers are the ones with the most accepted requests, not the longest running time. So we now compare the handled counts.',
+  multimode: 'Several servers can share the highest count. Every one of them is part of the answer, so we keep all of the tied winners.',
+  'sift-compare': 'This is one step of restoring heap order. The two items being compared decide whether the moved item rises above its parent.',
+  done: 'That is the full answer. It is every server whose handled count equals the maximum.',
+};
 export function serverTutorial({run,step}) {
   let entry = reasons[step.phase];
   if (step.phase === 'sift-compare') entry = step.sift?.kind === 'child'
@@ -61,5 +83,6 @@ export function serverTutorial({run,step}) {
   if (step.phase==='preferred' && step.approach !== 'virtual') variables.preferred=`S${step.target}`;
   if (['frequency','multimode','done'].includes(step.phase) && step.best !== null) variables.maximum=step.best;
   const instruction = (step.approach === 'virtual' ? alternativeCode : code).find(line => line.line === step.activeLine)?.text;
-  return {code:instruction,title:entry?.[0] || step.phase,reason:entry?.[1] || step.message,action:step.message,focus,variables};
+  const spoken = spokenReasons[step.phase] ? { reason: spokenReasons[step.phase] } : undefined;
+  return {code:instruction,title:entry?.[0] || step.phase,reason:entry?.[1] || step.message,action:step.message,focus,variables,spoken};
 }

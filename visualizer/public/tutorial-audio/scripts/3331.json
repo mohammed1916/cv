@@ -14,7 +14,7 @@
         {
           "key": "0-code",
           "kind": "code",
-          "text": "Next, this line runs: Start with 3 nodes; the root is node 0."
+          "text": "So we start with 3 nodes; the root is node 0."
         },
         {
           "key": "0-impact",
@@ -29,7 +29,7 @@
         {
           "key": "1-code",
           "kind": "code",
-          "text": "Next, this line runs: Link node 1 as a child of 0."
+          "text": "So we link node 1 as a child of 0."
         },
         {
           "key": "1-impact",
@@ -44,7 +44,7 @@
         {
           "key": "2-code",
           "kind": "code",
-          "text": "Next, this line runs: Link node 2 as a child of 1."
+          "text": "So we link node 2 as a child of 1."
         },
         {
           "key": "2-impact",
@@ -59,7 +59,7 @@
         {
           "key": "3-code",
           "kind": "code",
-          "text": "Next, this line runs: Every subtree starts with size 1."
+          "text": "So we every subtree starts with size 1."
         },
         {
           "key": "3-impact",
@@ -74,7 +74,7 @@
         {
           "key": "4-code",
           "kind": "code",
-          "text": "Next, this line runs: Push the root onto the stack."
+          "text": "So we push the root onto the stack."
         },
         {
           "key": "4-impact",
@@ -89,7 +89,7 @@
         {
           "key": "5-code",
           "kind": "code",
-          "text": "Next, this line runs: Enter node 0 (letter a)."
+          "text": "So we enter node 0 (letter a)."
         },
         {
           "key": "5-impact",
@@ -104,7 +104,7 @@
         {
           "key": "6-code",
           "kind": "code",
-          "text": "Next, this line runs: No ancestor with letter a yet."
+          "text": "So we no ancestor with letter a yet."
         },
         {
           "key": "6-impact",
@@ -119,7 +119,7 @@
         {
           "key": "7-code",
           "kind": "code",
-          "text": "Next, this line runs: Node 0 is now the latest a on this path."
+          "text": "So we node 0 is now the latest a on this path."
         },
         {
           "key": "7-impact",
@@ -134,7 +134,7 @@
         {
           "key": "8-code",
           "kind": "code",
-          "text": "Next, this line runs: Push the exit marker for node 0, so it runs after its subtree."
+          "text": "So we push the exit marker for node 0, so it runs after its subtree."
         },
         {
           "key": "8-impact",
@@ -149,7 +149,7 @@
         {
           "key": "9-code",
           "kind": "code",
-          "text": "Next, this line runs: Push children 1 to visit next."
+          "text": "So we push children 1 to visit next."
         },
         {
           "key": "9-impact",
@@ -164,7 +164,7 @@
         {
           "key": "10-code",
           "kind": "code",
-          "text": "Next, this line runs: Enter node 1 (letter b)."
+          "text": "So we enter node 1 (letter b)."
         },
         {
           "key": "10-impact",
@@ -179,7 +179,7 @@
         {
           "key": "11-code",
           "kind": "code",
-          "text": "Next, this line runs: No ancestor with letter b yet."
+          "text": "So we no ancestor with letter b yet."
         },
         {
           "key": "11-impact",
@@ -194,7 +194,7 @@
         {
           "key": "12-code",
           "kind": "code",
-          "text": "Next, this line runs: Node 1 is now the latest b on this path."
+          "text": "So we node 1 is now the latest b on this path."
         },
         {
           "key": "12-impact",
@@ -209,7 +209,7 @@
         {
           "key": "13-code",
           "kind": "code",
-          "text": "Next, this line runs: Push the exit marker for node 1, so it runs after its subtree."
+          "text": "So we push the exit marker for node 1, so it runs after its subtree."
         },
         {
           "key": "13-impact",
@@ -224,7 +224,7 @@
         {
           "key": "14-code",
           "kind": "code",
-          "text": "Next, this line runs: Push children 2 to visit next."
+          "text": "So we push children 2 to visit next."
         },
         {
           "key": "14-impact",
@@ -239,7 +239,7 @@
         {
           "key": "15-code",
           "kind": "code",
-          "text": "Next, this line runs: Enter node 2 (letter a)."
+          "text": "So we enter node 2 (letter a)."
         },
         {
           "key": "15-impact",
@@ -254,7 +254,7 @@
         {
           "key": "16-code",
           "kind": "code",
-          "text": "Next, this line runs: Remember the previous a ancestor, node 0."
+          "text": "So we remember the previous a ancestor, node 0."
         },
         {
           "key": "16-impact",
@@ -269,7 +269,7 @@
         {
           "key": "17-code",
           "kind": "code",
-          "text": "Next, this line runs: Node 2 is now the latest a on this path."
+          "text": "So we node 2 is now the latest a on this path."
         },
         {
           "key": "17-impact",
@@ -284,7 +284,7 @@
         {
           "key": "18-code",
           "kind": "code",
-          "text": "Next, this line runs: Push the exit marker for node 2, so it runs after its subtree."
+          "text": "So we push the exit marker for node 2, so it runs after its subtree."
         },
         {
           "key": "18-impact",
@@ -299,7 +299,7 @@
         {
           "key": "19-code",
           "kind": "code",
-          "text": "Next, this line runs: Node 2 is a leaf; nothing to push."
+          "text": "So we node 2 is a leaf; nothing to push."
         },
         {
           "key": "19-impact",
@@ -314,7 +314,7 @@
         {
           "key": "20-code",
           "kind": "code",
-          "text": "Next, this line runs: Leave node 2."
+          "text": "So we leave node 2."
         },
         {
           "key": "20-impact",
@@ -329,7 +329,7 @@
         {
           "key": "21-code",
           "kind": "code",
-          "text": "Next, this line runs: Restore the a ancestor to node 0."
+          "text": "So we restore the a ancestor to node 0."
         },
         {
           "key": "21-impact",
@@ -344,7 +344,7 @@
         {
           "key": "22-code",
           "kind": "code",
-          "text": "Next, this line runs: Add subtree 2 (size 1) to node 0, its nearest same-letter ancestor."
+          "text": "So we add subtree 2 (size 1) to node 0, its nearest same-letter ancestor."
         },
         {
           "key": "22-impact",
@@ -359,7 +359,7 @@
         {
           "key": "23-code",
           "kind": "code",
-          "text": "Next, this line runs: Leave node 1."
+          "text": "So we leave node 1."
         },
         {
           "key": "23-impact",
@@ -374,7 +374,7 @@
         {
           "key": "24-code",
           "kind": "code",
-          "text": "Next, this line runs: No earlier b ancestor; remove b from the path."
+          "text": "So we no earlier b ancestor; remove b from the path."
         },
         {
           "key": "24-impact",
@@ -389,7 +389,7 @@
         {
           "key": "25-code",
           "kind": "code",
-          "text": "Next, this line runs: Add subtree 1 (size 1) to node 0, its original parent."
+          "text": "So we add subtree 1 (size 1) to node 0, its original parent."
         },
         {
           "key": "25-impact",
@@ -404,7 +404,7 @@
         {
           "key": "26-code",
           "kind": "code",
-          "text": "Next, this line runs: Leave node 0."
+          "text": "So we leave node 0."
         },
         {
           "key": "26-impact",
@@ -419,7 +419,7 @@
         {
           "key": "27-code",
           "kind": "code",
-          "text": "Next, this line runs: No earlier a ancestor; remove a from the path."
+          "text": "So we no earlier a ancestor; remove a from the path."
         },
         {
           "key": "27-impact",
@@ -434,7 +434,7 @@
         {
           "key": "28-code",
           "kind": "code",
-          "text": "Next, this line runs: Subtree sizes: [3, 1, 1]."
+          "text": "So we subtree sizes: [3, 1, 1]."
         },
         {
           "key": "28-impact",
@@ -456,7 +456,7 @@
         {
           "key": "0-code",
           "kind": "code",
-          "text": "Next, this line runs: Start with 4 nodes; the root is node 0."
+          "text": "So we start with 4 nodes; the root is node 0."
         },
         {
           "key": "0-impact",
@@ -471,7 +471,7 @@
         {
           "key": "1-code",
           "kind": "code",
-          "text": "Next, this line runs: Link node 1 as a child of 0."
+          "text": "So we link node 1 as a child of 0."
         },
         {
           "key": "1-impact",
@@ -486,7 +486,7 @@
         {
           "key": "2-code",
           "kind": "code",
-          "text": "Next, this line runs: Link node 2 as a child of 1."
+          "text": "So we link node 2 as a child of 1."
         },
         {
           "key": "2-impact",
@@ -501,7 +501,7 @@
         {
           "key": "3-code",
           "kind": "code",
-          "text": "Next, this line runs: Link node 3 as a child of 2."
+          "text": "So we link node 3 as a child of 2."
         },
         {
           "key": "3-impact",
@@ -516,7 +516,7 @@
         {
           "key": "4-code",
           "kind": "code",
-          "text": "Next, this line runs: Every subtree starts with size 1."
+          "text": "So we every subtree starts with size 1."
         },
         {
           "key": "4-impact",
@@ -531,7 +531,7 @@
         {
           "key": "5-code",
           "kind": "code",
-          "text": "Next, this line runs: Push the root onto the stack."
+          "text": "So we push the root onto the stack."
         },
         {
           "key": "5-impact",
@@ -546,7 +546,7 @@
         {
           "key": "6-code",
           "kind": "code",
-          "text": "Next, this line runs: Enter node 0 (letter a)."
+          "text": "So we enter node 0 (letter a)."
         },
         {
           "key": "6-impact",
@@ -561,7 +561,7 @@
         {
           "key": "7-code",
           "kind": "code",
-          "text": "Next, this line runs: No ancestor with letter a yet."
+          "text": "So we no ancestor with letter a yet."
         },
         {
           "key": "7-impact",
@@ -576,7 +576,7 @@
         {
           "key": "8-code",
           "kind": "code",
-          "text": "Next, this line runs: Node 0 is now the latest a on this path."
+          "text": "So we node 0 is now the latest a on this path."
         },
         {
           "key": "8-impact",
@@ -591,7 +591,7 @@
         {
           "key": "9-code",
           "kind": "code",
-          "text": "Next, this line runs: Push the exit marker for node 0, so it runs after its subtree."
+          "text": "So we push the exit marker for node 0, so it runs after its subtree."
         },
         {
           "key": "9-impact",
@@ -606,7 +606,7 @@
         {
           "key": "10-code",
           "kind": "code",
-          "text": "Next, this line runs: Push children 1 to visit next."
+          "text": "So we push children 1 to visit next."
         },
         {
           "key": "10-impact",
@@ -621,7 +621,7 @@
         {
           "key": "11-code",
           "kind": "code",
-          "text": "Next, this line runs: Enter node 1 (letter a)."
+          "text": "So we enter node 1 (letter a)."
         },
         {
           "key": "11-impact",
@@ -636,7 +636,7 @@
         {
           "key": "12-code",
           "kind": "code",
-          "text": "Next, this line runs: Remember the previous a ancestor, node 0."
+          "text": "So we remember the previous a ancestor, node 0."
         },
         {
           "key": "12-impact",
@@ -651,7 +651,7 @@
         {
           "key": "13-code",
           "kind": "code",
-          "text": "Next, this line runs: Node 1 is now the latest a on this path."
+          "text": "So we node 1 is now the latest a on this path."
         },
         {
           "key": "13-impact",
@@ -666,7 +666,7 @@
         {
           "key": "14-code",
           "kind": "code",
-          "text": "Next, this line runs: Push the exit marker for node 1, so it runs after its subtree."
+          "text": "So we push the exit marker for node 1, so it runs after its subtree."
         },
         {
           "key": "14-impact",
@@ -681,7 +681,7 @@
         {
           "key": "15-code",
           "kind": "code",
-          "text": "Next, this line runs: Push children 2 to visit next."
+          "text": "So we push children 2 to visit next."
         },
         {
           "key": "15-impact",
@@ -696,7 +696,7 @@
         {
           "key": "16-code",
           "kind": "code",
-          "text": "Next, this line runs: Enter node 2 (letter a)."
+          "text": "So we enter node 2 (letter a)."
         },
         {
           "key": "16-impact",
@@ -711,7 +711,7 @@
         {
           "key": "17-code",
           "kind": "code",
-          "text": "Next, this line runs: Remember the previous a ancestor, node 1."
+          "text": "So we remember the previous a ancestor, node 1."
         },
         {
           "key": "17-impact",
@@ -726,7 +726,7 @@
         {
           "key": "18-code",
           "kind": "code",
-          "text": "Next, this line runs: Node 2 is now the latest a on this path."
+          "text": "So we node 2 is now the latest a on this path."
         },
         {
           "key": "18-impact",
@@ -741,7 +741,7 @@
         {
           "key": "19-code",
           "kind": "code",
-          "text": "Next, this line runs: Push the exit marker for node 2, so it runs after its subtree."
+          "text": "So we push the exit marker for node 2, so it runs after its subtree."
         },
         {
           "key": "19-impact",
@@ -756,7 +756,7 @@
         {
           "key": "20-code",
           "kind": "code",
-          "text": "Next, this line runs: Push children 3 to visit next."
+          "text": "So we push children 3 to visit next."
         },
         {
           "key": "20-impact",
@@ -771,7 +771,7 @@
         {
           "key": "21-code",
           "kind": "code",
-          "text": "Next, this line runs: Enter node 3 (letter a)."
+          "text": "So we enter node 3 (letter a)."
         },
         {
           "key": "21-impact",
@@ -786,7 +786,7 @@
         {
           "key": "22-code",
           "kind": "code",
-          "text": "Next, this line runs: Remember the previous a ancestor, node 2."
+          "text": "So we remember the previous a ancestor, node 2."
         },
         {
           "key": "22-impact",
@@ -801,7 +801,7 @@
         {
           "key": "23-code",
           "kind": "code",
-          "text": "Next, this line runs: Node 3 is now the latest a on this path."
+          "text": "So we node 3 is now the latest a on this path."
         },
         {
           "key": "23-impact",
@@ -816,7 +816,7 @@
         {
           "key": "24-code",
           "kind": "code",
-          "text": "Next, this line runs: Push the exit marker for node 3, so it runs after its subtree."
+          "text": "So we push the exit marker for node 3, so it runs after its subtree."
         },
         {
           "key": "24-impact",
@@ -831,7 +831,7 @@
         {
           "key": "25-code",
           "kind": "code",
-          "text": "Next, this line runs: Node 3 is a leaf; nothing to push."
+          "text": "So we node 3 is a leaf; nothing to push."
         },
         {
           "key": "25-impact",
@@ -846,7 +846,7 @@
         {
           "key": "26-code",
           "kind": "code",
-          "text": "Next, this line runs: Leave node 3."
+          "text": "So we leave node 3."
         },
         {
           "key": "26-impact",
@@ -861,7 +861,7 @@
         {
           "key": "27-code",
           "kind": "code",
-          "text": "Next, this line runs: Restore the a ancestor to node 2."
+          "text": "So we restore the a ancestor to node 2."
         },
         {
           "key": "27-impact",
@@ -876,7 +876,7 @@
         {
           "key": "28-code",
           "kind": "code",
-          "text": "Next, this line runs: Add subtree 3 (size 1) to node 2, its nearest same-letter ancestor."
+          "text": "So we add subtree 3 (size 1) to node 2, its nearest same-letter ancestor."
         },
         {
           "key": "28-impact",
@@ -891,7 +891,7 @@
         {
           "key": "29-code",
           "kind": "code",
-          "text": "Next, this line runs: Leave node 2."
+          "text": "So we leave node 2."
         },
         {
           "key": "29-impact",
@@ -906,7 +906,7 @@
         {
           "key": "30-code",
           "kind": "code",
-          "text": "Next, this line runs: Restore the a ancestor to node 1."
+          "text": "So we restore the a ancestor to node 1."
         },
         {
           "key": "30-impact",
@@ -921,7 +921,7 @@
         {
           "key": "31-code",
           "kind": "code",
-          "text": "Next, this line runs: Add subtree 2 (size 2) to node 1, its nearest same-letter ancestor."
+          "text": "So we add subtree 2 (size 2) to node 1, its nearest same-letter ancestor."
         },
         {
           "key": "31-impact",
@@ -936,7 +936,7 @@
         {
           "key": "32-code",
           "kind": "code",
-          "text": "Next, this line runs: Leave node 1."
+          "text": "So we leave node 1."
         },
         {
           "key": "32-impact",
@@ -951,7 +951,7 @@
         {
           "key": "33-code",
           "kind": "code",
-          "text": "Next, this line runs: Restore the a ancestor to node 0."
+          "text": "So we restore the a ancestor to node 0."
         },
         {
           "key": "33-impact",
@@ -966,7 +966,7 @@
         {
           "key": "34-code",
           "kind": "code",
-          "text": "Next, this line runs: Add subtree 1 (size 3) to node 0, its nearest same-letter ancestor."
+          "text": "So we add subtree 1 (size 3) to node 0, its nearest same-letter ancestor."
         },
         {
           "key": "34-impact",
@@ -981,7 +981,7 @@
         {
           "key": "35-code",
           "kind": "code",
-          "text": "Next, this line runs: Leave node 0."
+          "text": "So we leave node 0."
         },
         {
           "key": "35-impact",
@@ -996,7 +996,7 @@
         {
           "key": "36-code",
           "kind": "code",
-          "text": "Next, this line runs: No earlier a ancestor; remove a from the path."
+          "text": "So we no earlier a ancestor; remove a from the path."
         },
         {
           "key": "36-impact",
@@ -1011,7 +1011,7 @@
         {
           "key": "37-code",
           "kind": "code",
-          "text": "Next, this line runs: Subtree sizes: [4, 3, 2, 1]."
+          "text": "So we subtree sizes: [4, 3, 2, 1]."
         },
         {
           "key": "37-impact",
@@ -1033,7 +1033,7 @@
         {
           "key": "0-code",
           "kind": "code",
-          "text": "Next, this line runs: Start with 1 nodes; the root is node 0."
+          "text": "So we start with 1 nodes; the root is node 0."
         },
         {
           "key": "0-impact",
@@ -1048,7 +1048,7 @@
         {
           "key": "1-code",
           "kind": "code",
-          "text": "Next, this line runs: Every subtree starts with size 1."
+          "text": "So we every subtree starts with size 1."
         },
         {
           "key": "1-impact",
@@ -1063,7 +1063,7 @@
         {
           "key": "2-code",
           "kind": "code",
-          "text": "Next, this line runs: Push the root onto the stack."
+          "text": "So we push the root onto the stack."
         },
         {
           "key": "2-impact",
@@ -1078,7 +1078,7 @@
         {
           "key": "3-code",
           "kind": "code",
-          "text": "Next, this line runs: Enter node 0 (letter a)."
+          "text": "So we enter node 0 (letter a)."
         },
         {
           "key": "3-impact",
@@ -1093,7 +1093,7 @@
         {
           "key": "4-code",
           "kind": "code",
-          "text": "Next, this line runs: No ancestor with letter a yet."
+          "text": "So we no ancestor with letter a yet."
         },
         {
           "key": "4-impact",
@@ -1108,7 +1108,7 @@
         {
           "key": "5-code",
           "kind": "code",
-          "text": "Next, this line runs: Node 0 is now the latest a on this path."
+          "text": "So we node 0 is now the latest a on this path."
         },
         {
           "key": "5-impact",
@@ -1123,7 +1123,7 @@
         {
           "key": "6-code",
           "kind": "code",
-          "text": "Next, this line runs: Push the exit marker for node 0, so it runs after its subtree."
+          "text": "So we push the exit marker for node 0, so it runs after its subtree."
         },
         {
           "key": "6-impact",
@@ -1138,7 +1138,7 @@
         {
           "key": "7-code",
           "kind": "code",
-          "text": "Next, this line runs: Node 0 is a leaf; nothing to push."
+          "text": "So we node 0 is a leaf; nothing to push."
         },
         {
           "key": "7-impact",
@@ -1153,7 +1153,7 @@
         {
           "key": "8-code",
           "kind": "code",
-          "text": "Next, this line runs: Leave node 0."
+          "text": "So we leave node 0."
         },
         {
           "key": "8-impact",
@@ -1168,7 +1168,7 @@
         {
           "key": "9-code",
           "kind": "code",
-          "text": "Next, this line runs: No earlier a ancestor; remove a from the path."
+          "text": "So we no earlier a ancestor; remove a from the path."
         },
         {
           "key": "9-impact",
@@ -1183,7 +1183,7 @@
         {
           "key": "10-code",
           "kind": "code",
-          "text": "Next, this line runs: Subtree sizes: [1]."
+          "text": "So we subtree sizes: [1]."
         },
         {
           "key": "10-impact",
@@ -1205,7 +1205,7 @@
         {
           "key": "0-code",
           "kind": "code",
-          "text": "Next, this line runs: Start with 5 nodes; the root is node 0."
+          "text": "So we start with 5 nodes; the root is node 0."
         },
         {
           "key": "0-impact",
@@ -1220,7 +1220,7 @@
         {
           "key": "1-code",
           "kind": "code",
-          "text": "Next, this line runs: Link node 1 as a child of 0."
+          "text": "So we link node 1 as a child of 0."
         },
         {
           "key": "1-impact",
@@ -1235,7 +1235,7 @@
         {
           "key": "2-code",
           "kind": "code",
-          "text": "Next, this line runs: Link node 2 as a child of 0."
+          "text": "So we link node 2 as a child of 0."
         },
         {
           "key": "2-impact",
@@ -1250,7 +1250,7 @@
         {
           "key": "3-code",
           "kind": "code",
-          "text": "Next, this line runs: Link node 3 as a child of 0."
+          "text": "So we link node 3 as a child of 0."
         },
         {
           "key": "3-impact",
@@ -1265,7 +1265,7 @@
         {
           "key": "4-code",
           "kind": "code",
-          "text": "Next, this line runs: Link node 4 as a child of 0."
+          "text": "So we link node 4 as a child of 0."
         },
         {
           "key": "4-impact",
@@ -1280,7 +1280,7 @@
         {
           "key": "5-code",
           "kind": "code",
-          "text": "Next, this line runs: Every subtree starts with size 1."
+          "text": "So we every subtree starts with size 1."
         },
         {
           "key": "5-impact",
@@ -1295,7 +1295,7 @@
         {
           "key": "6-code",
           "kind": "code",
-          "text": "Next, this line runs: Push the root onto the stack."
+          "text": "So we push the root onto the stack."
         },
         {
           "key": "6-impact",
@@ -1310,7 +1310,7 @@
         {
           "key": "7-code",
           "kind": "code",
-          "text": "Next, this line runs: Enter node 0 (letter a)."
+          "text": "So we enter node 0 (letter a)."
         },
         {
           "key": "7-impact",
@@ -1325,7 +1325,7 @@
         {
           "key": "8-code",
           "kind": "code",
-          "text": "Next, this line runs: No ancestor with letter a yet."
+          "text": "So we no ancestor with letter a yet."
         },
         {
           "key": "8-impact",
@@ -1340,7 +1340,7 @@
         {
           "key": "9-code",
           "kind": "code",
-          "text": "Next, this line runs: Node 0 is now the latest a on this path."
+          "text": "So we node 0 is now the latest a on this path."
         },
         {
           "key": "9-impact",
@@ -1355,7 +1355,7 @@
         {
           "key": "10-code",
           "kind": "code",
-          "text": "Next, this line runs: Push the exit marker for node 0, so it runs after its subtree."
+          "text": "So we push the exit marker for node 0, so it runs after its subtree."
         },
         {
           "key": "10-impact",
@@ -1370,7 +1370,7 @@
         {
           "key": "11-code",
           "kind": "code",
-          "text": "Next, this line runs: Push children 4, 3, 2, 1 to visit next."
+          "text": "So we push children 4, 3, 2, 1 to visit next."
         },
         {
           "key": "11-impact",
@@ -1385,7 +1385,7 @@
         {
           "key": "12-code",
           "kind": "code",
-          "text": "Next, this line runs: Enter node 1 (letter a)."
+          "text": "So we enter node 1 (letter a)."
         },
         {
           "key": "12-impact",
@@ -1400,7 +1400,7 @@
         {
           "key": "13-code",
           "kind": "code",
-          "text": "Next, this line runs: Remember the previous a ancestor, node 0."
+          "text": "So we remember the previous a ancestor, node 0."
         },
         {
           "key": "13-impact",
@@ -1415,7 +1415,7 @@
         {
           "key": "14-code",
           "kind": "code",
-          "text": "Next, this line runs: Node 1 is now the latest a on this path."
+          "text": "So we node 1 is now the latest a on this path."
         },
         {
           "key": "14-impact",
@@ -1430,7 +1430,7 @@
         {
           "key": "15-code",
           "kind": "code",
-          "text": "Next, this line runs: Push the exit marker for node 1, so it runs after its subtree."
+          "text": "So we push the exit marker for node 1, so it runs after its subtree."
         },
         {
           "key": "15-impact",
@@ -1445,7 +1445,7 @@
         {
           "key": "16-code",
           "kind": "code",
-          "text": "Next, this line runs: Node 1 is a leaf; nothing to push."
+          "text": "So we node 1 is a leaf; nothing to push."
         },
         {
           "key": "16-impact",
@@ -1460,7 +1460,7 @@
         {
           "key": "17-code",
           "kind": "code",
-          "text": "Next, this line runs: Leave node 1."
+          "text": "So we leave node 1."
         },
         {
           "key": "17-impact",
@@ -1475,7 +1475,7 @@
         {
           "key": "18-code",
           "kind": "code",
-          "text": "Next, this line runs: Restore the a ancestor to node 0."
+          "text": "So we restore the a ancestor to node 0."
         },
         {
           "key": "18-impact",
@@ -1490,7 +1490,7 @@
         {
           "key": "19-code",
           "kind": "code",
-          "text": "Next, this line runs: Add subtree 1 (size 1) to node 0, its nearest same-letter ancestor."
+          "text": "So we add subtree 1 (size 1) to node 0, its nearest same-letter ancestor."
         },
         {
           "key": "19-impact",
@@ -1505,7 +1505,7 @@
         {
           "key": "20-code",
           "kind": "code",
-          "text": "Next, this line runs: Enter node 2 (letter a)."
+          "text": "So we enter node 2 (letter a)."
         },
         {
           "key": "20-impact",
@@ -1520,7 +1520,7 @@
         {
           "key": "21-code",
           "kind": "code",
-          "text": "Next, this line runs: Remember the previous a ancestor, node 0."
+          "text": "So we remember the previous a ancestor, node 0."
         },
         {
           "key": "21-impact",
@@ -1535,7 +1535,7 @@
         {
           "key": "22-code",
           "kind": "code",
-          "text": "Next, this line runs: Node 2 is now the latest a on this path."
+          "text": "So we node 2 is now the latest a on this path."
         },
         {
           "key": "22-impact",
@@ -1550,7 +1550,7 @@
         {
           "key": "23-code",
           "kind": "code",
-          "text": "Next, this line runs: Push the exit marker for node 2, so it runs after its subtree."
+          "text": "So we push the exit marker for node 2, so it runs after its subtree."
         },
         {
           "key": "23-impact",
@@ -1565,7 +1565,7 @@
         {
           "key": "24-code",
           "kind": "code",
-          "text": "Next, this line runs: Node 2 is a leaf; nothing to push."
+          "text": "So we node 2 is a leaf; nothing to push."
         },
         {
           "key": "24-impact",
@@ -1580,7 +1580,7 @@
         {
           "key": "25-code",
           "kind": "code",
-          "text": "Next, this line runs: Leave node 2."
+          "text": "So we leave node 2."
         },
         {
           "key": "25-impact",
@@ -1595,7 +1595,7 @@
         {
           "key": "26-code",
           "kind": "code",
-          "text": "Next, this line runs: Restore the a ancestor to node 0."
+          "text": "So we restore the a ancestor to node 0."
         },
         {
           "key": "26-impact",
@@ -1610,7 +1610,7 @@
         {
           "key": "27-code",
           "kind": "code",
-          "text": "Next, this line runs: Add subtree 2 (size 1) to node 0, its nearest same-letter ancestor."
+          "text": "So we add subtree 2 (size 1) to node 0, its nearest same-letter ancestor."
         },
         {
           "key": "27-impact",
@@ -1625,7 +1625,7 @@
         {
           "key": "28-code",
           "kind": "code",
-          "text": "Next, this line runs: Enter node 3 (letter a)."
+          "text": "So we enter node 3 (letter a)."
         },
         {
           "key": "28-impact",
@@ -1640,7 +1640,7 @@
         {
           "key": "29-code",
           "kind": "code",
-          "text": "Next, this line runs: Remember the previous a ancestor, node 0."
+          "text": "So we remember the previous a ancestor, node 0."
         },
         {
           "key": "29-impact",
@@ -1655,7 +1655,7 @@
         {
           "key": "30-code",
           "kind": "code",
-          "text": "Next, this line runs: Node 3 is now the latest a on this path."
+          "text": "So we node 3 is now the latest a on this path."
         },
         {
           "key": "30-impact",
@@ -1670,7 +1670,7 @@
         {
           "key": "31-code",
           "kind": "code",
-          "text": "Next, this line runs: Push the exit marker for node 3, so it runs after its subtree."
+          "text": "So we push the exit marker for node 3, so it runs after its subtree."
         },
         {
           "key": "31-impact",
@@ -1685,7 +1685,7 @@
         {
           "key": "32-code",
           "kind": "code",
-          "text": "Next, this line runs: Node 3 is a leaf; nothing to push."
+          "text": "So we node 3 is a leaf; nothing to push."
         },
         {
           "key": "32-impact",
@@ -1700,7 +1700,7 @@
         {
           "key": "33-code",
           "kind": "code",
-          "text": "Next, this line runs: Leave node 3."
+          "text": "So we leave node 3."
         },
         {
           "key": "33-impact",
@@ -1715,7 +1715,7 @@
         {
           "key": "34-code",
           "kind": "code",
-          "text": "Next, this line runs: Restore the a ancestor to node 0."
+          "text": "So we restore the a ancestor to node 0."
         },
         {
           "key": "34-impact",
@@ -1730,7 +1730,7 @@
         {
           "key": "35-code",
           "kind": "code",
-          "text": "Next, this line runs: Add subtree 3 (size 1) to node 0, its nearest same-letter ancestor."
+          "text": "So we add subtree 3 (size 1) to node 0, its nearest same-letter ancestor."
         },
         {
           "key": "35-impact",
@@ -1745,7 +1745,7 @@
         {
           "key": "36-code",
           "kind": "code",
-          "text": "Next, this line runs: Enter node 4 (letter a)."
+          "text": "So we enter node 4 (letter a)."
         },
         {
           "key": "36-impact",
@@ -1760,7 +1760,7 @@
         {
           "key": "37-code",
           "kind": "code",
-          "text": "Next, this line runs: Remember the previous a ancestor, node 0."
+          "text": "So we remember the previous a ancestor, node 0."
         },
         {
           "key": "37-impact",
@@ -1775,7 +1775,7 @@
         {
           "key": "38-code",
           "kind": "code",
-          "text": "Next, this line runs: Node 4 is now the latest a on this path."
+          "text": "So we node 4 is now the latest a on this path."
         },
         {
           "key": "38-impact",
@@ -1790,7 +1790,7 @@
         {
           "key": "39-code",
           "kind": "code",
-          "text": "Next, this line runs: Push the exit marker for node 4, so it runs after its subtree."
+          "text": "So we push the exit marker for node 4, so it runs after its subtree."
         },
         {
           "key": "39-impact",
@@ -1805,7 +1805,7 @@
         {
           "key": "40-code",
           "kind": "code",
-          "text": "Next, this line runs: Node 4 is a leaf; nothing to push."
+          "text": "So we node 4 is a leaf; nothing to push."
         },
         {
           "key": "40-impact",
@@ -1820,7 +1820,7 @@
         {
           "key": "41-code",
           "kind": "code",
-          "text": "Next, this line runs: Leave node 4."
+          "text": "So we leave node 4."
         },
         {
           "key": "41-impact",
@@ -1835,7 +1835,7 @@
         {
           "key": "42-code",
           "kind": "code",
-          "text": "Next, this line runs: Restore the a ancestor to node 0."
+          "text": "So we restore the a ancestor to node 0."
         },
         {
           "key": "42-impact",
@@ -1850,7 +1850,7 @@
         {
           "key": "43-code",
           "kind": "code",
-          "text": "Next, this line runs: Add subtree 4 (size 1) to node 0, its nearest same-letter ancestor."
+          "text": "So we add subtree 4 (size 1) to node 0, its nearest same-letter ancestor."
         },
         {
           "key": "43-impact",
@@ -1865,7 +1865,7 @@
         {
           "key": "44-code",
           "kind": "code",
-          "text": "Next, this line runs: Leave node 0."
+          "text": "So we leave node 0."
         },
         {
           "key": "44-impact",
@@ -1880,7 +1880,7 @@
         {
           "key": "45-code",
           "kind": "code",
-          "text": "Next, this line runs: No earlier a ancestor; remove a from the path."
+          "text": "So we no earlier a ancestor; remove a from the path."
         },
         {
           "key": "45-impact",
@@ -1895,7 +1895,7 @@
         {
           "key": "46-code",
           "kind": "code",
-          "text": "Next, this line runs: Subtree sizes: [5, 1, 1, 1, 1]."
+          "text": "So we subtree sizes: [5, 1, 1, 1, 1]."
         },
         {
           "key": "46-impact",
@@ -1917,7 +1917,7 @@
         {
           "key": "0-code",
           "kind": "code",
-          "text": "Next, this line runs: Start with 5 nodes; the root is node 0."
+          "text": "So we start with 5 nodes; the root is node 0."
         },
         {
           "key": "0-impact",
@@ -1932,7 +1932,7 @@
         {
           "key": "1-code",
           "kind": "code",
-          "text": "Next, this line runs: Link node 1 as a child of 0."
+          "text": "So we link node 1 as a child of 0."
         },
         {
           "key": "1-impact",
@@ -1947,7 +1947,7 @@
         {
           "key": "2-code",
           "kind": "code",
-          "text": "Next, this line runs: Link node 2 as a child of 1."
+          "text": "So we link node 2 as a child of 1."
         },
         {
           "key": "2-impact",
@@ -1962,7 +1962,7 @@
         {
           "key": "3-code",
           "kind": "code",
-          "text": "Next, this line runs: Link node 3 as a child of 2."
+          "text": "So we link node 3 as a child of 2."
         },
         {
           "key": "3-impact",
@@ -1977,7 +1977,7 @@
         {
           "key": "4-code",
           "kind": "code",
-          "text": "Next, this line runs: Link node 4 as a child of 0."
+          "text": "So we link node 4 as a child of 0."
         },
         {
           "key": "4-impact",
@@ -1992,7 +1992,7 @@
         {
           "key": "5-code",
           "kind": "code",
-          "text": "Next, this line runs: Every subtree starts with size 1."
+          "text": "So we every subtree starts with size 1."
         },
         {
           "key": "5-impact",
@@ -2007,7 +2007,7 @@
         {
           "key": "6-code",
           "kind": "code",
-          "text": "Next, this line runs: Push the root onto the stack."
+          "text": "So we push the root onto the stack."
         },
         {
           "key": "6-impact",
@@ -2022,7 +2022,7 @@
         {
           "key": "7-code",
           "kind": "code",
-          "text": "Next, this line runs: Enter node 0 (letter a)."
+          "text": "So we enter node 0 (letter a)."
         },
         {
           "key": "7-impact",
@@ -2037,7 +2037,7 @@
         {
           "key": "8-code",
           "kind": "code",
-          "text": "Next, this line runs: No ancestor with letter a yet."
+          "text": "So we no ancestor with letter a yet."
         },
         {
           "key": "8-impact",
@@ -2052,7 +2052,7 @@
         {
           "key": "9-code",
           "kind": "code",
-          "text": "Next, this line runs: Node 0 is now the latest a on this path."
+          "text": "So we node 0 is now the latest a on this path."
         },
         {
           "key": "9-impact",
@@ -2067,7 +2067,7 @@
         {
           "key": "10-code",
           "kind": "code",
-          "text": "Next, this line runs: Push the exit marker for node 0, so it runs after its subtree."
+          "text": "So we push the exit marker for node 0, so it runs after its subtree."
         },
         {
           "key": "10-impact",
@@ -2082,7 +2082,7 @@
         {
           "key": "11-code",
           "kind": "code",
-          "text": "Next, this line runs: Push children 4, 1 to visit next."
+          "text": "So we push children 4, 1 to visit next."
         },
         {
           "key": "11-impact",
@@ -2097,7 +2097,7 @@
         {
           "key": "12-code",
           "kind": "code",
-          "text": "Next, this line runs: Enter node 1 (letter b)."
+          "text": "So we enter node 1 (letter b)."
         },
         {
           "key": "12-impact",
@@ -2112,7 +2112,7 @@
         {
           "key": "13-code",
           "kind": "code",
-          "text": "Next, this line runs: No ancestor with letter b yet."
+          "text": "So we no ancestor with letter b yet."
         },
         {
           "key": "13-impact",
@@ -2127,7 +2127,7 @@
         {
           "key": "14-code",
           "kind": "code",
-          "text": "Next, this line runs: Node 1 is now the latest b on this path."
+          "text": "So we node 1 is now the latest b on this path."
         },
         {
           "key": "14-impact",
@@ -2142,7 +2142,7 @@
         {
           "key": "15-code",
           "kind": "code",
-          "text": "Next, this line runs: Push the exit marker for node 1, so it runs after its subtree."
+          "text": "So we push the exit marker for node 1, so it runs after its subtree."
         },
         {
           "key": "15-impact",
@@ -2157,7 +2157,7 @@
         {
           "key": "16-code",
           "kind": "code",
-          "text": "Next, this line runs: Push children 2 to visit next."
+          "text": "So we push children 2 to visit next."
         },
         {
           "key": "16-impact",
@@ -2172,7 +2172,7 @@
         {
           "key": "17-code",
           "kind": "code",
-          "text": "Next, this line runs: Enter node 2 (letter a)."
+          "text": "So we enter node 2 (letter a)."
         },
         {
           "key": "17-impact",
@@ -2187,7 +2187,7 @@
         {
           "key": "18-code",
           "kind": "code",
-          "text": "Next, this line runs: Remember the previous a ancestor, node 0."
+          "text": "So we remember the previous a ancestor, node 0."
         },
         {
           "key": "18-impact",
@@ -2202,7 +2202,7 @@
         {
           "key": "19-code",
           "kind": "code",
-          "text": "Next, this line runs: Node 2 is now the latest a on this path."
+          "text": "So we node 2 is now the latest a on this path."
         },
         {
           "key": "19-impact",
@@ -2217,7 +2217,7 @@
         {
           "key": "20-code",
           "kind": "code",
-          "text": "Next, this line runs: Push the exit marker for node 2, so it runs after its subtree."
+          "text": "So we push the exit marker for node 2, so it runs after its subtree."
         },
         {
           "key": "20-impact",
@@ -2232,7 +2232,7 @@
         {
           "key": "21-code",
           "kind": "code",
-          "text": "Next, this line runs: Push children 3 to visit next."
+          "text": "So we push children 3 to visit next."
         },
         {
           "key": "21-impact",
@@ -2247,7 +2247,7 @@
         {
           "key": "22-code",
           "kind": "code",
-          "text": "Next, this line runs: Enter node 3 (letter c)."
+          "text": "So we enter node 3 (letter c)."
         },
         {
           "key": "22-impact",
@@ -2262,7 +2262,7 @@
         {
           "key": "23-code",
           "kind": "code",
-          "text": "Next, this line runs: No ancestor with letter c yet."
+          "text": "So we no ancestor with letter c yet."
         },
         {
           "key": "23-impact",
@@ -2277,7 +2277,7 @@
         {
           "key": "24-code",
           "kind": "code",
-          "text": "Next, this line runs: Node 3 is now the latest c on this path."
+          "text": "So we node 3 is now the latest c on this path."
         },
         {
           "key": "24-impact",
@@ -2292,7 +2292,7 @@
         {
           "key": "25-code",
           "kind": "code",
-          "text": "Next, this line runs: Push the exit marker for node 3, so it runs after its subtree."
+          "text": "So we push the exit marker for node 3, so it runs after its subtree."
         },
         {
           "key": "25-impact",
@@ -2307,7 +2307,7 @@
         {
           "key": "26-code",
           "kind": "code",
-          "text": "Next, this line runs: Node 3 is a leaf; nothing to push."
+          "text": "So we node 3 is a leaf; nothing to push."
         },
         {
           "key": "26-impact",
@@ -2322,7 +2322,7 @@
         {
           "key": "27-code",
           "kind": "code",
-          "text": "Next, this line runs: Leave node 3."
+          "text": "So we leave node 3."
         },
         {
           "key": "27-impact",
@@ -2337,7 +2337,7 @@
         {
           "key": "28-code",
           "kind": "code",
-          "text": "Next, this line runs: No earlier c ancestor; remove c from the path."
+          "text": "So we no earlier c ancestor; remove c from the path."
         },
         {
           "key": "28-impact",
@@ -2352,7 +2352,7 @@
         {
           "key": "29-code",
           "kind": "code",
-          "text": "Next, this line runs: Add subtree 3 (size 1) to node 2, its original parent."
+          "text": "So we add subtree 3 (size 1) to node 2, its original parent."
         },
         {
           "key": "29-impact",
@@ -2367,7 +2367,7 @@
         {
           "key": "30-code",
           "kind": "code",
-          "text": "Next, this line runs: Leave node 2."
+          "text": "So we leave node 2."
         },
         {
           "key": "30-impact",
@@ -2382,7 +2382,7 @@
         {
           "key": "31-code",
           "kind": "code",
-          "text": "Next, this line runs: Restore the a ancestor to node 0."
+          "text": "So we restore the a ancestor to node 0."
         },
         {
           "key": "31-impact",
@@ -2397,7 +2397,7 @@
         {
           "key": "32-code",
           "kind": "code",
-          "text": "Next, this line runs: Add subtree 2 (size 2) to node 0, its nearest same-letter ancestor."
+          "text": "So we add subtree 2 (size 2) to node 0, its nearest same-letter ancestor."
         },
         {
           "key": "32-impact",
@@ -2412,7 +2412,7 @@
         {
           "key": "33-code",
           "kind": "code",
-          "text": "Next, this line runs: Leave node 1."
+          "text": "So we leave node 1."
         },
         {
           "key": "33-impact",
@@ -2427,7 +2427,7 @@
         {
           "key": "34-code",
           "kind": "code",
-          "text": "Next, this line runs: No earlier b ancestor; remove b from the path."
+          "text": "So we no earlier b ancestor; remove b from the path."
         },
         {
           "key": "34-impact",
@@ -2442,7 +2442,7 @@
         {
           "key": "35-code",
           "kind": "code",
-          "text": "Next, this line runs: Add subtree 1 (size 1) to node 0, its original parent."
+          "text": "So we add subtree 1 (size 1) to node 0, its original parent."
         },
         {
           "key": "35-impact",
@@ -2457,7 +2457,7 @@
         {
           "key": "36-code",
           "kind": "code",
-          "text": "Next, this line runs: Enter node 4 (letter a)."
+          "text": "So we enter node 4 (letter a)."
         },
         {
           "key": "36-impact",
@@ -2472,7 +2472,7 @@
         {
           "key": "37-code",
           "kind": "code",
-          "text": "Next, this line runs: Remember the previous a ancestor, node 0."
+          "text": "So we remember the previous a ancestor, node 0."
         },
         {
           "key": "37-impact",
@@ -2487,7 +2487,7 @@
         {
           "key": "38-code",
           "kind": "code",
-          "text": "Next, this line runs: Node 4 is now the latest a on this path."
+          "text": "So we node 4 is now the latest a on this path."
         },
         {
           "key": "38-impact",
@@ -2502,7 +2502,7 @@
         {
           "key": "39-code",
           "kind": "code",
-          "text": "Next, this line runs: Push the exit marker for node 4, so it runs after its subtree."
+          "text": "So we push the exit marker for node 4, so it runs after its subtree."
         },
         {
           "key": "39-impact",
@@ -2517,7 +2517,7 @@
         {
           "key": "40-code",
           "kind": "code",
-          "text": "Next, this line runs: Node 4 is a leaf; nothing to push."
+          "text": "So we node 4 is a leaf; nothing to push."
         },
         {
           "key": "40-impact",
@@ -2532,7 +2532,7 @@
         {
           "key": "41-code",
           "kind": "code",
-          "text": "Next, this line runs: Leave node 4."
+          "text": "So we leave node 4."
         },
         {
           "key": "41-impact",
@@ -2547,7 +2547,7 @@
         {
           "key": "42-code",
           "kind": "code",
-          "text": "Next, this line runs: Restore the a ancestor to node 0."
+          "text": "So we restore the a ancestor to node 0."
         },
         {
           "key": "42-impact",
@@ -2562,7 +2562,7 @@
         {
           "key": "43-code",
           "kind": "code",
-          "text": "Next, this line runs: Add subtree 4 (size 1) to node 0, its nearest same-letter ancestor."
+          "text": "So we add subtree 4 (size 1) to node 0, its nearest same-letter ancestor."
         },
         {
           "key": "43-impact",
@@ -2577,7 +2577,7 @@
         {
           "key": "44-code",
           "kind": "code",
-          "text": "Next, this line runs: Leave node 0."
+          "text": "So we leave node 0."
         },
         {
           "key": "44-impact",
@@ -2592,7 +2592,7 @@
         {
           "key": "45-code",
           "kind": "code",
-          "text": "Next, this line runs: No earlier a ancestor; remove a from the path."
+          "text": "So we no earlier a ancestor; remove a from the path."
         },
         {
           "key": "45-impact",
@@ -2607,7 +2607,7 @@
         {
           "key": "46-code",
           "kind": "code",
-          "text": "Next, this line runs: Subtree sizes: [5, 1, 2, 1, 1]."
+          "text": "So we subtree sizes: [5, 1, 2, 1, 1]."
         },
         {
           "key": "46-impact",
@@ -2629,7 +2629,7 @@
         {
           "key": "0-code",
           "kind": "code",
-          "text": "Next, this line runs: Start with 10 nodes; the root is node 0."
+          "text": "So we start with 10 nodes; the root is node 0."
         },
         {
           "key": "0-impact",
@@ -2644,7 +2644,7 @@
         {
           "key": "1-code",
           "kind": "code",
-          "text": "Next, this line runs: Link node 1 as a child of 0."
+          "text": "So we link node 1 as a child of 0."
         },
         {
           "key": "1-impact",
@@ -2659,7 +2659,7 @@
         {
           "key": "2-code",
           "kind": "code",
-          "text": "Next, this line runs: Link node 2 as a child of 1."
+          "text": "So we link node 2 as a child of 1."
         },
         {
           "key": "2-impact",
@@ -2674,7 +2674,7 @@
         {
           "key": "3-code",
           "kind": "code",
-          "text": "Next, this line runs: Link node 3 as a child of 2."
+          "text": "So we link node 3 as a child of 2."
         },
         {
           "key": "3-impact",
@@ -2689,7 +2689,7 @@
         {
           "key": "4-code",
           "kind": "code",
-          "text": "Next, this line runs: Link node 4 as a child of 3."
+          "text": "So we link node 4 as a child of 3."
         },
         {
           "key": "4-impact",
@@ -2704,7 +2704,7 @@
         {
           "key": "5-code",
           "kind": "code",
-          "text": "Next, this line runs: Link node 5 as a child of 4."
+          "text": "So we link node 5 as a child of 4."
         },
         {
           "key": "5-impact",
@@ -2719,7 +2719,7 @@
         {
           "key": "6-code",
           "kind": "code",
-          "text": "Next, this line runs: Link node 6 as a child of 5."
+          "text": "So we link node 6 as a child of 5."
         },
         {
           "key": "6-impact",
@@ -2734,7 +2734,7 @@
         {
           "key": "7-code",
           "kind": "code",
-          "text": "Next, this line runs: Link node 7 as a child of 6."
+          "text": "So we link node 7 as a child of 6."
         },
         {
           "key": "7-impact",
@@ -2749,7 +2749,7 @@
         {
           "key": "8-code",
           "kind": "code",
-          "text": "Next, this line runs: Link node 8 as a child of 7."
+          "text": "So we link node 8 as a child of 7."
         },
         {
           "key": "8-impact",
@@ -2764,7 +2764,7 @@
         {
           "key": "9-code",
           "kind": "code",
-          "text": "Next, this line runs: Link node 9 as a child of 8."
+          "text": "So we link node 9 as a child of 8."
         },
         {
           "key": "9-impact",
@@ -2779,7 +2779,7 @@
         {
           "key": "10-code",
           "kind": "code",
-          "text": "Next, this line runs: Every subtree starts with size 1."
+          "text": "So we every subtree starts with size 1."
         },
         {
           "key": "10-impact",
@@ -2794,7 +2794,7 @@
         {
           "key": "11-code",
           "kind": "code",
-          "text": "Next, this line runs: Push the root onto the stack."
+          "text": "So we push the root onto the stack."
         },
         {
           "key": "11-impact",
@@ -2809,7 +2809,7 @@
         {
           "key": "12-code",
           "kind": "code",
-          "text": "Next, this line runs: Enter node 0 (letter a)."
+          "text": "So we enter node 0 (letter a)."
         },
         {
           "key": "12-impact",
@@ -2824,7 +2824,7 @@
         {
           "key": "13-code",
           "kind": "code",
-          "text": "Next, this line runs: No ancestor with letter a yet."
+          "text": "So we no ancestor with letter a yet."
         },
         {
           "key": "13-impact",
@@ -2839,7 +2839,7 @@
         {
           "key": "14-code",
           "kind": "code",
-          "text": "Next, this line runs: Node 0 is now the latest a on this path."
+          "text": "So we node 0 is now the latest a on this path."
         },
         {
           "key": "14-impact",
@@ -2854,7 +2854,7 @@
         {
           "key": "15-code",
           "kind": "code",
-          "text": "Next, this line runs: Push the exit marker for node 0, so it runs after its subtree."
+          "text": "So we push the exit marker for node 0, so it runs after its subtree."
         },
         {
           "key": "15-impact",
@@ -2869,7 +2869,7 @@
         {
           "key": "16-code",
           "kind": "code",
-          "text": "Next, this line runs: Push children 1 to visit next."
+          "text": "So we push children 1 to visit next."
         },
         {
           "key": "16-impact",
@@ -2884,7 +2884,7 @@
         {
           "key": "17-code",
           "kind": "code",
-          "text": "Next, this line runs: Enter node 1 (letter b)."
+          "text": "So we enter node 1 (letter b)."
         },
         {
           "key": "17-impact",
@@ -2899,7 +2899,7 @@
         {
           "key": "18-code",
           "kind": "code",
-          "text": "Next, this line runs: No ancestor with letter b yet."
+          "text": "So we no ancestor with letter b yet."
         },
         {
           "key": "18-impact",
@@ -2914,7 +2914,7 @@
         {
           "key": "19-code",
           "kind": "code",
-          "text": "Next, this line runs: Node 1 is now the latest b on this path."
+          "text": "So we node 1 is now the latest b on this path."
         },
         {
           "key": "19-impact",
@@ -2929,7 +2929,7 @@
         {
           "key": "20-code",
           "kind": "code",
-          "text": "Next, this line runs: Push the exit marker for node 1, so it runs after its subtree."
+          "text": "So we push the exit marker for node 1, so it runs after its subtree."
         },
         {
           "key": "20-impact",
@@ -2944,7 +2944,7 @@
         {
           "key": "21-code",
           "kind": "code",
-          "text": "Next, this line runs: Push children 2 to visit next."
+          "text": "So we push children 2 to visit next."
         },
         {
           "key": "21-impact",
@@ -2959,7 +2959,7 @@
         {
           "key": "22-code",
           "kind": "code",
-          "text": "Next, this line runs: Enter node 2 (letter c)."
+          "text": "So we enter node 2 (letter c)."
         },
         {
           "key": "22-impact",
@@ -2974,7 +2974,7 @@
         {
           "key": "23-code",
           "kind": "code",
-          "text": "Next, this line runs: No ancestor with letter c yet."
+          "text": "So we no ancestor with letter c yet."
         },
         {
           "key": "23-impact",
@@ -2989,7 +2989,7 @@
         {
           "key": "24-code",
           "kind": "code",
-          "text": "Next, this line runs: Node 2 is now the latest c on this path."
+          "text": "So we node 2 is now the latest c on this path."
         },
         {
           "key": "24-impact",
@@ -3004,7 +3004,7 @@
         {
           "key": "25-code",
           "kind": "code",
-          "text": "Next, this line runs: Push the exit marker for node 2, so it runs after its subtree."
+          "text": "So we push the exit marker for node 2, so it runs after its subtree."
         },
         {
           "key": "25-impact",
@@ -3019,7 +3019,7 @@
         {
           "key": "26-code",
           "kind": "code",
-          "text": "Next, this line runs: Push children 3 to visit next."
+          "text": "So we push children 3 to visit next."
         },
         {
           "key": "26-impact",
@@ -3034,7 +3034,7 @@
         {
           "key": "27-code",
           "kind": "code",
-          "text": "Next, this line runs: Enter node 3 (letter d)."
+          "text": "So we enter node 3 (letter d)."
         },
         {
           "key": "27-impact",
@@ -3049,7 +3049,7 @@
         {
           "key": "28-code",
           "kind": "code",
-          "text": "Next, this line runs: No ancestor with letter d yet."
+          "text": "So we no ancestor with letter d yet."
         },
         {
           "key": "28-impact",
@@ -3064,7 +3064,7 @@
         {
           "key": "29-code",
           "kind": "code",
-          "text": "Next, this line runs: Node 3 is now the latest d on this path."
+          "text": "So we node 3 is now the latest d on this path."
         },
         {
           "key": "29-impact",
@@ -3079,7 +3079,7 @@
         {
           "key": "30-code",
           "kind": "code",
-          "text": "Next, this line runs: Push the exit marker for node 3, so it runs after its subtree."
+          "text": "So we push the exit marker for node 3, so it runs after its subtree."
         },
         {
           "key": "30-impact",
@@ -3094,7 +3094,7 @@
         {
           "key": "31-code",
           "kind": "code",
-          "text": "Next, this line runs: Push children 4 to visit next."
+          "text": "So we push children 4 to visit next."
         },
         {
           "key": "31-impact",
@@ -3109,7 +3109,7 @@
         {
           "key": "32-code",
           "kind": "code",
-          "text": "Next, this line runs: Enter node 4 (letter e)."
+          "text": "So we enter node 4 (letter e)."
         },
         {
           "key": "32-impact",
@@ -3124,7 +3124,7 @@
         {
           "key": "33-code",
           "kind": "code",
-          "text": "Next, this line runs: No ancestor with letter e yet."
+          "text": "So we no ancestor with letter e yet."
         },
         {
           "key": "33-impact",
@@ -3139,7 +3139,7 @@
         {
           "key": "34-code",
           "kind": "code",
-          "text": "Next, this line runs: Node 4 is now the latest e on this path."
+          "text": "So we node 4 is now the latest e on this path."
         },
         {
           "key": "34-impact",
@@ -3154,7 +3154,7 @@
         {
           "key": "35-code",
           "kind": "code",
-          "text": "Next, this line runs: Push the exit marker for node 4, so it runs after its subtree."
+          "text": "So we push the exit marker for node 4, so it runs after its subtree."
         },
         {
           "key": "35-impact",
@@ -3169,7 +3169,7 @@
         {
           "key": "36-code",
           "kind": "code",
-          "text": "Next, this line runs: Push children 5 to visit next."
+          "text": "So we push children 5 to visit next."
         },
         {
           "key": "36-impact",
@@ -3184,7 +3184,7 @@
         {
           "key": "37-code",
           "kind": "code",
-          "text": "Next, this line runs: Enter node 5 (letter a)."
+          "text": "So we enter node 5 (letter a)."
         },
         {
           "key": "37-impact",
@@ -3199,7 +3199,7 @@
         {
           "key": "38-code",
           "kind": "code",
-          "text": "Next, this line runs: Remember the previous a ancestor, node 0."
+          "text": "So we remember the previous a ancestor, node 0."
         },
         {
           "key": "38-impact",
@@ -3214,7 +3214,7 @@
         {
           "key": "39-code",
           "kind": "code",
-          "text": "Next, this line runs: Node 5 is now the latest a on this path."
+          "text": "So we node 5 is now the latest a on this path."
         },
         {
           "key": "39-impact",
@@ -3229,7 +3229,7 @@
         {
           "key": "40-code",
           "kind": "code",
-          "text": "Next, this line runs: Push the exit marker for node 5, so it runs after its subtree."
+          "text": "So we push the exit marker for node 5, so it runs after its subtree."
         },
         {
           "key": "40-impact",
@@ -3244,7 +3244,7 @@
         {
           "key": "41-code",
           "kind": "code",
-          "text": "Next, this line runs: Push children 6 to visit next."
+          "text": "So we push children 6 to visit next."
         },
         {
           "key": "41-impact",
@@ -3259,7 +3259,7 @@
         {
           "key": "42-code",
           "kind": "code",
-          "text": "Next, this line runs: Enter node 6 (letter b)."
+          "text": "So we enter node 6 (letter b)."
         },
         {
           "key": "42-impact",
@@ -3274,7 +3274,7 @@
         {
           "key": "43-code",
           "kind": "code",
-          "text": "Next, this line runs: Remember the previous b ancestor, node 1."
+          "text": "So we remember the previous b ancestor, node 1."
         },
         {
           "key": "43-impact",
@@ -3289,7 +3289,7 @@
         {
           "key": "44-code",
           "kind": "code",
-          "text": "Next, this line runs: Node 6 is now the latest b on this path."
+          "text": "So we node 6 is now the latest b on this path."
         },
         {
           "key": "44-impact",
@@ -3304,7 +3304,7 @@
         {
           "key": "45-code",
           "kind": "code",
-          "text": "Next, this line runs: Push the exit marker for node 6, so it runs after its subtree."
+          "text": "So we push the exit marker for node 6, so it runs after its subtree."
         },
         {
           "key": "45-impact",
@@ -3319,7 +3319,7 @@
         {
           "key": "46-code",
           "kind": "code",
-          "text": "Next, this line runs: Push children 7 to visit next."
+          "text": "So we push children 7 to visit next."
         },
         {
           "key": "46-impact",
@@ -3334,7 +3334,7 @@
         {
           "key": "47-code",
           "kind": "code",
-          "text": "Next, this line runs: Enter node 7 (letter c)."
+          "text": "So we enter node 7 (letter c)."
         },
         {
           "key": "47-impact",
@@ -3349,7 +3349,7 @@
         {
           "key": "48-code",
           "kind": "code",
-          "text": "Next, this line runs: Remember the previous c ancestor, node 2."
+          "text": "So we remember the previous c ancestor, node 2."
         },
         {
           "key": "48-impact",
@@ -3364,7 +3364,7 @@
         {
           "key": "49-code",
           "kind": "code",
-          "text": "Next, this line runs: Node 7 is now the latest c on this path."
+          "text": "So we node 7 is now the latest c on this path."
         },
         {
           "key": "49-impact",
@@ -3379,7 +3379,7 @@
         {
           "key": "50-code",
           "kind": "code",
-          "text": "Next, this line runs: Push the exit marker for node 7, so it runs after its subtree."
+          "text": "So we push the exit marker for node 7, so it runs after its subtree."
         },
         {
           "key": "50-impact",
@@ -3394,7 +3394,7 @@
         {
           "key": "51-code",
           "kind": "code",
-          "text": "Next, this line runs: Push children 8 to visit next."
+          "text": "So we push children 8 to visit next."
         },
         {
           "key": "51-impact",
@@ -3409,7 +3409,7 @@
         {
           "key": "52-code",
           "kind": "code",
-          "text": "Next, this line runs: Enter node 8 (letter d)."
+          "text": "So we enter node 8 (letter d)."
         },
         {
           "key": "52-impact",
@@ -3424,7 +3424,7 @@
         {
           "key": "53-code",
           "kind": "code",
-          "text": "Next, this line runs: Remember the previous d ancestor, node 3."
+          "text": "So we remember the previous d ancestor, node 3."
         },
         {
           "key": "53-impact",
@@ -3439,7 +3439,7 @@
         {
           "key": "54-code",
           "kind": "code",
-          "text": "Next, this line runs: Node 8 is now the latest d on this path."
+          "text": "So we node 8 is now the latest d on this path."
         },
         {
           "key": "54-impact",
@@ -3454,7 +3454,7 @@
         {
           "key": "55-code",
           "kind": "code",
-          "text": "Next, this line runs: Push the exit marker for node 8, so it runs after its subtree."
+          "text": "So we push the exit marker for node 8, so it runs after its subtree."
         },
         {
           "key": "55-impact",
@@ -3469,7 +3469,7 @@
         {
           "key": "56-code",
           "kind": "code",
-          "text": "Next, this line runs: Push children 9 to visit next."
+          "text": "So we push children 9 to visit next."
         },
         {
           "key": "56-impact",
@@ -3484,7 +3484,7 @@
         {
           "key": "57-code",
           "kind": "code",
-          "text": "Next, this line runs: Enter node 9 (letter e)."
+          "text": "So we enter node 9 (letter e)."
         },
         {
           "key": "57-impact",
@@ -3499,7 +3499,7 @@
         {
           "key": "58-code",
           "kind": "code",
-          "text": "Next, this line runs: Remember the previous e ancestor, node 4."
+          "text": "So we remember the previous e ancestor, node 4."
         },
         {
           "key": "58-impact",
@@ -3514,7 +3514,7 @@
         {
           "key": "59-code",
           "kind": "code",
-          "text": "Next, this line runs: Node 9 is now the latest e on this path."
+          "text": "So we node 9 is now the latest e on this path."
         },
         {
           "key": "59-impact",
@@ -3529,7 +3529,7 @@
         {
           "key": "60-code",
           "kind": "code",
-          "text": "Next, this line runs: Push the exit marker for node 9, so it runs after its subtree."
+          "text": "So we push the exit marker for node 9, so it runs after its subtree."
         },
         {
           "key": "60-impact",
@@ -3544,7 +3544,7 @@
         {
           "key": "61-code",
           "kind": "code",
-          "text": "Next, this line runs: Node 9 is a leaf; nothing to push."
+          "text": "So we node 9 is a leaf; nothing to push."
         },
         {
           "key": "61-impact",
@@ -3559,7 +3559,7 @@
         {
           "key": "62-code",
           "kind": "code",
-          "text": "Next, this line runs: Leave node 9."
+          "text": "So we leave node 9."
         },
         {
           "key": "62-impact",
@@ -3574,7 +3574,7 @@
         {
           "key": "63-code",
           "kind": "code",
-          "text": "Next, this line runs: Restore the e ancestor to node 4."
+          "text": "So we restore the e ancestor to node 4."
         },
         {
           "key": "63-impact",
@@ -3589,7 +3589,7 @@
         {
           "key": "64-code",
           "kind": "code",
-          "text": "Next, this line runs: Add subtree 9 (size 1) to node 4, its nearest same-letter ancestor."
+          "text": "So we add subtree 9 (size 1) to node 4, its nearest same-letter ancestor."
         },
         {
           "key": "64-impact",
@@ -3604,7 +3604,7 @@
         {
           "key": "65-code",
           "kind": "code",
-          "text": "Next, this line runs: Leave node 8."
+          "text": "So we leave node 8."
         },
         {
           "key": "65-impact",
@@ -3619,7 +3619,7 @@
         {
           "key": "66-code",
           "kind": "code",
-          "text": "Next, this line runs: Restore the d ancestor to node 3."
+          "text": "So we restore the d ancestor to node 3."
         },
         {
           "key": "66-impact",
@@ -3634,7 +3634,7 @@
         {
           "key": "67-code",
           "kind": "code",
-          "text": "Next, this line runs: Add subtree 8 (size 1) to node 3, its nearest same-letter ancestor."
+          "text": "So we add subtree 8 (size 1) to node 3, its nearest same-letter ancestor."
         },
         {
           "key": "67-impact",
@@ -3649,7 +3649,7 @@
         {
           "key": "68-code",
           "kind": "code",
-          "text": "Next, this line runs: Leave node 7."
+          "text": "So we leave node 7."
         },
         {
           "key": "68-impact",
@@ -3664,7 +3664,7 @@
         {
           "key": "69-code",
           "kind": "code",
-          "text": "Next, this line runs: Restore the c ancestor to node 2."
+          "text": "So we restore the c ancestor to node 2."
         },
         {
           "key": "69-impact",
@@ -3679,7 +3679,7 @@
         {
           "key": "70-code",
           "kind": "code",
-          "text": "Next, this line runs: Add subtree 7 (size 1) to node 2, its nearest same-letter ancestor."
+          "text": "So we add subtree 7 (size 1) to node 2, its nearest same-letter ancestor."
         },
         {
           "key": "70-impact",
@@ -3694,7 +3694,7 @@
         {
           "key": "71-code",
           "kind": "code",
-          "text": "Next, this line runs: Leave node 6."
+          "text": "So we leave node 6."
         },
         {
           "key": "71-impact",
@@ -3709,7 +3709,7 @@
         {
           "key": "72-code",
           "kind": "code",
-          "text": "Next, this line runs: Restore the b ancestor to node 1."
+          "text": "So we restore the b ancestor to node 1."
         },
         {
           "key": "72-impact",
@@ -3724,7 +3724,7 @@
         {
           "key": "73-code",
           "kind": "code",
-          "text": "Next, this line runs: Add subtree 6 (size 1) to node 1, its nearest same-letter ancestor."
+          "text": "So we add subtree 6 (size 1) to node 1, its nearest same-letter ancestor."
         },
         {
           "key": "73-impact",
@@ -3739,7 +3739,7 @@
         {
           "key": "74-code",
           "kind": "code",
-          "text": "Next, this line runs: Leave node 5."
+          "text": "So we leave node 5."
         },
         {
           "key": "74-impact",
@@ -3754,7 +3754,7 @@
         {
           "key": "75-code",
           "kind": "code",
-          "text": "Next, this line runs: Restore the a ancestor to node 0."
+          "text": "So we restore the a ancestor to node 0."
         },
         {
           "key": "75-impact",
@@ -3769,7 +3769,7 @@
         {
           "key": "76-code",
           "kind": "code",
-          "text": "Next, this line runs: Add subtree 5 (size 1) to node 0, its nearest same-letter ancestor."
+          "text": "So we add subtree 5 (size 1) to node 0, its nearest same-letter ancestor."
         },
         {
           "key": "76-impact",
@@ -3784,7 +3784,7 @@
         {
           "key": "77-code",
           "kind": "code",
-          "text": "Next, this line runs: Leave node 4."
+          "text": "So we leave node 4."
         },
         {
           "key": "77-impact",
@@ -3799,7 +3799,7 @@
         {
           "key": "78-code",
           "kind": "code",
-          "text": "Next, this line runs: No earlier e ancestor; remove e from the path."
+          "text": "So we no earlier e ancestor; remove e from the path."
         },
         {
           "key": "78-impact",
@@ -3814,7 +3814,7 @@
         {
           "key": "79-code",
           "kind": "code",
-          "text": "Next, this line runs: Add subtree 4 (size 2) to node 3, its original parent."
+          "text": "So we add subtree 4 (size 2) to node 3, its original parent."
         },
         {
           "key": "79-impact",
@@ -3829,7 +3829,7 @@
         {
           "key": "80-code",
           "kind": "code",
-          "text": "Next, this line runs: Leave node 3."
+          "text": "So we leave node 3."
         },
         {
           "key": "80-impact",
@@ -3844,7 +3844,7 @@
         {
           "key": "81-code",
           "kind": "code",
-          "text": "Next, this line runs: No earlier d ancestor; remove d from the path."
+          "text": "So we no earlier d ancestor; remove d from the path."
         },
         {
           "key": "81-impact",
@@ -3859,7 +3859,7 @@
         {
           "key": "82-code",
           "kind": "code",
-          "text": "Next, this line runs: Add subtree 3 (size 4) to node 2, its original parent."
+          "text": "So we add subtree 3 (size 4) to node 2, its original parent."
         },
         {
           "key": "82-impact",
@@ -3874,7 +3874,7 @@
         {
           "key": "83-code",
           "kind": "code",
-          "text": "Next, this line runs: Leave node 2."
+          "text": "So we leave node 2."
         },
         {
           "key": "83-impact",
@@ -3889,7 +3889,7 @@
         {
           "key": "84-code",
           "kind": "code",
-          "text": "Next, this line runs: No earlier c ancestor; remove c from the path."
+          "text": "So we no earlier c ancestor; remove c from the path."
         },
         {
           "key": "84-impact",
@@ -3904,7 +3904,7 @@
         {
           "key": "85-code",
           "kind": "code",
-          "text": "Next, this line runs: Add subtree 2 (size 6) to node 1, its original parent."
+          "text": "So we add subtree 2 (size 6) to node 1, its original parent."
         },
         {
           "key": "85-impact",
@@ -3919,7 +3919,7 @@
         {
           "key": "86-code",
           "kind": "code",
-          "text": "Next, this line runs: Leave node 1."
+          "text": "So we leave node 1."
         },
         {
           "key": "86-impact",
@@ -3934,7 +3934,7 @@
         {
           "key": "87-code",
           "kind": "code",
-          "text": "Next, this line runs: No earlier b ancestor; remove b from the path."
+          "text": "So we no earlier b ancestor; remove b from the path."
         },
         {
           "key": "87-impact",
@@ -3949,7 +3949,7 @@
         {
           "key": "88-code",
           "kind": "code",
-          "text": "Next, this line runs: Add subtree 1 (size 8) to node 0, its original parent."
+          "text": "So we add subtree 1 (size 8) to node 0, its original parent."
         },
         {
           "key": "88-impact",
@@ -3964,7 +3964,7 @@
         {
           "key": "89-code",
           "kind": "code",
-          "text": "Next, this line runs: Leave node 0."
+          "text": "So we leave node 0."
         },
         {
           "key": "89-impact",
@@ -3979,7 +3979,7 @@
         {
           "key": "90-code",
           "kind": "code",
-          "text": "Next, this line runs: No earlier a ancestor; remove a from the path."
+          "text": "So we no earlier a ancestor; remove a from the path."
         },
         {
           "key": "90-impact",
@@ -3994,7 +3994,7 @@
         {
           "key": "91-code",
           "kind": "code",
-          "text": "Next, this line runs: Subtree sizes: [10, 8, 6, 4, 2, 1, 1, 1, 1, 1]."
+          "text": "So we subtree sizes: [10, 8, 6, 4, 2, 1, 1, 1, 1, 1]."
         },
         {
           "key": "91-impact",
@@ -4016,7 +4016,7 @@
         {
           "key": "0-code",
           "kind": "code",
-          "text": "Next, this line runs: Start with 10 nodes; the root is node 0."
+          "text": "So we start with 10 nodes; the root is node 0."
         },
         {
           "key": "0-impact",
@@ -4031,7 +4031,7 @@
         {
           "key": "1-code",
           "kind": "code",
-          "text": "Next, this line runs: Link node 1 as a child of 0."
+          "text": "So we link node 1 as a child of 0."
         },
         {
           "key": "1-impact",
@@ -4046,7 +4046,7 @@
         {
           "key": "2-code",
           "kind": "code",
-          "text": "Next, this line runs: Link node 2 as a child of 1."
+          "text": "So we link node 2 as a child of 1."
         },
         {
           "key": "2-impact",
@@ -4061,7 +4061,7 @@
         {
           "key": "3-code",
           "kind": "code",
-          "text": "Next, this line runs: Link node 3 as a child of 1."
+          "text": "So we link node 3 as a child of 1."
         },
         {
           "key": "3-impact",
@@ -4076,7 +4076,7 @@
         {
           "key": "4-code",
           "kind": "code",
-          "text": "Next, this line runs: Link node 4 as a child of 1."
+          "text": "So we link node 4 as a child of 1."
         },
         {
           "key": "4-impact",
@@ -4091,7 +4091,7 @@
         {
           "key": "5-code",
           "kind": "code",
-          "text": "Next, this line runs: Link node 5 as a child of 1."
+          "text": "So we link node 5 as a child of 1."
         },
         {
           "key": "5-impact",
@@ -4106,7 +4106,7 @@
         {
           "key": "6-code",
           "kind": "code",
-          "text": "Next, this line runs: Link node 6 as a child of 5."
+          "text": "So we link node 6 as a child of 5."
         },
         {
           "key": "6-impact",
@@ -4121,7 +4121,7 @@
         {
           "key": "7-code",
           "kind": "code",
-          "text": "Next, this line runs: Link node 7 as a child of 3."
+          "text": "So we link node 7 as a child of 3."
         },
         {
           "key": "7-impact",
@@ -4136,7 +4136,7 @@
         {
           "key": "8-code",
           "kind": "code",
-          "text": "Next, this line runs: Link node 8 as a child of 7."
+          "text": "So we link node 8 as a child of 7."
         },
         {
           "key": "8-impact",
@@ -4151,7 +4151,7 @@
         {
           "key": "9-code",
           "kind": "code",
-          "text": "Next, this line runs: Link node 9 as a child of 0."
+          "text": "So we link node 9 as a child of 0."
         },
         {
           "key": "9-impact",
@@ -4166,7 +4166,7 @@
         {
           "key": "10-code",
           "kind": "code",
-          "text": "Next, this line runs: Every subtree starts with size 1."
+          "text": "So we every subtree starts with size 1."
         },
         {
           "key": "10-impact",
@@ -4181,7 +4181,7 @@
         {
           "key": "11-code",
           "kind": "code",
-          "text": "Next, this line runs: Push the root onto the stack."
+          "text": "So we push the root onto the stack."
         },
         {
           "key": "11-impact",
@@ -4196,7 +4196,7 @@
         {
           "key": "12-code",
           "kind": "code",
-          "text": "Next, this line runs: Enter node 0 (letter a)."
+          "text": "So we enter node 0 (letter a)."
         },
         {
           "key": "12-impact",
@@ -4211,7 +4211,7 @@
         {
           "key": "13-code",
           "kind": "code",
-          "text": "Next, this line runs: No ancestor with letter a yet."
+          "text": "So we no ancestor with letter a yet."
         },
         {
           "key": "13-impact",
@@ -4226,7 +4226,7 @@
         {
           "key": "14-code",
           "kind": "code",
-          "text": "Next, this line runs: Node 0 is now the latest a on this path."
+          "text": "So we node 0 is now the latest a on this path."
         },
         {
           "key": "14-impact",
@@ -4241,7 +4241,7 @@
         {
           "key": "15-code",
           "kind": "code",
-          "text": "Next, this line runs: Push the exit marker for node 0, so it runs after its subtree."
+          "text": "So we push the exit marker for node 0, so it runs after its subtree."
         },
         {
           "key": "15-impact",
@@ -4256,7 +4256,7 @@
         {
           "key": "16-code",
           "kind": "code",
-          "text": "Next, this line runs: Push children 9, 1 to visit next."
+          "text": "So we push children 9, 1 to visit next."
         },
         {
           "key": "16-impact",
@@ -4271,7 +4271,7 @@
         {
           "key": "17-code",
           "kind": "code",
-          "text": "Next, this line runs: Enter node 1 (letter b)."
+          "text": "So we enter node 1 (letter b)."
         },
         {
           "key": "17-impact",
@@ -4286,7 +4286,7 @@
         {
           "key": "18-code",
           "kind": "code",
-          "text": "Next, this line runs: No ancestor with letter b yet."
+          "text": "So we no ancestor with letter b yet."
         },
         {
           "key": "18-impact",
@@ -4301,7 +4301,7 @@
         {
           "key": "19-code",
           "kind": "code",
-          "text": "Next, this line runs: Node 1 is now the latest b on this path."
+          "text": "So we node 1 is now the latest b on this path."
         },
         {
           "key": "19-impact",
@@ -4316,7 +4316,7 @@
         {
           "key": "20-code",
           "kind": "code",
-          "text": "Next, this line runs: Push the exit marker for node 1, so it runs after its subtree."
+          "text": "So we push the exit marker for node 1, so it runs after its subtree."
         },
         {
           "key": "20-impact",
@@ -4331,7 +4331,7 @@
         {
           "key": "21-code",
           "kind": "code",
-          "text": "Next, this line runs: Push children 5, 4, 3, 2 to visit next."
+          "text": "So we push children 5, 4, 3, 2 to visit next."
         },
         {
           "key": "21-impact",
@@ -4346,7 +4346,7 @@
         {
           "key": "22-code",
           "kind": "code",
-          "text": "Next, this line runs: Enter node 2 (letter b)."
+          "text": "So we enter node 2 (letter b)."
         },
         {
           "key": "22-impact",
@@ -4361,7 +4361,7 @@
         {
           "key": "23-code",
           "kind": "code",
-          "text": "Next, this line runs: Remember the previous b ancestor, node 1."
+          "text": "So we remember the previous b ancestor, node 1."
         },
         {
           "key": "23-impact",
@@ -4376,7 +4376,7 @@
         {
           "key": "24-code",
           "kind": "code",
-          "text": "Next, this line runs: Node 2 is now the latest b on this path."
+          "text": "So we node 2 is now the latest b on this path."
         },
         {
           "key": "24-impact",
@@ -4391,7 +4391,7 @@
         {
           "key": "25-code",
           "kind": "code",
-          "text": "Next, this line runs: Push the exit marker for node 2, so it runs after its subtree."
+          "text": "So we push the exit marker for node 2, so it runs after its subtree."
         },
         {
           "key": "25-impact",
@@ -4406,7 +4406,7 @@
         {
           "key": "26-code",
           "kind": "code",
-          "text": "Next, this line runs: Node 2 is a leaf; nothing to push."
+          "text": "So we node 2 is a leaf; nothing to push."
         },
         {
           "key": "26-impact",
@@ -4421,7 +4421,7 @@
         {
           "key": "27-code",
           "kind": "code",
-          "text": "Next, this line runs: Leave node 2."
+          "text": "So we leave node 2."
         },
         {
           "key": "27-impact",
@@ -4436,7 +4436,7 @@
         {
           "key": "28-code",
           "kind": "code",
-          "text": "Next, this line runs: Restore the b ancestor to node 1."
+          "text": "So we restore the b ancestor to node 1."
         },
         {
           "key": "28-impact",
@@ -4451,7 +4451,7 @@
         {
           "key": "29-code",
           "kind": "code",
-          "text": "Next, this line runs: Add subtree 2 (size 1) to node 1, its nearest same-letter ancestor."
+          "text": "So we add subtree 2 (size 1) to node 1, its nearest same-letter ancestor."
         },
         {
           "key": "29-impact",
@@ -4466,7 +4466,7 @@
         {
           "key": "30-code",
           "kind": "code",
-          "text": "Next, this line runs: Enter node 3 (letter e)."
+          "text": "So we enter node 3 (letter e)."
         },
         {
           "key": "30-impact",
@@ -4481,7 +4481,7 @@
         {
           "key": "31-code",
           "kind": "code",
-          "text": "Next, this line runs: No ancestor with letter e yet."
+          "text": "So we no ancestor with letter e yet."
         },
         {
           "key": "31-impact",
@@ -4496,7 +4496,7 @@
         {
           "key": "32-code",
           "kind": "code",
-          "text": "Next, this line runs: Node 3 is now the latest e on this path."
+          "text": "So we node 3 is now the latest e on this path."
         },
         {
           "key": "32-impact",
@@ -4511,7 +4511,7 @@
         {
           "key": "33-code",
           "kind": "code",
-          "text": "Next, this line runs: Push the exit marker for node 3, so it runs after its subtree."
+          "text": "So we push the exit marker for node 3, so it runs after its subtree."
         },
         {
           "key": "33-impact",
@@ -4526,7 +4526,7 @@
         {
           "key": "34-code",
           "kind": "code",
-          "text": "Next, this line runs: Push children 7 to visit next."
+          "text": "So we push children 7 to visit next."
         },
         {
           "key": "34-impact",
@@ -4541,7 +4541,7 @@
         {
           "key": "35-code",
           "kind": "code",
-          "text": "Next, this line runs: Enter node 7 (letter b)."
+          "text": "So we enter node 7 (letter b)."
         },
         {
           "key": "35-impact",
@@ -4556,7 +4556,7 @@
         {
           "key": "36-code",
           "kind": "code",
-          "text": "Next, this line runs: Remember the previous b ancestor, node 1."
+          "text": "So we remember the previous b ancestor, node 1."
         },
         {
           "key": "36-impact",
@@ -4571,7 +4571,7 @@
         {
           "key": "37-code",
           "kind": "code",
-          "text": "Next, this line runs: Node 7 is now the latest b on this path."
+          "text": "So we node 7 is now the latest b on this path."
         },
         {
           "key": "37-impact",
@@ -4586,7 +4586,7 @@
         {
           "key": "38-code",
           "kind": "code",
-          "text": "Next, this line runs: Push the exit marker for node 7, so it runs after its subtree."
+          "text": "So we push the exit marker for node 7, so it runs after its subtree."
         },
         {
           "key": "38-impact",
@@ -4601,7 +4601,7 @@
         {
           "key": "39-code",
           "kind": "code",
-          "text": "Next, this line runs: Push children 8 to visit next."
+          "text": "So we push children 8 to visit next."
         },
         {
           "key": "39-impact",
@@ -4616,7 +4616,7 @@
         {
           "key": "40-code",
           "kind": "code",
-          "text": "Next, this line runs: Enter node 8 (letter b)."
+          "text": "So we enter node 8 (letter b)."
         },
         {
           "key": "40-impact",
@@ -4631,7 +4631,7 @@
         {
           "key": "41-code",
           "kind": "code",
-          "text": "Next, this line runs: Remember the previous b ancestor, node 7."
+          "text": "So we remember the previous b ancestor, node 7."
         },
         {
           "key": "41-impact",
@@ -4646,7 +4646,7 @@
         {
           "key": "42-code",
           "kind": "code",
-          "text": "Next, this line runs: Node 8 is now the latest b on this path."
+          "text": "So we node 8 is now the latest b on this path."
         },
         {
           "key": "42-impact",
@@ -4661,7 +4661,7 @@
         {
           "key": "43-code",
           "kind": "code",
-          "text": "Next, this line runs: Push the exit marker for node 8, so it runs after its subtree."
+          "text": "So we push the exit marker for node 8, so it runs after its subtree."
         },
         {
           "key": "43-impact",
@@ -4676,7 +4676,7 @@
         {
           "key": "44-code",
           "kind": "code",
-          "text": "Next, this line runs: Node 8 is a leaf; nothing to push."
+          "text": "So we node 8 is a leaf; nothing to push."
         },
         {
           "key": "44-impact",
@@ -4691,7 +4691,7 @@
         {
           "key": "45-code",
           "kind": "code",
-          "text": "Next, this line runs: Leave node 8."
+          "text": "So we leave node 8."
         },
         {
           "key": "45-impact",
@@ -4706,7 +4706,7 @@
         {
           "key": "46-code",
           "kind": "code",
-          "text": "Next, this line runs: Restore the b ancestor to node 7."
+          "text": "So we restore the b ancestor to node 7."
         },
         {
           "key": "46-impact",
@@ -4721,7 +4721,7 @@
         {
           "key": "47-code",
           "kind": "code",
-          "text": "Next, this line runs: Add subtree 8 (size 1) to node 7, its nearest same-letter ancestor."
+          "text": "So we add subtree 8 (size 1) to node 7, its nearest same-letter ancestor."
         },
         {
           "key": "47-impact",
@@ -4736,7 +4736,7 @@
         {
           "key": "48-code",
           "kind": "code",
-          "text": "Next, this line runs: Leave node 7."
+          "text": "So we leave node 7."
         },
         {
           "key": "48-impact",
@@ -4751,7 +4751,7 @@
         {
           "key": "49-code",
           "kind": "code",
-          "text": "Next, this line runs: Restore the b ancestor to node 1."
+          "text": "So we restore the b ancestor to node 1."
         },
         {
           "key": "49-impact",
@@ -4766,7 +4766,7 @@
         {
           "key": "50-code",
           "kind": "code",
-          "text": "Next, this line runs: Add subtree 7 (size 2) to node 1, its nearest same-letter ancestor."
+          "text": "So we add subtree 7 (size 2) to node 1, its nearest same-letter ancestor."
         },
         {
           "key": "50-impact",
@@ -4781,7 +4781,7 @@
         {
           "key": "51-code",
           "kind": "code",
-          "text": "Next, this line runs: Leave node 3."
+          "text": "So we leave node 3."
         },
         {
           "key": "51-impact",
@@ -4796,7 +4796,7 @@
         {
           "key": "52-code",
           "kind": "code",
-          "text": "Next, this line runs: No earlier e ancestor; remove e from the path."
+          "text": "So we no earlier e ancestor; remove e from the path."
         },
         {
           "key": "52-impact",
@@ -4811,7 +4811,7 @@
         {
           "key": "53-code",
           "kind": "code",
-          "text": "Next, this line runs: Add subtree 3 (size 1) to node 1, its original parent."
+          "text": "So we add subtree 3 (size 1) to node 1, its original parent."
         },
         {
           "key": "53-impact",
@@ -4826,7 +4826,7 @@
         {
           "key": "54-code",
           "kind": "code",
-          "text": "Next, this line runs: Enter node 4 (letter b)."
+          "text": "So we enter node 4 (letter b)."
         },
         {
           "key": "54-impact",
@@ -4841,7 +4841,7 @@
         {
           "key": "55-code",
           "kind": "code",
-          "text": "Next, this line runs: Remember the previous b ancestor, node 1."
+          "text": "So we remember the previous b ancestor, node 1."
         },
         {
           "key": "55-impact",
@@ -4856,7 +4856,7 @@
         {
           "key": "56-code",
           "kind": "code",
-          "text": "Next, this line runs: Node 4 is now the latest b on this path."
+          "text": "So we node 4 is now the latest b on this path."
         },
         {
           "key": "56-impact",
@@ -4871,7 +4871,7 @@
         {
           "key": "57-code",
           "kind": "code",
-          "text": "Next, this line runs: Push the exit marker for node 4, so it runs after its subtree."
+          "text": "So we push the exit marker for node 4, so it runs after its subtree."
         },
         {
           "key": "57-impact",
@@ -4886,7 +4886,7 @@
         {
           "key": "58-code",
           "kind": "code",
-          "text": "Next, this line runs: Node 4 is a leaf; nothing to push."
+          "text": "So we node 4 is a leaf; nothing to push."
         },
         {
           "key": "58-impact",
@@ -4901,7 +4901,7 @@
         {
           "key": "59-code",
           "kind": "code",
-          "text": "Next, this line runs: Leave node 4."
+          "text": "So we leave node 4."
         },
         {
           "key": "59-impact",
@@ -4916,7 +4916,7 @@
         {
           "key": "60-code",
           "kind": "code",
-          "text": "Next, this line runs: Restore the b ancestor to node 1."
+          "text": "So we restore the b ancestor to node 1."
         },
         {
           "key": "60-impact",
@@ -4931,7 +4931,7 @@
         {
           "key": "61-code",
           "kind": "code",
-          "text": "Next, this line runs: Add subtree 4 (size 1) to node 1, its nearest same-letter ancestor."
+          "text": "So we add subtree 4 (size 1) to node 1, its nearest same-letter ancestor."
         },
         {
           "key": "61-impact",
@@ -4946,7 +4946,7 @@
         {
           "key": "62-code",
           "kind": "code",
-          "text": "Next, this line runs: Enter node 5 (letter c)."
+          "text": "So we enter node 5 (letter c)."
         },
         {
           "key": "62-impact",
@@ -4961,7 +4961,7 @@
         {
           "key": "63-code",
           "kind": "code",
-          "text": "Next, this line runs: No ancestor with letter c yet."
+          "text": "So we no ancestor with letter c yet."
         },
         {
           "key": "63-impact",
@@ -4976,7 +4976,7 @@
         {
           "key": "64-code",
           "kind": "code",
-          "text": "Next, this line runs: Node 5 is now the latest c on this path."
+          "text": "So we node 5 is now the latest c on this path."
         },
         {
           "key": "64-impact",
@@ -4991,7 +4991,7 @@
         {
           "key": "65-code",
           "kind": "code",
-          "text": "Next, this line runs: Push the exit marker for node 5, so it runs after its subtree."
+          "text": "So we push the exit marker for node 5, so it runs after its subtree."
         },
         {
           "key": "65-impact",
@@ -5006,7 +5006,7 @@
         {
           "key": "66-code",
           "kind": "code",
-          "text": "Next, this line runs: Push children 6 to visit next."
+          "text": "So we push children 6 to visit next."
         },
         {
           "key": "66-impact",
@@ -5021,7 +5021,7 @@
         {
           "key": "67-code",
           "kind": "code",
-          "text": "Next, this line runs: Enter node 6 (letter b)."
+          "text": "So we enter node 6 (letter b)."
         },
         {
           "key": "67-impact",
@@ -5036,7 +5036,7 @@
         {
           "key": "68-code",
           "kind": "code",
-          "text": "Next, this line runs: Remember the previous b ancestor, node 1."
+          "text": "So we remember the previous b ancestor, node 1."
         },
         {
           "key": "68-impact",
@@ -5051,7 +5051,7 @@
         {
           "key": "69-code",
           "kind": "code",
-          "text": "Next, this line runs: Node 6 is now the latest b on this path."
+          "text": "So we node 6 is now the latest b on this path."
         },
         {
           "key": "69-impact",
@@ -5066,7 +5066,7 @@
         {
           "key": "70-code",
           "kind": "code",
-          "text": "Next, this line runs: Push the exit marker for node 6, so it runs after its subtree."
+          "text": "So we push the exit marker for node 6, so it runs after its subtree."
         },
         {
           "key": "70-impact",
@@ -5081,7 +5081,7 @@
         {
           "key": "71-code",
           "kind": "code",
-          "text": "Next, this line runs: Node 6 is a leaf; nothing to push."
+          "text": "So we node 6 is a leaf; nothing to push."
         },
         {
           "key": "71-impact",
@@ -5096,7 +5096,7 @@
         {
           "key": "72-code",
           "kind": "code",
-          "text": "Next, this line runs: Leave node 6."
+          "text": "So we leave node 6."
         },
         {
           "key": "72-impact",
@@ -5111,7 +5111,7 @@
         {
           "key": "73-code",
           "kind": "code",
-          "text": "Next, this line runs: Restore the b ancestor to node 1."
+          "text": "So we restore the b ancestor to node 1."
         },
         {
           "key": "73-impact",
@@ -5126,7 +5126,7 @@
         {
           "key": "74-code",
           "kind": "code",
-          "text": "Next, this line runs: Add subtree 6 (size 1) to node 1, its nearest same-letter ancestor."
+          "text": "So we add subtree 6 (size 1) to node 1, its nearest same-letter ancestor."
         },
         {
           "key": "74-impact",
@@ -5141,7 +5141,7 @@
         {
           "key": "75-code",
           "kind": "code",
-          "text": "Next, this line runs: Leave node 5."
+          "text": "So we leave node 5."
         },
         {
           "key": "75-impact",
@@ -5156,7 +5156,7 @@
         {
           "key": "76-code",
           "kind": "code",
-          "text": "Next, this line runs: No earlier c ancestor; remove c from the path."
+          "text": "So we no earlier c ancestor; remove c from the path."
         },
         {
           "key": "76-impact",
@@ -5171,7 +5171,7 @@
         {
           "key": "77-code",
           "kind": "code",
-          "text": "Next, this line runs: Add subtree 5 (size 1) to node 1, its original parent."
+          "text": "So we add subtree 5 (size 1) to node 1, its original parent."
         },
         {
           "key": "77-impact",
@@ -5186,7 +5186,7 @@
         {
           "key": "78-code",
           "kind": "code",
-          "text": "Next, this line runs: Leave node 1."
+          "text": "So we leave node 1."
         },
         {
           "key": "78-impact",
@@ -5201,7 +5201,7 @@
         {
           "key": "79-code",
           "kind": "code",
-          "text": "Next, this line runs: No earlier b ancestor; remove b from the path."
+          "text": "So we no earlier b ancestor; remove b from the path."
         },
         {
           "key": "79-impact",
@@ -5216,7 +5216,7 @@
         {
           "key": "80-code",
           "kind": "code",
-          "text": "Next, this line runs: Add subtree 1 (size 8) to node 0, its original parent."
+          "text": "So we add subtree 1 (size 8) to node 0, its original parent."
         },
         {
           "key": "80-impact",
@@ -5231,7 +5231,7 @@
         {
           "key": "81-code",
           "kind": "code",
-          "text": "Next, this line runs: Enter node 9 (letter e)."
+          "text": "So we enter node 9 (letter e)."
         },
         {
           "key": "81-impact",
@@ -5246,7 +5246,7 @@
         {
           "key": "82-code",
           "kind": "code",
-          "text": "Next, this line runs: No ancestor with letter e yet."
+          "text": "So we no ancestor with letter e yet."
         },
         {
           "key": "82-impact",
@@ -5261,7 +5261,7 @@
         {
           "key": "83-code",
           "kind": "code",
-          "text": "Next, this line runs: Node 9 is now the latest e on this path."
+          "text": "So we node 9 is now the latest e on this path."
         },
         {
           "key": "83-impact",
@@ -5276,7 +5276,7 @@
         {
           "key": "84-code",
           "kind": "code",
-          "text": "Next, this line runs: Push the exit marker for node 9, so it runs after its subtree."
+          "text": "So we push the exit marker for node 9, so it runs after its subtree."
         },
         {
           "key": "84-impact",
@@ -5291,7 +5291,7 @@
         {
           "key": "85-code",
           "kind": "code",
-          "text": "Next, this line runs: Node 9 is a leaf; nothing to push."
+          "text": "So we node 9 is a leaf; nothing to push."
         },
         {
           "key": "85-impact",
@@ -5306,7 +5306,7 @@
         {
           "key": "86-code",
           "kind": "code",
-          "text": "Next, this line runs: Leave node 9."
+          "text": "So we leave node 9."
         },
         {
           "key": "86-impact",
@@ -5321,7 +5321,7 @@
         {
           "key": "87-code",
           "kind": "code",
-          "text": "Next, this line runs: No earlier e ancestor; remove e from the path."
+          "text": "So we no earlier e ancestor; remove e from the path."
         },
         {
           "key": "87-impact",
@@ -5336,7 +5336,7 @@
         {
           "key": "88-code",
           "kind": "code",
-          "text": "Next, this line runs: Add subtree 9 (size 1) to node 0, its original parent."
+          "text": "So we add subtree 9 (size 1) to node 0, its original parent."
         },
         {
           "key": "88-impact",
@@ -5351,7 +5351,7 @@
         {
           "key": "89-code",
           "kind": "code",
-          "text": "Next, this line runs: Leave node 0."
+          "text": "So we leave node 0."
         },
         {
           "key": "89-impact",
@@ -5366,7 +5366,7 @@
         {
           "key": "90-code",
           "kind": "code",
-          "text": "Next, this line runs: No earlier a ancestor; remove a from the path."
+          "text": "So we no earlier a ancestor; remove a from the path."
         },
         {
           "key": "90-impact",
@@ -5381,7 +5381,7 @@
         {
           "key": "91-code",
           "kind": "code",
-          "text": "Next, this line runs: Subtree sizes: [10, 8, 1, 1, 1, 1, 1, 2, 1, 1]."
+          "text": "So we subtree sizes: [10, 8, 1, 1, 1, 1, 1, 2, 1, 1]."
         },
         {
           "key": "91-impact",

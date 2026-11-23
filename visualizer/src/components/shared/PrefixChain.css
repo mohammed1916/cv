@@ -1,0 +1,10 @@
+.prefix-chain { margin-top: 8px; }
+.prefix-chain h3 { font-size: 13px; margin: 0 0 6px; }
+.prefix-chain__cells { display: flex; flex-wrap: wrap; gap: 6px; min-height: 52px; }
+.prefix-chain__cell { display: flex; flex-direction: column; align-items: center; min-width: 52px; padding: 4px 8px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface2); transition: border-color .3s, background .3s; }
+.prefix-chain__cell small { font-size: 10px; color: var(--text-dim); }
+.prefix-chain__cell strong { font-size: 14px; }
+.prefix-chain__cell.is-reset { border-color: var(--warning, #d97706); }
+.prefix-chain__cell.is-start { border-color: var(--primary); background: color-mix(in srgb, var(--primary) 18%, var(--surface2)); }
+.prefix-chain__cell.is-end { border-color: var(--success, #16a34a); background: color-mix(in srgb, var(--success, #16a34a) 18%, var(--surface2)); }
+.prefix-chain__formula { margin: 6px 0 0; font-size: 13px; }

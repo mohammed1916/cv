@@ -13,8 +13,12 @@ import { getExamples } from '../src/config/examplesRegistry.js';
 import * as p3331 from '../src/problems/Problem3331/algorithm.js';
 import { sizeTutorial } from '../src/problems/Problem3331/tutorial.js';
 import { examples as examples3331 } from '../src/problems/Problem3331/presets.js';
+import * as p1352 from '../src/problems/Problem1352/algorithm.js';
+import { productTutorial } from '../src/problems/Problem1352/tutorial.js';
+import { examples as examples1352 } from '../src/problems/Problem1352/presets.js';
 
 const routes = [
+  { id: '1352', build: p1352.buildTrace, parse: p1352.parseInput, tutorial: productTutorial, examples: examples1352 },
   { id: '3331', build: p3331.buildTrace, parse: p3331.parseInput, tutorial: sizeTutorial, examples: examples3331 },
   { id: '1606-bisect', build: p1606.buildTrace, parse: p1606.parseInput, tutorial: serverTutorial, examples: examples1606 },
   { id: '1606-virtual', build: p1606.buildAlternativeTrace, parse: p1606.parseInput, tutorial: serverTutorial, examples: examples1606 },

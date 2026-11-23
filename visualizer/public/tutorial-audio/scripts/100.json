@@ -14,7 +14,7 @@
         {
           "key": "0-code",
           "kind": "code",
-          "text": "Next, this line runs: Start with the roots."
+          "text": "So we start with the roots."
         },
         {
           "key": "0-impact",
@@ -29,7 +29,7 @@
         {
           "key": "1-code",
           "kind": "code",
-          "text": "Next, this line runs: Check the empty pair."
+          "text": "So we check the empty pair."
         },
         {
           "key": "1-impact",
@@ -44,7 +44,7 @@
         {
           "key": "2-code",
           "kind": "code",
-          "text": "Next, this line runs: Check structural agreement."
+          "text": "So we check structural agreement."
         },
         {
           "key": "2-impact",
@@ -59,7 +59,7 @@
         {
           "key": "3-code",
           "kind": "code",
-          "text": "Next, this line runs: Compare this pair of values."
+          "text": "So we compare this pair of values."
         },
         {
           "key": "3-impact",
@@ -74,7 +74,7 @@
         {
           "key": "4-code",
           "kind": "code",
-          "text": "Next, this line runs: Call the left children."
+          "text": "So we call the left children."
         },
         {
           "key": "4-impact",
@@ -89,7 +89,7 @@
         {
           "key": "5-code",
           "kind": "code",
-          "text": "Next, this line runs: Check the empty pair."
+          "text": "So we check the empty pair."
         },
         {
           "key": "5-impact",
@@ -104,7 +104,7 @@
         {
           "key": "6-code",
           "kind": "code",
-          "text": "Next, this line runs: Check structural agreement."
+          "text": "So we check structural agreement."
         },
         {
           "key": "6-impact",
@@ -119,7 +119,7 @@
         {
           "key": "7-code",
           "kind": "code",
-          "text": "Next, this line runs: Compare this pair of values."
+          "text": "So we compare this pair of values."
         },
         {
           "key": "7-impact",
@@ -134,7 +134,7 @@
         {
           "key": "8-code",
           "kind": "code",
-          "text": "Next, this line runs: Call the left children."
+          "text": "So we call the left children."
         },
         {
           "key": "8-impact",
@@ -149,7 +149,7 @@
         {
           "key": "9-code",
           "kind": "code",
-          "text": "Next, this line runs: Check the empty pair."
+          "text": "So we check the empty pair."
         },
         {
           "key": "9-impact",
@@ -164,7 +164,7 @@
         {
           "key": "10-code",
           "kind": "code",
-          "text": "Next, this line runs: Base case returns true."
+          "text": "So we base case returns true."
         },
         {
           "key": "10-impact",
@@ -179,7 +179,7 @@
         {
           "key": "11-code",
           "kind": "code",
-          "text": "Next, this line runs: Store the left result."
+          "text": "So we store the left result."
         },
         {
           "key": "11-impact",
@@ -194,7 +194,7 @@
         {
           "key": "12-code",
           "kind": "code",
-          "text": "Next, this line runs: Call the right children."
+          "text": "So we call the right children."
         },
         {
           "key": "12-impact",
@@ -209,7 +209,7 @@
         {
           "key": "13-code",
           "kind": "code",
-          "text": "Next, this line runs: Check the empty pair."
+          "text": "So we check the empty pair."
         },
         {
           "key": "13-impact",
@@ -224,7 +224,7 @@
         {
           "key": "14-code",
           "kind": "code",
-          "text": "Next, this line runs: Check structural agreement."
+          "text": "So we check structural agreement."
         },
         {
           "key": "14-impact",
@@ -239,7 +239,7 @@
         {
           "key": "15-code",
           "kind": "code",
-          "text": "Next, this line runs: Compare this pair of values."
+          "text": "So we compare this pair of values."
         },
         {
           "key": "15-impact",
@@ -254,7 +254,7 @@
         {
           "key": "16-code",
           "kind": "code",
-          "text": "Next, this line runs: Call the left children."
+          "text": "So we call the left children."
         },
         {
           "key": "16-impact",
@@ -269,7 +269,7 @@
         {
           "key": "17-code",
           "kind": "code",
-          "text": "Next, this line runs: Check the empty pair."
+          "text": "So we check the empty pair."
         },
         {
           "key": "17-impact",
@@ -284,7 +284,7 @@
         {
           "key": "18-code",
           "kind": "code",
-          "text": "Next, this line runs: Check structural agreement."
+          "text": "So we check structural agreement."
         },
         {
           "key": "18-impact",
@@ -299,7 +299,7 @@
         {
           "key": "19-code",
           "kind": "code",
-          "text": "Next, this line runs: Compare this pair of values."
+          "text": "So we compare this pair of values."
         },
         {
           "key": "19-impact",
@@ -314,7 +314,7 @@
         {
           "key": "20-code",
           "kind": "code",
-          "text": "Next, this line runs: Call the left children."
+          "text": "So we call the left children."
         },
         {
           "key": "20-impact",
@@ -329,7 +329,7 @@
         {
           "key": "21-code",
           "kind": "code",
-          "text": "Next, this line runs: Check the empty pair."
+          "text": "So we check the empty pair."
         },
         {
           "key": "21-impact",
@@ -344,7 +344,7 @@
         {
           "key": "22-code",
           "kind": "code",
-          "text": "Next, this line runs: Base case returns true."
+          "text": "So we base case returns true."
         },
         {
           "key": "22-impact",
@@ -359,7 +359,7 @@
         {
           "key": "23-code",
           "kind": "code",
-          "text": "Next, this line runs: Store the left result."
+          "text": "So we store the left result."
         },
         {
           "key": "23-impact",
@@ -374,7 +374,7 @@
         {
           "key": "24-code",
           "kind": "code",
-          "text": "Next, this line runs: Call the right children."
+          "text": "So we call the right children."
         },
         {
           "key": "24-impact",
@@ -389,7 +389,7 @@
         {
           "key": "25-code",
           "kind": "code",
-          "text": "Next, this line runs: Check the empty pair."
+          "text": "So we check the empty pair."
         },
         {
           "key": "25-impact",
@@ -404,7 +404,7 @@
         {
           "key": "26-code",
           "kind": "code",
-          "text": "Next, this line runs: Base case returns true."
+          "text": "So we base case returns true."
         },
         {
           "key": "26-impact",
@@ -419,7 +419,7 @@
         {
           "key": "27-code",
           "kind": "code",
-          "text": "Next, this line runs: Store the right result."
+          "text": "So we store the right result."
         },
         {
           "key": "27-impact",
@@ -434,7 +434,7 @@
         {
           "key": "28-code",
           "kind": "code",
-          "text": "Next, this line runs: Return both results combined."
+          "text": "So we return both results combined."
         },
         {
           "key": "28-impact",
@@ -449,7 +449,7 @@
         {
           "key": "29-code",
           "kind": "code",
-          "text": "Next, this line runs: Store the left result."
+          "text": "So we store the left result."
         },
         {
           "key": "29-impact",
@@ -464,7 +464,7 @@
         {
           "key": "30-code",
           "kind": "code",
-          "text": "Next, this line runs: Call the right children."
+          "text": "So we call the right children."
         },
         {
           "key": "30-impact",
@@ -479,7 +479,7 @@
         {
           "key": "31-code",
           "kind": "code",
-          "text": "Next, this line runs: Check the empty pair."
+          "text": "So we check the empty pair."
         },
         {
           "key": "31-impact",
@@ -494,7 +494,7 @@
         {
           "key": "32-code",
           "kind": "code",
-          "text": "Next, this line runs: Base case returns true."
+          "text": "So we base case returns true."
         },
         {
           "key": "32-impact",
@@ -509,7 +509,7 @@
         {
           "key": "33-code",
           "kind": "code",
-          "text": "Next, this line runs: Store the right result."
+          "text": "So we store the right result."
         },
         {
           "key": "33-impact",
@@ -524,7 +524,7 @@
         {
           "key": "34-code",
           "kind": "code",
-          "text": "Next, this line runs: Return both results combined."
+          "text": "So we return both results combined."
         },
         {
           "key": "34-impact",
@@ -539,7 +539,7 @@
         {
           "key": "35-code",
           "kind": "code",
-          "text": "Next, this line runs: Store the right result."
+          "text": "So we store the right result."
         },
         {
           "key": "35-impact",
@@ -554,7 +554,7 @@
         {
           "key": "36-code",
           "kind": "code",
-          "text": "Next, this line runs: Return both results combined."
+          "text": "So we return both results combined."
         },
         {
           "key": "36-impact",
@@ -569,7 +569,7 @@
         {
           "key": "37-code",
           "kind": "code",
-          "text": "Next, this line runs: Store the left result."
+          "text": "So we store the left result."
         },
         {
           "key": "37-impact",
@@ -584,7 +584,7 @@
         {
           "key": "38-code",
           "kind": "code",
-          "text": "Next, this line runs: Call the right children."
+          "text": "So we call the right children."
         },
         {
           "key": "38-impact",
@@ -599,7 +599,7 @@
         {
           "key": "39-code",
           "kind": "code",
-          "text": "Next, this line runs: Check the empty pair."
+          "text": "So we check the empty pair."
         },
         {
           "key": "39-impact",
@@ -614,7 +614,7 @@
         {
           "key": "40-code",
           "kind": "code",
-          "text": "Next, this line runs: Check structural agreement."
+          "text": "So we check structural agreement."
         },
         {
           "key": "40-impact",
@@ -629,7 +629,7 @@
         {
           "key": "41-code",
           "kind": "code",
-          "text": "Next, this line runs: Compare this pair of values."
+          "text": "So we compare this pair of values."
         },
         {
           "key": "41-impact",
@@ -644,7 +644,7 @@
         {
           "key": "42-code",
           "kind": "code",
-          "text": "Next, this line runs: Call the left children."
+          "text": "So we call the left children."
         },
         {
           "key": "42-impact",
@@ -659,7 +659,7 @@
         {
           "key": "43-code",
           "kind": "code",
-          "text": "Next, this line runs: Check the empty pair."
+          "text": "So we check the empty pair."
         },
         {
           "key": "43-impact",
@@ -674,7 +674,7 @@
         {
           "key": "44-code",
           "kind": "code",
-          "text": "Next, this line runs: Check structural agreement."
+          "text": "So we check structural agreement."
         },
         {
           "key": "44-impact",
@@ -689,7 +689,7 @@
         {
           "key": "45-code",
           "kind": "code",
-          "text": "Next, this line runs: Compare this pair of values."
+          "text": "So we compare this pair of values."
         },
         {
           "key": "45-impact",
@@ -704,7 +704,7 @@
         {
           "key": "46-code",
           "kind": "code",
-          "text": "Next, this line runs: Call the left children."
+          "text": "So we call the left children."
         },
         {
           "key": "46-impact",
@@ -719,7 +719,7 @@
         {
           "key": "47-code",
           "kind": "code",
-          "text": "Next, this line runs: Check the empty pair."
+          "text": "So we check the empty pair."
         },
         {
           "key": "47-impact",
@@ -734,7 +734,7 @@
         {
           "key": "48-code",
           "kind": "code",
-          "text": "Next, this line runs: Base case returns true."
+          "text": "So we base case returns true."
         },
         {
           "key": "48-impact",
@@ -749,7 +749,7 @@
         {
           "key": "49-code",
           "kind": "code",
-          "text": "Next, this line runs: Store the left result."
+          "text": "So we store the left result."
         },
         {
           "key": "49-impact",
@@ -764,7 +764,7 @@
         {
           "key": "50-code",
           "kind": "code",
-          "text": "Next, this line runs: Call the right children."
+          "text": "So we call the right children."
         },
         {
           "key": "50-impact",
@@ -779,7 +779,7 @@
         {
           "key": "51-code",
           "kind": "code",
-          "text": "Next, this line runs: Check the empty pair."
+          "text": "So we check the empty pair."
         },
         {
           "key": "51-impact",
@@ -794,7 +794,7 @@
         {
           "key": "52-code",
           "kind": "code",
-          "text": "Next, this line runs: Check structural agreement."
+          "text": "So we check structural agreement."
         },
         {
           "key": "52-impact",
@@ -809,7 +809,7 @@
         {
           "key": "53-code",
           "kind": "code",
-          "text": "Next, this line runs: Compare this pair of values."
+          "text": "So we compare this pair of values."
         },
         {
           "key": "53-impact",
@@ -824,7 +824,7 @@
         {
           "key": "54-code",
           "kind": "code",
-          "text": "Next, this line runs: Call the left children."
+          "text": "So we call the left children."
         },
         {
           "key": "54-impact",
@@ -839,7 +839,7 @@
         {
           "key": "55-code",
           "kind": "code",
-          "text": "Next, this line runs: Check the empty pair."
+          "text": "So we check the empty pair."
         },
         {
           "key": "55-impact",
@@ -854,7 +854,7 @@
         {
           "key": "56-code",
           "kind": "code",
-          "text": "Next, this line runs: Base case returns true."
+          "text": "So we base case returns true."
         },
         {
           "key": "56-impact",
@@ -869,7 +869,7 @@
         {
           "key": "57-code",
           "kind": "code",
-          "text": "Next, this line runs: Store the left result."
+          "text": "So we store the left result."
         },
         {
           "key": "57-impact",
@@ -884,7 +884,7 @@
         {
           "key": "58-code",
           "kind": "code",
-          "text": "Next, this line runs: Call the right children."
+          "text": "So we call the right children."
         },
         {
           "key": "58-impact",
@@ -899,7 +899,7 @@
         {
           "key": "59-code",
           "kind": "code",
-          "text": "Next, this line runs: Check the empty pair."
+          "text": "So we check the empty pair."
         },
         {
           "key": "59-impact",
@@ -914,7 +914,7 @@
         {
           "key": "60-code",
           "kind": "code",
-          "text": "Next, this line runs: Base case returns true."
+          "text": "So we base case returns true."
         },
         {
           "key": "60-impact",
@@ -929,7 +929,7 @@
         {
           "key": "61-code",
           "kind": "code",
-          "text": "Next, this line runs: Store the right result."
+          "text": "So we store the right result."
         },
         {
           "key": "61-impact",
@@ -944,7 +944,7 @@
         {
           "key": "62-code",
           "kind": "code",
-          "text": "Next, this line runs: Return both results combined."
+          "text": "So we return both results combined."
         },
         {
           "key": "62-impact",
@@ -959,7 +959,7 @@
         {
           "key": "63-code",
           "kind": "code",
-          "text": "Next, this line runs: Store the right result."
+          "text": "So we store the right result."
         },
         {
           "key": "63-impact",
@@ -974,7 +974,7 @@
         {
           "key": "64-code",
           "kind": "code",
-          "text": "Next, this line runs: Return both results combined."
+          "text": "So we return both results combined."
         },
         {
           "key": "64-impact",
@@ -989,7 +989,7 @@
         {
           "key": "65-code",
           "kind": "code",
-          "text": "Next, this line runs: Store the left result."
+          "text": "So we store the left result."
         },
         {
           "key": "65-impact",
@@ -1004,7 +1004,7 @@
         {
           "key": "66-code",
           "kind": "code",
-          "text": "Next, this line runs: Call the right children."
+          "text": "So we call the right children."
         },
         {
           "key": "66-impact",
@@ -1019,7 +1019,7 @@
         {
           "key": "67-code",
           "kind": "code",
-          "text": "Next, this line runs: Check the empty pair."
+          "text": "So we check the empty pair."
         },
         {
           "key": "67-impact",
@@ -1034,7 +1034,7 @@
         {
           "key": "68-code",
           "kind": "code",
-          "text": "Next, this line runs: Base case returns true."
+          "text": "So we base case returns true."
         },
         {
           "key": "68-impact",
@@ -1049,7 +1049,7 @@
         {
           "key": "69-code",
           "kind": "code",
-          "text": "Next, this line runs: Store the right result."
+          "text": "So we store the right result."
         },
         {
           "key": "69-impact",
@@ -1064,7 +1064,7 @@
         {
           "key": "70-code",
           "kind": "code",
-          "text": "Next, this line runs: Return both results combined."
+          "text": "So we return both results combined."
         },
         {
           "key": "70-impact",
@@ -1079,7 +1079,7 @@
         {
           "key": "71-code",
           "kind": "code",
-          "text": "Next, this line runs: Store the right result."
+          "text": "So we store the right result."
         },
         {
           "key": "71-impact",
@@ -1094,7 +1094,7 @@
         {
           "key": "72-code",
           "kind": "code",
-          "text": "Next, this line runs: Return both results combined."
+          "text": "So we return both results combined."
         },
         {
           "key": "72-impact",
@@ -1109,7 +1109,7 @@
         {
           "key": "73-code",
           "kind": "code",
-          "text": "Next, this line runs: Report the tree comparison."
+          "text": "So we report the tree comparison."
         },
         {
           "key": "73-impact",
@@ -1131,7 +1131,7 @@
         {
           "key": "0-code",
           "kind": "code",
-          "text": "Next, this line runs: Start with the roots."
+          "text": "So we start with the roots."
         },
         {
           "key": "0-impact",
@@ -1146,7 +1146,7 @@
         {
           "key": "1-code",
           "kind": "code",
-          "text": "Next, this line runs: Check the empty pair."
+          "text": "So we check the empty pair."
         },
         {
           "key": "1-impact",
@@ -1161,7 +1161,7 @@
         {
           "key": "2-code",
           "kind": "code",
-          "text": "Next, this line runs: Check structural agreement."
+          "text": "So we check structural agreement."
         },
         {
           "key": "2-impact",
@@ -1176,7 +1176,7 @@
         {
           "key": "3-code",
           "kind": "code",
-          "text": "Next, this line runs: Compare this pair of values."
+          "text": "So we compare this pair of values."
         },
         {
           "key": "3-impact",
@@ -1191,7 +1191,7 @@
         {
           "key": "4-code",
           "kind": "code",
-          "text": "Next, this line runs: Call the left children."
+          "text": "So we call the left children."
         },
         {
           "key": "4-impact",
@@ -1206,7 +1206,7 @@
         {
           "key": "5-code",
           "kind": "code",
-          "text": "Next, this line runs: Check the empty pair."
+          "text": "So we check the empty pair."
         },
         {
           "key": "5-impact",
@@ -1221,7 +1221,7 @@
         {
           "key": "6-code",
           "kind": "code",
-          "text": "Next, this line runs: Check structural agreement."
+          "text": "So we check structural agreement."
         },
         {
           "key": "6-impact",
@@ -1236,7 +1236,7 @@
         {
           "key": "7-code",
           "kind": "code",
-          "text": "Next, this line runs: Compare this pair of values."
+          "text": "So we compare this pair of values."
         },
         {
           "key": "7-impact",
@@ -1251,7 +1251,7 @@
         {
           "key": "8-code",
           "kind": "code",
-          "text": "Next, this line runs: Call the left children."
+          "text": "So we call the left children."
         },
         {
           "key": "8-impact",
@@ -1266,7 +1266,7 @@
         {
           "key": "9-code",
           "kind": "code",
-          "text": "Next, this line runs: Check the empty pair."
+          "text": "So we check the empty pair."
         },
         {
           "key": "9-impact",
@@ -1281,7 +1281,7 @@
         {
           "key": "10-code",
           "kind": "code",
-          "text": "Next, this line runs: Check structural agreement."
+          "text": "So we check structural agreement."
         },
         {
           "key": "10-impact",
@@ -1296,7 +1296,7 @@
         {
           "key": "11-code",
           "kind": "code",
-          "text": "Next, this line runs: Compare this pair of values."
+          "text": "So we compare this pair of values."
         },
         {
           "key": "11-impact",
@@ -1311,7 +1311,7 @@
         {
           "key": "12-code",
           "kind": "code",
-          "text": "Next, this line runs: Call the left children."
+          "text": "So we call the left children."
         },
         {
           "key": "12-impact",
@@ -1326,7 +1326,7 @@
         {
           "key": "13-code",
           "kind": "code",
-          "text": "Next, this line runs: Check the empty pair."
+          "text": "So we check the empty pair."
         },
         {
           "key": "13-impact",
@@ -1341,7 +1341,7 @@
         {
           "key": "14-code",
           "kind": "code",
-          "text": "Next, this line runs: Base case returns true."
+          "text": "So we base case returns true."
         },
         {
           "key": "14-impact",
@@ -1356,7 +1356,7 @@
         {
           "key": "15-code",
           "kind": "code",
-          "text": "Next, this line runs: Store the left result."
+          "text": "So we store the left result."
         },
         {
           "key": "15-impact",
@@ -1371,7 +1371,7 @@
         {
           "key": "16-code",
           "kind": "code",
-          "text": "Next, this line runs: Call the right children."
+          "text": "So we call the right children."
         },
         {
           "key": "16-impact",
@@ -1386,7 +1386,7 @@
         {
           "key": "17-code",
           "kind": "code",
-          "text": "Next, this line runs: Check the empty pair."
+          "text": "So we check the empty pair."
         },
         {
           "key": "17-impact",
@@ -1401,7 +1401,7 @@
         {
           "key": "18-code",
           "kind": "code",
-          "text": "Next, this line runs: Base case returns true."
+          "text": "So we base case returns true."
         },
         {
           "key": "18-impact",
@@ -1416,7 +1416,7 @@
         {
           "key": "19-code",
           "kind": "code",
-          "text": "Next, this line runs: Store the right result."
+          "text": "So we store the right result."
         },
         {
           "key": "19-impact",
@@ -1431,7 +1431,7 @@
         {
           "key": "20-code",
           "kind": "code",
-          "text": "Next, this line runs: Return both results combined."
+          "text": "So we return both results combined."
         },
         {
           "key": "20-impact",
@@ -1446,7 +1446,7 @@
         {
           "key": "21-code",
           "kind": "code",
-          "text": "Next, this line runs: Store the left result."
+          "text": "So we store the left result."
         },
         {
           "key": "21-impact",
@@ -1461,7 +1461,7 @@
         {
           "key": "22-code",
           "kind": "code",
-          "text": "Next, this line runs: Call the right children."
+          "text": "So we call the right children."
         },
         {
           "key": "22-impact",
@@ -1476,7 +1476,7 @@
         {
           "key": "23-code",
           "kind": "code",
-          "text": "Next, this line runs: Check the empty pair."
+          "text": "So we check the empty pair."
         },
         {
           "key": "23-impact",
@@ -1491,7 +1491,7 @@
         {
           "key": "24-code",
           "kind": "code",
-          "text": "Next, this line runs: Check structural agreement."
+          "text": "So we check structural agreement."
         },
         {
           "key": "24-impact",
@@ -1506,7 +1506,7 @@
         {
           "key": "25-code",
           "kind": "code",
-          "text": "Next, this line runs: Compare this pair of values."
+          "text": "So we compare this pair of values."
         },
         {
           "key": "25-impact",
@@ -1521,7 +1521,7 @@
         {
           "key": "26-code",
           "kind": "code",
-          "text": "Next, this line runs: Values differ: return false."
+          "text": "So we values differ: return false."
         },
         {
           "key": "26-impact",
@@ -1536,7 +1536,7 @@
         {
           "key": "27-code",
           "kind": "code",
-          "text": "Next, this line runs: Store the right result."
+          "text": "So we store the right result."
         },
         {
           "key": "27-impact",
@@ -1551,7 +1551,7 @@
         {
           "key": "28-code",
           "kind": "code",
-          "text": "Next, this line runs: Return both results combined."
+          "text": "So we return both results combined."
         },
         {
           "key": "28-impact",
@@ -1566,7 +1566,7 @@
         {
           "key": "29-code",
           "kind": "code",
-          "text": "Next, this line runs: Store the left result."
+          "text": "So we store the left result."
         },
         {
           "key": "29-impact",
@@ -1581,7 +1581,7 @@
         {
           "key": "30-code",
           "kind": "code",
-          "text": "Next, this line runs: Call the right children."
+          "text": "So we call the right children."
         },
         {
           "key": "30-impact",
@@ -1596,7 +1596,7 @@
         {
           "key": "31-code",
           "kind": "code",
-          "text": "Next, this line runs: Check the empty pair."
+          "text": "So we check the empty pair."
         },
         {
           "key": "31-impact",
@@ -1611,7 +1611,7 @@
         {
           "key": "32-code",
           "kind": "code",
-          "text": "Next, this line runs: Check structural agreement."
+          "text": "So we check structural agreement."
         },
         {
           "key": "32-impact",
@@ -1626,7 +1626,7 @@
         {
           "key": "33-code",
           "kind": "code",
-          "text": "Next, this line runs: Compare this pair of values."
+          "text": "So we compare this pair of values."
         },
         {
           "key": "33-impact",
@@ -1641,7 +1641,7 @@
         {
           "key": "34-code",
           "kind": "code",
-          "text": "Next, this line runs: Call the left children."
+          "text": "So we call the left children."
         },
         {
           "key": "34-impact",
@@ -1656,7 +1656,7 @@
         {
           "key": "35-code",
           "kind": "code",
-          "text": "Next, this line runs: Check the empty pair."
+          "text": "So we check the empty pair."
         },
         {
           "key": "35-impact",
@@ -1671,7 +1671,7 @@
         {
           "key": "36-code",
           "kind": "code",
-          "text": "Next, this line runs: Check structural agreement."
+          "text": "So we check structural agreement."
         },
         {
           "key": "36-impact",
@@ -1686,7 +1686,7 @@
         {
           "key": "37-code",
           "kind": "code",
-          "text": "Next, this line runs: Compare this pair of values."
+          "text": "So we compare this pair of values."
         },
         {
           "key": "37-impact",
@@ -1701,7 +1701,7 @@
         {
           "key": "38-code",
           "kind": "code",
-          "text": "Next, this line runs: Call the left children."
+          "text": "So we call the left children."
         },
         {
           "key": "38-impact",
@@ -1716,7 +1716,7 @@
         {
           "key": "39-code",
           "kind": "code",
-          "text": "Next, this line runs: Check the empty pair."
+          "text": "So we check the empty pair."
         },
         {
           "key": "39-impact",
@@ -1731,7 +1731,7 @@
         {
           "key": "40-code",
           "kind": "code",
-          "text": "Next, this line runs: Base case returns true."
+          "text": "So we base case returns true."
         },
         {
           "key": "40-impact",
@@ -1746,7 +1746,7 @@
         {
           "key": "41-code",
           "kind": "code",
-          "text": "Next, this line runs: Store the left result."
+          "text": "So we store the left result."
         },
         {
           "key": "41-impact",
@@ -1761,7 +1761,7 @@
         {
           "key": "42-code",
           "kind": "code",
-          "text": "Next, this line runs: Call the right children."
+          "text": "So we call the right children."
         },
         {
           "key": "42-impact",
@@ -1776,7 +1776,7 @@
         {
           "key": "43-code",
           "kind": "code",
-          "text": "Next, this line runs: Check the empty pair."
+          "text": "So we check the empty pair."
         },
         {
           "key": "43-impact",
@@ -1791,7 +1791,7 @@
         {
           "key": "44-code",
           "kind": "code",
-          "text": "Next, this line runs: Base case returns true."
+          "text": "So we base case returns true."
         },
         {
           "key": "44-impact",
@@ -1806,7 +1806,7 @@
         {
           "key": "45-code",
           "kind": "code",
-          "text": "Next, this line runs: Store the right result."
+          "text": "So we store the right result."
         },
         {
           "key": "45-impact",
@@ -1821,7 +1821,7 @@
         {
           "key": "46-code",
           "kind": "code",
-          "text": "Next, this line runs: Return both results combined."
+          "text": "So we return both results combined."
         },
         {
           "key": "46-impact",
@@ -1836,7 +1836,7 @@
         {
           "key": "47-code",
           "kind": "code",
-          "text": "Next, this line runs: Store the left result."
+          "text": "So we store the left result."
         },
         {
           "key": "47-impact",
@@ -1851,7 +1851,7 @@
         {
           "key": "48-code",
           "kind": "code",
-          "text": "Next, this line runs: Call the right children."
+          "text": "So we call the right children."
         },
         {
           "key": "48-impact",
@@ -1866,7 +1866,7 @@
         {
           "key": "49-code",
           "kind": "code",
-          "text": "Next, this line runs: Check the empty pair."
+          "text": "So we check the empty pair."
         },
         {
           "key": "49-impact",
@@ -1881,7 +1881,7 @@
         {
           "key": "50-code",
           "kind": "code",
-          "text": "Next, this line runs: Check structural agreement."
+          "text": "So we check structural agreement."
         },
         {
           "key": "50-impact",
@@ -1896,7 +1896,7 @@
         {
           "key": "51-code",
           "kind": "code",
-          "text": "Next, this line runs: Compare this pair of values."
+          "text": "So we compare this pair of values."
         },
         {
           "key": "51-impact",
@@ -1911,7 +1911,7 @@
         {
           "key": "52-code",
           "kind": "code",
-          "text": "Next, this line runs: Call the left children."
+          "text": "So we call the left children."
         },
         {
           "key": "52-impact",
@@ -1926,7 +1926,7 @@
         {
           "key": "53-code",
           "kind": "code",
-          "text": "Next, this line runs: Check the empty pair."
+          "text": "So we check the empty pair."
         },
         {
           "key": "53-impact",
@@ -1941,7 +1941,7 @@
         {
           "key": "54-code",
           "kind": "code",
-          "text": "Next, this line runs: Base case returns true."
+          "text": "So we base case returns true."
         },
         {
           "key": "54-impact",
@@ -1956,7 +1956,7 @@
         {
           "key": "55-code",
           "kind": "code",
-          "text": "Next, this line runs: Store the left result."
+          "text": "So we store the left result."
         },
         {
           "key": "55-impact",
@@ -1971,7 +1971,7 @@
         {
           "key": "56-code",
           "kind": "code",
-          "text": "Next, this line runs: Call the right children."
+          "text": "So we call the right children."
         },
         {
           "key": "56-impact",
@@ -1986,7 +1986,7 @@
         {
           "key": "57-code",
           "kind": "code",
-          "text": "Next, this line runs: Check the empty pair."
+          "text": "So we check the empty pair."
         },
         {
           "key": "57-impact",
@@ -2001,7 +2001,7 @@
         {
           "key": "58-code",
           "kind": "code",
-          "text": "Next, this line runs: Base case returns true."
+          "text": "So we base case returns true."
         },
         {
           "key": "58-impact",
@@ -2016,7 +2016,7 @@
         {
           "key": "59-code",
           "kind": "code",
-          "text": "Next, this line runs: Store the right result."
+          "text": "So we store the right result."
         },
         {
           "key": "59-impact",
@@ -2031,7 +2031,7 @@
         {
           "key": "60-code",
           "kind": "code",
-          "text": "Next, this line runs: Return both results combined."
+          "text": "So we return both results combined."
         },
         {
           "key": "60-impact",
@@ -2046,7 +2046,7 @@
         {
           "key": "61-code",
           "kind": "code",
-          "text": "Next, this line runs: Store the right result."
+          "text": "So we store the right result."
         },
         {
           "key": "61-impact",
@@ -2061,7 +2061,7 @@
         {
           "key": "62-code",
           "kind": "code",
-          "text": "Next, this line runs: Return both results combined."
+          "text": "So we return both results combined."
         },
         {
           "key": "62-impact",
@@ -2076,7 +2076,7 @@
         {
           "key": "63-code",
           "kind": "code",
-          "text": "Next, this line runs: Store the right result."
+          "text": "So we store the right result."
         },
         {
           "key": "63-impact",
@@ -2091,7 +2091,7 @@
         {
           "key": "64-code",
           "kind": "code",
-          "text": "Next, this line runs: Return both results combined."
+          "text": "So we return both results combined."
         },
         {
           "key": "64-impact",
@@ -2106,7 +2106,7 @@
         {
           "key": "65-code",
           "kind": "code",
-          "text": "Next, this line runs: Report the tree comparison."
+          "text": "So we report the tree comparison."
         },
         {
           "key": "65-impact",
@@ -2128,7 +2128,7 @@
         {
           "key": "0-code",
           "kind": "code",
-          "text": "Next, this line runs: Start with the roots."
+          "text": "So we start with the roots."
         },
         {
           "key": "0-impact",
@@ -2143,7 +2143,7 @@
         {
           "key": "1-code",
           "kind": "code",
-          "text": "Next, this line runs: Check the empty pair."
+          "text": "So we check the empty pair."
         },
         {
           "key": "1-impact",
@@ -2158,7 +2158,7 @@
         {
           "key": "2-code",
           "kind": "code",
-          "text": "Next, this line runs: Check structural agreement."
+          "text": "So we check structural agreement."
         },
         {
           "key": "2-impact",
@@ -2173,7 +2173,7 @@
         {
           "key": "3-code",
           "kind": "code",
-          "text": "Next, this line runs: Compare this pair of values."
+          "text": "So we compare this pair of values."
         },
         {
           "key": "3-impact",
@@ -2188,7 +2188,7 @@
         {
           "key": "4-code",
           "kind": "code",
-          "text": "Next, this line runs: Call the left children."
+          "text": "So we call the left children."
         },
         {
           "key": "4-impact",
@@ -2203,7 +2203,7 @@
         {
           "key": "5-code",
           "kind": "code",
-          "text": "Next, this line runs: Check the empty pair."
+          "text": "So we check the empty pair."
         },
         {
           "key": "5-impact",
@@ -2218,7 +2218,7 @@
         {
           "key": "6-code",
           "kind": "code",
-          "text": "Next, this line runs: Check structural agreement."
+          "text": "So we check structural agreement."
         },
         {
           "key": "6-impact",
@@ -2233,7 +2233,7 @@
         {
           "key": "7-code",
           "kind": "code",
-          "text": "Next, this line runs: Structure differs: return false."
+          "text": "So we structure differs: return false."
         },
         {
           "key": "7-impact",
@@ -2248,7 +2248,7 @@
         {
           "key": "8-code",
           "kind": "code",
-          "text": "Next, this line runs: Store the left result."
+          "text": "So we store the left result."
         },
         {
           "key": "8-impact",
@@ -2263,7 +2263,7 @@
         {
           "key": "9-code",
           "kind": "code",
-          "text": "Next, this line runs: Call the right children."
+          "text": "So we call the right children."
         },
         {
           "key": "9-impact",
@@ -2278,7 +2278,7 @@
         {
           "key": "10-code",
           "kind": "code",
-          "text": "Next, this line runs: Check the empty pair."
+          "text": "So we check the empty pair."
         },
         {
           "key": "10-impact",
@@ -2293,7 +2293,7 @@
         {
           "key": "11-code",
           "kind": "code",
-          "text": "Next, this line runs: Check structural agreement."
+          "text": "So we check structural agreement."
         },
         {
           "key": "11-impact",
@@ -2308,7 +2308,7 @@
         {
           "key": "12-code",
           "kind": "code",
-          "text": "Next, this line runs: Structure differs: return false."
+          "text": "So we structure differs: return false."
         },
         {
           "key": "12-impact",
@@ -2323,7 +2323,7 @@
         {
           "key": "13-code",
           "kind": "code",
-          "text": "Next, this line runs: Store the right result."
+          "text": "So we store the right result."
         },
         {
           "key": "13-impact",
@@ -2338,7 +2338,7 @@
         {
           "key": "14-code",
           "kind": "code",
-          "text": "Next, this line runs: Return both results combined."
+          "text": "So we return both results combined."
         },
         {
           "key": "14-impact",
@@ -2353,7 +2353,7 @@
         {
           "key": "15-code",
           "kind": "code",
-          "text": "Next, this line runs: Report the tree comparison."
+          "text": "So we report the tree comparison."
         },
         {
           "key": "15-impact",
@@ -2375,7 +2375,7 @@
         {
           "key": "0-code",
           "kind": "code",
-          "text": "Next, this line runs: Start with the roots."
+          "text": "So we start with the roots."
         },
         {
           "key": "0-impact",
@@ -2390,7 +2390,7 @@
         {
           "key": "1-code",
           "kind": "code",
-          "text": "Next, this line runs: Check the empty pair."
+          "text": "So we check the empty pair."
         },
         {
           "key": "1-impact",
@@ -2405,7 +2405,7 @@
         {
           "key": "2-code",
           "kind": "code",
-          "text": "Next, this line runs: Check structural agreement."
+          "text": "So we check structural agreement."
         },
         {
           "key": "2-impact",
@@ -2420,7 +2420,7 @@
         {
           "key": "3-code",
           "kind": "code",
-          "text": "Next, this line runs: Structure differs: return false."
+          "text": "So we structure differs: return false."
         },
         {
           "key": "3-impact",
@@ -2435,7 +2435,7 @@
         {
           "key": "4-code",
           "kind": "code",
-          "text": "Next, this line runs: Report the tree comparison."
+          "text": "So we report the tree comparison."
         },
         {
           "key": "4-impact",
@@ -2457,7 +2457,7 @@
         {
           "key": "0-code",
           "kind": "code",
-          "text": "Next, this line runs: Start with the roots."
+          "text": "So we start with the roots."
         },
         {
           "key": "0-impact",
@@ -2472,7 +2472,7 @@
         {
           "key": "1-code",
           "kind": "code",
-          "text": "Next, this line runs: Check the empty pair."
+          "text": "So we check the empty pair."
         },
         {
           "key": "1-impact",
@@ -2487,7 +2487,7 @@
         {
           "key": "2-code",
           "kind": "code",
-          "text": "Next, this line runs: Base case returns true."
+          "text": "So we base case returns true."
         },
         {
           "key": "2-impact",
@@ -2502,7 +2502,7 @@
         {
           "key": "3-code",
           "kind": "code",
-          "text": "Next, this line runs: Report the tree comparison."
+          "text": "So we report the tree comparison."
         },
         {
           "key": "3-impact",
@@ -2524,7 +2524,7 @@
         {
           "key": "0-code",
           "kind": "code",
-          "text": "Next, this line runs: Start with the roots."
+          "text": "So we start with the roots."
         },
         {
           "key": "0-impact",
@@ -2539,7 +2539,7 @@
         {
           "key": "1-code",
           "kind": "code",
-          "text": "Next, this line runs: Check the empty pair."
+          "text": "So we check the empty pair."
         },
         {
           "key": "1-impact",
@@ -2554,7 +2554,7 @@
         {
           "key": "2-code",
           "kind": "code",
-          "text": "Next, this line runs: Check structural agreement."
+          "text": "So we check structural agreement."
         },
         {
           "key": "2-impact",
@@ -2569,7 +2569,7 @@
         {
           "key": "3-code",
           "kind": "code",
-          "text": "Next, this line runs: Compare this pair of values."
+          "text": "So we compare this pair of values."
         },
         {
           "key": "3-impact",
@@ -2584,7 +2584,7 @@
         {
           "key": "4-code",
           "kind": "code",
-          "text": "Next, this line runs: Call the left children."
+          "text": "So we call the left children."
         },
         {
           "key": "4-impact",
@@ -2599,7 +2599,7 @@
         {
           "key": "5-code",
           "kind": "code",
-          "text": "Next, this line runs: Check the empty pair."
+          "text": "So we check the empty pair."
         },
         {
           "key": "5-impact",
@@ -2614,7 +2614,7 @@
         {
           "key": "6-code",
           "kind": "code",
-          "text": "Next, this line runs: Check structural agreement."
+          "text": "So we check structural agreement."
         },
         {
           "key": "6-impact",
@@ -2629,7 +2629,7 @@
         {
           "key": "7-code",
           "kind": "code",
-          "text": "Next, this line runs: Compare this pair of values."
+          "text": "So we compare this pair of values."
         },
         {
           "key": "7-impact",
@@ -2644,7 +2644,7 @@
         {
           "key": "8-code",
           "kind": "code",
-          "text": "Next, this line runs: Call the left children."
+          "text": "So we call the left children."
         },
         {
           "key": "8-impact",
@@ -2659,7 +2659,7 @@
         {
           "key": "9-code",
           "kind": "code",
-          "text": "Next, this line runs: Check the empty pair."
+          "text": "So we check the empty pair."
         },
         {
           "key": "9-impact",
@@ -2674,7 +2674,7 @@
         {
           "key": "10-code",
           "kind": "code",
-          "text": "Next, this line runs: Base case returns true."
+          "text": "So we base case returns true."
         },
         {
           "key": "10-impact",
@@ -2689,7 +2689,7 @@
         {
           "key": "11-code",
           "kind": "code",
-          "text": "Next, this line runs: Store the left result."
+          "text": "So we store the left result."
         },
         {
           "key": "11-impact",
@@ -2704,7 +2704,7 @@
         {
           "key": "12-code",
           "kind": "code",
-          "text": "Next, this line runs: Call the right children."
+          "text": "So we call the right children."
         },
         {
           "key": "12-impact",
@@ -2719,7 +2719,7 @@
         {
           "key": "13-code",
           "kind": "code",
-          "text": "Next, this line runs: Check the empty pair."
+          "text": "So we check the empty pair."
         },
         {
           "key": "13-impact",
@@ -2734,7 +2734,7 @@
         {
           "key": "14-code",
           "kind": "code",
-          "text": "Next, this line runs: Base case returns true."
+          "text": "So we base case returns true."
         },
         {
           "key": "14-impact",
@@ -2749,7 +2749,7 @@
         {
           "key": "15-code",
           "kind": "code",
-          "text": "Next, this line runs: Store the right result."
+          "text": "So we store the right result."
         },
         {
           "key": "15-impact",
@@ -2764,7 +2764,7 @@
         {
           "key": "16-code",
           "kind": "code",
-          "text": "Next, this line runs: Return both results combined."
+          "text": "So we return both results combined."
         },
         {
           "key": "16-impact",
@@ -2779,7 +2779,7 @@
         {
           "key": "17-code",
           "kind": "code",
-          "text": "Next, this line runs: Store the left result."
+          "text": "So we store the left result."
         },
         {
           "key": "17-impact",
@@ -2794,7 +2794,7 @@
         {
           "key": "18-code",
           "kind": "code",
-          "text": "Next, this line runs: Call the right children."
+          "text": "So we call the right children."
         },
         {
           "key": "18-impact",
@@ -2809,7 +2809,7 @@
         {
           "key": "19-code",
           "kind": "code",
-          "text": "Next, this line runs: Check the empty pair."
+          "text": "So we check the empty pair."
         },
         {
           "key": "19-impact",
@@ -2824,7 +2824,7 @@
         {
           "key": "20-code",
           "kind": "code",
-          "text": "Next, this line runs: Check structural agreement."
+          "text": "So we check structural agreement."
         },
         {
           "key": "20-impact",
@@ -2839,7 +2839,7 @@
         {
           "key": "21-code",
           "kind": "code",
-          "text": "Next, this line runs: Compare this pair of values."
+          "text": "So we compare this pair of values."
         },
         {
           "key": "21-impact",
@@ -2854,7 +2854,7 @@
         {
           "key": "22-code",
           "kind": "code",
-          "text": "Next, this line runs: Call the left children."
+          "text": "So we call the left children."
         },
         {
           "key": "22-impact",
@@ -2869,7 +2869,7 @@
         {
           "key": "23-code",
           "kind": "code",
-          "text": "Next, this line runs: Check the empty pair."
+          "text": "So we check the empty pair."
         },
         {
           "key": "23-impact",
@@ -2884,7 +2884,7 @@
         {
           "key": "24-code",
           "kind": "code",
-          "text": "Next, this line runs: Base case returns true."
+          "text": "So we base case returns true."
         },
         {
           "key": "24-impact",
@@ -2899,7 +2899,7 @@
         {
           "key": "25-code",
           "kind": "code",
-          "text": "Next, this line runs: Store the left result."
+          "text": "So we store the left result."
         },
         {
           "key": "25-impact",
@@ -2914,7 +2914,7 @@
         {
           "key": "26-code",
           "kind": "code",
-          "text": "Next, this line runs: Call the right children."
+          "text": "So we call the right children."
         },
         {
           "key": "26-impact",
@@ -2929,7 +2929,7 @@
         {
           "key": "27-code",
           "kind": "code",
-          "text": "Next, this line runs: Check the empty pair."
+          "text": "So we check the empty pair."
         },
         {
           "key": "27-impact",
@@ -2944,7 +2944,7 @@
         {
           "key": "28-code",
           "kind": "code",
-          "text": "Next, this line runs: Base case returns true."
+          "text": "So we base case returns true."
         },
         {
           "key": "28-impact",
@@ -2959,7 +2959,7 @@
         {
           "key": "29-code",
           "kind": "code",
-          "text": "Next, this line runs: Store the right result."
+          "text": "So we store the right result."
         },
         {
           "key": "29-impact",
@@ -2974,7 +2974,7 @@
         {
           "key": "30-code",
           "kind": "code",
-          "text": "Next, this line runs: Return both results combined."
+          "text": "So we return both results combined."
         },
         {
           "key": "30-impact",
@@ -2989,7 +2989,7 @@
         {
           "key": "31-code",
           "kind": "code",
-          "text": "Next, this line runs: Store the right result."
+          "text": "So we store the right result."
         },
         {
           "key": "31-impact",
@@ -3004,7 +3004,7 @@
         {
           "key": "32-code",
           "kind": "code",
-          "text": "Next, this line runs: Return both results combined."
+          "text": "So we return both results combined."
         },
         {
           "key": "32-impact",
@@ -3019,7 +3019,7 @@
         {
           "key": "33-code",
           "kind": "code",
-          "text": "Next, this line runs: Report the tree comparison."
+          "text": "So we report the tree comparison."
         },
         {
           "key": "33-impact",
@@ -3041,7 +3041,7 @@
         {
           "key": "0-code",
           "kind": "code",
-          "text": "Next, this line runs: Start with the roots."
+          "text": "So we start with the roots."
         },
         {
           "key": "0-impact",
@@ -3056,7 +3056,7 @@
         {
           "key": "1-code",
           "kind": "code",
-          "text": "Next, this line runs: Check the empty pair."
+          "text": "So we check the empty pair."
         },
         {
           "key": "1-impact",
@@ -3071,7 +3071,7 @@
         {
           "key": "2-code",
           "kind": "code",
-          "text": "Next, this line runs: Check structural agreement."
+          "text": "So we check structural agreement."
         },
         {
           "key": "2-impact",
@@ -3086,7 +3086,7 @@
         {
           "key": "3-code",
           "kind": "code",
-          "text": "Next, this line runs: Compare this pair of values."
+          "text": "So we compare this pair of values."
         },
         {
           "key": "3-impact",
@@ -3101,7 +3101,7 @@
         {
           "key": "4-code",
           "kind": "code",
-          "text": "Next, this line runs: Call the left children."
+          "text": "So we call the left children."
         },
         {
           "key": "4-impact",
@@ -3116,7 +3116,7 @@
         {
           "key": "5-code",
           "kind": "code",
-          "text": "Next, this line runs: Check the empty pair."
+          "text": "So we check the empty pair."
         },
         {
           "key": "5-impact",
@@ -3131,7 +3131,7 @@
         {
           "key": "6-code",
           "kind": "code",
-          "text": "Next, this line runs: Check structural agreement."
+          "text": "So we check structural agreement."
         },
         {
           "key": "6-impact",
@@ -3146,7 +3146,7 @@
         {
           "key": "7-code",
           "kind": "code",
-          "text": "Next, this line runs: Compare this pair of values."
+          "text": "So we compare this pair of values."
         },
         {
           "key": "7-impact",
@@ -3161,7 +3161,7 @@
         {
           "key": "8-code",
           "kind": "code",
-          "text": "Next, this line runs: Call the left children."
+          "text": "So we call the left children."
         },
         {
           "key": "8-impact",
@@ -3176,7 +3176,7 @@
         {
           "key": "9-code",
           "kind": "code",
-          "text": "Next, this line runs: Check the empty pair."
+          "text": "So we check the empty pair."
         },
         {
           "key": "9-impact",
@@ -3191,7 +3191,7 @@
         {
           "key": "10-code",
           "kind": "code",
-          "text": "Next, this line runs: Base case returns true."
+          "text": "So we base case returns true."
         },
         {
           "key": "10-impact",
@@ -3206,7 +3206,7 @@
         {
           "key": "11-code",
           "kind": "code",
-          "text": "Next, this line runs: Store the left result."
+          "text": "So we store the left result."
         },
         {
           "key": "11-impact",
@@ -3221,7 +3221,7 @@
         {
           "key": "12-code",
           "kind": "code",
-          "text": "Next, this line runs: Call the right children."
+          "text": "So we call the right children."
         },
         {
           "key": "12-impact",
@@ -3236,7 +3236,7 @@
         {
           "key": "13-code",
           "kind": "code",
-          "text": "Next, this line runs: Check the empty pair."
+          "text": "So we check the empty pair."
         },
         {
           "key": "13-impact",
@@ -3251,7 +3251,7 @@
         {
           "key": "14-code",
           "kind": "code",
-          "text": "Next, this line runs: Base case returns true."
+          "text": "So we base case returns true."
         },
         {
           "key": "14-impact",
@@ -3266,7 +3266,7 @@
         {
           "key": "15-code",
           "kind": "code",
-          "text": "Next, this line runs: Store the right result."
+          "text": "So we store the right result."
         },
         {
           "key": "15-impact",
@@ -3281,7 +3281,7 @@
         {
           "key": "16-code",
           "kind": "code",
-          "text": "Next, this line runs: Return both results combined."
+          "text": "So we return both results combined."
         },
         {
           "key": "16-impact",
@@ -3296,7 +3296,7 @@
         {
           "key": "17-code",
           "kind": "code",
-          "text": "Next, this line runs: Store the left result."
+          "text": "So we store the left result."
         },
         {
           "key": "17-impact",
@@ -3311,7 +3311,7 @@
         {
           "key": "18-code",
           "kind": "code",
-          "text": "Next, this line runs: Call the right children."
+          "text": "So we call the right children."
         },
         {
           "key": "18-impact",
@@ -3326,7 +3326,7 @@
         {
           "key": "19-code",
           "kind": "code",
-          "text": "Next, this line runs: Check the empty pair."
+          "text": "So we check the empty pair."
         },
         {
           "key": "19-impact",
@@ -3341,7 +3341,7 @@
         {
           "key": "20-code",
           "kind": "code",
-          "text": "Next, this line runs: Check structural agreement."
+          "text": "So we check structural agreement."
         },
         {
           "key": "20-impact",
@@ -3356,7 +3356,7 @@
         {
           "key": "21-code",
           "kind": "code",
-          "text": "Next, this line runs: Compare this pair of values."
+          "text": "So we compare this pair of values."
         },
         {
           "key": "21-impact",
@@ -3371,7 +3371,7 @@
         {
           "key": "22-code",
           "kind": "code",
-          "text": "Next, this line runs: Call the left children."
+          "text": "So we call the left children."
         },
         {
           "key": "22-impact",
@@ -3386,7 +3386,7 @@
         {
           "key": "23-code",
           "kind": "code",
-          "text": "Next, this line runs: Check the empty pair."
+          "text": "So we check the empty pair."
         },
         {
           "key": "23-impact",
@@ -3401,7 +3401,7 @@
         {
           "key": "24-code",
           "kind": "code",
-          "text": "Next, this line runs: Base case returns true."
+          "text": "So we base case returns true."
         },
         {
           "key": "24-impact",
@@ -3416,7 +3416,7 @@
         {
           "key": "25-code",
           "kind": "code",
-          "text": "Next, this line runs: Store the left result."
+          "text": "So we store the left result."
         },
         {
           "key": "25-impact",
@@ -3431,7 +3431,7 @@
         {
           "key": "26-code",
           "kind": "code",
-          "text": "Next, this line runs: Call the right children."
+          "text": "So we call the right children."
         },
         {
           "key": "26-impact",
@@ -3446,7 +3446,7 @@
         {
           "key": "27-code",
           "kind": "code",
-          "text": "Next, this line runs: Check the empty pair."
+          "text": "So we check the empty pair."
         },
         {
           "key": "27-impact",
@@ -3461,7 +3461,7 @@
         {
           "key": "28-code",
           "kind": "code",
-          "text": "Next, this line runs: Base case returns true."
+          "text": "So we base case returns true."
         },
         {
           "key": "28-impact",
@@ -3476,7 +3476,7 @@
         {
           "key": "29-code",
           "kind": "code",
-          "text": "Next, this line runs: Store the right result."
+          "text": "So we store the right result."
         },
         {
           "key": "29-impact",
@@ -3491,7 +3491,7 @@
         {
           "key": "30-code",
           "kind": "code",
-          "text": "Next, this line runs: Return both results combined."
+          "text": "So we return both results combined."
         },
         {
           "key": "30-impact",
@@ -3506,7 +3506,7 @@
         {
           "key": "31-code",
           "kind": "code",
-          "text": "Next, this line runs: Store the right result."
+          "text": "So we store the right result."
         },
         {
           "key": "31-impact",
@@ -3521,7 +3521,7 @@
         {
           "key": "32-code",
           "kind": "code",
-          "text": "Next, this line runs: Return both results combined."
+          "text": "So we return both results combined."
         },
         {
           "key": "32-impact",
@@ -3536,7 +3536,7 @@
         {
           "key": "33-code",
           "kind": "code",
-          "text": "Next, this line runs: Report the tree comparison."
+          "text": "So we report the tree comparison."
         },
         {
           "key": "33-impact",
@@ -3558,7 +3558,7 @@
         {
           "key": "0-code",
           "kind": "code",
-          "text": "Next, this line runs: Start with the roots."
+          "text": "So we start with the roots."
         },
         {
           "key": "0-impact",
@@ -3573,7 +3573,7 @@
         {
           "key": "1-code",
           "kind": "code",
-          "text": "Next, this line runs: Check the empty pair."
+          "text": "So we check the empty pair."
         },
         {
           "key": "1-impact",
@@ -3588,7 +3588,7 @@
         {
           "key": "2-code",
           "kind": "code",
-          "text": "Next, this line runs: Check structural agreement."
+          "text": "So we check structural agreement."
         },
         {
           "key": "2-impact",
@@ -3603,7 +3603,7 @@
         {
           "key": "3-code",
           "kind": "code",
-          "text": "Next, this line runs: Compare this pair of values."
+          "text": "So we compare this pair of values."
         },
         {
           "key": "3-impact",
@@ -3618,7 +3618,7 @@
         {
           "key": "4-code",
           "kind": "code",
-          "text": "Next, this line runs: Call the left children."
+          "text": "So we call the left children."
         },
         {
           "key": "4-impact",
@@ -3633,7 +3633,7 @@
         {
           "key": "5-code",
           "kind": "code",
-          "text": "Next, this line runs: Check the empty pair."
+          "text": "So we check the empty pair."
         },
         {
           "key": "5-impact",
@@ -3648,7 +3648,7 @@
         {
           "key": "6-code",
           "kind": "code",
-          "text": "Next, this line runs: Check structural agreement."
+          "text": "So we check structural agreement."
         },
         {
           "key": "6-impact",
@@ -3663,7 +3663,7 @@
         {
           "key": "7-code",
           "kind": "code",
-          "text": "Next, this line runs: Compare this pair of values."
+          "text": "So we compare this pair of values."
         },
         {
           "key": "7-impact",
@@ -3678,7 +3678,7 @@
         {
           "key": "8-code",
           "kind": "code",
-          "text": "Next, this line runs: Call the left children."
+          "text": "So we call the left children."
         },
         {
           "key": "8-impact",
@@ -3693,7 +3693,7 @@
         {
           "key": "9-code",
           "kind": "code",
-          "text": "Next, this line runs: Check the empty pair."
+          "text": "So we check the empty pair."
         },
         {
           "key": "9-impact",
@@ -3708,7 +3708,7 @@
         {
           "key": "10-code",
           "kind": "code",
-          "text": "Next, this line runs: Check structural agreement."
+          "text": "So we check structural agreement."
         },
         {
           "key": "10-impact",
@@ -3723,7 +3723,7 @@
         {
           "key": "11-code",
           "kind": "code",
-          "text": "Next, this line runs: Compare this pair of values."
+          "text": "So we compare this pair of values."
         },
         {
           "key": "11-impact",
@@ -3738,7 +3738,7 @@
         {
           "key": "12-code",
           "kind": "code",
-          "text": "Next, this line runs: Call the left children."
+          "text": "So we call the left children."
         },
         {
           "key": "12-impact",
@@ -3753,7 +3753,7 @@
         {
           "key": "13-code",
           "kind": "code",
-          "text": "Next, this line runs: Check the empty pair."
+          "text": "So we check the empty pair."
         },
         {
           "key": "13-impact",
@@ -3768,7 +3768,7 @@
         {
           "key": "14-code",
           "kind": "code",
-          "text": "Next, this line runs: Check structural agreement."
+          "text": "So we check structural agreement."
         },
         {
           "key": "14-impact",
@@ -3783,7 +3783,7 @@
         {
           "key": "15-code",
           "kind": "code",
-          "text": "Next, this line runs: Compare this pair of values."
+          "text": "So we compare this pair of values."
         },
         {
           "key": "15-impact",
@@ -3798,7 +3798,7 @@
         {
           "key": "16-code",
           "kind": "code",
-          "text": "Next, this line runs: Call the left children."
+          "text": "So we call the left children."
         },
         {
           "key": "16-impact",
@@ -3813,7 +3813,7 @@
         {
           "key": "17-code",
           "kind": "code",
-          "text": "Next, this line runs: Check the empty pair."
+          "text": "So we check the empty pair."
         },
         {
           "key": "17-impact",
@@ -3828,7 +3828,7 @@
         {
           "key": "18-code",
           "kind": "code",
-          "text": "Next, this line runs: Base case returns true."
+          "text": "So we base case returns true."
         },
         {
           "key": "18-impact",
@@ -3843,7 +3843,7 @@
         {
           "key": "19-code",
           "kind": "code",
-          "text": "Next, this line runs: Store the left result."
+          "text": "So we store the left result."
         },
         {
           "key": "19-impact",
@@ -3858,7 +3858,7 @@
         {
           "key": "20-code",
           "kind": "code",
-          "text": "Next, this line runs: Call the right children."
+          "text": "So we call the right children."
         },
         {
           "key": "20-impact",
@@ -3873,7 +3873,7 @@
         {
           "key": "21-code",
           "kind": "code",
-          "text": "Next, this line runs: Check the empty pair."
+          "text": "So we check the empty pair."
         },
         {
           "key": "21-impact",
@@ -3888,7 +3888,7 @@
         {
           "key": "22-code",
           "kind": "code",
-          "text": "Next, this line runs: Base case returns true."
+          "text": "So we base case returns true."
         },
         {
           "key": "22-impact",
@@ -3903,7 +3903,7 @@
         {
           "key": "23-code",
           "kind": "code",
-          "text": "Next, this line runs: Store the right result."
+          "text": "So we store the right result."
         },
         {
           "key": "23-impact",
@@ -3918,7 +3918,7 @@
         {
           "key": "24-code",
           "kind": "code",
-          "text": "Next, this line runs: Return both results combined."
+          "text": "So we return both results combined."
         },
         {
           "key": "24-impact",
@@ -3933,7 +3933,7 @@
         {
           "key": "25-code",
           "kind": "code",
-          "text": "Next, this line runs: Store the left result."
+          "text": "So we store the left result."
         },
         {
           "key": "25-impact",
@@ -3948,7 +3948,7 @@
         {
           "key": "26-code",
           "kind": "code",
-          "text": "Next, this line runs: Call the right children."
+          "text": "So we call the right children."
         },
         {
           "key": "26-impact",
@@ -3963,7 +3963,7 @@
         {
           "key": "27-code",
           "kind": "code",
-          "text": "Next, this line runs: Check the empty pair."
+          "text": "So we check the empty pair."
         },
         {
           "key": "27-impact",
@@ -3978,7 +3978,7 @@
         {
           "key": "28-code",
           "kind": "code",
-          "text": "Next, this line runs: Check structural agreement."
+          "text": "So we check structural agreement."
         },
         {
           "key": "28-impact",
@@ -3993,7 +3993,7 @@
         {
           "key": "29-code",
           "kind": "code",
-          "text": "Next, this line runs: Compare this pair of values."
+          "text": "So we compare this pair of values."
         },
         {
           "key": "29-impact",
@@ -4008,7 +4008,7 @@
         {
           "key": "30-code",
           "kind": "code",
-          "text": "Next, this line runs: Call the left children."
+          "text": "So we call the left children."
         },
         {
           "key": "30-impact",
@@ -4023,7 +4023,7 @@
         {
           "key": "31-code",
           "kind": "code",
-          "text": "Next, this line runs: Check the empty pair."
+          "text": "So we check the empty pair."
         },
         {
           "key": "31-impact",
@@ -4038,7 +4038,7 @@
         {
           "key": "32-code",
           "kind": "code",
-          "text": "Next, this line runs: Base case returns true."
+          "text": "So we base case returns true."
         },
         {
           "key": "32-impact",
@@ -4053,7 +4053,7 @@
         {
           "key": "33-code",
           "kind": "code",
-          "text": "Next, this line runs: Store the left result."
+          "text": "So we store the left result."
         },
         {
           "key": "33-impact",
@@ -4068,7 +4068,7 @@
         {
           "key": "34-code",
           "kind": "code",
-          "text": "Next, this line runs: Call the right children."
+          "text": "So we call the right children."
         },
         {
           "key": "34-impact",
@@ -4083,7 +4083,7 @@
         {
           "key": "35-code",
           "kind": "code",
-          "text": "Next, this line runs: Check the empty pair."
+          "text": "So we check the empty pair."
         },
         {
           "key": "35-impact",
@@ -4098,7 +4098,7 @@
         {
           "key": "36-code",
           "kind": "code",
-          "text": "Next, this line runs: Base case returns true."
+          "text": "So we base case returns true."
         },
         {
           "key": "36-impact",
@@ -4113,7 +4113,7 @@
         {
           "key": "37-code",
           "kind": "code",
-          "text": "Next, this line runs: Store the right result."
+          "text": "So we store the right result."
         },
         {
           "key": "37-impact",
@@ -4128,7 +4128,7 @@
         {
           "key": "38-code",
           "kind": "code",
-          "text": "Next, this line runs: Return both results combined."
+          "text": "So we return both results combined."
         },
         {
           "key": "38-impact",
@@ -4143,7 +4143,7 @@
         {
           "key": "39-code",
           "kind": "code",
-          "text": "Next, this line runs: Store the right result."
+          "text": "So we store the right result."
         },
         {
           "key": "39-impact",
@@ -4158,7 +4158,7 @@
         {
           "key": "40-code",
           "kind": "code",
-          "text": "Next, this line runs: Return both results combined."
+          "text": "So we return both results combined."
         },
         {
           "key": "40-impact",
@@ -4173,7 +4173,7 @@
         {
           "key": "41-code",
           "kind": "code",
-          "text": "Next, this line runs: Store the left result."
+          "text": "So we store the left result."
         },
         {
           "key": "41-impact",
@@ -4188,7 +4188,7 @@
         {
           "key": "42-code",
           "kind": "code",
-          "text": "Next, this line runs: Call the right children."
+          "text": "So we call the right children."
         },
         {
           "key": "42-impact",
@@ -4203,7 +4203,7 @@
         {
           "key": "43-code",
           "kind": "code",
-          "text": "Next, this line runs: Check the empty pair."
+          "text": "So we check the empty pair."
         },
         {
           "key": "43-impact",
@@ -4218,7 +4218,7 @@
         {
           "key": "44-code",
           "kind": "code",
-          "text": "Next, this line runs: Check structural agreement."
+          "text": "So we check structural agreement."
         },
         {
           "key": "44-impact",
@@ -4233,7 +4233,7 @@
         {
           "key": "45-code",
           "kind": "code",
-          "text": "Next, this line runs: Compare this pair of values."
+          "text": "So we compare this pair of values."
         },
         {
           "key": "45-impact",
@@ -4248,7 +4248,7 @@
         {
           "key": "46-code",
           "kind": "code",
-          "text": "Next, this line runs: Call the left children."
+          "text": "So we call the left children."
         },
         {
           "key": "46-impact",
@@ -4263,7 +4263,7 @@
         {
           "key": "47-code",
           "kind": "code",
-          "text": "Next, this line runs: Check the empty pair."
+          "text": "So we check the empty pair."
         },
         {
           "key": "47-impact",
@@ -4278,7 +4278,7 @@
         {
           "key": "48-code",
           "kind": "code",
-          "text": "Next, this line runs: Check structural agreement."
+          "text": "So we check structural agreement."
         },
         {
           "key": "48-impact",
@@ -4293,7 +4293,7 @@
         {
           "key": "49-code",
           "kind": "code",
-          "text": "Next, this line runs: Compare this pair of values."
+          "text": "So we compare this pair of values."
         },
         {
           "key": "49-impact",
@@ -4308,7 +4308,7 @@
         {
           "key": "50-code",
           "kind": "code",
-          "text": "Next, this line runs: Call the left children."
+          "text": "So we call the left children."
         },
         {
           "key": "50-impact",
@@ -4323,7 +4323,7 @@
         {
           "key": "51-code",
           "kind": "code",
-          "text": "Next, this line runs: Check the empty pair."
+          "text": "So we check the empty pair."
         },
         {
           "key": "51-impact",
@@ -4338,7 +4338,7 @@
         {
           "key": "52-code",
           "kind": "code",
-          "text": "Next, this line runs: Base case returns true."
+          "text": "So we base case returns true."
         },
         {
           "key": "52-impact",
@@ -4353,7 +4353,7 @@
         {
           "key": "53-code",
           "kind": "code",
-          "text": "Next, this line runs: Store the left result."
+          "text": "So we store the left result."
         },
         {
           "key": "53-impact",
@@ -4368,7 +4368,7 @@
         {
           "key": "54-code",
           "kind": "code",
-          "text": "Next, this line runs: Call the right children."
+          "text": "So we call the right children."
         },
         {
           "key": "54-impact",
@@ -4383,7 +4383,7 @@
         {
           "key": "55-code",
           "kind": "code",
-          "text": "Next, this line runs: Check the empty pair."
+          "text": "So we check the empty pair."
         },
         {
           "key": "55-impact",
@@ -4398,7 +4398,7 @@
         {
           "key": "56-code",
           "kind": "code",
-          "text": "Next, this line runs: Base case returns true."
+          "text": "So we base case returns true."
         },
         {
           "key": "56-impact",
@@ -4413,7 +4413,7 @@
         {
           "key": "57-code",
           "kind": "code",
-          "text": "Next, this line runs: Store the right result."
+          "text": "So we store the right result."
         },
         {
           "key": "57-impact",
@@ -4428,7 +4428,7 @@
         {
           "key": "58-code",
           "kind": "code",
-          "text": "Next, this line runs: Return both results combined."
+          "text": "So we return both results combined."
         },
         {
           "key": "58-impact",
@@ -4443,7 +4443,7 @@
         {
           "key": "59-code",
           "kind": "code",
-          "text": "Next, this line runs: Store the left result."
+          "text": "So we store the left result."
         },
         {
           "key": "59-impact",
@@ -4458,7 +4458,7 @@
         {
           "key": "60-code",
           "kind": "code",
-          "text": "Next, this line runs: Call the right children."
+          "text": "So we call the right children."
         },
         {
           "key": "60-impact",
@@ -4473,7 +4473,7 @@
         {
           "key": "61-code",
           "kind": "code",
-          "text": "Next, this line runs: Check the empty pair."
+          "text": "So we check the empty pair."
         },
         {
           "key": "61-impact",
@@ -4488,7 +4488,7 @@
         {
           "key": "62-code",
           "kind": "code",
-          "text": "Next, this line runs: Check structural agreement."
+          "text": "So we check structural agreement."
         },
         {
           "key": "62-impact",
@@ -4503,7 +4503,7 @@
         {
           "key": "63-code",
           "kind": "code",
-          "text": "Next, this line runs: Compare this pair of values."
+          "text": "So we compare this pair of values."
         },
         {
           "key": "63-impact",
@@ -4518,7 +4518,7 @@
         {
           "key": "64-code",
           "kind": "code",
-          "text": "Next, this line runs: Call the left children."
+          "text": "So we call the left children."
         },
         {
           "key": "64-impact",
@@ -4533,7 +4533,7 @@
         {
           "key": "65-code",
           "kind": "code",
-          "text": "Next, this line runs: Check the empty pair."
+          "text": "So we check the empty pair."
         },
         {
           "key": "65-impact",
@@ -4548,7 +4548,7 @@
         {
           "key": "66-code",
           "kind": "code",
-          "text": "Next, this line runs: Base case returns true."
+          "text": "So we base case returns true."
         },
         {
           "key": "66-impact",
@@ -4563,7 +4563,7 @@
         {
           "key": "67-code",
           "kind": "code",
-          "text": "Next, this line runs: Store the left result."
+          "text": "So we store the left result."
         },
         {
           "key": "67-impact",
@@ -4578,7 +4578,7 @@
         {
           "key": "68-code",
           "kind": "code",
-          "text": "Next, this line runs: Call the right children."
+          "text": "So we call the right children."
         },
         {
           "key": "68-impact",
@@ -4593,7 +4593,7 @@
         {
           "key": "69-code",
           "kind": "code",
-          "text": "Next, this line runs: Check the empty pair."
+          "text": "So we check the empty pair."
         },
         {
           "key": "69-impact",
@@ -4608,7 +4608,7 @@
         {
           "key": "70-code",
           "kind": "code",
-          "text": "Next, this line runs: Base case returns true."
+          "text": "So we base case returns true."
         },
         {
           "key": "70-impact",
@@ -4623,7 +4623,7 @@
         {
           "key": "71-code",
           "kind": "code",
-          "text": "Next, this line runs: Store the right result."
+          "text": "So we store the right result."
         },
         {
           "key": "71-impact",
@@ -4638,7 +4638,7 @@
         {
           "key": "72-code",
           "kind": "code",
-          "text": "Next, this line runs: Return both results combined."
+          "text": "So we return both results combined."
         },
         {
           "key": "72-impact",
@@ -4653,7 +4653,7 @@
         {
           "key": "73-code",
           "kind": "code",
-          "text": "Next, this line runs: Store the right result."
+          "text": "So we store the right result."
         },
         {
           "key": "73-impact",
@@ -4668,7 +4668,7 @@
         {
           "key": "74-code",
           "kind": "code",
-          "text": "Next, this line runs: Return both results combined."
+          "text": "So we return both results combined."
         },
         {
           "key": "74-impact",
@@ -4683,7 +4683,7 @@
         {
           "key": "75-code",
           "kind": "code",
-          "text": "Next, this line runs: Store the right result."
+          "text": "So we store the right result."
         },
         {
           "key": "75-impact",
@@ -4698,7 +4698,7 @@
         {
           "key": "76-code",
           "kind": "code",
-          "text": "Next, this line runs: Return both results combined."
+          "text": "So we return both results combined."
         },
         {
           "key": "76-impact",
@@ -4713,7 +4713,7 @@
         {
           "key": "77-code",
           "kind": "code",
-          "text": "Next, this line runs: Store the left result."
+          "text": "So we store the left result."
         },
         {
           "key": "77-impact",
@@ -4728,7 +4728,7 @@
         {
           "key": "78-code",
           "kind": "code",
-          "text": "Next, this line runs: Call the right children."
+          "text": "So we call the right children."
         },
         {
           "key": "78-impact",
@@ -4743,7 +4743,7 @@
         {
           "key": "79-code",
           "kind": "code",
-          "text": "Next, this line runs: Check the empty pair."
+          "text": "So we check the empty pair."
         },
         {
           "key": "79-impact",
@@ -4758,7 +4758,7 @@
         {
           "key": "80-code",
           "kind": "code",
-          "text": "Next, this line runs: Check structural agreement."
+          "text": "So we check structural agreement."
         },
         {
           "key": "80-impact",
@@ -4773,7 +4773,7 @@
         {
           "key": "81-code",
           "kind": "code",
-          "text": "Next, this line runs: Compare this pair of values."
+          "text": "So we compare this pair of values."
         },
         {
           "key": "81-impact",
@@ -4788,7 +4788,7 @@
         {
           "key": "82-code",
           "kind": "code",
-          "text": "Next, this line runs: Call the left children."
+          "text": "So we call the left children."
         },
         {
           "key": "82-impact",
@@ -4803,7 +4803,7 @@
         {
           "key": "83-code",
           "kind": "code",
-          "text": "Next, this line runs: Check the empty pair."
+          "text": "So we check the empty pair."
         },
         {
           "key": "83-impact",
@@ -4818,7 +4818,7 @@
         {
           "key": "84-code",
           "kind": "code",
-          "text": "Next, this line runs: Check structural agreement."
+          "text": "So we check structural agreement."
         },
         {
           "key": "84-impact",
@@ -4833,7 +4833,7 @@
         {
           "key": "85-code",
           "kind": "code",
-          "text": "Next, this line runs: Compare this pair of values."
+          "text": "So we compare this pair of values."
         },
         {
           "key": "85-impact",
@@ -4848,7 +4848,7 @@
         {
           "key": "86-code",
           "kind": "code",
-          "text": "Next, this line runs: Call the left children."
+          "text": "So we call the left children."
         },
         {
           "key": "86-impact",
@@ -4863,7 +4863,7 @@
         {
           "key": "87-code",
           "kind": "code",
-          "text": "Next, this line runs: Check the empty pair."
+          "text": "So we check the empty pair."
         },
         {
           "key": "87-impact",
@@ -4878,7 +4878,7 @@
         {
           "key": "88-code",
           "kind": "code",
-          "text": "Next, this line runs: Check structural agreement."
+          "text": "So we check structural agreement."
         },
         {
           "key": "88-impact",
@@ -4893,7 +4893,7 @@
         {
           "key": "89-code",
           "kind": "code",
-          "text": "Next, this line runs: Compare this pair of values."
+          "text": "So we compare this pair of values."
         },
         {
           "key": "89-impact",
@@ -4908,7 +4908,7 @@
         {
           "key": "90-code",
           "kind": "code",
-          "text": "Next, this line runs: Call the left children."
+          "text": "So we call the left children."
         },
         {
           "key": "90-impact",
@@ -4923,7 +4923,7 @@
         {
           "key": "91-code",
           "kind": "code",
-          "text": "Next, this line runs: Check the empty pair."
+          "text": "So we check the empty pair."
         },
         {
           "key": "91-impact",
@@ -4938,7 +4938,7 @@
         {
           "key": "92-code",
           "kind": "code",
-          "text": "Next, this line runs: Base case returns true."
+          "text": "So we base case returns true."
         },
         {
           "key": "92-impact",
@@ -4953,7 +4953,7 @@
         {
           "key": "93-code",
           "kind": "code",
-          "text": "Next, this line runs: Store the left result."
+          "text": "So we store the left result."
         },
         {
           "key": "93-impact",
@@ -4968,7 +4968,7 @@
         {
           "key": "94-code",
           "kind": "code",
-          "text": "Next, this line runs: Call the right children."
+          "text": "So we call the right children."
         },
         {
           "key": "94-impact",
@@ -4983,7 +4983,7 @@
         {
           "key": "95-code",
           "kind": "code",
-          "text": "Next, this line runs: Check the empty pair."
+          "text": "So we check the empty pair."
         },
         {
           "key": "95-impact",
@@ -4998,7 +4998,7 @@
         {
           "key": "96-code",
           "kind": "code",
-          "text": "Next, this line runs: Base case returns true."
+          "text": "So we base case returns true."
         },
         {
           "key": "96-impact",
@@ -5013,7 +5013,7 @@
         {
           "key": "97-code",
           "kind": "code",
-          "text": "Next, this line runs: Store the right result."
+          "text": "So we store the right result."
         },
         {
           "key": "97-impact",
@@ -5028,7 +5028,7 @@
         {
           "key": "98-code",
           "kind": "code",
-          "text": "Next, this line runs: Return both results combined."
+          "text": "So we return both results combined."
         },
         {
           "key": "98-impact",
@@ -5043,7 +5043,7 @@
         {
           "key": "99-code",
           "kind": "code",
-          "text": "Next, this line runs: Store the left result."
+          "text": "So we store the left result."
         },
         {
           "key": "99-impact",
@@ -5058,7 +5058,7 @@
         {
           "key": "100-code",
           "kind": "code",
-          "text": "Next, this line runs: Call the right children."
+          "text": "So we call the right children."
         },
         {
           "key": "100-impact",
@@ -5073,7 +5073,7 @@
         {
           "key": "101-code",
           "kind": "code",
-          "text": "Next, this line runs: Check the empty pair."
+          "text": "So we check the empty pair."
         },
         {
           "key": "101-impact",
@@ -5088,7 +5088,7 @@
         {
           "key": "102-code",
           "kind": "code",
-          "text": "Next, this line runs: Check structural agreement."
+          "text": "So we check structural agreement."
         },
         {
           "key": "102-impact",
@@ -5103,7 +5103,7 @@
         {
           "key": "103-code",
           "kind": "code",
-          "text": "Next, this line runs: Compare this pair of values."
+          "text": "So we compare this pair of values."
         },
         {
           "key": "103-impact",
@@ -5118,7 +5118,7 @@
         {
           "key": "104-code",
           "kind": "code",
-          "text": "Next, this line runs: Call the left children."
+          "text": "So we call the left children."
         },
         {
           "key": "104-impact",
@@ -5133,7 +5133,7 @@
         {
           "key": "105-code",
           "kind": "code",
-          "text": "Next, this line runs: Check the empty pair."
+          "text": "So we check the empty pair."
         },
         {
           "key": "105-impact",
@@ -5148,7 +5148,7 @@
         {
           "key": "106-code",
           "kind": "code",
-          "text": "Next, this line runs: Base case returns true."
+          "text": "So we base case returns true."
         },
         {
           "key": "106-impact",
@@ -5163,7 +5163,7 @@
         {
           "key": "107-code",
           "kind": "code",
-          "text": "Next, this line runs: Store the left result."
+          "text": "So we store the left result."
         },
         {
           "key": "107-impact",
@@ -5178,7 +5178,7 @@
         {
           "key": "108-code",
           "kind": "code",
-          "text": "Next, this line runs: Call the right children."
+          "text": "So we call the right children."
         },
         {
           "key": "108-impact",
@@ -5193,7 +5193,7 @@
         {
           "key": "109-code",
           "kind": "code",
-          "text": "Next, this line runs: Check the empty pair."
+          "text": "So we check the empty pair."
         },
         {
           "key": "109-impact",
@@ -5208,7 +5208,7 @@
         {
           "key": "110-code",
           "kind": "code",
-          "text": "Next, this line runs: Base case returns true."
+          "text": "So we base case returns true."
         },
         {
           "key": "110-impact",
@@ -5223,7 +5223,7 @@
         {
           "key": "111-code",
           "kind": "code",
-          "text": "Next, this line runs: Store the right result."
+          "text": "So we store the right result."
         },
         {
           "key": "111-impact",
@@ -5238,7 +5238,7 @@
         {
           "key": "112-code",
           "kind": "code",
-          "text": "Next, this line runs: Return both results combined."
+          "text": "So we return both results combined."
         },
         {
           "key": "112-impact",
@@ -5253,7 +5253,7 @@
         {
           "key": "113-code",
           "kind": "code",
-          "text": "Next, this line runs: Store the right result."
+          "text": "So we store the right result."
         },
         {
           "key": "113-impact",
@@ -5268,7 +5268,7 @@
         {
           "key": "114-code",
           "kind": "code",
-          "text": "Next, this line runs: Return both results combined."
+          "text": "So we return both results combined."
         },
         {
           "key": "114-impact",
@@ -5283,7 +5283,7 @@
         {
           "key": "115-code",
           "kind": "code",
-          "text": "Next, this line runs: Store the left result."
+          "text": "So we store the left result."
         },
         {
           "key": "115-impact",
@@ -5298,7 +5298,7 @@
         {
           "key": "116-code",
           "kind": "code",
-          "text": "Next, this line runs: Call the right children."
+          "text": "So we call the right children."
         },
         {
           "key": "116-impact",
@@ -5313,7 +5313,7 @@
         {
           "key": "117-code",
           "kind": "code",
-          "text": "Next, this line runs: Check the empty pair."
+          "text": "So we check the empty pair."
         },
         {
           "key": "117-impact",
@@ -5328,7 +5328,7 @@
         {
           "key": "118-code",
           "kind": "code",
-          "text": "Next, this line runs: Check structural agreement."
+          "text": "So we check structural agreement."
         },
         {
           "key": "118-impact",
@@ -5343,7 +5343,7 @@
         {
           "key": "119-code",
           "kind": "code",
-          "text": "Next, this line runs: Compare this pair of values."
+          "text": "So we compare this pair of values."
         },
         {
           "key": "119-impact",
@@ -5358,7 +5358,7 @@
         {
           "key": "120-code",
           "kind": "code",
-          "text": "Next, this line runs: Call the left children."
+          "text": "So we call the left children."
         },
         {
           "key": "120-impact",
@@ -5373,7 +5373,7 @@
         {
           "key": "121-code",
           "kind": "code",
-          "text": "Next, this line runs: Check the empty pair."
+          "text": "So we check the empty pair."
         },
         {
           "key": "121-impact",
@@ -5388,7 +5388,7 @@
         {
           "key": "122-code",
           "kind": "code",
-          "text": "Next, this line runs: Check structural agreement."
+          "text": "So we check structural agreement."
         },
         {
           "key": "122-impact",
@@ -5403,7 +5403,7 @@
         {
           "key": "123-code",
           "kind": "code",
-          "text": "Next, this line runs: Compare this pair of values."
+          "text": "So we compare this pair of values."
         },
         {
           "key": "123-impact",
@@ -5418,7 +5418,7 @@
         {
           "key": "124-code",
           "kind": "code",
-          "text": "Next, this line runs: Call the left children."
+          "text": "So we call the left children."
         },
         {
           "key": "124-impact",
@@ -5433,7 +5433,7 @@
         {
           "key": "125-code",
           "kind": "code",
-          "text": "Next, this line runs: Check the empty pair."
+          "text": "So we check the empty pair."
         },
         {
           "key": "125-impact",
@@ -5448,7 +5448,7 @@
         {
           "key": "126-code",
           "kind": "code",
-          "text": "Next, this line runs: Base case returns true."
+          "text": "So we base case returns true."
         },
         {
           "key": "126-impact",
@@ -5463,7 +5463,7 @@
         {
           "key": "127-code",
           "kind": "code",
-          "text": "Next, this line runs: Store the left result."
+          "text": "So we store the left result."
         },
         {
           "key": "127-impact",
@@ -5478,7 +5478,7 @@
         {
           "key": "128-code",
           "kind": "code",
-          "text": "Next, this line runs: Call the right children."
+          "text": "So we call the right children."
         },
         {
           "key": "128-impact",
@@ -5493,7 +5493,7 @@
         {
           "key": "129-code",
           "kind": "code",
-          "text": "Next, this line runs: Check the empty pair."
+          "text": "So we check the empty pair."
         },
         {
           "key": "129-impact",
@@ -5508,7 +5508,7 @@
         {
           "key": "130-code",
           "kind": "code",
-          "text": "Next, this line runs: Base case returns true."
+          "text": "So we base case returns true."
         },
         {
           "key": "130-impact",
@@ -5523,7 +5523,7 @@
         {
           "key": "131-code",
           "kind": "code",
-          "text": "Next, this line runs: Store the right result."
+          "text": "So we store the right result."
         },
         {
           "key": "131-impact",
@@ -5538,7 +5538,7 @@
         {
           "key": "132-code",
           "kind": "code",
-          "text": "Next, this line runs: Return both results combined."
+          "text": "So we return both results combined."
         },
         {
           "key": "132-impact",
@@ -5553,7 +5553,7 @@
         {
           "key": "133-code",
           "kind": "code",
-          "text": "Next, this line runs: Store the left result."
+          "text": "So we store the left result."
         },
         {
           "key": "133-impact",
@@ -5568,7 +5568,7 @@
         {
           "key": "134-code",
           "kind": "code",
-          "text": "Next, this line runs: Call the right children."
+          "text": "So we call the right children."
         },
         {
           "key": "134-impact",
@@ -5583,7 +5583,7 @@
         {
           "key": "135-code",
           "kind": "code",
-          "text": "Next, this line runs: Check the empty pair."
+          "text": "So we check the empty pair."
         },
         {
           "key": "135-impact",
@@ -5598,7 +5598,7 @@
         {
           "key": "136-code",
           "kind": "code",
-          "text": "Next, this line runs: Check structural agreement."
+          "text": "So we check structural agreement."
         },
         {
           "key": "136-impact",
@@ -5613,7 +5613,7 @@
         {
           "key": "137-code",
           "kind": "code",
-          "text": "Next, this line runs: Compare this pair of values."
+          "text": "So we compare this pair of values."
         },
         {
           "key": "137-impact",
@@ -5628,7 +5628,7 @@
         {
           "key": "138-code",
           "kind": "code",
-          "text": "Next, this line runs: Values differ: return false."
+          "text": "So we values differ: return false."
         },
         {
           "key": "138-impact",
@@ -5643,7 +5643,7 @@
         {
           "key": "139-code",
           "kind": "code",
-          "text": "Next, this line runs: Store the right result."
+          "text": "So we store the right result."
         },
         {
           "key": "139-impact",
@@ -5658,7 +5658,7 @@
         {
           "key": "140-code",
           "kind": "code",
-          "text": "Next, this line runs: Return both results combined."
+          "text": "So we return both results combined."
         },
         {
           "key": "140-impact",
@@ -5673,7 +5673,7 @@
         {
           "key": "141-code",
           "kind": "code",
-          "text": "Next, this line runs: Store the right result."
+          "text": "So we store the right result."
         },
         {
           "key": "141-impact",
@@ -5688,7 +5688,7 @@
         {
           "key": "142-code",
           "kind": "code",
-          "text": "Next, this line runs: Return both results combined."
+          "text": "So we return both results combined."
         },
         {
           "key": "142-impact",
@@ -5703,7 +5703,7 @@
         {
           "key": "143-code",
           "kind": "code",
-          "text": "Next, this line runs: Store the right result."
+          "text": "So we store the right result."
         },
         {
           "key": "143-impact",
@@ -5718,7 +5718,7 @@
         {
           "key": "144-code",
           "kind": "code",
-          "text": "Next, this line runs: Return both results combined."
+          "text": "So we return both results combined."
         },
         {
           "key": "144-impact",
@@ -5733,7 +5733,7 @@
         {
           "key": "145-code",
           "kind": "code",
-          "text": "Next, this line runs: Report the tree comparison."
+          "text": "So we report the tree comparison."
         },
         {
           "key": "145-impact",

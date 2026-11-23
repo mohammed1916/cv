@@ -9,9 +9,11 @@ export const narrationUrl = (routeId, presetIndex, beat) =>
 
 // Spoken text is written from the scene's own authored fields (original wording, no statement text).
 export function narrationLine(beat) {
-  if (beat.kind === 'reason') return beat.scene.reason;
-  if (beat.kind === 'code') return `Next, this line runs: ${beat.scene.title}.`;
-  return beat.scene.action;
+  // A scene may carry spoken wording (natural phrasing, big picture first); the on-screen text is unchanged.
+  if (beat.kind === 'reason') return beat.scene.spoken?.reason ?? beat.scene.reason;
+  // Continuity: the code scene continues the story from the reason just spoken, rather than announcing a new item.
+  if (beat.kind === 'code') return `So we ${beat.scene.title.charAt(0).toLowerCase()}${beat.scene.title.slice(1)}.`;
+  return beat.scene.spoken?.impact ?? beat.scene.action;
 }
 
 export function buildNarrationScript(run, tutorial) {

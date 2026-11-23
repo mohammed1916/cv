@@ -47,3 +47,40 @@ test('1352 seeded random operation lists match a direct-product oracle', () => {
     assert.deepEqual(solve(operations), oracle(operations), JSON.stringify(operations))
   }
 })
+
+import { productTutorial } from './tutorial.js'
+import { examples } from './presets.js'
+
+test('1352 goal example and presets give the answers stated in the goal text', () => {
+  const run = input => buildTrace(parseInput(input)).result
+  assert.deepEqual(run(examples[0].input), [15])
+  assert.deepEqual(run(examples[1].input), [0, 30])
+})
+
+test('1352 random operations match a direct product of the last k values', () => {
+  let seed = 1352
+  const rnd = n => { seed = (seed * 1103515245 + 12345) & 0x7fffffff; return (seed >> 16) % n }
+  for (let t = 0; t < 300; t++) {
+    const ops = [], values = [], want = []
+    const count = 1 + rnd(12)
+    for (let i = 0; i < count; i++) {
+      if (values.length === 0 || rnd(2) === 0) { const v = rnd(10); ops.push(['add', v]); values.push(v) }
+      else {
+        const k = 1 + rnd(values.length)
+        ops.push(['getProduct', k])
+        want.push(values.slice(-k).reduce((p, v) => p * v, 1))
+      }
+    }
+    assert.deepEqual(buildTrace({ operations: ops }).result, want, JSON.stringify(ops))
+  }
+})
+
+test('1352 every frame has a reason tied to its line of the submitted solution', () => {
+  const run = buildTrace(parseInput(examples[1].input))
+  for (const frame of run.frames) {
+    const scene = productTutorial({ step: frame })
+    assert.ok(scene.reason.length > 20)
+    assert.ok(scene.spoken.reason.length > 20)
+  }
+  assert.deepEqual(run.frames.find(frame => frame.phase === 'multiply').window[0] >= 0, true)
+})

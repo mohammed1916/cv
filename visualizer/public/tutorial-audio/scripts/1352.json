@@ -1,0 +1,1787 @@
+{
+  "route": "1352",
+  "presets": [
+    {
+      "presetIndex": 0,
+      "label": "Goal example: last two of 2, 4, 3, 5",
+      "input": "{\"operations\":[[\"add\",2],[\"add\",4],[\"add\",3],[\"add\",5],[\"getProduct\",2]]}",
+      "scenes": [
+        {
+          "key": "0-reason",
+          "kind": "reason",
+          "text": "The class needs somewhere to remember the numbers. A plain list keeps them in arrival order, and that order matters because a query asks about the most recent numbers."
+        },
+        {
+          "key": "0-code",
+          "kind": "code",
+          "text": "So we the class needs somewhere to remember numbers in arrival order.."
+        },
+        {
+          "key": "0-impact",
+          "kind": "impact",
+          "text": "Start with an empty list of numbers."
+        },
+        {
+          "key": "1-reason",
+          "kind": "reason",
+          "text": "Each add call only records the new number at the end. The end holds the most recent numbers, and that is exactly where the queries look."
+        },
+        {
+          "key": "1-code",
+          "kind": "code",
+          "text": "So we each new number is recorded at the end.."
+        },
+        {
+          "key": "1-impact",
+          "kind": "impact",
+          "text": "Append 2 to the end of the list."
+        },
+        {
+          "key": "2-reason",
+          "kind": "reason",
+          "text": "Each add call only records the new number at the end. The end holds the most recent numbers, and that is exactly where the queries look."
+        },
+        {
+          "key": "2-code",
+          "kind": "code",
+          "text": "So we each new number is recorded at the end.."
+        },
+        {
+          "key": "2-impact",
+          "kind": "impact",
+          "text": "Append 4 to the end of the list."
+        },
+        {
+          "key": "3-reason",
+          "kind": "reason",
+          "text": "Each add call only records the new number at the end. The end holds the most recent numbers, and that is exactly where the queries look."
+        },
+        {
+          "key": "3-code",
+          "kind": "code",
+          "text": "So we each new number is recorded at the end.."
+        },
+        {
+          "key": "3-impact",
+          "kind": "impact",
+          "text": "Append 3 to the end of the list."
+        },
+        {
+          "key": "4-reason",
+          "kind": "reason",
+          "text": "Each add call only records the new number at the end. The end holds the most recent numbers, and that is exactly where the queries look."
+        },
+        {
+          "key": "4-code",
+          "kind": "code",
+          "text": "So we each new number is recorded at the end.."
+        },
+        {
+          "key": "4-impact",
+          "kind": "impact",
+          "text": "Append 5 to the end of the list."
+        },
+        {
+          "key": "5-reason",
+          "kind": "reason",
+          "text": "Now a query arrives. A product needs a starting value that changes nothing when multiplied, and that value is one. Starting from zero would make every answer zero."
+        },
+        {
+          "key": "5-code",
+          "kind": "code",
+          "text": "So we a product starts from one.."
+        },
+        {
+          "key": "5-impact",
+          "kind": "impact",
+          "text": "Query for the last 2: start the product at 1."
+        },
+        {
+          "key": "6-reason",
+          "kind": "reason",
+          "text": "The question is about the last k numbers. Slicing from negative k onward isolates exactly that window, so the loop only sees the numbers the question asks for."
+        },
+        {
+          "key": "6-code",
+          "kind": "code",
+          "text": "So we the last k numbers are a slice.."
+        },
+        {
+          "key": "6-impact",
+          "kind": "impact",
+          "text": "Take the last 2 numbers: positions 2 to 3."
+        },
+        {
+          "key": "7-reason",
+          "kind": "reason",
+          "text": "Each number in the window has to be multiplied in once. The running product grows one number at a time, so after the loop it covers the whole window."
+        },
+        {
+          "key": "7-code",
+          "kind": "code",
+          "text": "So we multiply each number in the window into the product.."
+        },
+        {
+          "key": "7-impact",
+          "kind": "impact",
+          "text": "Multiply by 3: running product 3."
+        },
+        {
+          "key": "8-reason",
+          "kind": "reason",
+          "text": "Each number in the window has to be multiplied in once. The running product grows one number at a time, so after the loop it covers the whole window."
+        },
+        {
+          "key": "8-code",
+          "kind": "code",
+          "text": "So we multiply each number in the window into the product.."
+        },
+        {
+          "key": "8-impact",
+          "kind": "impact",
+          "text": "Multiply by 5: running product 15."
+        },
+        {
+          "key": "9-reason",
+          "kind": "reason",
+          "text": "The loop has covered every number in the window, so the running product is the answer. Returning it now gives the query its result."
+        },
+        {
+          "key": "9-code",
+          "kind": "code",
+          "text": "So we return the product the loop built.."
+        },
+        {
+          "key": "9-impact",
+          "kind": "impact",
+          "text": "Return 15."
+        },
+        {
+          "key": "10-reason",
+          "kind": "reason",
+          "text": "The loop has covered every number in the window, so the running product is the answer. Returning it now gives the query its result."
+        },
+        {
+          "key": "10-code",
+          "kind": "code",
+          "text": "So we return the product the loop built.."
+        },
+        {
+          "key": "10-impact",
+          "kind": "impact",
+          "text": "Answers: 15."
+        }
+      ]
+    },
+    {
+      "presetIndex": 1,
+      "label": "Zero, then recover",
+      "input": "{\"operations\":[[\"add\",2],[\"add\",4],[\"add\",3],[\"add\",0],[\"getProduct\",2],[\"add\",5],[\"add\",6],[\"getProduct\",2]]}",
+      "scenes": [
+        {
+          "key": "0-reason",
+          "kind": "reason",
+          "text": "The class needs somewhere to remember the numbers. A plain list keeps them in arrival order, and that order matters because a query asks about the most recent numbers."
+        },
+        {
+          "key": "0-code",
+          "kind": "code",
+          "text": "So we the class needs somewhere to remember numbers in arrival order.."
+        },
+        {
+          "key": "0-impact",
+          "kind": "impact",
+          "text": "Start with an empty list of numbers."
+        },
+        {
+          "key": "1-reason",
+          "kind": "reason",
+          "text": "Each add call only records the new number at the end. The end holds the most recent numbers, and that is exactly where the queries look."
+        },
+        {
+          "key": "1-code",
+          "kind": "code",
+          "text": "So we each new number is recorded at the end.."
+        },
+        {
+          "key": "1-impact",
+          "kind": "impact",
+          "text": "Append 2 to the end of the list."
+        },
+        {
+          "key": "2-reason",
+          "kind": "reason",
+          "text": "Each add call only records the new number at the end. The end holds the most recent numbers, and that is exactly where the queries look."
+        },
+        {
+          "key": "2-code",
+          "kind": "code",
+          "text": "So we each new number is recorded at the end.."
+        },
+        {
+          "key": "2-impact",
+          "kind": "impact",
+          "text": "Append 4 to the end of the list."
+        },
+        {
+          "key": "3-reason",
+          "kind": "reason",
+          "text": "Each add call only records the new number at the end. The end holds the most recent numbers, and that is exactly where the queries look."
+        },
+        {
+          "key": "3-code",
+          "kind": "code",
+          "text": "So we each new number is recorded at the end.."
+        },
+        {
+          "key": "3-impact",
+          "kind": "impact",
+          "text": "Append 3 to the end of the list."
+        },
+        {
+          "key": "4-reason",
+          "kind": "reason",
+          "text": "Each add call only records the new number at the end. The end holds the most recent numbers, and that is exactly where the queries look."
+        },
+        {
+          "key": "4-code",
+          "kind": "code",
+          "text": "So we each new number is recorded at the end.."
+        },
+        {
+          "key": "4-impact",
+          "kind": "impact",
+          "text": "Append 0 to the end of the list."
+        },
+        {
+          "key": "5-reason",
+          "kind": "reason",
+          "text": "Now a query arrives. A product needs a starting value that changes nothing when multiplied, and that value is one. Starting from zero would make every answer zero."
+        },
+        {
+          "key": "5-code",
+          "kind": "code",
+          "text": "So we a product starts from one.."
+        },
+        {
+          "key": "5-impact",
+          "kind": "impact",
+          "text": "Query for the last 2: start the product at 1."
+        },
+        {
+          "key": "6-reason",
+          "kind": "reason",
+          "text": "The question is about the last k numbers. Slicing from negative k onward isolates exactly that window, so the loop only sees the numbers the question asks for."
+        },
+        {
+          "key": "6-code",
+          "kind": "code",
+          "text": "So we the last k numbers are a slice.."
+        },
+        {
+          "key": "6-impact",
+          "kind": "impact",
+          "text": "Take the last 2 numbers: positions 2 to 3."
+        },
+        {
+          "key": "7-reason",
+          "kind": "reason",
+          "text": "Each number in the window has to be multiplied in once. The running product grows one number at a time, so after the loop it covers the whole window."
+        },
+        {
+          "key": "7-code",
+          "kind": "code",
+          "text": "So we multiply each number in the window into the product.."
+        },
+        {
+          "key": "7-impact",
+          "kind": "impact",
+          "text": "Multiply by 3: running product 3."
+        },
+        {
+          "key": "8-reason",
+          "kind": "reason",
+          "text": "Each number in the window has to be multiplied in once. The running product grows one number at a time, so after the loop it covers the whole window."
+        },
+        {
+          "key": "8-code",
+          "kind": "code",
+          "text": "So we multiply each number in the window into the product.."
+        },
+        {
+          "key": "8-impact",
+          "kind": "impact",
+          "text": "Multiply by 0: running product 0."
+        },
+        {
+          "key": "9-reason",
+          "kind": "reason",
+          "text": "The loop has covered every number in the window, so the running product is the answer. Returning it now gives the query its result."
+        },
+        {
+          "key": "9-code",
+          "kind": "code",
+          "text": "So we return the product the loop built.."
+        },
+        {
+          "key": "9-impact",
+          "kind": "impact",
+          "text": "Return 0."
+        },
+        {
+          "key": "10-reason",
+          "kind": "reason",
+          "text": "Each add call only records the new number at the end. The end holds the most recent numbers, and that is exactly where the queries look."
+        },
+        {
+          "key": "10-code",
+          "kind": "code",
+          "text": "So we each new number is recorded at the end.."
+        },
+        {
+          "key": "10-impact",
+          "kind": "impact",
+          "text": "Append 5 to the end of the list."
+        },
+        {
+          "key": "11-reason",
+          "kind": "reason",
+          "text": "Each add call only records the new number at the end. The end holds the most recent numbers, and that is exactly where the queries look."
+        },
+        {
+          "key": "11-code",
+          "kind": "code",
+          "text": "So we each new number is recorded at the end.."
+        },
+        {
+          "key": "11-impact",
+          "kind": "impact",
+          "text": "Append 6 to the end of the list."
+        },
+        {
+          "key": "12-reason",
+          "kind": "reason",
+          "text": "Now a query arrives. A product needs a starting value that changes nothing when multiplied, and that value is one. Starting from zero would make every answer zero."
+        },
+        {
+          "key": "12-code",
+          "kind": "code",
+          "text": "So we a product starts from one.."
+        },
+        {
+          "key": "12-impact",
+          "kind": "impact",
+          "text": "Query for the last 2: start the product at 1."
+        },
+        {
+          "key": "13-reason",
+          "kind": "reason",
+          "text": "The question is about the last k numbers. Slicing from negative k onward isolates exactly that window, so the loop only sees the numbers the question asks for."
+        },
+        {
+          "key": "13-code",
+          "kind": "code",
+          "text": "So we the last k numbers are a slice.."
+        },
+        {
+          "key": "13-impact",
+          "kind": "impact",
+          "text": "Take the last 2 numbers: positions 4 to 5."
+        },
+        {
+          "key": "14-reason",
+          "kind": "reason",
+          "text": "Each number in the window has to be multiplied in once. The running product grows one number at a time, so after the loop it covers the whole window."
+        },
+        {
+          "key": "14-code",
+          "kind": "code",
+          "text": "So we multiply each number in the window into the product.."
+        },
+        {
+          "key": "14-impact",
+          "kind": "impact",
+          "text": "Multiply by 5: running product 5."
+        },
+        {
+          "key": "15-reason",
+          "kind": "reason",
+          "text": "Each number in the window has to be multiplied in once. The running product grows one number at a time, so after the loop it covers the whole window."
+        },
+        {
+          "key": "15-code",
+          "kind": "code",
+          "text": "So we multiply each number in the window into the product.."
+        },
+        {
+          "key": "15-impact",
+          "kind": "impact",
+          "text": "Multiply by 6: running product 30."
+        },
+        {
+          "key": "16-reason",
+          "kind": "reason",
+          "text": "The loop has covered every number in the window, so the running product is the answer. Returning it now gives the query its result."
+        },
+        {
+          "key": "16-code",
+          "kind": "code",
+          "text": "So we return the product the loop built.."
+        },
+        {
+          "key": "16-impact",
+          "kind": "impact",
+          "text": "Return 30."
+        },
+        {
+          "key": "17-reason",
+          "kind": "reason",
+          "text": "The loop has covered every number in the window, so the running product is the answer. Returning it now gives the query its result."
+        },
+        {
+          "key": "17-code",
+          "kind": "code",
+          "text": "So we return the product the loop built.."
+        },
+        {
+          "key": "17-impact",
+          "kind": "impact",
+          "text": "Answers: 0, 30."
+        }
+      ]
+    },
+    {
+      "presetIndex": 2,
+      "label": "Single value",
+      "input": "{\"operations\":[[\"add\",7],[\"getProduct\",1]]}",
+      "scenes": [
+        {
+          "key": "0-reason",
+          "kind": "reason",
+          "text": "The class needs somewhere to remember the numbers. A plain list keeps them in arrival order, and that order matters because a query asks about the most recent numbers."
+        },
+        {
+          "key": "0-code",
+          "kind": "code",
+          "text": "So we the class needs somewhere to remember numbers in arrival order.."
+        },
+        {
+          "key": "0-impact",
+          "kind": "impact",
+          "text": "Start with an empty list of numbers."
+        },
+        {
+          "key": "1-reason",
+          "kind": "reason",
+          "text": "Each add call only records the new number at the end. The end holds the most recent numbers, and that is exactly where the queries look."
+        },
+        {
+          "key": "1-code",
+          "kind": "code",
+          "text": "So we each new number is recorded at the end.."
+        },
+        {
+          "key": "1-impact",
+          "kind": "impact",
+          "text": "Append 7 to the end of the list."
+        },
+        {
+          "key": "2-reason",
+          "kind": "reason",
+          "text": "Now a query arrives. A product needs a starting value that changes nothing when multiplied, and that value is one. Starting from zero would make every answer zero."
+        },
+        {
+          "key": "2-code",
+          "kind": "code",
+          "text": "So we a product starts from one.."
+        },
+        {
+          "key": "2-impact",
+          "kind": "impact",
+          "text": "Query for the last 1: start the product at 1."
+        },
+        {
+          "key": "3-reason",
+          "kind": "reason",
+          "text": "The question is about the last k numbers. Slicing from negative k onward isolates exactly that window, so the loop only sees the numbers the question asks for."
+        },
+        {
+          "key": "3-code",
+          "kind": "code",
+          "text": "So we the last k numbers are a slice.."
+        },
+        {
+          "key": "3-impact",
+          "kind": "impact",
+          "text": "Take the last 1 numbers: positions 0 to 0."
+        },
+        {
+          "key": "4-reason",
+          "kind": "reason",
+          "text": "Each number in the window has to be multiplied in once. The running product grows one number at a time, so after the loop it covers the whole window."
+        },
+        {
+          "key": "4-code",
+          "kind": "code",
+          "text": "So we multiply each number in the window into the product.."
+        },
+        {
+          "key": "4-impact",
+          "kind": "impact",
+          "text": "Multiply by 7: running product 7."
+        },
+        {
+          "key": "5-reason",
+          "kind": "reason",
+          "text": "The loop has covered every number in the window, so the running product is the answer. Returning it now gives the query its result."
+        },
+        {
+          "key": "5-code",
+          "kind": "code",
+          "text": "So we return the product the loop built.."
+        },
+        {
+          "key": "5-impact",
+          "kind": "impact",
+          "text": "Return 7."
+        },
+        {
+          "key": "6-reason",
+          "kind": "reason",
+          "text": "The loop has covered every number in the window, so the running product is the answer. Returning it now gives the query its result."
+        },
+        {
+          "key": "6-code",
+          "kind": "code",
+          "text": "So we return the product the loop built.."
+        },
+        {
+          "key": "6-impact",
+          "kind": "impact",
+          "text": "Answers: 7."
+        }
+      ]
+    },
+    {
+      "presetIndex": 3,
+      "label": "Equal values",
+      "input": "{\"operations\":[[\"add\",2],[\"add\",2],[\"add\",2],[\"getProduct\",3]]}",
+      "scenes": [
+        {
+          "key": "0-reason",
+          "kind": "reason",
+          "text": "The class needs somewhere to remember the numbers. A plain list keeps them in arrival order, and that order matters because a query asks about the most recent numbers."
+        },
+        {
+          "key": "0-code",
+          "kind": "code",
+          "text": "So we the class needs somewhere to remember numbers in arrival order.."
+        },
+        {
+          "key": "0-impact",
+          "kind": "impact",
+          "text": "Start with an empty list of numbers."
+        },
+        {
+          "key": "1-reason",
+          "kind": "reason",
+          "text": "Each add call only records the new number at the end. The end holds the most recent numbers, and that is exactly where the queries look."
+        },
+        {
+          "key": "1-code",
+          "kind": "code",
+          "text": "So we each new number is recorded at the end.."
+        },
+        {
+          "key": "1-impact",
+          "kind": "impact",
+          "text": "Append 2 to the end of the list."
+        },
+        {
+          "key": "2-reason",
+          "kind": "reason",
+          "text": "Each add call only records the new number at the end. The end holds the most recent numbers, and that is exactly where the queries look."
+        },
+        {
+          "key": "2-code",
+          "kind": "code",
+          "text": "So we each new number is recorded at the end.."
+        },
+        {
+          "key": "2-impact",
+          "kind": "impact",
+          "text": "Append 2 to the end of the list."
+        },
+        {
+          "key": "3-reason",
+          "kind": "reason",
+          "text": "Each add call only records the new number at the end. The end holds the most recent numbers, and that is exactly where the queries look."
+        },
+        {
+          "key": "3-code",
+          "kind": "code",
+          "text": "So we each new number is recorded at the end.."
+        },
+        {
+          "key": "3-impact",
+          "kind": "impact",
+          "text": "Append 2 to the end of the list."
+        },
+        {
+          "key": "4-reason",
+          "kind": "reason",
+          "text": "Now a query arrives. A product needs a starting value that changes nothing when multiplied, and that value is one. Starting from zero would make every answer zero."
+        },
+        {
+          "key": "4-code",
+          "kind": "code",
+          "text": "So we a product starts from one.."
+        },
+        {
+          "key": "4-impact",
+          "kind": "impact",
+          "text": "Query for the last 3: start the product at 1."
+        },
+        {
+          "key": "5-reason",
+          "kind": "reason",
+          "text": "The question is about the last k numbers. Slicing from negative k onward isolates exactly that window, so the loop only sees the numbers the question asks for."
+        },
+        {
+          "key": "5-code",
+          "kind": "code",
+          "text": "So we the last k numbers are a slice.."
+        },
+        {
+          "key": "5-impact",
+          "kind": "impact",
+          "text": "Take the last 3 numbers: positions 0 to 2."
+        },
+        {
+          "key": "6-reason",
+          "kind": "reason",
+          "text": "Each number in the window has to be multiplied in once. The running product grows one number at a time, so after the loop it covers the whole window."
+        },
+        {
+          "key": "6-code",
+          "kind": "code",
+          "text": "So we multiply each number in the window into the product.."
+        },
+        {
+          "key": "6-impact",
+          "kind": "impact",
+          "text": "Multiply by 2: running product 2."
+        },
+        {
+          "key": "7-reason",
+          "kind": "reason",
+          "text": "Each number in the window has to be multiplied in once. The running product grows one number at a time, so after the loop it covers the whole window."
+        },
+        {
+          "key": "7-code",
+          "kind": "code",
+          "text": "So we multiply each number in the window into the product.."
+        },
+        {
+          "key": "7-impact",
+          "kind": "impact",
+          "text": "Multiply by 2: running product 4."
+        },
+        {
+          "key": "8-reason",
+          "kind": "reason",
+          "text": "Each number in the window has to be multiplied in once. The running product grows one number at a time, so after the loop it covers the whole window."
+        },
+        {
+          "key": "8-code",
+          "kind": "code",
+          "text": "So we multiply each number in the window into the product.."
+        },
+        {
+          "key": "8-impact",
+          "kind": "impact",
+          "text": "Multiply by 2: running product 8."
+        },
+        {
+          "key": "9-reason",
+          "kind": "reason",
+          "text": "The loop has covered every number in the window, so the running product is the answer. Returning it now gives the query its result."
+        },
+        {
+          "key": "9-code",
+          "kind": "code",
+          "text": "So we return the product the loop built.."
+        },
+        {
+          "key": "9-impact",
+          "kind": "impact",
+          "text": "Return 8."
+        },
+        {
+          "key": "10-reason",
+          "kind": "reason",
+          "text": "The loop has covered every number in the window, so the running product is the answer. Returning it now gives the query its result."
+        },
+        {
+          "key": "10-code",
+          "kind": "code",
+          "text": "So we return the product the loop built.."
+        },
+        {
+          "key": "10-impact",
+          "kind": "impact",
+          "text": "Answers: 8."
+        }
+      ]
+    },
+    {
+      "presetIndex": 4,
+      "label": "Eleven nines",
+      "input": "{\"operations\":[[\"add\",9],[\"add\",9],[\"add\",9],[\"add\",9],[\"add\",9],[\"add\",9],[\"add\",9],[\"add\",9],[\"add\",9],[\"add\",9],[\"add\",9],[\"getProduct\",11]]}",
+      "scenes": [
+        {
+          "key": "0-reason",
+          "kind": "reason",
+          "text": "The class needs somewhere to remember the numbers. A plain list keeps them in arrival order, and that order matters because a query asks about the most recent numbers."
+        },
+        {
+          "key": "0-code",
+          "kind": "code",
+          "text": "So we the class needs somewhere to remember numbers in arrival order.."
+        },
+        {
+          "key": "0-impact",
+          "kind": "impact",
+          "text": "Start with an empty list of numbers."
+        },
+        {
+          "key": "1-reason",
+          "kind": "reason",
+          "text": "Each add call only records the new number at the end. The end holds the most recent numbers, and that is exactly where the queries look."
+        },
+        {
+          "key": "1-code",
+          "kind": "code",
+          "text": "So we each new number is recorded at the end.."
+        },
+        {
+          "key": "1-impact",
+          "kind": "impact",
+          "text": "Append 9 to the end of the list."
+        },
+        {
+          "key": "2-reason",
+          "kind": "reason",
+          "text": "Each add call only records the new number at the end. The end holds the most recent numbers, and that is exactly where the queries look."
+        },
+        {
+          "key": "2-code",
+          "kind": "code",
+          "text": "So we each new number is recorded at the end.."
+        },
+        {
+          "key": "2-impact",
+          "kind": "impact",
+          "text": "Append 9 to the end of the list."
+        },
+        {
+          "key": "3-reason",
+          "kind": "reason",
+          "text": "Each add call only records the new number at the end. The end holds the most recent numbers, and that is exactly where the queries look."
+        },
+        {
+          "key": "3-code",
+          "kind": "code",
+          "text": "So we each new number is recorded at the end.."
+        },
+        {
+          "key": "3-impact",
+          "kind": "impact",
+          "text": "Append 9 to the end of the list."
+        },
+        {
+          "key": "4-reason",
+          "kind": "reason",
+          "text": "Each add call only records the new number at the end. The end holds the most recent numbers, and that is exactly where the queries look."
+        },
+        {
+          "key": "4-code",
+          "kind": "code",
+          "text": "So we each new number is recorded at the end.."
+        },
+        {
+          "key": "4-impact",
+          "kind": "impact",
+          "text": "Append 9 to the end of the list."
+        },
+        {
+          "key": "5-reason",
+          "kind": "reason",
+          "text": "Each add call only records the new number at the end. The end holds the most recent numbers, and that is exactly where the queries look."
+        },
+        {
+          "key": "5-code",
+          "kind": "code",
+          "text": "So we each new number is recorded at the end.."
+        },
+        {
+          "key": "5-impact",
+          "kind": "impact",
+          "text": "Append 9 to the end of the list."
+        },
+        {
+          "key": "6-reason",
+          "kind": "reason",
+          "text": "Each add call only records the new number at the end. The end holds the most recent numbers, and that is exactly where the queries look."
+        },
+        {
+          "key": "6-code",
+          "kind": "code",
+          "text": "So we each new number is recorded at the end.."
+        },
+        {
+          "key": "6-impact",
+          "kind": "impact",
+          "text": "Append 9 to the end of the list."
+        },
+        {
+          "key": "7-reason",
+          "kind": "reason",
+          "text": "Each add call only records the new number at the end. The end holds the most recent numbers, and that is exactly where the queries look."
+        },
+        {
+          "key": "7-code",
+          "kind": "code",
+          "text": "So we each new number is recorded at the end.."
+        },
+        {
+          "key": "7-impact",
+          "kind": "impact",
+          "text": "Append 9 to the end of the list."
+        },
+        {
+          "key": "8-reason",
+          "kind": "reason",
+          "text": "Each add call only records the new number at the end. The end holds the most recent numbers, and that is exactly where the queries look."
+        },
+        {
+          "key": "8-code",
+          "kind": "code",
+          "text": "So we each new number is recorded at the end.."
+        },
+        {
+          "key": "8-impact",
+          "kind": "impact",
+          "text": "Append 9 to the end of the list."
+        },
+        {
+          "key": "9-reason",
+          "kind": "reason",
+          "text": "Each add call only records the new number at the end. The end holds the most recent numbers, and that is exactly where the queries look."
+        },
+        {
+          "key": "9-code",
+          "kind": "code",
+          "text": "So we each new number is recorded at the end.."
+        },
+        {
+          "key": "9-impact",
+          "kind": "impact",
+          "text": "Append 9 to the end of the list."
+        },
+        {
+          "key": "10-reason",
+          "kind": "reason",
+          "text": "Each add call only records the new number at the end. The end holds the most recent numbers, and that is exactly where the queries look."
+        },
+        {
+          "key": "10-code",
+          "kind": "code",
+          "text": "So we each new number is recorded at the end.."
+        },
+        {
+          "key": "10-impact",
+          "kind": "impact",
+          "text": "Append 9 to the end of the list."
+        },
+        {
+          "key": "11-reason",
+          "kind": "reason",
+          "text": "Each add call only records the new number at the end. The end holds the most recent numbers, and that is exactly where the queries look."
+        },
+        {
+          "key": "11-code",
+          "kind": "code",
+          "text": "So we each new number is recorded at the end.."
+        },
+        {
+          "key": "11-impact",
+          "kind": "impact",
+          "text": "Append 9 to the end of the list."
+        },
+        {
+          "key": "12-reason",
+          "kind": "reason",
+          "text": "Now a query arrives. A product needs a starting value that changes nothing when multiplied, and that value is one. Starting from zero would make every answer zero."
+        },
+        {
+          "key": "12-code",
+          "kind": "code",
+          "text": "So we a product starts from one.."
+        },
+        {
+          "key": "12-impact",
+          "kind": "impact",
+          "text": "Query for the last 11: start the product at 1."
+        },
+        {
+          "key": "13-reason",
+          "kind": "reason",
+          "text": "The question is about the last k numbers. Slicing from negative k onward isolates exactly that window, so the loop only sees the numbers the question asks for."
+        },
+        {
+          "key": "13-code",
+          "kind": "code",
+          "text": "So we the last k numbers are a slice.."
+        },
+        {
+          "key": "13-impact",
+          "kind": "impact",
+          "text": "Take the last 11 numbers: positions 0 to 10."
+        },
+        {
+          "key": "14-reason",
+          "kind": "reason",
+          "text": "Each number in the window has to be multiplied in once. The running product grows one number at a time, so after the loop it covers the whole window."
+        },
+        {
+          "key": "14-code",
+          "kind": "code",
+          "text": "So we multiply each number in the window into the product.."
+        },
+        {
+          "key": "14-impact",
+          "kind": "impact",
+          "text": "Multiply by 9: running product 9."
+        },
+        {
+          "key": "15-reason",
+          "kind": "reason",
+          "text": "Each number in the window has to be multiplied in once. The running product grows one number at a time, so after the loop it covers the whole window."
+        },
+        {
+          "key": "15-code",
+          "kind": "code",
+          "text": "So we multiply each number in the window into the product.."
+        },
+        {
+          "key": "15-impact",
+          "kind": "impact",
+          "text": "Multiply by 9: running product 81."
+        },
+        {
+          "key": "16-reason",
+          "kind": "reason",
+          "text": "Each number in the window has to be multiplied in once. The running product grows one number at a time, so after the loop it covers the whole window."
+        },
+        {
+          "key": "16-code",
+          "kind": "code",
+          "text": "So we multiply each number in the window into the product.."
+        },
+        {
+          "key": "16-impact",
+          "kind": "impact",
+          "text": "Multiply by 9: running product 729."
+        },
+        {
+          "key": "17-reason",
+          "kind": "reason",
+          "text": "Each number in the window has to be multiplied in once. The running product grows one number at a time, so after the loop it covers the whole window."
+        },
+        {
+          "key": "17-code",
+          "kind": "code",
+          "text": "So we multiply each number in the window into the product.."
+        },
+        {
+          "key": "17-impact",
+          "kind": "impact",
+          "text": "Multiply by 9: running product 6561."
+        },
+        {
+          "key": "18-reason",
+          "kind": "reason",
+          "text": "Each number in the window has to be multiplied in once. The running product grows one number at a time, so after the loop it covers the whole window."
+        },
+        {
+          "key": "18-code",
+          "kind": "code",
+          "text": "So we multiply each number in the window into the product.."
+        },
+        {
+          "key": "18-impact",
+          "kind": "impact",
+          "text": "Multiply by 9: running product 59049."
+        },
+        {
+          "key": "19-reason",
+          "kind": "reason",
+          "text": "Each number in the window has to be multiplied in once. The running product grows one number at a time, so after the loop it covers the whole window."
+        },
+        {
+          "key": "19-code",
+          "kind": "code",
+          "text": "So we multiply each number in the window into the product.."
+        },
+        {
+          "key": "19-impact",
+          "kind": "impact",
+          "text": "Multiply by 9: running product 531441."
+        },
+        {
+          "key": "20-reason",
+          "kind": "reason",
+          "text": "Each number in the window has to be multiplied in once. The running product grows one number at a time, so after the loop it covers the whole window."
+        },
+        {
+          "key": "20-code",
+          "kind": "code",
+          "text": "So we multiply each number in the window into the product.."
+        },
+        {
+          "key": "20-impact",
+          "kind": "impact",
+          "text": "Multiply by 9: running product 4782969."
+        },
+        {
+          "key": "21-reason",
+          "kind": "reason",
+          "text": "Each number in the window has to be multiplied in once. The running product grows one number at a time, so after the loop it covers the whole window."
+        },
+        {
+          "key": "21-code",
+          "kind": "code",
+          "text": "So we multiply each number in the window into the product.."
+        },
+        {
+          "key": "21-impact",
+          "kind": "impact",
+          "text": "Multiply by 9: running product 43046721."
+        },
+        {
+          "key": "22-reason",
+          "kind": "reason",
+          "text": "Each number in the window has to be multiplied in once. The running product grows one number at a time, so after the loop it covers the whole window."
+        },
+        {
+          "key": "22-code",
+          "kind": "code",
+          "text": "So we multiply each number in the window into the product.."
+        },
+        {
+          "key": "22-impact",
+          "kind": "impact",
+          "text": "Multiply by 9: running product 387420489."
+        },
+        {
+          "key": "23-reason",
+          "kind": "reason",
+          "text": "Each number in the window has to be multiplied in once. The running product grows one number at a time, so after the loop it covers the whole window."
+        },
+        {
+          "key": "23-code",
+          "kind": "code",
+          "text": "So we multiply each number in the window into the product.."
+        },
+        {
+          "key": "23-impact",
+          "kind": "impact",
+          "text": "Multiply by 9: running product 3486784401."
+        },
+        {
+          "key": "24-reason",
+          "kind": "reason",
+          "text": "Each number in the window has to be multiplied in once. The running product grows one number at a time, so after the loop it covers the whole window."
+        },
+        {
+          "key": "24-code",
+          "kind": "code",
+          "text": "So we multiply each number in the window into the product.."
+        },
+        {
+          "key": "24-impact",
+          "kind": "impact",
+          "text": "Multiply by 9: running product 31381059609."
+        },
+        {
+          "key": "25-reason",
+          "kind": "reason",
+          "text": "The loop has covered every number in the window, so the running product is the answer. Returning it now gives the query its result."
+        },
+        {
+          "key": "25-code",
+          "kind": "code",
+          "text": "So we return the product the loop built.."
+        },
+        {
+          "key": "25-impact",
+          "kind": "impact",
+          "text": "Return 31381059609."
+        },
+        {
+          "key": "26-reason",
+          "kind": "reason",
+          "text": "The loop has covered every number in the window, so the running product is the answer. Returning it now gives the query its result."
+        },
+        {
+          "key": "26-code",
+          "kind": "code",
+          "text": "So we return the product the loop built.."
+        },
+        {
+          "key": "26-impact",
+          "kind": "impact",
+          "text": "Answers: 31381059609."
+        }
+      ]
+    },
+    {
+      "presetIndex": 5,
+      "label": "Long run: twelve operations",
+      "input": "{\"operations\":[[\"add\",4],[\"add\",2],[\"add\",1],[\"add\",7],[\"add\",5],[\"add\",1],[\"add\",9],[\"add\",4],[\"getProduct\",6],[\"getProduct\",4],[\"getProduct\",7],[\"getProduct\",3]]}",
+      "scenes": [
+        {
+          "key": "0-reason",
+          "kind": "reason",
+          "text": "The class needs somewhere to remember the numbers. A plain list keeps them in arrival order, and that order matters because a query asks about the most recent numbers."
+        },
+        {
+          "key": "0-code",
+          "kind": "code",
+          "text": "So we the class needs somewhere to remember numbers in arrival order.."
+        },
+        {
+          "key": "0-impact",
+          "kind": "impact",
+          "text": "Start with an empty list of numbers."
+        },
+        {
+          "key": "1-reason",
+          "kind": "reason",
+          "text": "Each add call only records the new number at the end. The end holds the most recent numbers, and that is exactly where the queries look."
+        },
+        {
+          "key": "1-code",
+          "kind": "code",
+          "text": "So we each new number is recorded at the end.."
+        },
+        {
+          "key": "1-impact",
+          "kind": "impact",
+          "text": "Append 4 to the end of the list."
+        },
+        {
+          "key": "2-reason",
+          "kind": "reason",
+          "text": "Each add call only records the new number at the end. The end holds the most recent numbers, and that is exactly where the queries look."
+        },
+        {
+          "key": "2-code",
+          "kind": "code",
+          "text": "So we each new number is recorded at the end.."
+        },
+        {
+          "key": "2-impact",
+          "kind": "impact",
+          "text": "Append 2 to the end of the list."
+        },
+        {
+          "key": "3-reason",
+          "kind": "reason",
+          "text": "Each add call only records the new number at the end. The end holds the most recent numbers, and that is exactly where the queries look."
+        },
+        {
+          "key": "3-code",
+          "kind": "code",
+          "text": "So we each new number is recorded at the end.."
+        },
+        {
+          "key": "3-impact",
+          "kind": "impact",
+          "text": "Append 1 to the end of the list."
+        },
+        {
+          "key": "4-reason",
+          "kind": "reason",
+          "text": "Each add call only records the new number at the end. The end holds the most recent numbers, and that is exactly where the queries look."
+        },
+        {
+          "key": "4-code",
+          "kind": "code",
+          "text": "So we each new number is recorded at the end.."
+        },
+        {
+          "key": "4-impact",
+          "kind": "impact",
+          "text": "Append 7 to the end of the list."
+        },
+        {
+          "key": "5-reason",
+          "kind": "reason",
+          "text": "Each add call only records the new number at the end. The end holds the most recent numbers, and that is exactly where the queries look."
+        },
+        {
+          "key": "5-code",
+          "kind": "code",
+          "text": "So we each new number is recorded at the end.."
+        },
+        {
+          "key": "5-impact",
+          "kind": "impact",
+          "text": "Append 5 to the end of the list."
+        },
+        {
+          "key": "6-reason",
+          "kind": "reason",
+          "text": "Each add call only records the new number at the end. The end holds the most recent numbers, and that is exactly where the queries look."
+        },
+        {
+          "key": "6-code",
+          "kind": "code",
+          "text": "So we each new number is recorded at the end.."
+        },
+        {
+          "key": "6-impact",
+          "kind": "impact",
+          "text": "Append 1 to the end of the list."
+        },
+        {
+          "key": "7-reason",
+          "kind": "reason",
+          "text": "Each add call only records the new number at the end. The end holds the most recent numbers, and that is exactly where the queries look."
+        },
+        {
+          "key": "7-code",
+          "kind": "code",
+          "text": "So we each new number is recorded at the end.."
+        },
+        {
+          "key": "7-impact",
+          "kind": "impact",
+          "text": "Append 9 to the end of the list."
+        },
+        {
+          "key": "8-reason",
+          "kind": "reason",
+          "text": "Each add call only records the new number at the end. The end holds the most recent numbers, and that is exactly where the queries look."
+        },
+        {
+          "key": "8-code",
+          "kind": "code",
+          "text": "So we each new number is recorded at the end.."
+        },
+        {
+          "key": "8-impact",
+          "kind": "impact",
+          "text": "Append 4 to the end of the list."
+        },
+        {
+          "key": "9-reason",
+          "kind": "reason",
+          "text": "Now a query arrives. A product needs a starting value that changes nothing when multiplied, and that value is one. Starting from zero would make every answer zero."
+        },
+        {
+          "key": "9-code",
+          "kind": "code",
+          "text": "So we a product starts from one.."
+        },
+        {
+          "key": "9-impact",
+          "kind": "impact",
+          "text": "Query for the last 6: start the product at 1."
+        },
+        {
+          "key": "10-reason",
+          "kind": "reason",
+          "text": "The question is about the last k numbers. Slicing from negative k onward isolates exactly that window, so the loop only sees the numbers the question asks for."
+        },
+        {
+          "key": "10-code",
+          "kind": "code",
+          "text": "So we the last k numbers are a slice.."
+        },
+        {
+          "key": "10-impact",
+          "kind": "impact",
+          "text": "Take the last 6 numbers: positions 2 to 7."
+        },
+        {
+          "key": "11-reason",
+          "kind": "reason",
+          "text": "Each number in the window has to be multiplied in once. The running product grows one number at a time, so after the loop it covers the whole window."
+        },
+        {
+          "key": "11-code",
+          "kind": "code",
+          "text": "So we multiply each number in the window into the product.."
+        },
+        {
+          "key": "11-impact",
+          "kind": "impact",
+          "text": "Multiply by 1: running product 1."
+        },
+        {
+          "key": "12-reason",
+          "kind": "reason",
+          "text": "Each number in the window has to be multiplied in once. The running product grows one number at a time, so after the loop it covers the whole window."
+        },
+        {
+          "key": "12-code",
+          "kind": "code",
+          "text": "So we multiply each number in the window into the product.."
+        },
+        {
+          "key": "12-impact",
+          "kind": "impact",
+          "text": "Multiply by 7: running product 7."
+        },
+        {
+          "key": "13-reason",
+          "kind": "reason",
+          "text": "Each number in the window has to be multiplied in once. The running product grows one number at a time, so after the loop it covers the whole window."
+        },
+        {
+          "key": "13-code",
+          "kind": "code",
+          "text": "So we multiply each number in the window into the product.."
+        },
+        {
+          "key": "13-impact",
+          "kind": "impact",
+          "text": "Multiply by 5: running product 35."
+        },
+        {
+          "key": "14-reason",
+          "kind": "reason",
+          "text": "Each number in the window has to be multiplied in once. The running product grows one number at a time, so after the loop it covers the whole window."
+        },
+        {
+          "key": "14-code",
+          "kind": "code",
+          "text": "So we multiply each number in the window into the product.."
+        },
+        {
+          "key": "14-impact",
+          "kind": "impact",
+          "text": "Multiply by 1: running product 35."
+        },
+        {
+          "key": "15-reason",
+          "kind": "reason",
+          "text": "Each number in the window has to be multiplied in once. The running product grows one number at a time, so after the loop it covers the whole window."
+        },
+        {
+          "key": "15-code",
+          "kind": "code",
+          "text": "So we multiply each number in the window into the product.."
+        },
+        {
+          "key": "15-impact",
+          "kind": "impact",
+          "text": "Multiply by 9: running product 315."
+        },
+        {
+          "key": "16-reason",
+          "kind": "reason",
+          "text": "Each number in the window has to be multiplied in once. The running product grows one number at a time, so after the loop it covers the whole window."
+        },
+        {
+          "key": "16-code",
+          "kind": "code",
+          "text": "So we multiply each number in the window into the product.."
+        },
+        {
+          "key": "16-impact",
+          "kind": "impact",
+          "text": "Multiply by 4: running product 1260."
+        },
+        {
+          "key": "17-reason",
+          "kind": "reason",
+          "text": "The loop has covered every number in the window, so the running product is the answer. Returning it now gives the query its result."
+        },
+        {
+          "key": "17-code",
+          "kind": "code",
+          "text": "So we return the product the loop built.."
+        },
+        {
+          "key": "17-impact",
+          "kind": "impact",
+          "text": "Return 1260."
+        },
+        {
+          "key": "18-reason",
+          "kind": "reason",
+          "text": "Now a query arrives. A product needs a starting value that changes nothing when multiplied, and that value is one. Starting from zero would make every answer zero."
+        },
+        {
+          "key": "18-code",
+          "kind": "code",
+          "text": "So we a product starts from one.."
+        },
+        {
+          "key": "18-impact",
+          "kind": "impact",
+          "text": "Query for the last 4: start the product at 1."
+        },
+        {
+          "key": "19-reason",
+          "kind": "reason",
+          "text": "The question is about the last k numbers. Slicing from negative k onward isolates exactly that window, so the loop only sees the numbers the question asks for."
+        },
+        {
+          "key": "19-code",
+          "kind": "code",
+          "text": "So we the last k numbers are a slice.."
+        },
+        {
+          "key": "19-impact",
+          "kind": "impact",
+          "text": "Take the last 4 numbers: positions 4 to 7."
+        },
+        {
+          "key": "20-reason",
+          "kind": "reason",
+          "text": "Each number in the window has to be multiplied in once. The running product grows one number at a time, so after the loop it covers the whole window."
+        },
+        {
+          "key": "20-code",
+          "kind": "code",
+          "text": "So we multiply each number in the window into the product.."
+        },
+        {
+          "key": "20-impact",
+          "kind": "impact",
+          "text": "Multiply by 5: running product 5."
+        },
+        {
+          "key": "21-reason",
+          "kind": "reason",
+          "text": "Each number in the window has to be multiplied in once. The running product grows one number at a time, so after the loop it covers the whole window."
+        },
+        {
+          "key": "21-code",
+          "kind": "code",
+          "text": "So we multiply each number in the window into the product.."
+        },
+        {
+          "key": "21-impact",
+          "kind": "impact",
+          "text": "Multiply by 1: running product 5."
+        },
+        {
+          "key": "22-reason",
+          "kind": "reason",
+          "text": "Each number in the window has to be multiplied in once. The running product grows one number at a time, so after the loop it covers the whole window."
+        },
+        {
+          "key": "22-code",
+          "kind": "code",
+          "text": "So we multiply each number in the window into the product.."
+        },
+        {
+          "key": "22-impact",
+          "kind": "impact",
+          "text": "Multiply by 9: running product 45."
+        },
+        {
+          "key": "23-reason",
+          "kind": "reason",
+          "text": "Each number in the window has to be multiplied in once. The running product grows one number at a time, so after the loop it covers the whole window."
+        },
+        {
+          "key": "23-code",
+          "kind": "code",
+          "text": "So we multiply each number in the window into the product.."
+        },
+        {
+          "key": "23-impact",
+          "kind": "impact",
+          "text": "Multiply by 4: running product 180."
+        },
+        {
+          "key": "24-reason",
+          "kind": "reason",
+          "text": "The loop has covered every number in the window, so the running product is the answer. Returning it now gives the query its result."
+        },
+        {
+          "key": "24-code",
+          "kind": "code",
+          "text": "So we return the product the loop built.."
+        },
+        {
+          "key": "24-impact",
+          "kind": "impact",
+          "text": "Return 180."
+        },
+        {
+          "key": "25-reason",
+          "kind": "reason",
+          "text": "Now a query arrives. A product needs a starting value that changes nothing when multiplied, and that value is one. Starting from zero would make every answer zero."
+        },
+        {
+          "key": "25-code",
+          "kind": "code",
+          "text": "So we a product starts from one.."
+        },
+        {
+          "key": "25-impact",
+          "kind": "impact",
+          "text": "Query for the last 7: start the product at 1."
+        },
+        {
+          "key": "26-reason",
+          "kind": "reason",
+          "text": "The question is about the last k numbers. Slicing from negative k onward isolates exactly that window, so the loop only sees the numbers the question asks for."
+        },
+        {
+          "key": "26-code",
+          "kind": "code",
+          "text": "So we the last k numbers are a slice.."
+        },
+        {
+          "key": "26-impact",
+          "kind": "impact",
+          "text": "Take the last 7 numbers: positions 1 to 7."
+        },
+        {
+          "key": "27-reason",
+          "kind": "reason",
+          "text": "Each number in the window has to be multiplied in once. The running product grows one number at a time, so after the loop it covers the whole window."
+        },
+        {
+          "key": "27-code",
+          "kind": "code",
+          "text": "So we multiply each number in the window into the product.."
+        },
+        {
+          "key": "27-impact",
+          "kind": "impact",
+          "text": "Multiply by 2: running product 2."
+        },
+        {
+          "key": "28-reason",
+          "kind": "reason",
+          "text": "Each number in the window has to be multiplied in once. The running product grows one number at a time, so after the loop it covers the whole window."
+        },
+        {
+          "key": "28-code",
+          "kind": "code",
+          "text": "So we multiply each number in the window into the product.."
+        },
+        {
+          "key": "28-impact",
+          "kind": "impact",
+          "text": "Multiply by 1: running product 2."
+        },
+        {
+          "key": "29-reason",
+          "kind": "reason",
+          "text": "Each number in the window has to be multiplied in once. The running product grows one number at a time, so after the loop it covers the whole window."
+        },
+        {
+          "key": "29-code",
+          "kind": "code",
+          "text": "So we multiply each number in the window into the product.."
+        },
+        {
+          "key": "29-impact",
+          "kind": "impact",
+          "text": "Multiply by 7: running product 14."
+        },
+        {
+          "key": "30-reason",
+          "kind": "reason",
+          "text": "Each number in the window has to be multiplied in once. The running product grows one number at a time, so after the loop it covers the whole window."
+        },
+        {
+          "key": "30-code",
+          "kind": "code",
+          "text": "So we multiply each number in the window into the product.."
+        },
+        {
+          "key": "30-impact",
+          "kind": "impact",
+          "text": "Multiply by 5: running product 70."
+        },
+        {
+          "key": "31-reason",
+          "kind": "reason",
+          "text": "Each number in the window has to be multiplied in once. The running product grows one number at a time, so after the loop it covers the whole window."
+        },
+        {
+          "key": "31-code",
+          "kind": "code",
+          "text": "So we multiply each number in the window into the product.."
+        },
+        {
+          "key": "31-impact",
+          "kind": "impact",
+          "text": "Multiply by 1: running product 70."
+        },
+        {
+          "key": "32-reason",
+          "kind": "reason",
+          "text": "Each number in the window has to be multiplied in once. The running product grows one number at a time, so after the loop it covers the whole window."
+        },
+        {
+          "key": "32-code",
+          "kind": "code",
+          "text": "So we multiply each number in the window into the product.."
+        },
+        {
+          "key": "32-impact",
+          "kind": "impact",
+          "text": "Multiply by 9: running product 630."
+        },
+        {
+          "key": "33-reason",
+          "kind": "reason",
+          "text": "Each number in the window has to be multiplied in once. The running product grows one number at a time, so after the loop it covers the whole window."
+        },
+        {
+          "key": "33-code",
+          "kind": "code",
+          "text": "So we multiply each number in the window into the product.."
+        },
+        {
+          "key": "33-impact",
+          "kind": "impact",
+          "text": "Multiply by 4: running product 2520."
+        },
+        {
+          "key": "34-reason",
+          "kind": "reason",
+          "text": "The loop has covered every number in the window, so the running product is the answer. Returning it now gives the query its result."
+        },
+        {
+          "key": "34-code",
+          "kind": "code",
+          "text": "So we return the product the loop built.."
+        },
+        {
+          "key": "34-impact",
+          "kind": "impact",
+          "text": "Return 2520."
+        },
+        {
+          "key": "35-reason",
+          "kind": "reason",
+          "text": "Now a query arrives. A product needs a starting value that changes nothing when multiplied, and that value is one. Starting from zero would make every answer zero."
+        },
+        {
+          "key": "35-code",
+          "kind": "code",
+          "text": "So we a product starts from one.."
+        },
+        {
+          "key": "35-impact",
+          "kind": "impact",
+          "text": "Query for the last 3: start the product at 1."
+        },
+        {
+          "key": "36-reason",
+          "kind": "reason",
+          "text": "The question is about the last k numbers. Slicing from negative k onward isolates exactly that window, so the loop only sees the numbers the question asks for."
+        },
+        {
+          "key": "36-code",
+          "kind": "code",
+          "text": "So we the last k numbers are a slice.."
+        },
+        {
+          "key": "36-impact",
+          "kind": "impact",
+          "text": "Take the last 3 numbers: positions 5 to 7."
+        },
+        {
+          "key": "37-reason",
+          "kind": "reason",
+          "text": "Each number in the window has to be multiplied in once. The running product grows one number at a time, so after the loop it covers the whole window."
+        },
+        {
+          "key": "37-code",
+          "kind": "code",
+          "text": "So we multiply each number in the window into the product.."
+        },
+        {
+          "key": "37-impact",
+          "kind": "impact",
+          "text": "Multiply by 1: running product 1."
+        },
+        {
+          "key": "38-reason",
+          "kind": "reason",
+          "text": "Each number in the window has to be multiplied in once. The running product grows one number at a time, so after the loop it covers the whole window."
+        },
+        {
+          "key": "38-code",
+          "kind": "code",
+          "text": "So we multiply each number in the window into the product.."
+        },
+        {
+          "key": "38-impact",
+          "kind": "impact",
+          "text": "Multiply by 9: running product 9."
+        },
+        {
+          "key": "39-reason",
+          "kind": "reason",
+          "text": "Each number in the window has to be multiplied in once. The running product grows one number at a time, so after the loop it covers the whole window."
+        },
+        {
+          "key": "39-code",
+          "kind": "code",
+          "text": "So we multiply each number in the window into the product.."
+        },
+        {
+          "key": "39-impact",
+          "kind": "impact",
+          "text": "Multiply by 4: running product 36."
+        },
+        {
+          "key": "40-reason",
+          "kind": "reason",
+          "text": "The loop has covered every number in the window, so the running product is the answer. Returning it now gives the query its result."
+        },
+        {
+          "key": "40-code",
+          "kind": "code",
+          "text": "So we return the product the loop built.."
+        },
+        {
+          "key": "40-impact",
+          "kind": "impact",
+          "text": "Return 36."
+        },
+        {
+          "key": "41-reason",
+          "kind": "reason",
+          "text": "The loop has covered every number in the window, so the running product is the answer. Returning it now gives the query its result."
+        },
+        {
+          "key": "41-code",
+          "kind": "code",
+          "text": "So we return the product the loop built.."
+        },
+        {
+          "key": "41-impact",
+          "kind": "impact",
+          "text": "Answers: 1260, 180, 2520, 36."
+        }
+      ]
+    }
+  ]
+}

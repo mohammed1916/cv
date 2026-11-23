@@ -3,6 +3,7 @@ import {buildAdaptiveSequence} from './adaptive/planner.js';
 import TutorialScene from './TutorialScene';
 import { buildTutorialSequence, tutorialPosition } from './tutorialSequence.js';
 import { narrationLine, narrationUrl } from './tutorialNarration.js';
+import { speakScene } from './narrationSpeech.js';
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import LuminoDockPanel from '../LuminoDockPanel'
@@ -25,7 +26,7 @@ const PANELS = [
 const TUTORIAL_PANELS = [{ id: 'story', title: 'Tutorial story' }, { id: 'input', title: 'Input & examples', dockMode: 'split-right', ratio: .3 }];
 
 // Problems own validation, execution states, and views. This owns only the shell.
-export default function AlgorithmWorkspace({ definition, renderVisual, renderReasoning, tutorial, visuals, narration }) {
+export default function AlgorithmWorkspace({ definition, renderVisual, renderReasoning, tutorial, visuals, narration, tutorialModes }) {
   const [draft, setDraft] = useState(definition.examples[0].input)
   const [run, setRun] = useState(() => definition.build(definition.parse(definition.examples[0].input)))
   const [error, setError] = useState('')
@@ -92,14 +93,12 @@ export default function AlgorithmWorkspace({ definition, renderVisual, renderRea
     // Timed fallback keeps the tutorial moving when neither a recorded clip nor a browser voice is available.
     const timed = () => { clearTimeout(timer); timer = setTimeout(advance, playback.speed) }
     // A missing or blocked recorded clip is read aloud by the browser's built-in voice.
+    let stopSpeech = null
     const speak = () => {
       if (handled) return
       handled = true
       if (!canSpeak) return timed()
-      const utterance = new SpeechSynthesisUtterance(narrationLine(beat))
-      utterance.onend = advance
-      utterance.onerror = timed
-      window.speechSynthesis.speak(utterance)
+      stopSpeech = speakScene(narrationLine(beat), { onEnd: advance, onError: timed })
     }
     audio.onended = advance
     audio.onerror = speak
@@ -107,7 +106,7 @@ export default function AlgorithmWorkspace({ definition, renderVisual, renderRea
     audio.play().catch(speak)
     return () => {
       clearTimeout(timer); audio.onended = null; audio.onerror = null; audio.pause()
-      if (canSpeak) window.speechSynthesis.cancel()
+      stopSpeech?.()
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [narrated, narrating, position])
@@ -170,7 +169,15 @@ export default function AlgorithmWorkspace({ definition, renderVisual, renderRea
       value={position} disabled={!run} onChange={event => seek(Number(event.target.value))} /></label>
     {narration && directed && <label className="algorithm-workspace__narration" style={{marginInlineStart: 16, paddingInlineStart: 12, borderInlineStart: '1px solid var(--border)'}}>
       <input type="checkbox" checked={narrationOn} disabled={presetIndex < 0}
-        onChange={event => { if (event.target.checked) unlockAudio(); setNarrationOn(event.target.checked); setNarrating(false); playback.setIsPlaying(false) }} />
+        onChange={event => {
+          const on = event.target.checked
+          if (on) unlockAudio()
+          // Switching narration keeps playback running: if it was playing, the voice takes over (or the silent timer resumes).
+          const wasPlaying = narrating || playback.isPlaying
+          setNarrationOn(on)
+          setNarrating(on && wasPlaying)
+          playback.setIsPlaying(!on && wasPlaying)
+        }} />
       Narration{presetIndex < 0 ? ' (fixed examples only)' : ''}
     </label>}
     <span>{run ? `${position + 1} / ${total} ${directed ? 'scenes' : 'frames'}` : 'No valid input'}</span>
@@ -189,7 +196,7 @@ export default function AlgorithmWorkspace({ definition, renderVisual, renderRea
     {goal}
     <div className="algorithm-workspace__tabs">
       {supportsTutorial && <TabSwitch label="Tutorial mode" className="tutorial-mode-switch" value={tutorialMode} onChange={changeMode}
-        options={[{value:'off',label:'Full view'},{value:'steps',label:'Step-by-step'},{value:'why',label:'Reason-first'}]} />}
+        options={[{value:'off',label:'Full view'},{value:'steps',label:'Step-by-step'},{value:'why',label:'Reason-first'}].filter(option => !tutorialModes || tutorialModes.includes(option.value))} />}
       {definition.goal && <TabSwitch label="Problem goal" className="goal-tab-switch" value={goalTab} onChange={setGoalTab}
         options={[{value:'visual',label:'Visualization'},{value:'goal',label:'Goal'}]} />}
     </div>
