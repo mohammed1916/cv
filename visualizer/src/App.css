@@ -45,7 +45,8 @@
 
 .chat-launcher {
   position: fixed;
-  right: 3.25rem; /* leaves room for the feedback tab on the right edge */
+  right: 3.25rem;
+  /* leaves room for the feedback tab on the right edge */
   bottom: 1rem;
   z-index: 2100;
   border: 1px solid var(--border);
@@ -951,6 +952,7 @@ img.brand-icon {
   gap: 8px 18px;
   margin: 0.5rem 0;
 }
+
 .about-links a,
 .about-link-button {
   padding: 0;
@@ -962,6 +964,7 @@ img.brand-icon {
   text-underline-offset: 3px;
   cursor: pointer;
 }
+
 .about-link-button:focus-visible,
 .about-links a:focus-visible {
   outline: 2px solid var(--primary);
@@ -969,22 +972,64 @@ img.brand-icon {
   border-radius: 4px;
 }
 
-.account-menu { position: relative; display: inline-block; }
-.account-menu > summary { list-style: none; cursor: pointer; }
-.account-menu > summary::-webkit-details-marker { display: none; }
-.account-avatar-btn { display: inline-flex; align-items: center; justify-content: center; }
-.account-menu-popover {
-  position: absolute; right: 0; top: calc(100% + 8px); z-index: 2000;
-  min-width: 220px; padding: 14px; display: grid; gap: 8px;
-  border: 1px solid var(--border); border-radius: 12px;
-  background: var(--surface); color: var(--text); box-shadow: 0 12px 40px #0003;
+.account-menu {
+  position: relative;
+  display: inline-block;
 }
-.account-menu-popover p { margin: 0; }
-.account-menu-name { font-weight: 700; }
-.account-menu-email { font-size: 12px; color: var(--text-muted, var(--text)); word-break: break-all; }
+
+.account-menu>summary {
+  list-style: none;
+  cursor: pointer;
+}
+
+.account-menu>summary::-webkit-details-marker {
+  display: none;
+}
+
+.account-avatar-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.account-menu-popover {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 8px);
+  z-index: 2000;
+  min-width: 220px;
+  padding: 14px;
+  display: grid;
+  gap: 8px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--surface);
+  color: var(--text);
+  box-shadow: 0 12px 40px #0003;
+}
+
+.account-menu-popover p {
+  margin: 0;
+}
+
+.account-menu-name {
+  font-weight: 700;
+}
+
+.account-menu-email {
+  font-size: 12px;
+  color: var(--text-muted, var(--text));
+  word-break: break-all;
+}
+
 .account-menu-popover button {
-  padding: 8px 12px; border: 1px solid var(--border); border-radius: 8px;
-  background: var(--surface2); color: var(--text); font-weight: 600; cursor: pointer;
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface2);
+  color: var(--text);
+  font-weight: 600;
+  cursor: pointer;
 }
 
 /* Signed-in account avatar: first initial in the theme's primary colour pair,
@@ -1011,7 +1056,7 @@ img.brand-icon {
   white-space: nowrap;
 }
 
-.problem-header > .view-menu {
+.problem-header>.view-menu {
   position: absolute;
   left: 50%;
   top: 50%;
@@ -1145,29 +1190,77 @@ img.brand-icon {
 .home-page .cards-grid--virtual .cards-row {
   box-sizing: border-box;
 }
-.problem-header-nav { display: inline-flex; align-items: center; gap: 6px; }
 
-.access-toolbar-icon { display: inline-flex; align-items: center; justify-content: center; width: 34px; padding: 0; }
+.problem-header-nav {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.access-toolbar-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  padding: 0;
+}
 
 /* Compact navigation bar; on phones the title moves into the content and the header keeps the View button. */
-.problem-info-bar { gap: 2px; padding: 2px; }
+.problem-info-bar {
+  gap: 2px;
+  padding: 2px;
+}
+
 .problem-info-bar .problem-nav-button,
-.problem-info-bar .problem-info-toggle { width: 28px; height: 28px; min-width: 28px; padding: 0; }
-.problem-title-mobile { display: none; }
+.problem-info-bar .problem-info-toggle {
+  width: 28px;
+  height: 28px;
+  min-width: 28px;
+  padding: 0;
+}
+
+.problem-title-mobile {
+  display: none;
+}
+
 @media (max-width: 720px) {
+
   .problem-header .problem-num,
   .problem-header .problem-title,
-  .problem-header .problem-title-group .difficulty { display: none; }
-  .problem-title-mobile { display: flex; align-items: center; gap: 8px; padding: 6px 12px; }
-  .problem-title-mobile .problem-title { font-size: 1rem; margin: 0; }
+  .problem-header .problem-title-group .difficulty {
+    display: none;
+  }
+
+  .problem-title-mobile {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px;
+    margin-top: 54px;
+  }
+
+  .problem-title-mobile .problem-title {
+    font-size: 1rem;
+    margin: 0;
+  }
 }
 
 /* Phones: View sits at the far right after the navigation arrows; its popover opens from the right edge. */
 @media (max-width: 720px) {
-  .problem-header .problem-title-group { flex: 0 0 0; min-width: 0; padding: 0; margin: 0; overflow: hidden; }
-  .problem-header .view-menu { margin-left: 2px; }
+  .problem-header .problem-title-group {
+    flex: 0 0 0;
+    min-width: 0;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+  }
+
+  .problem-header .view-menu {
+    margin-left: 2px;
+  }
+
   .problem-header .view-menu__popover,
-  .problem-header .view-menu > div {
+  .problem-header .view-menu>div {
     position: fixed;
     top: auto;
     left: 8px;
@@ -1178,48 +1271,142 @@ img.brand-icon {
 }
 
 /* Phones: the navigation slides away and a chevron tab stays on the right. Tapping the content hides it. */
-.problem-nav-tab { display: none; }
+.problem-nav-tab {
+  display: none;
+}
+
 @media (max-width: 720px) {
-  .problem-header { position: relative; transition: transform .2s ease; }
-  .problem-header.is-hidden { transform: translateY(calc(-100% + 22px)); }
+  .problem-header {
+    position: relative;
+    transition: transform .2s ease;
+  }
+
+  .problem-header.is-hidden {
+    transform: translateY(calc(-100% + 22px));
+  }
+
   .problem-header .problem-nav-tab {
-    display: inline-flex; align-items: center; justify-content: center;
-    position: absolute; right: 8px; bottom: -22px; width: 36px; height: 22px;
-    border: 1px solid var(--border); border-top: 0; border-radius: 0 0 8px 8px;
-    background: var(--surface2); color: var(--text);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    right: 8px;
+    bottom: -22px;
+    width: 36px;
+    height: 22px;
+    border: 1px solid var(--border);
+    border-top: 0;
+    border-radius: 0 0 8px 8px;
+    background: var(--surface2);
+    color: var(--text);
   }
 }
 
 @media (max-width: 720px) {
-  .problem-header .view-menu__popover, .problem-header .view-menu > div { top: 64px; }
+
+  .problem-header .view-menu__popover,
+  .problem-header .view-menu>div {
+    top: 64px;
+  }
 }
 
 /* Phones: the page scrolls as one column, so panels at the bottom can be reached. */
 @media (max-width: 720px) {
-  .problem-page { height: auto; min-height: 100%; overflow: visible; }
-  .problem-content { overflow: visible; display: block; flex: 0 0 auto; }
-  .problem-content .algorithm-workspace { height: auto; overflow: visible; }
+  .problem-page {
+    height: auto;
+    min-height: 100%;
+    overflow: visible;
+  }
+
+  .problem-content {
+    overflow: visible;
+    display: block;
+    flex: 0 0 auto;
+  }
+
+  .problem-content .algorithm-workspace {
+    height: auto;
+    overflow: visible;
+  }
 }
 
 /* Phones: the navigation bar stays at the top while the page scrolls; its chevron tab stays visible when hidden. */
 @media (max-width: 720px) {
-  .problem-header { position: sticky; top: 0; z-index: 50; background: var(--surface); }
-  .problem-header.is-hidden { transform: translateY(calc(-100% + 22px)); }
+  .problem-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: var(--surface);
+  }
+
+  .problem-header.is-hidden {
+    transform: translateY(calc(-100% + 22px));
+  }
 }
 
-/* Phones: the prerequisite map strip takes too much width, so it is hidden; the top bar sits below the toolbar. */
+/* Phones: the prerequisite map stays, but as a thin strip; the top bar sits below the toolbar. */
 @media (max-width: 720px) {
-  .prerequisite-edge, .prerequisite-edge-track { display: none; }
-  .problem-header { top: 0; }
+
+  .prerequisite-edge {
+    width: 22px !important;
+    min-width: 22px;
+  }
+
+  .prerequisite-edge-track {
+    width: 22px;
+  }
+
+  .problem-header {
+    top: 0;
+  }
 }
 
 /* Phones: leave room at the bottom so the floating Ask AI button does not cover the last content. */
 @media (max-width: 720px) {
-  .problem-content { padding-bottom: 88px; }
+  .problem-content {
+    padding-bottom: 88px;
+  }
 }
 
 /* Phones, simplified navigation: a plain bar at the top of the page, always visible, no sticky or sliding. */
 @media (max-width: 720px) {
-  .problem-header, .problem-header.is-hidden { position: relative; top: auto; transform: none; transition: none; z-index: auto; }
-  .problem-header .problem-nav-tab { display: none; }
+
+  .problem-header,
+  .problem-header.is-hidden {
+    position: relative;
+    top: auto;
+    transform: none;
+    transition: none;
+    z-index: auto;
+  }
+
+  .problem-header .problem-nav-tab {
+    display: none;
+  }
+}
+
+/* Phones: the account and help buttons form a highlighted sub-nav row under the main navigation. */
+@media (max-width: 720px) {
+  .problem-header {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    row-gap: 0;
+  }
+
+  .problem-header .problem-utilities {
+    order: 3;
+    flex: 0 0 100%;
+    width: 100%;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 6px;
+    overflow-x: auto;
+    margin: 6px -4px 0;
+    padding: 6px 8px;
+    background: color-mix(in srgb, var(--primary) 12%, var(--surface2));
+    border-top: 1px solid var(--border);
+    border-radius: 8px;
+  }
 }
