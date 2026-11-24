@@ -5,3 +5,7 @@
 .visualizer { flex: 1 1 0; min-height: 0; min-width: 0; position: relative; overflow: auto; display: flex; flex-direction: column; }
 .visualizer > * { flex: 1 1 auto; min-height: 0; }
 @media (max-height: 650px) { .scroll { max-height: 24vh; } }
+/* Phones: the page scrolls as one column, so the visualizer area takes its content height instead of the remaining screen. */
+@media (max-width: 720px) {
+  .visualizer { flex: none; overflow: visible; }
+}
