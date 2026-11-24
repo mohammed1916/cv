@@ -1219,179 +1219,61 @@ img.brand-icon {
   padding: 0;
 }
 
+/* Phone layout (max-width: 720px). One block, normal page flow: no sticky or sliding bars, no fixed heights. */
 .problem-title-mobile {
   display: none;
 }
 
 @media (max-width: 720px) {
-
-  .problem-header .problem-num,
-  .problem-header .problem-title,
-  .problem-header .problem-title-group .difficulty {
-    display: none;
-  }
-
-  .problem-title-mobile {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 6px 12px;
-    margin-top: 54px;
-  }
-
-  .problem-title-mobile .problem-title {
-    font-size: 1rem;
-    margin: 0;
-  }
-}
-
-/* Phones: View sits at the far right after the navigation arrows; its popover opens from the right edge. */
-@media (max-width: 720px) {
-  .problem-header .problem-title-group {
-    flex: 0 0 0;
-    min-width: 0;
-    padding: 0;
-    margin: 0;
-    overflow: hidden;
-  }
-
-  .problem-header .view-menu {
-    margin-left: 2px;
-  }
-
-  .problem-header .view-menu__popover,
-  .problem-header .view-menu>div {
-    position: fixed;
-    top: auto;
-    left: 8px;
-    right: 8px;
-    max-width: none;
-    width: auto;
-  }
-}
-
-/* Phones: the navigation slides away and a chevron tab stays on the right. Tapping the content hides it. */
-.problem-nav-tab {
-  display: none;
-}
-
-@media (max-width: 720px) {
-  .problem-header {
-    position: relative;
-    transition: transform .2s ease;
-  }
-
-  .problem-header.is-hidden {
-    transform: translateY(calc(-100% + 22px));
-  }
-
-  .problem-header .problem-nav-tab {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    position: absolute;
-    right: 8px;
-    bottom: -22px;
-    width: 36px;
-    height: 22px;
-    border: 1px solid var(--border);
-    border-top: 0;
-    border-radius: 0 0 8px 8px;
-    background: var(--surface2);
-    color: var(--text);
-  }
-}
-
-@media (max-width: 720px) {
-
-  .problem-header .view-menu__popover,
-  .problem-header .view-menu>div {
-    top: 64px;
-  }
-}
-
-/* Phones: the page scrolls as one column, so panels at the bottom can be reached. */
-@media (max-width: 720px) {
+  /* Page: a single column that scrolls as a whole, with room at the bottom for the Ask AI button. */
   .problem-page {
     height: auto;
-    min-height: 100%;
+    min-height: 0;
     overflow: visible;
   }
 
   .problem-content {
-    overflow: visible;
     display: block;
     flex: 0 0 auto;
+    overflow: visible;
+    padding: 0.5rem 12px 88px;
   }
 
   .problem-content .algorithm-workspace {
     height: auto;
     overflow: visible;
   }
-}
 
-/* Phones: the navigation bar stays at the top while the page scrolls; its chevron tab stays visible when hidden. */
-@media (max-width: 720px) {
+  /* Header: row one is the navigation, row two is the account and help sub-nav. Always visible. */
   .problem-header {
-    position: sticky;
-    top: 0;
-    z-index: 50;
-    background: var(--surface);
-  }
-
-  .problem-header.is-hidden {
-    transform: translateY(calc(-100% + 22px));
-  }
-}
-
-/* Phones: the prerequisite map stays, but as a thin strip; the top bar sits below the toolbar. */
-@media (max-width: 720px) {
-
-  .prerequisite-edge {
-    width: 22px !important;
-    min-width: 22px;
-  }
-
-  .prerequisite-edge-track {
-    width: 22px;
-  }
-
-  .problem-header {
-    top: 0;
-  }
-}
-
-/* Phones: leave room at the bottom so the floating Ask AI button does not cover the last content. */
-@media (max-width: 720px) {
-  .problem-content {
-    padding-bottom: 88px;
-  }
-}
-
-/* Phones, simplified navigation: a plain bar at the top of the page, always visible, no sticky or sliding. */
-@media (max-width: 720px) {
-
-  .problem-header,
-  .problem-header.is-hidden {
     position: relative;
     top: auto;
     transform: none;
     transition: none;
     z-index: auto;
-  }
-
-  .problem-header .problem-nav-tab {
-    display: none;
-  }
-}
-
-/* Phones: the account and help buttons form a highlighted sub-nav row under the main navigation. */
-@media (max-width: 720px) {
-  .problem-header {
-    flex-direction: row;
     flex-wrap: wrap;
     align-items: center;
     row-gap: 0;
+    padding: 6px 10px;
+  }
+
+  .problem-header .problem-title-group,
+  .problem-header .problem-nav-tab {
+    display: none;
+  }
+
+  .problem-header .view-menu {
+    margin-left: auto;
+  }
+
+  .problem-header .view-menu__popover,
+  .problem-header .view-menu > div {
+    position: fixed;
+    top: 64px;
+    left: 8px;
+    right: 8px;
+    width: auto;
+    max-width: none;
   }
 
   .problem-header .problem-utilities {
@@ -1403,10 +1285,47 @@ img.brand-icon {
     align-items: center;
     gap: 6px;
     overflow-x: auto;
-    margin: 6px -4px 0;
+    margin: 8px 0 0;
     padding: 6px 8px;
     background: color-mix(in srgb, var(--primary) 12%, var(--surface2));
     border-top: 1px solid var(--border);
     border-radius: 8px;
+  }
+
+  /* Problem name: in normal page flow below the navigation. */
+  .problem-title-mobile {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 54px;
+    padding: 6px 2px 10px;
+  }
+
+  .problem-title-mobile .problem-title {
+    font-size: 1rem;
+    margin: 0;
+  }
+
+  /* Prerequisite map: a thin strip, kept visible. The page gutter that reserves its space shrinks to match,
+     so no empty column is left beside the content. */
+  .app {
+    margin-left: 22px;
+  }
+
+  .prerequisite-edge {
+    width: 22px !important;
+    min-width: 22px;
+  }
+
+  .prerequisite-edge-track {
+    width: 22px;
+  }
+
+  .prerequisite-edge-band-outer {
+    width: 21px;
+  }
+
+  .prerequisite-edge-band-inner {
+    width: 17px;
   }
 }
